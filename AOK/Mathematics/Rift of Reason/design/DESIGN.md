@@ -1,3 +1,24 @@
+## Expansion-2 cards — 22 October 2026 (#129)
+
+Eight more catalogue concepts are playable as release `expansion-2`:
+
+| Card | Way and rarity | Effect |
+|---|---|---|
+| Grant Sanderstag | Reason, Rare | Entrance: an enemy with the same current attack loses its abilities, keywords and boosts. |
+| Greta Thunbug | Emotion, Uncommon | Guard; +1 attack at 4 hearts or fewer. |
+| Nelly Koalda | Perception, Uncommon | Entrance: privately look at the top 2 deck cards and bottom one. |
+| Ryan Georilla | Language, Common | Entrance: an enemy gets −1 attack until the end of its next turn. |
+| PewDiePika | Imagination, Common | Entrance: choose +1 attack, or +1 maximum health and heal 1. |
+| Share the Feeling | Emotion spell | 1 damage to an ally, then +2 attack if it survives. |
+| Remember the Guard | Memory spell | Timed Guard and heal 2. |
+| Warm Blanket | Generic spell | Heal 2 and timed Shield. |
+
+Timed effects end when the caster's next turn starts.
+
+All eight are pack cards. Each creature also has one ordinary chapter-two catch: Schoolhouse, Town Hall Stairs, Lamp Lane, Post Office and Bakery. They use their existing portraits or Way motifs and shared sounds, with no voice lines. Before the two-lesson unlock, packs now hold 12 Common, 2 Uncommon and 1 Rare kind.
+
+**177 catalogue concepts stay held under #129.** See the [verification](reviews/expansion-2-2026-10-22.md) and the [audit ledger](drafts/card-arena-2026-10-12/CONTRACT-AUDIT-123.md).
+
 ## In-game animation — 22 October 2026 (#66)
 
 Teacher remit (18 October): animate wherever it makes the game clearer and looks good, with no approval gate per phase. Animation is presentation only: engine state, saves and results never wait for it or change because of it.
@@ -17,7 +38,7 @@ Granny (Syllo if Granny is gone) gives a teaser on the map after the Gate and an
 
 ## Story-only cards — 21 October 2026
 
-Eighteen plot-1 cards now have actual runtime effects and fixed story sources. Completed-node proof plus a canonical once-only receipt grants two normal copies; existing historical copies satisfy the entitlement. Visits, dark-node shortcuts and practice do not qualify. Plot IDs stay out of packs forever. Collection shows known/earned sources. Seven shared Win goals settle only at the active player's own turn end, after cleanup/hand limits and before Fate; hearts reaching zero settle first. The Common Good is the first released Mythic Axiom, with ordinary print limits and no wild catch route. [Source policy and verification](reviews/story-132-2026-10-21.md) records all18 contracts,96 legal matchup probes and acceptance limits. Expansion frontier: seven foundation cards, eighteen plot cards,185 held concepts.
+Eighteen plot-1 cards now have actual runtime effects and fixed story sources. Completed-node proof plus a canonical once-only receipt grants two normal copies; existing historical copies satisfy the entitlement. Visits, dark-node shortcuts and practice do not qualify. Plot IDs stay out of packs forever. Collection shows known/earned sources. Seven shared Win goals settle only at the active player's own turn end, after cleanup/hand limits and before Fate; hearts reaching zero settle first. The Common Good is the first released Mythic Axiom, with ordinary print limits and no wild catch route. [Source policy and verification](reviews/story-132-2026-10-21.md) records all18 contracts,96 legal matchup probes and acceptance limits. Expansion frontier: seven foundation cards, eighteen plot cards,185 held concepts (177 after the 22 October expansion-2 batch).
 
 ## Five-tier rarity — 21 October 2026
 

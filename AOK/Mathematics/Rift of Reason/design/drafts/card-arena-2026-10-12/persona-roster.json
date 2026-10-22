@@ -445,7 +445,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-2: pack pool plus one ordinary chapter-two catch"
       },
       "silhouette": "Slim young stag with short branched antlers, slate-blue coat and thoughtful face.",
       "signatureProp": "One curved chalk loop between its antlers; three blue beads and one brown bead are a subtle secondary motif, not a copied logo.",
@@ -470,12 +470,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-2 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 4,
         "attack": 3,
         "health": 3,
-        "text": "Entrance: silence an enemy creature whose current attack equals this creature's attack.",
+        "text": "Entrance: an enemy creature with the same current attack as this one, measured after this is on the board, loses its abilities, keywords and boosts. Elusive enemies are not offered.",
         "gates": [
           109
         ]
@@ -1040,7 +1040,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-2: pack pool plus one ordinary chapter-two catch"
       },
       "silhouette": "A small sturdy stick insect with two braided antennae, dark-red travelling coat and one blank placard. Use insect eyes and a twig body.",
       "signatureProp": "Tall left-facing planted stance, placard held level by forelegs while the head looks directly toward the viewer.",
@@ -1066,7 +1066,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-2 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 4,
         "attack": 2,
@@ -1525,7 +1525,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-2: pack pool plus one ordinary chapter-two catch"
       },
       "silhouette": "A compact silver-grey koala with round fluffy ears, broad dark animal nose and worn emerald golf jacket. Four total limbs, no human face. One oversized simple brass-headed golf club with dark green grip; no notebook, visor logo or branded kit.",
       "signatureProp": "Rendered LEFT three-quarter; original pose intent in provenance.",
@@ -1537,7 +1537,8 @@
       "sharedSfx": [
         "card-play",
         "hit",
-        "defeat"
+        "defeat",
+        "reveal"
       ],
       "artId": "creature/perception-scout-stoat/idle",
       "palette": {
@@ -1550,12 +1551,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-2 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
         "health": 3,
-        "text": "Entrance: inspect the top 2 personal-deck cards and put one on the bottom.",
+        "text": "Entrance: look privately at the top 2 personal-deck cards and put one of them on the bottom. With fewer than 2 cards nothing moves.",
         "gates": [
           109
         ]
@@ -2076,7 +2077,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-2: pack pool plus one ordinary chapter-two catch"
       },
       "silhouette": "Small gentle gorilla with a tidy head tuft, charcoal jacket and gold collar.",
       "signatureProp": "One blank label stamp; one raised questioning brow.",
@@ -2101,7 +2102,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-2 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
@@ -2677,7 +2678,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-2: pack pool plus one ordinary chapter-two catch"
       },
       "silhouette": "Round pika with small upright ears, charcoal head tufts and a worn violet jacket.",
       "signatureProp": "One plain two-button controller and a puzzled raised paw.",
@@ -2703,7 +2704,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-2 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,

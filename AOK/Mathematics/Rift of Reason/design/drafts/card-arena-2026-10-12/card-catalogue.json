@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 cards, eighteen plot-1 story cards, 185 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eighteen plot-1 story cards, 177 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -297,13 +297,13 @@
       "cost": 4,
       "attack": 3,
       "health": 3,
-      "text": "Entrance: silence an enemy creature whose current attack equals this creature's attack.",
+      "text": "Entrance: an enemy creature with the same current attack as this one, measured after this is on the board, loses its abilities, keywords and boosts. Elusive enemies are not offered.",
       "tags": [
         "control"
       ],
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Change the target's attack first.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-2 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -313,7 +313,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-2: pack pool plus one ordinary chapter-two catch"
+      },
+      "runtimeRelease": "expansion-2",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Entrance: silence an enemy creature whose current attack equals this creature's attack.",
+        "rationale": "Pin the comparison moment (after entering, so auras count) and the Elusive exclusion. Meaning unchanged."
       }
     },
     {
@@ -636,7 +642,7 @@
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Use removal instead of small trades.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-2 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -646,8 +652,9 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
-      }
+        "releaseStatus": "Released expansion-2: pack pool plus one ordinary chapter-two catch"
+      },
+      "runtimeRelease": "expansion-2"
     },
     {
       "id": "emotion-outrage-ox",
@@ -903,13 +910,13 @@
       "cost": 3,
       "attack": 2,
       "health": 3,
-      "text": "Entrance: inspect the top 2 personal-deck cards and put one on the bottom.",
+      "text": "Entrance: look privately at the top 2 personal-deck cards and put one of them on the bottom. With fewer than 2 cards nothing moves.",
       "tags": [
         "inspection"
       ],
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Contest its setup turn.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-2 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -919,7 +926,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-2: pack pool plus one ordinary chapter-two catch"
+      },
+      "runtimeRelease": "expansion-2",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Entrance: inspect the top 2 personal-deck cards and put one on the bottom.",
+        "rationale": "Pin the private viewer and the short-deck case. Meaning unchanged."
       }
     },
     {
@@ -1212,7 +1225,7 @@
       ],
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Use another attacker or restore its stats.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-2 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -1222,8 +1235,9 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
-      }
+        "releaseStatus": "Released expansion-2: pack pool plus one ordinary chapter-two catch"
+      },
+      "runtimeRelease": "expansion-2"
     },
     {
       "id": "language-word-weasel",
@@ -1543,7 +1557,7 @@
       ],
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Punish the mode not chosen.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-2 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -1553,8 +1567,9 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
-      }
+        "releaseStatus": "Released expansion-2: pack pool plus one ordinary chapter-two catch"
+      },
+      "runtimeRelease": "expansion-2"
     },
     {
       "id": "imagination-fable-fawn",
@@ -2554,14 +2569,14 @@
       "rarity": "common",
       "cost": 2,
       "target": "friendly-creature",
-      "text": "Deal 1 damage to it; if it survives, give 2 attack until your next turn starts.",
+      "text": "Deal 1 damage to a friendly creature. If it survives (a Shield counts), it gains 2 attack until your next turn starts.",
       "tags": [
         "self-damage",
         "buff"
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Remove it before it attacks.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-2 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2569,7 +2584,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-2: pack pool"
+      },
+      "runtimeRelease": "expansion-2",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Deal 1 damage to it; if it survives, give 2 attack until your next turn starts.",
+        "rationale": "Pin the Shield outcome: blocked damage still counts as surviving. Meaning unchanged."
       }
     },
     {
@@ -3626,7 +3647,7 @@
       ],
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Remove Guard or focus another target.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-2 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -3634,8 +3655,9 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
-      }
+        "releaseStatus": "Released expansion-2: pack pool"
+      },
+      "runtimeRelease": "expansion-2"
     },
     {
       "id": "memory-a-little-later",
@@ -5091,7 +5113,7 @@
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Remove Shield or strike twice.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-2 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -5099,8 +5121,9 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
-      }
+        "releaseStatus": "Released expansion-2: pack pool"
+      },
+      "runtimeRelease": "expansion-2"
     },
     {
       "id": "generic-pause-one-beat",

@@ -670,6 +670,40 @@
         art: 'art/spell-motif-generic', target: 'friendly-creature', filter: (s, cid) => s.cards[cid].damage > 0,
         run(api, p, target) { const n = api.s.players[p].monoColour ? 3 : 2; api.heal(target, n); api.emit({ t: 'tactic', player: p, text: 'Small Patch: heal ' + api.name(target) + ' by ' + n + '.' }); },
     };
+    // #129 expansion-2 spells: one friendly target each, existing motifs, timed effects end when the caster's next turn starts.
+    Object.assign(tactics, {
+        'emotion-share-the-feeling': {
+            name: 'Share the Feeling', cost: 2, colour: 'emotion', rarity: 'common', release: 'expansion-2', packEligible: true,
+            text: 'Deal 1 damage to a friendly creature. If it survives, it gets +2 attack until your next turn starts.',
+            art: 'art/spell-motif-emotion', target: 'friendly-creature',
+            run(api, p, target) {
+                api.damage(target, 1, null); // A Shield blocks this damage; the creature still survives.
+                if (!api.s.players[p].board.includes(target) || api.H.health(api.s, target) <= 0) {
+                    api.emit({ t: 'tactic', player: p, text: 'Share the Feeling: ' + api.name(target) + ' was defeated.' }); return;
+                }
+                api.buffUntilStart(target, 2, 0, 'Share the Feeling', p);
+                api.emit({ t: 'tactic', player: p, text: 'Share the Feeling: ' + api.name(target) + ' gets +2 attack until your next turn starts.' });
+            },
+        },
+        'memory-remember-the-guard': {
+            name: 'Remember the Guard', cost: 2, colour: 'memory', rarity: 'common', release: 'expansion-2', packEligible: true,
+            text: 'A friendly creature gets Guard until your next turn starts. Heal it by 2.',
+            art: 'art/spell-motif-memory', target: 'friendly-creature',
+            run(api, p, target) {
+                const gave = api.keywordUntilStart(target, 'guard', 'gain', p, 'Remember the Guard'); api.heal(target, 2);
+                api.emit({ t: 'tactic', player: p, text: 'Remember the Guard: ' + api.name(target) + (gave ? ' guards until your next turn starts and heals 2.' : ' already has Guard. It heals 2.') });
+            },
+        },
+        'generic-warm-blanket': {
+            name: 'Warm Blanket', cost: 2, rarity: 'common', release: 'expansion-2', packEligible: true,
+            text: 'Heal a friendly creature by 2. It gets Shield until your next turn starts.',
+            art: 'art/spell-motif-generic', target: 'friendly-creature',
+            run(api, p, target) {
+                api.heal(target, 2); const gave = api.keywordUntilStart(target, 'shield', 'gain', p, 'Warm Blanket');
+                api.emit({ t: 'tactic', player: p, text: 'Warm Blanket: heal ' + api.name(target) + ' by 2. ' + (gave ? 'Shield until your next turn starts.' : 'It already has a Shield.') });
+            },
+        },
+    });
     Rift.data.tactics = tactics;
     tactics['generic-quiet-reset'] = {
         id: 'generic-quiet-reset', name: 'Quiet Reset', cost: 3, rarity: 'uncommon', release: 'plot-1', packEligible: false,

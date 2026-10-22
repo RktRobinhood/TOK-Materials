@@ -192,7 +192,7 @@
                 name: 'Lamp Lane', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 670, y: 593,
                 scene: 'scene/village-square', script: 'ch2.lane',
                 puzzles: [{ id: 'village', difficulty: 1, opts: { excludeRoles: ['schoolteacher'] } }],
-                spawns: ['astrophysicat', 'lobstorian', 'swiftlet', 'carlseal', 'khaby'], links: ['b-south-bridge', 'b-square'],
+                spawns: ['astrophysicat', 'lobstorian', 'swiftlet', 'carlseal', 'khaby', 'perception-scout-stoat'], links: ['b-south-bridge', 'b-square'],
                 teaser: 'Lamp-lit steps. The neighbours are whispering about each other.',
             },
             // A scene with a small fixed table (STORY.md Ch2 beat 3, App. H): three villagers, the imp count
@@ -212,7 +212,7 @@
                 name: 'The Bakery', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 633, y: 344,
                 scene: 'scene/village-square', script: 'ch2.bakery',
                 puzzles: [{ id: 'village', difficulty: 1, opts: { excludeRoles: ['schoolteacher'] } }, { id: 'village', difficulty: 2, opts: { excludeRoles: ['schoolteacher'] } }],
-                spawns: ['beastie', 'siuuugull', 'tremendoodle', 'messilion', 'attenbirdough'], links: ['b-square', 'b-kitchen'],
+                spawns: ['beastie', 'siuuugull', 'tremendoodle', 'messilion', 'attenbirdough', 'imagination-possibility-pika'], links: ['b-square', 'b-kitchen'],
                 teaser: 'Warm bread, cold stares. Someone stole the last loaf.',
             },
             // Optional (#62): water jugs. Off the required path; nothing links through it.
@@ -232,7 +232,7 @@
                 name: 'The Post Office', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 383, y: 450,
                 scene: 'scene/village-square', script: 'ch2.post',
                 puzzles: [{ id: 'tower', difficulty: 1 }],
-                spawns: ['swiftlet', 'chimpossible', 'altmanta', 'rockodile', 'shakirattle'], links: ['b-square', 'b-west-bridge'],
+                spawns: ['swiftlet', 'chimpossible', 'altmanta', 'rockodile', 'shakirattle', 'language-label-lemur'], links: ['b-square', 'b-west-bridge'],
                 teaser: 'The Constable wants a word. About who you are. And where you were on Tuesday.',
             },
             'b-west-bridge': {
@@ -256,7 +256,7 @@
                 name: 'The Schoolhouse', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 1005, y: 622,
                 scene: 'scene/village-square', script: 'ch2.school',
                 puzzles: [{ id: 'village', difficulty: 2, opts: { excludeRoles: ['schoolteacher'] } }, { id: 'switchboard', difficulty: 2 }],
-                spawns: ['astrophysicat', 'beastie', 'booleon', 'carlseal', 'eminemu'], links: ['b-square', 'b-clockmaker', 'b-garden'],
+                spawns: ['astrophysicat', 'beastie', 'booleon', 'carlseal', 'eminemu', 'reason-diagonal-deer'], links: ['b-square', 'b-clockmaker', 'b-garden'],
                 teaser: 'A bell turret. Chalk on the board: 0 and 1, over and over.',
             },
             'b-garden': {
@@ -286,7 +286,7 @@
                 name: 'The Town Hall Stairs', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 1244, y: 239,
                 scene: 'scene/switch-room', script: 'ch2.stairs',
                 puzzles: [{ id: 'switchboard', difficulty: 3 }],
-                spawns: ['altmanta', 'muskrat', 'speedcheeta', 'usainvolt', 'messilion'], links: ['b-clock-tower', 'b-town-hall'],
+                spawns: ['altmanta', 'muskrat', 'speedcheeta', 'usainvolt', 'messilion', 'emotion-resolve-ram'], links: ['b-clock-tower', 'b-town-hall'],
                 teaser: 'A locked gate on the stairs. One switch is hidden behind a curtain.',
             },
             'b-town-hall': {

@@ -1,3 +1,7 @@
+## Gameplay release — 22 October 2026 (#129 expansion-2)
+
+Eight more concepts are released (1 Rare, 2 Uncommon, 5 Common, all six Ways plus generic), with paired mono/mixed and mirror probes and browser evidence in ../../reviews/expansion-2-2026-10-22.md. 177 remain held. No Fate, Win, token or reaction rule was added.
+
 ## Current gameplay release — 21 October 2026
 
 #123 contract audit screened210 effects and authored23 distinctness replacements. Foundation-1 adds six common creatures plus Small Patch;203 remain held under the #129 staged implementation map. Source/acquisition, static public mono identity, measured paired matches and browser evidence are in CONTRACT-AUDIT-123.md and ../../reviews/expansion-123-2026-10-21.md. No bulk pack release, new Fate/Win/token policy, art generation or voice use. Main issue-loop checkpoint records publication and current validation. All older frontier/automation claims below are historical.

@@ -58,3 +58,21 @@ Future resource, discard, replay, token, information, lifetime and Win hazards a
 The other **203** concepts remain held. Keep each subsequent batch small, test and measure it before choosing the next. #130 owns consistent Mythic presentation; #132 owns exact story-only grants/exclusion; #136/#134 own atomic packs and reveal. None may draw an unimplemented catalogue ID. Later #129 content batches must explicitly choose IDs, implement their hooks and sources, run the same edge/loop/mono/mixed checks and record release metadata. Conditional #148/#149 is a separate set. This resolves #123's draft/audit/first staged release brief while preserving the larger implementation map.
 
 Measured play, browser evidence, review and full-suite receipts are in [the acceptance report](../../reviews/expansion-123-2026-10-21.md).
+
+## Expansion-2 under #129 — 22 October 2026
+
+The second staged batch follows the rules above. It releases eight IDs as `expansion-2`, ledgered in `review-129.mjs`:
+
+- `reason-diagonal-deer`, a Rare
+- `emotion-resolve-ram` and `perception-scout-stoat`, both Uncommon
+- `language-label-lemur` and `imagination-possibility-pika`
+- the spells `emotion-share-the-feeling`, `memory-remember-the-guard` and `generic-warm-blanket`
+
+Each has a real handler, a pack source (creatures also have one ordinary chapter-two catch), its existing portrait or motif and shared sounds. No voice is added.
+
+Three contract texts are clarified without changing their meaning: the deer compares attack after it is on the board, the stoat's look is private, and a Shield still counts as surviving Share the Feeling.
+
+Edge, re-entry, information, source and backup tests, paired mono/mixed games against a mono mirror, and real-board browser commits are in the [acceptance report](../../reviews/expansion-2-2026-10-22.md).
+
+**177 concepts remain held.** The next batch is suggested in that report. The same exclusions stand: Fate timing, alternative Win goals, tokens and reaction cards.
+

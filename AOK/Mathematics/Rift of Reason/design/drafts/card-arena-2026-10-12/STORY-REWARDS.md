@@ -1,6 +1,6 @@
 # Story-only card rewards — implemented #132
 
-The teacher approved a separate story-only subset. All eighteen assignments below now have real `plot-1` definitions and a permanent acquisition registry. Completing the associated plot earns two normal copies once; packs never contain them, before or after unlock. Existing historical copies satisfy that entitlement. The other 192 expansion concepts are eventual pack candidates, seven of which are the released foundation batch; 185 remain held. Exact completion proofs, runtime policy, tests and bounded balance evidence are in [the #132 report](../../reviews/story-132-2026-10-21.md).
+The teacher approved a separate story-only subset. All eighteen assignments below now have real `plot-1` definitions and a permanent acquisition registry. Completing the associated plot earns two normal copies once; packs never contain them, before or after unlock. Existing historical copies satisfy that entitlement. The other 192 expansion concepts are eventual pack candidates, seven of which are the released foundation batch and eight the expansion-2 batch (#129); 177 remain held. Exact completion proofs, runtime policy, tests and bounded balance evidence are in [the #132 report](../../reviews/story-132-2026-10-21.md).
 
 | Card | Rarity | Proposed completion node |
 |---|---|---|

@@ -1,3 +1,16 @@
+**22 Oct 2026 · #129 expansion-2 DONE, tracker stays OPEN (Paperclip FAL-266, Claude).** Eight more held catalogue concepts are now playable as `expansion-2`:
+
+- Grant Sanderstag (Rare)
+- Greta Thunbug and Nelly Koalda (Uncommon)
+- Ryan Georilla and PewDiePika
+- the spells Share the Feeling, Remember the Guard and Warm Blanket
+
+All six Ways and generic are covered. The cards are in packs, and the five creatures also have chapter-two catches. Each uses its existing art and shared sounds, with no voice lines. Before the lesson unlock, the stall now offers 12 Common, 2 Uncommon and 1 Rare kind (before this it was 7 Common).
+
+New `tools/test/expansion-2.test.mjs`, 14 tests. Paired mono/mixed and mono-mirror probes (`tools/sim-expansion-2.mjs`, 384 games each way, hooks off = same bodies and keywords, spells as plain heal 2) show every Way shift inside the mirror noise. The Hard-vs-Easy check now samples 80 games at the same 60% bar. Board commits were checked by real input at 1280 normal, 1280 Calm and 390 touch, plus a real stall pack.
+
+**177 concepts held.** Report: `expansion-2-2026-10-22.md`. NEXT: the next #129 batch suggested there; open #159 (stretch), #43, #29, #162 (teacher).
+
 **22 Oct 2026 · #66 DONE (Paperclip FAL-257, Claude).** In-game animation throughout, presentation only, in three slices (`d5e4f05`, `ab0864c`, `50233a3`) plus a review-fix commit.
 
 - **Battle:** every engine event has one cue on the existing event clock, with no duplicates of #108/#109/#110. Cards fly from the hand; dying creatures are held until their defeat beat; saved creatures fly to the hand; Persuasion crosses the table. Spells burst in their colour and shape. Guard, Shield and frost/silence frames flash. Boosts and heals float, and "Boost ends" and "Swapped" are not shown as losses. The finish follows the lethal hit.

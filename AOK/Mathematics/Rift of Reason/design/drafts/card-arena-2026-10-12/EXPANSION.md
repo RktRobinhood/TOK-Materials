@@ -1,3 +1,7 @@
+## Expansion-2 — 22 October 2026
+
+Eight more audited concepts are released as `expansion-2` (#129): Grant Sanderstag (Rare), Greta Thunbug and Nelly Koalda (Uncommon), Ryan Georilla, PewDiePika, Share the Feeling, Remember the Guard and Warm Blanket. They are pack cards; the five creatures also have chapter-two catches. **177 concepts remain held.** See [CONTRACT-AUDIT-123.md](CONTRACT-AUDIT-123.md) and [acceptance evidence](../../reviews/expansion-2-2026-10-22.md).
+
 ## Current release — 21 October 2026
 
 The whole 210-contract creative review is complete, with 23 authored overlap replacements. Foundation-1 releases six common creatures plus Small Patch; 203 concepts remain held. See [CONTRACT-AUDIT-123.md](CONTRACT-AUDIT-123.md), CONTRACT-REVIEW.json and [acceptance evidence](../../reviews/expansion-123-2026-10-21.md). All 18 story-only entries remain outside packs. #129 retains subsequent tested content batches; #130/#132/#136/#134 own their separate release steps. Historical proposal/frontier statements below predate this release.

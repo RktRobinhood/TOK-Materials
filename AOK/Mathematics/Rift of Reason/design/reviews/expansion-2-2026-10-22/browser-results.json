@@ -1,0 +1,529 @@
+{
+  "date": "2026-10-22",
+  "browser": "Firefox 158 headless via WebDriver BiDi; real pointer (mouse) and touch input",
+  "bench": "dev/expansion-2.html (memory-only save)",
+  "boardCommits": [
+    {
+      "mode": "wide",
+      "id": "reason-diagonal-deer",
+      "reader": "Grant Sanderstag, cost 4, attack 3, health 3 of 3. Rare rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "silenced": true,
+        "target": {
+          "attack": 3,
+          "health": 4,
+          "keywords": []
+        },
+        "other": false
+      },
+      "log": [
+        "You play Grant Sanderstag.",
+        "Grant Sanderstag draws the same picture: Lobstorian loses its abilities, keywords and boosts."
+      ],
+      "docWidth": 1280,
+      "newErrors": []
+    },
+    {
+      "mode": "wide",
+      "id": "emotion-resolve-ram",
+      "reader": "Greta Thunbug, cost 4, attack 3, health 5 of 5, guard. Active effects: +1 attack: Hold the Line (its own ability). Uncommon rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "attack": 3,
+        "health": 5,
+        "keywords": [
+          "guard"
+        ]
+      },
+      "log": [
+        "You play Greta Thunbug."
+      ],
+      "docWidth": 1280,
+      "newErrors": []
+    },
+    {
+      "mode": "wide",
+      "id": "perception-scout-stoat",
+      "reader": "Nelly Koalda, cost 3, attack 2, health 3 of 3. Uncommon rarity.",
+      "choiceSeen": [
+        "Paper Dragon, cost 2, attack 2, health 2 of 2. Common rarity",
+        "Proof Pup, cost 2, attack 1, health 3 of 3, guard. Common ra"
+      ],
+      "outcome": {
+        "top": [
+          "p0c1",
+          "p0c3"
+        ],
+        "bottom": "p0c2",
+        "hand": 0,
+        "phase": "main"
+      },
+      "log": [
+        "You put Proof Pup on the bottom of your deck."
+      ],
+      "docWidth": 1280,
+      "newErrors": []
+    },
+    {
+      "mode": "wide",
+      "id": "language-label-lemur",
+      "reader": "Ryan Georilla, cost 2, attack 2, health 2 of 2. Common rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "attack": 1,
+        "health": 4,
+        "keywords": []
+      },
+      "log": [
+        "You play Ryan Georilla.",
+        "Ryan Georilla asks Mr. Beastie a quick question: −1 attack until the end of its next turn."
+      ],
+      "docWidth": 1280,
+      "newErrors": []
+    },
+    {
+      "mode": "wide",
+      "id": "imagination-possibility-pika",
+      "reader": "PewDiePika, cost 2, attack 2, health 2 of 2. Common rarity.",
+      "choiceSeen": [
+        "+1 attack",
+        "+1 maximum health, heal 1"
+      ],
+      "outcome": {
+        "attack": 2,
+        "health": 3,
+        "keywords": []
+      },
+      "log": [
+        "PewDiePika plays it safe: +1 maximum health and heal 1."
+      ],
+      "docWidth": 1280,
+      "newErrors": []
+    },
+    {
+      "mode": "wide",
+      "id": "emotion-share-the-feeling",
+      "reader": "Tactic Share the Feeling, cost 2: Deal 1 damage to a friendly creature. If it survives, it gets +2 attack until your next turn starts. Emotion · common. Common rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "attack": 4,
+        "health": 1,
+        "keywords": [],
+        "damage": 4
+      },
+      "log": [
+        "You play the tactic Share the Feeling on Paper Dragon.",
+        "Paper Dragon takes 1 damage.",
+        "Share the Feeling: Paper Dragon gets +2 attack until your next turn starts."
+      ],
+      "docWidth": 1280,
+      "newErrors": []
+    },
+    {
+      "mode": "wide",
+      "id": "memory-remember-the-guard",
+      "reader": "Tactic Remember the Guard, cost 2: A friendly creature gets Guard until your next turn starts. Heal it by 2. Memory · common. Common rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "attack": 2,
+        "health": 4,
+        "keywords": [
+          "guard"
+        ],
+        "damage": 1
+      },
+      "log": [
+        "You play the tactic Remember the Guard on Paper Dragon.",
+        "Remember the Guard: Paper Dragon guards until your next turn starts and heals 2."
+      ],
+      "docWidth": 1280,
+      "newErrors": []
+    },
+    {
+      "mode": "wide",
+      "id": "generic-warm-blanket",
+      "reader": "Tactic Warm Blanket, cost 2: Heal a friendly creature by 2. It gets Shield until your next turn starts. Common rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "attack": 2,
+        "health": 4,
+        "keywords": [
+          "shield"
+        ],
+        "damage": 1
+      },
+      "log": [
+        "You play the tactic Warm Blanket on Paper Dragon.",
+        "Warm Blanket: heal Paper Dragon by 2. Shield until your next turn starts."
+      ],
+      "docWidth": 1280,
+      "newErrors": []
+    },
+    {
+      "mode": "wide-calm",
+      "id": "reason-diagonal-deer",
+      "reader": "Grant Sanderstag, cost 4, attack 3, health 3 of 3. Rare rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "silenced": true,
+        "target": {
+          "attack": 3,
+          "health": 4,
+          "keywords": []
+        },
+        "other": false
+      },
+      "log": [
+        "You play Grant Sanderstag.",
+        "Grant Sanderstag draws the same picture: Lobstorian loses its abilities, keywords and boosts."
+      ],
+      "docWidth": 1280,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "wide-calm",
+      "id": "emotion-resolve-ram",
+      "reader": "Greta Thunbug, cost 4, attack 3, health 5 of 5, guard. Active effects: +1 attack: Hold the Line (its own ability). Uncommon rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "attack": 3,
+        "health": 5,
+        "keywords": [
+          "guard"
+        ]
+      },
+      "log": [
+        "You play Greta Thunbug."
+      ],
+      "docWidth": 1280,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "wide-calm",
+      "id": "perception-scout-stoat",
+      "reader": "Nelly Koalda, cost 3, attack 2, health 3 of 3. Uncommon rarity.",
+      "choiceSeen": [
+        "Paper Dragon, cost 2, attack 2, health 2 of 2. Common rarity",
+        "Proof Pup, cost 2, attack 1, health 3 of 3, guard. Common ra"
+      ],
+      "outcome": {
+        "top": [
+          "p0c1",
+          "p0c3"
+        ],
+        "bottom": "p0c2",
+        "hand": 0,
+        "phase": "main"
+      },
+      "log": [
+        "You put Proof Pup on the bottom of your deck."
+      ],
+      "docWidth": 1280,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "wide-calm",
+      "id": "language-label-lemur",
+      "reader": "Ryan Georilla, cost 2, attack 2, health 2 of 2. Common rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "attack": 1,
+        "health": 4,
+        "keywords": []
+      },
+      "log": [
+        "You play Ryan Georilla.",
+        "Ryan Georilla asks Mr. Beastie a quick question: −1 attack until the end of its next turn."
+      ],
+      "docWidth": 1280,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "wide-calm",
+      "id": "imagination-possibility-pika",
+      "reader": "PewDiePika, cost 2, attack 2, health 2 of 2. Common rarity.",
+      "choiceSeen": [
+        "+1 attack",
+        "+1 maximum health, heal 1"
+      ],
+      "outcome": {
+        "attack": 2,
+        "health": 3,
+        "keywords": []
+      },
+      "log": [
+        "PewDiePika plays it safe: +1 maximum health and heal 1."
+      ],
+      "docWidth": 1280,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "wide-calm",
+      "id": "emotion-share-the-feeling",
+      "reader": "Tactic Share the Feeling, cost 2: Deal 1 damage to a friendly creature. If it survives, it gets +2 attack until your next turn starts. Emotion · common. Common rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "attack": 4,
+        "health": 1,
+        "keywords": [],
+        "damage": 4
+      },
+      "log": [
+        "You play the tactic Share the Feeling on Paper Dragon.",
+        "Paper Dragon takes 1 damage.",
+        "Share the Feeling: Paper Dragon gets +2 attack until your next turn starts."
+      ],
+      "docWidth": 1280,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "wide-calm",
+      "id": "memory-remember-the-guard",
+      "reader": "Tactic Remember the Guard, cost 2: A friendly creature gets Guard until your next turn starts. Heal it by 2. Memory · common. Common rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "attack": 2,
+        "health": 4,
+        "keywords": [
+          "guard"
+        ],
+        "damage": 1
+      },
+      "log": [
+        "You play the tactic Remember the Guard on Paper Dragon.",
+        "Remember the Guard: Paper Dragon guards until your next turn starts and heals 2."
+      ],
+      "docWidth": 1280,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "wide-calm",
+      "id": "generic-warm-blanket",
+      "reader": "Tactic Warm Blanket, cost 2: Heal a friendly creature by 2. It gets Shield until your next turn starts. Common rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "attack": 2,
+        "health": 4,
+        "keywords": [
+          "shield"
+        ],
+        "damage": 1
+      },
+      "log": [
+        "You play the tactic Warm Blanket on Paper Dragon.",
+        "Warm Blanket: heal Paper Dragon by 2. Shield until your next turn starts."
+      ],
+      "docWidth": 1280,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "phone-calm",
+      "id": "reason-diagonal-deer",
+      "reader": "Grant Sanderstag, cost 4, attack 3, health 3 of 3. Rare rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "silenced": true,
+        "target": {
+          "attack": 3,
+          "health": 4,
+          "keywords": []
+        },
+        "other": false
+      },
+      "log": [
+        "You play Grant Sanderstag.",
+        "Grant Sanderstag draws the same picture: Lobstorian loses its abilities, keywords and boosts."
+      ],
+      "docWidth": 390,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "phone-calm",
+      "id": "emotion-resolve-ram",
+      "reader": "Greta Thunbug, cost 4, attack 3, health 5 of 5, guard. Active effects: +1 attack: Hold the Line (its own ability). Uncommon rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "attack": 3,
+        "health": 5,
+        "keywords": [
+          "guard"
+        ]
+      },
+      "log": [
+        "You play Greta Thunbug."
+      ],
+      "docWidth": 390,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "phone-calm",
+      "id": "perception-scout-stoat",
+      "reader": "Nelly Koalda, cost 3, attack 2, health 3 of 3. Uncommon rarity.",
+      "choiceSeen": [
+        "Paper Dragon, cost 2, attack 2, health 2 of 2. Common rarity",
+        "Proof Pup, cost 2, attack 1, health 3 of 3, guard. Common ra"
+      ],
+      "outcome": {
+        "top": [
+          "p0c1",
+          "p0c3"
+        ],
+        "bottom": "p0c2",
+        "hand": 0,
+        "phase": "main"
+      },
+      "log": [
+        "You put Proof Pup on the bottom of your deck."
+      ],
+      "docWidth": 390,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "phone-calm",
+      "id": "language-label-lemur",
+      "reader": "Ryan Georilla, cost 2, attack 2, health 2 of 2. Common rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "attack": 1,
+        "health": 4,
+        "keywords": []
+      },
+      "log": [
+        "You play Ryan Georilla.",
+        "Ryan Georilla asks Mr. Beastie a quick question: −1 attack until the end of its next turn."
+      ],
+      "docWidth": 390,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "phone-calm",
+      "id": "imagination-possibility-pika",
+      "reader": "PewDiePika, cost 2, attack 2, health 2 of 2. Common rarity.",
+      "choiceSeen": [
+        "+1 attack",
+        "+1 maximum health, heal 1"
+      ],
+      "outcome": {
+        "attack": 2,
+        "health": 3,
+        "keywords": []
+      },
+      "log": [
+        "PewDiePika plays it safe: +1 maximum health and heal 1."
+      ],
+      "docWidth": 390,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "phone-calm",
+      "id": "emotion-share-the-feeling",
+      "reader": "Tactic Share the Feeling, cost 2: Deal 1 damage to a friendly creature. If it survives, it gets +2 attack until your next turn starts. Emotion · common. Common rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "attack": 4,
+        "health": 1,
+        "keywords": [],
+        "damage": 4
+      },
+      "log": [
+        "You play the tactic Share the Feeling on Paper Dragon.",
+        "Paper Dragon takes 1 damage.",
+        "Share the Feeling: Paper Dragon gets +2 attack until your next turn starts."
+      ],
+      "docWidth": 390,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "phone-calm",
+      "id": "memory-remember-the-guard",
+      "reader": "Tactic Remember the Guard, cost 2: A friendly creature gets Guard until your next turn starts. Heal it by 2. Memory · common. Common rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "attack": 2,
+        "health": 4,
+        "keywords": [
+          "guard"
+        ],
+        "damage": 1
+      },
+      "log": [
+        "You play the tactic Remember the Guard on Paper Dragon.",
+        "Remember the Guard: Paper Dragon guards until your next turn starts and heals 2."
+      ],
+      "docWidth": 390,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "phone-calm",
+      "id": "generic-warm-blanket",
+      "reader": "Tactic Warm Blanket, cost 2: Heal a friendly creature by 2. It gets Shield until your next turn starts. Common rarity.",
+      "choiceSeen": null,
+      "outcome": {
+        "attack": 2,
+        "health": 4,
+        "keywords": [
+          "shield"
+        ],
+        "damage": 1
+      },
+      "log": [
+        "You play the tactic Warm Blanket on Paper Dragon.",
+        "Warm Blanket: heal Paper Dragon by 2. Shield until your next turn starts."
+      ],
+      "docWidth": 390,
+      "movingAnimations": [],
+      "newErrors": []
+    }
+  ],
+  "stall": {
+    "wide": {
+      "packs": [
+        [
+          "memory-recall-robin",
+          "reason-premise-pigeon",
+          "memory-remember-the-guard",
+          "memory-remember-the-guard",
+          "emotion-share-the-feeling"
+        ]
+      ],
+      "odds": "Next card: Common 67% (12 kinds), Uncommon 23.7% (2 kinds), Rare 9.3% (1 kind). Foil: 4% per card. Full folders are left out.",
+      "hit": "memory-remember-the-guard",
+      "caption": "CCommon spellRemember the GuardNew copy · Folder 1/4",
+      "docWidth": 1280,
+      "errors": []
+    },
+    "phone": {
+      "packs": [
+        [
+          "memory-recall-robin",
+          "reason-premise-pigeon",
+          "memory-remember-the-guard",
+          "memory-remember-the-guard",
+          "emotion-share-the-feeling"
+        ]
+      ],
+      "odds": "Next card: Common 67% (12 kinds), Uncommon 23.7% (2 kinds), Rare 9.3% (1 kind). Foil: 4% per card. Full folders are left out.",
+      "hit": "memory-remember-the-guard",
+      "caption": "CCommon spellRemember the GuardNew copy · Folder 1/4",
+      "docWidth": 390,
+      "errors": []
+    }
+  },
+  "rerun": "After the review fixes (log text and the PewDiePika prompt): all 24 commits reached the same outcomes."
+}

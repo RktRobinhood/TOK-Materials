@@ -107,7 +107,9 @@ test('Open, Next and See all are presentation only; Done alone marks the receipt
         assert.equal(card.dataset.rarity, receipt.cards[i].rarity);
         const caption = m.g.document.body.querySelector('.pack-caption').textContent;
         assert.ok(caption.includes(names[i]), names[i]);
-        assert.match(caption, /^CCommon (creature|spell)/);
+        // Since #129 expansion-2 the pool holds Common, Uncommon and Rare kinds; the badge follows the saved card.
+        const tier = { common: 'CCommon', uncommon: 'UUncommon', rare: 'RRare' }[receipt.cards[i].rarity];
+        assert.match(caption, new RegExp('^' + tier + ' (creature|spell)'));
         assert.match(caption, /New copy · Folder \d\/4$/);
         assert.ok(m.g.document.body.querySelector('.pack-caption .rarity-badge') !== null, 'rarity icon');
         assert.ok(m.g.document.activeElement === next, 'focus stays on the next button');

@@ -324,6 +324,36 @@
         },
     });
 
+    // #129 expansion-2: second small audited batch. Existing selected portraits, packs plus one
+    // ordinary chapter-two catch each, four-owned/two-deck limits. Unvoiced, like foundation-1.
+    Object.assign(Rift.data.creatures, {
+        'reason-diagonal-deer': {
+            name: 'Grant Sanderstag', inspiredBy: 'Grant Sanderson', colour: 'reason', rarity: 'rare', power: 6, cost: 4, attack: 3, health: 3,
+            ability: 'same-picture', abilityText: 'Entrance: an enemy creature with the same attack as this loses its abilities, keywords and boosts.',
+            blurb: 'Draws the picture first. Then the hard part looks obvious.', lines: [], release: 'expansion-2', packEligible: true,
+        },
+        'emotion-resolve-ram': {
+            name: 'Greta Thunbug', inspiredBy: 'Greta Thunberg', colour: 'emotion', rarity: 'uncommon', power: 5, cost: 4, attack: 2, health: 5,
+            ability: 'hold-the-line', abilityText: 'Guard. While your hero has 4 hearts or fewer, this has +1 attack.',
+            blurb: 'Calmly repeats the evidence until someone listens.', lines: [], release: 'expansion-2', packEligible: true,
+        },
+        'perception-scout-stoat': {
+            name: 'Nelly Koalda', inspiredBy: 'Nelly Korda', colour: 'perception', rarity: 'uncommon', power: 4, cost: 3, attack: 2, health: 3,
+            ability: 'walk-the-course', abilityText: 'Entrance: look at your top 2 deck cards. Put one of them on the bottom.',
+            blurb: 'Walks the whole course before the first swing.', lines: [], release: 'expansion-2', packEligible: true,
+        },
+        'language-label-lemur': {
+            name: 'Ryan Georilla', inspiredBy: 'Ryan George', colour: 'language', rarity: 'common', power: 3, cost: 2, attack: 2, health: 2,
+            ability: 'quick-question', abilityText: 'Entrance: an enemy creature gets −1 attack until the end of its next turn.',
+            blurb: 'Asks one very literal question about the big plan.', lines: [], release: 'expansion-2', packEligible: true,
+        },
+        'imagination-possibility-pika': {
+            name: 'PewDiePika', inspiredBy: 'PewDiePie', colour: 'imagination', rarity: 'common', power: 3, cost: 2, attack: 2, health: 2,
+            ability: 'one-more-way', abilityText: 'Entrance: choose +1 attack, or +1 maximum health and heal 1, for this creature.',
+            blurb: 'There is always one more way to play this.', lines: [], release: 'expansion-2', packEligible: true,
+        },
+    });
+
     // #132 plot identities: their actual earned source is the permanent Acquisition registry.
     function plotCreature(name,inspiredBy,colour,attack,health,ability,abilityText,blurb){
         return {name,inspiredBy,colour,rarity:'rare',power:5,cost:5,attack,health,ability,abilityText,blurb,lines:[],release:'plot-1',packEligible:false};

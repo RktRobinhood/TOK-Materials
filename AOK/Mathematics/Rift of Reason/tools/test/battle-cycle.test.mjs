@@ -122,8 +122,9 @@ test('AI choices are deterministic for the same state, level and salt', () => {
 });
 
 test('Hard usually beats Easy, but Easy can win', () => {
+    // 80 games, same 60% bar: at 40 the random-team sample alone swung 22–32 wins (#129 expansion-2 measured).
     let hard = 0, easy = 0;
-    for (let g = 0; g < 40; g++) {
+    for (let g = 0; g < 80; g++) {
         const rng = Rift.makeRng('he-' + g);
         const teams = [0, 1].map(p => E.randomTeam(rng, 10, { prefix: 'he' + g + p, legendaries: false }));
         const hardSeat = g % 2;
@@ -132,8 +133,8 @@ test('Hard usually beats Easy, but Easy can win', () => {
         if (end.winner === hardSeat) hard++;
         else if (end.winner === 1 - hardSeat) easy++;
     }
-    assert.ok(hard >= 24, 'hard wins most (' + hard + '/40)');
-    assert.ok(easy >= 1, 'easy is beatable but not hopeless (' + easy + '/40)');
+    assert.ok(hard >= 48, 'hard wins most (' + hard + '/80)');
+    assert.ok(easy >= 1, 'easy is beatable but not hopeless (' + easy + '/80)');
 });
 
 test('10,000 AI-vs-AI games (random teams, tactics, axioms, options, levels) end with consistent states', async () => {

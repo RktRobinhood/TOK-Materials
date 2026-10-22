@@ -59,8 +59,8 @@ test('fixed per-ID weights use the approved totals over the actual roster; odds 
     const roster = P.roster(), by = r => roster.filter(e => e.rarity === r);
     const commons = by('common').length;
     assert.equal(by('common')[0].weight, 0.65 / commons);
-    assert.equal(by('uncommon')[0].weight, 0.23 / 2);
-    assert.equal(by('legendary')[0].weight, 0.005 / 2);
+    assert.equal(by('uncommon')[0].weight, 0.23 / by('uncommon').length);
+    assert.equal(by('legendary')[0].weight, 0.005 / by('legendary').length);
     const odds = Object.fromEntries(P.quote().odds.map(r => [r.rarity, r.chance]));
     assert.ok(Math.abs(odds.common - 0.65) < 1e-12 && Math.abs(odds.mythic - 0.025) < 1e-12);
     assert.ok(Math.abs(Object.values(odds).reduce((a, b) => a + b, 0) - 1) < 1e-12);
@@ -69,9 +69,11 @@ test('fixed per-ID weights use the approved totals over the actual roster; odds 
     const after = Object.fromEntries(P.quote().odds.map(r => [r.rarity, r.chance]));
     assert.equal(after.common, undefined);
     assert.ok(Math.abs(after.uncommon - 0.23 / 0.35) < 1e-12);
-    // Today's release has commons only: honest 100% Common, and a different version from the wide pool.
-    const today = setup();
-    assert.deepEqual(J(today.P.quote().odds.map(r => [r.rarity, r.chance])), [['common', 1]]);
+    // Today's pool before the two-lesson unlock (#129 expansion-2): Common, Uncommon and Rare kinds only, so
+    // their approved totals renormalise over 0.97. A different version from the wide pool.
+    const today = setup(), shares = J(today.P.quote().odds.map(r => [r.rarity, r.chance]));
+    assert.deepEqual(shares.map(r => r[0]), ['common', 'uncommon', 'rare']);
+    [0.65, 0.23, 0.09].forEach((total, i) => assert.ok(Math.abs(shares[i][1] - total / 0.97) < 1e-12, shares[i][0]));
     assert.notEqual(today.P.quote().version, P.quote().version);
 });
 
@@ -333,7 +335,7 @@ test('mounted stall shows odds, confirms, reveals then lists the saved cards and
     let g = mount(); let R = g.Rift;
     const find = text => g.document.body.querySelectorAll('button').find(b => b.textContent === text);
     let shop = R.UI.shop();
-    assert.match(shop.node.textContent, /Next card: Common 100% \(7 kinds\)/);
+    assert.match(shop.node.textContent, /Next card: Common 67% \(12 kinds\), Uncommon 23\.7% \(2 kinds\), Rare 9\.3% \(1 kind\)/);
     assert.match(shop.node.textContent, /Foil: 4% per card/);
     assert.match(shop.node.textContent, /Free packs saved: 1/);
     assert.ok(find('Open free pack · 5 cards'));

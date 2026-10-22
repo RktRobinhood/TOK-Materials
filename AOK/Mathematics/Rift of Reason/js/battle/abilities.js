@@ -547,6 +547,75 @@
                 api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' puts ' + api.cardName(cid) + ' on the bottom of the personal deck.' });
             } },
         },
+        // #129 expansion-2. Each hook resolves once per paid play and adds no listener, copy or Fate event.
+        'same-picture': {
+            name: 'Same Picture',
+            text: 'Entrance: an enemy creature with the same attack as this loses its abilities, keywords and boosts.',
+            // Compared once this is on the board, so auras and rules that change its attack count.
+            entrance: { run(api, card) {
+                const mine = api.attack(card.cid), H = api.H;
+                const options = api.s.players[1 - card.controller].board.filter(cid => !H.hasKeyword(api.s, cid, 'elusive') && api.attack(cid) === mine);
+                if (!api.ask({ player: card.controller, kind: 'card', options, prompt: 'Which enemy with ' + mine + ' attack loses its abilities, keywords and boosts?',
+                    source: { type: 'ability', id: 'same-picture', cid: card.cid } })) {
+                    api.emit({ t: 'fizzle', cid: card.cid, text: api.name(card.cid) + ' finds no enemy with ' + mine + ' attack.' });
+                }
+            } },
+            choose(api, card, cid) {
+                const board = api.s.players[1 - card.controller].board;
+                if (!board.includes(cid) || api.attack(cid) !== api.attack(card.cid)) return;
+                api.silence(cid);
+                api.emit({ t: 'ability', cid: card.cid, target: cid, text: api.name(card.cid) + ' draws the same picture: ' + api.name(cid) + ' loses its abilities, keywords and boosts.' });
+            },
+        },
+        'hold-the-line': {
+            name: 'Hold the Line', keywords: ['guard'],
+            text: 'Guard. While your hero has 4 hearts or fewer, this has +1 attack.',
+            attackMod: (s, card) => (s.players[card.controller].hearts <= 4 ? 1 : 0),
+        },
+        'walk-the-course': {
+            name: 'Walk the Course',
+            text: 'Entrance: look at your top 2 deck cards. Put one of them on the bottom.',
+            entrance: { run(api, card) {
+                if (api.planning) return; // No real top-card inspection during a prospective AI choice.
+                const options = api.s.players[card.controller].deck.slice(0, 2);
+                if (options.length < 2) return; // One card is already top and bottom: nothing to choose.
+                api.ask({ player: card.controller, kind: 'card', auto: false, options, prompt: 'Which of your top 2 cards goes to the bottom?',
+                    source: { type: 'ability', id: 'walk-the-course', cid: card.cid } });
+            } },
+            choose(api, card, cid) {
+                const deck = api.s.players[card.controller].deck, at = deck.indexOf(cid);
+                if (at < 0 || at > 1) return;
+                deck.splice(at, 1); deck.push(cid);
+                api.emit({ t: 'ability', cid: card.cid, player: card.controller, privateTo: card.controller,
+                    text: 'You put ' + api.cardName(cid) + ' on the bottom of your deck.',
+                    publicText: api.name(card.cid) + ' puts one of the top 2 cards on the bottom.' });
+            },
+            ai: () => 0.15,
+        },
+        'quick-question': {
+            name: 'Quick Question',
+            text: 'Entrance: an enemy creature gets −1 attack until the end of its next turn.',
+            entrance: { target: 'enemy-creature', run(api, card, target) {
+                // Minimum 0: a creature with no attack has nothing to lose, so no debuff is stored.
+                const hit = api.attack(target) > 0;
+                if (hit) api.buffNextTurn(target, -1, 0, 'Quick question');
+                api.emit({ t: 'ability', cid: card.cid, target, text: api.name(card.cid) + ' asks ' + api.name(target) + ' a quick question: ' + (hit ? '−1 attack until the end of its next turn.' : 'it has no attack to lose.') });
+            } },
+        },
+        'one-more-way': {
+            name: 'One More Way',
+            text: 'Entrance: choose +1 attack, or +1 maximum health and heal 1, for this creature.',
+            entrance: { run(api, card) {
+                api.ask({ player: card.controller, kind: 'option', auto: false, options: ['attack', 'health'],
+                    labels: { attack: '+1 attack', health: '+1 maximum health, heal 1' },
+                    prompt: 'Choose one for this creature:', source: { type: 'ability', id: 'one-more-way', cid: card.cid } });
+            } },
+            choose(api, card, choice) {
+                if (choice === 'attack') api.buff(card.cid, 1, 0, 'One more way');
+                else { api.buff(card.cid, 0, 1, 'One more way'); api.heal(card.cid, 1); }
+                api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + (choice === 'attack' ? ' plays it bold: +1 attack.' : ' plays it safe: +1 maximum health and heal 1.') });
+            },
+        },
         'patient-conclusion': {
             name: 'One Tiny Detail', text: 'Once per turn, after another friend survives a fight at 1 health, draw 1 personal card.',
             onAllySurvive(api, card, ally, health) {
