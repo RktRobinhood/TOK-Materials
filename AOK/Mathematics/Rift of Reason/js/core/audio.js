@@ -56,9 +56,13 @@
 
     // ---- voices ----------------------------------------------------------------
 
+    // Pause first: the line's finish() clears currentVoice, so calling it first
+    // left the old recording playing under the next one.
     function stopVoice() {
+        const a = currentVoice;
+        currentVoice = null;
+        if (a) { try { a.pause(); } catch (e) { /* ignore */ } }
         if (finishVoice) { const finish = finishVoice; finishVoice = null; finish(); }
-        if (currentVoice) { try { currentVoice.pause(); } catch (e) { /* ignore */ } currentVoice = null; }
     }
 
     // Plays a line's recording. Resolves when it ends, or at once when the line has

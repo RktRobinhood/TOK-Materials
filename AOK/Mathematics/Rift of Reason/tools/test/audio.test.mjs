@@ -78,3 +78,20 @@ test('the browser voice is never used: unrecorded or failed lines are text only'
  const stopped=Rift.Audio.speak({speaker:'narrator',text:'Recorded',voice:'line'});Rift.Audio.stopVoice();await stopped;
  assert.equal(spoken.length,0,'speechSynthesis must never speak');
 });
+test('a new line or a click past cuts the recording that is playing, so voices never overlap',async()=>{
+ const state={settings:{music:.5,sfx:.8,voice:1}},instances=[];
+ class Audio {constructor(file){this.file=file;this.paused=true;instances.push(this);}play(){this.paused=false;return new Promise(()=>{});}pause(){this.paused=true;}}
+ const Rift={data:{voices:{a:'a.mp3',b:'b.mp3'}},State:{get:()=>state},clamp:(n,a,b)=>Math.max(a,Math.min(b,n)),bus:{on(){}}};
+ vm.runInNewContext(fs.readFileSync(GAME_DIR+'/js/core/audio.js','utf8'),{window:{Rift},Audio,Math,Date,Set});
+ const playing=()=>instances.filter(a=>!a.paused).map(a=>a.file);
+ const first=Rift.Audio.speak({speaker:'granny',text:'One',voice:'a'});
+ assert.deepEqual(playing(),['assets/voice/a.mp3']);
+ const second=Rift.Audio.speak({speaker:'granny',text:'Two',voice:'b'});
+ await first;
+ assert.deepEqual(playing(),['assets/voice/b.mp3'],'the first line stops when the next starts');
+ Rift.Audio.speak({speaker:'granny',text:'Unrecorded'});
+ assert.deepEqual(playing(),[],'a line without a recording still silences the one before');
+ await second;
+ Rift.Audio.speak({speaker:'granny',text:'Three',voice:'a'});Rift.Audio.stopVoice();
+ assert.deepEqual(playing(),[]);assert.equal(Rift.Audio.speaking(),false);
+});

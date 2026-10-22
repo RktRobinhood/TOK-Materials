@@ -26,3 +26,23 @@ test('dialogue captures Enter and Space before a focused map marker and releases
  press('Enter');press(' ');await completed;
  assert.equal(markerActivations,0);assert.equal(listeners.size,0);assert.equal(overlay.children[0].removed,true);
 });
+test('clicking past a voiced line stops its voice before the next box appears',async()=>{
+ class Element extends Node {
+  appendChild(n){this.append(n);return n;}
+  addEventListener(){}
+  remove(){this.removed=true;}
+ }
+ const overlay=new Element(),listeners=new Map(),log=[];
+ const document={getElementById:()=>overlay,addEventListener:(key,fn,capture)=>listeners.set(fn,{key,capture}),removeEventListener:(key,fn)=>listeners.delete(fn)};
+ const Rift={el:(...a)=>new Element(...a),data:{speakers:{narrator:{name:'Narrator',art:'host'}}},State:{get:()=>({settings:{textSpeed:1}})},Assets:{img:()=>new Element()},
+  Audio:{sfx(){},speak:l=>log.push('speak:'+l.text),stopVoice:()=>log.push('stop')},voiceId:()=>''};
+ const ctx={window:{Rift,document},setTimeout:()=>1,clearTimeout(){}};
+ for(const f of ['js/core/story.js','js/core/cast.js','js/ui/dialogue.js'])vm.runInNewContext(fs.readFileSync(GAME_DIR+'/'+f,'utf8'),ctx);
+ const completed=Rift.Dialogue.play([{s:'narrator',t:'Listen.'},{note:'A door creaks.'}]);
+ const press=key=>{for(const [fn,entry] of [...listeners])if(entry.capture)fn({key,preventDefault(){},stopPropagation(){}});};
+ press('Enter');
+ assert.deepEqual(log,['speak:Listen.'],'finishing the typing lets the voice go on');
+ press('Enter');await new Promise(r=>setImmediate(r));
+ assert.deepEqual(log,['speak:Listen.','stop'],'moving on to the note cuts the voice');
+ press('Enter');press('Enter');await completed;
+});

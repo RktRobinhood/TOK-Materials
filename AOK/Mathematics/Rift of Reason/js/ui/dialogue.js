@@ -109,6 +109,8 @@
                 if (Date.now() < readyAt) return;
                 settled = true;
                 if (Rift.UI && Rift.UI.input) Rift.UI.input.guard();
+                // Clicking past a line cuts its voice, even when a choice or note comes next.
+                Rift.Audio.stopVoice();
                 Rift.Audio.sfx('click');
                 cleanup();
                 resolve();
