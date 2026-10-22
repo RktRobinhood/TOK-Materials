@@ -76,3 +76,20 @@ Edge, re-entry, information, source and backup tests, paired mono/mixed games ag
 
 **177 concepts remain held.** The next batch is suggested in that report. The same exclusions stand: Fate timing, alternative Win goals, tokens and reaction cards.
 
+
+## Expansion-3 under #129 — 23 October 2026
+
+The third staged batch follows the same rules. It releases eight IDs as `expansion-3`, ledgered in `review-129.mjs`:
+
+- `reason-proof-by-cases`, a Rare
+- `language-definition-dolphin` and `imagination-mirror-marten`, both Uncommon
+- `emotion-cheer-chick` and `memory-archive-armadillo`
+- the spells `reason-check-the-premise`, `perception-focused-hit` and `generic-simple-cover`
+
+Each has a real handler, a pack source (creatures also have one ordinary chapter-two catch), its existing portrait or motif and shared sounds. No voice is added.
+
+Four contract texts are clarified without changing their meaning: the dolphin skips a creature that already has Guard, the marten measures once on the board and never lowers its own attack, the armadillo's Last Word also happens with a full hand or Mercy, and Proof by Cases offers only a case that can happen.
+
+Edge, re-entry, information, source and backup tests, paired mono/mixed games against three partner Ways from the colour wheel and a mono mirror, and real-board browser commits are in the [acceptance report](../../reviews/expansion-3-2026-10-23.md).
+
+**169 concepts remain held.** The next batch is suggested in that report. The same exclusions stand: Fate timing, alternative Win goals, tokens and reaction cards.

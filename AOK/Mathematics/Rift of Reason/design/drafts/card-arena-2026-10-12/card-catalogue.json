@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eighteen plot-1 story cards, 177 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eighteen plot-1 story cards, 169 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -530,7 +530,7 @@
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Remove or block the supported attacker.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-3 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -540,8 +540,9 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
-      }
+        "releaseStatus": "Released expansion-3: pack pool plus one ordinary chapter-two catch"
+      },
+      "runtimeRelease": "expansion-3"
     },
     {
       "id": "emotion-temper-tiger",
@@ -1305,13 +1306,13 @@
       "cost": 3,
       "attack": 1,
       "health": 4,
-      "text": "Entrance: give a friendly creature Guard until your next turn starts.",
+      "text": "Entrance: another friendly creature that does not have Guard gains Guard until your next turn starts.",
       "tags": [
         "guard"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Remove Guard or attack after expiry.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-3 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -1321,7 +1322,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-3: pack pool plus one ordinary chapter-two catch"
+      },
+      "runtimeRelease": "expansion-3",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Entrance: give a friendly creature Guard until your next turn starts.",
+        "rationale": "Pin the target: it is chosen as the creature is played, so it is another friendly creature, and one that already has Guard is not offered. Meaning unchanged."
       }
     },
     {
@@ -1674,13 +1681,13 @@
       "cost": 3,
       "attack": 2,
       "health": 3,
-      "text": "Entrance: copy another friendly creature's current attack until your next turn starts, maximum 4.",
+      "text": "Entrance: if another friendly creature has higher current attack, this creature's attack becomes that attack, maximum 4, until your next turn starts. Measured after this is on the board; it never lowers this creature's attack.",
       "tags": [
         "transformation"
       ],
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Remove the large source before the copy turn.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-3 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -1690,7 +1697,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-3: pack pool plus one ordinary chapter-two catch"
+      },
+      "runtimeRelease": "expansion-3",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Entrance: copy another friendly creature's current attack until your next turn starts, maximum 4.",
+        "rationale": "Pin the copy: measured once this is on the board, kept as a timed boost of the difference, so it never lowers this creature or passes 4. Meaning unchanged."
       }
     },
     {
@@ -1943,14 +1956,14 @@
       "cost": 2,
       "attack": 1,
       "health": 3,
-      "text": "Guard. Last Word: put your oldest discarded spell on top of your personal deck if one is still there.",
+      "text": "Guard. Last Word: put your oldest discarded spell on top of your personal deck if one is still there. This happens even when the hand is full or Mercy returns this creature.",
       "tags": [
         "guard",
         "recursion"
       ],
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Silence it or force an unwanted oldest spell; it replaces a later draw rather than creating a copy.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-3 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "revision": {
@@ -1966,7 +1979,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-3: pack pool plus one ordinary chapter-two catch"
+      },
+      "runtimeRelease": "expansion-3",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Guard. Last Word: put your oldest discarded spell on top of your personal deck if one is still there.",
+        "rationale": "Pin the Last Word: it happens with a full hand or Mercy too, and any spell card in the pile counts. Meaning unchanged."
       }
     },
     {
@@ -2261,7 +2280,7 @@
       ],
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Use a non-Guard threat.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-3 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2269,8 +2288,9 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
-      }
+        "releaseStatus": "Released expansion-3: pack pool"
+      },
+      "runtimeRelease": "expansion-3"
     },
     {
       "id": "reason-small-lemma",
@@ -2467,13 +2487,13 @@
       "rarity": "rare",
       "cost": 4,
       "target": "choice",
-      "text": "Choose: deal 4 damage to an enemy creature, or give two friendly creatures 2 maximum health and heal each by 2.",
+      "text": "Choose one that can happen: deal 4 damage to an enemy creature, or give two friendly creatures (all of them if you have two or fewer) +2 maximum health and heal each by 2.",
       "tags": [
         "choice"
       ],
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Force the less useful choice.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-3 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2481,7 +2501,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-3: pack pool"
+      },
+      "runtimeRelease": "expansion-3",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Choose: deal 4 damage to an enemy creature, or give two friendly creatures 2 maximum health and heal each by 2.",
+        "rationale": "Pin the choice: a case that can do nothing is not offered, and with two or fewer friendly creatures each one gets the second case. Meaning unchanged."
       }
     },
     {
@@ -2903,7 +2929,7 @@
       ],
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Keep a keyword or use Shield.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-3 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2911,8 +2937,9 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
-      }
+        "releaseStatus": "Released expansion-3: pack pool"
+      },
+      "runtimeRelease": "expansion-3"
     },
     {
       "id": "perception-change-the-angle",
@@ -4955,7 +4982,7 @@
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Remove Guard or wait out the effect.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-3 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -4963,8 +4990,9 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
-      }
+        "releaseStatus": "Released expansion-3: pack pool"
+      },
+      "runtimeRelease": "expansion-3"
     },
     {
       "id": "generic-pocket-plan",

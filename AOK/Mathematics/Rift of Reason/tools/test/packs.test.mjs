@@ -335,7 +335,7 @@ test('mounted stall shows odds, confirms, reveals then lists the saved cards and
     let g = mount(); let R = g.Rift;
     const find = text => g.document.body.querySelectorAll('button').find(b => b.textContent === text);
     let shop = R.UI.shop();
-    assert.match(shop.node.textContent, /Next card: Common 67% \(12 kinds\), Uncommon 23\.7% \(2 kinds\), Rare 9\.3% \(1 kind\)/);
+    assert.match(shop.node.textContent, /Next card: Common 67% \(17 kinds\), Uncommon 23\.7% \(4 kinds\), Rare 9\.3% \(2 kinds\)/);
     assert.match(shop.node.textContent, /Foil: 4% per card/);
     assert.match(shop.node.textContent, /Free packs saved: 1/);
     assert.ok(find('Open free pack · 5 cards'));

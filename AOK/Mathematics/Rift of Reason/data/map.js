@@ -183,7 +183,7 @@
                 name: 'The Lever Bridge', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 756, y: 736,
                 scene: 'scene/switch-room', script: 'ch2.bridge',
                 cards: ['colour-rule'], puzzles: [{ id: 'switchboard', difficulty: 1 }],
-                spawns: ['rawmsay', 'speedcheeta', 'zuckerborg', 'beeyonce', 'eelish'], links: ['b-arrival', 'b-lamp-lane'],
+                spawns: ['rawmsay', 'speedcheeta', 'zuckerborg', 'beeyonce', 'eelish', 'emotion-cheer-chick'], links: ['b-arrival', 'b-lamp-lane'],
                 teaser: 'A drawbridge worked by brass levers. Something about it is very sure of itself.',
             },
             'b-lamp-lane': {
@@ -223,7 +223,7 @@
                 name: "Granny's Kitchen", chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 548, y: 300,
                 scene: 'scene/granny-door',
                 cards: ['second-colour'], puzzles: [{ id: 'water-jugs', difficulty: 1 }, { id: 'water-jugs', difficulty: 2 }, { id: 'water-jugs', difficulty: 3 }],
-                spawns: ['beastie', 'tremendoodle', 'attenbirdough'], links: ['b-bakery'],
+                spawns: ['beastie', 'tremendoodle', 'attenbirdough', 'memory-archive-armadillo'], links: ['b-bakery'],
                 teaser: 'Two ladles, no markings, and a very exact recipe.',
             },
             'b-post': {
@@ -232,7 +232,7 @@
                 name: 'The Post Office', chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 383, y: 450,
                 scene: 'scene/village-square', script: 'ch2.post',
                 puzzles: [{ id: 'tower', difficulty: 1 }],
-                spawns: ['swiftlet', 'chimpossible', 'altmanta', 'rockodile', 'shakirattle', 'language-label-lemur'], links: ['b-square', 'b-west-bridge'],
+                spawns: ['swiftlet', 'chimpossible', 'altmanta', 'rockodile', 'shakirattle', 'language-label-lemur', 'language-definition-dolphin'], links: ['b-square', 'b-west-bridge'],
                 teaser: 'The Constable wants a word. About who you are. And where you were on Tuesday.',
             },
             'b-west-bridge': {
@@ -246,7 +246,7 @@
                 name: "The Clockmaker's Workshop", chapter: 'ch2', map: 'ch2', type: 'puzzle', x: 919, y: 392,
                 scene: 'scene/switch-room', script: 'ch2.clockmaker',
                 puzzles: [{ id: 'switchboard', difficulty: 2 }],
-                spawns: ['muskrat', 'altmanta', 'zuckerborg', 'gargoyle', 'haalandroid'], links: ['b-square', 'b-school', 'b-clock-tower'],
+                spawns: ['muskrat', 'altmanta', 'zuckerborg', 'gargoyle', 'haalandroid', 'imagination-mirror-marten'], links: ['b-square', 'b-school', 'b-clock-tower'],
                 teaser: 'Gears, wires and a bulb controlled by true and false inputs.',
             },
             'b-school': {

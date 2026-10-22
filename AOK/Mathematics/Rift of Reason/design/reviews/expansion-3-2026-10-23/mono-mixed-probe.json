@@ -1,0 +1,1219 @@
+{
+  "date": "2026-10-23",
+  "issue": 129,
+  "release": "expansion-3",
+  "scope": "Paired legal 20-card mono/mixed probe against three partner Ways taken from the colour wheel (next = Strong target, previous = Weak, opposite = neutral), and a same-deck mono mirror. Competent AI both seats, opposite seats, alternating first player; no tuning from one win rate.",
+  "withoutBatchHooks": false,
+  "seedsPerColour": 16,
+  "games": 768,
+  "decks": {
+    "reason": {
+      "mono": {
+        "creatures": [
+          "reason-premise-pigeon",
+          "reason-premise-pigeon",
+          "astrophysicat",
+          "astrophysicat",
+          "khaby",
+          "khaby",
+          "proof-pup",
+          "proof-pup"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "reason-check-the-premise",
+          "reason-check-the-premise",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "reason-proof-by-cases",
+          "reason-proof-by-cases"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedStrong": {
+        "creatures": [
+          "reason-premise-pigeon",
+          "reason-premise-pigeon",
+          "astrophysicat",
+          "astrophysicat",
+          "emotion-cheer-chick",
+          "emotion-cheer-chick",
+          "emotion-courage-cub",
+          "emotion-courage-cub"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "reason-check-the-premise",
+          "reason-check-the-premise",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "gut-reaction",
+          "gut-reaction"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedWeak": {
+        "creatures": [
+          "reason-premise-pigeon",
+          "reason-premise-pigeon",
+          "astrophysicat",
+          "astrophysicat",
+          "memory-archive-armadillo",
+          "memory-archive-armadillo",
+          "memory-recall-robin",
+          "memory-recall-robin"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "reason-check-the-premise",
+          "reason-check-the-premise",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "remember-when",
+          "remember-when"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedNeutral": {
+        "creatures": [
+          "reason-premise-pigeon",
+          "reason-premise-pigeon",
+          "astrophysicat",
+          "astrophysicat",
+          "perception-cue-cricket",
+          "perception-cue-cricket",
+          "kardashiant",
+          "kardashiant"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "reason-check-the-premise",
+          "reason-check-the-premise",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "perception-focused-hit",
+          "perception-focused-hit"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      }
+    },
+    "emotion": {
+      "mono": {
+        "creatures": [
+          "emotion-cheer-chick",
+          "emotion-cheer-chick",
+          "emotion-courage-cub",
+          "emotion-courage-cub",
+          "eelish",
+          "eelish",
+          "speedcheeta",
+          "speedcheeta"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "gut-reaction",
+          "gut-reaction",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "rally-cry",
+          "rally-cry"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedStrong": {
+        "creatures": [
+          "emotion-cheer-chick",
+          "emotion-cheer-chick",
+          "emotion-courage-cub",
+          "emotion-courage-cub",
+          "language-definition-dolphin",
+          "language-definition-dolphin",
+          "language-question-quail",
+          "language-question-quail"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "gut-reaction",
+          "gut-reaction",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "label-it",
+          "label-it"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedWeak": {
+        "creatures": [
+          "emotion-cheer-chick",
+          "emotion-cheer-chick",
+          "emotion-courage-cub",
+          "emotion-courage-cub",
+          "reason-premise-pigeon",
+          "reason-premise-pigeon",
+          "astrophysicat",
+          "astrophysicat"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "gut-reaction",
+          "gut-reaction",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "reason-check-the-premise",
+          "reason-check-the-premise"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedNeutral": {
+        "creatures": [
+          "emotion-cheer-chick",
+          "emotion-cheer-chick",
+          "emotion-courage-cub",
+          "emotion-courage-cub",
+          "imagination-mirror-marten",
+          "imagination-mirror-marten",
+          "imagination-fable-fawn",
+          "imagination-fable-fawn"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "gut-reaction",
+          "gut-reaction",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "daydream",
+          "daydream"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      }
+    },
+    "perception": {
+      "mono": {
+        "creatures": [
+          "perception-cue-cricket",
+          "perception-cue-cricket",
+          "kardashiant",
+          "kardashiant",
+          "lens-lizard",
+          "lens-lizard",
+          "attenbirdough",
+          "attenbirdough"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "perception-focused-hit",
+          "perception-focused-hit",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "field-notes",
+          "field-notes"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedStrong": {
+        "creatures": [
+          "perception-cue-cricket",
+          "perception-cue-cricket",
+          "kardashiant",
+          "kardashiant",
+          "imagination-mirror-marten",
+          "imagination-mirror-marten",
+          "imagination-fable-fawn",
+          "imagination-fable-fawn"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "perception-focused-hit",
+          "perception-focused-hit",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "daydream",
+          "daydream"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedWeak": {
+        "creatures": [
+          "perception-cue-cricket",
+          "perception-cue-cricket",
+          "kardashiant",
+          "kardashiant",
+          "language-definition-dolphin",
+          "language-definition-dolphin",
+          "language-question-quail",
+          "language-question-quail"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "perception-focused-hit",
+          "perception-focused-hit",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "label-it",
+          "label-it"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedNeutral": {
+        "creatures": [
+          "perception-cue-cricket",
+          "perception-cue-cricket",
+          "kardashiant",
+          "kardashiant",
+          "reason-premise-pigeon",
+          "reason-premise-pigeon",
+          "astrophysicat",
+          "astrophysicat"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "perception-focused-hit",
+          "perception-focused-hit",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "reason-check-the-premise",
+          "reason-check-the-premise"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      }
+    },
+    "language": {
+      "mono": {
+        "creatures": [
+          "language-definition-dolphin",
+          "language-definition-dolphin",
+          "language-question-quail",
+          "language-question-quail",
+          "beansprout",
+          "beansprout",
+          "footnote-finch",
+          "footnote-finch"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "label-it",
+          "label-it",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "rousing-speech",
+          "rousing-speech"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedStrong": {
+        "creatures": [
+          "language-definition-dolphin",
+          "language-definition-dolphin",
+          "language-question-quail",
+          "language-question-quail",
+          "perception-cue-cricket",
+          "perception-cue-cricket",
+          "kardashiant",
+          "kardashiant"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "label-it",
+          "label-it",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "perception-focused-hit",
+          "perception-focused-hit"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedWeak": {
+        "creatures": [
+          "language-definition-dolphin",
+          "language-definition-dolphin",
+          "language-question-quail",
+          "language-question-quail",
+          "emotion-cheer-chick",
+          "emotion-cheer-chick",
+          "emotion-courage-cub",
+          "emotion-courage-cub"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "label-it",
+          "label-it",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "gut-reaction",
+          "gut-reaction"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedNeutral": {
+        "creatures": [
+          "language-definition-dolphin",
+          "language-definition-dolphin",
+          "language-question-quail",
+          "language-question-quail",
+          "memory-archive-armadillo",
+          "memory-archive-armadillo",
+          "memory-recall-robin",
+          "memory-recall-robin"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "label-it",
+          "label-it",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "remember-when",
+          "remember-when"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      }
+    },
+    "imagination": {
+      "mono": {
+        "creatures": [
+          "imagination-mirror-marten",
+          "imagination-mirror-marten",
+          "imagination-fable-fawn",
+          "imagination-fable-fawn",
+          "imagination-possibility-pika",
+          "imagination-possibility-pika",
+          "paper-dragon",
+          "paper-dragon"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "daydream",
+          "daydream",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "imagine-otherwise",
+          "imagine-otherwise"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedStrong": {
+        "creatures": [
+          "imagination-mirror-marten",
+          "imagination-mirror-marten",
+          "imagination-fable-fawn",
+          "imagination-fable-fawn",
+          "memory-archive-armadillo",
+          "memory-archive-armadillo",
+          "memory-recall-robin",
+          "memory-recall-robin"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "daydream",
+          "daydream",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "remember-when",
+          "remember-when"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedWeak": {
+        "creatures": [
+          "imagination-mirror-marten",
+          "imagination-mirror-marten",
+          "imagination-fable-fawn",
+          "imagination-fable-fawn",
+          "perception-cue-cricket",
+          "perception-cue-cricket",
+          "kardashiant",
+          "kardashiant"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "daydream",
+          "daydream",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "perception-focused-hit",
+          "perception-focused-hit"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedNeutral": {
+        "creatures": [
+          "imagination-mirror-marten",
+          "imagination-mirror-marten",
+          "imagination-fable-fawn",
+          "imagination-fable-fawn",
+          "emotion-cheer-chick",
+          "emotion-cheer-chick",
+          "emotion-courage-cub",
+          "emotion-courage-cub"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "daydream",
+          "daydream",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "gut-reaction",
+          "gut-reaction"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      }
+    },
+    "memory": {
+      "mono": {
+        "creatures": [
+          "memory-archive-armadillo",
+          "memory-archive-armadillo",
+          "memory-recall-robin",
+          "memory-recall-robin",
+          "pocket-tortoise",
+          "pocket-tortoise",
+          "keanu",
+          "keanu"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "remember-when",
+          "remember-when",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "nostalgia",
+          "nostalgia"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedStrong": {
+        "creatures": [
+          "memory-archive-armadillo",
+          "memory-archive-armadillo",
+          "memory-recall-robin",
+          "memory-recall-robin",
+          "reason-premise-pigeon",
+          "reason-premise-pigeon",
+          "astrophysicat",
+          "astrophysicat"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "remember-when",
+          "remember-when",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "reason-check-the-premise",
+          "reason-check-the-premise"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedWeak": {
+        "creatures": [
+          "memory-archive-armadillo",
+          "memory-archive-armadillo",
+          "memory-recall-robin",
+          "memory-recall-robin",
+          "imagination-mirror-marten",
+          "imagination-mirror-marten",
+          "imagination-fable-fawn",
+          "imagination-fable-fawn"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "remember-when",
+          "remember-when",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "daydream",
+          "daydream"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixedNeutral": {
+        "creatures": [
+          "memory-archive-armadillo",
+          "memory-archive-armadillo",
+          "memory-recall-robin",
+          "memory-recall-robin",
+          "language-definition-dolphin",
+          "language-definition-dolphin",
+          "language-question-quail",
+          "language-question-quail"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "remember-when",
+          "remember-when",
+          "generic-simple-cover",
+          "generic-simple-cover",
+          "label-it",
+          "label-it"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      }
+    }
+  },
+  "rows": [
+    {
+      "colour": "reason",
+      "partner": "emotion",
+      "edge": "strong",
+      "games": 32,
+      "monoWins": 26,
+      "mixedWins": 6,
+      "draws": 0,
+      "maxSteps": 150,
+      "turnLimit": 0,
+      "monoShare": 0.813
+    },
+    {
+      "colour": "reason",
+      "partner": "memory",
+      "edge": "weak",
+      "games": 32,
+      "monoWins": 11,
+      "mixedWins": 21,
+      "draws": 0,
+      "maxSteps": 173,
+      "turnLimit": 0,
+      "monoShare": 0.344
+    },
+    {
+      "colour": "reason",
+      "partner": "perception",
+      "edge": "neutral",
+      "games": 32,
+      "monoWins": 27,
+      "mixedWins": 5,
+      "draws": 0,
+      "maxSteps": 159,
+      "turnLimit": 0,
+      "monoShare": 0.844
+    },
+    {
+      "colour": "emotion",
+      "partner": "language",
+      "edge": "strong",
+      "games": 32,
+      "monoWins": 25,
+      "mixedWins": 7,
+      "draws": 0,
+      "maxSteps": 107,
+      "turnLimit": 0,
+      "monoShare": 0.781
+    },
+    {
+      "colour": "emotion",
+      "partner": "reason",
+      "edge": "weak",
+      "games": 32,
+      "monoWins": 13,
+      "mixedWins": 19,
+      "draws": 0,
+      "maxSteps": 99,
+      "turnLimit": 0,
+      "monoShare": 0.406
+    },
+    {
+      "colour": "emotion",
+      "partner": "imagination",
+      "edge": "neutral",
+      "games": 32,
+      "monoWins": 20,
+      "mixedWins": 12,
+      "draws": 0,
+      "maxSteps": 71,
+      "turnLimit": 0,
+      "monoShare": 0.625
+    },
+    {
+      "colour": "perception",
+      "partner": "imagination",
+      "edge": "strong",
+      "games": 32,
+      "monoWins": 25,
+      "mixedWins": 7,
+      "draws": 0,
+      "maxSteps": 136,
+      "turnLimit": 0,
+      "monoShare": 0.781
+    },
+    {
+      "colour": "perception",
+      "partner": "language",
+      "edge": "weak",
+      "games": 32,
+      "monoWins": 6,
+      "mixedWins": 26,
+      "draws": 0,
+      "maxSteps": 134,
+      "turnLimit": 0,
+      "monoShare": 0.188
+    },
+    {
+      "colour": "perception",
+      "partner": "reason",
+      "edge": "neutral",
+      "games": 32,
+      "monoWins": 20,
+      "mixedWins": 12,
+      "draws": 0,
+      "maxSteps": 141,
+      "turnLimit": 0,
+      "monoShare": 0.625
+    },
+    {
+      "colour": "language",
+      "partner": "perception",
+      "edge": "strong",
+      "games": 32,
+      "monoWins": 25,
+      "mixedWins": 7,
+      "draws": 0,
+      "maxSteps": 164,
+      "turnLimit": 0,
+      "monoShare": 0.781
+    },
+    {
+      "colour": "language",
+      "partner": "emotion",
+      "edge": "weak",
+      "games": 32,
+      "monoWins": 8,
+      "mixedWins": 24,
+      "draws": 0,
+      "maxSteps": 142,
+      "turnLimit": 0,
+      "monoShare": 0.25
+    },
+    {
+      "colour": "language",
+      "partner": "memory",
+      "edge": "neutral",
+      "games": 32,
+      "monoWins": 20,
+      "mixedWins": 12,
+      "draws": 0,
+      "maxSteps": 171,
+      "turnLimit": 0,
+      "monoShare": 0.625
+    },
+    {
+      "colour": "imagination",
+      "partner": "memory",
+      "edge": "strong",
+      "games": 32,
+      "monoWins": 15,
+      "mixedWins": 17,
+      "draws": 0,
+      "maxSteps": 116,
+      "turnLimit": 0,
+      "monoShare": 0.469
+    },
+    {
+      "colour": "imagination",
+      "partner": "perception",
+      "edge": "weak",
+      "games": 32,
+      "monoWins": 8,
+      "mixedWins": 24,
+      "draws": 0,
+      "maxSteps": 114,
+      "turnLimit": 0,
+      "monoShare": 0.25
+    },
+    {
+      "colour": "imagination",
+      "partner": "emotion",
+      "edge": "neutral",
+      "games": 32,
+      "monoWins": 18,
+      "mixedWins": 14,
+      "draws": 0,
+      "maxSteps": 102,
+      "turnLimit": 0,
+      "monoShare": 0.563
+    },
+    {
+      "colour": "memory",
+      "partner": "reason",
+      "edge": "strong",
+      "games": 32,
+      "monoWins": 26,
+      "mixedWins": 6,
+      "draws": 0,
+      "maxSteps": 156,
+      "turnLimit": 0,
+      "monoShare": 0.813
+    },
+    {
+      "colour": "memory",
+      "partner": "imagination",
+      "edge": "weak",
+      "games": 32,
+      "monoWins": 6,
+      "mixedWins": 26,
+      "draws": 0,
+      "maxSteps": 154,
+      "turnLimit": 0,
+      "monoShare": 0.188
+    },
+    {
+      "colour": "memory",
+      "partner": "language",
+      "edge": "neutral",
+      "games": 32,
+      "monoWins": 14,
+      "mixedWins": 18,
+      "draws": 0,
+      "maxSteps": 176,
+      "turnLimit": 0,
+      "monoShare": 0.438
+    }
+  ],
+  "mirror": [
+    {
+      "colour": "reason",
+      "games": 32,
+      "seat0": 14,
+      "seat1": 18,
+      "draws": 0,
+      "turnLimit": 0,
+      "seat0Share": 0.438
+    },
+    {
+      "colour": "emotion",
+      "games": 32,
+      "seat0": 16,
+      "seat1": 16,
+      "draws": 0,
+      "turnLimit": 0,
+      "seat0Share": 0.5
+    },
+    {
+      "colour": "perception",
+      "games": 32,
+      "seat0": 20,
+      "seat1": 12,
+      "draws": 0,
+      "turnLimit": 0,
+      "seat0Share": 0.625
+    },
+    {
+      "colour": "language",
+      "games": 32,
+      "seat0": 18,
+      "seat1": 14,
+      "draws": 0,
+      "turnLimit": 0,
+      "seat0Share": 0.563
+    },
+    {
+      "colour": "imagination",
+      "games": 32,
+      "seat0": 15,
+      "seat1": 17,
+      "draws": 0,
+      "turnLimit": 0,
+      "seat0Share": 0.469
+    },
+    {
+      "colour": "memory",
+      "games": 32,
+      "seat0": 16,
+      "seat1": 16,
+      "draws": 0,
+      "turnLimit": 0,
+      "seat0Share": 0.5
+    }
+  ],
+  "plays": {
+    "emotion-cheer-chick": 283,
+    "reason-proof-by-cases": 153,
+    "reason-check-the-premise": 348,
+    "generic-simple-cover": 658,
+    "memory-archive-armadillo": 486,
+    "perception-focused-hit": 403,
+    "language-definition-dolphin": 462,
+    "imagination-mirror-marten": 334
+  }
+}

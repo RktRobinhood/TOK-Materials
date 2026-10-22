@@ -1,0 +1,686 @@
+{
+  "date": "2026-10-23",
+  "issue": 129,
+  "release": "expansion-3",
+  "method": "Headless Firefox over WebDriver BiDi, production board via dev/expansion-3.html with a memory-only save, real pointer input (mouse at 1280x720, touch at 390x844).",
+  "boardCommits": [
+    {
+      "mode": "wide",
+      "id": "reason-check-the-premise",
+      "reader": "Tactic Check the Premise, cost 1: Deal 1 damage to an enemy creature, or 2 if it has Guard. Reason · common. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 2,
+        "health": 7,
+        "keywords": [
+          "guard"
+        ],
+        "damage": 2
+      },
+      "phase": "main",
+      "log": [
+        "You play the tactic Check the Premise on Lobstorian.",
+        "Check the Premise: 2 damage to Lobstorian, which has Guard.",
+        "Lobstorian takes 2 damage."
+      ],
+      "docWidth": 1280,
+      "newErrors": []
+    },
+    {
+      "mode": "wide",
+      "id": "emotion-cheer-chick",
+      "reader": "Terry Chews, cost 2, attack 1, health 2 of 2. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 3,
+        "health": 2,
+        "keywords": [],
+        "damage": 0
+      },
+      "phase": "main",
+      "log": [
+        "You play Terry Chews.",
+        "Terry Chews hypes up Paper Dragon: +1 attack this turn."
+      ],
+      "docWidth": 1280,
+      "newErrors": []
+    },
+    {
+      "mode": "wide",
+      "id": "perception-focused-hit",
+      "reader": "Tactic Focused Hit, cost 2: Deal 2 damage to an enemy creature, or 3 if it has no keywords. Sense perception · common. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 2,
+        "health": 6,
+        "keywords": [],
+        "damage": 3
+      },
+      "phase": "main",
+      "log": [
+        "You play the tactic Focused Hit on Mr. Beastie.",
+        "Focused Hit: 3 damage to Mr. Beastie, which has no keywords.",
+        "Mr. Beastie takes 3 damage."
+      ],
+      "docWidth": 1280,
+      "newErrors": []
+    },
+    {
+      "mode": "wide",
+      "id": "language-definition-dolphin",
+      "reader": "Susie Dentshell, cost 3, attack 1, health 4 of 4. Uncommon rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 2,
+        "health": 2,
+        "keywords": [
+          "guard"
+        ],
+        "damage": 0
+      },
+      "phase": "main",
+      "log": [
+        "You play Susie Dentshell.",
+        "Susie Dentshell defines Paper Dragon as a guard until your next turn starts."
+      ],
+      "docWidth": 1280,
+      "newErrors": []
+    },
+    {
+      "mode": "wide",
+      "id": "imagination-mirror-marten",
+      "reader": "Peter Jacktree, cost 3, attack 2, health 3 of 3. Uncommon rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 4,
+        "health": 3,
+        "keywords": [],
+        "damage": 0
+      },
+      "phase": "main",
+      "log": [
+        "You play Peter Jacktree.",
+        "Peter Jacktree copies Khaby Llame: 4 attack until your next turn starts."
+      ],
+      "docWidth": 1280,
+      "newErrors": []
+    },
+    {
+      "mode": "wide",
+      "id": "memory-archive-armadillo",
+      "reader": "Niklas Landillo, cost 2, attack 1, health 3 of 3, guard. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 1,
+        "health": 3,
+        "keywords": [
+          "guard"
+        ],
+        "damage": 0
+      },
+      "phase": "main",
+      "log": [
+        "You play Niklas Landillo."
+      ],
+      "docWidth": 1280,
+      "newErrors": []
+    },
+    {
+      "mode": "wide",
+      "id": "generic-simple-cover",
+      "reader": "Tactic Simple Cover, cost 1: A friendly creature gets Guard until your next turn starts. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 2,
+        "health": 2,
+        "keywords": [
+          "guard"
+        ],
+        "damage": 0
+      },
+      "phase": "main",
+      "log": [
+        "You play the tactic Simple Cover on Paper Dragon.",
+        "Simple Cover: Paper Dragon guards until your next turn starts."
+      ],
+      "docWidth": 1280,
+      "newErrors": []
+    },
+    {
+      "mode": "wide",
+      "id": "reason-proof-by-cases",
+      "reader": "Tactic Proof by Cases, cost 4: Choose one: 4 damage to an enemy creature, or two of your creatures get +2 maximum health and heal 2. Reason · rare. Rare rarity.",
+      "choiceSeen": [
+        [
+          "4 damage to an enemy creature",
+          "Two of your creatures: +2 maximum health, heal 2"
+        ],
+        [
+          "Lobstorian, cost 4, attack 2, health 4 of 4, guard. Uncommon",
+          "Mr. Beastie, cost 4, attack 2, health 4 of 4. Uncommon rarit"
+        ]
+      ],
+      "outcome": {
+        "target": {
+          "gone": true,
+          "discarded": true
+        },
+        "friends": [
+          {
+            "id": "paper-dragon",
+            "max": 2,
+            "damage": 0
+          },
+          {
+            "id": "proof-pup",
+            "max": 3,
+            "damage": 0
+          }
+        ]
+      },
+      "phase": "main",
+      "log": [
+        "Proof by Cases: 4 damage to Lobstorian.",
+        "Lobstorian takes 4 damage.",
+        "Lobstorian is defeated."
+      ],
+      "docWidth": 1280,
+      "newErrors": []
+    },
+    {
+      "mode": "wide",
+      "id": "last-save",
+      "reader": "Tactic Focused Hit, cost 2: Deal 2 damage to an enemy creature, or 3 if it has no keywords. Sense perception · common. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "niklas": {
+          "gone": true,
+          "discarded": true
+        },
+        "rivalTop": "counterexample",
+        "rivalDiscard": [
+          "pep-talk",
+          "memory-archive-armadillo"
+        ]
+      },
+      "phase": "main",
+      "log": [
+        "Focused Hit: 2 damage to Niklas Landillo.",
+        "Niklas Landillo takes 2 damage.",
+        "Niklas Landillo puts Counterexample on top of the personal deck.",
+        "Niklas Landillo is defeated."
+      ],
+      "docWidth": 1280,
+      "newErrors": []
+    },
+    {
+      "mode": "wide-calm",
+      "id": "reason-check-the-premise",
+      "reader": "Tactic Check the Premise, cost 1: Deal 1 damage to an enemy creature, or 2 if it has Guard. Reason · common. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 2,
+        "health": 7,
+        "keywords": [
+          "guard"
+        ],
+        "damage": 2
+      },
+      "phase": "main",
+      "log": [
+        "You play the tactic Check the Premise on Lobstorian.",
+        "Check the Premise: 2 damage to Lobstorian, which has Guard.",
+        "Lobstorian takes 2 damage."
+      ],
+      "docWidth": 1280,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "wide-calm",
+      "id": "emotion-cheer-chick",
+      "reader": "Terry Chews, cost 2, attack 1, health 2 of 2. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 3,
+        "health": 2,
+        "keywords": [],
+        "damage": 0
+      },
+      "phase": "main",
+      "log": [
+        "You play Terry Chews.",
+        "Terry Chews hypes up Paper Dragon: +1 attack this turn."
+      ],
+      "docWidth": 1280,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "wide-calm",
+      "id": "perception-focused-hit",
+      "reader": "Tactic Focused Hit, cost 2: Deal 2 damage to an enemy creature, or 3 if it has no keywords. Sense perception · common. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 2,
+        "health": 6,
+        "keywords": [],
+        "damage": 3
+      },
+      "phase": "main",
+      "log": [
+        "You play the tactic Focused Hit on Mr. Beastie.",
+        "Focused Hit: 3 damage to Mr. Beastie, which has no keywords.",
+        "Mr. Beastie takes 3 damage."
+      ],
+      "docWidth": 1280,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "wide-calm",
+      "id": "language-definition-dolphin",
+      "reader": "Susie Dentshell, cost 3, attack 1, health 4 of 4. Uncommon rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 2,
+        "health": 2,
+        "keywords": [
+          "guard"
+        ],
+        "damage": 0
+      },
+      "phase": "main",
+      "log": [
+        "You play Susie Dentshell.",
+        "Susie Dentshell defines Paper Dragon as a guard until your next turn starts."
+      ],
+      "docWidth": 1280,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "wide-calm",
+      "id": "imagination-mirror-marten",
+      "reader": "Peter Jacktree, cost 3, attack 2, health 3 of 3. Uncommon rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 4,
+        "health": 3,
+        "keywords": [],
+        "damage": 0
+      },
+      "phase": "main",
+      "log": [
+        "You play Peter Jacktree.",
+        "Peter Jacktree copies Khaby Llame: 4 attack until your next turn starts."
+      ],
+      "docWidth": 1280,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "wide-calm",
+      "id": "memory-archive-armadillo",
+      "reader": "Niklas Landillo, cost 2, attack 1, health 3 of 3, guard. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 1,
+        "health": 3,
+        "keywords": [
+          "guard"
+        ],
+        "damage": 0
+      },
+      "phase": "main",
+      "log": [
+        "You play Niklas Landillo."
+      ],
+      "docWidth": 1280,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "wide-calm",
+      "id": "generic-simple-cover",
+      "reader": "Tactic Simple Cover, cost 1: A friendly creature gets Guard until your next turn starts. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 2,
+        "health": 2,
+        "keywords": [
+          "guard"
+        ],
+        "damage": 0
+      },
+      "phase": "main",
+      "log": [
+        "You play the tactic Simple Cover on Paper Dragon.",
+        "Simple Cover: Paper Dragon guards until your next turn starts."
+      ],
+      "docWidth": 1280,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "wide-calm",
+      "id": "reason-proof-by-cases",
+      "reader": "Tactic Proof by Cases, cost 4: Choose one: 4 damage to an enemy creature, or two of your creatures get +2 maximum health and heal 2. Reason · rare. Rare rarity.",
+      "choiceSeen": [
+        [
+          "4 damage to an enemy creature",
+          "Two of your creatures: +2 maximum health, heal 2"
+        ]
+      ],
+      "outcome": {
+        "target": {
+          "attack": 2,
+          "health": 4,
+          "keywords": [
+            "guard"
+          ],
+          "damage": 0
+        },
+        "friends": [
+          {
+            "id": "paper-dragon",
+            "max": 4,
+            "damage": 0
+          },
+          {
+            "id": "proof-pup",
+            "max": 5,
+            "damage": 0
+          }
+        ]
+      },
+      "phase": "main",
+      "log": [
+        "Proof by Cases: Paper Dragon gets +2 maximum health and heals 2.",
+        "Proof by Cases: Proof Pup gets +2 maximum health and heals 2."
+      ],
+      "docWidth": 1280,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "wide-calm",
+      "id": "last-save",
+      "reader": "Tactic Focused Hit, cost 2: Deal 2 damage to an enemy creature, or 3 if it has no keywords. Sense perception · common. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "niklas": {
+          "gone": true,
+          "discarded": true
+        },
+        "rivalTop": "counterexample",
+        "rivalDiscard": [
+          "pep-talk",
+          "memory-archive-armadillo"
+        ]
+      },
+      "phase": "main",
+      "log": [
+        "Focused Hit: 2 damage to Niklas Landillo.",
+        "Niklas Landillo takes 2 damage.",
+        "Niklas Landillo puts Counterexample on top of the personal deck.",
+        "Niklas Landillo is defeated."
+      ],
+      "docWidth": 1280,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "phone-calm",
+      "id": "reason-check-the-premise",
+      "reader": "Tactic Check the Premise, cost 1: Deal 1 damage to an enemy creature, or 2 if it has Guard. Reason · common. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 2,
+        "health": 7,
+        "keywords": [
+          "guard"
+        ],
+        "damage": 2
+      },
+      "phase": "main",
+      "log": [
+        "You play the tactic Check the Premise on Lobstorian.",
+        "Check the Premise: 2 damage to Lobstorian, which has Guard.",
+        "Lobstorian takes 2 damage."
+      ],
+      "docWidth": 390,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "phone-calm",
+      "id": "emotion-cheer-chick",
+      "reader": "Terry Chews, cost 2, attack 1, health 2 of 2. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 3,
+        "health": 2,
+        "keywords": [],
+        "damage": 0
+      },
+      "phase": "main",
+      "log": [
+        "You play Terry Chews.",
+        "Terry Chews hypes up Paper Dragon: +1 attack this turn."
+      ],
+      "docWidth": 390,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "phone-calm",
+      "id": "perception-focused-hit",
+      "reader": "Tactic Focused Hit, cost 2: Deal 2 damage to an enemy creature, or 3 if it has no keywords. Sense perception · common. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 2,
+        "health": 6,
+        "keywords": [],
+        "damage": 3
+      },
+      "phase": "main",
+      "log": [
+        "You play the tactic Focused Hit on Mr. Beastie.",
+        "Focused Hit: 3 damage to Mr. Beastie, which has no keywords.",
+        "Mr. Beastie takes 3 damage."
+      ],
+      "docWidth": 390,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "phone-calm",
+      "id": "language-definition-dolphin",
+      "reader": "Susie Dentshell, cost 3, attack 1, health 4 of 4. Uncommon rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 2,
+        "health": 2,
+        "keywords": [
+          "guard"
+        ],
+        "damage": 0
+      },
+      "phase": "main",
+      "log": [
+        "You play Susie Dentshell.",
+        "Susie Dentshell defines Paper Dragon as a guard until your next turn starts."
+      ],
+      "docWidth": 390,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "phone-calm",
+      "id": "imagination-mirror-marten",
+      "reader": "Peter Jacktree, cost 3, attack 2, health 3 of 3. Uncommon rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 4,
+        "health": 3,
+        "keywords": [],
+        "damage": 0
+      },
+      "phase": "main",
+      "log": [
+        "You play Peter Jacktree.",
+        "Peter Jacktree copies Khaby Llame: 4 attack until your next turn starts."
+      ],
+      "docWidth": 390,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "phone-calm",
+      "id": "memory-archive-armadillo",
+      "reader": "Niklas Landillo, cost 2, attack 1, health 3 of 3, guard. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 1,
+        "health": 3,
+        "keywords": [
+          "guard"
+        ],
+        "damage": 0
+      },
+      "phase": "main",
+      "log": [
+        "You play Niklas Landillo."
+      ],
+      "docWidth": 390,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "phone-calm",
+      "id": "generic-simple-cover",
+      "reader": "Tactic Simple Cover, cost 1: A friendly creature gets Guard until your next turn starts. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "attack": 2,
+        "health": 2,
+        "keywords": [
+          "guard"
+        ],
+        "damage": 0
+      },
+      "phase": "main",
+      "log": [
+        "You play the tactic Simple Cover on Paper Dragon.",
+        "Simple Cover: Paper Dragon guards until your next turn starts."
+      ],
+      "docWidth": 390,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "phone-calm",
+      "id": "reason-proof-by-cases",
+      "reader": "Tactic Proof by Cases, cost 4: Choose one: 4 damage to an enemy creature, or two of your creatures get +2 maximum health and heal 2. Reason · rare. Rare rarity.",
+      "choiceSeen": [
+        [
+          "4 damage to an enemy creature",
+          "Two of your creatures: +2 maximum health, heal 2"
+        ]
+      ],
+      "outcome": {
+        "target": {
+          "attack": 2,
+          "health": 4,
+          "keywords": [
+            "guard"
+          ],
+          "damage": 0
+        },
+        "friends": [
+          {
+            "id": "paper-dragon",
+            "max": 4,
+            "damage": 0
+          },
+          {
+            "id": "proof-pup",
+            "max": 5,
+            "damage": 0
+          }
+        ]
+      },
+      "phase": "main",
+      "log": [
+        "Proof by Cases: Paper Dragon gets +2 maximum health and heals 2.",
+        "Proof by Cases: Proof Pup gets +2 maximum health and heals 2."
+      ],
+      "docWidth": 390,
+      "movingAnimations": [],
+      "newErrors": []
+    },
+    {
+      "mode": "phone-calm",
+      "id": "last-save",
+      "reader": "Tactic Focused Hit, cost 2: Deal 2 damage to an enemy creature, or 3 if it has no keywords. Sense perception · common. Common rarity.",
+      "choiceSeen": [],
+      "outcome": {
+        "niklas": {
+          "gone": true,
+          "discarded": true
+        },
+        "rivalTop": "counterexample",
+        "rivalDiscard": [
+          "pep-talk",
+          "memory-archive-armadillo"
+        ]
+      },
+      "phase": "main",
+      "log": [
+        "Focused Hit: 2 damage to Niklas Landillo.",
+        "Niklas Landillo takes 2 damage.",
+        "Niklas Landillo puts Counterexample on top of the personal deck.",
+        "Niklas Landillo is defeated."
+      ],
+      "docWidth": 390,
+      "movingAnimations": [],
+      "newErrors": []
+    }
+  ],
+  "stall": {
+    "wide": {
+      "packs": [
+        [
+          "memory-recall-robin",
+          "memory-archive-armadillo",
+          "language-definition-dolphin",
+          "memory-remember-the-guard",
+          "emotion-share-the-feeling"
+        ]
+      ],
+      "odds": "Next card: Common 67% (17 kinds), Uncommon 23.7% (4 kinds), Rare 9.3% (2 kinds). Foil: 4% per card. Full folders are left out.",
+      "hit": "memory-archive-armadillo",
+      "caption": "CCommon creatureNiklas LandilloGuard. Last Word: put your oldest discarded spell on top of your personal deck.New copy · Folder 1/4",
+      "docWidth": 1280,
+      "errors": []
+    },
+    "phone": {
+      "packs": [
+        [
+          "memory-recall-robin",
+          "memory-archive-armadillo",
+          "language-definition-dolphin",
+          "memory-remember-the-guard",
+          "emotion-share-the-feeling"
+        ]
+      ],
+      "odds": "Next card: Common 67% (17 kinds), Uncommon 23.7% (4 kinds), Rare 9.3% (2 kinds). Foil: 4% per card. Full folders are left out.",
+      "hit": "memory-archive-armadillo",
+      "caption": "CCommon creatureNiklas LandilloGuard. Last Word: put your oldest discarded spell on top of your personal deck.New copy · Folder 1/4",
+      "docWidth": 390,
+      "errors": []
+    }
+  },
+  "note": "Board commits re-run after the review text fixes; outcomes identical to the first run."
+}

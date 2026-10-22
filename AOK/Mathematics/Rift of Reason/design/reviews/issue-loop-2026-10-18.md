@@ -1,3 +1,16 @@
+**23 Oct 2026 · #129 expansion-3 DONE, tracker stays OPEN (Paperclip FAL-272, Claude).** Eight more held catalogue concepts are now playable as `expansion-3`:
+
+- Proof by Cases (Rare spell)
+- Susie Dentshell and Peter Jacktree (Uncommon)
+- Terry Chews and Niklas Landillo
+- the spells Check the Premise, Focused Hit and Simple Cover
+
+All six Ways and generic are covered. The cards are in packs, and the four creatures also have chapter-two catches. Each uses its existing art and shared sounds, with no voice lines. Before the lesson unlock, the stall now offers 17 Common, 4 Uncommon and 2 Rare kinds (it was 12/2/1). A new engine hook, `lastWordEffect`, runs a Last Word even with a full hand or Mercy.
+
+New `tools/test/expansion-3.test.mjs` has 13 tests. The existing arena fuzz caught one real defect (Niklas's empty-pile note was a fizzle event), which is now fixed. The probe (`tools/sim-expansion-3.mjs`, 768 games each way) now pairs each mono Way with **three** partner Ways from the colour wheel: Strong, Weak and neutral. Every batch shift is inside the mirror noise. Expansion-2's Perception and Memory skews were wheel edges, not colour strength. On the neutral row the Reason mono fixture is strong and Memory's is the weakest. Board commits were checked by real input at 1280 normal, 1280 Calm and 390 touch, plus a real stall pack. Full suite 1,494 / 1,493 pass / 1 skip / 0 fail.
+
+**169 concepts held.** Report: `expansion-3-2026-10-23.md`. NEXT: the next #129 batch suggested there; #163 art and world-screen slices; open #159 (stretch), #43, #29, #162 (teacher).
+
 **23 Oct 2026 · #163 slice 1 (card text) DONE, #163 stays OPEN (Paperclip FAL-270, Claude).** Card rules text is now readable everywhere it is shown. All 209 released cards were measured in headless Firefox (`tools/measure-card-text.mjs`) at 1280 and 390 px. Before: up to 175 clipped faces per place, type down to 7 px, and 1.02:1 contrast on the tactic magnifier. After: 0 clipped, at least 12 px, and at least 4.58:1 contrast.
 
 - Hand faces print one word.

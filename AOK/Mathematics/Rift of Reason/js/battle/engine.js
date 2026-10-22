@@ -588,7 +588,7 @@
         [c.ability].concat(c.gained).filter(Boolean).forEach((id, i) => {
             const def = defs[id];
             if (!def) return;
-            const kind = def.activate ? 'activate' : def.entrance ? 'entrance' : def.lastWord ? 'lastword' : 'passive';
+            const kind = def.activate ? 'activate' : def.entrance ? 'entrance' : def.lastWord || def.lastWordEffect ? 'lastword' : 'passive';
             lines.push({ id, name: def.name, text: def.text, kind, gained: i > 0, warped: i === 0 && c.warped, off,
                 cost: def.activate ? Math.max(0, def.activate.cost + rules(s).abilityCostDelta) : null });
         });
@@ -1093,6 +1093,12 @@
                 const p = s.cards[cid].owner, P = s.players[p];
                 if (!removeFrom(P.discard, cid)) return false;
                 P.deck.push(cid);recordRecovery(s, p, cid);return true;
+            },
+            // The discard pile is public, so the card now on top is known to both players (#129, Last Save).
+            recoverTop(cid) {
+                const p = s.cards[cid].owner, P = s.players[p];
+                if (!removeFrom(P.discard, cid)) return false;
+                P.deck.unshift(cid);recordRecovery(s, p, cid);return true;
             },
             toHand: (p, cid, quiet) => toHand(G, p, cid, quiet),
             handRoom: (p, n) => handRoom(s, p, n),
@@ -2233,6 +2239,7 @@
         if (room && rules(s).mercy) { dest = 'hand'; saver = 'Mercy'; }
         abilityIds(s, c).forEach(id => {
             const def = abilityDefs()[id];
+            if (def.lastWordEffect) def.lastWordEffect(api(G), c); // whatever the hand or Mercy (#129, Last Save)
             if (room && dest === 'discard' && def.lastWord && def.lastWord(api(G), c) === 'hand') { dest = 'hand'; saver = def.name; }
         });
         resetCard(c);

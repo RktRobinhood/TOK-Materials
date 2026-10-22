@@ -828,7 +828,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-3: pack pool plus one ordinary chapter-two catch"
       },
       "silhouette": "Broad-shouldered rooster with a warm grin, small comb and worn crimson sports vest.",
       "signatureProp": "One wing gives an exaggerated thumbs-up-shaped encouragement; no human hands.",
@@ -853,7 +853,7 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-3 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
@@ -2239,7 +2239,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-3: pack pool plus one ordinary chapter-two catch"
       },
       "silhouette": "A compact hermit crab with a dark spiral shell, golden edging and two bright stalk eyes; a short russet crest curls over its brow.",
       "signatureProp": "One stout closed dictionary with a blank gold-edged cover held like a protective lectern.",
@@ -2265,12 +2265,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-3 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 3,
         "attack": 1,
         "health": 4,
-        "text": "Entrance: give a friendly creature Guard until your next turn starts.",
+        "text": "Entrance: another friendly creature that does not have Guard gains Guard until your next turn starts.",
         "gates": [
           109
         ]
@@ -2895,7 +2895,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-3: pack pool plus one ordinary chapter-two catch"
       },
       "silhouette": "Living sapling with knot eyes, mossy bark beard and violet collar; one brass viewfinder.",
       "signatureProp": "Rendered FRONT with viewfinder angled LEFT; authored intent and actual changes in provenance.",
@@ -2920,12 +2920,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-3 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
         "health": 3,
-        "text": "Entrance: copy another friendly creature's current attack until your next turn starts, maximum 4.",
+        "text": "Entrance: if another friendly creature has higher current attack, this creature's attack becomes that attack, maximum 4, until your next turn starts. Measured after this is on the board; it never lowers this creature's attack.",
         "gates": [
           109
         ]
@@ -3384,7 +3384,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-3: pack pool plus one ordinary chapter-two catch"
       },
       "silhouette": "A small warm-eyed armadillo with a broad natural shell and silver-trimmed padded goalkeeper vest; short snout and four total limbs. One plain silver-and-cream handball held against a forepaw; no film map, human head or national-team uniform.",
       "signatureProp": "Rendered FRONT three-quarter; original pose and any correction in provenance.",
@@ -3410,12 +3410,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-3 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
         "health": 3,
-        "text": "Guard. Last Word: put your oldest discarded spell on top of your personal deck if one is still there.",
+        "text": "Guard. Last Word: put your oldest discarded spell on top of your personal deck if one is still there. This happens even when the hand is full or Mercy returns this creature.",
         "gates": [
           109
         ]

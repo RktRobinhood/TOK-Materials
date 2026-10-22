@@ -1,3 +1,7 @@
+## Expansion-3 — 23 October 2026
+
+Eight more audited concepts are released as `expansion-3` (#129): Proof by Cases (Rare), Susie Dentshell and Peter Jacktree (Uncommon), Terry Chews, Niklas Landillo, Check the Premise, Focused Hit and Simple Cover. They are pack cards; the four creatures also have chapter-two catches. **169 concepts remain held.** See [CONTRACT-AUDIT-123.md](CONTRACT-AUDIT-123.md) and [acceptance evidence](../../reviews/expansion-3-2026-10-23.md).
+
 ## Expansion-2 — 22 October 2026
 
 Eight more audited concepts are released as `expansion-2` (#129): Grant Sanderstag (Rare), Greta Thunbug and Nelly Koalda (Uncommon), Ryan Georilla, PewDiePika, Share the Feeling, Remember the Guard and Warm Blanket. They are pack cards; the five creatures also have chapter-two catches. **177 concepts remain held.** See [CONTRACT-AUDIT-123.md](CONTRACT-AUDIT-123.md) and [acceptance evidence](../../reviews/expansion-2-2026-10-22.md).

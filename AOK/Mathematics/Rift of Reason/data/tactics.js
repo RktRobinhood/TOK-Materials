@@ -704,6 +704,79 @@
             },
         },
     });
+    // #129 expansion-3 spells. The bonus is checked as the spell resolves; Guard ends when the caster's next turn starts.
+    // Proof by Cases: enemy creatures it may target (Elusive hides them, as from any spell).
+    const proofTargets = (s, p, H) => s.players[1 - p].board.filter(cid => !H.hasKeyword(s, cid, 'elusive'));
+    function proofSupport(api, p, cid) {
+        api.buff(cid, 0, 2, 'Proof by Cases'); api.heal(cid, 2);
+        api.emit({ t: 'tactic', player: p, text: 'Proof by Cases: ' + api.name(cid) + ' gets +2 maximum health and heals 2.' });
+    }
+    Object.assign(tactics, {
+        'reason-check-the-premise': {
+            name: 'Check the Premise', cost: 1, colour: 'reason', rarity: 'common', release: 'expansion-3', packEligible: true,
+            text: 'Deal 1 damage to an enemy creature, or 2 if it has Guard.', short: '1 damage to an enemy; 2 if it has Guard',
+            art: 'art/spell-motif-reason', target: 'enemy-creature',
+            run(api, p, target) {
+                const n = api.H.hasKeyword(api.s, target, 'guard') ? 2 : 1;
+                api.emit({ t: 'tactic', player: p, text: 'Check the Premise: ' + n + ' damage to ' + api.name(target) + (n === 2 ? ', which has Guard.' : '.') });
+                api.damage(target, n, null);
+            },
+        },
+        'perception-focused-hit': {
+            name: 'Focused Hit', cost: 2, colour: 'perception', rarity: 'common', release: 'expansion-3', packEligible: true,
+            text: 'Deal 2 damage to an enemy creature, or 3 if it has no keywords.', short: '2 damage to an enemy; 3 if it has no keywords',
+            art: 'art/spell-motif-perception', target: 'enemy-creature',
+            run(api, p, target) {
+                const n = api.H.keywordsOf(api.s, target).length ? 2 : 3;
+                api.emit({ t: 'tactic', player: p, text: 'Focused Hit: ' + n + ' damage to ' + api.name(target) + (n === 3 ? ', which has no keywords.' : '.') });
+                api.damage(target, n, null);
+            },
+        },
+        'generic-simple-cover': {
+            name: 'Simple Cover', cost: 1, rarity: 'common', release: 'expansion-3', packEligible: true,
+            text: 'A friendly creature gets Guard until your next turn starts.', short: 'Your creature: Guard until your next turn',
+            // A creature that already has Guard is not offered: the spell would do nothing.
+            art: 'art/spell-motif-generic', target: 'friendly-creature', filter: (s, cid, H) => !H.hasKeyword(s, cid, 'guard'),
+            run(api, p, target) {
+                api.keywordUntilStart(target, 'guard', 'gain', p, 'Simple Cover');
+                api.emit({ t: 'tactic', player: p, text: 'Simple Cover: ' + api.name(target) + ' guards until your next turn starts.' });
+            },
+        },
+        'reason-proof-by-cases': {
+            name: 'Proof by Cases', cost: 4, colour: 'reason', rarity: 'rare', release: 'expansion-3', packEligible: true,
+            text: 'Choose one: 4 damage to an enemy creature, or two of your creatures get +2 maximum health and heal 2.',
+            // No short form: both cases do not fit the tactic plate, so the big face names the card instead (#163).
+            art: 'art/spell-motif-reason',
+            usable: (s, p, H) => proofTargets(s, p, H).length > 0 || s.players[p].board.length > 0,
+            // A case that can do nothing is not offered; with one case left there is no question.
+            run(api, p) {
+                const modes = (proofTargets(api.s, p, api.H).length ? ['damage'] : []).concat(api.s.players[p].board.length ? ['support'] : []);
+                api.ask({ player: p, kind: 'option', options: modes, step: 'case', prompt: 'Proof by Cases: choose one.',
+                    labels: { damage: '4 damage to an enemy creature', support: 'Two of your creatures: +2 maximum health, heal 2' },
+                    source: { type: 'tactic', id: 'reason-proof-by-cases' } });
+            },
+            choose(api, p, choice, req) {
+                const board = api.s.players[p].board;
+                if (req.step === 'case' && choice === 'damage') {
+                    api.ask({ player: p, kind: 'card', options: proofTargets(api.s, p, api.H), step: 'enemy', prompt: 'Which enemy creature takes 4 damage?',
+                        source: { type: 'tactic', id: 'reason-proof-by-cases' } });
+                } else if (req.step === 'case') {
+                    // Two or fewer creatures: each one gets it, with no question.
+                    if (board.length <= 2) board.slice().forEach(cid => proofSupport(api, p, cid));
+                    else api.ask({ player: p, kind: 'card', options: board.slice(), step: 'first', prompt: 'Which creature gets +2 maximum health and heals 2?',
+                        source: { type: 'tactic', id: 'reason-proof-by-cases' } });
+                } else if (req.step === 'enemy') {
+                    if (!api.s.players[1 - p].board.includes(choice)) return;
+                    api.emit({ t: 'tactic', player: p, text: 'Proof by Cases: 4 damage to ' + api.name(choice) + '.' });
+                    api.damage(choice, 4, null);
+                } else if (board.includes(choice)) {
+                    proofSupport(api, p, choice);
+                    if (req.step === 'first') api.ask({ player: p, kind: 'card', options: board.filter(cid => cid !== choice), step: 'second',
+                        prompt: 'Which other creature gets it too?', source: { type: 'tactic', id: 'reason-proof-by-cases' } });
+                }
+            },
+        },
+    });
     Rift.data.tactics = tactics;
     tactics['generic-quiet-reset'] = {
         id: 'generic-quiet-reset', name: 'Quiet Reset', cost: 3, rarity: 'uncommon', release: 'plot-1', packEligible: false,

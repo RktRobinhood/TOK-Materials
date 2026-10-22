@@ -10,6 +10,7 @@
  *                                    (it would certainly do nothing, e.g. an empty deck)
  *   lastWord(api, card)              when defeated; return 'hand' to go back to the hand instead
  *                                    (skipped when Mercy already returns it or the hand is full)
+ *   lastWordEffect(api, card)        when defeated, wherever the card goes: an effect that never returns it
  *   attackMod(state, card, H)        own attack change
  *   aura(state, source, card, H)     attack bonus given to OTHER friendly creatures
  *   onTurnEnd(api, card)             at the end of its controller's turn
@@ -615,6 +616,59 @@
                 else { api.buff(card.cid, 0, 1, 'One more way'); api.heal(card.cid, 1); }
                 api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + (choice === 'attack' ? ' plays it bold: +1 attack.' : ' plays it safe: +1 maximum health and heal 1.') });
             },
+        },
+        // #129 expansion-3. Like expansion-2: once per paid play (or per defeat), no listener, copy or Fate event.
+        'big-hype': {
+            name: 'Big Hype',
+            text: 'Entrance: another friendly creature gets +1 attack this turn.',
+            entrance: { target: 'friendly-other', run(api, card, target) {
+                api.buff(target, 1, 0, 'Big hype', true);
+                api.emit({ t: 'ability', cid: card.cid, target, text: api.name(card.cid) + ' hypes up ' + api.name(target) + ': +1 attack this turn.' });
+            } },
+        },
+        'dictionary-corner': {
+            name: 'Dictionary Corner',
+            text: 'Entrance: another friendly creature gets Guard until your next turn starts.',
+            // A creature that already has Guard is not offered: it would gain nothing.
+            entrance: { target: 'friendly-other', filter: (s, cid, H) => !H.hasKeyword(s, cid, 'guard'), run(api, card, target) {
+                api.keywordUntilStart(target, 'guard', 'gain', card.controller, 'Dictionary Corner');
+                api.emit({ t: 'ability', cid: card.cid, target, text: api.name(card.cid) + ' defines ' + api.name(target) + ' as a guard until your next turn starts.' });
+            } },
+        },
+        'one-more-take': {
+            name: 'One More Take',
+            text: 'Entrance: copy a friend\'s attack if it is higher (up to 4) until your next turn starts.',
+            // Measured once this is on the board (auras count). Kept as a timed boost of the difference,
+            // so a copy never lowers this creature's attack and never goes past 4.
+            entrance: { run(api, card) {
+                const mine = api.attack(card.cid), options = api.s.players[card.controller].board
+                    .filter(cid => cid !== card.cid && Math.min(4, api.attack(cid)) > mine);
+                if (!api.ask({ player: card.controller, kind: 'card', options, prompt: 'Whose attack does this copy (up to 4)?',
+                    source: { type: 'ability', id: 'one-more-take', cid: card.cid } })) {
+                    api.emit({ t: 'fizzle', cid: card.cid, text: api.name(card.cid) + ' finds no higher attack to copy.' });
+                }
+            } },
+            choose(api, card, cid) {
+                const P = api.s.players[card.controller];
+                if (!P.board.includes(cid) || !P.board.includes(card.cid)) return;
+                const gain = Math.min(4, api.attack(cid)) - api.attack(card.cid);
+                if (gain <= 0) return;
+                api.buffUntilStart(card.cid, gain, 0, 'One more take', card.controller);
+                api.emit({ t: 'ability', cid: card.cid, target: cid, text: api.name(card.cid) + ' copies ' + api.name(cid) + ': ' + api.attack(card.cid) + ' attack until your next turn starts.' });
+            },
+        },
+        'last-save': {
+            name: 'Last Save', keywords: ['guard'],
+            text: 'Guard. Last Word: put your oldest discarded spell on top of your personal deck.',
+            // Not lastWord: that one returns a card to the hand and is skipped with a full hand or Mercy.
+            // An empty pile is a plain log line, not a fizzle: the action that defeated him did not fail.
+            lastWordEffect(api, card) {
+                const P = api.s.players[card.controller], cid = P.discard.find(id => api.s.cards[id].kind === 'tactic');
+                if (!cid) { api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' finds no spell in the discard pile.' }); return; }
+                api.recoverTop(cid);
+                api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' puts ' + api.cardName(cid) + ' on top of the personal deck.' });
+            },
+            ai: () => 0.5,
         },
         'patient-conclusion': {
             name: 'One Tiny Detail', text: 'Once per turn, after another friend survives a fight at 1 health, draw 1 personal card.',

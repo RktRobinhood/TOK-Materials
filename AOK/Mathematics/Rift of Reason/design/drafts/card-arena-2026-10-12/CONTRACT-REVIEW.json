@@ -42,7 +42,17 @@
     "memory-remember-the-guard",
     "generic-warm-blanket"
   ],
-  "held": 177,
+  "expansion3Batch": [
+    "reason-check-the-premise",
+    "emotion-cheer-chick",
+    "perception-focused-hit",
+    "language-definition-dolphin",
+    "imagination-mirror-marten",
+    "memory-archive-armadillo",
+    "generic-simple-cover",
+    "reason-proof-by-cases"
+  ],
+  "held": 169,
   "rows": [
     {
       "id": "reason-premise-pigeon",
@@ -344,7 +354,7 @@
       "kind": "creature",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-3 runtime release (#129); see expansion-3 acceptance report",
       "trigger": "Entrance",
       "target": "creature-local or explicitly named target in contract",
       "payoffAndLifetime": "Entrance: another friendly creature gains 1 attack this turn.",
@@ -866,10 +876,10 @@
       "kind": "creature",
       "rarity": "uncommon",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-3 runtime release (#129); see expansion-3 acceptance report",
       "trigger": "Entrance",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Entrance: give a friendly creature Guard until your next turn starts.",
+      "payoffAndLifetime": "Entrance: another friendly creature that does not have Guard gains Guard until your next turn starts.",
       "counterplay": "Remove Guard or attack after expiry.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -1106,14 +1116,13 @@
       "kind": "creature",
       "rarity": "uncommon",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-3 runtime release (#129); see expansion-3 acceptance report",
       "trigger": "Entrance",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Entrance: copy another friendly creature's current attack until your next turn starts, maximum 4.",
+      "payoffAndLifetime": "Entrance: if another friendly creature has higher current attack, this creature's attack becomes that attack, maximum 4, until your next turn starts. Measured after this is on the board; it never lowers this creature's attack.",
       "counterplay": "Remove the large source before the copy turn.",
       "semanticRevision": null,
       "releaseChecks": [
-        "identity: move actual instance; consume one-shots before effects; no cloned receipt or source",
         "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap"
       ],
       "gates": [
@@ -1290,14 +1299,15 @@
       "kind": "creature",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
-      "trigger": "Guard. Last Word: put your oldest discarded spell on top of your personal deck if one is still there.",
+      "disposition": "expansion-3 runtime release (#129); see expansion-3 acceptance report",
+      "trigger": "Guard. Last Word: put your oldest discarded spell on top of your personal deck if one is still there. This happens even when the hand is full or Mercy returns this creature.",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Guard. Last Word: put your oldest discarded spell on top of your personal deck if one is still there.",
+      "payoffAndLifetime": "Guard. Last Word: put your oldest discarded spell on top of your personal deck if one is still there. This happens even when the hand is full or Mercy returns this creature.",
       "counterplay": "Silence it or force an unwanted oldest spell; it replaces a later draw rather than creating a copy.",
       "semanticRevision": "Niklas Landillo marks a precise place in the archive instead of plain Guard. Recall Robin recycles the newest spell to the bottom on Entrance.",
       "releaseChecks": [
-        "identity: move actual instance; consume one-shots before effects; no cloned receipt or source"
+        "identity: move actual instance; consume one-shots before effects; no cloned receipt or source",
+        "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap"
       ],
       "gates": [
         109
@@ -1506,7 +1516,7 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-3 runtime release (#129); see expansion-3 acceptance report",
       "trigger": "paid cast",
       "target": "enemy-creature",
       "payoffAndLifetime": "Deal 1 damage, or 2 if the target has Guard.",
@@ -1663,10 +1673,10 @@
       "kind": "spell",
       "rarity": "rare",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-3 runtime release (#129); see expansion-3 acceptance report",
       "trigger": "paid cast",
       "target": "choice",
-      "payoffAndLifetime": "Choose: deal 4 damage to an enemy creature, or give two friendly creatures 2 maximum health and heal each by 2.",
+      "payoffAndLifetime": "Choose one that can happen: deal 4 damage to an enemy creature, or give two friendly creatures (all of them if you have two or fewer) +2 maximum health and heal each by 2.",
       "counterplay": "Force the less useful choice.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -1978,7 +1988,7 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-3 runtime release (#129); see expansion-3 acceptance report",
       "trigger": "paid cast",
       "target": "enemy-creature",
       "payoffAndLifetime": "Deal 2 damage, or 3 if it has no keywords.",
@@ -3526,7 +3536,7 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-3 runtime release (#129); see expansion-3 acceptance report",
       "trigger": "paid cast",
       "target": "friendly-creature",
       "payoffAndLifetime": "Give Guard until your next turn starts.",

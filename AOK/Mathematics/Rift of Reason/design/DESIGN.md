@@ -1,3 +1,24 @@
+## Expansion-3 cards — 23 October 2026 (#129)
+
+Eight more catalogue concepts are playable as release `expansion-3`:
+
+| Card | Way and rarity | Effect |
+|---|---|---|
+| Check the Premise | Reason spell, Common | 1 damage to an enemy creature, or 2 if it has Guard. |
+| Terry Chews | Emotion, Common | Entrance: another friendly creature gets +1 attack this turn. |
+| Focused Hit | Perception spell, Common | 2 damage to an enemy creature, or 3 if it has no keywords. |
+| Susie Dentshell | Language, Uncommon | Entrance: another friendly creature without Guard gets timed Guard. |
+| Peter Jacktree | Imagination, Uncommon | Entrance: copy a higher friendly attack, up to 4, until your next turn starts. |
+| Niklas Landillo | Memory, Common | Guard. Last Word: your oldest discarded spell goes on top of your deck. |
+| Simple Cover | Generic spell, Common | A friendly creature without Guard gets timed Guard. |
+| Proof by Cases | Reason spell, Rare | Choose one: 4 damage to an enemy creature, or two friendly creatures get +2 maximum health and heal 2. |
+
+Timed effects end when the caster's next turn starts. Niklas's Last Word happens even when the hand is full or Mercy returns him (a new `lastWordEffect` hook). A choice that can do nothing is not offered.
+
+All eight are pack cards. Each creature also has one ordinary chapter-two catch: Lever Bridge, Post Office, Clockmaker's Workshop and Granny's Kitchen. They use their existing portraits or Way motifs and shared sounds, with no voice lines. Before the two-lesson unlock, packs now hold 17 Common, 4 Uncommon and 2 Rare kinds.
+
+**169 catalogue concepts stay held under #129.** See the [verification](reviews/expansion-3-2026-10-23.md) and the [audit ledger](drafts/card-arena-2026-10-12/CONTRACT-AUDIT-123.md).
+
 ## Expansion-2 cards — 22 October 2026 (#129)
 
 Eight more catalogue concepts are playable as release `expansion-2`:
@@ -38,7 +59,7 @@ Granny (Syllo if Granny is gone) gives a teaser on the map after the Gate and an
 
 ## Story-only cards — 21 October 2026
 
-Eighteen plot-1 cards now have actual runtime effects and fixed story sources. Completed-node proof plus a canonical once-only receipt grants two normal copies; existing historical copies satisfy the entitlement. Visits, dark-node shortcuts and practice do not qualify. Plot IDs stay out of packs forever. Collection shows known/earned sources. Seven shared Win goals settle only at the active player's own turn end, after cleanup/hand limits and before Fate; hearts reaching zero settle first. The Common Good is the first released Mythic Axiom, with ordinary print limits and no wild catch route. [Source policy and verification](reviews/story-132-2026-10-21.md) records all18 contracts,96 legal matchup probes and acceptance limits. Expansion frontier: seven foundation cards, eighteen plot cards,185 held concepts (177 after the 22 October expansion-2 batch).
+Eighteen plot-1 cards now have actual runtime effects and fixed story sources. Completed-node proof plus a canonical once-only receipt grants two normal copies; existing historical copies satisfy the entitlement. Visits, dark-node shortcuts and practice do not qualify. Plot IDs stay out of packs forever. Collection shows known/earned sources. Seven shared Win goals settle only at the active player's own turn end, after cleanup/hand limits and before Fate; hearts reaching zero settle first. The Common Good is the first released Mythic Axiom, with ordinary print limits and no wild catch route. [Source policy and verification](reviews/story-132-2026-10-21.md) records all18 contracts,96 legal matchup probes and acceptance limits. Expansion frontier: seven foundation cards, eighteen plot cards,185 held concepts (177 after the 22 October expansion-2 batch, 169 after the 23 October expansion-3 batch).
 
 ## Five-tier rarity — 21 October 2026
 

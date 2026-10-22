@@ -1,3 +1,7 @@
+## Gameplay release — 23 October 2026 (#129 expansion-3)
+
+Eight more concepts are released (1 Rare, 2 Uncommon, 5 Common, all six Ways plus generic), with paired mono/mixed probes against three partner Ways from the colour wheel, a mirror and browser evidence in ../../reviews/expansion-3-2026-10-23.md. 169 remain held. No Fate, Win, token or reaction rule was added.
+
 ## Gameplay release — 22 October 2026 (#129 expansion-2)
 
 Eight more concepts are released (1 Rare, 2 Uncommon, 5 Common, all six Ways plus generic), with paired mono/mixed and mirror probes and browser evidence in ../../reviews/expansion-2-2026-10-22.md. 177 remain held. No Fate, Win, token or reaction rule was added.

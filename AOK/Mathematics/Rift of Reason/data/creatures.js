@@ -354,6 +354,30 @@
         },
     });
 
+    // #129 expansion-3: third small audited batch, the same rules as expansion-2 above.
+    Object.assign(Rift.data.creatures, {
+        'emotion-cheer-chick': {
+            name: 'Terry Chews', inspiredBy: 'Terry Crews', colour: 'emotion', rarity: 'common', power: 2, cost: 2, attack: 1, health: 2,
+            ability: 'big-hype', abilityText: 'Entrance: another friendly creature gets +1 attack this turn.',
+            blurb: 'Every small pep talk becomes a full motivational show.', lines: [], release: 'expansion-3', packEligible: true,
+        },
+        'language-definition-dolphin': {
+            name: 'Susie Dentshell', inspiredBy: 'Susie Dent', colour: 'language', rarity: 'uncommon', power: 4, cost: 3, attack: 1, health: 4,
+            ability: 'dictionary-corner', abilityText: 'Entrance: another friendly creature gets Guard until your next turn starts.',
+            blurb: 'Even a monster must wait while she finds exactly the right word.', lines: [], release: 'expansion-3', packEligible: true,
+        },
+        'imagination-mirror-marten': {
+            name: 'Peter Jacktree', inspiredBy: 'Peter Jackson', colour: 'imagination', rarity: 'uncommon', power: 4, cost: 3, attack: 2, health: 3,
+            ability: 'one-more-take', abilityText: 'Entrance: copy a friend\'s attack if it is higher (up to 4) until your next turn starts.',
+            blurb: 'The scene is fine. One more take, just to be sure.', lines: [], release: 'expansion-3', packEligible: true,
+        },
+        'memory-archive-armadillo': {
+            name: 'Niklas Landillo', inspiredBy: 'Niklas Landin Jacobsen', colour: 'memory', rarity: 'common', power: 3, cost: 2, attack: 1, health: 3,
+            ability: 'last-save', abilityText: 'Guard. Last Word: put your oldest discarded spell on top of your personal deck.',
+            blurb: 'Remembers every shot he ever saved.', lines: [], release: 'expansion-3', packEligible: true,
+        },
+    });
+
     // #132 plot identities: their actual earned source is the permanent Acquisition registry.
     function plotCreature(name,inspiredBy,colour,attack,health,ability,abilityText,blurb){
         return {name,inspiredBy,colour,rarity:'rare',power:5,cost:5,attack,health,ability,abilityText,blurb,lines:[],release:'plot-1',packEligible:false};
