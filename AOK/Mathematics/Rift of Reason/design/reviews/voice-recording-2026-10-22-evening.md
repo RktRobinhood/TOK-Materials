@@ -18,14 +18,24 @@ All 7 ready lines from the card teaser and invite:
 
 Every clip matches its line word for word: "1" is Whisper's spelling of "one", and only punctuation differs. No cut slipped. The transcripts came from faster-whisper small on the CPU, with no API use. Catalog: **2934/2981**.
 
-## Still missing (47)
+## Rubberstamp (later the same evening)
 
-Every missing line, with its voice id, speaker, place, text and status, is listed in [voice-missing-2026-10-22.json](voice-missing-2026-10-22.json).
+The teacher ruled that every character who could plausibly appear in the plot gets all of their lines (see DESIGN.md, voice completion). So Mr Rubberstamp's 46 tutorial lines are no longer deferred; he is Pip's understudy.
 
-- **Rubberstamp, 46 tutorial lines:** still deferred, pending the story-reachability decision from 20 October.
-- **kuku-o0st9l:** this logic-grid line contains ✓. Both earlier takes read the symbol as a letter. The fix, so the voice says "a tick" or "a cross", is on the unmerged branch `fal-262-voice-cuts` (b1e1f6f4). Re-record the line with `--single --id kuku-o0st9l` once that branch lands.
+- **Recorded:** 28 lines in one lite request. The stock splitter slipped several cuts, so the kept raw take was re-cut with `--resplit` and local Whisper word timings (`RIFT_WHISPER_PYTHON`). That moved 7 of 27 cuts, with 623 of 627 words aligned. No extra TTS was used. Unrelated takes in `tools/voice-raw` were moved aside during the resplit and then restored.
+- **Checked:** Whisper transcribed every final clip. In all 28, the first and last words match the line and the length matches. ✓/✕ are now spoken as "a tick" and "a cross" (the fal-262 fix, now on main). Hashes and transcripts: [voice-recording-2026-10-22-rubberstamp.json](voice-recording-2026-10-22-rubberstamp.json).
+- **Quota:** the second request (18 lines) hit the server's daily lite quota.
 
-## Also in this commit
+Catalog: **2962/2981**.
+
+## Still missing (19)
+
+Every missing line, with its voice id, speaker, place, text and status, is listed in [voice-missing-2026-10-22.json](voice-missing-2026-10-22.json). All are ready for the next run, using about 2 lite requests:
+
+- **Rubberstamp, 18 tutorial lines:** run `--render --only rubberstamp` with `RIFT_WHISPER_PYTHON` set.
+- **kuku-o0st9l:** run `--single --id kuku-o0st9l`. The tick/cross fix it needed is now on main.
+
+## Also in the first evening commit (107d8670)
 
 - **No browser voice.** At the teacher's request, `js/core/audio.js` no longer falls back to `speechSynthesis`. A line without a recording, or one whose file fails to play, is on-screen text only. Callers already hold subtitles for a reading time, so silent lines are not rushed. `tools/test/audio.test.mjs` now checks that the browser voice never speaks.
 - **Manifest ignores OneDrive conflict copies.** 101 files named `…-T14S-G6-MP-2.mp3` sit in `assets/voice`. They are older takes, and every one differs from its tracked clip. `--manifest` had been listing them. It now lists only lowercase voice-id names, so the manifest gains exactly the 7 new clips. The conflict files were left on disk.

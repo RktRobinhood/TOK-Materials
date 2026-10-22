@@ -151,7 +151,9 @@ The teacher runs the classic 3×3 nine-dots puzzle live in lesson 1, so the game
 
 The finished game must use recorded audio for every spoken line. Browser-generated speech is not an acceptable final fallback, including when an audio file is missing or playback fails; readable text must remain available. This covers tutorials, hints, replies, narration, creature speech, generated avatar-power explanations and conditional replacement hosts. Intentionally silent text does not need a recording.
 
-Completion requires a complete inventory of reachable speech, recordings and boundary/wording checks for that inventory, and removal of browser speech synthesis from runtime playback. Generated and customized wording must use covered variants or recorded composition. Track remaining gaps in [the voice handoff](drafts/card-arena-2026-10-12/VOICE-NEEDS.md), with early tutorials first. The current browser fallback is temporary production behavior, and existing catalog totals do not certify complete coverage.
+Completion requires a complete inventory of reachable speech, recordings and boundary/wording checks for that inventory, and removal of browser speech synthesis from runtime playback. Generated and customized wording must use covered variants or recorded composition. Track remaining gaps in [the voice handoff](drafts/card-arena-2026-10-12/VOICE-NEEDS.md), with early tutorials first. Existing catalog totals do not certify complete coverage.
+
+**22 October 2026:** browser speech synthesis has been removed. A line without a recording is on-screen text only. The teacher also ruled that every character who could plausibly appear in the plot gets all of their voice lines, including understudies with no arrival beat (for example Mr Rubberstamp). Never defer a line because its character may not be reachable.
 
 ## Avatars
 

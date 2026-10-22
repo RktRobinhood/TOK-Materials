@@ -1,0 +1,232 @@
+﻿{
+    "date":  "2026-10-22",
+    "method":  "faster-whisper small (CPU) on each final clip; cuts placed by voices.mjs --resplit with RIFT_WHISPER_PYTHON (7 of 27 moved, 623/627 words aligned)",
+    "check":  "first word, last word and length within 2 words of the line (tick/cross spoken as words)",
+    "passed":  "28/28",
+    "clips":  [
+                  {
+                      "id":  "rubberstamp-120e5i0",
+                      "pass":  true,
+                      "duration":  "10.61s",
+                      "hash":  "sha256:7a8fdbc139ee2fdb",
+                      "want":  "In that example, \"A blue lamp is on\" is Can\u0027t tell. There is no evidence either way. Use these three buttons for each claim.",
+                      "heard":  "In that example, a blue lamp is on is can\u0027t tell. There is no evidence either way. Use these three buttons for each claim."
+                  },
+                  {
+                      "id":  "rubberstamp-13fc1y1",
+                      "pass":  true,
+                      "duration":  "8.50s",
+                      "hash":  "sha256:06915a976f734299",
+                      "want":  "Read the scene before judging any claim. We need evidence, not a story your mind fills in.",
+                      "heard":  "Read the scene before judging any claim. We need evidence, not a story your mind fills in."
+                  },
+                  {
+                      "id":  "rubberstamp-17zbyml",
+                      "pass":  true,
+                      "duration":  "15.55s",
+                      "hash":  "sha256:5e1101cb3296bf9b",
+                      "want":  "Choose every answer, then Give my testimony. Read feedback and revise your answer. Your first hint on a new topic is free and keeps your stars; later hints show their heart cost.",
+                      "heard":  "Choose every answer, then give my testimony. Read feedback and revise your answer. Your first hint on a new topic is free and keeps your stars. Later hints show their heart cost."
+                  },
+                  {
+                      "id":  "rubberstamp-187j377",
+                      "pass":  true,
+                      "duration":  "20.42s",
+                      "hash":  "sha256:bb53f0979dc79783",
+                      "want":  "Use Present on the statement, choose evidence, then Take that. Name the flaw and repair the proof if asked. Finish with Close the case. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                      "heard":  "Use present on the statement. Choose evidence, then take that. Name the flaw and repair the proof if asked. Finish with close the case. How to play is free. The hint button shows its heart cost. Think first, then check your answer."
+                  },
+                  {
+                      "id":  "rubberstamp-19oixkj",
+                      "pass":  true,
+                      "duration":  "6.98s",
+                      "hash":  "sha256:9ba86c4306329b93",
+                      "want":  "Pick a move only after its guess is locked. You win a point when the machine is wrong.",
+                      "heard":  "Pick a move only after its guess is locked. You win a point when the machine is wrong."
+                  },
+                  {
+                      "id":  "rubberstamp-1b94flg",
+                      "pass":  true,
+                      "duration":  "12.48s",
+                      "hash":  "sha256:8802201ccf264a5e",
+                      "want":  "Example: \"The door stayed locked all day\" clashes with a dated record showing it opened at noon. Present that record against that statement.",
+                      "heard":  "Example, the door stayed locked all day. Clashes with a dated record showing it opened at noon. Present that record against that statement."
+                  },
+                  {
+                      "id":  "rubberstamp-1cy2gy",
+                      "pass":  true,
+                      "duration":  "8.54s",
+                      "hash":  "sha256:2de714a0ccb451e6",
+                      "want":  "Read each switch before changing it. Not every switch is a trick: keep the honest controls honest.",
+                      "heard":  "Read each switch before changing it. Not every switch is a trick. Keep the honest controls honest."
+                  },
+                  {
+                      "id":  "rubberstamp-1gzdbhr",
+                      "pass":  true,
+                      "duration":  "11.78s",
+                      "hash":  "sha256:4f488e4f855ef982",
+                      "want":  "Choose Valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument.",
+                      "heard":  "Choose valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument."
+                  },
+                  {
+                      "id":  "rubberstamp-1jy0gmq",
+                      "pass":  true,
+                      "duration":  "11.23s",
+                      "hash":  "sha256:d4d8ea25512fc4fc",
+                      "want":  "Some means at least one. \"Some ducks are birds\" needs an x in their overlap. \"No ducks are birds\" shades that overlap.",
+                      "heard":  "Some means at least one. Some ducks or birds needs an X in their overlap. No ducks or birds shades that overlap."
+                  },
+                  {
+                      "id":  "rubberstamp-1lbys5p",
+                      "pass":  true,
+                      "duration":  "13.80s",
+                      "hash":  "sha256:9f57a7ab785748fa",
+                      "want":  "Choose Shade and click a region, or drag an x from the tray. Put an x on a border when the facts leave its side open. Clear lets you restart.",
+                      "heard":  "Choose Shade and click a region or drag an X from the tray. Put an X on a border when the facts leave its side open. Clear lets you restart."
+                  },
+                  {
+                      "id":  "rubberstamp-1pxqyfh",
+                      "pass":  true,
+                      "duration":  "7.85s",
+                      "hash":  "sha256:87b7df94f8a841b2",
+                      "want":  "Read the target. We are testing a machine that uses past patterns to guess your next move.",
+                      "heard":  "Read the target. We are testing a machine that uses past patterns to guess your next move."
+                  },
+                  {
+                      "id":  "rubberstamp-1qcd1n9",
+                      "pass":  true,
+                      "duration":  "9.22s",
+                      "hash":  "sha256:db40c934645184f3",
+                      "want":  "Use the arrows to read the testimony. Press a statement to hear more; some evidence appears only after pressing.",
+                      "heard":  "Use the arrows to read the testimony. Press a statement to hear more. Some evidence appears only after pressing."
+                  },
+                  {
+                      "id":  "rubberstamp-1t59s1b",
+                      "pass":  true,
+                      "duration":  "5.95s",
+                      "hash":  "sha256:bb6b498a75385a0d",
+                      "want":  "Each clue is evidence. Read them all first. Click a clue to mark it as used.",
+                      "heard":  "Each clue is evidence. Read them all first. Click a clue to mark it as used."
+                  },
+                  {
+                      "id":  "rubberstamp-1thtpop",
+                      "pass":  true,
+                      "duration":  "8.21s",
+                      "hash":  "sha256:1fb8b96509521874",
+                      "want":  "We judge whether the conclusion MUST follow from these facts. Read the scrolls first.",
+                      "heard":  "We judge whether the conclusion must follow from these facts. Read the scrolls first."
+                  },
+                  {
+                      "id":  "rubberstamp-1xkc4yh",
+                      "pass":  true,
+                      "duration":  "11.18s",
+                      "hash":  "sha256:9cc9276175c962d6",
+                      "want":  "Example, not this scene: \"A red lamp is on.\" \"The red lamp is on\" is True. \"The red lamp is off\" is False.",
+                      "heard":  "Example, not this scene. A red lamp is on. The red lamp is on is true. The red lamp is off is false."
+                  },
+                  {
+                      "id":  "rubberstamp-1xr1ta8",
+                      "pass":  true,
+                      "duration":  "12.38s",
+                      "hash":  "sha256:158df0161648b17b",
+                      "want":  "Move the axis handles. Example: bars of 95 and 100 look very different if the axis starts at 90; the increase is only 5.",
+                      "heard":  "Move the axis handles. Example, bars of 95 and 100 look very different if the axis starts at 90. The increase is only 5."
+                  },
+                  {
+                      "id":  "rubberstamp-5c8v19",
+                      "pass":  true,
+                      "duration":  "10.25s",
+                      "hash":  "sha256:16e6388b83e70504",
+                      "want":  "Then Check my grid. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                      "heard":  "Then check my grid. How to play is free. The hint button shows its hard cost. Think first. Then check your answer."
+                  },
+                  {
+                      "id":  "rubberstamp-78nwqb",
+                      "pass":  true,
+                      "duration":  "7.90s",
+                      "hash":  "sha256:1e6b443ab299c852",
+                      "want":  "For each claim, point to a line that supports or contradicts it. If no line settles it, choose Can\u0027t tell.",
+                      "heard":  "For each claim, point to a line that supports or contradicts it. If no line settles it, choose Can\u0027t Tell."
+                  },
+                  {
+                      "id":  "rubberstamp-8i0uxs",
+                      "pass":  true,
+                      "duration":  "21.00s",
+                      "hash":  "sha256:4053237e74df33f7",
+                      "want":  "The drawing is optional working. If asked, judge premise support using only the reference records, then Seal the verdict. Missing evidence is not false. How to play is free. The Hint button shows its heart cost.",
+                      "heard":  "The drawing is optional working. If asked, judge premise support using only the reference records, then seal the verdict. Missing evidence is not false. How to play is free. The hint button shows its heart cost."
+                  },
+                  {
+                      "id":  "rubberstamp-8q54d8",
+                      "pass":  true,
+                      "duration":  "7.15s",
+                      "hash":  "sha256:4ab6cb083ecf9a18",
+                      "want":  "We put the argument on trial. Your job is to connect a weak statement to evidence.",
+                      "heard":  "We put the argument on trial. Your job is to connect a weak statement to evidence."
+                  },
+                  {
+                      "id":  "rubberstamp-ctzvkn",
+                      "pass":  true,
+                      "duration":  "9.41s",
+                      "hash":  "sha256:48d45a645e245a30",
+                      "want":  "When a row has only one empty cell left, that cell must be ✓. Keep going until every row has one ✓.",
+                      "heard":  "When a row has only one empty cell left, that cell must be a tick. Keep going until every row has one tick."
+                  },
+                  {
+                      "id":  "rubberstamp-hb623d",
+                      "pass":  true,
+                      "duration":  "12.94s",
+                      "hash":  "sha256:8874347228b63b96",
+                      "want":  "Shade means no things here. Example: \"All ducks are birds\" shades the ducks-only region outside birds. It does not add an x.",
+                      "heard":  "Shade means no things here. Example, all ducks are birds. Shades the ducks only region outside birds. It does not add an X."
+                  },
+                  {
+                      "id":  "rubberstamp-hbmx80",
+                      "pass":  true,
+                      "duration":  "6.12s",
+                      "hash":  "sha256:94f721ea75755725",
+                      "want":  "We want a fair chart. Compare the headline with the actual values.",
+                      "heard":  "We want a fair chart. Compare the headline with the actual values."
+                  },
+                  {
+                      "id":  "rubberstamp-qqsy9f",
+                      "pass":  true,
+                      "duration":  "9.17s",
+                      "hash":  "sha256:a9107c4336e02a65",
+                      "want":  "The visible window can hide inconvenient values. Use its handles to check the full picture when the task needs it.",
+                      "heard":  "The visible window can hide inconvenient values. Use its handles to check the full picture when the task needs it."
+                  },
+                  {
+                      "id":  "rubberstamp-u81zc",
+                      "pass":  true,
+                      "duration":  "7.82s",
+                      "hash":  "sha256:ed3c5011a7a867a0",
+                      "want":  "Click a cell once for ✕ (ruled out), twice for ✓ (confirmed). A ✓ crosses out its row and column.",
+                      "heard":  "Click a cell once for a cross, twice for a tick. A tick crosses out its row and column."
+                  },
+                  {
+                      "id":  "rubberstamp-w82jz1",
+                      "pass":  true,
+                      "duration":  "7.70s",
+                      "hash":  "sha256:551c9de69f88074c",
+                      "want":  "Open the Court record. Read what each piece of evidence establishes, not just its picture.",
+                      "heard":  "Open the court record. Read what each piece of evidence establishes, not just its picture."
+                  },
+                  {
+                      "id":  "rubberstamp-xfvenq",
+                      "pass":  true,
+                      "duration":  "19.78s",
+                      "hash":  "sha256:de10fc526075e11e",
+                      "want":  "Choose the claim the corrected data supports, then submit. Fixing a chart means both its view and its conclusion are fair. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+                      "heard":  "Choose the claim the corrected data supports, then submit. Fixing a chart means both its view and its conclusion are fair. How to play is free. The hint button shows its heart cost. Think first, then check your answer."
+                  },
+                  {
+                      "id":  "rubberstamp-zlpmx6",
+                      "pass":  true,
+                      "duration":  "9.14s",
+                      "hash":  "sha256:90d33d5912048bf7",
+                      "want":  "Example, not this puzzle: \"Ada did not write the frog story.\" Put ✕ where Ada meets that headline.",
+                      "heard":  "Example, not this puzzle. Ada did not write the frog story. Put across where Ada meets that headline."
+                  }
+              ]
+}
