@@ -255,9 +255,10 @@
             inspect: null, longPress: null, bannerTurn: null, bannerTimer: null,
             hoverBlock: null, confirm: false, handPos: null, bagOpen: false,
             readKey: null, reading: null, future: null, revealedAction: null,
+            drop: null, finale: false,   // presentation only (#66): a dragged card's drop box; the finish has played
         };
         const actionStates = new WeakMap();
-        const presentationTimers = new Set(), motions = new Set();
+        const presentationTimers = new Set(), motions = new Set(), holds = new Map();
         function presentationLater(fn, ms) {
             const id = setTimeout(() => {
                 presentationTimers.delete(id);
@@ -281,6 +282,7 @@
             motions.forEach(motion => { if (motion.cancel) motion.cancel(); });
             motions.clear();
             dom.floats.replaceChildren();
+            holds.clear();
             dom.lane.classList.remove('flash');
         }
         function stopScreenTimers() {
@@ -496,6 +498,9 @@
             const before = rects();
             const previous = state;
             const focusDrawn = action.type === 'draw' && by === ME && !!keyboardDraw;
+            // Where a dragged card was let go (onPointerUp), so its flight starts there.
+            const drop = ui.drop && by === ME ? ui.drop : null;
+            ui.drop = null;
             const guided = guide && by === ME && !ui.busy && step() && stepAccepts(step(), action);
             if (action.type === 'end' && by === ME) ui.snap = snapshot();
             if (by === ME && action.type !== 'draw') ui.recapTurn = null;   // the recap has been read
@@ -517,7 +522,7 @@
             if (guided) { ui.busy = true; ui.queue = E.winner(state) == null ? (step().replies || []).slice() : []; if (ui.queue.some(r => r.say)) stopVoice(); }
             noteEvents(state.lastEvents);
             render();
-            playVisuals(state.lastEvents, before, previous, focusDrawn);
+            playVisuals(state.lastEvents, before, previous, focusDrawn, drop);
             ruleReveal(state.lastEvents);
             if (waiting && state.players[ME].hand.includes(waiting)) setNote(name(waiting) + ' was not played. It is back in your hand: its Entrance needs a target first.');
             schedule();
@@ -637,7 +642,14 @@
             if (ui.ended || help || ui.confirm || ui.reading || ui.future) return;
             // A card shown big (a reveal) is read first: everything waits until it fades.
             if (ui.holding || ui.saying) return;
-            if (E.winner(state) != null) { ui.timer = setTimeout(finish, 1000); return; }
+            if (E.winner(state) != null) {
+                // The finish follows the lethal hit's cue; the results wait one second as before
+                // (a little longer only when a long chain of events ended the match).
+                const at = chainEnd(state.lastEvents || []);
+                ui.timer = setTimeout(finish, Math.max(1000, at + 550));
+                if (!ui.finale) { ui.finale = true; presentationLater(finale, at); }
+                return;
+            }
             // A reveal owns the pending move until it is committed, including while a reader,
             // Help or confirmation pauses the timer. Scripted replies were already dequeued.
             if (ui.revealedAction) {
@@ -817,6 +829,12 @@
         }
 
         // Why an attacker can't hit this target: Guard first, else the general hint.
+        // A refused attack target: say why, and when Guard is the reason, show which creature to attack.
+        function refuseTarget(att, target) {
+            setNote(badTargetNote(att, target));
+            const guards = state.cards[att] && E.canAttack(state, att) ? E.attackTargets(state, att).filter(t => !E.isHero(t) && E.hasKeyword(state, t, 'guard')) : [];
+            if (guards.length && !guards.includes(target)) guards.forEach(g => burst(rectOf(g, {}), 'guard-frame', { frame: true, duration: 600 }));
+        }
         function badTargetNote(att, target) {
             const c = state.cards[att];
             if (!c || target === att) return '';
@@ -1409,7 +1427,7 @@
                 pi === ME ? dangerEl(P, r) : null,
             ]);
             if (isTarget) node.addEventListener('click', () => { if (!ui.suppressClick) clickTarget(id, L); });
-            else if (pi === OPP) node.addEventListener('click', () => { if (!ui.suppressClick && ui.sel && ui.sel.kind === 'board') setNote(badTargetNote(ui.sel.cid, id)); });
+            else if (pi === OPP) node.addEventListener('click', () => { if (!ui.suppressClick && ui.sel && ui.sel.kind === 'board') refuseTarget(ui.sel.cid, id); });
             nodes[id] = node;
             return node;
         }
@@ -3116,7 +3134,7 @@
             // A tactic, Entrance or ability waiting for a target, and an Elusive enemy is clicked.
             if (!mine && ui.sel && (ui.sel.kind === 'hand' || ui.sel.kind === 'activate' || ui.sel.kind === 'item') && elusiveNote(cid)) { setNote(elusiveNote(cid)); return; }
             // An attacker is selected and this enemy is not a valid target (for example: Guard).
-            if (!mine && ui.sel && ui.sel.kind === 'board' && state.players[OPP].board.includes(cid)) { setNote(badTargetNote(ui.sel.cid, cid)); return; }
+            if (!mine && ui.sel && ui.sel.kind === 'board' && state.players[OPP].board.includes(cid)) { refuseTarget(ui.sel.cid, cid); return; }
             if (mine && (L.some(a => (a.type === 'attack' || a.type === 'activate') && a.cid === cid) || E.activations(state, cid).length)) {
                 ui.sel = ui.sel && ui.sel.cid === cid ? null : { kind: 'board', cid };
                 render();
@@ -3293,7 +3311,9 @@
             if (!d.active) { ui.drag = null; return; }
             const hit = hitTarget(ev.clientX, ev.clientY) || {};
             const info = d.info;
+            ui.drop = boxOf(d.ghost);
             cancelDrag();
+            setTimeout(() => { ui.drop = null; }, 0);   // only the play made by this drop uses it
             ui.hoverBlock = { x: ev.clientX, y: ev.clientY };
             ui.suppressClick = true;
             setTimeout(() => { ui.suppressClick = false; }, 0);
@@ -3301,7 +3321,7 @@
             if (info.kind === 'board') {
                 const a = L.find(x => x.type === 'attack' && x.cid === info.cid && x.target === hit.target);
                 if (a) act(a);
-                else if (hit.target && hit.target !== info.cid) setNote(badTargetNote(info.cid, hit.target));
+                else if (hit.target && hit.target !== info.cid) refuseTarget(info.cid, hit.target);
                 return;
             }
             if (info.kind === 'item') { dropItem(info.id, hit, L); return; }
@@ -3560,12 +3580,9 @@
             return out;
         }
         function rectOf(key, before) {
-            const n = nodes[key];
-            if (n && n.getBoundingClientRect && dom.arena.getBoundingClientRect) {
-                const box = dom.arena.getBoundingClientRect(), r = n.getBoundingClientRect();
-                if (r.width) return { left: r.left - box.left, top: r.top - box.top, width: r.width, height: r.height };
-            }
-            return before[key] || null;
+            // '@deck' / '@opponent': a deck pile on the table.
+            if (key && key[0] === '@') return boxOf(tableDecks[key.slice(1)]);
+            return boxOf(nodes[key]) || before[key] || null;
         }
         function float(key, text, cls, before) {
             const r = rectOf(key, before);
@@ -3574,62 +3591,296 @@
             dom.floats.appendChild(f);
             presentationLater(() => { if (f.remove) f.remove(); }, 1300);
         }
-        function effects(events, before) {
+        // Every committed event gets at most one cue here (design/reviews/in-game-animation-66-2026-10-22.md).
+        // ctx: { previous, drop } from act(): the state before the action and where a dragged card was let go.
+        function effects(events, before, ctx) {
             if (!root.document || !dom.arena.getBoundingClientRect) return;
             const calm = calmMotion();
             events.forEach(ev => {
-                if (ev.t === 'damage') float(ev.cid, '−' + ev.amount, 'dmg', before);
-                if (ev.t === 'hit') float('h' + ev.player, '−' + ev.amount + ' ❤', 'dmg', before);
-                if (ev.t === 'shield') float(ev.cid, 'Blocked!', 'info', before);
+                if (ev.t === 'damage') { float(ev.cid, '−' + ev.amount, 'dmg', before); struck(ev.cid, before, calm); }
+                if (ev.t === 'hit') { float('h' + ev.player, '−' + ev.amount + ' ❤', 'dmg', before); heroStruck(ev.player, before, calm); }
+                if (ev.t === 'shield') { float(ev.cid, 'Blocked!', 'info', before); burst(rectOf(ev.cid, before), 'shield-break'); }
                 // A changed fight rule decided this fight: name it over the defender.
                 if (ev.t === 'fight') {
                     const rule = E.changedAxioms(state).find(a => a.category === 'combat');
                     if (rule) float(ev.defender, '⚖ ' + (rule.short || rule.name), 'rule', before);
                 }
-                if (ev.t === 'item-use') float(ev.target || 'h' + ev.player, ((Rift.data.items || {})[ev.id] || { name: ev.id }).name, 'info', before);
-                if (ev.t === 'power-use') float(ev.target || 'pw' + ev.player, powerName(ev.id), 'info', before);
-                if (ev.t === 'defeated' && before[ev.cid]) {
-                    const r = before[ev.cid];
-                    const ghost = r.node.cloneNode ? r.node.cloneNode(true) : null;
-                    if (ghost) {
-                        ghost.classList.add('b-defeat-ghost');
-                        ['valid', 'selected', 'guide-focus', 'attacking', 'targeted'].forEach(k => ghost.classList.remove(k));
-                        Object.assign(ghost.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px' });
-                        dom.floats.appendChild(ghost);
-                        presentationLater(() => { if (ghost.remove) ghost.remove(); }, 900);
-                    }
+                if (ev.t === 'item-use') {
+                    float(ev.target || 'h' + ev.player, ((Rift.data.items || {})[ev.id] || { name: ev.id }).name, 'info', before);
+                    burst(rectOf(ev.target || 'h' + ev.player, before), 'ring', { scale: 0.8 });
                 }
-                if ((ev.t === 'play' || ev.t === 'summon') && nodes[ev.cid]) nodes[ev.cid].classList.add('entered');
-                if (ev.t === 'attack') lunge(ev.cid, ev.target, before, calm);
+                if (ev.t === 'power-use') {
+                    float(ev.target || 'pw' + ev.player, powerName(ev.id), 'info', before);
+                    sourceCue({ t: 'power-use', cid: 'pw' + ev.player, target: ev.target }, before, calm);
+                }
+                if (ev.t === 'defeated') defeatCue(ev, before, calm);
+                if (ev.t === 'token-gone') burst(rectOf(ev.cid, before), 'poof');
+                if (ev.t === 'play' || ev.t === 'summon') arrive(ev, before, ctx, calm);
+                if (ev.t === 'attack') {
+                    lunge(ev.cid, ev.target, before, calm);
+                    // Guard stood in the way: its frame flashes as the attack lands.
+                    if (ctx && ctx.previous && ctx.previous.cards[ev.target] && E.hasKeyword(ctx.previous, ev.target, 'guard')) burst(rectOf(ev.target, before), 'guard-frame', { frame: true, delay: 120 });
+                }
                 if (['tactic-play', 'activate', 'ability', 'shield'].includes(ev.t)) sourceCue(ev, before, calm);
                 if (ev.t === 'axiom' || ev.t === 'reset') {
                     if (calm && dom.lane.animate) animate(dom.lane, [{ opacity: 0.7 }, { opacity: 1 }], { duration: 400 });
                     else if (!calm) { dom.lane.classList.remove('flash'); void dom.lane.offsetWidth; dom.lane.classList.add('flash'); }
                 }
+                // Fate itself acted (not a round passing, which slides the reel): one rift pulse on the track.
+                if (['reset', 'flip', 'fate-event', 'fate-leap'].includes(ev.t)) fatePulse(calm);
+                if (ev.t === 'spark') pop(energyNode(ev.player), calm);
+                if (ev.t === 'armed') pop(conditionNode(ev.player), calm);
+                if (ev.t === 'burn') float(ev.player === ME ? '@deck' : '@opponent', 'Hand full: discarded', 'info', before);
+                if (ev.t === 'fizzle' && ev.cid) float(ev.cid, 'No effect', 'info', before);
+                if (ev.t === 'attack-cancelled') float(ev.cid, 'Attack stopped', 'info', before);
             });
         }
-        function motionSource(cid, before, event, captured) {
-            if (!captured && nodes[cid]) return nodes[cid];
-            const r = before[cid];
-            if (!r || !r.node.cloneNode) return null;
+
+        // ---- more effects (#66): one-shot bursts, arrivals, hits, crossings and the finish ----
+        // Each cue is short, plays once and never loops. Calm motion and OS reduced motion keep
+        // every cue but only fade it: no travel, scale, flash or recoil.
+        const FX_ART = { poof: 'fx/poof', heal: 'fx/heal', buff: 'fx/buff', damage: 'fx/damage', 'shield-break': 'fx/shield-break', 'shield-bubble': 'fx/shield-bubble',
+            'guard-frame': 'fx/guard-frame', 'frost-frame': 'fx/frost-frame', silence: 'fx/silence' };
+        const centre = r => ({ x: r.left + r.width / 2, y: r.top + r.height / 2 });
+        // Arena-relative box of any node on the table (a hand row, a deck pile, the energy).
+        function boxOf(node) {
+            if (!node || !node.getBoundingClientRect || !dom.arena.getBoundingClientRect) return null;
+            const box = dom.arena.getBoundingClientRect(), r = node.getBoundingClientRect();
+            return r.width ? { left: r.left - box.left, top: r.top - box.top, width: r.width, height: r.height } : null;
+        }
+        // The colour ring for a spell or an arrival takes its Way of Knowing's shape too, so the
+        // colour is never the only cue: a heartbeat for Emotion, a ring that draws in for Memory...
+        function ringFrames(colour) {
+            if (colour === 'emotion') return [{ opacity: 0, scale: '0.5' }, { opacity: 1, scale: '1', offset: 0.25 }, { opacity: 0.8, scale: '0.85', offset: 0.45 }, { opacity: 0.9, scale: '1.1', offset: 0.7 }, { opacity: 0, scale: '1.2' }];
+            if (colour === 'memory') return [{ opacity: 0, scale: '1.4' }, { opacity: 1, scale: '1', offset: 0.4 }, { opacity: 0, scale: '0.7' }];
+            if (colour === 'imagination') return [{ opacity: 0, scale: '0.4', rotate: '0deg' }, { opacity: 1, scale: '1', rotate: '60deg', offset: 0.35 }, { opacity: 0, scale: '1.2', rotate: '120deg' }];
+            if (colour === 'reason') return [{ opacity: 0, scale: '0.3' }, { opacity: 1, scale: '1.15', offset: 0.2 }, { opacity: 0, scale: '1.2' }];
+            return [{ opacity: 0, scale: '0.4' }, { opacity: 1, scale: '1', offset: 0.3 }, { opacity: 0, scale: '1.2' }];
+        }
+        // One burst over a card or hero: a picture from assets/fx, or a drawn ring in a colour.
+        function burst(r, kind, opts) {
+            if (!r || !root.document) return null;
+            const o = opts || {}, calm = calmMotion(), c = centre(r);
+            // A frame (Guard, Frozen, Silenced) takes the card's own shape; other bursts are round.
+            const size = Math.round(Math.max(44, Math.min(r.width, r.height) * (o.scale || 1)));
+            const w = o.frame ? Math.round(r.width * 1.1) : size, h = o.frame ? Math.round(r.height * 1.06) : size;
+            const art = FX_ART[kind] && bg(FX_ART[kind]);
+            const hex = o.colour && (Rift.COLOURS[o.colour] || {}).hex;
+            const node = el('div.b-fx' + (art ? '.art' : '.ring') + (o.frame ? '.frame' : ''), { 'aria-hidden': 'true', dataset: { fx: kind, colour: o.colour || 'none' },
+                style: Object.assign({ left: c.x + 'px', top: c.y + 'px', width: w + 'px', height: h + 'px', color: hex || '' }, art || {}) });
+            dom.floats.appendChild(node);
+            const duration = o.duration || 480, delay = o.delay || 0;
+            animate(node, calm ? [{ opacity: 0 }, { opacity: 0.9, offset: 0.3 }, { opacity: 0 }]
+                : art ? [{ opacity: 0, scale: '0.55' }, { opacity: 1, scale: '1', offset: 0.3 }, { opacity: 0, scale: '1.12' }] : ringFrames(o.colour),
+            { duration, delay, fill: 'backwards', easing: 'ease-out' });
+            presentationLater(() => node.remove(), duration + delay + 20);
+            return node;
+        }
+        // A short scale pop (energy after the Spark, a new condition): once, back to normal.
+        function pop(node, calm) {
+            if (!node || !node.animate) return;
+            animate(node, calm ? [{ opacity: 0.6 }, { opacity: 1 }] : [{ scale: '1' }, { scale: '1.18', offset: 0.35 }, { scale: '1' }], { duration: 320, easing: 'ease-out' });
+        }
+        const energyNode = p => (p === ME ? dom.myRight : dom.oppRight).querySelector('.b-energy');
+        const conditionNode = p => { const all = (p === ME ? dom.myBoard : dom.oppBoard).querySelectorAll('.b-condition'); return all.length ? all[all.length - 1] : null; };
+        // A creature that takes damage flashes red and dips once. The number floats above it.
+        function struck(cid, before, calm) {
+            const n = holds.get(cid) || nodes[cid];
+            if (n && n.animate) animate(n, calm ? [{ opacity: 0.55 }, { opacity: 1 }]
+                : [{ filter: 'brightness(1.7) drop-shadow(0 0 10px #ff4a3a)', scale: '0.95' }, { filter: 'none', scale: '1' }], { duration: 300, easing: 'ease-out' });
+            burst(rectOf(cid, before), 'damage', { scale: 0.7, duration: 360 });
+        }
+        // A hero who loses hearts: the portrait flashes and recoils once (away from the middle) and
+        // the heart counter pops, so the new number is seen.
+        function heroStruck(p, before, calm) {
+            const n = nodes['h' + p];
+            if (!n || !n.querySelector) return;
+            const face = n.querySelector('.b-portrait'), hearts = n.querySelector('.b-hearts');
+            if (face && face.animate) animate(face, calm ? [{ opacity: 0.55 }, { opacity: 1 }]
+                : [{ filter: 'brightness(1.6) sepia(1) hue-rotate(-30deg) saturate(3)', translate: '0 0' }, { translate: '0 ' + (p === ME ? 6 : -6) + 'px', offset: 0.3 }, { filter: 'none', translate: '0 0' }], { duration: 340, easing: 'ease-out' });
+            pop(hearts, calm);
+            burst(rectOf('h' + p, before), 'damage', { scale: 0.8, duration: 360 });
+        }
+        // A creature arrives: from the hand (or where it was dropped) for my plays, from the
+        // opponent's hand for theirs. The real card is already in place; a copy flies over it.
+        function arrive(ev, before, ctx, calm) {
+            const n = nodes[ev.cid], to = n && rectOf(ev.cid, {});
+            if (!n) return;
+            const colour = state.cards[ev.cid] && E.colourOf(state, state.cards[ev.cid]);
+            const from = ev.t === 'summon' ? null : ev.player === ME ? (ctx && ctx.drop) || before[ev.cid] : boxOf(dom.oppHand);
+            if (calm || !to || !from || !n.cloneNode) {
+                n.classList.add('entered');
+                if (to) burst(to, 'ring', { colour, scale: 1.1 });
+                return;
+            }
+            const ghost = ghostCopy(Object.assign({ node: n }, to), ev.t);
+            // Their hand shows small backs: the copy starts small. Mine starts at its hand-card size.
+            const a = centre(from), b = centre(to), s = ev.player === ME ? Math.max(0.4, Math.min(1.4, from.width / to.width || 1)) : 0.6;
+            const FLY = 320;
+            animate(ghost, [{ transform: 'translate(' + (a.x - b.x) + 'px,' + (a.y - b.y) + 'px) scale(' + s + ')' }, { transform: 'translate(0,0) scale(1)' }], { duration: FLY, easing: 'cubic-bezier(.2,.7,.3,1)' });
+            animate(n, [{ opacity: 0 }, { opacity: 0, offset: 0.9 }, { opacity: 1 }], { duration: FLY });
+            presentationLater(() => ghost.remove(), FLY + 10);
+            // The landing: a dust ring in the creature's colour.
+            burst(to, 'ring', { colour, scale: 1.15, delay: FLY - 40 });
+        }
+        // Defeat: the copy greys and shrinks where the creature stood, with a puff. A creature
+        // that goes back to a hand (Last Word, Mercy) flies there instead; a token just vanishes.
+        function defeatCue(ev, before, calm) {
+            const r = before[ev.cid];
+            if (!r) return;
+            if (holds.has(ev.cid)) { holds.get(ev.cid).remove(); holds.delete(ev.cid); }
+            const ghost = r.node.cloneNode ? r.node.cloneNode(true) : null;
+            if (ghost) {
+                ghost.classList.add('b-defeat-ghost');
+                ['valid', 'selected', 'guide-focus', 'attacking', 'targeted'].forEach(k => ghost.classList.remove(k));
+                Object.assign(ghost.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px' });
+                dom.floats.appendChild(ghost);
+                const home = ev.dest === 'hand' && !calm ? (ev.player === ME ? rectOf(ev.cid, {}) : boxOf(dom.oppHand)) : null;
+                const inHand = ev.dest === 'hand' && ev.player === ME ? nodes[ev.cid] : null;
+                // Calm motion: the copy fades on the board and the hand card fades in, so it is clear where it went.
+                if (inHand && inHand.animate) animate(inHand, calm ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0 }, { opacity: 0, offset: 0.9 }, { opacity: 1 }], { duration: calm ? 400 : 600 });
+                if (home && ghost.animate) {
+                    // Keep the card's colours: it is saved, not lost.
+                    ghost.classList.add('to-hand');
+                    const a = centre(r), b = centre(home);
+                    // translate/scale, not transform: the ghost's CSS pins transform with !important.
+                    animate(ghost, [{ translate: '0 0', scale: '1', opacity: 1 }, { translate: '0 -12px', scale: '1.04', opacity: 1, offset: 0.25 },
+                        { translate: (b.x - a.x) + 'px ' + (b.y - a.y) + 'px', scale: '0.5', opacity: 0 }], { duration: 600, easing: 'ease-in-out', fill: 'forwards' });
+                }
+                presentationLater(() => { if (ghost.remove) ghost.remove(); }, 900);
+            }
+            if (ev.dest !== 'hand') burst(r, 'poof', { delay: calm ? 0 : 180, duration: 560 });
+        }
+        // Fate flips, resets, fires or leaps: the track glows once with rift light.
+        function fatePulse(calm) {
+            const track = dom.fate && dom.fate.querySelector && dom.fate.querySelector('.b-fate-track');
+            if (track && track.animate) animate(track, calm ? [{ opacity: 0.6 }, { opacity: 1 }]
+                : [{ filter: 'none' }, { filter: 'drop-shadow(0 0 12px #3fe0d0) brightness(1.3)', offset: 0.35 }, { filter: 'none' }], { duration: 700, easing: 'ease-out' });
+        }
+
+        // What changed without an event of its own, read from the states before and after the
+        // action (presentation only): a creature that changed sides or went back to a hand,
+        // boosts and losses, gained Shield, heals and restored hearts. These come last.
+        function changeCues(previous, events, before) {
+            if (!previous || !root.document || !dom.arena.getBoundingClientRect) return;
+            const calm = calmMotion();
+            const covered = new Set(events.filter(ev => ['defeated', 'play', 'summon', 'token-gone'].includes(ev.t)).map(ev => ev.cid));
+            const wasOn = cid => [0, 1].find(p => previous.players[p].board.includes(cid));
+            [0, 1].forEach(p => {
+                // Hearts restored = the change plus what the hits in this batch took.
+                const gained = state.players[p].hearts - previous.players[p].hearts + events.filter(ev => ev.t === 'hit' && ev.player === p).reduce((n, ev) => n + (ev.amount || 0), 0);
+                if (gained > 0 && state.players[p].hearts > 0) {   // at 0 a hit was clamped: not a heal
+                    float('h' + p, '+' + gained + ' ❤', 'heal', before);
+                    burst(rectOf('h' + p, before), 'heal', { scale: 0.8 });
+                }
+            });
+            // Creatures that left a board without being defeated: to the other side or to a hand.
+            [0, 1].forEach(p => previous.players[p].board.forEach(cid => {
+                if (covered.has(cid) || state.players[p].board.includes(cid)) return;
+                const q = 1 - p;
+                if (state.players[q].board.includes(cid)) cross(cid, before[cid], rectOf(cid, {}), calm);
+                else if (state.players[q].hand.includes(cid) || state.players[p].hand.includes(cid)) {
+                    const owner = state.players[ME].hand.includes(cid) ? ME : OPP;
+                    cross(cid, before[cid], owner === ME ? rectOf(cid, {}) : boxOf(dom.oppHand), calm, true);
+                }
+            }));
+            // Stat changes on creatures that stayed (a boost, a loss, a gained Shield, a heal).
+            [0, 1].forEach(p => state.players[p].board.forEach(cid => {
+                if (covered.has(cid) || wasOn(cid) !== p) return;
+                const a = E.describe(previous, cid), b = E.describe(state, cid);
+                const dAtk = b.attack - a.attack, dMax = b.maxHealth - a.maxHealth;
+                // Attack and health traded places (Fold, Möbius): say so, not "−3 attack" and a heal.
+                if (a.attack !== a.health && b.attack === a.health && b.health === a.attack) { float(cid, 'Swapped', 'buff', before); return; }
+                // A boost that simply ran out (this turn, until a turn starts) is not a new loss.
+                const gone = (previous.cards[cid].buffs || []).filter(x => !(state.cards[cid].buffs || []).includes(x) && (x.temp || x.untilTurn != null || x.untilStart != null));
+                const ran = gone.reduce((n, x) => n + (x.attack || 0), 0), ranMax = gone.reduce((n, x) => n + (x.health || 0), 0);
+                if (gone.length && dAtk === -ran && dMax === -ranMax) { if (dAtk || dMax) float(cid, 'Boost ends', 'info', before); return; }
+                // The cards' own notation (attack/health), short enough not to cover a neighbour.
+                const sign = n => (n < 0 ? '−' : '+') + Math.abs(n);
+                const words = dAtk && dMax ? sign(dAtk) + '/' + sign(dMax) : dAtk ? sign(dAtk) + ' attack' : dMax ? sign(dMax) + ' health' : '';
+                if (words) {
+                    float(cid, words, dAtk + dMax > 0 ? 'buff' : 'debuff', before);
+                    if (dAtk + dMax > 0) burst(rectOf(cid, before), 'buff', { scale: 0.8 });
+                }
+                if (!dMax && b.health > a.health) { float(cid, '+' + (b.health - a.health), 'heal', before); burst(rectOf(cid, before), 'heal', { scale: 0.8 }); }
+                if (b.keywords.includes('shield') && !a.keywords.includes('shield')) burst(rectOf(cid, before), 'shield-bubble');
+                if (b.silenced && !a.silenced) { float(cid, 'Silenced', 'debuff', before); burst(rectOf(cid, before), 'silence', { frame: true, duration: 600 }); }
+                if (b.frozen && !a.frozen) { float(cid, 'Frozen', 'debuff', before); burst(rectOf(cid, before), 'frost-frame', { frame: true, duration: 600 }); }
+            }));
+        }
+        // A creature crosses the table (taken over) or goes back to a hand: a copy travels from
+        // its old place to its new one, and the real card waits until it lands.
+        function cross(cid, from, to, calm, toHand) {
+            const n = nodes[cid];
+            if (!from || !to) return;
+            if (calm) { if (n && n.animate) animate(n, [{ opacity: 0 }, { opacity: 1 }], { duration: 300 }); return; }
+            const ghost = ghostCopy(from, toHand ? 'to-hand' : 'cross');
+            if (!ghost) return;
+            const a = centre(from), b = centre(to), s = Math.max(0.4, Math.min(1.4, to.width / from.width || 1));
+            const MOVE = 480;
+            animate(ghost, [{ transform: 'translate(0,0) scale(1)' }, { transform: 'translate(0,' + (a.y < b.y ? -10 : 10) + 'px) scale(1.05)', offset: 0.2 },
+                { transform: 'translate(' + (b.x - a.x) + 'px,' + (b.y - a.y) + 'px) scale(' + s + ')', opacity: toHand && !n ? 0 : 1 }], { duration: MOVE, easing: 'ease-in-out', fill: 'forwards' });
+            if (n && n.animate) animate(n, [{ opacity: 0 }, { opacity: 0, offset: 0.92 }, { opacity: 1 }], { duration: MOVE });
+            presentationLater(() => ghost.remove(), MOVE + 10);
+            if (!toHand) burst(to, 'ring', { colour: state.cards[cid] && E.colourOf(state, state.cards[cid]), delay: MOVE - 60 });
+        }
+
+        // The battle is decided: the loser's portrait greys and sinks, the winner's glows. This plays
+        // inside the existing one-second wait before the results, so no match gets longer.
+        function finale() {
+            const w = E.winner(state), calm = calmMotion();
+            [ME, OPP].forEach(pi => {
+                const n = nodes['h' + pi];
+                if (!n || !n.querySelector) return;
+                const face = n.querySelector('.b-portrait') || n;
+                if (!face.animate) return;
+                if (w === 'draw' || w !== pi) {
+                    animate(face, calm ? [{ opacity: 1 }, { opacity: 0.45 }]
+                        : [{ filter: 'none', translate: '0 0' }, { filter: 'grayscale(1) brightness(0.55)', translate: '0 ' + (pi === ME ? 8 : -8) + 'px' }], { duration: 500, easing: 'ease-in', fill: 'forwards' });
+                    if (!calm) burst(rectOf('h' + pi, {}), 'poof', { delay: 80, duration: 480 });
+                } else {
+                    animate(n, calm ? [{ opacity: 0.7 }, { opacity: 1 }]
+                        : [{ filter: 'none' }, { filter: 'drop-shadow(0 0 16px #f2b632) brightness(1.15)' }], { duration: 500, easing: 'ease-out', fill: 'forwards' });
+                }
+            });
+        }
+        // A copy of a card at its captured place, for motion after the real card has moved or gone.
+        function ghostCopy(r, event) {
+            if (!r || !r.node || !r.node.cloneNode) return null;
             const ghost = r.node.cloneNode(true);
             ghost.classList.add('b-motion-ghost');
             ghost.dataset.event = event;
             ghost.setAttribute('aria-hidden', 'true'); ghost.setAttribute('tabindex', '-1'); ghost.disabled = true;
-            ['valid', 'selected', 'guide-focus', 'attacking', 'targeted'].forEach(k => ghost.classList.remove(k));
+            ['valid', 'selected', 'guide-focus', 'attacking', 'targeted', 'ready'].forEach(k => ghost.classList.remove(k));
             Object.assign(ghost.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px' });
             dom.floats.appendChild(ghost);
-            presentationLater(() => ghost.remove(), 400);
+            return ghost;
+        }
+        function motionSource(cid, before, event, captured) {
+            // A creature dying in this batch is still held in place (playVisuals): it moves itself,
+            // even when it was saved to my hand (its node is then the hand card).
+            if (holds.has(cid)) { holds.get(cid).dataset.event = event; return holds.get(cid); }
+            if (!captured && nodes[cid]) return nodes[cid];
+            const ghost = ghostCopy(before[cid], event);
+            if (ghost) presentationLater(() => ghost.remove(), 400);
             return ghost;
         }
         function sourceCue(ev, before, calm) {
             const key = ev.cid || ev.target, node = motionSource(key, before, ev.t);
-            if (node && node.animate) animate(node, calm ? [{ opacity: 0.6 }, { opacity: 1 }]
-                : [{ filter: 'brightness(1)' }, { filter: 'brightness(1.3)', scale: '1.04' }, { filter: 'brightness(1)', scale: '1' }], { duration: 380 });
-            const from = rectOf(key, before), to = ev.target && rectOf(ev.target, before);
-            if (!from || !to || key === ev.target) return;
             const colour = ev.t === 'tactic-play' ? ((Rift.data.tactics || {})[ev.id] || {}).colour
                 : state.cards[key] && E.colourOf(state, state.cards[key]);
+            const hex = (Rift.COLOURS[colour] || {}).hex || '#f2b632';
+            // A spell card rises from the hand and glows in its Way of Knowing's colour.
+            if (node && node.animate) animate(node, calm ? [{ opacity: 0.6 }, { opacity: 1 }]
+                : ev.t === 'tactic-play' ? [{ filter: 'brightness(1)', translate: '0 0', scale: '1' }, { filter: 'brightness(1.3) drop-shadow(0 0 14px ' + hex + ')', translate: '0 -22px', scale: '1.08', offset: 0.5 }, { filter: 'brightness(1.3) drop-shadow(0 0 14px ' + hex + ')', translate: '0 -28px', scale: '1.08', opacity: 0 }]
+                    : [{ filter: 'brightness(1)' }, { filter: 'brightness(1.3)', scale: '1.04' }, { filter: 'brightness(1)', scale: '1' }], { duration: 380 });
+            // Then its colour bursts where it lands: the target, or (no target) the caster's hero.
+            const landing = ev.target || (ev.t === 'tactic-play' ? 'h' + ev.player : null);
+            // Where the target stood when cast: a stolen creature crosses afterwards (changeCues).
+            const at = k => before[k] || rectOf(k, before);
+            if (landing && landing !== key && (ev.t === 'tactic-play' || ev.t === 'activate' || ev.t === 'power-use')) burst(at(landing), 'ring', { colour, delay: 200, scale: 1.1 });
+            const from = rectOf(key, before), to = ev.target && at(ev.target);
+            if (!from || !to || key === ev.target) return;
             const trail = el('div.b-cast-trail', { 'aria-hidden': 'true', dataset: { event: ev.t }, style: {
                 left: (from.left + from.width / 2) + 'px', top: (from.top + from.height / 2) + 'px',
                 width: Math.hypot(to.left + to.width / 2 - from.left - from.width / 2, to.top + to.height / 2 - from.top - from.height / 2) + 'px',
@@ -3657,7 +3908,7 @@
 
         // Recovered from the unfinished #109 prototype, using the shipped lifecycle rather than
         // its competing timer/animation owner. Input never waits for these optional visuals.
-        function playVisuals(events, before, previous, focusDrawn) {
+        function playVisuals(events, before, previous, focusDrawn, drop) {
             const drawn = [], flights = new Map();
             const axUsed = [0, 0].map(() => ({}));
             events.forEach(ev => {
@@ -3680,12 +3931,25 @@
                 if (ev.player === ME) drawn.push(card);
                 flights.set(ev, () => flyDraw(card, ev.t === 'draw-axiom' ? 'axiom' : ev.player === OPP ? 'opponent' : 'deck', ev.t === 'draw-axiom', ev.player === ME));
             });
-            battleSounds(events, ev => { if (flights.has(ev)) flights.get(ev)(); effects([ev], before); });
+            const ctx = { previous, drop };
+            // A creature that dies in this batch has already left the rendered board. Hold a still
+            // copy in its place until its defeat beat, so its fight and damage are seen on it.
+            holds.clear();
+            events.forEach(ev => {
+                if (ev.t !== 'defeated' || holds.has(ev.cid) || !before[ev.cid]) return;
+                const held = ghostCopy(before[ev.cid], 'hold');
+                if (held) { holds.set(ev.cid, held); presentationLater(() => held.remove(), 1200); }
+            });
+            battleSounds(events, ev => { if (flights.has(ev)) flights.get(ev)(); effects([ev], before, ctx); });
+            // Changes with no event of their own come after the event chain (at most 600 ms in).
+            presentationLater(() => changeCues(previous, events, before), chainEnd(events));
             if (focusDrawn) {
                 const card = drawn[0] || dom.myHand.querySelector('.bc') || screen.querySelector('.b-end');
                 if (card && card.focus) card.focus();
             }
         }
+        // When a batch's last beat has played (battleSounds spaces beats over at most 600 ms), plus a breath.
+        const chainEnd = events => (events.length > 1 ? Math.min(600, (events.length - 1) * 100) : 0) + 150;
         function flyDraw(card, pile, axiom, reveal) {
             if (!card.animate || !card.getBoundingClientRect) return;
             const duration = calmMotion() ? 120 : 300;
