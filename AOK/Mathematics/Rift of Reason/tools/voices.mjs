@@ -12,7 +12,8 @@
 //   node tools/voices.mjs --report          every line still on browser-voice fallback
 //   node tools/voices.mjs --audition        one sample per speaker into tools/voice-auditions (one request each)
 //        --avatars <id[,id…]|all>          avatar voices instead: a spoken and an inner sample per request
-//   node tools/voices.mjs --resplit         retry the splitter on failed batches kept in tools/voice-raw (no quota)
+//   node tools/voices.mjs --resplit         retry the splitter on takes kept in tools/voice-raw (no quota)
+//        RIFT_WHISPER_PYTHON=<python with faster-whisper>   check every batch cut against local word timings
 //   node tools/voices.mjs --prune           delete recordings whose line no longer exists
 //   node tools/voices.mjs --manifest        just rebuild data/voice-manifest.js from files on disk
 //
@@ -30,6 +31,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { createRequire } from 'node:module';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import { fileURLToPath } from 'node:url';
 import { loadRift, GAME_DIR } from './test/harness.mjs';
 import { applyFx } from './voices-fx.mjs';
@@ -58,6 +61,7 @@ const opt = n => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : null
 const DELAY = +(opt('--delay') || 21000); // free tier: about 3 requests a minute per model
 const FLASH = 'gemini-3.8-flash-tts', LITE = 'gemini-3.8-flash-lite-tts';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+const execFileP = promisify(execFile);
 
 // ---- lines --------------------------------------------------------------------
 
@@ -141,12 +145,17 @@ export function tutorialHosts(Rift, nodeId) {
     return [...hosts];
 }
 
+const SPOKEN_MARKS = { '✓': 'tick', '✔': 'tick', '✕': 'cross', '✗': 'cross', '✘': 'cross' };
 // What the TTS reads: no nickname, and shouted all-caps lines (the Algorithm) in sentence case
 // so they are spoken, not spelled out.
 export function spoken(text) {
     let t = text.replace(/,\s*\{name\}/g, '').replace(/\{name\}[,!.]?\s*/g, '');
     // Stage directions in brackets, e.g. "(whispering)" or "(raises one eyebrow)", are acted, not read.
     t = t.replace(/\([^)]*\)/g, ' ').replace(/…\s*…/g, '…');
+    // The TTS reads ✓ as a letter ("Z", "V"), so marks are spoken as words, with "a" unless a
+    // word like "one" or "the" already counts them. The voice id still hashes the text as written.
+    t = t.replace(/(\S*)(\s*)([✓✔✕✗✘])/gu, (_, before, gap, mark) => before + (gap || ' ')
+        + (/^(a|an|one|the|each|every|its|this|that|no|any|your|their)$/i.test(before) ? '' : 'a ') + SPOKEN_MARKS[mark]);
     t = t.replace(/\s+([,.!?…])/g, '$1').replace(/\s+/g, ' ').trim();
     const letters = t.replace(/[^A-Za-z]/g, '');
     if (letters.length > 8 && letters === letters.toUpperCase()) {
@@ -420,7 +429,9 @@ export function speechParts(lines, style) {
 // ---- batch splitting ----------------------------------------------------------
 // Many lines from one speaker go into one request, separated by long pauses. The audio is
 // split at the silences that best fit each line's expected length; a batch whose pieces
-// don't fit is saved raw and retried as two smaller batches.
+// don't fit is saved raw and retried as two smaller batches. Length alone often picks a long
+// pause inside a line, so splitChecked then moves each cut to the pause where local Whisper word
+// timings say one line ends and the next begins (alignCuts).
 
 function rmsFrames(pcm, rate) {
     const n = Math.round(rate * 0.02), out = [];
@@ -432,21 +443,27 @@ function rmsFrames(pcm, rate) {
     return { rms: out, frame: n };
 }
 
-export function splitBatch(pcm, rate, texts) {
+// Candidate cut points: 20 ms frames, loud above 450, a pause is at least 12 quiet frames.
+export function pausesOf(pcm, rate) {
     const { rms, frame } = rmsFrames(pcm, rate);
     const loud = rms.map(v => v > 450);
     const first = loud.indexOf(true), last = loud.lastIndexOf(true);
-    if (first < 0) return null;
-    const n = texts.length, need = n - 1;
-    const fsec = frame / rate;
     const gaps = [];
-    for (let i = first; i < last;) {
+    for (let i = first; first >= 0 && i < last;) {
         if (loud[i]) { i++; continue; }
         let j = i;
         while (j < last && !loud[j]) j++;
         if (j - i >= 12) gaps.push({ start: i, end: j, len: j - i });
         i = j;
     }
+    return { frame, fsec: frame / rate, loud, first, last, gaps };
+}
+
+// The pause (an index into gaps) that ends each line but the last, chosen by line length, or null.
+export function stockCuts(p, texts) {
+    const { loud, first, last, fsec, gaps } = p;
+    if (first < 0) return null;
+    const n = texts.length, need = n - 1;
     if (gaps.length < need) return null;
     const chars = texts.map(t => t.length), totalChars = chars.reduce((a, b) => a + b, 0);
     const longest = gaps.map(g => g.len).sort((a, b) => b - a).slice(0, need).reduce((a, b) => a + b, 0);
@@ -463,10 +480,10 @@ export function splitBatch(pcm, rate, texts) {
         const lastLine = k === n - 1;
         for (let g = k + 1; g <= G + 1; g++) {
             if (lastLine !== (g === G + 1)) continue;
-            for (let p = k; p < g; p++) {
-                if (dp[k - 1][p] >= INF) continue;
-                const c = dp[k - 1][p] + cost(p, g, k) + (lastLine ? 0 : bonus(g));
-                if (c < dp[k][g]) { dp[k][g] = c; back[k][g] = p; }
+            for (let q = k; q < g; q++) {
+                if (dp[k - 1][q] >= INF) continue;
+                const c = dp[k - 1][q] + cost(q, g, k) + (lastLine ? 0 : bonus(g));
+                if (c < dp[k][g]) { dp[k][g] = c; back[k][g] = q; }
             }
         }
     }
@@ -475,9 +492,8 @@ export function splitBatch(pcm, rate, texts) {
     for (let k = n - 1, g = G + 1; k > 0; k--) { g = back[k][g]; chosen.unshift(g); }
     if (need && Math.min(...chosen.map(g => pts[g].len)) < 20) return null; // cuts must be > 0.4 s
     const bounds = [first].concat(chosen.map(g => Math.round((pts[g].start + pts[g].end) / 2))).concat([last + 1]);
-    const pieces = [], secs = [];
+    const secs = [];
     for (let k = 0; k < n; k++) {
-        pieces.push(pcm.subarray(bounds[k] * frame, bounds[k + 1] * frame));
         let a = bounds[k], b = bounds[k + 1] - 1;
         while (a < b && !loud[a]) a++;
         while (b > a && !loud[b]) b--;
@@ -488,7 +504,121 @@ export function splitBatch(pcm, rate, texts) {
         const expect = chars[k] * r1;
         if (secs[k] < expect * 0.4 - 0.5 || secs[k] > expect * 2.4 + 1.0) return null;
     }
-    return pieces;
+    return chosen.map(g => g - 1);
+}
+
+// One piece per line, cut at the middle of each chosen pause.
+export function cutAt(pcm, p, cuts) {
+    const bounds = [p.first].concat(cuts.map(g => Math.round((p.gaps[g].start + p.gaps[g].end) / 2))).concat([p.last + 1]);
+    return bounds.slice(1).map((b, k) => pcm.subarray(bounds[k] * p.frame, b * p.frame));
+}
+
+export function splitBatch(pcm, rate, texts) {
+    const p = pausesOf(pcm, rate), cuts = stockCuts(p, texts);
+    return cuts && cutAt(pcm, p, cuts);
+}
+
+// Words for matching a script line against Whisper: lower case, no apostrophes, small numbers as digits.
+const DIGITS = { zero: '0', one: '1', two: '2', three: '3', four: '4', five: '5', six: '6', seven: '7', eight: '8', nine: '9', ten: '10' };
+export function matchWords(text) {
+    return text.toLowerCase().replace(/[’']/g, '').split(/[^\p{L}\p{N}]+/u).filter(Boolean).map(w => DIGITS[w] || w);
+}
+
+// Longest common subsequence of two word lists: expected index -> heard index.
+function lcsMatch(a, b) {
+    const m = b.length, rows = a.map(() => new Uint16Array(m + 1));
+    rows.push(new Uint16Array(m + 1));
+    for (let i = a.length - 1; i >= 0; i--) {
+        for (let j = m - 1; j >= 0; j--) rows[i][j] = a[i] === b[j] ? rows[i + 1][j + 1] + 1 : Math.max(rows[i + 1][j], rows[i][j + 1]);
+    }
+    const match = new Map();
+    for (let i = 0, j = 0; i < a.length && j < m;) {
+        if (a[i] === b[j]) match.set(i++, j++);
+        else if (rows[i + 1][j] >= rows[i][j + 1]) i++;
+        else j++;
+    }
+    return match;
+}
+
+// Move each cut to the pause between line k's last heard word and line k+1's first heard word.
+// words: Whisper's [word, start, end] timings (seconds) for the whole take. A boundary whose
+// first words of the next line were not heard as written (a name like "Foresee") takes the
+// earliest pause in the window; one whose last words were not heard takes the latest. A
+// boundary with no aligned words or no pause in the window keeps the stock cut and is "unsure".
+export function alignCuts(p, texts, words, stock) {
+    const expected = texts.flatMap((t, k) => matchWords(t).map(w => ({ w, k })));
+    const heard = words.flatMap(([w, start, end]) => matchWords(w).map(x => ({ w: x, start, end })));
+    const match = lcsMatch(expected.map(e => e.w), heard.map(h => h.w));
+    const cuts = [], boundaries = [];
+    for (let k = 0; k < texts.length - 1; k++) {
+        const idx = j => expected.map((e, i) => (e.k === j && match.has(i) ? i : -1)).filter(i => i >= 0);
+        const own = idx(k), next = idx(k + 1), prev = cuts.length ? cuts[cuts.length - 1] : -1;
+        const fallback = stock && stock[k] > prev ? stock[k] : null;
+        let cut = null, how = 'unsure';
+        if (own.length && next.length) {
+            const te = heard[match.get(own[own.length - 1])].end, ts = heard[match.get(next[0])].start;
+            const tailHeard = expected[own[own.length - 1] + 1]?.k !== k, headHeard = expected[next[0] - 1]?.k !== k + 1;
+            const dist = g => Math.max(0, p.gaps[g].start * p.fsec - ts, te - p.gaps[g].end * p.fsec);
+            const near = p.gaps.map((_, g) => g).filter(g => g > prev && dist(g) <= 0.4);
+            if (near.length) {
+                // The earliest pause still running when line k's last word ends, or the latest
+                // that starts before line k+1's first heard word.
+                const after = near.filter(g => p.gaps[g].end * p.fsec > te), before = near.filter(g => p.gaps[g].start * p.fsec < ts);
+                if (!headHeard && tailHeard) { cut = (after.length ? after : near)[0]; how = 'earliest'; }
+                else if (headHeard && !tailHeard) { cut = (before.length ? before : near).at(-1); how = 'latest'; }
+                else {
+                    cut = near.reduce((a, g) => (Math.round(dist(g) * 10) < Math.round(dist(a) * 10)
+                        || (Math.round(dist(g) * 10) === Math.round(dist(a) * 10) && p.gaps[g].len > p.gaps[a].len) ? g : a));
+                    how = headHeard ? 'aligned' : 'unsure';
+                }
+            }
+        }
+        if (cut === null) cut = fallback;
+        if (cut === null) return null;
+        cuts.push(cut);
+        boundaries.push({ how, stock: stock ? stock[k] : null, cut });
+    }
+    return { cuts, boundaries, matched: match.size, words: expected.length };
+}
+
+// Whisper word timings for a take through tools/voice-words.py, or null when no checker is set up.
+// RIFT_WHISPER_PYTHON names a Python with faster-whisper; RIFT_WHISPER_MODEL a model (default small).
+async function whisperWords(pcm, rate) {
+    const python = process.env.RIFT_WHISPER_PYTHON;
+    if (!python) return null;
+    fs.mkdirSync(RAW, { recursive: true });
+    const file = path.join(RAW, '.align-' + process.pid + '-' + Date.now() + '.wav');
+    fs.writeFileSync(file, wavOf(pcm, rate));
+    try {
+        const { stdout } = await execFileP(python, ['-I', path.join(HERE, 'voice-words.py'), file], { maxBuffer: 64 << 20, timeout: 20 * 60000 });
+        return JSON.parse(stdout);
+    } catch (e) {
+        console.log('Whisper check failed: ' + String(e.message).split('\n')[0].slice(0, 200));
+        return null;
+    } finally { fs.rmSync(file, { force: true }); }
+}
+function wavOf(pcm, rate) {
+    const h = Buffer.alloc(44), d = Buffer.from(pcm.buffer, pcm.byteOffset, pcm.byteLength);
+    h.write('RIFF', 0); h.writeUInt32LE(36 + d.length, 4); h.write('WAVEfmt ', 8); h.writeUInt32LE(16, 16);
+    h.writeUInt16LE(1, 20); h.writeUInt16LE(1, 22); h.writeUInt32LE(rate, 24); h.writeUInt32LE(rate * 2, 28);
+    h.writeUInt16LE(2, 32); h.writeUInt16LE(16, 34); h.write('data', 36); h.writeUInt32LE(d.length, 40);
+    return Buffer.concat([h, d]);
+}
+
+// Split a batch take and check the cuts. Returns { pieces, checked, unsure } or null when the
+// stock split fails. checked is false when no Whisper checker is set up; unsure lists line ids
+// whose boundary could not be confirmed. Either way the caller keeps the raw take for review.
+// hear(pcm, rate) gives the word timings (tests pass recorded ones).
+export async function splitChecked(pcm, rate, lines, hear = whisperWords) {
+    const p = pausesOf(pcm, rate), texts = lines.map(l => l.say), stock = stockCuts(p, texts);
+    if (!stock) return null;
+    const words = await hear(pcm, rate);
+    const aligned = words && alignCuts(p, texts, words, stock);
+    if (!aligned) return { pieces: cutAt(pcm, p, stock), checked: false, unsure: [] };
+    const moved = aligned.boundaries.filter(b => b.cut !== b.stock).length;
+    if (moved) console.log(`  moved ${moved} of ${stock.length} cuts to the Whisper-aligned pause (${aligned.matched}/${aligned.words} words aligned)`);
+    const unsure = aligned.boundaries.flatMap((b, k) => (b.how === 'unsure' ? [lines[k].id, lines[k + 1].id] : []));
+    return { pieces: cutAt(pcm, p, aligned.cuts), checked: true, unsure: [...new Set(unsure)] };
 }
 
 function saveRaw(wav, lines, preserve = false) {
@@ -500,17 +630,20 @@ function saveRaw(wav, lines, preserve = false) {
     fs.writeFileSync(path.join(RAW, id + '.json'), JSON.stringify(lines));
 }
 
-function resplit() {
+// A take is deleted only once its cuts are checked; unchecked or unsure takes stay for review.
+async function resplit() {
     if (!fs.existsSync(RAW)) return console.log('Nothing in tools/voice-raw.');
     let n = 0;
     fs.mkdirSync(OUT, { recursive: true });
     for (const f of fs.readdirSync(RAW).filter(x => x.endsWith('.json'))) {
         const lines = JSON.parse(fs.readFileSync(path.join(RAW, f), 'utf8'));
         const { rate, pcm } = pcmFromWav(fs.readFileSync(path.join(RAW, f.replace('.json', '.wav'))));
-        const pieces = splitBatch(pcm, rate, lines.map(l => l.say));
-        if (!pieces) { console.log('still unsplittable:', f); continue; }
-        pieces.forEach((p, k) => save(lines[k], p, rate));
-        n += pieces.length;
+        const split = lines.length === 1 ? { pieces: [pcm], checked: true, unsure: [] } : await splitChecked(pcm, rate, lines);
+        if (!split) { console.log('still unsplittable:', f); continue; }
+        split.pieces.forEach((p, k) => save(lines[k], p, rate));
+        n += split.pieces.length;
+        if (!split.checked) { console.log('cuts not checked (set RIFT_WHISPER_PYTHON), kept:', f); continue; }
+        if (split.unsure.length) { console.log('check these boundaries by ear, kept ' + f + ':', split.unsure.join(', ')); continue; }
         fs.unlinkSync(path.join(RAW, f)); fs.unlinkSync(path.join(RAW, f.replace('.json', '.wav')));
     }
     console.log('Recovered ' + n + ' lines. Manifest lists ' + writeManifest() + ' files.');
@@ -571,8 +704,8 @@ async function render(key, todo) {
             }
             if (flag('--keep-raw')) saveRaw(wav, job.lines, true);
             const { rate, pcm } = pcmFromWav(wav);
-            const pieces = single ? [pcm] : splitBatch(pcm, rate, job.lines.map(l => l.say));
-            if (!pieces) {
+            const split = single ? { pieces: [pcm], checked: true, unsure: [] } : await splitChecked(pcm, rate, job.lines);
+            if (!split) {
                 if (!flag('--keep-raw')) saveRaw(wav, job.lines);
                 const half = Math.ceil(job.lines.length / 2);
                 console.log(`split failed for ${job.who} x${job.lines.length}; kept in tools/voice-raw, retrying as ${half} + ${job.lines.length - half}.`);
@@ -580,6 +713,12 @@ async function render(key, todo) {
                 queue.unshift({ ...job, lines: job.lines.slice(0, half) });
                 await sleep(DELAY);
                 continue;
+            }
+            const { pieces } = split;
+            if (!split.checked || split.unsure.length) {
+                if (!flag('--keep-raw')) saveRaw(wav, job.lines, true);
+                console.log(split.checked ? `  check these boundaries by ear (take kept in tools/voice-raw): ${split.unsure.join(', ')}`
+                    : '  cuts not checked: set RIFT_WHISPER_PYTHON to a Python with faster-whisper. Take kept in tools/voice-raw for --resplit.');
             }
             pieces.forEach((p, k) => save(job.lines[k], p, rate));
             saved += pieces.length;
@@ -660,7 +799,7 @@ async function avatarAudition(key, which) {
 
 async function main() {
     if (flag('--manifest')) return console.log('Manifest lists ' + writeManifest() + ' files.');
-    if (flag('--resplit')) return resplit();
+    if (flag('--resplit')) return await resplit();
     const { lines: all, skipped } = voiceCatalog();
     let lines = all;
     if (opt('--only')) lines = lines.filter(l => l.who === opt('--only'));
