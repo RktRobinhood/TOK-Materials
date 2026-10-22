@@ -633,7 +633,7 @@ test('real boot and claw pixels belong to the moving cutouts rather than the ste
     const sharp = (await import('sharp')).default;
     const R = await rendererSetup(), heroes = R.data.trailer.scenes.find(scene => scene.id === 'heroes');
     // Inspected frame-zero rows below the last coat, tail or wing pixels.
-    const feetBegin = { 'fox-girl': 333, 'frogling-boy': 264, 'raven-girl': 329, 'owlet-boy': 319, 'mothkin-girl': 416 };
+    const feetBegin = { 'fox-girl': 333, 'frogling-boy': 264, 'raven-girl': 329, 'owlet-boy': 319, 'mothkin-girl': 392 };
     const contains = (polygon, x, y) => {
         let inside = false;
         for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
@@ -676,8 +676,8 @@ test('all five trailer travellers exchange foot contacts, lift only the swing fo
         'avatar/fox-girl': [[162, 376], [268, 376]],
         'avatar/frogling-boy': [[72, 323], [164, 320]],
         'avatar/raven-girl': [[117, 367], [173, 361]],
-        'avatar/owlet-boy': [[150, 352], [203, 342]],
-        'avatar/mothkin-girl': [[97, 430], [220, 429]],
+        'avatar/owlet-boy': [[148, 352], [201, 342]],
+        'avatar/mothkin-girl': [[107, 413], [190, 415]],
     };
     for (const member of heroes.cast) {
         const base = member.art.replace(/\/idle$/, ''), walkId = base + '/walk';

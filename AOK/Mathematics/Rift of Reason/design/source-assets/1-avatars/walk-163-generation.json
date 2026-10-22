@@ -1,0 +1,245 @@
+{
+ "date": "2026-10-23",
+ "issue": 163,
+ "task": "FAL-279 (slice A of the FAL-271 art audit)",
+ "method": "Edit the shipped image, never draw fresh. One shipped frame is the anchor; each other frame is a qwen21_edit \"change only its legs and feet\" edit of the anchor (prep_walk_frame.py: padded, 3x). The two down frames then get a small CPU swing of the scarf ends / cape hem / antennae (swing_part.py: the shipped pixels sheared a few degrees from their root, no redraw). finish_walk.py registers each frame to the anchor on the head and stands the lowest foot on the anchor ground row; pack_source.py lays the rows out for build-assets.mjs. Old sources owlet-walk.png and mothkin-walk.png are kept and marked skip in tools/assets/sheets.json.",
+ "why_cpu_swing": "A qwen21_edit \"change only the scarf ends / cape / antennae\" round (FAL-279 round 2, seeds 27903-27904, 16 renders) redrew the part instead of moving it: antennae shrank or changed shape, scarf ends came out thin and flat. In a 6-frame loop that reads as the part popping, so the swing is done on the CPU from the shipped pixels.",
+ "measured": "head_track.py on the built webp: head bob owlet-boy 2.0 %, owlet-girl 2.0 %, mothkin-boy 2.2 %, mothkin-girl 2.4 %; head scale 1.00 on every frame; ground row within 1 px.",
+ "sheets": {
+  "owlet-walk-163.png": [
+   {
+    "id": "avatar/owlet-boy/walk",
+    "anchor": "shipped frame 1",
+    "frames": [
+     {
+      "frame": 1,
+      "source": "shipped assets/avatars/owlet-boy-walk.webp frame 1 (the anchor, unchanged)"
+     },
+     {
+      "frame": 2,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "walk-down-v2",
+      "seed": 27201,
+      "input": "owlet-boy-walk-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little owl walking to the right. Change only its legs and feet, so that both feet are flat on the ground under the body: the front leg (on the right) is bent at the knee and takes the weight, and the back foot (on the left) is a short step behind with its heel just lifting. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the big yellow eyes, the beak, the ear tufts, the red knitted scarf, the brown satchel, the wings and the body exactly as they are, in the same place, the same size. The bird still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-271 trial round 2 #1",
+      "then": "CPU swing, tools/art-local/swing_part.py --cut x:425 --angle 9 --box 120,530,425,1020 --ramp 70 --protect 360,697,425,800 --protect 400,960,425,1020"
+     },
+     {
+      "frame": 3,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "walk-pass-a",
+      "seed": 27101,
+      "input": "owlet-boy-walk-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little owl walking to the right. Change only its legs and feet, so that one leg stands straight directly under the middle of the body with its foot flat on the ground, and the other leg is lifted, its foot raised well off the ground and tucked up under the belly with the toes curled, swinging forward. Keep the head, the big yellow eyes, the beak, the ear tufts, the red knitted scarf, the brown satchel, the wings and the body exactly as they are, in the same place, the same size. The bird still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-271 trial round 1 #3"
+     },
+     {
+      "frame": 4,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "walk-contact-b-v2",
+      "seed": 27202,
+      "input": "owlet-boy-walk-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little owl walking to the right. Change only its legs and feet, so that a long stride with the legs the other way round from <image1>: the leg that was behind now reaches forward to the right with its foot touching the ground, and the other leg is stretched back to the left with only its toes on the ground. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the big yellow eyes, the beak, the ear tufts, the red knitted scarf, the brown satchel, the wings and the body exactly as they are, in the same place, the same size. The bird still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-271 trial round 2 #6"
+     },
+     {
+      "frame": 5,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "walk-down-v2",
+      "seed": 27202,
+      "input": "owlet-boy-walk-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little owl walking to the right. Change only its legs and feet, so that both feet are flat on the ground under the body: the front leg (on the right) is bent at the knee and takes the weight, and the back foot (on the left) is a short step behind with its heel just lifting. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the big yellow eyes, the beak, the ear tufts, the red knitted scarf, the brown satchel, the wings and the body exactly as they are, in the same place, the same size. The bird still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-271 trial round 2 #2",
+      "then": "CPU swing, tools/art-local/swing_part.py --cut x:425 --angle 9 --box 120,530,425,1020 --ramp 70 --protect 360,697,425,800 --protect 400,960,425,1020"
+     },
+     {
+      "frame": 6,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "walk-pass-a",
+      "seed": 27102,
+      "input": "owlet-boy-walk-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little owl walking to the right. Change only its legs and feet, so that one leg stands straight directly under the middle of the body with its foot flat on the ground, and the other leg is lifted, its foot raised well off the ground and tucked up under the belly with the toes curled, swinging forward. Keep the head, the big yellow eyes, the beak, the ear tufts, the red knitted scarf, the brown satchel, the wings and the body exactly as they are, in the same place, the same size. The bird still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-271 trial round 1 #4"
+     }
+    ]
+   },
+   {
+    "id": "avatar/owlet-girl/walk",
+    "anchor": "shipped frame 1",
+    "frames": [
+     {
+      "frame": 1,
+      "source": "shipped assets/avatars/owlet-girl-walk.webp frame 1 (the anchor, unchanged)"
+     },
+     {
+      "frame": 2,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "owlet-girl-down",
+      "seed": 27901,
+      "input": "owlet-girl-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little owl in a hooded cape walking to the right. Change only its legs and feet, so that both feet are flat on the ground under the body: the front leg (on the right) is bent at the knee and takes the weight, and the back foot (on the left) is a short step behind with its heel just lifting. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the round gold glasses, the big yellow eyes, the beak, the ear tufts, the teal hooded cape with its gold trim and gold clasp, the dark red book with gold corners, the wings and the body exactly as they are, in the same place, the same size. The owl still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-279 round 1 #1",
+      "then": "CPU swing, tools/art-local/swing_part.py --cut x:450 --angle 8 --box 120,560,450,1050 --ramp 80 --fade top:110 --protect 395,975,450,1050"
+     },
+     {
+      "frame": 3,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "owlet-girl-pass",
+      "seed": 27901,
+      "input": "owlet-girl-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little owl in a hooded cape walking to the right. Change only its legs and feet, so that one leg stands straight directly under the middle of the body with its foot flat on the ground, and the other leg is lifted, its foot raised well off the ground and tucked up under the belly with the toes curled, swinging forward. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the round gold glasses, the big yellow eyes, the beak, the ear tufts, the teal hooded cape with its gold trim and gold clasp, the dark red book with gold corners, the wings and the body exactly as they are, in the same place, the same size. The owl still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-279 round 1 #3"
+     },
+     {
+      "frame": 4,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "owlet-girl-contactB",
+      "seed": 27901,
+      "input": "owlet-girl-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little owl in a hooded cape walking to the right. Change only its legs and feet, so that a long stride with the legs the other way round from <image1>: the leg that was behind now reaches forward to the right with its foot touching the ground, and the other leg is stretched back to the left with only its toes on the ground. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the round gold glasses, the big yellow eyes, the beak, the ear tufts, the teal hooded cape with its gold trim and gold clasp, the dark red book with gold corners, the wings and the body exactly as they are, in the same place, the same size. The owl still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-279 round 1 #5"
+     },
+     {
+      "frame": 5,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "owlet-girl-down",
+      "seed": 27902,
+      "input": "owlet-girl-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little owl in a hooded cape walking to the right. Change only its legs and feet, so that both feet are flat on the ground under the body: the front leg (on the right) is bent at the knee and takes the weight, and the back foot (on the left) is a short step behind with its heel just lifting. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the round gold glasses, the big yellow eyes, the beak, the ear tufts, the teal hooded cape with its gold trim and gold clasp, the dark red book with gold corners, the wings and the body exactly as they are, in the same place, the same size. The owl still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-279 round 1 #2",
+      "then": "CPU swing, tools/art-local/swing_part.py --cut x:450 --angle 8 --box 120,560,450,1050 --ramp 80 --fade top:110 --protect 395,975,450,1050"
+     },
+     {
+      "frame": 6,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "owlet-girl-pass",
+      "seed": 27902,
+      "input": "owlet-girl-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little owl in a hooded cape walking to the right. Change only its legs and feet, so that one leg stands straight directly under the middle of the body with its foot flat on the ground, and the other leg is lifted, its foot raised well off the ground and tucked up under the belly with the toes curled, swinging forward. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the round gold glasses, the big yellow eyes, the beak, the ear tufts, the teal hooded cape with its gold trim and gold clasp, the dark red book with gold corners, the wings and the body exactly as they are, in the same place, the same size. The owl still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-279 round 1 #4"
+     }
+    ]
+   }
+  ],
+  "mothkin-walk-163.png": [
+   {
+    "id": "avatar/mothkin-boy/walk",
+    "anchor": "shipped frame 4",
+    "frames": [
+     {
+      "frame": 1,
+      "source": "shipped assets/avatars/mothkin-boy-walk.webp frame 4 (the anchor, unchanged)"
+     },
+     {
+      "frame": 2,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "mothkin-boy-down",
+      "seed": 27901,
+      "input": "mothkin-boy-f4-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fluffy moth creature walking to the right. Change only its legs and feet, so that both feet are flat on the ground under the body: the front leg (on the right) is bent at the knee and takes the weight, and the back foot (on the left) is a short step behind with its heel just lifting. Both legs look exactly like the legs in <image1>: the same soft blue-grey fluffy fur with lilac shading, the same rounded feet with small toes, and the same dark outlines. Both legs are the same colour. Keep the head, the big dark eyes, the two large feathery antennae, the blue-grey fur, the brown leather vest and satchel, the patterned moth wings and the glowing orange lantern exactly as they are, in the same place, the same size. The moth still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-279 round 1 #7",
+      "then": "CPU swing, tools/art-local/swing_part.py --cut y:430 --angle 8 --box 150,60,820,430 --ramp 70"
+     },
+     {
+      "frame": 3,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "mothkin-boy-pass",
+      "seed": 27901,
+      "input": "mothkin-boy-f4-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fluffy moth creature walking to the right. Change only its legs and feet, so that one leg stands straight directly under the middle of the body with its foot flat on the ground, and the other leg is lifted, its foot raised well off the ground and tucked up under the belly with the toes curled, swinging forward. Both legs look exactly like the legs in <image1>: the same soft blue-grey fluffy fur with lilac shading, the same rounded feet with small toes, and the same dark outlines. Both legs are the same colour. Keep the head, the big dark eyes, the two large feathery antennae, the blue-grey fur, the brown leather vest and satchel, the patterned moth wings and the glowing orange lantern exactly as they are, in the same place, the same size. The moth still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-279 round 1 #9"
+     },
+     {
+      "frame": 4,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "mothkin-boy-contactB",
+      "seed": 27901,
+      "input": "mothkin-boy-f4-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fluffy moth creature walking to the right. Change only its legs and feet, so that a long stride with the legs the other way round from <image1>: the leg that was behind now reaches forward to the right with its foot touching the ground, and the other leg is stretched back to the left with only its toes on the ground. Both legs look exactly like the legs in <image1>: the same soft blue-grey fluffy fur with lilac shading, the same rounded feet with small toes, and the same dark outlines. Both legs are the same colour. Keep the head, the big dark eyes, the two large feathery antennae, the blue-grey fur, the brown leather vest and satchel, the patterned moth wings and the glowing orange lantern exactly as they are, in the same place, the same size. The moth still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-279 round 1 #11"
+     },
+     {
+      "frame": 5,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "mothkin-boy-down",
+      "seed": 27902,
+      "input": "mothkin-boy-f4-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fluffy moth creature walking to the right. Change only its legs and feet, so that both feet are flat on the ground under the body: the front leg (on the right) is bent at the knee and takes the weight, and the back foot (on the left) is a short step behind with its heel just lifting. Both legs look exactly like the legs in <image1>: the same soft blue-grey fluffy fur with lilac shading, the same rounded feet with small toes, and the same dark outlines. Both legs are the same colour. Keep the head, the big dark eyes, the two large feathery antennae, the blue-grey fur, the brown leather vest and satchel, the patterned moth wings and the glowing orange lantern exactly as they are, in the same place, the same size. The moth still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-279 round 1 #8",
+      "then": "CPU swing, tools/art-local/swing_part.py --cut y:430 --angle 8 --box 150,60,820,430 --ramp 70"
+     },
+     {
+      "frame": 6,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "mothkin-boy-pass",
+      "seed": 27902,
+      "input": "mothkin-boy-f4-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fluffy moth creature walking to the right. Change only its legs and feet, so that one leg stands straight directly under the middle of the body with its foot flat on the ground, and the other leg is lifted, its foot raised well off the ground and tucked up under the belly with the toes curled, swinging forward. Both legs look exactly like the legs in <image1>: the same soft blue-grey fluffy fur with lilac shading, the same rounded feet with small toes, and the same dark outlines. Both legs are the same colour. Keep the head, the big dark eyes, the two large feathery antennae, the blue-grey fur, the brown leather vest and satchel, the patterned moth wings and the glowing orange lantern exactly as they are, in the same place, the same size. The moth still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-279 round 1 #10"
+     }
+    ]
+   },
+   {
+    "id": "avatar/mothkin-girl/walk",
+    "anchor": "shipped frame 4",
+    "frames": [
+     {
+      "frame": 1,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "mothkin-girl-down",
+      "seed": 27901,
+      "input": "mothkin-girl-f4-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fluffy moth creature walking to the right. Change only its legs and feet, so that both feet are flat on the ground under the body: the front leg (on the right) is bent at the knee and takes the weight, and the back foot (on the left) is a short step behind with its heel just lifting. Both legs look exactly like the legs in <image1>: the same soft lilac-grey fluffy fur with violet shading, the same rounded feet with small toes, and the same dark outlines. Both legs are the same colour. Keep the head, the big dark eyes, the two large feathery antennae, the flower hair clip, the dark blue star-patterned shawl with its fringe and gold crescent clasp, the brown satchel, the moth wings with crescent moons and the glowing violet lantern exactly as they are, in the same place, the same size. The moth still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-279 round 1 #13",
+      "then": "CPU swing, tools/art-local/swing_part.py --cut y:440 --angle 8 --box 150,60,820,440 --ramp 70"
+     },
+     {
+      "frame": 2,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "mothkin-girl-pass",
+      "seed": 27901,
+      "input": "mothkin-girl-f4-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fluffy moth creature walking to the right. Change only its legs and feet, so that one leg stands straight directly under the middle of the body with its foot flat on the ground, and the other leg is lifted, its foot raised well off the ground and tucked up under the belly with the toes curled, swinging forward. Both legs look exactly like the legs in <image1>: the same soft lilac-grey fluffy fur with violet shading, the same rounded feet with small toes, and the same dark outlines. Both legs are the same colour. Keep the head, the big dark eyes, the two large feathery antennae, the flower hair clip, the dark blue star-patterned shawl with its fringe and gold crescent clasp, the brown satchel, the moth wings with crescent moons and the glowing violet lantern exactly as they are, in the same place, the same size. The moth still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-279 round 1 #15"
+     },
+     {
+      "frame": 3,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "mothkin-girl-contactB",
+      "seed": 27901,
+      "input": "mothkin-girl-f4-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fluffy moth creature walking to the right. Change only its legs and feet, so that a long stride with the legs the other way round from <image1>: the leg that was behind now reaches forward to the right with its foot touching the ground, and the other leg is stretched back to the left with only its toes on the ground. Both legs look exactly like the legs in <image1>: the same soft lilac-grey fluffy fur with violet shading, the same rounded feet with small toes, and the same dark outlines. Both legs are the same colour. Keep the head, the big dark eyes, the two large feathery antennae, the flower hair clip, the dark blue star-patterned shawl with its fringe and gold crescent clasp, the brown satchel, the moth wings with crescent moons and the glowing violet lantern exactly as they are, in the same place, the same size. The moth still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-279 round 1 #17"
+     },
+     {
+      "frame": 4,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "mothkin-girl-down",
+      "seed": 27902,
+      "input": "mothkin-girl-f4-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fluffy moth creature walking to the right. Change only its legs and feet, so that both feet are flat on the ground under the body: the front leg (on the right) is bent at the knee and takes the weight, and the back foot (on the left) is a short step behind with its heel just lifting. Both legs look exactly like the legs in <image1>: the same soft lilac-grey fluffy fur with violet shading, the same rounded feet with small toes, and the same dark outlines. Both legs are the same colour. Keep the head, the big dark eyes, the two large feathery antennae, the flower hair clip, the dark blue star-patterned shawl with its fringe and gold crescent clasp, the brown satchel, the moth wings with crescent moons and the glowing violet lantern exactly as they are, in the same place, the same size. The moth still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-279 round 1 #14",
+      "then": "CPU swing, tools/art-local/swing_part.py --cut y:440 --angle 8 --box 150,60,820,440 --ramp 70"
+     },
+     {
+      "frame": 5,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "mothkin-girl-pass",
+      "seed": 27902,
+      "input": "mothkin-girl-f4-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fluffy moth creature walking to the right. Change only its legs and feet, so that one leg stands straight directly under the middle of the body with its foot flat on the ground, and the other leg is lifted, its foot raised well off the ground and tucked up under the belly with the toes curled, swinging forward. Both legs look exactly like the legs in <image1>: the same soft lilac-grey fluffy fur with violet shading, the same rounded feet with small toes, and the same dark outlines. Both legs are the same colour. Keep the head, the big dark eyes, the two large feathery antennae, the flower hair clip, the dark blue star-patterned shawl with its fringe and gold crescent clasp, the brown satchel, the moth wings with crescent moons and the glowing violet lantern exactly as they are, in the same place, the same size. The moth still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-279 round 1 #16"
+     },
+     {
+      "frame": 6,
+      "source": "shipped assets/avatars/mothkin-girl-walk.webp frame 4 (the anchor, unchanged)"
+     }
+    ],
+    "note": "Cycle rotated so the sheet starts on the down frame (both feet planted under the body): the trailer leg rig (js/ui/trailer-scenes.js walkRigs) and the map standing pose use frame 1, and the anchor stride pose made the rig stretch the long shanks. The loop order is unchanged."
+   }
+  ]
+ },
+ "frame_order": "1 contact A (anchor), 2 down, 3 pass, 4 contact B, 5 down, 6 pass (mothkin-girl starts at its down frame, see its note)",
+ "trailer": "js/ui/trailer-scenes.js walkRigs refitted: owlet-boy moved 2 px left with its re-packed frame 1; mothkin-girl refitted to its new frame 1."
+}

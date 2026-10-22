@@ -152,12 +152,14 @@
             "avatar/owlet-boy/idle", "avatar/owlet-boy/neutral", "avatar/owlet-boy/happy", "avatar/owlet-boy/surprised", "avatar/owlet-boy/worried",
             "avatar/owlet-girl/idle", "avatar/owlet-girl/neutral", "avatar/owlet-girl/happy", "avatar/owlet-girl/surprised", "avatar/owlet-girl/worried"
         ] },
-        "owlet-walk.png": { "type": "walk", "frames": 6, "rows": ["avatar/owlet-boy/walk", "avatar/owlet-girl/walk"] },
+        "owlet-walk.png": { "type": "skip" },
+        "owlet-walk-163.png": { "type": "walk", "frames": 6, "rows": ["avatar/owlet-boy/walk", "avatar/owlet-girl/walk"] },
         "mothkin-sheet.png": { "type": "islands", "ids": [
             "avatar/mothkin-boy/idle", "avatar/mothkin-boy/neutral", "avatar/mothkin-boy/happy", "avatar/mothkin-boy/surprised", "avatar/mothkin-boy/worried",
             "avatar/mothkin-girl/idle", "avatar/mothkin-girl/neutral", "avatar/mothkin-girl/happy", "avatar/mothkin-girl/surprised", "avatar/mothkin-girl/worried"
         ] },
-        "mothkin-walk.png": { "type": "walk", "frames": 6, "rows": ["avatar/mothkin-boy/walk", "avatar/mothkin-girl/walk"] },
+        "mothkin-walk.png": { "type": "skip" },
+        "mothkin-walk-163.png": { "type": "walk", "frames": 6, "rows": ["avatar/mothkin-boy/walk", "avatar/mothkin-girl/walk"] },
         "fox-sheet.png": { "type": "islands", "ids": [
             "avatar/fox-boy/idle", "avatar/fox-boy/neutral", "avatar/fox-boy/happy", "avatar/fox-boy/surprised", "avatar/fox-boy/worried",
             "avatar/fox-girl/idle", "avatar/fox-girl/neutral", "avatar/fox-girl/happy", "avatar/fox-girl/surprised", "avatar/fox-girl/worried"
