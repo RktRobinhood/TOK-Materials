@@ -73,7 +73,8 @@
             if(!message||typeof message!=='object'||Array.isArray(message)||text.length>MAX_MESSAGE)throw new Error('That message is too large or cannot be sent.');
             if(channel.bufferedAmount>MAX_MESSAGE*4)throw new Error('The connection is busy. Try again in a moment.');channel.send(text);
         }
-        return {host,join,accept,send,close};
+        function writable(){return !closed&&!!channel&&channel.readyState==='open'&&channel.bufferedAmount<=MAX_MESSAGE*4;}
+        return {host,join,accept,send,close,writable};
     }
     R.Peer={create,encode,decode,LIFETIME,MAX_MESSAGE};
 })(typeof window!=='undefined'?window:globalThis);

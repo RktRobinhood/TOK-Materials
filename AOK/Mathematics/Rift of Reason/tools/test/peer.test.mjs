@@ -40,9 +40,9 @@ test('cancel closes transport, clears callbacks and makes old connection actions
 });
 
 test('sending validates bounded objects and applies backpressure; inbound valid objects alone reach the caller',async()=>{
-    const f=fixture(),p=f.make();await p.host();const dc=f.pcs[0].dc;dc.readyState='open';dc.onopen();
-    assert.throws(()=>p.send([]),/too large/);assert.throws(()=>p.send({text:'x'.repeat(20000)}),/too large/);dc.bufferedAmount=100000;assert.throws(()=>p.send({type:'ping'}),/busy/);dc.bufferedAmount=0;
-    dc.onmessage({data:'{"type":"pong","number":1}'});assert.equal(f.messages[0].type,'pong');assert.equal(f.messages.length,1);p.close();
+    const f=fixture(),p=f.make();await p.host();const dc=f.pcs[0].dc;assert.equal(p.writable(),false);dc.readyState='open';dc.onopen();assert.equal(p.writable(),true);
+    assert.throws(()=>p.send([]),/too large/);assert.throws(()=>p.send({text:'x'.repeat(20000)}),/too large/);dc.bufferedAmount=100000;assert.equal(p.writable(),false);assert.throws(()=>p.send({type:'ping'}),/busy/);dc.bufferedAmount=0;assert.equal(p.writable(),true);
+    dc.onmessage({data:'{"type":"pong","number":1}'});assert.equal(f.messages[0].type,'pong');assert.equal(f.messages.length,1);p.close();assert.equal(p.writable(),false);
 });
 
 test('cancelling during host/join awaits prevents later status, code and gathering work',async()=>{
