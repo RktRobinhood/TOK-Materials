@@ -51,7 +51,7 @@ function both(id, scenario) {
 }
 const count = (calls, s) => calls.filter(c => c === s).length;
 
-test('logic grid: the clicked mark pops, its automatic crosses arrive staggered, a struck clue reveals', () => {
+test('logic grid: the clicked mark pops, its automatic crosses arrive staggered, a struck clue pops', () => {
     let afterMount = -1, afterTick = -1, autoOrder = '';
     const t = both('logic-grid', s => {
         const data = s.def.generate(s.R.makeRng('motion'), 1);
@@ -74,7 +74,7 @@ test('logic grid: the clicked mark pops, its automatic crosses arrive staggered,
     assert.deepEqual(first.slice(0, 2), ['pop:lg-cell lg-x', 'pop:lg-cell lg-v']);
     assert.equal(count(first, 'reveal:lg-cell lg-x'), 4, 'the ✓ crosses out 2 + 2 cells');
     assert.equal(autoOrder, '1,2,3,4', 'auto crosses follow the ✓, staggered');
-    assert.equal(t.calls.includes('reveal:lg-clue used'), true);
+    assert.equal(t.calls.includes('pop:lg-clue used'), true, 'already on screen: it pops, never blinks out and back');
     assert.equal(JSON.parse(t.results[0]).solved, true);
 });
 
@@ -161,7 +161,7 @@ test('witness: wrong rows are revealed one after another after a check', () => {
     assert.equal(JSON.parse(t.results[0]).solved, false);
 });
 
-test("liar's gate: speech bubbles arrive staggered on mount; a role token pops its badge", () => {
+test("liar's gate: speech bubbles arrive staggered on mount; a switched role token pops its badge", () => {
     let guards = 0, mountCalls = '', mountOrder = '';
     const t = both('liars-gate', s => {
         const data = s.def.generate(s.R.makeRng('motion'), 2);
@@ -170,6 +170,9 @@ test("liar's gate: speech bubbles arrive staggered on mount; a role token pops i
         mountCalls = s.calls.join('|');
         mountOrder = s.order.join(',');
         const sol = s.def.solve(data);
+        // First guess wrong for the first guard, then switch: only the switch pops (a new mark pops in CSS).
+        const first = s.box.querySelectorAll('.lg-guard')[0], other = sol.roles[data.guards[0].id] === 'truth' ? 'lie' : 'truth';
+        first.querySelector('.lg-mark.' + other).click();
         s.box.querySelectorAll('.lg-guard').forEach((card, i) => {
             card.querySelector('.lg-mark.' + sol.roles[data.guards[i].id]).click();
         });
@@ -178,7 +181,7 @@ test("liar's gate: speech bubbles arrive staggered on mount; a role token pops i
     });
     assert.equal(mountCalls, Array(guards).fill('reveal:lg-bubble').join('|'));
     assert.equal(mountOrder, Array.from({ length: guards }, (_, i) => i).join(','));
-    assert.equal(count(t.calls, 'pop:lg-badge'), guards);
+    assert.equal(count(t.calls, 'pop:lg-badge'), 1);
     assert.equal(JSON.parse(t.results[0]).solved, true);
 });
 

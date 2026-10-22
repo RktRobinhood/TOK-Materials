@@ -527,11 +527,20 @@
                 if (obstacle && !Rift.State.hasRoom(Rift.State.get(), obstacle)) {
                     body.append(el('p.small', { text: Rift.State.fullReason(obstacle) + (Rift.State.isLegendary(obstacle) ? '' : ' Release one in Collection to catch another next time.') }));
                     modal('Solved!', body, [{ label: '📖 Open Collection', onclick: () => Rift.Router.replace('collection') }, { label: 'Back to the map', primary: true, onclick: () => Rift.Router.replace('map') }]);
+                    rewardsArrive(body);
                     return;
                 }
                 // required: a stray click beside the box must not close it and lose the catch offer (#125 playtest).
                 const buttons = obstacle ? [{ label: 'Catch ' + Rift.data.creatures[obstacle].name + '!', primary: true, required: true, onclick: catchPhase }, { label: 'Back to the map', onclick: () => Rift.Router.replace('map') }] : [{ label: n.id === 'k-core' && !s.flags['seen:finale.home'] ? 'Go to the Summit Rift to return home' : 'Back to the map', primary: true, onclick: () => Rift.Router.replace('map') }];
                 modal('Solved!', body, buttons);
+                rewardsArrive(body);
+            }
+            // After the banner, each reward line arrives in turn and the stars pop, so the player
+            // sees what this win gave (#66; presentation only).
+            function rewardsArrive(body) {
+                if (!Rift.Motion) return;
+                Array.from(body.children).slice(1).forEach((line, i) => Rift.Motion.reveal(line, i + 2));
+                Rift.Motion.pop(body.querySelector('.enc-stars'), { delay: 260 });
             }
 
             // ---- catching ----

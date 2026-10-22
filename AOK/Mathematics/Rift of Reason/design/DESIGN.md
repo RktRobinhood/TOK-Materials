@@ -3,11 +3,11 @@
 Teacher remit (18 October): animate wherever it makes the game clearer and looks good, with no approval gate per phase. Animation is presentation only: engine state, saves and results never wait for it or change because of it.
 
 - **Card Arena.** Every engine event has one short cue on the existing event clock, synced with its sound and never duplicating the #108–#110 effects: cards fly from the hand, hits flash once, dying creatures stay in place until their defeat beat, saved creatures fly to the hand, stolen ones cross the table, spells burst in their Way of Knowing's colour and shape, Guard and Shield frames flash, boosts and heals float, and the finish follows the lethal hit within the usual one-second wait.
-- **Puzzles and stations.** `js/ui/anim.js` (`Rift.Motion`) supplies one-shot settle, nudge, reveal, glow, pop and line-draw cues. Stations settle a solved puzzle, move the wrong-check reason once and pop lost hearts. Every puzzle shows what its last move did.
+- **Puzzles and stations.** `js/ui/anim.js` (`Rift.Motion`) supplies one-shot settle, nudge, reveal, glow, pop and line-draw cues. Stations settle a solved puzzle, move the wrong-check reason once, pop lost hearts and bring in each reward after a win. Every puzzle shows what its last move did.
 - **Wrong answers move once.** The old three- and four-swing shakes are now a single movement.
 - **Other screens.** Catch games show each move once, the visitor settles when caught or dashes off when it escapes, the map opens the fog around newly reached places (session memory only, nothing saved), and dialogs rise in.
 
-Every cue lasts under a second, plays once and is cancelled on leaving, resize or interruption; pointer input skips battle cues. Calm motion and OS reduced motion keep every cue as a fade only. Nothing loops, shakes, wobbles or jitters; slow ambient hovers and pulses that existed before stay, and Calm motion stops them. [What was animated and why, tests and browser checks](reviews/in-game-animation-66-2026-10-22.md).
+Every cue lasts under a second and plays once. Battle cues are cancelled by a pointer press, a new action, resize, leaving and the battle's end. Station, catch and map cues stop when the player leaves the screen; on resize a short cue simply finishes. Calm motion and OS reduced motion keep every cue as a fade only, and reduced motion now plays any old CSS loop once instead of flickering. Nothing loops, shakes, wobbles or jitters. Slow ambient hovers and pulses that existed before stay, and Calm motion stops them. [What was animated and why, tests and browser checks](reviews/in-game-animation-66-2026-10-22.md).
 
 ## Waiting (conditional) cards — 22 October 2026 (#148/#149)
 

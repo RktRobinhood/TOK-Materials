@@ -164,9 +164,10 @@
                 hints.forEach(id => nodesLayer.append(nodeMarker(id, 'hinted')));
                 revealed.forEach(id => nodesLayer.append(markers[id] = nodeMarker(id, 'revealed')));
                 // A newly reached place: the fog opens around it, then its marker fades in, so the
-                // player sees what the last win opened and where to go next.
-                if (Rift.Motion) fresh.forEach((id, i) => {
-                    Rift.Motion.play(holes[id], [{ r: '0px' }, { r: '210px' }], { duration: 700, delay: i * 120 }, [{ opacity: 0 }, { opacity: 1 }]);
+                // player sees what the last win opened and where to go next. Many at once (a loaded
+                // save, a time-rift jump) is not one win: those simply appear.
+                if (Rift.Motion && fresh.length <= 4) fresh.forEach((id, i) => {
+                    Rift.Motion.play(holes[id], [{ r: '0px' }, { r: '210px' }], { duration: 700, delay: i * 120, fill: 'backwards' }, [{ opacity: 0 }, { opacity: 1 }]);
                     Rift.Motion.play(markers[id], [{ opacity: 0, filter: 'brightness(2)' }, { opacity: 1, filter: 'none' }],
                         { duration: 600, delay: 300 + i * 120, fill: 'backwards' }, [{ opacity: 0 }, { opacity: 1 }]);
                 });
@@ -710,7 +711,7 @@
             }, 1500);
 
             return {
-                destroy() { destroyed = true; clearTimeout(arrivalTimer); clearInterval(backupTimer); releaseInput(); if (hud.destroy) hud.destroy(); },
+                destroy() { destroyed = true; if (Rift.Motion) Rift.Motion.cancel(rootNode); clearTimeout(arrivalTimer); clearInterval(backupTimer); releaseInput(); if (hud.destroy) hud.destroy(); },
             };
         },
     });

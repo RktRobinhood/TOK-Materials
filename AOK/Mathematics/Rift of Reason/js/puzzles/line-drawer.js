@@ -931,7 +931,8 @@
                 const stuck = data.edges.every(([a, b], i) => usedEdges().has(i) || (a !== last2 && b !== last2));
                 setStatus(stuck ? 'Stuck! Undo, clear, or decide it cannot be done.' : (data.edges.length - used) + ' lines to go.', stuck ? 'bad' : '');
             }
-            if (Rift.Motion) Rift.Motion.draw(gFigure.children[k]); // (#66) the line just traced draws itself
+            // (#66) the line just traced draws itself, from the dot the player came from
+            if (Rift.Motion) Rift.Motion.draw(gFigure.children[k], { reverse: data.edges[k][0] !== last });
         }
 
         function undo() {

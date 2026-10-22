@@ -151,7 +151,8 @@
             // Keys go to the field, so Space builds or throws instead of pressing Pause.
             if (canvas.focus) try { canvas.focus({ preventScroll: true }); } catch (e) { canvas.focus(); }
         }
-        function pause() { running = false; stepLeft = 0; held = false; if (frame && root.cancelAnimationFrame) root.cancelAnimationFrame(frame); frame = null; refresh(); draw(); }
+        // A pause stops the frames, so a half-faded spark is cleared rather than frozen on the field.
+        function pause() { running = false; stepLeft = 0; held = false; sparks.length = 0; if (frame && root.cancelAnimationFrame) root.cancelAnimationFrame(frame); frame = null; refresh(); draw(); }
 
         // ---------------------------------------------------------------- input
         function point(ev) {

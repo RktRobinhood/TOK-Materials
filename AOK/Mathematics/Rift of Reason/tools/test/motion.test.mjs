@@ -48,16 +48,38 @@ test('nudge is one movement out and back, never a back-and-forth shake', () => {
     assert.equal(xs.join(' | '), '0 0 | 7px 0 | 0 0');
 });
 
-test('draw traces an SVG line from its start; without a length it simply reveals', () => {
+test('a motion that holds its end state can still be undone after it finishes (an escaped visitor comes back)', () => {
+    const t = motionDom();
+    const host = t.node(), beast = t.g.document.createElement('img'); host.appendChild(beast);
+    // A browser-like animation: finish listeners fire when it ends.
+    Object.getPrototypeOf(beast).animate = function (frames, options) {
+        const a = { frames, options, effect: { target: this }, listeners: {}, addEventListener(type, fn) { (this.listeners[type] = this.listeners[type] || []).push(fn); },
+            cancel() { this.cancelled = true; (this.listeners.cancel || []).forEach(fn => fn()); } };
+        t.calls.push(a);
+        return a;
+    };
+    const dash = t.M.play(beast, [{ translate: '0 0' }, { translate: '56px 0', opacity: 0 }], { duration: 520, fill: 'forwards' });
+    const hop = t.M.pop(beast);
+    (dash.listeners.finish || []).forEach(fn => fn());
+    (hop.listeners.finish || []).forEach(fn => fn());
+    t.M.cancel(host);
+    assert.equal(dash.cancelled, true, 'the held dash is undone');
+    assert.ok(!hop.cancelled, 'a finished one-shot is simply gone');
+});
+
+test('draw traces an SVG line from its start, or from its end when drawn that way; without a length it simply reveals', () => {
     const t = motionDom();
     const path = t.node();
     path.getTotalLength = () => 120;
     t.M.draw(path);
     assert.equal(t.calls[0].frames[0].strokeDashoffset, 120);
     assert.equal(t.calls[0].frames[1].strokeDashoffset, 0);
+    t.M.draw(path, { reverse: true });
+    assert.equal(t.calls[1].frames[0].strokeDashoffset, -120);
+    assert.equal('reverse' in t.calls[1].options, false);
     const plain = t.node();
     t.M.draw(plain);
-    assert.equal(t.calls[1].frames[0].opacity, 0);
+    assert.equal(t.calls[2].frames[0].opacity, 0);
 });
 
 test('cancel(scope) stops only the motions inside it; missing nodes and old browsers are safe', () => {
@@ -93,7 +115,7 @@ async function encounter() {
     Rift.Puzzles.register({ id: 'fake', name: 'Fake', colour: 'reason', generate: () => ({}), check: (_, a) => ({ solved: a === true, feedback: 'Check the premise.' }),
         hints: () => ['Look again.'], mount: (_, d, x) => { api = x; return { pause() {}, destroy() {} }; } });
     vm.runInNewContext(fs.readFileSync(new URL('../../js/screens/encounter.js', import.meta.url), 'utf8'), { window: { Rift }, setTimeout, clearTimeout, Date });
-    const root = new Node();
+    const root = new Node('div.test-root');
     const handle = screen.mount(root, { nodeId: 'test' });
     return { state, handle, modals, cues, api: () => api, root };
 }
@@ -105,13 +127,18 @@ test('the encounter: a wrong check nudges the feedback, a hint reveals it, a los
     for (let i = 0; i < 3; i++) g.api().submit(false);
     assert.ok(g.cues.includes('pop:hearts'), 'a paid wrong check pops the hearts');
     g.cues.length = 0;
-    g.handle.debugSolve && null;
     g.api().submit(true);
     assert.deepEqual(g.cues, ['settle:enc-puzzle', 'reveal:enc-feedback good']);
     assert.equal(g.modals.at(-1).title, 'Stage solved!', 'the dialog still opens at once');
     assert.equal(g.state.stats.puzzlesSolved, 1, 'motion changes no result');
+    // Continue: the rewards arrive one by one and the stars pop.
+    g.cues.length = 0;
+    await g.modals.at(-1).buttons[0].onclick();
+    assert.equal(g.modals.at(-1).title, 'Solved!');
+    assert.ok(g.cues.filter(c => /^reveal:/.test(c)).length >= 2, g.cues.join(' | '));
+    assert.ok(g.cues.includes('pop:enc-stars'), g.cues.join(' | '));
     g.handle.destroy();
-    assert.equal(g.cues.at(-1), 'cancel:' + (g.root.className || '[object Object]'));
+    assert.equal(g.cues.at(-1), 'cancel:test-root', 'leaving the station stops its cues');
 });
 
 test('the encounter: a hint reveals the new hint text', async () => {
@@ -137,7 +164,8 @@ test('the map: a place revealed since the last map view opens its fog and fades 
     Rift.Dialogue = { play: async () => {} };
     Rift.Router = { go() {} };
     Rift.Screens = { register: (name, def) => { screens[name] = def; } };
-    Rift.Motion = { play: (n, frames) => { cues.push((n && (n.tagName || '').toLowerCase()) + ':' + Object.keys(frames[0]).join('+')); return null; } };
+    const opts = [];
+    Rift.Motion = { play: (n, frames, o) => { cues.push((n && (n.tagName || '').toLowerCase()) + ':' + Object.keys(frames[0]).join('+')); opts.push(o); return null; }, cancel() {} };
     g.ctx.setInterval = () => 1; g.ctx.clearInterval = () => {}; g.ctx.performance = { now: () => 0 }; g.ctx.requestAnimationFrame = () => 1;
     g.run('js/screens/map.js');
     const here = Object.keys(Rift.data.map.nodes).find(id => (Rift.data.map.nodes[id].links || []).length && !Rift.data.map.nodes[id].map);
@@ -159,5 +187,24 @@ test('the map: a place revealed since the last map view opens its fog and fades 
     cues.length = 0;
     Rift.State.update(() => {});
     assert.equal(cues.length, 0, 'a repaint does not replay it');
+    handle.destroy && handle.destroy();
+
+    // Two places at once: the second waits its turn without showing first (fill backwards).
+    const more = Rift.data.map.nodes[next].links.filter(id => !Rift.data.map.nodes[id].map && !state.map.revealed.includes(id));
+    const two = Rift.data.map.nodes[here].links.concat(more).filter(id => !Rift.data.map.nodes[id].map && !state.map.revealed.includes(id)).slice(0, 2);
+    assert.equal(two.length, 2, "two neighbours to reveal");
+    {
+        opts.length = 0; cues.length = 0;
+        state.map.revealed.push(...two);
+        handle = mount();
+        assert.equal(cues.length, 4);
+        assert.equal(opts.filter(o => o.fill === 'backwards').length, 4, 'nothing flashes before its turn');
+        handle.destroy && handle.destroy();
+    }
+    // A loaded save that reveals many places at once is not one win: they simply appear.
+    cues.length = 0;
+    state.map.revealed.push(...Object.keys(Rift.data.map.nodes).filter(id => !Rift.data.map.nodes[id].map && !state.map.revealed.includes(id)).slice(0, 6));
+    handle = mount();
+    assert.equal(cues.length, 0);
     handle.destroy && handle.destroy();
 });

@@ -70,7 +70,7 @@
         }
         function act(action) {
             if (!active()) return;
-            const was = { open: (board.open || []).slice(), gap: board.tiles ? board.tiles.indexOf(0) : -1, lit: board.kind === 'lure' ? games.lightPath(board).path.slice() : [] };
+            const was = Rift.Motion ? { open: (board.open || []).slice(), gap: board.tiles ? board.tiles.indexOf(0) : -1, lit: board.kind === 'lure' ? games.lightPath(board).path.slice() : [] } : null;
             const result = o.onAction(action);
             if (!result.ok) {
                 // A hint is refused only when no win fits the moves left.
@@ -91,7 +91,7 @@
         // trail glows, a slid piece slides in from its old place, new patches open in order.
         function moveCue(action, result, was) {
             const M = Rift.Motion, at = key => game.querySelector('[data-catch-key="' + key + '"]');
-            if (!M || action.hint) return;
+            if (!M || !was || action.hint) return;
             if (board.kind === 'lure') {
                 const turned = at('trail-' + action.cell);
                 M.play(turned && (turned.querySelector('svg') || turned), [{ rotate: '-90deg' }, { rotate: '0deg' }], { duration: 220 });

@@ -791,13 +791,13 @@
         }
 
         // (#66) What the last render showed (null before the first), so only real changes animate.
-        const shown = { status: null, chips: null, pips: null };
+        const shown = { status: null, chips: null, pips: null, shaky: null, tilt: {} };
         const popChanged = (nodes, before) => { if (before && Rift.Motion) Array.from(nodes).forEach((n, i) => { if (n.textContent + (n.dataset.s || '') !== before[i]) Rift.Motion.pop(n); }); };
         const seen = nodes => Array.from(nodes).map(n => n.textContent + (n.dataset.s || ''));
 
         function renderTower(fresh) {
-            const statusBefore = shown.status;
-            shown.status = {};
+            const statusBefore = shown.status, shakyBefore = shown.shaky;
+            shown.status = {}; shown.shaky = new Set();
             towerEl.innerHTML = '';
             const st = standingBlocks(state);
             const top = st.length ? Math.max.apply(null, st.map(b => b.level)) : 0;
@@ -817,9 +817,14 @@
                     if (art && has(art)) { node.classList.add('art'); node.style.backgroundImage = 'url("' + Rift.Assets.src(art) + '")'; }
                     if (b.kind === 'base') node.classList.add('is-base');
                     if (b.shaky) node.classList.add('shaky');
+                    // (#66) A shaky block leans once when it becomes shaky, not again on every redraw.
+                    if (b.shaky && !(shakyBefore && shakyBefore.has(b.id))) node.classList.add('wobble');
+                    if (b.shaky) shown.shaky.add(b.id);
                     if (status === 'cemented') node.appendChild(el('span.tw-seal', { text: '✓', 'aria-hidden': 'true' }));
                     if (fresh === b.id) node.classList.add('arrive');
-                    node.style.setProperty('--tilt', ((uiRng.next() - 0.5) * (b.shaky ? 4 : 1.2)).toFixed(2) + 'deg');
+                    // (#66) Each block keeps its tilt between redraws, so standing blocks never jump.
+                    const tilt = shown.tilt[b.id + (b.shaky ? ':shaky' : '')] = shown.tilt[b.id + (b.shaky ? ':shaky' : '')] || ((uiRng.next() - 0.5) * (b.shaky ? 4 : 1.2)).toFixed(2) + 'deg';
+                    node.style.setProperty('--tilt', tilt);
                     row.appendChild(node);
                     shown.status[b.id] = status;
                     // (#66) A block that is newly proven clicks into place once it has landed.

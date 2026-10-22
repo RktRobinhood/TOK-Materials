@@ -55,7 +55,7 @@ Changes that have no event of their own are read by comparing the states before 
 
 New `tools/test/battle-animation.test.mjs` (13 tests): hand-to-board flight and landing ring; Calm/reduced fade-only arrival; fight flash, bursts, held copy and puff; hero recoil and heart pop; Mercy and Last Word flights to the hand; Persuasion crossing, spell ring at the cast position, boosts and restored hearts; the finish inside the one-second wait and cancellation by pointer, resize and leaving; the opponent's arrival from their hand; a no-loop/under-a-second check of every cue; Guard frames on attack and on a refused target; Shield's break; "Boost ends" at turn end; "Swapped" for Fold Self; and a saved creature's flash staying on its board copy. Every test also checks that presentation never changes the battle state.
 
-Full suite: **1,382 tests: 1,381 pass, 1 skipped, 0 fail** (1,373 before).
+Full suite at the slice 1 push (`d5e4f05`): **1,386 tests: 1,385 pass, 1 skipped, 0 fail** (1,373 before).
 
 ### Reviews
 
@@ -92,6 +92,7 @@ Every puzzle call is guarded (`if (Rift.Motion)`), so puzzles still run in tests
 - **Wrong check:** the red feedback box moves once with a red edge, so the new reason is noticed.
 - **Hint:** the hint text rises in.
 - **Heart lost:** the hearts in the top bar pop.
+- **Rewards:** after the banner, each reward line (stars, the visitor, XP and Coins, packs, accolades) arrives in turn and the stars pop, so the player sees what the win gave.
 - **Restoring a saved checkpoint:** nothing plays.
 
 ### Wrong answers now move once (house rule)
@@ -103,22 +104,22 @@ Six existing "wrong" effects swung back and forth three or four times in 0.4 s. 
 - the Tribunal witness and prosecutor (a single recoil);
 - a Tower block that is hit.
 
-The Tower stage's quake is now a single thud when blocks fall. A shaky Tower block leans once instead of twice. The Oracle's glitch flickers once instead of four times.
+The Tower stage's quake is now a single thud when blocks fall. A shaky Tower block leans once when it becomes shaky, not twice on every redraw; standing blocks also keep their tilt between redraws instead of snapping to a new one. The Oracle's glitch is one flick instead of four two-frame jitters.
 
 ### Per puzzle: what now animates, and why
 
 | Puzzle | Cue | Why |
 |---|---|---|
-| River crossing | the boat and every creature that changed place glide; after an unsafe crossing the two rivals named in the message nudge | who went where, and which pair broke the rule |
+| River crossing | the boat glides when it crosses, and every creature that changed place glides; after an unsafe crossing the two rivals named in the message nudge | who went where, and which pair broke the rule |
 | Water jugs | the ladle poured from glows, the one poured into settles; a ladle that reaches the goal settles | which way the water went |
 | Switchboard | a flipped lever pops; a new wire draws itself; a bulb that lights glows once | this switch or wire lit the bulb |
-| Line drawer | only the newest stretch of chalk draws itself; the counter pops when the last line is used | which stroke was just added, and when lines run out |
+| Line drawer | only the newest stretch of chalk draws itself, in the direction it was drawn; the counter pops when the last line is used | which stroke was just added, and when lines run out |
 | Tower | a newly cemented block settles after it lands; changed counters and pips pop | proven blocks and changing counts are seen |
-| Logic grid | the clicked mark pops; the ✕ marks its ✓ caused arrive one by one after it | the ✓ caused those ✕ marks |
+| Logic grid | the clicked mark pops; the ✕ marks its ✓ caused arrive one by one after it; a clue marked as used pops | the ✓ caused those ✕ marks |
 | Venn | a new x pops; after a check, a missing x fades in where it belongs | where the mark went, and what was missing |
 | Village | a right T/F answer pops; struck worlds cross out one after another ("strike all" too) | each clash removed is visible |
 | Witness | wrongly judged claims and their reasons appear in turn | each reason can be read |
-| Liar's Gate | the guards speak one after another; a placed token pops | clues arrive with a flourish (issue list); shows only the player's own mark |
+| Liar's Gate | the guards speak one after another; a switched token pops (a new one already pops in CSS) | clues arrive with a flourish (issue list); shows only the player's own mark |
 | Rule hunter | the tally that went up pops | which way the gate answered |
 | Oracle | the tested step settles if it held, nudges if it broke | which step the test just marked |
 | Prediction | the newest history chip and the newly lit pip pop | the round just played and progress |
@@ -139,15 +140,42 @@ Builder calls:
 - **Lantern Lure:** the turned piece turns, and newly lit trail glows in order.
 - **Picture Catch:** the slid piece glides in from where it was.
 - **Trail Finder:** newly opened patches appear in order; a snare nudges once; a flag pops.
-- **Pocket Nets and Shard Burst** (canvas): a spark fades once in 0.45 s where a shard broke, where a net broke, around the lantern when it is hit, and over ground a net just closed. It does not grow in Calm motion. It never changes the saved replay.
-- **Map.** A place revealed since the last map view opens its fog and fades in, so the player sees what the last win opened and where to go next. "Already shown" lives only in memory for this session, per painted map, never in the save; a map's first view shows places as they are.
+- **Pocket Nets and Shard Burst** (canvas): a spark fades once in 0.45 s where a shard broke, where a net broke, around the lantern when it is hit, and over ground a net just closed. It does not grow in Calm motion, is cleared by Pause, and never changes the saved replay.
+- **Map.** A place revealed since the last map view opens its fog and fades in, so the player sees what the last win opened and where to go next. Two places open one after the other. More than four at once (a loaded save, a time-rift jump) is not one win, so they simply appear. "Already shown" lives only in memory for this session, per painted map, never in the save. A map's first view shows places as they are, and leaving the map stops its cues.
 - **Dialogs** rise in once (CSS, 0.18 s; Calm motion removes it, reduced motion makes it instant).
+- **OS reduced motion and old loops.** The global reduced-motion rule shortened every CSS animation to 0.001 s but left loops looping, so slow hovers could flicker; it now plays them once.
 
 ### Tests (slices 2–3)
 
-- `tools/test/motion.test.mjs` (7): the helper plays once, moves normally and only fades under Calm or reduced motion; nudge is one movement; draw; cancel by scope; the encounter's solved, wrong, hint and heart cues (results unchanged); the map's fog opening (not on first view or repaints; nothing saved).
+- `tools/test/motion.test.mjs` (8): the helper plays once, moves normally and only fades under Calm or reduced motion; nudge is one movement; draw (both directions); cancel by scope; a finished hold-at-end motion is still undone (the escaped visitor comes back); the encounter's solved, wrong, hint, heart and reward cues (results unchanged); the map's fog opening (not on first view, repaints or a big jump; staggered without flashing; nothing saved).
 - `tools/test/puzzle-motion-a/b/c.test.mjs` (5 + 6 + 7): every puzzle above is played by real clicks with and without `Rift.Motion`, with identical answers and `check()` results, plus the play-once fixes.
 - `tools/test/catch-motion.test.mjs` (6): Lantern, Picture and Trail cues; every catch game still wins without the helper; Shard Burst's spark fades and is gone; and the encounter's caught/escaped motion, which plays once and not on reload.
+
+Full suite on the slice 2 commit alone: **1,410 tests: 1,409 pass, 1 skipped, 0 fail**. With slice 3 and the review fixes: **1,418 tests: 1,417 pass, 1 skipped, 0 fail**.
+
+### Reviews (slices 2–3)
+
+Two independent reviews of the slice 2 and 3 commits.
+- **Standards:** rules 1–5, 7 and 8 hold. Fixed:
+  - the escaped visitor never came back for a new try (a finished hold-at-end motion left the cancel list);
+  - map fog that flashed open before its stagger;
+  - leftovers in a test;
+  - a Logic grid clue that blinked;
+  - the Oracle's two-frame glitch;
+  - a double pop on a first Liar's Gate mark;
+  - work done without the helper in Lantern Lure;
+  - a traced line that drew against the player's direction;
+  - the boat gliding when only its width changed.
+- **Spec:** boxes B and E met; C, D and F partial before fixes. Fixed:
+  - the same visitor bug;
+  - the fog flash;
+  - shaky Tower blocks re-wobbling on every placement;
+  - loops flickering under OS reduced motion;
+  - DESIGN.md overclaiming cancellation (now reworded, and the map cancels its cues on leaving);
+  - a spark frozen by Pause;
+  - an uncapped chain of fog openings after a big jump.
+
+  The reviewer recommended closing #66 with these fixed. Its one suggested gap, reward gains, is now covered (stations above). Catch "rings" no longer exist since the #158 rework; caught and escaped are shown by the visitor.
 
 ### Browser checks (slices 2–3)
 

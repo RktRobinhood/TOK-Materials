@@ -13,8 +13,9 @@
  *   Motion.reveal(node, i)     a clue or a new mark arrives; i staggers a list (70 ms apart)
  *   Motion.glow(node, colour)  draws the eye once (a hint, a lit lamp, a caught creature)
  *   Motion.pop(node)           a counter or icon that just changed
- *   Motion.draw(path)          an SVG line draws itself from its start
- *   Motion.cancel(scope)       stops every running motion inside scope (all when omitted)
+ *   Motion.draw(path, opts)    an SVG line draws itself from its start ({ reverse: true }: from its end)
+ *   Motion.cancel(scope)       stops every running motion inside scope (all when omitted), and
+ *                              undoes any finished one that holds its end state (fill forwards)
  */
 (function (root) {
     'use strict';
@@ -38,8 +39,11 @@
         } catch (e) { return null; }
         if (!motion) return null;
         live.add(motion);
+        // A motion that holds its end state (fill forwards) stays cancellable after it finishes,
+        // so cancel(scope) can still put the node back (e.g. an escaped visitor for a new try).
+        const holds = options && (options.fill === 'forwards' || options.fill === 'both');
         const done = () => live.delete(motion);
-        if (motion.addEventListener) { motion.addEventListener('finish', done); motion.addEventListener('cancel', done); }
+        if (motion.addEventListener) { if (!holds) motion.addEventListener('finish', done); motion.addEventListener('cancel', done); }
         return motion;
     }
 
@@ -72,14 +76,17 @@
         [{ scale: '1' }, { scale: '1.2', offset: 0.35 }, { scale: '1' }],
         Object.assign({ duration: 300 }, opts));
 
-    // An SVG line or path draws from its start. Calm motion fades it in instead.
+    // An SVG line or path draws from its start (or its end, the way the player drew it).
+    // Calm motion fades it in instead.
     function draw(path, opts) {
         if (!path || !path.animate) return null;
+        const o = Object.assign({}, opts), from = o.reverse ? -1 : 1;
+        delete o.reverse;
         let length = 0;
         try { length = path.getTotalLength ? path.getTotalLength() : 0; } catch (e) { length = 0; }
-        if (!length) return reveal(path, 0, opts);
-        return play(path, [{ strokeDasharray: length, strokeDashoffset: length }, { strokeDasharray: length, strokeDashoffset: 0 }],
-            Object.assign({ duration: 260, easing: 'ease-out' }, opts), [{ opacity: 0 }, { opacity: 1 }]);
+        if (!length) return reveal(path, 0, o);
+        return play(path, [{ strokeDasharray: length, strokeDashoffset: from * length }, { strokeDasharray: length, strokeDashoffset: 0 }],
+            Object.assign({ duration: 260, easing: 'ease-out' }, o), [{ opacity: 0 }, { opacity: 1 }]);
     }
 
     Rift.Motion = { calm, play, cancel, settle, nudge, reveal, glow, pop, draw };

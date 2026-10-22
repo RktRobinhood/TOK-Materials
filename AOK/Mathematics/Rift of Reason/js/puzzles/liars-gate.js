@@ -533,14 +533,16 @@
 
         function setRole(id, kind, fromButton) {
             if (done) return;
+            const had = roles[id];
             if (fromButton && roles[id] === kind) delete roles[id];
             else roles[id] = kind;
             armed = fromButton ? armed : null;
             sfx('place');
             clearResult();
             refresh();
-            // (#66) The new token pops onto the badge. This shows only the player's own mark.
-            const c = roles[id] && cards.find(x => x.g.id === id);
+            // (#66) A switched token pops on its badge (a new one already pops in through CSS).
+            // This shows only the player's own mark.
+            const c = had && roles[id] && roles[id] !== had && cards.find(x => x.g.id === id);
             if (c && Rift.Motion) Rift.Motion.pop(c.badge);
         }
 

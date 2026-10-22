@@ -209,7 +209,7 @@
             el('button.btn.small', { text: 'Reset', onclick() { if (done) return; trips = []; load = []; recovery.textContent = 'The whole plan was reset. Everyone is back on the near bank.'; render(); } }),
         ]);
 
-        let placed = {}; // (#66) cast id → { node, where } from the latest render, for the glide
+        let placed = {}, boatSide = null; // (#66) cast id → { node, where }, and the boat's bank, from the latest render
         function state() { return play(data, trips); }
         function token(c, i, where) {
             const picked = load.includes(c.id);
@@ -277,9 +277,10 @@
                     const dx = from.left - to.left, dy = from.top - to.top;
                     if (dx || dy) M.play(node, [{ translate: dx + 'px ' + dy + 'px' }, { translate: '0 0' }], { duration: 420, easing: 'ease-in-out' });
                 };
-                if (oldBoat) glide(boatBox, oldBoat);
+                if (oldBoat && boatSide !== null && boatSide !== !!s.boat) glide(boatBox, oldBoat);   // only a crossing moves the boat
                 Object.keys(placed).forEach(id => { if (old[id] && old[id].where !== placed[id].where) glide(placed[id].node, old[id].box); });
             }
+            boatSide = !!s.boat;
             const left = data.toll ? ' · Tickets left: ' + Math.max(0, data.toll - trips.length) : '';
             info.textContent = 'Crossings: ' + trips.length + left + ' · Boat seats ' + data.seats + ' besides you.';
         }

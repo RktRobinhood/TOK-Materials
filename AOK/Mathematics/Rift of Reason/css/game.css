@@ -190,7 +190,8 @@ h1, h2, h3 { font-family: var(--font-display); margin: 0 0 0.4em; line-height: 1
 }
 
 @media (prefers-reduced-motion: reduce) {
-    * { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
+    /* Once, too: a 0.001 s loop would otherwise flicker through its frames (#66). */
+    * { animation-duration: 0.001s !important; animation-iteration-count: 1 !important; transition-duration: 0.001s !important; }
 }
 
 /* Calm motion (Settings): stops every animation and transition, for anyone who finds movement hard to watch. */

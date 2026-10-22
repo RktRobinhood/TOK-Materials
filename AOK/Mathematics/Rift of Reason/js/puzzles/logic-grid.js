@@ -170,7 +170,7 @@
         const note = el('div.small.lg-note', { 'aria-live': 'polite' });
 
         const clueList = el('ol.lg-clues.panel', null, data.clues.map(c => {
-            const b = el('button.lg-clue', { text: c.text, title: 'Click to mark this clue as used', onclick() { if (b.classList.toggle('used') && Rift.Motion) Rift.Motion.reveal(b); } });
+            const b = el('button.lg-clue', { text: c.text, title: 'Click to mark this clue as used', onclick() { if (b.classList.toggle('used') && Rift.Motion) Rift.Motion.pop(b); } });
             return el('li', null, [b]);
         }));
 
