@@ -86,7 +86,7 @@ Every budget now gets tighter as rarity rises, in every game.
 | Shard Burst · rare | 48% | 70% | 84.8% | 0.5% | |
 | Shard Burst · legendary | 40.8% | 63.7% | 81.8% | 0.3% | |
 
-**Per game, across rarities:** Pocket Nets 54.7%, Lantern Lure 51%, Trail Finder 49.9%, Picture Catch 51.6%, Shard Burst 49.7%. In every game, each rarity is a bit harder than the one below it. One help adds 13–32 points; two add 22–48.
+**Per game, across rarities:** Pocket Nets 54.7%, Lantern Lure 51%, Trail Finder 49.9%, Picture Catch 51.6%, Shard Burst 49.7%. In every game, each rarity is a bit harder than the one below it. One help adds 12–32 points; two add 22–48.
 
 **Round length.** The real-time games are timed: rounds of 16–30 s (see the slice 1–2 report). The puzzles are untimed and end within their move budgets. The machine players make at most 4–28 moves, and usually 4–14. At an *assumed* 2–4 s per considered move, that is roughly 10–55 s. This is an estimate, not a measurement of students.
 
