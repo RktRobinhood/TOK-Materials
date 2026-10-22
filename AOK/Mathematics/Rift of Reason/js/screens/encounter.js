@@ -604,7 +604,7 @@
                         panel.append(el('button.btn', { text: result === 'escaped' ? 'Let it go' : 'Back to the map', onclick: dismiss }));
                         return;
                     }
-                    const helpText = o.kind === 'picture' ? '+2 slides' : o.kind === 'net' ? '+1 net and 10 s' : o.kind === 'burst' ? '+1 shield and 10 s' : '+1 turn or trap heart';
+                    const helpText = { picture: '+2 slides and 2 hints', net: '+1 spare net and 10 s', burst: '+1 shield and 10 s', lure: '+2 turns', tracks: '+1 trap heart' }[o.kind] || 'extra help';
                     const intro = el('p.small', { text: 'Win the game to catch it. One charm pays for one whole try. You can pause or return here later.' });
                     panel.append(intro);
                     if (o.lured) panel.append(el('p.catch-help.small', { text: 'Lure: ' + helpText + ' on this visit.' }));

@@ -96,6 +96,28 @@ test('a failed final save grants nothing; repeating the same action after recove
     assert.equal(g.R.State.get().creatures.length, 1);
     assert.equal(g.R.State.get().stats.catches, 1);
 });
+test('a Picture Catch hint is saved with the paid try, survives reload and backup, and costs no charm or move', async () => {
+    let g = setup(); visitor(g, 'picture');
+    assert.equal(g.S.start('test', 'greatcharm', g.S.get('test').version).ok, true);
+    const before = J(g.S.get('test'));
+    assert.equal(before.board.hints, 2);
+    assert.equal(g.S.play('test', { hint: true }, before.version).ok, true);
+    const hinted = J(g.S.get('test'));
+    assert.ok(hinted.version > before.version, 'a hint is a saved change');
+    assert.equal(hinted.board.hints, 1);
+    assert.equal(hinted.board.turn, 0, 'no move used');
+    assert.equal(hinted.board.hint, g.R.CatchGames.solve(before.board)[0].cell);
+    g = setup(g.store);
+    assert.deepEqual(J(g.S.get('test')), hinted, 'the shown hint survives reload');
+    await g.R.State.importCode(await g.R.State.exportCode());
+    assert.deepEqual(J(g.S.get('test')), hinted, 'and a backup');
+    assert.equal(g.R.State.get().items.greatcharm, 1);
+    assert.equal(g.R.State.get().items.charm, 2);
+    assert.equal(g.S.play('test', { hint: true }, hinted.version).ok, false, 'one hint at a time');
+    assert.equal(g.S.play('test', { cell: hinted.board.hint }, hinted.version).ok, true);
+    assert.equal(g.S.get('test').board.hint, null);
+    assert.equal(g.S.get('test').board.turn, 1);
+});
 test('Fox perk is real assistance on the same board, without changing adventure health', () => {
     const g = setup(); visitor(g, 'tracks');
     const normal = g.S.preview('test', 'charm');

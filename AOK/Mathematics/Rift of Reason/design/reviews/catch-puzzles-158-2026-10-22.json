@@ -1,0 +1,314 @@
+{
+  "boardsPerRow": 400,
+  "seedPrefix": "catch-held-out:2210:",
+  "tune": {
+    "picture": {
+      "depth": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "spare": [
+        10,
+        4,
+        2,
+        0
+      ],
+      "help": 2,
+      "hints": 2
+    },
+    "lure": {
+      "scramble": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "spare": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "help": 2
+    },
+    "tracks": {
+      "size": [
+        6,
+        5,
+        5,
+        5
+      ],
+      "traps": [
+        6,
+        5,
+        6,
+        7
+      ],
+      "lives": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "help": 1
+    }
+  },
+  "players": {
+    "picture": "Weighs each slide by how close all pieces would be to home after it and the best next slide, misjudges that by up to 2.5 squares, never undoes its last slide on purpose, and uses any hints at once.",
+    "lure": "Re-plans the shortest route from the screen, but 30% of taps are plausible mistakes on or beside the lit trail.",
+    "tracks": "Reads one number at a time (all hidden patches are snares, or all snares are flagged so the rest are safe), never combines numbers or counts snares left; when stuck opens the hidden patch touching the fewest numbers; misclicks 3% of safe opens.",
+    "net": "See tools/sim-catch-arcade.mjs: looks 0.6–1.5 s, weighs six spots, misjudges speed, reacts in 0.17–0.33 s, slips one cell 20% of the time.",
+    "burst": "See tools/sim-catch-arcade.mjs: holds the pointer down, trails the nearest shard by 0.25 s, about 6° aim error.",
+    "random": "A random legal-looking action (about once a second in real time)."
+  },
+  "help": "help1 = Great Charm; help2 = Great Charm and lure. Real-time help can never undo a win; puzzle help changes the player's path (hints), so helpUndidWin is counted, not forbidden.",
+  "limitations": "Machine players. They do not establish classroom success, timing or enjoyment.",
+  "rows": [
+    {
+      "kind": "net",
+      "rarity": "common",
+      "boards": 400,
+      "certified": 400,
+      "average": 61.3,
+      "help1": 75.3,
+      "help2": 85.8,
+      "random": 14.2,
+      "helpUndidWin": 0
+    },
+    {
+      "kind": "net",
+      "rarity": "uncommon",
+      "boards": 400,
+      "certified": 400,
+      "average": 55.3,
+      "help1": 71.8,
+      "help2": 82.8,
+      "random": 6,
+      "helpUndidWin": 0
+    },
+    {
+      "kind": "net",
+      "rarity": "rare",
+      "boards": 400,
+      "certified": 400,
+      "average": 52.3,
+      "help1": 73.8,
+      "help2": 85,
+      "random": 2,
+      "helpUndidWin": 0
+    },
+    {
+      "kind": "net",
+      "rarity": "legendary",
+      "boards": 400,
+      "certified": 400,
+      "average": 50,
+      "help1": 69,
+      "help2": 83,
+      "random": 0,
+      "helpUndidWin": 0
+    },
+    {
+      "kind": "lure",
+      "rarity": "common",
+      "boards": 400,
+      "certified": 400,
+      "average": 62.3,
+      "help1": 74,
+      "help2": 84.5,
+      "random": 0,
+      "helpUndidWin": 0,
+      "medianActions": 4,
+      "maxActions": 4
+    },
+    {
+      "kind": "lure",
+      "rarity": "uncommon",
+      "boards": 400,
+      "certified": 400,
+      "average": 53.8,
+      "help1": 67.5,
+      "help2": 80.8,
+      "random": 0.3,
+      "helpUndidWin": 0,
+      "medianActions": 5,
+      "maxActions": 5
+    },
+    {
+      "kind": "lure",
+      "rarity": "rare",
+      "boards": 400,
+      "certified": 400,
+      "average": 47.5,
+      "help1": 61,
+      "help2": 77.8,
+      "random": 0,
+      "helpUndidWin": 0,
+      "medianActions": 6,
+      "maxActions": 6
+    },
+    {
+      "kind": "lure",
+      "rarity": "legendary",
+      "boards": 400,
+      "certified": 400,
+      "average": 40.3,
+      "help1": 55.8,
+      "help2": 69.3,
+      "random": 0,
+      "helpUndidWin": 0,
+      "medianActions": 7,
+      "maxActions": 7
+    },
+    {
+      "kind": "tracks",
+      "rarity": "common",
+      "boards": 400,
+      "certified": 400,
+      "average": 60.3,
+      "help1": 85,
+      "help2": 96.8,
+      "random": 0.8,
+      "helpUndidWin": 0,
+      "medianActions": 12,
+      "maxActions": 28
+    },
+    {
+      "kind": "tracks",
+      "rarity": "uncommon",
+      "boards": 400,
+      "certified": 400,
+      "average": 56,
+      "help1": 80.3,
+      "help2": 97.8,
+      "random": 1.5,
+      "helpUndidWin": 0,
+      "medianActions": 9,
+      "maxActions": 19
+    },
+    {
+      "kind": "tracks",
+      "rarity": "rare",
+      "boards": 400,
+      "certified": 400,
+      "average": 43.8,
+      "help1": 65,
+      "help2": 85,
+      "random": 1,
+      "helpUndidWin": 0,
+      "medianActions": 8,
+      "maxActions": 19
+    },
+    {
+      "kind": "tracks",
+      "rarity": "legendary",
+      "boards": 400,
+      "certified": 400,
+      "average": 39.3,
+      "help1": 56.8,
+      "help2": 73.3,
+      "random": 0.5,
+      "helpUndidWin": 0,
+      "medianActions": 7,
+      "maxActions": 19
+    },
+    {
+      "kind": "picture",
+      "rarity": "common",
+      "boards": 400,
+      "certified": 400,
+      "average": 57,
+      "help1": 84,
+      "help2": 96.8,
+      "random": 0.3,
+      "helpUndidWin": 26,
+      "medianActions": 14,
+      "maxActions": 20
+    },
+    {
+      "kind": "picture",
+      "rarity": "uncommon",
+      "boards": 400,
+      "certified": 400,
+      "average": 52,
+      "help1": 82.3,
+      "help2": 96.5,
+      "random": 0.3,
+      "helpUndidWin": 27,
+      "medianActions": 14,
+      "maxActions": 14
+    },
+    {
+      "kind": "picture",
+      "rarity": "rare",
+      "boards": 400,
+      "certified": 400,
+      "average": 49.8,
+      "help1": 82,
+      "help2": 96.5,
+      "random": 0,
+      "helpUndidWin": 28,
+      "medianActions": 12,
+      "maxActions": 12
+    },
+    {
+      "kind": "picture",
+      "rarity": "legendary",
+      "boards": 400,
+      "certified": 400,
+      "average": 47.5,
+      "help1": 79,
+      "help2": 95.8,
+      "random": 0,
+      "helpUndidWin": 30,
+      "medianActions": 10,
+      "maxActions": 10
+    },
+    {
+      "kind": "burst",
+      "rarity": "common",
+      "boards": 400,
+      "certified": 400,
+      "average": 56.8,
+      "help1": 74,
+      "help2": 86.8,
+      "random": 3.8,
+      "helpUndidWin": 0
+    },
+    {
+      "kind": "burst",
+      "rarity": "uncommon",
+      "boards": 400,
+      "certified": 400,
+      "average": 53.3,
+      "help1": 75,
+      "help2": 86.5,
+      "random": 2,
+      "helpUndidWin": 0
+    },
+    {
+      "kind": "burst",
+      "rarity": "rare",
+      "boards": 400,
+      "certified": 400,
+      "average": 48,
+      "help1": 70,
+      "help2": 84.8,
+      "random": 0.5,
+      "helpUndidWin": 0
+    },
+    {
+      "kind": "burst",
+      "rarity": "legendary",
+      "boards": 400,
+      "certified": 400,
+      "average": 40.8,
+      "help1": 63.7,
+      "help2": 81.8,
+      "random": 0.3,
+      "helpUndidWin": 0
+    }
+  ]
+}

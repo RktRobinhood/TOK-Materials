@@ -9,6 +9,13 @@
     const RARITIES = ['common', 'uncommon', 'rare', 'legendary'];
     const clone = b => JSON.parse(JSON.stringify(b));
     const tier = r => Math.max(0, RARITIES.indexOf(r));
+    // Tuning by rarity (common → legendary), measured against the average players below.
+    // See design/reviews/catch-puzzles-158-2026-10-22.md.
+    const TUNE = {
+        picture: { depth: [10, 10, 10, 10], spare: [10, 4, 2, 0], help: 2, hints: 2 },
+        lure: { scramble: [3, 4, 5, 6], spare: [1, 1, 1, 1], help: 2 },
+        tracks: { size: [6, 5, 5, 5], traps: [6, 5, 6, 7], lives: [1, 1, 1, 1], help: 1 },
+    };
 
     // The classic eight-piece sliding puzzle. A small reverse breadth-first map
     // gives every generated layout an exact shortest distance, not a shuffle count.
@@ -74,13 +81,24 @@
     }
     function picture(seed, rarity, help) {
         pictureIndex();
-        const level = tier(rarity), distance = 6 + level * 2;
+        const level = tier(rarity), distance = TUNE.picture.depth[level];
         const key = Rift.makeRng(seed + ':picture').pick(pictureLayers[distance]);
-        return { kind: 'picture', size: 3, tiles: Array.from(key, Number), moves: distance + 8 - level + help * 2, turn: 0, done: null };
+        return { kind: 'picture', size: 3, tiles: Array.from(key, Number), moves: distance + TUNE.picture.spare[level] + help * TUNE.picture.help,
+            hints: help * TUNE.picture.hints, hint: null, turn: 0, done: null };
+    }
+    // A hint (from help) marks the next slide of a shortest winning route. It costs no move.
+    function pictureHint(board) {
+        if (!(board.hints > 0) || board.hint != null) return null;
+        const plan = picturePlan(board);
+        if (!plan || !plan.length) return null;
+        const b = clone(board);
+        b.hints--; b.hint = plan[0].cell;
+        return { board: b, hint: b.hint };
     }
     function slidePicture(board, cell) {
         if (!Number.isInteger(cell) || !pictureMoves(board).includes(cell)) return null;
         const b = clone(board), gap = b.tiles.indexOf(0);
+        if ('hint' in b) b.hint = null;
         [b.tiles[cell], b.tiles[gap]] = [b.tiles[gap], b.tiles[cell]];
         b.turn++;
         b.done = b.tiles.join('') === PICTURE_GOAL ? 'caught' : b.turn >= b.moves ? 'escaped' : null;
@@ -144,14 +162,14 @@
         });
         // One clockwise turn repairs each scrambled route tile. The solver still
         // checks every alternative route, so admission never relies on a recipe.
-        rng.shuffle(path).slice(0, 3 + level).forEach(cell => { tiles[cell].rot = (tiles[cell].rot + 3) % 4; });
+        rng.shuffle(path).slice(0, TUNE.lure.scramble[level]).forEach(cell => { tiles[cell].rot = (tiles[cell].rot + 3) % 4; });
         const b = { kind: 'lure', size: 4, tiles, moves: 24, turn: 0, done: null };
         // A chance alternative can already be connected. Rotate the entry until
         // it is closed; then re-check instead of serving a pre-won board.
         while (lightPath(b).connected) b.tiles[0].rot = (b.tiles[0].rot + 1) % 4;
         const plan = lurePlan(b);
         if (!plan || !plan.length) throw new Error('No verified lantern route');
-        b.moves = plan.length + 3 - level + help;
+        b.moves = plan.length + TUNE.lure.spare[level] + help * TUNE.lure.help;
         return b;
     }
     function turnTrail(board, cell) {
@@ -216,15 +234,15 @@
         return null;
     }
     function tracks(seed, rarity, help) {
-        const level = tier(rarity), size = level < 2 ? 4 : 5, count = level === 3 ? 6 : 2 + level;
+        const level = tier(rarity), size = TUNE.tracks.size[level], count = TUNE.tracks.traps[level];
         for (let attempt = 0; attempt < 512; attempt++) {
             const rng = Rift.makeRng(seed + ':tracks:' + attempt), cells = rng.shuffle(Array.from({ length: size ** 2 }, (_, i) => i));
             const b = { kind: 'tracks', size, traps: cells.slice(0, count), open: [], flags: [], hits: [], mistakes: 0,
-                lives: 1, turn: 0, done: null };
+                lives: TUNE.tracks.lives[level], turn: 0, done: null };
             const first = cells.slice(count).find(c => clue(b, c) === 0);
             if (first == null) continue;
             reveal(b, first);
-            if (b.open.length < size ** 2 - count && solveTracks(b)) { b.lives += help; return b; }
+            if (b.open.length < size ** 2 - count && solveTracks(b)) { b.lives += help * TUNE.tracks.help; return b; }
         }
         throw new Error('No verified trail layout');
     }
@@ -240,7 +258,7 @@
         if (!board || board.done || !action) return null;
         if (arcade.KINDS.includes(board.kind)) return arcade.step(board, action);
         if (board.kind === 'lure') return turnTrail(board, action.cell);
-        if (board.kind === 'picture') return slidePicture(board, action.cell);
+        if (board.kind === 'picture') return action.hint ? pictureHint(board) : slidePicture(board, action.cell);
         if (board.kind !== 'tracks' || !Number.isInteger(action.cell) || action.cell < 0 || action.cell >= board.size ** 2 || board.open.includes(action.cell) || (board.hits || []).includes(action.cell)) return null;
         const b = clone(board), cell = action.cell;
         if (action.flag) {
@@ -264,6 +282,75 @@
         if (b.kind === 'picture') return picturePlan(b);
         return solveTracks(b);
     }
+    // Average sensible players for the three puzzles (#158 tuning). Explicit, seeded, and weaker
+    // than the solvers: they see only what the screen shows and make ordinary mistakes.
+    // Picture Catch: weighs each slide by how close all pieces would be to home after it and the
+    // best next slide, misjudges that a little, and never undoes its last slide on purpose.
+    function pictureAverage(rng) {
+        let last = -1, asked = -1;
+        const far = t => t.reduce((sum, v, c) => v ? sum + Math.abs(c % 3 - (v - 1) % 3) + Math.abs(Math.floor(c / 3) - Math.floor((v - 1) / 3)) : sum, 0);
+        return b => {
+            const t = b.tiles.slice(), gap = t.indexOf(0);
+            // Follows a shown hint, and remembers it so it never slides that piece straight back.
+            if (b.hint != null) { last = gap; return { cell: b.hint }; }
+            // Hints are used as soon as they are offered, one per slide (unless one was just refused).
+            if (b.hints > 0 && asked !== b.turn) { asked = b.turn; return { hint: true }; }
+            let pick = null;
+            for (const c of pictureMoves(b)) {
+                if (c === last) continue;
+                [t[gap], t[c]] = [t[c], t[gap]];
+                let score = t.join('') === PICTURE_GOAL ? -99 : Infinity;
+                if (score > 0) for (const d of pictureMoves({ tiles: t })) {
+                    if (d === gap) continue;
+                    [t[c], t[d]] = [t[d], t[c]]; score = Math.min(score, far(t)); [t[c], t[d]] = [t[d], t[c]];
+                }
+                score += rng.next() * 2.5;
+                [t[gap], t[c]] = [t[c], t[gap]];
+                if (!pick || score < pick.score) pick = { score, cell: c };
+            }
+            last = gap;
+            return { cell: pick.cell };
+        };
+    }
+    // Lantern Lure: reads the pieces and re-plans from the screen, but 30% of taps are plausible
+    // mistakes: a piece on or beside the lit trail that was not the one to turn.
+    function lureAverage(rng) {
+        return b => {
+            const plan = lurePlan(Object.assign({}, b, { moves: b.turn + 40 }));
+            if (plan && plan.length && !rng.chance(0.3)) return plan[0];
+            const near = new Set();
+            const path = lightPath(b).path;
+            (path.length ? path : [0]).forEach(c => [c, c - 4, c + 4, c % 4 ? c - 1 : -1, c % 4 < 3 ? c + 1 : -1].forEach(x => { if (x >= 0 && x < 16) near.add(x); }));
+            return { cell: rng.pick(Array.from(near)) };
+        };
+    }
+    // Trail Finder: reads one number at a time (all its hidden patches are snares, or its snares are
+    // all flagged so the rest are safe), never combines numbers or counts the snares left; when
+    // stuck, opens the hidden patch touching the fewest numbers. Misclicks 3% of safe opens.
+    function tracksAverage(rng) {
+        return b => {
+            const closed = Array.from({ length: b.size ** 2 }, (_, i) => i).filter(c => !b.open.includes(c) && !b.flags.includes(c));
+            for (const c of b.open) {
+                const near = neighbours(b, c), hidden = near.filter(x => closed.includes(x)), flagged = near.filter(x => b.flags.includes(x)).length, n = clue(b, c);
+                if (!hidden.length) continue;
+                if (n - flagged === hidden.length) return { cell: hidden[0], flag: true };
+                if (n === flagged) return { cell: rng.chance(0.03) ? rng.pick(closed) : hidden[0] };
+            }
+            return { cell: closed.map(c => ({ c, k: neighbours(b, c).filter(x => b.open.includes(x)).length + rng.next() })).sort((a, z) => a.k - z.k)[0].c };
+        };
+    }
+    function average(kind, seed) {
+        const rng = Rift.makeRng('average:' + seed);
+        if (arcade.KINDS.includes(kind)) return arcade.average(kind, seed);
+        return (kind === 'picture' ? pictureAverage : kind === 'lure' ? lureAverage : tracksAverage)(rng);
+    }
+    // Plays a puzzle board to its end with a player; real-time boards use their own clock.
+    function playOut(board, player) {
+        if (arcade.KINDS.includes(board.kind)) return arcade.play(board, player).done;
+        let b = board;
+        for (let i = 0; i < 400 && !b.done; i++) { const r = step(b, player(b)); if (r) b = r.board; }
+        return b.done;
+    }
     const pick = seed => Rift.makeRng(String(seed) + ':game').pick(IDS);
-    Rift.CatchGames = { IDS, NAMES, RARITIES, pick, create, step, solve, clue, neighbours, deductions, ports, lightPath, pictureMoves };
+    Rift.CatchGames = { IDS, NAMES, RARITIES, TUNE, pick, create, step, solve, average, playOut, clue, neighbours, deductions, ports, lightPath, pictureMoves };
 })(typeof window !== 'undefined' ? window : globalThis);

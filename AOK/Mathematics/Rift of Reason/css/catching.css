@@ -3,9 +3,6 @@
 .catch-cabinet { container-type: inline-size; container-name: catch-cabinet; }
 .catch-game { width: 100%; max-width: 640px; margin-inline: auto; align-items: stretch; gap: 12px; }
 .catch-game h3 { color: #ffe3aa; font-size: 1.45rem; }
-.catch-game .catch-rules { line-height: 1.5; }
-.catch-rules summary { cursor: pointer; color: #f6d397; }
-.catch-rules p { padding-top: 8px; }
 .catch-toolbar { justify-content: space-between; align-items: center; }
 .catch-budget { font-weight: 800; color: #a4efda; font-variant-numeric: tabular-nums; }
 .catch-game .catch-play { align-self: flex-start; min-height: 44px; }
@@ -23,7 +20,7 @@
 .catch-help { border-left: 3px solid #76ddbd; padding-left: 12px; }
 @container catch-cabinet (min-width: 600px) {
     .catch-game { display: grid; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); column-gap: 20px; }
-    .catch-game > h3, .catch-rules, .catch-toolbar, .catch-status { grid-column: 1 / -1; }
+    .catch-game > h3, .catch-rule, .catch-result, .catch-toolbar, .catch-status { grid-column: 1 / -1; }
     .catch-game .catch-play { justify-self: start; }
     .catch-field { grid-column: 1; }
     .catch-controls { grid-column: 2; align-content: start; }
@@ -42,8 +39,6 @@
     .screen-encounter.catching .bubble { max-height: 68px; overflow: auto; }
 }
 /* Woodland catching: the painted assets sit behind live clues and controls. */
-.catch-visitor { display: flex; align-items: center; gap: 12px; grid-column: 1 / -1; color: #d4e7c8; }
-.catch-visitor p { margin: 0; font-style: italic; }
 .catch-beast { display: inline-block; width: 64px; height: 64px; flex: 0 0 64px; background: url('../assets/creatures/astrophysicat-idle.webp') center/contain no-repeat; }
 .catch-beast img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .catch-beast:has(img) { background: none; }
@@ -92,3 +87,14 @@
 .catch-arcade-keys { justify-content: center; gap: 8px; }
 .catch-arcade-keys .btn { min-height: 44px; min-width: 120px; }
 .catch-arcade-keys:empty { display: none; }
+/* Static demo outlines before Start, and the Picture Catch hint. No animation. */
+/* Drawn as overlays so the tile art and SVG never cover them. */
+.catch-trail, .catch-track { position: relative; }
+.catch-trail.demo::after, .catch-track.demo::after, .catch-track.demo-number::after, .catch-picture-tile.hinted::after { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.catch-trail.demo::after { box-shadow: inset 0 0 0 5px #ffe39c; }
+.catch-track.demo::after { box-shadow: inset 0 0 0 3px #ffe39c; }
+.catch-track.demo-number { background: #6b5520; color: #fff6cf; }
+.catch-track.demo-number::after { box-shadow: inset 0 0 0 5px #ffe39c; }
+.catch-picture-tile.hinted::after { box-shadow: inset 0 0 0 6px #6ff2d2; }
+.catch-hint-mark { position: absolute; right: 4px; top: 4px; padding: 1px 6px; border-radius: 8px; background: #6ff2d2; color: #0d2a22; font-weight: 900; font-size: .8rem; z-index: 2; }
+.catch-endpoint .catch-beast { width: 40px; height: 40px; flex-basis: 40px; vertical-align: middle; }

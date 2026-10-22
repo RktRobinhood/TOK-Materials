@@ -6,27 +6,25 @@
     const el = (...a) => Rift.el(...a);
     const amount = (n, word) => n + ' ' + word + (n === 1 ? '' : 's');
     const RULES = {
-        net: 'Drag or tap to grow a net. Close off the field before time runs out.',
-        burst: 'Tap or hold to throw nets. Break every shard before they hit your lantern.',
-        lure: 'Turn the trails to carry lantern light from IN to the beast at OUT.',
-        tracks: 'Search the long grass to reach the beast: numbers count nearby rival snares; flag them and open every safe patch.',
-        picture: 'Slide pieces into the empty space to rebuild the creature before your moves run out.',
+        net: 'Drag or tap to grow a net. Close off the field.',
+        burst: 'Tap or hold to throw. Break every shard.',
+        lure: 'Turn pieces to lead the light from IN to OUT.',
+        tracks: 'Numbers count snares nearby. Open the rest.',
+        picture: 'Slide pieces into the gap to rebuild the picture.',
     };
     function mount(container, o) {
         let board = o.board, phase = o.board.done ? 'ended' : o.started ? 'paused' : 'ready', destroyed = false;
-        let flagMode = false, view = null;
+        let flagMode = false, view = null, hintRefused = -1;
         const arcade = arcadeKinds.includes(board.kind);
         const game = el('div.catch-game.stack'), status = el('p.catch-status', { role: 'status', 'aria-live': 'polite' });
         const budget = el('p.catch-budget');
         const play = el('button.btn.catch-play', { type: 'button', onclick: toggle });
         const field = el('div.catch-field'), controls = el('div.catch-controls');
         const result = el('div.catch-result');
-        // Real-time games teach through the field itself: one line, then a ghost net or aim line.
-        const rules = arcade ? el('p.catch-rule', { text: RULES[board.kind] }) : el('details.catch-rules', null, [el('summary', { text: 'How to play' }), el('p', { text: RULES[board.kind] })]);
-        if (!arcade) rules.open = !o.started;
-        const visitor = arcade ? null : el('div.catch-visitor', null, [beast(), el('p', { text: board.kind === 'picture' ? 'Rebuild the picture. Catch the beast.' : board.kind === 'tracks' ? 'A beast waits beyond the long grass.' : 'Guide the beast to your lantern.' })]);
+        // Every game teaches through the board itself: one line, then a highlight, ghost net or aim line.
+        const rules = el('p.catch-rule', { text: RULES[board.kind] });
         if (arcade) game.classList.add('catch-game-arcade');
-        game.append(...[el('h3', { text: games.NAMES[board.kind] }), result, rules, el('div.catch-toolbar.row.wrap', null, [budget, play]), visitor, field, controls, status].filter(Boolean));
+        game.append(el('h3', { text: games.NAMES[board.kind] }), result, rules, el('div.catch-toolbar.row.wrap', null, [budget, play]), field, controls, status);
         container.append(game);
         if (arcade) view = Rift.CatchArcadeView.mount(field, controls, {
             board, species: o.species, calm: o.calm,
@@ -47,6 +45,8 @@
             if (Rift.Assets) node.append(Rift.Assets.img('creature/' + (o.species || 'astrophysicat') + '/idle', { label: 'The visiting beast' }));
             return node;
         }
+        // Before Start, one thing on the board is outlined to show the rule (static, no motion).
+        function demo() { return phase === 'ready' && !board.done; }
         function active() { return !destroyed && phase === 'running' && !board.done; }
         function finish() {
             phase = 'ended';
@@ -62,7 +62,6 @@
                 const result = o.onStart();
                 if (!result.ok) { status.textContent = result.error; return; }
                 board = result.board;
-                if (!arcade) rules.open = false;
                 if (view) view.load(board);
             }
             phase = phase === 'running' ? 'paused' : 'running';
@@ -72,13 +71,19 @@
         function act(action) {
             if (!active()) return;
             const result = o.onAction(action);
-            if (!result.ok) { status.textContent = result.error; return; }
+            if (!result.ok) {
+                // A hint is refused only when no win fits the moves left.
+                if (action.hint) { hintRefused = board.turn; status.textContent = 'No hint: no win fits the moves left.'; refresh(); return; }
+                status.textContent = result.error; return;
+            }
             board = result.board;
-            if (board.kind === 'lure') status.textContent = 'Trail turned. Gold shows where lantern light reaches.';
-            else if (board.kind === 'picture') status.textContent = 'Piece slid. ' + amount(board.moves - board.turn, 'move') + ' left.';
-            else status.textContent = result.hit ? 'Rival snare at row ' + (Math.floor(result.cell / board.size) + 1) + ', column ' + (result.cell % board.size + 1) + '. One trap heart used.' : 'Follow the clues through the grass. No guessing is needed.';
+            if (board.kind === 'lure') status.textContent = 'Gold shows the lit trail. ' + amount(board.moves - board.turn, 'turn') + ' left.';
+            else if (board.kind === 'picture') status.textContent = result.hint != null ? 'Slide the piece marked Next.' : amount(board.moves - board.turn, 'move') + ' left.';
+            else status.textContent = result.hit ? 'A snare! One trap heart used.' : action.flag ? (board.flags.includes(action.cell) ? 'Flagged.' : 'Flag removed.') : 'Safe.';
             if (board.done) { finish(); return; }
             refresh();
+            // Keep keyboard focus on the board: after a hint, on the piece it marks.
+            if (result.hint != null) { const marked = game.querySelector('[data-catch-key="picture-' + board.hint + '"]'); if (marked) marked.focus(); }
         }
         function refresh() {
             result.replaceChildren(...(board.done ? [Rift.resultBanner(board.done === 'caught' ? 'won' : 'lost', board.done === 'caught' ? 'You won!' : 'It escaped this time.', board.done === 'caught' ? 'You caught the creature.' : 'Try a different plan.')] : []));
@@ -87,9 +92,9 @@
             play.textContent = phase === 'ready' ? o.startLabel || 'Start · 1 charm' : phase === 'running' ? 'Pause' : phase === 'paused' ? 'Resume' : 'Finished';
             play.disabled = !!board.done;
             if (view) { budget.hidden = true; return; }
-            budget.textContent = board.kind === 'lure' ? amount(board.moves - board.turn, 'turn') + ' · connect IN to OUT'
-                    : board.kind === 'picture' ? amount(board.moves - board.turn, 'move') + ' · rebuild the picture'
-                    : amount(board.lives - board.mistakes, 'trap heart') + ' · ' + board.traps.length + ' snares · ' + board.open.length + '/' + (board.size ** 2 - board.traps.length) + ' safe tiles';
+            budget.textContent = board.kind === 'lure' ? amount(board.moves - board.turn, 'turn') + ' left'
+                    : board.kind === 'picture' ? amount(board.moves - board.turn, 'move') + ' left'
+                    : amount(board.lives - board.mistakes, 'trap heart') + ' · ' + amount(board.traps.length, 'snare') + ' · safe ' + board.open.length + '/' + (board.size ** 2 - board.traps.length);
             field.innerHTML = ''; controls.innerHTML = '';
             if (board.kind === 'lure') drawLure();
             else if (board.kind === 'picture') drawPicture();
@@ -101,15 +106,16 @@
         }
         function drawLure() {
             const light = games.lightPath(board), names = ['north', 'east', 'south', 'west'];
+            const first = demo() && (games.solve(board) || [])[0];
             field.append(el('p.catch-endpoint', { text: '✦ IN → lantern light' }));
-            const grid = el('div.catch-lure-board', { 'aria-label': 'Four by four lantern trail. Light enters the top left from the west; reach the bottom right east exit.' });
+            const grid = el('div.catch-lure-board', { 'aria-label': 'Four by four lantern trail. Light enters the top left from the west; reach the bottom right east exit. Arrow keys move. Enter or Space turns a piece clockwise.' });
             for (let cell = 0; cell < 16; cell++) {
                 const ends = games.ports(board.tiles[cell]), xy = [[50, 0], [100, 50], [50, 100], [0, 50]];
                 const lit = light.path.includes(cell), points = ends.map(d => xy[d]);
                 const d = 'M' + points[0].join(' ') + ' L50 50 L' + points[1].join(' ');
-                const button = el('button.catch-trail' + (lit ? '.lit' : ''), {
+                const button = el('button.catch-trail' + (lit ? '.lit' : '') + (first && first.cell === cell ? '.demo' : ''), {
                     type: 'button', disabled: !active(), 'data-catch-key': 'trail-' + cell,
-                    'aria-label': 'Row ' + (Math.floor(cell / 4) + 1) + ', column ' + (cell % 4 + 1) + ': ' + ends.map(d => names[d]).join(' to ') + (lit ? ', lit' : '') + '. Turn clockwise',
+                    'aria-label': 'Row ' + (Math.floor(cell / 4) + 1) + ', column ' + (cell % 4 + 1) + ': ' + ends.map(d => names[d]).join(' to ') + (lit ? ', lit' : '') + (first && first.cell === cell ? ', example: turn this one first' : '') + '. Turn clockwise',
                     html: '<svg viewBox="0 0 100 100" aria-hidden="true"><path d="' + d + '" fill="none" stroke="#17251f" stroke-width="28"/><path d="' + d + '" fill="none" stroke="' + (lit ? '#ffe39c' : '#a9bdb0') + '" stroke-width="14" stroke-linejoin="round"/><circle cx="50" cy="50" r="7" fill="#443623"/></svg>',
                     onclick() { act({ cell }); },
                     onkeydown(ev) {
@@ -119,10 +125,7 @@
                 });
                 grid.append(button);
             }
-            field.append(grid, el('p.catch-endpoint.exit', { text: 'beast → OUT ✦' }));
-            controls.append(el('p', { text: 'Tap a trail to turn it clockwise. Each tap uses one turn.' }),
-                el('p.small', { text: 'Gold = lit trail. Join both ends of each piece. You only need one route from IN to OUT; other pieces can stay dark.' }),
-                el('p.small', { text: 'Keyboard: arrows to move, Enter or Space to turn. No timer.' }));
+            field.append(grid, el('p.catch-endpoint.exit', null, ['beast → OUT ✦ ', beast()]));
         }
         function drawPicture() {
             const legal = games.pictureMoves(board), gap = board.tiles.indexOf(0);
@@ -147,9 +150,9 @@
             });
             for (let cell = 0; cell < 9; cell++) {
                 const value = board.tiles[cell], movable = !board.done && legal.includes(cell), complete = board.done === 'caught';
-                const button = el('button.catch-picture-tile' + (!value ? '.gap' : '') + (movable ? '.movable' : ''), {
+                const button = el('button.catch-picture-tile' + (!value ? '.gap' : '') + (movable ? '.movable' : '') + (board.hint === cell && !board.done ? '.hinted' : ''), {
                     type: 'button', disabled: !active(), 'aria-disabled': String(!active() || !movable), 'data-catch-key': 'picture-' + cell,
-                    'aria-label': 'Row ' + (Math.floor(cell / 3) + 1) + ', column ' + (cell % 3 + 1) + ': ' + (value ? 'piece ' + value + (movable ? ', slide into the empty space' : ', not beside the empty space') : 'empty space'),
+                    'aria-label': 'Row ' + (Math.floor(cell / 3) + 1) + ', column ' + (cell % 3 + 1) + ': ' + (value ? 'piece ' + value + (board.hint === cell ? ', the hinted next slide' : '') + (movable ? ', slide into the empty space' : ', not beside the empty space') : 'empty space'),
                     onclick() { slide(cell); },
                 });
                 if (value || complete) {
@@ -158,26 +161,32 @@
                     fragment.style.top = -Math.floor(index / 3) * 100 + '%';
                     button.append(fragment);
                     if (!complete) button.append(el('span.catch-piece-number', { text: String(value) }));
+                    if (board.hint === cell && !complete) button.append(el('span.catch-hint-mark', { text: 'Next' }));
                 } else button.append(el('span.catch-empty-mark', { text: 'Empty' }));
                 grid.append(button);
             }
             field.append(grid);
             const reference = el('div.catch-picture-reference', { role: 'img', 'aria-label': 'Finished picture to match. Pieces 1 to 8 run left to right, top to bottom; the gap finishes bottom right.' }, [scene()]);
-            controls.append(el('p.small', { text: 'Make this picture. Numbers help: 1–8 in reading order, empty space last.' }), reference,
-                el('p.small', { text: 'Tap a piece beside the empty space. Gold edges show which pieces can slide. No diagonal moves.' }),
-                el('p.small', { text: 'Keyboard: arrow keys move the empty space; Enter or Space slides the focused piece. Each slide uses one move. No timer.' }));
+            controls.append(reference);
+            if (board.hints > 0 || board.hint != null) controls.append(el('button.btn.small.catch-hint', {
+                type: 'button', text: 'Hint (' + (board.hints || 0) + ')', 'data-catch-key': 'hint', disabled: !active() || board.hint != null || !(board.hints > 0) || hintRefused === board.turn,
+                'aria-label': 'Hint: show the next slide. ' + (board.hints || 0) + ' left. Hints use no moves.',
+                onclick() { if (active()) act({ hint: true }); },
+            }));
         }
         function drawTracks() {
             controls.append(el('button.btn.small', { type: 'button', text: 'Flag mode: ' + (flagMode ? 'on' : 'off'), 'aria-pressed': String(flagMode), 'data-catch-key': 'flags', disabled: !active(),
-                onclick() { if (!active()) return; flagMode = !flagMode; refresh(); } }),
-            el('p.small', { text: 'Numbers count snares in all 8 touching patches. Tap grass to search. Flag mode marks danger; F also flags, arrows move.' }));
-            const grid = el('div.catch-tracks-board', { 'aria-label': board.size + ' by ' + board.size + ' trail board' });
+                onclick() { if (!active()) return; flagMode = !flagMode; refresh(); } }));
+            const grid = el('div.catch-tracks-board', { 'aria-label': board.size + ' by ' + board.size + ' trail board. Numbers count snares in the 8 touching patches. Arrow keys move, Enter opens, F flags.' });
+            // Before Start: ring one number and the hidden patches it counts.
+            const shown = demo() ? board.open.find(c => games.clue(board, c) > 0) : null;
+            const ring = shown == null ? [] : games.neighbours(board, shown).filter(c => !board.open.includes(c)).concat(shown);
             grid.style.gridTemplateColumns = 'repeat(' + board.size + ', 1fr)';
             for (let cell = 0; cell < board.size ** 2; cell++) {
                 const open = board.open.includes(cell), flagged = board.flags.includes(cell), hit = (board.hits || []).includes(cell), value = open ? games.clue(board, cell) : null;
-                const button = el('button.catch-track' + (open ? '.open' : '') + (flagged ? '.flagged' : '') + (hit ? '.hit' : ''), {
+                const button = el('button.catch-track' + (open ? '.open' : '') + (flagged ? '.flagged' : '') + (hit ? '.hit' : '') + (ring.includes(cell) ? (cell === shown ? '.demo-number' : '.demo') : ''), {
                     type: 'button', text: open ? value || '♧' : hit ? '✕' : flagged ? '⚑' : '', 'data-catch-key': 'tile-' + cell,
-                    'aria-label': 'Row ' + (Math.floor(cell / board.size) + 1) + ', column ' + (cell % board.size + 1) + ': ' + (open ? value + ' touching snares' : hit ? 'opened snare' : flagged ? 'flagged' : 'unopened'),
+                    'aria-label': 'Row ' + (Math.floor(cell / board.size) + 1) + ', column ' + (cell % board.size + 1) + ': ' + (open ? value + ' touching snares' : hit ? 'opened snare' : flagged ? 'flagged' : 'unopened') + (cell === shown ? ', example number' : ring.includes(cell) ? ', counted by the example number' : ''),
                     'aria-disabled': String(!active() || open || hit), disabled: !active(),
                     onclick() { if (!open && !hit) act({ cell, flag: flagMode }); },
                     onkeydown(ev) {

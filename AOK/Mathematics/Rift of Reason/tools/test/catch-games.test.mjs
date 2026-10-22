@@ -37,7 +37,8 @@ test('assistance preserves the exact layout and adds a visible action or mistake
                 assert.equal(json([assisted.terrain, assisted.balls, assisted.shards]), json([base.terrain, base.balls, base.shards]));
             } else {
                 const field = ['lure', 'picture'].includes(kind) ? 'moves' : 'lives';
-                assert.equal(assisted[field], base[field] + extra * (kind === 'picture' ? 2 : 1));
+                assert.equal(assisted[field], base[field] + extra * C.TUNE[kind].help);
+                if (kind === 'picture') assert.equal(assisted.hints, extra * C.TUNE.picture.hints, 'each help also gives hints');
             }
             for (const action of C.solve(base)) {
                 if (assisted.done) break;
@@ -104,8 +105,8 @@ test('Picture Catch uses exact solvable depths, one gap and only adjacent legal 
         const b = C.create('picture', 'picture-rules', rarity, 'charm', false), before = json(b);
         assert.deepEqual(Array.from(b.tiles).sort((a, c) => a - c), [0,1,2,3,4,5,6,7,8]);
         const plan = C.solve(b);
-        assert.equal(plan.length, 6 + level * 2);
-        assert.equal(b.moves, plan.length + 8 - level);
+        assert.equal(plan.length, C.TUNE.picture.depth[level]);
+        assert.equal(b.moves, plan.length + C.TUNE.picture.spare[level]);
         assert.equal(json(b), before);
         for (const cell of [-1, 9, 1.5, b.tiles.indexOf(0), ...Array.from({length:9}, (_,i)=>i).filter(i=>!C.pictureMoves(b).includes(i))]) {
             assert.equal(C.step(b, {cell}), null, 'illegal slides are free');
@@ -126,22 +127,63 @@ test('Picture Catch uses exact solvable depths, one gap and only adjacent legal 
 test('Picture Catch help preserves the picture layout and gives a whole backtrack per bonus', () => {
     const base=C.create('picture','picture-help','rare','charm',false);
     const help=C.create('picture','picture-help','rare','greatcharm',true,true);
-    assert.equal(json(base.tiles),json(help.tiles)); assert.equal(help.moves,base.moves+6);
+    assert.equal(json(base.tiles),json(help.tiles)); assert.equal(help.moves,base.moves+3*C.TUNE.picture.help);
+    assert.equal(base.hints,0); assert.equal(help.hints,3*C.TUNE.picture.hints);
 });
 
 test('Picture Catch can solve a player detour beyond the generation depths within the remaining budget', () => {
     let detour=null;
     const distance=b=>b.tiles.reduce((s,t,c)=>t?s+Math.abs(c%3-(t-1)%3)+Math.abs(Math.floor(c/3)-Math.floor((t-1)/3)):s,0);
+    // Walk a common board away from home until even the piece-distance estimate passes the
+    // 12-slide map, so the solver must search instead of reading the map.
     for(let i=0;i<100 && !detour;i++) {
-        const b=C.create('picture','detour:'+i,'legendary','charm',false);
-        for(const cell of C.pictureMoves(b)) {
-            const next=C.step(b,{cell}).board;
-            if(distance(next)>12) { detour=next; break; }
+        let b=C.create('picture','detour:'+i,'common','charm',false), previous=-1;
+        for(let step=0;step<4 && distance(b)<=12;step++) {
+            const gap=b.tiles.indexOf(0);
+            const cell=C.pictureMoves(b).filter(c=>c!==previous).map(c=>({c,d:distance(C.step(b,{cell:c}).board)})).sort((x,y)=>y.d-x.d)[0].c;
+            b=C.step(b,{cell}).board; previous=gap;
         }
+        if(distance(b)>12 && !b.done) detour=b;
     }
     assert.ok(detour,'fixture leaves the reverse generation map');
     const plan=C.solve(detour); assert.ok(plan && plan.length<=detour.moves-detour.turn);
     for(const action of plan) detour=C.step(detour,action).board;
     assert.equal(detour.done,'caught');
     assert.equal(C.solve({kind:'picture',tiles:[2,1,3,4,5,6,7,8,0],moves:10,turn:0,done:null}),null,'a parity-impossible board is never certified');
+});
+
+test('Picture Catch hints mark the next slide of a shortest route, cost no move and come one at a time', () => {
+    let b = C.create('picture', 'hint-proof', 'rare', 'greatcharm', false);
+    assert.equal(C.step(C.create('picture', 'hint-proof', 'rare', 'charm', false), { hint: true }), null, 'no help, no hints');
+    const plan = C.solve(b), r = C.step(b, { hint: true });
+    assert.equal(r.board.hint, plan[0].cell);
+    assert.equal(r.board.turn, 0, 'a hint uses no move');
+    assert.equal(r.board.hints, b.hints - 1);
+    assert.equal(C.step(r.board, { hint: true }), null, 'slide the shown piece before asking again');
+    b = C.step(r.board, { cell: r.board.hint }).board;
+    assert.equal(b.hint, null);
+    assert.equal(C.solve(b).length, plan.length - 1, 'following the hint gets one slide closer');
+});
+
+// Average sensible players (catch-games.js): a picture slider with two-step lookahead that uses
+// hints at once, a Lantern player who re-plans but mis-taps 30% of the time, and a Trail Finder
+// reader of single numbers who guesses when stuck. Machine evidence, not students.
+test('puzzle games: the average sensible player wins about half the time and help clearly improves it', () => {
+    const report = {};
+    for (const kind of ['picture', 'lure', 'tracks']) {
+        let wins = 0, helped = 0, total = 0;
+        for (const rarity of C.RARITIES) {
+            let rarityWins = 0;
+            for (let i = 0; i < 25; i++) {
+                const seed = 'puzzle-rate:' + i;
+                if (C.playOut(C.create(kind, seed, rarity, 'charm', false), C.average(kind, seed)) === 'caught') { wins++; rarityWins++; }
+                if (C.playOut(C.create(kind, seed, rarity, 'greatcharm', false), C.average(kind, seed)) === 'caught') helped++;
+                total++;
+            }
+            assert.ok(rarityWins >= 5 && rarityWins <= 20, kind + '/' + rarity + ': ' + rarityWins + '/25');
+        }
+        report[kind] = { win: wins / total, help: helped / total };
+        assert.ok(report[kind].win >= 0.38 && report[kind].win <= 0.66, json(report));
+        assert.ok(report[kind].help >= report[kind].win + 0.08, json(report));
+    }
 });

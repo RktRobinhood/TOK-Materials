@@ -214,3 +214,61 @@ test('if the closing save fails, Resume saves the end again and settles once', (
     assert.equal(current.done, 'caught');
     assert.equal(JSON.stringify(outcomes), '["caught"]');
 });
+
+test('Picture Catch refuses a hint with a clear reason when no win fits the moves left', () => {
+    const g = loadWithDom(['js/core/rift.js', 'data/assets.js', 'js/core/assets.js', 'js/core/catch-arcade.js', 'js/core/catch-games.js', 'js/ui/catch-arcade.js', 'js/ui/catching.js']);
+    const root = g.Rift.el('div'); g.document.body.append(root);
+    let board = g.Rift.CatchGames.create('picture', 'ui-proof', 'rare', 'greatcharm', false);
+    board.turn = board.moves - 1; // one slide left: no shortest route fits
+    g.Rift.CatchGame.mount(root, { board, started: true,
+        onStart: () => ({ ok: true, board }),
+        onAction(action) { const r = g.Rift.CatchGames.step(board, action); if (!r) return { ok: false, error: 'Choose an available move.' }; board = r.board; return { ok: true, ...r }; },
+        onFinish() {} });
+    const hint = () => root.querySelectorAll('button').find(b => b.textContent.startsWith('Hint'));
+    root.querySelectorAll('button').find(b => b.textContent === 'Resume').click();
+    hint().click();
+    assert.match(root.querySelector('.catch-status').textContent, /No hint/);
+    assert.equal(hint().disabled, true, 'the button stays off until the next slide');
+    assert.equal(board.hints, 2, 'a refused hint is not spent');
+});
+
+test('every game explains itself in one line; puzzles outline one example before Start', () => {
+    for (const kind of ['net', 'lure', 'tracks', 'picture', 'burst']) {
+        const g = game(kind);
+        const rules = g.root.querySelectorAll('.catch-rule');
+        assert.equal(rules.length, 1, kind);
+        assert.ok(rules[0].textContent.length <= 50, kind + ': ' + rules[0].textContent + ' (one line on a 390 px phone)');
+        assert.equal(g.root.querySelectorAll('details').length, 0, kind + ': no hidden rules panel');
+        assert.equal(g.root.querySelectorAll('.catch-controls p').length, 0, kind + ': no extra instruction paragraphs');
+        if (kind === 'lure') {
+            assert.equal(g.root.querySelectorAll('.catch-trail.demo').length, 1, 'the first piece to turn is outlined');
+            g.button('Start · 1 charm').click();
+            assert.equal(g.root.querySelectorAll('.catch-trail.demo').length, 0, 'the outline goes once play starts');
+        }
+        if (kind === 'tracks') {
+            assert.equal(g.root.querySelectorAll('.catch-track.demo-number').length, 1, 'one number is ringed');
+            const counted = g.root.querySelectorAll('.catch-track.demo');
+            assert.ok(counted.length >= 1, 'with the hidden patches it counts');
+            assert.equal(counted.filter(c => c.classList.contains('open')).length, 0, 'open patches are not ringed');
+        }
+        g.handle.destroy();
+    }
+});
+
+test('Picture Catch help: the Hint button marks the next slide and uses no move', () => {
+    const g = game('picture', 'greatcharm', 'swiftlet');
+    assert.equal(g.button('Hint (2)').disabled, true, 'not before Start');
+    g.button('Start · 1 charm').click();
+    g.button('Hint (2)').click();
+    const hinted = g.root.querySelectorAll('.catch-picture-tile.hinted');
+    assert.equal(hinted.length, 1);
+    assert.ok(g.document.activeElement === hinted[0], 'keyboard focus moves to the marked piece');
+    assert.equal(g.board().turn, 0);
+    assert.equal(g.button('Hint (1)').disabled, true, 'one hint at a time');
+    hinted[0].click();
+    assert.equal(g.board().turn, 1);
+    assert.match(g.root.querySelector('.catch-status').textContent, /moves? left/, 'the live status reads the moves left');
+    assert.equal(g.root.querySelectorAll('.catch-picture-tile.hinted').length, 0);
+    assert.equal(g.button('Hint (1)').disabled, false);
+    assert.equal(game('picture').root.querySelectorAll('.catch-hint').length, 0, 'no help, no Hint button');
+});
