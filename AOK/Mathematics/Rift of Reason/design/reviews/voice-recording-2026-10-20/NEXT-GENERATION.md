@@ -1,5 +1,7 @@
 # Next Google voice generation — 20 October 2026
 
+> **Status, 22 October:** this ready queue is recorded except `kuku-o0st9l`, which needs a spoken-text fix first. Catalog is 2927/2974. See [voice-recording-2026-10-22](../voice-recording-2026-10-22/README.md). Only the deferred Rubberstamp reserve remains.
+
 Recorded: **2754/2974 catalog lines**. **220 files remain missing:** **174 ready** for the next pass and **46 deferred reserve lines**.
 
 Both models reached their server daily limits. Resume after **09:00 Copenhagen, 21 October**, keeping the saved ledger and existing character/model pins. No billing or recurring-task changes were made.

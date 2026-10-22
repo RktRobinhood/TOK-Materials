@@ -1,0 +1,1496 @@
+{
+ "date": "2026-10-22",
+ "checker": "faster-whisper small (local CPU), number words and symbol readings normalised",
+ "clips": {
+  "granny-10nkg6k": {
+   "take": "068c42b (other session)",
+   "sha256": "592fb4c2ebc35fba7b8ca49ca649f8d6ccde6a6974ec299953cb51074de41f93",
+   "expected": "Call It Out: An enemy creature loses Guard, Shield and Elusive. Also draw a card. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Call it out. An enemy creature loses guard, shield, and elusive. Also draw a card. Cost 2 hearts. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-10yf2zu": {
+   "take": "FAL-260",
+   "sha256": "7539bfd45c8811563c9affdbfaa5b3f4a9e73c8d019dd08aae5b407ac1c0dac1",
+   "expected": "Brainstorm: +2 card activations this turn. Also +1 energy. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+   "heard": "Brainstorm. Plus two card activations this turn. Also plus one energy. Cost one heart. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-12uij64": {
+   "take": "068c42b (other session)",
+   "sha256": "99796ff2735add7edfac2e76d372a298a2d55ee7ae240611f414478e25028df0",
+   "expected": "Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Also restore 1 heart. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Hold that thought. Move the Fate Track one round closer or further away. Draw a card. Also, restore one heart. Cost two hearts. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-14w3jy6": {
+   "take": "FAL-260",
+   "sha256": "06b90372a1f20f31e872f57dc37ce0e5d3c77b92e431a262d998dca6b0e35d84",
+   "expected": "Night Sight: See the opponent's hand until your next turn. Their next 2 cards cost 1 more. Also see the top card of their deck. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Night sight. See the opponent's hand until your next turn. Their next two cards cost one more. Also see the top card of their deck. Cost 4 energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-15s27ru": {
+   "take": "FAL-260",
+   "sha256": "2c4138cd8e0da3baef43c452a8c8500cc181bf9a998a314d8e95bdae3d2e52b8",
+   "expected": "Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Also restore 1 heart. Cost: 5 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Hold that thought. Move the Fate Track one round closer, or further away. Draw a card. Also, restore one heart. Cost 5 Energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-1644uh1": {
+   "take": "FAL-260",
+   "sha256": "02053d048ce4c19d0e78c15301889709d67aabcc55efa83d6e341b9e0c2bddae",
+   "expected": "What If?: Swap a creature's attack and health, then give it +1 attack. Also +1 health. Cost: free. Click your power to continue; this lesson click does not use it.",
+   "heard": "What if Swap a creature's attack and health, then give it plus one attack, also plus one health, cost free. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-166ez6s": {
+   "take": "068c42b (other session)",
+   "sha256": "ba383d20ad0c222355729b4b46122184b513388ac855dd4216b4d29128736d7b",
+   "expected": "Night Sight: See the opponent's hand until your next turn. Their next card costs 1 more. Also see the top card of their deck. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+   "heard": "Night Sight. See the opponent's hand until your next turn. Their next card costs one more. Also, see the top card of their deck. Cost 1 Heart. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-175vqhl": {
+   "take": "FAL-260",
+   "sha256": "229e71e598df7625e4108e30ddd401b31bdda4a69fda8fae776a79d17519256a",
+   "expected": "Call It Out: An enemy creature loses Guard, Shield, Elusive and Swift. Also draw a card. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Call it out. An enemy creature loses guard, shield, elusive, and swift. Also, draw a card. Cost for energy. Click your power to continue. This lesson click does not use it.",
+   "exact": false,
+   "differences": [
+    "4 -> for"
+   ],
+   "recut": true
+  },
+  "granny-17xz8st": {
+   "take": "FAL-260",
+   "sha256": "8a94e3ce9fb4297ced85b4baca221a55d80e7538134ba900d8ed5b4116cec14d",
+   "expected": "Call It Out: An enemy creature loses Guard, Shield and Elusive. Also draw a card. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+   "heard": "Call it out. An enemy creature loses guard, shield, and elusive. Also, draw a card. Cost 1 heart. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-1ajk6c6": {
+   "take": "FAL-260",
+   "sha256": "fde998b224871a2680f7d61f9decd6aca54f072034c554db6ccf02a47772baca",
+   "expected": "Recall: Return your most recently defeated creature to your hand with +1/+1. Also restore 2 hearts. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Recall. Return your most recently defeated creature to your hand with plus one plus one. Also restore two hearts. Cost, two energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-1b2t76a": {
+   "take": "FAL-260",
+   "sha256": "6573c82ed096c0cae99743c1097e47d9005ae9938c60c18fbd8301f301632d90",
+   "expected": "Recall: Return your most recently defeated creature to your hand with +1/+1. Also restore 2 hearts. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Recall. Return your most recently defeated creature to your hand with plus one plus one. Also, restore two hearts. Cost, two hearts. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-1dyijc4": {
+   "take": "FAL-260",
+   "sha256": "d9a59f2ea679b55ac7fd0f3230bb6287ff3299cd3d8025b824fc2af83ed5e184",
+   "expected": "Night Sight: See the opponent's hand until your next turn. Their next 2 cards cost 1 more. Also see the top card of their deck. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Night sight see the opponent's hand until your next turn Their next two cards cost one more Also see the top card of their deck cost two hearts Click your power to continue this lesson. Click does not use it",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-1fduw2j": {
+   "take": "FAL-260",
+   "sha256": "38016dbca235b43244c1a8ae8ecf6ea58566c13c2723184a2d8931b1a9f5c2fb",
+   "expected": "Recall: Return your most recently defeated creature to your hand. Also restore 2 hearts. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Recall. Return your most recently defeated creature to your hand. Also, restore two hearts. Cost, two energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-1fv6n0y": {
+   "take": "068c42b (other session)",
+   "sha256": "eb0e25e6026180a048bd74e10112f24c95ea6b72faef49bef7a4d4a4481fc6c3",
+   "expected": "Foresee: Look at the top 3 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+   "heard": "4C. Look at the top three rule cards. Take one into your hand and put the others back in any order. Also, put one of the others at the bottom of the rule deck. Cost 1 Heart. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-1hf4ync": {
+   "take": "FAL-260",
+   "sha256": "fa4e7c7087f52f237aeefba7194d9bb88223f3f2928767aad1859389f79290ad",
+   "expected": "Call It Out: An enemy creature loses Guard, Shield, Elusive and Swift. Also draw a card. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Call it out. An enemy creature loses guard, shield, elusive, and swift. Also, draw a card. Cost 3 energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-1i73svt": {
+   "take": "FAL-260",
+   "sha256": "751227913792057451e99507a4988d7b1d9c985b4c7f6c17e38ba1257deffd33",
+   "expected": "Call It Out: An enemy creature loses Guard, Shield, Elusive and Swift. Also draw a card. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Call it out. An enemy creature loses guard, shield, elusive, and swift. Also, draw a card. Cost 2 energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-1jlf9vt": {
+   "take": "FAL-260",
+   "sha256": "98fa462e8da9d8f05e350ed7998dfe2bceb355b8f8b97532b7e96f68d9482418",
+   "expected": "Recall: Return your most recently defeated creature to your hand. Also restore 2 hearts. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Recall. Return your most recently defeated creature to your hand. Also, restore two hearts. Cost two hearts. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-1k5cj2y": {
+   "take": "068c42b (other session)",
+   "sha256": "9b54442ddb0a7801a0bd40062cc93187f4fc3e0cbe7c6f06d06a79c72eb6436f",
+   "expected": "Night Sight: See the opponent's hand until your next turn. Their next 2 cards cost 1 more. Also see the top card of their deck. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Night Sight. See the opponent's hand until your next turn. Their next two cards cost one more. Also, see the top card of their deck. Cost 3 Energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-1kz8pxz": {
+   "take": "FAL-260",
+   "sha256": "7fefcca368e1b327e939084df5ab2f3b7415aa2061280da624a1c8fc4e41d878",
+   "expected": "Foresee: Look at the top 4 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+   "heard": "Four C. Look at the top four rule cards. Take one into your hand and put the others back in any order. Also, put one of the others at the bottom of the rule deck. Cost one heart. Click your power to continue. This lesson click does not use it.",
+   "exact": false,
+   "differences": [
+    "foresee -> 4 c"
+   ],
+   "recut": false
+  },
+  "granny-1l9gtd3": {
+   "take": "FAL-260",
+   "sha256": "84775cfb85590317d3187163a6451ac2aac5c3ba503f86cc542cd280c474d788",
+   "expected": "Fine Print: Lose 1 heart and draw 2 cards. Also +1 energy this turn. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Fine print lose one heart and draw two cards also plus one energy this turn cost three energy Click your power to continue this lesson. Click does not use it",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-1l9r1p2": {
+   "take": "FAL-260",
+   "sha256": "c6da754f7168974b6b693acaf80176f6d3f3707412ad64c26651f039283cd072",
+   "expected": "Brainstorm: +1 card activation this turn. Also +1 energy. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+   "heard": "Brainstorm. Plus one card activation this turn. Also plus one energy. Cost one heart. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-1lfgkkc": {
+   "take": "FAL-260",
+   "sha256": "c0a7d03c9dc84f2e4afdfcc93338957d950d3f28bc653703c99650b95ffa5eb3",
+   "expected": "Lantern: Deal 1 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Lantern. Deal 1 damage to an enemy creature. Also see 1 random card in the enemy hand. Cost 2 energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-1lokazk": {
+   "take": "FAL-260",
+   "sha256": "c26b395c6d0383dcff36e980119e7e9e0183ea0393f3aa7055fe654b10ff852a",
+   "expected": "What If?: Swap a creature's attack and health. Also +1 health. Cost: free. Click your power to continue; this lesson click does not use it.",
+   "heard": "What if? Swap a creature's attack and health. Also, plus one health. Cost free. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-1ocj1du": {
+   "take": "FAL-260",
+   "sha256": "4b438aaa0849741bbb38a63ebf6e19b4edf0be79eb17ea9e9d1bce812b9a8ecd",
+   "expected": "Close the Proof: Defeat an enemy creature that has 2 or less health left. Also deal 1 damage to the enemy hero. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Close the proof. Defeat an enemy creature that has 2 or less health left. Also deal 1 damage to the enemy hero. Cost 2 hearts. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-1ohwtie": {
+   "take": "FAL-260",
+   "sha256": "a275b3de378ff6613e4ad6da1ad745415f0706db26b7c8efc2d8a7e432a34049",
+   "expected": "What If?: Swap a creature's attack and health, then give it +1 attack. Also +1 health. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "What if swap a creature's attack and health then give it plus one attack also plus one health cost to energy Click your power to continue this lesson. Click does not use it",
+   "exact": false,
+   "differences": [
+    "2 -> to"
+   ],
+   "recut": true
+  },
+  "granny-1ojq8cu": {
+   "take": "068c42b (other session)",
+   "sha256": "a5e73844d62129b62a338efbd3aceaff96c82f63e05d2390b4a62fd936a4945f",
+   "expected": "Lantern: Deal 1 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+   "heard": "Lantern. Deal one damage to an enemy creature. Also, see one random card in the enemy hand. Cost one heart. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-1omwkh0": {
+   "take": "FAL-260",
+   "sha256": "18ce013adfd790792d3130311fe5de6be9f8e9c909a6a91f20b370cd768d2791",
+   "expected": "Brainstorm: +2 card activations this turn. Also +1 energy. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Brainstorm. Plus two card activations this turn. Also, plus one energy. Cost two energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-1ou2x1h": {
+   "take": "FAL-260",
+   "sha256": "77cb4d6fd434e5a80ffa9bd56bbf9bedb7d216fcc69436e983677cb5c141487b",
+   "expected": "Lantern: Deal 2 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Lantern. Deal 2 damage to an enemy creature. Also, see 1 random card in the enemy hand. Cost? 2 energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-1oxoaex": {
+   "take": "FAL-260",
+   "sha256": "c24a70159cf22615fee10adf7895046681a17717f09afbba3d11967a6b9499ad",
+   "expected": "Recall: Return your most recently defeated creature to your hand. Also restore 2 hearts. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Recall. Return your most recently defeated creature to your hand. Also, restore two hearts. Cost 4 energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-1q2j47g": {
+   "take": "FAL-260",
+   "sha256": "ea5e961fc2e1705755601c3eedb4c10bd2b8ff60d69c8cad361eb0b0532088d9",
+   "expected": "Night Sight: See the opponent's hand until your next turn. Their next 2 cards cost 1 more. Also see the top card of their deck. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Night Sight. See the opponent's hand until your next turn. Their next two cards cost one more. Also see the top card of their deck. Cost two energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-1q86o9p": {
+   "take": "FAL-260",
+   "sha256": "437c3f62f8e8d2523713d4af6a6c3a7ca0ae25f939c209d95743d223190ff1e1",
+   "expected": "Hold That Thought: Move the Fate track up to 2 rounds closer or further away. Draw a card. Also restore 1 heart. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Hold that thought. Move the Fate track up to two rounds closer or further away. Draw a card. Also restore one heart. Cost four energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-1qavyi7": {
+   "take": "FAL-260",
+   "sha256": "c78eccb8e9fa7b25743ce29e278a8c313c01e6d11d4ac09f95787fedf72f7e98",
+   "expected": "Close the Proof: Defeat an enemy creature that has 2 or less health left. Also deal 1 damage to the enemy hero. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Close the proof. Defeat an enemy creature that has 2 or less health left. Also, deal 1 damage to the enemy hero. Cost 4 energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-1qqifj2": {
+   "take": "FAL-260",
+   "sha256": "b54e71c3437580aa08f672cee9e2a5383c66113006b93bf309aa94bbe89ae9a2",
+   "expected": "Foresee: Look at the top 3 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: free. Click your power to continue; this lesson click does not use it.",
+   "heard": "4C. Look at the top three rule cards. Take one into your hand, and put the others back in any order. Also, put one of the others at the bottom of the rule deck. Cost free. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-1rlokmv": {
+   "take": "FAL-260",
+   "sha256": "6cd1df1e66e88e8f219d2712044ed98f8fb8dcb8169d0a9200e45200584d7612",
+   "expected": "Hold That Thought: Move the Fate track up to 2 rounds closer or further away. Draw a card. Also restore 1 heart. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Hold that thought. Move the Fate Track up to two rounds closer or further away. Draw a card. Also, restore one heart. Cost two hearts. Click your power to continue. This lesson, Click, does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-1s8b4j": {
+   "take": "FAL-260",
+   "sha256": "8879bb85fa36d469a48c6f5bac1acdc1620934a674e1030dbfa85a9602380681",
+   "expected": "Call It Out: An enemy creature loses Guard, Shield and Elusive. Also draw a card. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Call it out. An enemy creature loses guard, shield, and elusive. Also, draw a card. Cost 4 energy. Click your power to continue. This lesson, Click, does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-1stzpeg": {
+   "take": "FAL-260",
+   "sha256": "367a0e607d5b68808967b3fa06d4f082a6d270384c675247666108a8f70d664c",
+   "expected": "What If?: Swap a creature's attack and health. Also +1 health. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "What if swap a creature's attack and health also plus one health cost to energy Click your power to continue. This lesson. Click does not use it",
+   "exact": false,
+   "differences": [
+    "2 -> to"
+   ],
+   "recut": true
+  },
+  "granny-1trkfc7": {
+   "take": "FAL-260",
+   "sha256": "2e06492137bbc48b34143acdec2c2bc42140b24eb6f2d2fe246b2875e643a19a",
+   "expected": "Lantern: Deal 2 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Lantern. Deal 2 damage to an enemy creature. Also, see 1 random card in the enemy hand. Cost 2 hearts. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-1xiddkd": {
+   "take": "FAL-260",
+   "sha256": "9f090d0ad0c29a6b584200f117f92c533b2070de551d959abc91977de38913d7",
+   "expected": "Hold That Thought: Move the Fate track up to 2 rounds closer or further away. Draw a card. Also restore 1 heart. Cost: 5 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Hold that thought. Move the Fate Track up to two rounds closer or further away. Draw a card. Also restore one heart. Cost five energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-2001ic": {
+   "take": "FAL-260",
+   "sha256": "ac2658e6792f7830e2af31480fd8249660983a920ebe8f13262610163350265c",
+   "expected": "Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Also restore 1 heart. Cost: 3 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Hold that thought, move the Fate track one round closer, or further away, draw a card, also restore one heart, cost three hearts, click your power to continue, this lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-4tinvn": {
+   "take": "FAL-260",
+   "sha256": "8b1615b340bb8de2023976ddc3caf0be3374c8cf41d2aa21efa34e93f5334a6c",
+   "expected": "Fine Print: Lose 1 heart and draw a card. Also +1 energy this turn. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+   "heard": "Fine print lose one heart and draw a card also plus one energy this turn cost one heart Click your power to continue this lesson. Click does not use it",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-5p8whl": {
+   "take": "FAL-260",
+   "sha256": "5f3a2285c6b925666c37b09cbf61f2fcbfb89d231f825878b5a89ad523c30fac",
+   "expected": "Close the Proof: Defeat an enemy creature that has 1 health left. Also deal 1 damage to the enemy hero. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Close the Proof. Defeat an enemy creature that has one health left. Also, deal one damage to the enemy hero. Cost 3 Energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-68fge0": {
+   "take": "FAL-260",
+   "sha256": "6cbd7313aabcddd8ed7c30ec7ee7a78e46b2f62556e3e1b16df51ed3d50a2836",
+   "expected": "Foresee: Look at the top 4 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "4C. Look at the top four rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost two energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-6pg26g": {
+   "take": "FAL-260",
+   "sha256": "9d7ddab979bb939cd9cf82a66bb44fb615b78c9fabebb679bf4896d26371be8f",
+   "expected": "Foresee: Look at the top 4 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "4C. Look at the top four rule cards. Take one into your hand, and put the others back in any order. Also, put one of the others at the bottom of the rule deck. Cost one energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-87icff": {
+   "take": "068c42b (other session)",
+   "sha256": "35f8ce7ebd38c260aa87a0ed20bdfc66846c2e5c912b3d76d3c54688ab936ff7",
+   "expected": "Brainstorm: +2 card activations this turn. Also +1 energy. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Brainstorm. Plus two card activations this turn. Also plus one energy. Cost one energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-b1abu3": {
+   "take": "FAL-260",
+   "sha256": "5d6449b92519ada5f36902cbebcd61582896799933b7aaf5d67ddd418a0e21e4",
+   "expected": "Close the Proof: Defeat an enemy creature that has 2 or less health left. Also deal 1 damage to the enemy hero. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Close the proof. Defeat an enemy creature that has two or less health left. Also, deal one damage to the enemy hero. Cost? Three energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-b4yv4y": {
+   "take": "FAL-260",
+   "sha256": "30fb817bbe9800e1c35afcdebcc522c52cae5a6862ed297f9baa52da4bde0726",
+   "expected": "What If?: Swap a creature's attack and health. Also +1 health. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+   "heard": "What if swap a creature's attack and health also plus one health cost one heart Click your power to continue. This lesson click does not use it",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-bhpjsj": {
+   "take": "FAL-260",
+   "sha256": "a8a0acbfcad397471b9abc12e7e645d72cc52a7566b34d5da2ff1804c23e0472",
+   "expected": "Recall: Return your most recently defeated creature to your hand with +1/+1. Also restore 2 hearts. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Recall. Return your most recently defeated creature to your hand with plus one plus one. Also restore two hearts. Cost. Three energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-bo2hzj": {
+   "take": "FAL-260",
+   "sha256": "ae0cb4c12d87eb016e0bc8db702ae828617b0adf55efeebfb280bdcb3f175a83",
+   "expected": "Close the Proof: Defeat an enemy creature that has 1 health left. Also deal 1 damage to the enemy hero. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "close the proof defeat an enemy creature that has one health left also deal one damage to the enemy hero cost two hearts click your power to continue this lesson click does not use it",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-c6tenc": {
+   "take": "FAL-260",
+   "sha256": "fdb89f47b447f6e4825c50c5573a349258e26b50609e91ef9bb9672423ad4b3b",
+   "expected": "Fine Print: Lose 1 heart and draw 2 cards. Also +1 energy this turn. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Fine print. Lose one heart and draw two cards. Also, plus one energy this turn. Cost? Two hearts. Click your power to continue. This lesson, Click, does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-cp2mdo": {
+   "take": "068c42b (other session)",
+   "sha256": "46cbecf0a1f18bd67efa30d1a409c9b6b0de09a6275088941c7577b6f2fe210c",
+   "expected": "Fine Print: Lose 1 heart and draw a card. Also +1 energy this turn. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Fine print lose one heart and draw a card Also, plus one energy this turn cost to energy Click your power to continue this lesson. Click does not use it",
+   "exact": false,
+   "differences": [
+    "2 -> to"
+   ],
+   "recut": false
+  },
+  "granny-fowaxu": {
+   "take": "068c42b (other session)",
+   "sha256": "8b27c342293cb515eb2753f98eb549225534e6b4463c6d3a41a40621eed62bfe",
+   "expected": "Recall: Return your most recently defeated creature to your hand. Also restore 2 hearts. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+   "heard": "Recall. Return your most recently defeated creature to your hand. Also, restore two hearts. Cost 1 Heart. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-fwn5m7": {
+   "take": "FAL-260",
+   "sha256": "2f8517ab37e258079d6722666a71c475e4e748fdfb4314301bcab82c2b1e00be",
+   "expected": "Hold That Thought: Move the Fate track up to 2 rounds closer or further away. Draw a card. Also restore 1 heart. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Hold that thought. Move the Fate track up to two rounds closer, or further away. Draw a card. Also restore one heart. Cost three energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-g9okpx": {
+   "take": "068c42b (other session)",
+   "sha256": "0193c70e12774d523ae0a4292e1985727f6d34f8d3e9a10cb18b40afbed5a564",
+   "expected": "What If?: Swap a creature's attack and health, then give it +1 attack. Also +1 health. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "What if swap a creature's attack and health, then give it plus one attack, also plus one health, cost one energy? Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-gt063p": {
+   "take": "068c42b (other session)",
+   "sha256": "be11d738c2376ffdb2b4546a8825946d2d25e5a955a85bcf2d610f9ad6f22dd9",
+   "expected": "Call It Out: An enemy creature loses Guard, Shield and Elusive. Also draw a card. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Call it out. An enemy creature loses guard, shield, and elusive. Also draw a card. Cost to energy. Click your power to continue. This lesson click does not use it.",
+   "exact": false,
+   "differences": [
+    "2 -> to"
+   ],
+   "recut": false
+  },
+  "granny-h0b50k": {
+   "take": "FAL-260",
+   "sha256": "9bd00f7450f4aa5043aa1739681e3ec43819dd950611a36a68c07496955c3b17",
+   "expected": "Night Sight: See the opponent's hand until your next turn. Their next card costs 1 more. Also see the top card of their deck. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Night Sight. See the opponent's hand until your next turn. Their next card costs one more. Also, see the top card of their deck. Cost 2 Energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-hjhwyq": {
+   "take": "FAL-260",
+   "sha256": "038f601be72ced7522cb0eefdb268c102f212c19c8312e2f2aa2dd43988eb449",
+   "expected": "Close the Proof: Defeat an enemy creature that has 1 health left. Also deal 1 damage to the enemy hero. Cost: 3 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "close the proof defeat an enemy creature that has one health left also deal one damage to the enemy hero cost three hearts click your power to continue this lesson click does not use it",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-j3g8ld": {
+   "take": "068c42b (other session)",
+   "sha256": "585e73288f1a43a5e6558d913797974423bbef3c80816e46c0464d5a33bf2de0",
+   "expected": "Night Sight: See the opponent's hand until your next turn. Their next card costs 1 more. Also see the top card of their deck. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Night Sight See the opponent's hand until your next turn. Their next card costs one more. Also see the top card of their deck. Cost two hearts. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-jtkztl": {
+   "take": "FAL-260",
+   "sha256": "9d1c9c3e68b18e248ce498717af410a4cf244da8fc64fe07a347ef5dff34cec9",
+   "expected": "What If?: Swap a creature's attack and health, then give it +1 attack. Also +1 health. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+   "heard": "What if swap a creature's attack and health, then give it plus one attack, also plus one health, cost one heart, click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-jzr6p5": {
+   "take": "068c42b (other session)",
+   "sha256": "3c3a1bd7e38514c50de8286585b4e6c6bef8b82acb9fbd582de05b2ba1c0e98a",
+   "expected": "Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Also restore 1 heart. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Hold that thought. Move the Fate track one round closer or further away. Draw a card. Also restore one heart. Cost 3 energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-kd4oaf": {
+   "take": "FAL-260",
+   "sha256": "d411b2d782099096b9ae87fb1c66da34d617cde86352bb7297977efe671038f7",
+   "expected": "Fine Print: Lose 1 heart and draw 2 cards. Also +1 energy this turn. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Fine print. Lose one heart and draw two cards. Also, plus one energy this turn. Cost for energy. Click your power to continue. This lesson click does not use it.",
+   "exact": false,
+   "differences": [
+    "4 -> for"
+   ],
+   "recut": false
+  },
+  "granny-kknblb": {
+   "take": "068c42b (other session)",
+   "sha256": "64eb7ff97f892d992e2e9e65cdd89ad6123309c826fdca99cf830ebd8d775eb2",
+   "expected": "Fine Print: Lose 1 heart and draw a card. Also +1 energy this turn. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Fine print. Lose one heart and draw a card. Also plus one energy this turn. Cost two hearts. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-ktvuet": {
+   "take": "FAL-260",
+   "sha256": "e48beca4ec1bfb8b489a826319a3e0581520984459b5f245dc88aaa04e404409",
+   "expected": "Brainstorm: +2 card activations this turn. Also +1 energy. Cost: free. Click your power to continue; this lesson click does not use it.",
+   "heard": "Brainstorm. Plus two card activations this turn. Also plus one energy. Cost. Free. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-n2vqab": {
+   "take": "FAL-260",
+   "sha256": "8e36fab02384f1dc3f85ab90161b20f95305c7d92cc6e2b802a78cb78329e423",
+   "expected": "Lantern: Deal 2 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Lantern. Deal 2 damage to an enemy creature. Also see 1 random card in the enemy hand. Cost 4 energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-nsw51z": {
+   "take": "FAL-260",
+   "sha256": "460be4884bdc3cef5491a6c397f62c29a4fa3b767392b217d019df430d64ae37",
+   "expected": "Foresee: Look at the top 4 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: free. Click your power to continue; this lesson click does not use it.",
+   "heard": "4C. Look at the top four rule cards. Take one into your hand, and put the others back in any order. Also, put one of the others at the bottom of the rule deck. Cost? Free. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-oggp2h": {
+   "take": "FAL-260",
+   "sha256": "0b758008ad60666788de267d631056b0b615e1217e3dd51ec7ed7932d4111278",
+   "expected": "Brainstorm: +1 card activation this turn. Also +1 energy. Cost: free. Click your power to continue; this lesson click does not use it.",
+   "heard": "Brainstorm. Plus one card activation this turn. Also plus one energy. Cost free. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-rpeyso": {
+   "take": "FAL-260",
+   "sha256": "f9fee053fc07745a60bb3d5bf6a401cad386b683da8d023d30e18123b7a9bbf9",
+   "expected": "Brainstorm: +1 card activation this turn. Also +1 energy. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Brainstorm plus one card activation this turn also plus one energy cost two energy Click your power to continue this lesson click does not use it",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-s55vf1": {
+   "take": "FAL-260",
+   "sha256": "1922dc44bca5832212460e6c4a0c6fa70bc4b64fe3aca13f67b537ce6eefebef",
+   "expected": "Close the Proof: Defeat an enemy creature that has 2 or less health left. Also deal 1 damage to the enemy hero. Cost: 5 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Close the proof. Defeat an enemy creature that has two or less health left. Also deal one damage to the enemy hero. Cost five energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-swdv2f": {
+   "take": "FAL-260",
+   "sha256": "83b996e9a3779997128ef1651e001638d925bb98c414cc2ce9dce01dc37508db",
+   "expected": "Lantern: Deal 1 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Lantern. Deal 1 damage to an enemy creature. Also see 1 random card in the enemy hand. Cost 2 hearts. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-uqfmyt": {
+   "take": "FAL-260",
+   "sha256": "2c02b65a48ecf01cc4f1001a64b0d42334696c9fd9d8a8295e18afb38b4eb5c9",
+   "expected": "Fine Print: Lose 1 heart and draw a card. Also +1 energy this turn. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Fine print lose one heart and draw a card Also, plus one energy this turn cost for energy Click your power to continue this lesson. Click does not use it",
+   "exact": false,
+   "differences": [
+    "4 -> for"
+   ],
+   "recut": true
+  },
+  "granny-vx6r2w": {
+   "take": "FAL-260",
+   "sha256": "9519628b98c9cdf7e6e6586319df44b93670b0bc58fb6db0848d73fbb553df53",
+   "expected": "Fine Print: Lose 1 heart and draw 2 cards. Also +1 energy this turn. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Fine print lose one heart and draw two cards also plus one energy this turn cost to energy Click your power to continue. This lesson click does not use it",
+   "exact": false,
+   "differences": [
+    "2 -> to"
+   ],
+   "recut": false
+  },
+  "granny-y34ae6": {
+   "take": "FAL-260",
+   "sha256": "58dbf1904b3f1a8a01270a0c81e684e5f5ef560bee26cf4367bd45229b3289ba",
+   "expected": "Recall: Return your most recently defeated creature to your hand with +1/+1. Also restore 2 hearts. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Recall, return your most recently defeated creature to your hand, with plus one, plus one. Also, restore two hearts, cost four energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "granny-z0a88z": {
+   "take": "068c42b (other session)",
+   "sha256": "86112343fac6716d5d3f6a02b4c88216f99d17b3b9fdd72b7acb19f36892852f",
+   "expected": "Lantern: Deal 2 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Lantern. Deal 2 damage to an enemy creature. Also see 1 random card in the enemy hand. Cost 3 energy. Click your power to continue. This lesson click does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "granny-zns1e9": {
+   "take": "FAL-260",
+   "sha256": "3e1171c03402d8dcc3ca6d562d29887271b7b8919bc8aa7848b933c9e4216655",
+   "expected": "Call It Out: An enemy creature loses Guard, Shield, Elusive and Swift. Also draw a card. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Call it out! An enemy creature loses guard, shield, elusive, and swift. Also, draw a card. Cost two hearts. Click your power to continue. This lesson, click, does not use it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-10ub4fa": {
+   "take": "068c42b (other session)",
+   "sha256": "e9734c616628108a465bbebcfb59f27cd4e104643ecd372859c1d1885b72cfb7",
+   "expected": "Example: to fill an empty tank at a steady rate, we need its capacity and the amount entering each minute. Its colour probably will not help.",
+   "heard": "Example, to fill an empty tank at a steady rate, we need its capacity and the amount entering each minute. Its color probably will not help.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1107zv1": {
+   "take": "FAL-260",
+   "sha256": "8c634e9d6302df0aa8cbc0c9692edcd15fddd20ce08ba61e6b7d9ee9f7e850d6",
+   "expected": "Example: Baker says \"Sweep is an imp\". In a world where Sweep is honest, those words are false. Baker must then be an imp.",
+   "heard": "Example, Baker says, Sweep is an imp. In a world where Sweep is honest, those words are false. Baker must then be an imp.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-140poa4": {
+   "take": "068c42b (other session)",
+   "sha256": "4d56af771e85a5a0783da24ba47493ef838b1f958118a1e3ac07965e7045868b",
+   "expected": "The well still wants evidence. Wishes just bounce off.",
+   "heard": "The well still wants evidence, wishes just bounce off.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-14qgcmu": {
+   "take": "068c42b (other session)",
+   "sha256": "53bcd2620990964a1f51c6beab9a88e4dea3c7ed301fef95227d854c99a8b23a",
+   "expected": "His stamp is still on the desk. Check who the machine says no to.",
+   "heard": "His stamp is still on the desk. Check who the machine says no to.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-14x60yx": {
+   "take": "068c42b (other session)",
+   "sha256": "8a666e62109497abfa3d57ca07960e4d7a6bac142c15f020d97149a1041c9ebf",
+   "expected": "Upstream, a rocket sits in the river. Muskrat calls it a reef now.",
+   "heard": "Upstream, a rocket sits in the river. Muskrat calls it a reef now.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-16qw54m": {
+   "take": "068c42b (other session)",
+   "sha256": "023292d13429d33634e6f5698ef652f47c77a4685f5dceb41fee2dc61e123f33",
+   "expected": "The charts hang a little crooked now. Check the axes anyway.",
+   "heard": "The charts hang a little crooked now. Check the axes anyway.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-16yi3q6": {
+   "take": "068c42b (other session)",
+   "sha256": "7b65ec38063aee5f90dbd3f1a10f25234914dea6f4356067929e29bc9129a7d8",
+   "expected": "Then Check my grid. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+   "heard": "Then, check my grid. How to play is free. The hint button shows its heart cost. Think first, then check your answer.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-170otng": {
+   "take": "068c42b (other session)",
+   "sha256": "e2f2130616798b2c3322148e2e291c46184f64982daa84a09e36294f41c7137a",
+   "expected": "Shade means no things here. Example: \"All ducks are birds\" shades the ducks-only region outside birds. It does not add an x.",
+   "heard": "Shade means no things here. Example, all ducks are birds. Shades the duck's only region outside birds. It does not add an X.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-19zjota": {
+   "take": "FAL-260",
+   "sha256": "9d25e25b73c4811bba289ffa33afa00dfb57f3062baef2686391cba3c7093adb",
+   "expected": "Example, not this scene: \"A red lamp is on.\" \"The red lamp is on\" is True. \"The red lamp is off\" is False.",
+   "heard": "Example, not this scene, a red lamp is on, the red lamp is on is true, the red lamp is off is false.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1avlh99": {
+   "take": "FAL-260",
+   "sha256": "a71fc15d7f564d6673d851e1b71f32bb669cc858f669a1007393a3894b3d0681",
+   "expected": "The drawing is optional working. If asked, judge premise support using only the reference records, then Seal the verdict. Missing evidence is not false. How to play is free. The Hint button shows its heart cost.",
+   "heard": "The drawing is optional working. If asked, judge premise support using only the reference records, then seal the verdict. Missing evidence is not false. How to play is free. The hint button shows its hard cost.",
+   "exact": false,
+   "differences": [
+    "heart -> hard"
+   ],
+   "recut": false
+  },
+  "kuku-1b6v5z0": {
+   "take": "068c42b (other session)",
+   "sha256": "7f09442d8f62925d16f2f569b9ac243ec6ec74979cb01edfe36a555ddf5a7488",
+   "expected": "Move the axis handles. Example: bars of 95 and 100 look very different if the axis starts at 90; the increase is only 5.",
+   "heard": "Move the axis handles. Example, bars of 95 and 100 look very different if the axis starts at 90. The increase is only 5.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1b92404": {
+   "take": "068c42b (other session)",
+   "sha256": "2e251da7e36cd8dc1c353615389eafce278de2a46f747f707c1a342d3b833b8a",
+   "expected": "Read the scene before judging any claim. We need evidence, not a story your mind fills in.",
+   "heard": "Read the scene before judging any claim. We need evidence, not a story your mind fills in.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1bnqm46": {
+   "take": "FAL-260",
+   "sha256": "f3a2ac619ceeeb759e478ff9bbca705f65d1aa295ff8d7c1d959fcfe2ed1f88a",
+   "expected": "Read the target. We are testing a machine that uses past patterns to guess your next move.",
+   "heard": "Read the target. We are testing a machine that uses past patterns to guess your next move.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1c12mau": {
+   "take": "068c42b (other session)",
+   "sha256": "aa879f96a2d165d106a63a7c1057dd5e31ed120e737bcffab8868b93ae4a4afd",
+   "expected": "His chalk is still here. Guess, pick the facts, finish the question.",
+   "heard": "His chalk is still here. Guess, pick the facts, finish the question.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1dlikc": {
+   "take": "FAL-260",
+   "sha256": "b61300533ff5c219b681c1da39df82bc1253f21160b2b7fb7af6675851395c29",
+   "expected": "Check who your fix changes, its cost, and the mistakes left. If asked, choose a value and support it with a reason from the audit, then Hand in the audit. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+   "heard": "Check who your fix changes, its cost, and the mistakes left. If asked, choose a value and support it with a reason from the audit. Then, hand in the audit. How to play is free. The hint button shows its heart cost. Think first, then check your answer.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1dmf2rh": {
+   "take": "068c42b (other session)",
+   "sha256": "475cdf3c50c4704649fc0e35d01ff2efcf018fe6f7f4c18651107c1cbdecbc08",
+   "expected": "We judge whether the conclusion MUST follow from these facts. Read the scrolls first.",
+   "heard": "We judge whether the conclusion must follow from these facts. Read the scrolls first.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1dz7t15": {
+   "take": "068c42b (other session)",
+   "sha256": "78d587579b6e75dd7a903370164c1011e363e6f1301a30f0ebfe151522217601",
+   "expected": "Pick a move only after its guess is locked. You win a point when the machine is wrong.",
+   "heard": "Pick a move only after its guess is locked. You win a point when the machine is wrong.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1fj9jxc": {
+   "take": "FAL-260",
+   "sha256": "0b9c4376b069484a3f1c91a9a1b9e78a879418f3e2954d6603d43f8d8f42b94a",
+   "expected": "For each claim, point to a line that supports or contradicts it. If no line settles it, choose Can't tell.",
+   "heard": "For each claim, point to a line that supports or contradicts it. If no line settles it, choose Can't Tell.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1i889xi": {
+   "take": "068c42b (other session)",
+   "sha256": "cd80757cf1654ccb0c7d547cde83ccd7ec6a5274f7a793c6a545671874ba2e40",
+   "expected": "Example: \"The door stayed locked all day\" clashes with a dated record showing it opened at noon. Present that record against that statement.",
+   "heard": "Example, the door stayed locked all day, clashes with a dated record showing it opened at noon. Present that record against that statement.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1ibhzso": {
+   "take": "068c42b (other session)",
+   "sha256": "29d373c0678544f58629c2a6d8d6a851310296626c57571b319e69bb5dce1ce7",
+   "expected": "Choose information cards with facts your model needs. Choose a model and use the calculator, table or graph to find a result.",
+   "heard": "Choose information cards with facts your model needs. Choose a model and use the calculator, table or graph to find a result.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1ie5bhk": {
+   "take": "068c42b (other session)",
+   "sha256": "a3f33b4a1f924d986b6aab8f94ef1f853ada14cfc94414e6ab46f7f72c5b82fc",
+   "expected": "Still shouting. Check the claims, not the volume.",
+   "heard": "Still shouting? Check the claims, not the volume.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1jwrtx6": {
+   "take": "068c42b (other session)",
+   "sha256": "8b952f97d1c5414f4dd3b7da2af976a98e00b258ef63ddbee3618350fa444dd3",
+   "expected": "We want a fair chart. Compare the headline with the actual values.",
+   "heard": "We want a fair chart. Compare the headline with the actual values.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1mou753": {
+   "take": "FAL-260",
+   "sha256": "f057696c69b96315a0e00f9878ac8d68dac96136e3ef15b41b45e68a11250cdf",
+   "expected": "Test a triple you expect NOT to fit. If it fits, your guess needs changing. Then choose Name the rule.",
+   "heard": "Test a triple you expect not to fit. If it fits, your guess needs changing. Then choose name the rule.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1ob0y0s": {
+   "take": "FAL-260",
+   "sha256": "d2116064a37f494de6fb5bdd0a1f72fe8b0261e2ade4ec0784b6742af3c6ea21",
+   "expected": "Choose the claim the corrected data supports, then submit. Fixing a chart means both its view and its conclusion are fair. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+   "heard": "Choose the claim the corrected data supports, then submit. Fixing a chart means both its view and its conclusion are fair. How to play is free. The hint button shows its heart cost. Think first, then check your answer.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1olx7sg": {
+   "take": "FAL-260",
+   "sha256": "6b5aeb7a09890f7beff3bb170718a9c6e0ba75abab4e5d91361902ef4322f483",
+   "expected": "Follow the stages: audit, name the flaw, then fix. We are checking who gets help and who misses out.",
+   "heard": "Follow the stages. Audit, name the flaw, then fix. We are checking who gets help and who misses out.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1sh8o2g": {
+   "take": "FAL-260",
+   "sha256": "1abd93e6c9f7c2a406ab02bd60c2adaebcd2022ecfa53751878f0f980e50edd4",
+   "expected": "Choose Valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument.",
+   "heard": "Choose valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1shesyx": {
+   "take": "068c42b (other session)",
+   "sha256": "39ad50fb7f1b9ffea850ceab10665d0ae94d1fa7f43bd166f5d2584a93b0cd62",
+   "expected": "Each clue is evidence. Read them all first. Click a clue to mark it as used.",
+   "heard": "Each clue is evidence. Read them all first. Click a clue to mark it as used.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1tpfqw9": {
+   "take": "FAL-260",
+   "sha256": "d78d4578ab3c77895efeb1f2f8c731c90eb4e43e9d8483a48a8bc5964b8356d2",
+   "expected": "Now check the other statements. A possible answer must make every honest statement true and every lie false.",
+   "heard": "Now, check the other statements. A possible answer must make every honest statement true and every lie false.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1weopsh": {
+   "take": "FAL-260",
+   "sha256": "bdb92d00776684d94bcc310dd0715356019aaaf2beebb1c8ea203f4c710abaf0",
+   "expected": "Run the home-visit audit. Click cards to see their scores; compare the stamps with the needs the audit reveals.",
+   "heard": "Run the home visit audit. Click cards to see their scores. Compare the stamps with the needs the audit reveals.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1xg7tow": {
+   "take": "068c42b (other session)",
+   "sha256": "5efce575c8982765845f7d3c15dd2d069e0cf5be222b92d528134655583be634",
+   "expected": "The machine still counts. It just doesn't boast.",
+   "heard": "The machine still counts. It just doesn't boast.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1xynpb": {
+   "take": "FAL-260",
+   "sha256": "a4934d6b8120522719c4ed39763be94ff7588160166a12215e5b0f8fcc87a534",
+   "expected": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+   "heard": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The hint button shows its heart cost. Think first, then check your answer.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-1ysj57a": {
+   "take": "FAL-260",
+   "sha256": "b6cbe392508bc63801c50a7aab4319256e119407502dd8b1b156316c8e8216e6",
+   "expected": "In Pattern Breaker mode, read the picture and count. Choose the next value and the explanation; a familiar pattern can break.",
+   "heard": "In pattern breaker mode, read the picture and count. Choose the next value and the explanation. A familiar pattern can break.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-2icg1v": {
+   "take": "068c42b (other session)",
+   "sha256": "f335420e9318826bc71b09bd21d4718b9c736f09d3c081ca8c2da6bfe1941441",
+   "expected": "In a triple task, click tiles to fill three slots, then Test it. A yes does not prove your rule.",
+   "heard": "In a triple task, click tiles to fill three slots, then test it. A yes does not prove your rule.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-5sg1v": {
+   "take": "068c42b (other session)",
+   "sha256": "e0aa290058224f00ea5222892ac898bffeadd3f2c847a2b4a8b2fe4227d21144",
+   "expected": "Choose every answer, then Give my testimony. Read feedback and revise your answer. Your first hint on a new topic is free and keeps your stars; later hints show their heart cost.",
+   "heard": "Choose every answer, then give my testimony. Read feedback and revise your answer. Your first hint on a new topic is free and keeps your stars. Later hints show their heart cost.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-6byco6": {
+   "take": "068c42b (other session)",
+   "sha256": "ee8ef836a8a838b1f8e07feedcc83030e3afb3f2c0fd347bd7327fe41dead892",
+   "expected": "Click Truth or Lie under each guard. Your marks are a guess you can change.",
+   "heard": "Click Truth or Lie under each guard. Your marks are a guess. You can change.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-7s11uz": {
+   "take": "068c42b (other session)",
+   "sha256": "31d9fdcddc46a7f90e8dbea269f7b03150a6f55f6869658deea69452b03c601b",
+   "expected": "The visible window can hide inconvenient values. Use its handles to check the full picture when the task needs it.",
+   "heard": "The visible window can hide inconvenient values. Use its handles to check the full picture when the task needs it.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-7t8lhm": {
+   "take": "068c42b (other session)",
+   "sha256": "4ba1225a09c249d11f698c82e328a81f9078aa0dcfaf11c6d7a472bea1021c46",
+   "expected": "Reach the stated target, then explain how the guess works. Check the score and last result after each move. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+   "heard": "Reach the stated target, then explain how the guess works. Check the score and last result after each move. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-86bib1": {
+   "take": "FAL-260",
+   "sha256": "8c83a76ac2f11a6042f32b7467da51bc0f85d7f03288d4b4eec785bee4586308",
+   "expected": "The four boxes count right and wrong decisions. Example: refusing help to someone who needs it is a missed need, even if most other decisions are right.",
+   "heard": "The four boxes count right and wrong decisions. Example, refusing help to someone who needs it is a missed need, even if most other decisions are right.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-99egid": {
+   "take": "068c42b (other session)",
+   "sha256": "0c1e91282c358457a0bd86ca83ce61e38235fe61d0a769f80b4acfecfc8c2756",
+   "expected": "We need a safe route. These are the rules of this world, not promises about real people.",
+   "heard": "We need a safe route. These are the rules of this world, not promises about real people.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-9v7tm3": {
+   "take": "068c42b (other session)",
+   "sha256": "2bc9845037d8da7aae2d2d72ef9f0b2e030c0793fbc264821deea7dfcf5106cf",
+   "expected": "Some means at least one. \"Some ducks are birds\" needs an x in their overlap. \"No ducks are birds\" shades that overlap.",
+   "heard": "Some means at least one. Some ducks are birds needs an X in their overlap. No ducks are birds shades that overlap.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-b483rb": {
+   "take": "FAL-260",
+   "sha256": "b6a687abe00819f14fa1e26a5904508eb06cce6c596700c7328ab33fee6cdc75",
+   "expected": "Example: 2,4,6 fits both \"even numbers\" and \"numbers going up\". Testing 1,3,5 tells those ideas apart.",
+   "heard": "Example, 2, 4, 6 fits both even numbers and numbers going up. Testing 1, 3, 5 tells those ideas apart.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-bj4e1r": {
+   "take": "068c42b (other session)",
+   "sha256": "2e8401f5e2893473155e9f3a0a67eb142203e2d470f0ae817fd01bed853ff174",
+   "expected": "We put the argument on trial. Your job is to connect a weak statement to evidence.",
+   "heard": "We put the argument on trial. Your job is to connect a weak statement to evidence.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-bp3gzv": {
+   "take": "068c42b (other session)",
+   "sha256": "a9b1d8003d4959e137c1697986d33e9dc4c493288f3d23776ff1098a7bcdcf09",
+   "expected": "The stone is still sure of itself. Test it.",
+   "heard": "The stone is still sure of itself. Test it!",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-dj7rsr": {
+   "take": "068c42b (other session)",
+   "sha256": "d13704c3edc1f8a711c8405f2aa95a9ac7172a94aaebf6cb02f4e91060e5ac5c",
+   "expected": "Use the arrows to read the testimony. Press a statement to hear more; some evidence appears only after pressing.",
+   "heard": "Use the arrows to read the testimony. Press a statement to hear more. Some evidence appears only after pressing.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-efozr": {
+   "take": "068c42b (other session)",
+   "sha256": "f7e90bd442508055b97dc423a7cfad99be10887f58158500b2c682cd22fb3ac9",
+   "expected": "How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+   "heard": "how to play is free. The hint button shows its heart cost. Think first, then check your answer.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-ezpaai": {
+   "take": "068c42b (other session)",
+   "sha256": "7ef0afb6e182a5b03d75a592b61494279bc806948a12b302b9b8a4053cb590b8",
+   "expected": "Choose Shade and click a region, or drag an x from the tray. Put an x on a border when the facts leave its side open. Clear lets you restart.",
+   "heard": "Choose Shade and click a region or drag an X from the tray. Put an X on a border when the facts leave its side open. Clear lets you restart.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-g0z1l3": {
+   "take": "068c42b (other session)",
+   "sha256": "87a85b774d55e7edd5ca393abf8f90d06d4bd6d6900c7275662d02acd12344bf",
+   "expected": "Find the secret rule, or check whether a pattern really keeps going.",
+   "heard": "Find the secret rule, or check whether a pattern really keeps going.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-glukf9": {
+   "take": "068c42b (other session)",
+   "sha256": "8005ecfa3eb59c5b4800360227236fbd129629286a56682f84d67f0558c0aa4e",
+   "expected": "Three acts: wonder, investigate, compare. We need a useful question before a calculation.",
+   "heard": "Three acts. Wonder, investigate, compare. We need a useful question before a calculation.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-hdythp": {
+   "take": "FAL-260",
+   "sha256": "56209f3da7a443530fa50bd12f3cb2d2200f98a2288dfb23cfbe2637e5106264",
+   "expected": "Open the truth table. A row is one possible world; a column asks whether someone's words are true in that world.",
+   "heard": "Open the truth table. A row is one possible world. A column asks whether someone's words are true in that world.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-latemz": {
+   "take": "FAL-260",
+   "sha256": "8d46ac1de6e6e8b76c7d2ef3183687d1d8fb90e112a85d42e207cd8622e82def",
+   "expected": "Example: A says \"B is a liar\". Suppose A is honest: B must be a liar. Suppose A lies: B must be honest.",
+   "heard": "Example, A says B is a liar. Suppose A is honest, B must be a liar. Suppose A lies, B must be honest.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-lku6pv": {
+   "take": "FAL-260",
+   "sha256": "17207cba9b5d30e74f3f41c7ee381370f932b555fcccb46da043e4d3419aedf1",
+   "expected": "In that example, \"A blue lamp is on\" is Can't tell. There is no evidence either way. Use these three buttons for each claim.",
+   "heard": "In that example, a blue lamp is on and can't tell. There is no evidence either way. Use these three buttons for each claim.",
+   "exact": false,
+   "differences": [
+    "is -> and"
+   ],
+   "recut": false
+  },
+  "kuku-lxx7ww": {
+   "take": "068c42b (other session)",
+   "sha256": "00fcb5467744df44aa03104909832d03dbf5de815d820201d9623bf2117a0d40",
+   "expected": "Watch the scene, choose what you wonder, then make a rough guess. The guess is a starting point, not a test of your maths.",
+   "heard": "Watch the scene. Choose what you wonder. Then make a rough guess. The guess is a starting point, not a test of your maths.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-nss66q": {
+   "take": "068c42b (other session)",
+   "sha256": "57f45c2f184ac87c323e883b7d96edc9f42c985c1e6b35c7d7f905dbf15c4bd6",
+   "expected": "Example: if it always guesses your most common past move, choosing a different move can beat it. Watch whether its rule changes.",
+   "heard": "Example, if it always guesses your most common past move, choosing a different move can beat it. Watch whether its rule changes.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-olajgc": {
+   "take": "068c42b (other session)",
+   "sha256": "b8d6731f33f0f20fbb99e68f14f3abf9ad76190099e2fe7440356aa5c5f36f33",
+   "expected": "After the warm-up, its brain opens. The table counts past choices. Read it, then choose Now beat it to start the next rounds.",
+   "heard": "After the warm-up, its brain opens. The table counts past choices. Read it, then choose now. Beat it to start the next rounds.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-oulrgh": {
+   "take": "068c42b (other session)",
+   "sha256": "5e13ceb13fde27c4a82c170761e97a9203a7c45ebf543818e796e3f6570f4d71",
+   "expected": "Read each switch before changing it. Not every switch is a trick: keep the honest controls honest.",
+   "heard": "Read each switch before changing it. Not every switch is a trick. Keep the honest controls honest.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-qhbo1k": {
+   "take": "068c42b (other session)",
+   "sha256": "270ca5ea38950882934745bf4f8aa224af8c68c98af1b93f4d8b138791783b81",
+   "expected": "Open the Court record. Read what each piece of evidence establishes, not just its picture.",
+   "heard": "Open the court record. Read what each piece of evidence establishes, not just its picture.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-qkrbkp": {
+   "take": "FAL-260",
+   "sha256": "94ee2247fadc750778990f5f48c8dd70a1a56a5a6abdae21f4f2a9c2829e1fb8",
+   "expected": "In the reveal, compare your model with what happened. Explain which assumption caused any gap and complete the reflection. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+   "heard": "In the reveal, compare your model with what happened. Explain which assumption caused any gap and complete the reflection. How to play is free. The hint button shows its heart cost. Think first, then check your answer.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-rhgil2": {
+   "take": "068c42b (other session)",
+   "sha256": "9eb39a228f2ac3d71ee5dddf2d1d02ed17611b82ec403e3b48cbb9bede27191d",
+   "expected": "The cage is empty. The crack has stopped drinking.",
+   "heard": "The cage is empty. The crack has stopped drinking.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-ri3ed6": {
+   "take": "068c42b (other session)",
+   "sha256": "8e57ed583897eaa1902ee1b839004d5ec48018dd5a215b700798485062226f76",
+   "expected": "Use Present on the statement, choose evidence, then Take that. Name the flaw and repair the proof if asked. Finish with Close the case. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+   "heard": "Use present on the statement, choose evidence, then take that. Name the flaw and repair the proof if asked. Finish with close the case. How to play is free. The hint button shows its hard cost. Think first, then check your answer.",
+   "exact": false,
+   "differences": [
+    "heart -> hard"
+   ],
+   "recut": false
+  },
+  "kuku-stlg1l": {
+   "take": "068c42b (other session)",
+   "sha256": "640294c48bb5d9c7998f99bbe4d11614f6c8638ab8d552909b43d42853b2d65f",
+   "expected": "The core is quiet. Its three old tricks still run, if you want them.",
+   "heard": "The core is quiet. It's three old tricks still run, if you want them.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-tfypat": {
+   "take": "068c42b (other session)",
+   "sha256": "cc9094ed79a65063f0b22cbc4705770c6fdb4f02a0b09f6ba9078c6cb98efa1b",
+   "expected": "Click a cell once for ✕, twice for ✓. A ✓ crosses out its row and column.",
+   "heard": "Click a cell once for x, twice for check. A check crosses out its row and column.",
+   "exact": false,
+   "differences": [
+    "- -> x",
+    "- -> check",
+    "- -> check"
+   ],
+   "recut": false
+  },
+  "kuku-ti5ynd": {
+   "take": "068c42b (other session)",
+   "sha256": "55a41c2f35063cb8cf3f8bb93be1a044738e88a0bd04b6db57abbb65749e2abb",
+   "expected": "Choose a door and Open the gate when all your marks fit. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+   "heard": "Choose a door and open the gate when all your marks fit. How to play is free. The hint button shows its heart cost. Think first, then check your answer.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-ue6w2g": {
+   "take": "FAL-260",
+   "sha256": "8e7c580d99993446eb8d4a7a186bb3d51cd319fd624d11ce6082359ffe76a127",
+   "expected": "Read the rule and budget. Name the flaw, then choose one of the listed fixes to meet the stated goals.",
+   "heard": "read the rule and budget, name the flaw, then choose one of the listed fixes to meet the stated goals.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-vh8ou6": {
+   "take": "FAL-260",
+   "sha256": "b5e199b0a5603bfbb9043b41f64beaf3064b075d6372028aca216e4c0d2a8b0d",
+   "expected": "Click a villager to add an accusation token. Click again to remove it. Mark suspected imps; leave honest villagers unmarked.",
+   "heard": "Click a villager to add an accusation token. Click again to remove it. Mark suspected imps. Leave honest villagers unmarked.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-wuhbbb": {
+   "take": "FAL-260",
+   "sha256": "1643a06161a4ed6f935ac6e5d12207c196ef447d7ba0b9cdbb6b5e07c68eccc7",
+   "expected": "Find which villagers are imps. Every identity must fit all their words under these rules.",
+   "heard": "Find which villagers are imps. Every identity must fit all their words under these rules.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "kuku-z1rqt3": {
+   "take": "068c42b (other session)",
+   "sha256": "1583caf1bd86931d9679191a8a7f1fee5b75049027797ba0438c511d254ebd30",
+   "expected": "Example, not this puzzle: \"Ada did not write the frog story.\" Put ✕ where Ada meets that headline.",
+   "heard": "Example, not this puzzle, Ada did not write the frog story. Put X where Ada meets that headline.",
+   "exact": false,
+   "differences": [
+    "- -> x"
+   ],
+   "recut": false
+  },
+  "pip-10ajjzf": {
+   "take": "FAL-260",
+   "sha256": "44db0ac64cb204224e1aef85b729c27b11b03a7d881b6dfb817d85251d6a9f52",
+   "expected": "Pick a move only after its guess is locked. You win a point when the machine is wrong.",
+   "heard": "Pick a move only after its guess is locked. You win a point when the machine is wrong.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "pip-15istb8": {
+   "take": "FAL-260",
+   "sha256": "91d64569048957ff80003741f6fcd9121e8e9ec2c7780fb7b62571dc0d04477e",
+   "expected": "Open the truth table. A row is one possible world; a column asks whether someone's words are true in that world.",
+   "heard": "Open the truth table. A row is one possible world. A column asks whether someone's words are true in that world.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "pip-1cdrk8c": {
+   "take": "FAL-260",
+   "sha256": "d0623bd625f3de4b8f0c2a75cc272b2b427e0b2d45ec59fa543c028a8c6021d9",
+   "expected": "After the warm-up, its brain opens. The table counts past choices. Read it, then choose Now beat it to start the next rounds.",
+   "heard": "After the warm-up, its brain opens. The table counts past choices. Read it, then choose. Now beat it to start the next round.",
+   "exact": false,
+   "differences": [
+    "rounds -> round"
+   ],
+   "recut": false
+  },
+  "pip-1ft59gd": {
+   "take": "FAL-260",
+   "sha256": "2ab7b481b8b9fdab068b7bc5b77aca6567ba91a11c5ee629175ee1429c0c00ba",
+   "expected": "Reach the stated target, then explain how the guess works. Check the score and last result after each move. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+   "heard": "Reach the stated target, then explain how the guess works. Check the score and last result after each move. How to play is free. The hint button shows its heart cost. Think first, then check your answer.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "pip-1j5zex": {
+   "take": "FAL-260",
+   "sha256": "62931c6723c1af6a7a2331e60541fef0fba41c3b54f38e4bbc336f915a605ecf",
+   "expected": "Click a villager to add an accusation token. Click again to remove it. Mark suspected imps; leave honest villagers unmarked.",
+   "heard": "Click a villager to add an accusation token. Click again to remove it. Mark suspected imps. Leave honest villagers unmarked.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "pip-2ok06r": {
+   "take": "FAL-260",
+   "sha256": "61a721fd4119338c7d28d211a21371ee69d21d204831901ebf0bc09e85905ec9",
+   "expected": "Example: if it always guesses your most common past move, choosing a different move can beat it. Watch whether its rule changes.",
+   "heard": "Example, if it always guesses your most common past move, choosing a different move can beat it. Watch whether its rule changes.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "pip-5svepz": {
+   "take": "FAL-260",
+   "sha256": "1eebfdec86f29c9691d1de553956ba0abbf92943ff624060f06eba9307d0ec98",
+   "expected": "Example: Baker says \"Sweep is an imp\". In a world where Sweep is honest, those words are false. Baker must then be an imp.",
+   "heard": "Example. Baker says, sweep is an imp. In a world where sweep is honest, those words are false. Baker must then be an imp.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "pip-hlrghk": {
+   "take": "FAL-260",
+   "sha256": "eddfb74a9e14dad7a34d678d1dd2bf86c03cf477d6054b69ccb58cc2c8b6ab88",
+   "expected": "Find which villagers are imps. Every identity must fit all their words under these rules.",
+   "heard": "Find which villagers are imps. Every identity must fit all their words under these rules.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "pip-o4n371": {
+   "take": "FAL-260",
+   "sha256": "41b79c47c2bf6e6caaaa2e3268739b0236399ed937763466e93cc7926a342d05",
+   "expected": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+   "heard": "Check rows for clashes, and cross out the ones that cannot fit. Put tokens on the imps in the surviving world, and accuse when every statement fits. How to play is free. The hint button shows its heart cost. Think first, then check your answer.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "pip-wvypo": {
+   "take": "FAL-260",
+   "sha256": "ba08a05fa9ed1b9e8bdcf619e885e97ffa0e8ec0fb8f93b8a2fb65427f4bcd2c",
+   "expected": "Read the target. We are testing a machine that uses past patterns to guess your next move.",
+   "heard": "Read the target. We are testing a machine that uses past patterns to guess your next move.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "tally-111rjfe": {
+   "take": "FAL-260",
+   "sha256": "78b62897bc8578326d6f61081daed1697a366e188591cae15f9592cedc5d65f3",
+   "expected": "Test a triple you expect NOT to fit. If it fits, your guess needs changing. Then choose Name the rule.",
+   "heard": "Test a triple you expect not to fit. If it fits, your guess needs changing. Then choose name the rule.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "tally-12d4hyp": {
+   "take": "FAL-260",
+   "sha256": "a0d478d59f6343da0f3e7a39a4277223eed3813f300fe54e1165c1ba223ee150",
+   "expected": "Choose Shade and click a region, or drag an x from the tray. Put an x on a border when the facts leave its side open. Clear lets you restart.",
+   "heard": "Choose Shade and click a region, or drag an X from the tray. Put an X on a border when the facts leave its side open. Clear lets you restart.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "tally-13qfjvj": {
+   "take": "FAL-260",
+   "sha256": "0fec132c9aea5644c998d87f00623d42cdce6e2ac2ecd883e7bb8b9a803c2573",
+   "expected": "Example: 2,4,6 fits both \"even numbers\" and \"numbers going up\". Testing 1,3,5 tells those ideas apart.",
+   "heard": "Example 2, 4, 6 fits both even numbers and numbers going up. Testing 1, 3, 5 tells those ideas apart.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "tally-1jd184q": {
+   "take": "FAL-260",
+   "sha256": "45e0d3299ef740d76f7ff38dd869dcceabf87d57464443b55a6e1de6f17fd989",
+   "expected": "Choose Valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument.",
+   "heard": "Choose valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "tally-1jzcol6": {
+   "take": "FAL-260",
+   "sha256": "0409976c2bdad1a564d75603fd1cbbfa63aff7fdc4f13ba12011d65bf553467e",
+   "expected": "Some means at least one. \"Some ducks are birds\" needs an x in their overlap. \"No ducks are birds\" shades that overlap.",
+   "heard": "Some means at least one. Some ducks are birds needs an X in their overlap. No ducks are birds shades that overlap",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "tally-1kbwjjo": {
+   "take": "FAL-260",
+   "sha256": "02df7da25d606545d2639ffbaef3c64ea5e46c871fb28a3f24f6201ee0fb3a3d",
+   "expected": "How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+   "heard": "How to play is free the hint button shows its heart cost think first then check your answer",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "tally-1phwr6j": {
+   "take": "FAL-260",
+   "sha256": "1e67782af417a32a6316ffbe46eace3c92ce3fd8d3988fd4373f17dcbe2612ee",
+   "expected": "In Pattern Breaker mode, read the picture and count. Choose the next value and the explanation; a familiar pattern can break.",
+   "heard": "In Pattern Breaker mode, read the picture and count. Choose the next value and the explanation. A familiar pattern can break.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "tally-1rm8zx0": {
+   "take": "FAL-260",
+   "sha256": "51ac8b13b45bf84f2fbb94c8f707efa7af3f79d286048b0db72d3a4483d40eaf",
+   "expected": "Still no sequence. Evidence, please. Not wishes.",
+   "heard": "Still no sequence. Evidence, please. Not wishes.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "tally-1tsbeqe": {
+   "take": "FAL-260",
+   "sha256": "fa4ab505604763c440e4813a5fec9ce2f631cedda047b5d3dc682a72fcab384b",
+   "expected": "We judge whether the conclusion MUST follow from these facts. Read the scrolls first.",
+   "heard": "We judge whether the conclusion must follow from these facts. Read the scrolls first.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "tally-cvagyd": {
+   "take": "FAL-260",
+   "sha256": "d2635261b219d561e2ecca376a1fe410389b4fd2467e0cbe1b7c7f0e8b14aa55",
+   "expected": "Find the secret rule, or check whether a pattern really keeps going.",
+   "heard": "Find the secret rule or check whether a pattern really keeps going",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "tally-j4e0ee": {
+   "take": "FAL-260",
+   "sha256": "fc7de1f3e0b7bdd02e582518526229192ef9f06ee82268a161cf7c39b1590814",
+   "expected": "The drawing is optional working. If asked, judge premise support using only the reference records, then Seal the verdict. Missing evidence is not false. How to play is free. The Hint button shows its heart cost.",
+   "heard": "The drawing is optional working. If asked, judge premise support using only the reference records, then seal the verdict. Missing evidence is not false. How to play is free. The hint button shows its heart cost.",
+   "exact": true,
+   "differences": [],
+   "recut": true
+  },
+  "tally-o3ahsc": {
+   "take": "FAL-260",
+   "sha256": "e1740a769f70c8fb3e483f3bbb2a4bf241466d46e93fb7fffae4f7cd9d1c689e",
+   "expected": "In a triple task, click tiles to fill three slots, then Test it. A yes does not prove your rule.",
+   "heard": "In a triple task, click tiles to fill three slots, then test it. A yes does not prove your rule.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  },
+  "tally-yzav0a": {
+   "take": "FAL-260",
+   "sha256": "6e5140de4530a5be91c02b0226dff1ad1020a32c3fac56a643f70cc3ff27b9df",
+   "expected": "Shade means no things here. Example: \"All ducks are birds\" shades the ducks-only region outside birds. It does not add an x.",
+   "heard": "Shade means no things here. Example, all ducks are birds. Shades the ducks only region outside birds. It does not add an X.",
+   "exact": true,
+   "differences": [],
+   "recut": false
+  }
+ }
+}

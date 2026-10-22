@@ -1,0 +1,339 @@
+{
+  "date": "2026-10-22",
+  "task": "FAL-260",
+  "ttsRequests": 0,
+  "method": "Each raw take was transcribed locally with word timings (faster-whisper small, CPU). The script words were aligned to those timings, and each line boundary moved to the detected pause between line k's last word and line k+1's first word. Two boundaries where the short power name \"Foresee\" sat between two pauses were set by hand. Pause detection, trim, effects and the 48 kbps MP3 encoder match tools/voices.mjs; re-cutting at the stock pauses reproduced untouched clips byte for byte.",
+  "repairs": [
+    {
+      "id": "granny-10yf2zu",
+      "rawTake": "granny-fwn5m7-10",
+      "stockPauses": [7, 14, 22, 29, 35, 43, 50, 58, 65],
+      "chosenPauses": [7, 14, 22, 29, 35, 42, 50, 56, 64],
+      "note": "",
+      "stockCutSha256": "65f9f2f9fa21333bb54d78ca8c09679f46bd69b8a15c3d8113527719ded747b1",
+      "finalSha256": "7539bfd45c8811563c9affdbfaa5b3f4a9e73c8d019dd08aae5b407ac1c0dac1"
+    },
+    {
+      "id": "granny-15s27ru",
+      "rawTake": "granny-rpeyso-10",
+      "stockPauses": [6, 12, 18, 27, 35, 43, 53, 61, 68],
+      "chosenPauses": [7, 14, 20, 29, 37, 45, 55, 63, 70],
+      "note": "",
+      "stockCutSha256": "1809c204ccca041031bc2650a340c7b627532201f873af81b12e40ad19f0864d",
+      "finalSha256": "2c4138cd8e0da3baef43c452a8c8500cc181bf9a998a314d8e95bdae3d2e52b8"
+    },
+    {
+      "id": "granny-175vqhl",
+      "rawTake": "granny-1xiddkd-10",
+      "stockPauses": [8, 14, 24, 32, 39, 46, 54, 61, 69],
+      "chosenPauses": [8, 14, 23, 32, 39, 46, 54, 61, 69],
+      "note": "manual: Foresee sits between pauses 23 and 24",
+      "stockCutSha256": "1f87d68bbccf6df2db767afe9bc14bfd4abfc48adcddf06529b65eb746672a75",
+      "finalSha256": "229e71e598df7625e4108e30ddd401b31bdda4a69fda8fae776a79d17519256a"
+    },
+    {
+      "id": "granny-17xz8st",
+      "rawTake": "granny-fowaxu-10",
+      "stockPauses": [6, 14, 22, 30, 37, 44, 54, 60, 66],
+      "chosenPauses": [6, 14, 21, 32, 39, 46, 54, 60, 66],
+      "note": "",
+      "stockCutSha256": "fa1bc112abfb369fe9d59cb552df24fac86fb9510e31ff2ad3a76a6597cd7c2c",
+      "finalSha256": "8a94e3ce9fb4297ced85b4baca221a55d80e7538134ba900d8ed5b4116cec14d"
+    },
+    {
+      "id": "granny-1b2t76a",
+      "rawTake": "granny-fwn5m7-10",
+      "stockPauses": [7, 14, 22, 29, 35, 43, 50, 58, 65],
+      "chosenPauses": [7, 14, 22, 29, 35, 42, 50, 56, 64],
+      "note": "",
+      "stockCutSha256": "f1ed977effe353b892ac24d111259f5f98431fac7dc918330f055324f8a7dc62",
+      "finalSha256": "6573c82ed096c0cae99743c1097e47d9005ae9938c60c18fbd8301f301632d90"
+    },
+    {
+      "id": "granny-1dyijc4",
+      "rawTake": "granny-fwn5m7-10",
+      "stockPauses": [7, 14, 22, 29, 35, 43, 50, 58, 65],
+      "chosenPauses": [7, 14, 22, 29, 35, 42, 50, 56, 64],
+      "note": "",
+      "stockCutSha256": "17e448269dba6f22cafe5ff48d61f01f02b16468e470d881a653405c62056f0a",
+      "finalSha256": "d9a59f2ea679b55ac7fd0f3230bb6287ff3299cd3d8025b824fc2af83ed5e184"
+    },
+    {
+      "id": "granny-1fduw2j",
+      "rawTake": "granny-oggp2h-10",
+      "stockPauses": [6, 14, 20, 28, 36, 44, 56, 64, 70],
+      "chosenPauses": [6, 14, 21, 30, 38, 46, 56, 64, 71],
+      "note": "manual: Foresee sits between pauses 46 and 47",
+      "stockCutSha256": "7a3b3baee36f8dff922efc76113fd0441c183a978e0df92871f0a6dbe85ee012",
+      "finalSha256": "38016dbca235b43244c1a8ae8ecf6ea58566c13c2723184a2d8931b1a9f5c2fb"
+    },
+    {
+      "id": "granny-1hf4ync",
+      "rawTake": "granny-1q86o9p-10",
+      "stockPauses": [7, 14, 23, 32, 39, 46, 55, 64, 75],
+      "chosenPauses": [7, 14, 22, 32, 39, 46, 55, 64, 74],
+      "note": "",
+      "stockCutSha256": "57e31c718b900e2fdf94bfb00779336ba18554c93fa182eff32de64e6eb82042",
+      "finalSha256": "fa4e7c7087f52f237aeefba7194d9bb88223f3f2928767aad1859389f79290ad"
+    },
+    {
+      "id": "granny-1lfgkkc",
+      "rawTake": "granny-rpeyso-10",
+      "stockPauses": [6, 12, 18, 27, 35, 43, 53, 61, 68],
+      "chosenPauses": [7, 14, 20, 29, 37, 45, 55, 63, 70],
+      "note": "",
+      "stockCutSha256": "6bb30186202c889d2866c391cd0a9923be8d939d44c23b1ea12db7b3c01e7313",
+      "finalSha256": "c0a7d03c9dc84f2e4afdfcc93338957d950d3f28bc653703c99650b95ffa5eb3"
+    },
+    {
+      "id": "granny-1ohwtie",
+      "rawTake": "granny-1q86o9p-10",
+      "stockPauses": [7, 14, 23, 32, 39, 46, 55, 64, 75],
+      "chosenPauses": [7, 14, 22, 32, 39, 46, 55, 64, 74],
+      "note": "",
+      "stockCutSha256": "3282f1049d86ab56db65752d4e8a9f83b1408997884f267a3d4be60035674c2a",
+      "finalSha256": "a275b3de378ff6613e4ad6da1ad745415f0706db26b7c8efc2d8a7e432a34049"
+    },
+    {
+      "id": "granny-1oxoaex",
+      "rawTake": "granny-rpeyso-10",
+      "stockPauses": [6, 12, 18, 27, 35, 43, 53, 61, 68],
+      "chosenPauses": [7, 14, 20, 29, 37, 45, 55, 63, 70],
+      "note": "",
+      "stockCutSha256": "2f3aae2f5675a9342ce6baa69a978a2ed7dd6314e7fcdb27a703fdb236c0a19c",
+      "finalSha256": "c24a70159cf22615fee10adf7895046681a17717f09afbba3d11967a6b9499ad"
+    },
+    {
+      "id": "granny-1qavyi7",
+      "rawTake": "granny-fowaxu-10",
+      "stockPauses": [6, 14, 22, 30, 37, 44, 54, 60, 66],
+      "chosenPauses": [6, 14, 21, 32, 39, 46, 54, 60, 66],
+      "note": "",
+      "stockCutSha256": "b1ffa9cf60f1e8e54e9e73a546fd6fb4f808063508dfdee05fbd4ad2f2dc09ab",
+      "finalSha256": "c78eccb8e9fa7b25743ce29e278a8c313c01e6d11d4ac09f95787fedf72f7e98"
+    },
+    {
+      "id": "granny-1qqifj2",
+      "rawTake": "granny-rpeyso-10",
+      "stockPauses": [6, 12, 18, 27, 35, 43, 53, 61, 68],
+      "chosenPauses": [7, 14, 20, 29, 37, 45, 55, 63, 70],
+      "note": "",
+      "stockCutSha256": "89038996afd5df87801fa9227b7ee2e1c8a893e1130d5c09bbdd0445a8cb0d4e",
+      "finalSha256": "b54e71c3437580aa08f672cee9e2a5383c66113006b93bf309aa94bbe89ae9a2"
+    },
+    {
+      "id": "granny-1s8b4j",
+      "rawTake": "granny-rpeyso-10",
+      "stockPauses": [6, 12, 18, 27, 35, 43, 53, 61, 68],
+      "chosenPauses": [7, 14, 20, 29, 37, 45, 55, 63, 70],
+      "note": "",
+      "stockCutSha256": "df3132e8d63bbac3635b6e365b161f5b4f671baf36699cb708881d56d15c0aeb",
+      "finalSha256": "8879bb85fa36d469a48c6f5bac1acdc1620934a674e1030dbfa85a9602380681"
+    },
+    {
+      "id": "granny-1stzpeg",
+      "rawTake": "granny-rpeyso-10",
+      "stockPauses": [6, 12, 18, 27, 35, 43, 53, 61, 68],
+      "chosenPauses": [7, 14, 20, 29, 37, 45, 55, 63, 70],
+      "note": "",
+      "stockCutSha256": "5f14100f702df657fd074ad2c9986e8f00d149828afd89865c115f736b3c6168",
+      "finalSha256": "367a0e607d5b68808967b3fa06d4f082a6d270384c675247666108a8f70d664c"
+    },
+    {
+      "id": "granny-1trkfc7",
+      "rawTake": "granny-fwn5m7-10",
+      "stockPauses": [7, 14, 22, 29, 35, 43, 50, 58, 65],
+      "chosenPauses": [7, 14, 22, 29, 35, 42, 50, 56, 64],
+      "note": "",
+      "stockCutSha256": "913b627cc0eaa96e6a0c625fc2a465d88dde3cf787837d23d8beccb20a0b534e",
+      "finalSha256": "2e06492137bbc48b34143acdec2c2bc42140b24eb6f2d2fe246b2875e643a19a"
+    },
+    {
+      "id": "granny-5p8whl",
+      "rawTake": "granny-rpeyso-10",
+      "stockPauses": [6, 12, 18, 27, 35, 43, 53, 61, 68],
+      "chosenPauses": [7, 14, 20, 29, 37, 45, 55, 63, 70],
+      "note": "",
+      "stockCutSha256": "83f12b90c23243f1bc502ae6615d61d1842ba3e856a021790eda785b47db4da1",
+      "finalSha256": "5f3a2285c6b925666c37b09cbf61f2fcbfb89d231f825878b5a89ad523c30fac"
+    },
+    {
+      "id": "granny-68fge0",
+      "rawTake": "granny-1q86o9p-10",
+      "stockPauses": [7, 14, 23, 32, 39, 46, 55, 64, 75],
+      "chosenPauses": [7, 14, 22, 32, 39, 46, 55, 64, 74],
+      "note": "",
+      "stockCutSha256": "42b5e2a021031b5d90efeab8d6e04e7b1b762bedb64597615d974463e1886642",
+      "finalSha256": "6cbd7313aabcddd8ed7c30ec7ee7a78e46b2f62556e3e1b16df51ed3d50a2836"
+    },
+    {
+      "id": "granny-6pg26g",
+      "rawTake": "granny-fowaxu-10",
+      "stockPauses": [6, 14, 22, 30, 37, 44, 54, 60, 66],
+      "chosenPauses": [6, 14, 21, 32, 39, 46, 54, 60, 66],
+      "note": "",
+      "stockCutSha256": "b21eefd511c1ead0f2a46cec01deb6fb714c8ffa22ac9ded6ff11ea966bfbfe5",
+      "finalSha256": "9d7ddab979bb939cd9cf82a66bb44fb615b78c9fabebb679bf4896d26371be8f"
+    },
+    {
+      "id": "granny-h0b50k",
+      "rawTake": "granny-rpeyso-10",
+      "stockPauses": [6, 12, 18, 27, 35, 43, 53, 61, 68],
+      "chosenPauses": [7, 14, 20, 29, 37, 45, 55, 63, 70],
+      "note": "",
+      "stockCutSha256": "394204414fd73a7b9c01666952e4598408fdfe9d8d6a4d04943db43f5e6a0493",
+      "finalSha256": "9bd00f7450f4aa5043aa1739681e3ec43819dd950611a36a68c07496955c3b17"
+    },
+    {
+      "id": "granny-hjhwyq",
+      "rawTake": "granny-1l9r1p2-10",
+      "stockPauses": [5, 11, 19, 26, 33, 42, 48, 56, 64],
+      "chosenPauses": [5, 11, 19, 26, 33, 41, 48, 56, 64],
+      "note": "",
+      "stockCutSha256": "c84367103b1a9c177545fecbaccbe3942944cdaa36f37c0c8e81409f900d7bc5",
+      "finalSha256": "038f601be72ced7522cb0eefdb268c102f212c19c8312e2f2aa2dd43988eb449"
+    },
+    {
+      "id": "granny-jtkztl",
+      "rawTake": "granny-fwn5m7-10",
+      "stockPauses": [7, 14, 22, 29, 35, 43, 50, 58, 65],
+      "chosenPauses": [7, 14, 22, 29, 35, 42, 50, 56, 64],
+      "note": "",
+      "stockCutSha256": "dd6171074249f8b1db041d5e237d7c8e37a5dedf9e4562fbdab919b3a2f71e4f",
+      "finalSha256": "9d1c9c3e68b18e248ce498717af410a4cf244da8fc64fe07a347ef5dff34cec9"
+    },
+    {
+      "id": "granny-nsw51z",
+      "rawTake": "granny-1xiddkd-10",
+      "stockPauses": [8, 14, 24, 32, 39, 46, 54, 61, 69],
+      "chosenPauses": [8, 14, 23, 32, 39, 46, 54, 61, 69],
+      "note": "manual: Foresee sits between pauses 23 and 24",
+      "stockCutSha256": "58765fd2cf7afd81d8ae92219cce5745299822bc500d6327a5957402f7435464",
+      "finalSha256": "460be4884bdc3cef5491a6c397f62c29a4fa3b767392b217d019df430d64ae37"
+    },
+    {
+      "id": "granny-rpeyso",
+      "rawTake": "granny-rpeyso-10",
+      "stockPauses": [6, 12, 18, 27, 35, 43, 53, 61, 68],
+      "chosenPauses": [7, 14, 20, 29, 37, 45, 55, 63, 70],
+      "note": "",
+      "stockCutSha256": "bd0f069671cb42295c944488fca83543fa464505c982ff638321e66f29aac82f",
+      "finalSha256": "f9fee053fc07745a60bb3d5bf6a401cad386b683da8d023d30e18123b7a9bbf9"
+    },
+    {
+      "id": "granny-swdv2f",
+      "rawTake": "granny-oggp2h-10",
+      "stockPauses": [6, 14, 20, 28, 36, 44, 56, 64, 70],
+      "chosenPauses": [6, 14, 21, 30, 38, 46, 56, 64, 71],
+      "note": "manual: Foresee sits between pauses 46 and 47",
+      "stockCutSha256": "f37b6126805bd31135de40fa581fe1e26b4dc2f3d691773227a7dda3d230d6dd",
+      "finalSha256": "83b996e9a3779997128ef1651e001638d925bb98c414cc2ce9dce01dc37508db"
+    },
+    {
+      "id": "granny-uqfmyt",
+      "rawTake": "granny-rpeyso-10",
+      "stockPauses": [6, 12, 18, 27, 35, 43, 53, 61, 68],
+      "chosenPauses": [7, 14, 20, 29, 37, 45, 55, 63, 70],
+      "note": "",
+      "stockCutSha256": "07e73b88a76da94dd054d8f20732f438e61398af9c1935b870097e29e1815580",
+      "finalSha256": "2c02b65a48ecf01cc4f1001a64b0d42334696c9fd9d8a8295e18afb38b4eb5c9"
+    },
+    {
+      "id": "granny-y34ae6",
+      "rawTake": "granny-1q86o9p-10",
+      "stockPauses": [7, 14, 23, 32, 39, 46, 55, 64, 75],
+      "chosenPauses": [7, 14, 22, 32, 39, 46, 55, 64, 74],
+      "note": "",
+      "stockCutSha256": "f67fedc6251a4fd852835438ce53ad68d9417f60e97ffc38ffb66755d7aaf6ba",
+      "finalSha256": "58dbf1904b3f1a8a01270a0c81e684e5f5ef560bee26cf4367bd45229b3289ba"
+    },
+    {
+      "id": "pip-15istb8",
+      "rawTake": "pip-wvypo-10",
+      "stockPauses": [1, 3, 8, 12, 19, 22, 26, 30, 34],
+      "chosenPauses": [1, 3, 8, 12, 19, 22, 26, 29, 34],
+      "note": "",
+      "stockCutSha256": "c053d146f030912af6316c500cd79c832882aca7bcf0f6212410d662fc059828",
+      "finalSha256": "91d64569048957ff80003741f6fcd9121e8e9ec2c7780fb7b62571dc0d04477e"
+    },
+    {
+      "id": "pip-5svepz",
+      "rawTake": "pip-wvypo-10",
+      "stockPauses": [1, 3, 8, 12, 19, 22, 26, 30, 34],
+      "chosenPauses": [1, 3, 8, 12, 19, 22, 26, 29, 34],
+      "note": "",
+      "stockCutSha256": "1d6d87424714e87885330a1fa0f40fe315e3d6269614205a8ae56eea43ee3892",
+      "finalSha256": "1eebfdec86f29c9691d1de553956ba0abbf92943ff624060f06eba9307d0ec98"
+    },
+    {
+      "id": "tally-111rjfe",
+      "rawTake": "tally-1rm8zx0-10",
+      "stockPauses": [2, 4, 9, 16, 23, 32, 38, 42, 49],
+      "chosenPauses": [2, 4, 9, 21, 27, 34, 39, 42, 49],
+      "note": "",
+      "stockCutSha256": "af95b432d1530abb68f0b51f362911e8953d4a7ed255b45d2ab502c23e758310",
+      "finalSha256": "78b62897bc8578326d6f61081daed1697a366e188591cae15f9592cedc5d65f3"
+    },
+    {
+      "id": "tally-13qfjvj",
+      "rawTake": "tally-1rm8zx0-10",
+      "stockPauses": [2, 4, 9, 16, 23, 32, 38, 42, 49],
+      "chosenPauses": [2, 4, 9, 21, 27, 34, 39, 42, 49],
+      "note": "",
+      "stockCutSha256": "44a1f3ff66945823ba9482d95bb21022217c9f8175d357c1cc2df47d7ade741e",
+      "finalSha256": "0fec132c9aea5644c998d87f00623d42cdce6e2ac2ecd883e7bb8b9a803c2573"
+    },
+    {
+      "id": "tally-1jd184q",
+      "rawTake": "tally-12d4hyp-3",
+      "stockPauses": [6, 14],
+      "chosenPauses": [6, 11],
+      "note": "",
+      "stockCutSha256": "71949d3118ad7edc539769971bf85701d6ec084158d24642b8e8b088459fdbb7",
+      "finalSha256": "45e0d3299ef740d76f7ff38dd869dcceabf87d57464443b55a6e1de6f17fd989"
+    },
+    {
+      "id": "tally-1kbwjjo",
+      "rawTake": "tally-1rm8zx0-10",
+      "stockPauses": [2, 4, 9, 16, 23, 32, 38, 42, 49],
+      "chosenPauses": [2, 4, 9, 21, 27, 34, 39, 42, 49],
+      "note": "",
+      "stockCutSha256": "815845df4db87b4e88eb571a1d59b580d6843fb8196589b4eda6bf8bba5b2be5",
+      "finalSha256": "02df7da25d606545d2639ffbaef3c64ea5e46c871fb28a3f24f6201ee0fb3a3d"
+    },
+    {
+      "id": "tally-1phwr6j",
+      "rawTake": "tally-1rm8zx0-10",
+      "stockPauses": [2, 4, 9, 16, 23, 32, 38, 42, 49],
+      "chosenPauses": [2, 4, 9, 21, 27, 34, 39, 42, 49],
+      "note": "",
+      "stockCutSha256": "594c65fb913166bc2d715d65d9d9ab2af16b772fae2c7e1b6d4755c0f4fd42e6",
+      "finalSha256": "1e67782af417a32a6316ffbe46eace3c92ce3fd8d3988fd4373f17dcbe2612ee"
+    },
+    {
+      "id": "tally-1tsbeqe",
+      "rawTake": "tally-1rm8zx0-10",
+      "stockPauses": [2, 4, 9, 16, 23, 32, 38, 42, 49],
+      "chosenPauses": [2, 4, 9, 21, 27, 34, 39, 42, 49],
+      "note": "",
+      "stockCutSha256": "440e4f643970f0495bcd20f5f55e1a78ae0121e69fc4ab61c415fdd0686f9862",
+      "finalSha256": "fa4ab505604763c440e4813a5fec9ce2f631cedda047b5d3dc682a72fcab384b"
+    },
+    {
+      "id": "tally-j4e0ee",
+      "rawTake": "tally-12d4hyp-3",
+      "stockPauses": [6, 14],
+      "chosenPauses": [6, 11],
+      "note": "",
+      "stockCutSha256": "bfe4c81e5e9777a7c56d45a5742a400e322fc42e05319e197c6f419dda88850d",
+      "finalSha256": "fc7de1f3e0b7bdd02e582518526229192ef9f06ee82268a161cf7c39b1590814"
+    }
+  ],
+  "removed": [
+    {
+      "id": "kuku-o0st9l",
+      "text": "When a row has only one empty cell left, that cell must be ✓. Keep going until every row has one ✓.",
+      "reason": "Both takes read ✓ as a letter: ours as \"Z\" (heard by gemini-3.8-flash, gemini-3-flash-preview and Whisper), commit 068c42b's as \"V\" (Whisper). Removed so the line falls back until a single-line re-record."
+    }
+  ]
+}
