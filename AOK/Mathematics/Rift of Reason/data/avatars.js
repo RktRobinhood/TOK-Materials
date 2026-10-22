@@ -25,7 +25,7 @@
         fox: {
             name: 'Fox kit', colour: 'imagination',
             looks: { boy: 'green bandana', girl: 'mustard duffle coat' },
-            perk: { id: 'sly', name: 'Sly Charm', text: '+1 cast, turn or trap heart (+2 slides in Picture Catch) when catching Language and Imagination creatures.' },
+            perk: { id: 'sly', name: 'Sly Charm', text: 'Catch games give Language and Imagination creatures a little more: +1 net, shield, turn or trap heart (+2 slides in Picture Catch).' },
             powers: { girl: 'what-if', boy: 'brainstorm' },
         },
         frogling: {

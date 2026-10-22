@@ -1,0 +1,240 @@
+{
+  "boardsPerRarity": 400,
+  "seedPrefix": "arcade-held-out:2210:",
+  "settings": {
+    "NET": {
+      "balls": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "speed": [
+        2.95,
+        2.55,
+        2.4,
+        2.3
+      ],
+      "goal": [
+        0.8,
+        0.8,
+        0.8,
+        0.8
+      ],
+      "lives": 3,
+      "seconds": 60,
+      "grow": 4.5,
+      "terrain": [
+        3,
+        4,
+        4,
+        5
+      ],
+      "pen": 6
+    },
+    "BURST": {
+      "big": [
+        1,
+        2,
+        2,
+        3
+      ],
+      "medium": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "pace": [
+        2.8,
+        2.42,
+        2.18,
+        2.02
+      ],
+      "shields": 4,
+      "seconds": 35,
+      "radius": [
+        0,
+        0.42,
+        0.72,
+        1.1
+      ],
+      "speed": [
+        0,
+        2,
+        1.5,
+        1
+      ],
+      "dart": 9,
+      "dartLife": 50,
+      "darts": 1,
+      "cool": 12,
+      "turret": 0.6
+    },
+    "HELP": {
+      "lives": 1,
+      "seconds": 10
+    }
+  },
+  "players": {
+    "average": "Pocket Nets: looks 0.6–1.5 s between nets, weighs six random spots, skips spots a creature seems to head for (speed misjudged up to 25%), reacts in 0.17–0.33 s, slips one cell 20% of the time. Shard Burst: holds the pointer down, picks the nearest shard 75% of the time (else a random one), pointer trails it by 0.25 s, about 6° aim error, half a lead, 0.1–0.23 s to re-aim.",
+    "calm": "Calm step mode: acts once per half-second step, reads the exact one-second ghost path, weighs six spots (nets) or leads the nearest shard (throws), slips a cell 10% of the time or aims about 3° off. No reaction delay.",
+    "random": "Pocket Nets: a random spot and direction once a second. Shard Burst: a random direction five times a second.",
+    "skilled": "Admission only: tests options against the exact clock; every served board has its replayed win."
+  },
+  "limitations": "Machine players. They do not establish classroom success, timing or enjoyment.",
+  "rows": [
+    {
+      "kind": "net",
+      "rarity": "common",
+      "boards": 400,
+      "certified": 400,
+      "average": 59.5,
+      "help1": 76.5,
+      "help2": 85.8,
+      "calm": 95.3,
+      "random": 13.8,
+      "timeouts": 0,
+      "medianWinSeconds": 17.7,
+      "medianLossSeconds": 15.1
+    },
+    {
+      "kind": "net",
+      "rarity": "uncommon",
+      "boards": 400,
+      "certified": 400,
+      "average": 59,
+      "help1": 75.5,
+      "help2": 88,
+      "calm": 94.5,
+      "random": 4.5,
+      "timeouts": 0,
+      "medianWinSeconds": 21.7,
+      "medianLossSeconds": 17.9
+    },
+    {
+      "kind": "net",
+      "rarity": "rare",
+      "boards": 400,
+      "certified": 400,
+      "average": 52.3,
+      "help1": 70,
+      "help2": 83.8,
+      "calm": 87.3,
+      "random": 1.5,
+      "timeouts": 3,
+      "medianWinSeconds": 25.9,
+      "medianLossSeconds": 20.2
+    },
+    {
+      "kind": "net",
+      "rarity": "legendary",
+      "boards": 400,
+      "certified": 400,
+      "average": 53,
+      "help1": 67.8,
+      "help2": 80.3,
+      "calm": 84.3,
+      "random": 1,
+      "timeouts": 12,
+      "medianWinSeconds": 28,
+      "medianLossSeconds": 20.5
+    },
+    {
+      "kind": "burst",
+      "rarity": "common",
+      "boards": 400,
+      "certified": 400,
+      "average": 56.8,
+      "help1": 73,
+      "help2": 84,
+      "calm": 98,
+      "random": 3.8,
+      "timeouts": 3,
+      "medianWinSeconds": 15.9,
+      "medianLossSeconds": 11
+    },
+    {
+      "kind": "burst",
+      "rarity": "uncommon",
+      "boards": 400,
+      "certified": 400,
+      "average": 52.5,
+      "help1": 72.3,
+      "help2": 87.8,
+      "calm": 95.5,
+      "random": 0.5,
+      "timeouts": 4,
+      "medianWinSeconds": 17.6,
+      "medianLossSeconds": 12.5
+    },
+    {
+      "kind": "burst",
+      "rarity": "rare",
+      "boards": 400,
+      "certified": 400,
+      "average": 51,
+      "help1": 75.3,
+      "help2": 87.8,
+      "calm": 99,
+      "random": 0,
+      "timeouts": 3,
+      "medianWinSeconds": 19,
+      "medianLossSeconds": 11.4
+    },
+    {
+      "kind": "burst",
+      "rarity": "legendary",
+      "boards": 400,
+      "certified": 400,
+      "average": 41.8,
+      "help1": 60.3,
+      "help2": 76,
+      "calm": 94.5,
+      "random": 0.5,
+      "timeouts": 7,
+      "medianWinSeconds": 18.9,
+      "medianLossSeconds": 11.4
+    }
+  ],
+  "oldNetRepro": {
+    "engine": "turn-based Pocket Nets (js/core/catch-net.js at c180d1c), 300 seeds x common/rare, rooms reached by 1-2 clean cuts",
+    "rooms2x3": 120,
+    "unwinnable2x3": 120,
+    "example": {
+      "seed": "repro:0",
+      "rarity": "common",
+      "depth": 2,
+      "shape": "2x3",
+      "castsLeft": 4,
+      "target": 3,
+      "behaviour": "steady",
+      "cell": 23,
+      "region": [
+        22,
+        23,
+        28,
+        29,
+        34,
+        35
+      ],
+      "available": [
+        {
+          "cut": 4,
+          "hit": true,
+          "area": 6
+        },
+        {
+          "cut": 9,
+          "hit": true,
+          "area": 6
+        },
+        {
+          "cut": 8,
+          "hit": true,
+          "area": 6
+        }
+      ]
+    }
+  }
+}

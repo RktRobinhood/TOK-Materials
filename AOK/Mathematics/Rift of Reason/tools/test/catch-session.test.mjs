@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { loadRift } from './harness.mjs';
-const FILES = ['js/core/rift.js', 'js/core/state.js', 'js/core/world.js', 'js/core/catch-net.js', 'js/core/catch-games.js', 'js/core/catch-session.js', 'data/creatures.js', 'data/items.js'];
+const FILES = ['js/core/rift.js', 'js/core/state.js', 'js/core/world.js', 'js/core/catch-arcade.js', 'js/core/catch-games.js', 'js/core/catch-session.js', 'data/creatures.js', 'data/items.js'];
 const J = b => JSON.parse(JSON.stringify(b));
 function setup(store = new Map()) {
     const R = loadRift(FILES);
@@ -17,7 +17,7 @@ function visitor(g, kind) {
     });
     g.R.State.saveNow();
 }
-for (const kind of ['net', 'lure', 'tracks', 'picture']) {
+for (const kind of ['net', 'lure', 'tracks', 'picture', 'burst']) {
     test(`${kind}: a paid attempt resumes exactly and its win grants one creature without a luck roll`, async () => {
         let g = setup(); visitor(g, kind);
         const o = J(g.S.get('test'));
@@ -158,4 +158,37 @@ test('retired Rebound saves refund an active charm once and preserve finished re
     g.R.State.load();
     const backup = await g.R.State.exportCode(); await g.R.State.importCode(backup);
     assert.equal(g.R.State.get().items.greatcharm, 1, 'backup and reload do not refund twice');
+});
+
+test('old turn-based Pocket Nets tries refund their charm once; finished receipts stay', async () => {
+    const g = setup();
+    const old = g.R.State.freshState(); old.version = 6;
+    old.items = { charm: 1, greatcharm: 0 };
+    const oldBoard = { kind: 'net', rocks: [1, 2], cell: 9, mask: 4, turn: 1, cfg: { casts: 4 }, done: null };
+    old.catchOffers = {
+        paid: { kind: 'net', species: 'swiftlet', seed: 'old', attempt: 1, version: 2, item: 'greatcharm', board: oldBoard, receipt: null },
+        ready: { kind: 'net', species: 'swiftlet', seed: 'ready', attempt: 1, version: 0, item: null, board: null, receipt: null },
+        won: { kind: 'net', version: 3, item: 'charm', board: Object.assign({}, oldBoard, { done: 'caught' }), receipt: { outcome: 'caught', uid: 'kept' } },
+        other: { kind: 'tracks', version: 1, item: 'charm', board: { kind: 'tracks', open: [] }, receipt: null },
+    };
+    const migrated = g.R.State.migrate(J(old));
+    assert.equal(migrated.version, 7);
+    assert.equal(migrated.items.greatcharm, 1, 'the unfinished paid try is refunded');
+    assert.equal(migrated.items.charm, 1, 'never refund a settled outcome');
+    assert.equal(migrated.catchOffers.paid.kind, 'net', 'the visitor keeps its game: the new Pocket Nets');
+    assert.equal(migrated.catchOffers.paid.board, null);
+    assert.equal(migrated.catchOffers.paid.item, null);
+    assert.equal(migrated.catchOffers.paid.version, 3, 'stale controls are invalidated');
+    assert.equal(migrated.catchOffers.ready.version, 0, 'an unstarted offer is untouched');
+    assert.equal(migrated.catchOffers.won.receipt.uid, 'kept');
+    assert.equal(migrated.catchOffers.won.board, null, 'the old board cannot be drawn any more');
+    assert.equal(migrated.catchOffers.other.board.kind, 'tracks');
+    assert.deepEqual(J(g.R.State.migrate(J(migrated))), J(migrated), 'migration is idempotent');
+    g.store.set(g.R.State.STORAGE_KEY, JSON.stringify(old));
+    g.R.State.load();
+    assert.equal(g.R.State.get().items.greatcharm, 1);
+    const backup = await g.R.State.exportCode(); await g.R.State.importCode(backup);
+    assert.equal(g.R.State.get().items.greatcharm, 1, 'backup and reload do not refund twice');
+    assert.equal(g.S.start('paid', 'greatcharm', g.S.get('paid').version).ok, true, 'the visitor can be tried again with the new game');
+    assert.ok(Array.isArray(g.S.get('paid').board.log));
 });

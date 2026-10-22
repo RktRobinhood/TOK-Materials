@@ -49,7 +49,7 @@ test('Mythic preserves ordinary copy/release/deck rules and exact backup/team co
 });
 
 test('unapproved Mythic wild routes never spawn, catch, spend a charm or enter random opponents',()=>{
-    const R=loadRift(files.concat(['js/core/catch-net.js','js/core/catch-games.js','js/core/catch-session.js']));
+    const R=loadRift(files.concat(['js/core/catch-arcade.js','js/core/catch-games.js','js/core/catch-session.js']));
     const memory=new Map();R.storage=()=>({getItem:k=>memory.get(k)||null,setItem:(k,v)=>memory.set(k,v),removeItem:k=>memory.delete(k)});
     R.State.newGame();const s=R.State.get(); R.data.creatures[tom].rarity='mythic';s.items.charm=3;
     const node={id:'probe',type:'puzzle',spawns:['astrophysicat',tom]};

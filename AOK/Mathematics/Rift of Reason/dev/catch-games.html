@@ -22,27 +22,28 @@ select, input[type=text] { font: inherit; color: #f1f5ff; background: #20304a; b
 </style>
 </head>
 <body><main>
-<h1>Four little catch games</h1>
+<h1>Five little catch games</h1>
 <p>Try the games from the adventure. Practice uses no charms and changes no save.</p>
 <div class="practice-settings">
-<label>Game <select id="kind"><option value="net">Pocket Nets</option><option value="lure">Lantern Lure</option><option value="tracks">Trail Finder</option><option value="picture">Picture Catch</option></select></label>
+<label>Game <select id="kind"><option value="net">Pocket Nets</option><option value="lure">Lantern Lure</option><option value="tracks">Trail Finder</option><option value="picture">Picture Catch</option><option value="burst">Shard Burst</option></select></label>
 <label>Creature <select id="visitor"><option value="astrophysicat">Astrophysicat</option><option value="swiftlet">Swiftlet</option><option value="lobstorian">Lobstorian</option></select></label>
 <label>Rarity <select id="rarity"><option>common</option><option>uncommon</option><option selected>rare</option><option>legendary</option></select></label>
 <label>Board seed <input id="seed" type="text" value="first-catch-2" maxlength="60"></label>
-<label class="practice-check"><input id="great" type="checkbox">Great Charm (extra moves)</label>
-<label class="practice-check"><input id="lure" type="checkbox">Lure (extra moves)</label>
+<label class="practice-check"><input id="great" type="checkbox">Great Charm (help)</label>
+<label class="practice-check"><input id="lure" type="checkbox">Lure (help)</label>
 <label class="practice-check"><input id="calm" type="checkbox">Calm motion</label>
 </div>
 <div class="row wrap"><button class="btn" id="same">Restart this board</button><button class="btn" id="next">New board</button></div>
 <div id="cabinet" class="catch-cabinet"></div>
-<p class="small">Inspired by early net-cutting, tile-rotation, deduction and sliding picture puzzles. These are original boards and rules. Rarer visitors have tighter budgets, tougher movement or denser clues. A win earns the catch directly.</p>
+<p class="small">Inspired by classic wall-building, rock-splitting, tile-rotation, deduction and sliding picture games. These are original boards and rules. Rarer visitors bring more moving creatures, tighter budgets or denser clues. A win earns the catch directly.</p>
 <p><a href="index.html">Back to the adventure</a></p>
 </main>
 <script src="js/core/rift.js"></script>
 <script src="data/assets.js"></script>
 <script src="js/core/assets.js"></script>
-<script src="js/core/catch-net.js"></script>
+<script src="js/core/catch-arcade.js"></script>
 <script src="js/core/catch-games.js"></script>
+<script src="js/ui/catch-arcade.js"></script>
 <script src="js/ui/catching.js"></script>
 <script>
 (function () {
@@ -54,12 +55,12 @@ select, input[type=text] { font: inherit; color: #f1f5ff; background: #20304a; b
         let board = Rift.CatchGames.create($('kind').value, $('seed').value, $('rarity').value, $('great').checked ? 'greatcharm' : 'charm', $('lure').checked);
         handle = Rift.CatchGame.mount($('cabinet'), {
             board, species: $('visitor').value, startLabel: 'Start practice', onStart: () => ({ ok: true, board }),
-            onAction(action) { const result = Rift.CatchGames.step(board, action); board = result.board; return Object.assign({ ok: true }, result); },
+            onAction(action) { const result = Rift.CatchGames.step(board, action); if (!result) return { ok: false, error: 'That move is not available.' }; board = result.board; return Object.assign({ ok: true }, result); },
         });
     }
     ['kind','visitor','rarity','great','lure'].forEach(id => $(id).addEventListener('change', mount));
     $('seed').addEventListener('change', mount);
-    $('calm').addEventListener('change', () => document.body.classList.toggle('calm-motion', $('calm').checked));
+    $('calm').addEventListener('change', () => { document.body.classList.toggle('calm-motion', $('calm').checked); mount(); });
     $('same').onclick = mount;
     $('next').onclick = () => { $('seed').value = 'practice-' + (++sequence); mount(); };
     mount();

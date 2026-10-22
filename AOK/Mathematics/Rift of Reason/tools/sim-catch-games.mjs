@@ -1,16 +1,29 @@
 // Feasibility and transparent machine policies, never a claim about student success.
 import fs from 'node:fs';
 import { loadRift } from './test/harness.mjs';
-const R = loadRift(['js/core/rift.js', 'js/core/catch-net.js', 'js/core/catch-games.js']);
+const R = loadRift(['js/core/rift.js', 'js/core/catch-arcade.js', 'js/core/catch-games.js']);
 const C = R.CatchGames, count = Number(process.argv[2] || 200);
 const rows = [];
+const A = R.CatchArcade;
+// Real-time games: the documented average sensible player, or random taps about once a second.
+function arcadeRandom(rng) {
+    return s => {
+        if (s.t % (s.kind === 'net' ? 60 : 20)) return null;
+        if (s.kind === 'burst') return { fire: Math.round(rng.next() * 6283) / 1000 };
+        const c = rng.int(0, A.COLS * A.ROWS - 1);
+        return { wall: [c % A.COLS, Math.floor(c / A.COLS), rng.int(0, 1)] };
+    };
+}
 function play(start, random) {
+    if (A.KINDS.includes(start.kind)) {
+        const seed = JSON.stringify([start.terrain, start.balls, start.shards]);
+        return A.play(start, random ? arcadeRandom(R.makeRng('random:' + seed)) : A.average(start.kind, seed)).done === 'caught';
+    }
     let b = start, actions = 0;
     const rng = R.makeRng('policy:' + JSON.stringify(start));
     while (!b.done && actions++ < 100) {
         let action;
-        if (b.kind === 'net') action = { cut: random ? rng.pick(R.CatchNetPrototype.available(b)) : R.CatchNetPrototype.sensible(b) };
-        else if (b.kind === 'lure' || b.kind === 'picture') {
+        if (b.kind === 'lure' || b.kind === 'picture') {
             const plan = C.solve(b);
             if (!random && (!plan || !plan.length)) return false;
             action = random ? { cell: b.kind === 'picture' ? rng.pick(C.pictureMoves(b)) : rng.int(0, 15) } : plan[0];
@@ -53,10 +66,11 @@ for (const kind of C.IDS) for (const rarity of ['common', 'uncommon', 'rare', 'l
 }
 const report = { seedsPerGameRarity: count, seedPrefix: 'production-held-out:2381:',
     policies: { picture: 'Shortest sliding route from visible numbered pieces. Planning expert, not an average student. Random chooses a uniformly legal adjacent slide.',
-        net: 'Choose a safe cut with smallest next room; seed-fixed ties; one action of lookahead, no future search.',
+        net: 'Average sensible player (catch-arcade.js): looks 0.6–1.5 s between nets, weighs six random spots, skips spots a creature seems to be heading for (speed misjudged up to 25%), reacts in 0.17–0.33 s and slips one cell 20% of the time.',
+        burst: 'Average sensible player (catch-arcade.js): holds the pointer down, picks the nearest shard 75% of the time (else a random one), pointer trails it by 0.25 s, about 6° aim error, half a lead, 0.1–0.23 s to re-aim.',
         lure: 'Minimum-turn route using every visible tile shape. This is a planning expert, not an average student.',
         tracks: 'Apply visible-clue direct/subset deductions plus the total trap count until solved. This is a logical expert, not an average player.',
-        random: 'Uniform legal cut/trail tile/adjacent slide or uniformly chosen unopened unflagged tile. No deliberate-loss coin flip.' },
+        random: 'Uniform legal trail tile/adjacent slide, uniformly chosen unopened unflagged tile, a random net spot once a second or a random throw three times a second. No deliberate-loss coin flip.' },
     limitations: 'These are machine policies. They do not establish ~50% average-student success, 20–60-second timing or enjoyment. Those require classroom play.', rows };
 if (process.argv[3]) fs.writeFileSync(process.argv[3], JSON.stringify(report, null, 2) + '\n');
 console.table(rows.map(({ kind, rarity, seeds, certified, policyWins, randomWins, bothWins, medianCertificateActions }) => ({ kind, rarity, seeds, certified, policyWins, randomWins, bothWins, medianCertificateActions })));

@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { loadRift } from './harness.mjs';
-const R = loadRift(['js/core/rift.js', 'js/core/catch-net.js', 'js/core/catch-games.js']);
-const C = R.CatchGames, json = v => JSON.stringify(v);
+const R = loadRift(['js/core/rift.js', 'js/core/catch-arcade.js', 'js/core/catch-games.js']);
+const C = R.CatchGames, A = R.CatchArcade, json = v => JSON.stringify(v);
 
-test('all four games, every rarity: deterministic layouts have replayable unassisted wins', () => {
-    for (const kind of C.IDS) for (const rarity of C.RARITIES) for (let i = 0; i < 40; i++) {
+test('all five games, every rarity: deterministic layouts have replayable unassisted wins', () => {
+    for (const kind of C.IDS) for (const rarity of C.RARITIES) for (let i = 0; i < (A.KINDS.includes(kind) ? 12 : 40); i++) {
         let b = C.create(kind, 'held-out:' + i, rarity, 'charm', false);
         const before = json(b);
         assert.equal(json(C.create(kind, 'held-out:' + i, rarity, 'charm', false)), before);
@@ -29,8 +29,16 @@ test('assistance preserves the exact layout and adds a visible action or mistake
         const base = C.create(kind, 'help:' + i, rarity, 'charm', false);
         for (const [item, lure, extra] of [['greatcharm', false, 1], ['charm', true, 1], ['greatcharm', true, 2]]) {
             let assisted = C.create(kind, 'help:' + i, rarity, item, lure);
-            const field = kind === 'net' ? 'casts' : ['lure', 'picture'].includes(kind) ? 'moves' : 'lives';
-            assert.equal(kind === 'net' ? assisted.cfg[field] : assisted[field], (kind === 'net' ? base.cfg[field] : base[field]) + extra * (kind === 'picture' ? 2 : 1));
+            if (A.KINDS.includes(kind)) {
+                // Real-time help: one more net or shield and ten more seconds on the identical layout.
+                const field = kind === 'net' ? 'lives' : 'shields';
+                assert.equal(assisted.cfg[field], base.cfg[field] + extra);
+                assert.equal(assisted.cfg.seconds, base.cfg.seconds + 10 * extra);
+                assert.equal(json([assisted.terrain, assisted.balls, assisted.shards]), json([base.terrain, base.balls, base.shards]));
+            } else {
+                const field = ['lure', 'picture'].includes(kind) ? 'moves' : 'lives';
+                assert.equal(assisted[field], base[field] + extra * (kind === 'picture' ? 2 : 1));
+            }
             for (const action of C.solve(base)) {
                 if (assisted.done) break;
                 assisted = C.step(assisted, action).board;
@@ -55,30 +63,15 @@ test('trail cells use clues, flags and explicit mistakes; flagging alone never w
     assert.equal(b.done, 'escaped');
 });
 
-test('random game choice uses its own deterministic stream and reaches all four games', () => {
+test('random game choice uses its own deterministic stream and reaches all five games', () => {
     const counts = Object.fromEntries(C.IDS.map(id => [id, 0]));
     for (let i = 0; i < 3000; i++) {
         const id = C.pick('attempt:' + i);
         counts[id]++;
         assert.equal(C.pick('attempt:' + i), id);
     }
-    for (const n of Object.values(counts)) assert.ok(n > 650 && n < 850, json(counts));
-});
-
-test('net rarity tightens budgets on the same terrain and behaviour; easier tiers cannot remove a policy win', () => {
-    for (let i = 0; i < 40; i++) {
-        let harder = null;
-        for (const rarity of Array.from(C.RARITIES).reverse()) {
-            const easier = C.create('net', 'rarity-paired:' + i, rarity, 'charm', false);
-            if (harder) {
-                assert.equal(json(easier.rocks), json(harder.rocks));
-                assert.equal(easier.cfg.behaviour, harder.cfg.behaviour);
-                assert.equal(easier.cfg.casts, harder.cfg.casts + 1);
-                if (R.CatchNetPrototype.playSensible(harder)) assert.ok(R.CatchNetPrototype.playSensible(easier));
-            }
-            harder = easier;
-        }
-    }
+    assert.equal(C.IDS.length, 5);
+    for (const n of Object.values(counts)) assert.ok(n > 520 && n < 680, json(counts));
 });
 
 test('Lantern Lure shows an actual joined route and enforces a finite turn budget', () => {

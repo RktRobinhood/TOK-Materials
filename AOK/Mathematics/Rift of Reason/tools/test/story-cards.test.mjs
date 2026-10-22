@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {loadRift} from './harness.mjs';
 const files=['js/core/rift.js','js/core/state.js','js/core/world.js','js/core/acquisition.js','data/creatures.js','data/items.js','data/map.js','data/tactics.js','data/axioms.js','data/starters.js',
-    'data/fate.js','js/battle/ante.js','js/core/catch-net.js','js/core/catch-games.js','js/core/catch-session.js'];
+    'data/fate.js','js/battle/ante.js','js/core/catch-arcade.js','js/core/catch-games.js','js/core/catch-session.js'];
 const plain=x=>JSON.parse(JSON.stringify(x));
 function fixture(){
     const R=loadRift(files),s=R.State.freshState();s.avatar={type:'owlet',variant:'girl'};R.State.grantStarter(s);

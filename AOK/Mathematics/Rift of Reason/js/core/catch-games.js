@@ -1,10 +1,11 @@
-/* Four short, finite skill games. Every admitted layout has a winning certificate.
- * Pure JSON boards: no clocks, DOM, bag changes or random catch roll here. */
+/* Five short skill games. Every admitted layout has a winning certificate.
+ * Pure JSON boards: no clocks, DOM, bag changes or random catch roll here. The two
+ * real-time games (net, burst) live in catch-arcade.js; their boards carry an input log. */
 (function (root) {
     'use strict';
-    const Rift = root.Rift, net = Rift.CatchNetPrototype;
-    const IDS = ['net', 'lure', 'tracks', 'picture'];
-    const NAMES = { net: 'Pocket Nets', lure: 'Lantern Lure', tracks: 'Trail Finder', picture: 'Picture Catch' };
+    const Rift = root.Rift, arcade = Rift.CatchArcade;
+    const IDS = ['net', 'lure', 'tracks', 'picture', 'burst'];
+    const NAMES = { net: 'Pocket Nets', lure: 'Lantern Lure', tracks: 'Trail Finder', picture: 'Picture Catch', burst: 'Shard Burst' };
     const RARITIES = ['common', 'uncommon', 'rare', 'legendary'];
     const clone = b => JSON.parse(JSON.stringify(b));
     const tier = r => Math.max(0, RARITIES.indexOf(r));
@@ -228,24 +229,16 @@
         throw new Error('No verified trail layout');
     }
     function create(kind, seed, rarity, item, lured, sly) {
-        const help = (item === 'greatcharm' ? 1 : 0) + (lured ? 1 : 0) + (sly ? 1 : 0), level = tier(rarity);
+        const help = (item === 'greatcharm' ? 1 : 0) + (lured ? 1 : 0) + (sly ? 1 : 0);
         if (kind === 'lure') return lantern(seed, rarity, help);
         if (kind === 'tracks') return tracks(seed, rarity, help);
         if (kind === 'picture') return picture(seed, rarity, help);
-        if (kind !== 'net') throw new Error('Unknown catch game');
-        const behaviour = Rift.makeRng(seed + ':net-behaviour').pick(net.BEHAVIOURS);
-        // Admit against the same three-cast budget before adding the easier rarity's
-        // spare casts. Otherwise easy tiers accidentally admit much harder terrain.
-        const b = net.generate(seed, behaviour, item === 'greatcharm', lured,
-            { casts: 3, target: behaviour === 'hunter' ? 4 : 3 });
-        b.cfg.casts += 3 - level;
-        if (sly) b.cfg.casts++;
-        b.kind = kind;
-        return b;
+        if (arcade.KINDS.includes(kind)) return arcade.create(kind, seed, rarity, help);
+        throw new Error('Unknown catch game');
     }
     function step(board, action) {
         if (!board || board.done || !action) return null;
-        if (board.kind === 'net') return net.preview(board, action.cut);
+        if (arcade.KINDS.includes(board.kind)) return arcade.step(board, action);
         if (board.kind === 'lure') return turnTrail(board, action.cell);
         if (board.kind === 'picture') return slidePicture(board, action.cell);
         if (board.kind !== 'tracks' || !Number.isInteger(action.cell) || action.cell < 0 || action.cell >= board.size ** 2 || board.open.includes(action.cell) || (board.hits || []).includes(action.cell)) return null;
@@ -266,7 +259,7 @@
         return { board: b, hit: b.traps.includes(cell), cell };
     }
     function solve(b) {
-        if (b.kind === 'net') { const plan = net.solve(b); return plan && plan.map(cut => ({ cut })); }
+        if (arcade.KINDS.includes(b.kind)) return arcade.solve(b);
         if (b.kind === 'lure') return lurePlan(b);
         if (b.kind === 'picture') return picturePlan(b);
         return solveTracks(b);

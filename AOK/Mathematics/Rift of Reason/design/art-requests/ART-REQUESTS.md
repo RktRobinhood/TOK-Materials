@@ -1292,3 +1292,7 @@ Reuses all shipped affinity, tactic and Axiom paintings/frames. Rarity is a nati
 ## Stage 13.91 — Story-card reuse (#132), 21 October 2026
 
 Six selected expansion portraits now ship through plot-only sources: James Mayfly, LeBrontosaurus, Houdini Wisp, Jenna Otterga, Ariana Crande and Downewt Jr. Their existing creature asset IDs/provenance remain unchanged. Ten plot Axioms reuse `art/axiom-rule-motif`; Quiet Reset and uncollectible Paper reuse `art/spell-motif-generic`; The Last Page uses its existing `art/spell-the-last-page` painting. Paper's committed face and future-preview frame both use that motif, with no missing species portrait. No new image generation, manifest build or voice calls. See [story acceptance and screenshots](../reviews/story-132-2026-10-21.md).
+
+## Stage 13.92 — Real-time catch games (#158), 22 October 2026
+
+Pocket Nets (rebuilt) reuses `ui/catch-grass`, `ui/catch-rock`, `ui/catch-tree`, `ui/catch-water` and `ui/catch-net`; the bouncing portraits are the visitor's own idle art in a round frame. Shard Burst draws its shards as round frames around the same visitor art, with a plain lantern circle and shield rings in canvas. No new raster asset is needed to ship. Nice-to-have, for the teacher: `ui/catch-shard-frame` (a cracked rift-crystal ring, three sizes read from one image) and `ui/catch-lantern` (a top-down lantern for the centre of Shard Burst). Both are used in `js/ui/catch-arcade.js`. Static images only; no glow loops.

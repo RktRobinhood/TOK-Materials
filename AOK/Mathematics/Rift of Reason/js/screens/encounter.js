@@ -538,6 +538,13 @@
                     : [el('p', { text: words + ' ' + '★'.repeat(d.stars) + '☆'.repeat(3 - d.stars) })]);
             }
 
+            function escapeHint(b) {
+                if (!b) return 'Try a different plan.';
+                if (b.kind === 'tracks') return 'You opened too many traps. Check the touching numbers next time.';
+                if (b.kind === 'net') return b.lives > 0 ? 'Time ran out. Bigger nets close more ground.' : 'The nets broke. Start a net where no creature is heading.';
+                if (b.kind === 'burst') return b.lives > 0 ? 'Time ran out. Break the big shards first.' : 'Shards hit your lantern. Break the closest ones first.';
+                return 'Your moves ran out before the goal. Try a different plan.';
+            }
             function catchPhase() {
                 phase = 'catch';
                 rootNode.classList.add('catching');
@@ -582,7 +589,7 @@
                         } else if (result === 'full') {
                             panel.append(Rift.resultBanner('won', 'You won!', 'Your folder is full.'), el('p', { text: 'Your charm was returned. ' + Rift.State.fullReason(o.species) }));
                         } else {
-                            panel.append(Rift.resultBanner('lost', 'It escaped this time.', 'You can try again.'), el('p', { text: o.board && o.board.kind === 'tracks' ? 'You opened too many traps. Check the touching numbers next time.' : 'Your moves ran out before the goal. Try a different plan.' }),
+                            panel.append(Rift.resultBanner('lost', 'It escaped this time.', 'You can try again.'), el('p', { text: escapeHint(o.board) }),
                                 el('button.btn.primary', { text: 'Try again · new random game', onclick() {
                                     const result = session.retry(n.id, o.version);
                                     if (result.ok) render(); else panel.append(el('p', { role: 'alert', text: result.error }));
@@ -597,7 +604,7 @@
                         panel.append(el('button.btn', { text: result === 'escaped' ? 'Let it go' : 'Back to the map', onclick: dismiss }));
                         return;
                     }
-                    const helpText = o.kind === 'picture' ? '+2 slides' : '+1 cast, turn or trap heart';
+                    const helpText = o.kind === 'picture' ? '+2 slides' : o.kind === 'net' ? '+1 net and 10 s' : o.kind === 'burst' ? '+1 shield and 10 s' : '+1 turn or trap heart';
                     const intro = el('p.small', { text: 'Win the game to catch it. One charm pays for one whole try. You can pause or return here later.' });
                     panel.append(intro);
                     if (o.lured) panel.append(el('p.catch-help.small', { text: 'Lure: ' + helpText + ' on this visit.' }));

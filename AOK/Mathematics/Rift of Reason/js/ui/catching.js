@@ -1,62 +1,84 @@
-/* Adventure and practice share these finite-move, native-button games. */
+/* Adventure and practice share these games: finite-move native-button puzzles, and the two
+ * real-time games drawn by Rift.CatchArcadeView (js/ui/catch-arcade.js). */
 (function (root) {
     'use strict';
-    const Rift = root.Rift, games = Rift.CatchGames, net = Rift.CatchNetPrototype;
+    const Rift = root.Rift, games = Rift.CatchGames, arcadeKinds = Rift.CatchArcade ? Rift.CatchArcade.KINDS : [];
     const el = (...a) => Rift.el(...a);
     const amount = (n, word) => n + ' ' + word + (n === 1 ? '' : 's');
     const RULES = {
-        net: 'Cast net fences to close the beast into a small clearing; check its next path first.',
+        net: 'Drag or tap to grow a net. Close off the field before time runs out.',
+        burst: 'Tap or hold to throw nets. Break every shard before they hit your lantern.',
         lure: 'Turn the trails to carry lantern light from IN to the beast at OUT.',
         tracks: 'Search the long grass to reach the beast: numbers count nearby rival snares; flag them and open every safe patch.',
         picture: 'Slide pieces into the empty space to rebuild the creature before your moves run out.',
     };
     function mount(container, o) {
         let board = o.board, phase = o.board.done ? 'ended' : o.started ? 'paused' : 'ready', destroyed = false;
-        let selected = board.kind === 'net' ? net.available(board)[0] : 3, flagMode = false;
+        let flagMode = false, view = null;
+        const arcade = arcadeKinds.includes(board.kind);
         const game = el('div.catch-game.stack'), status = el('p.catch-status', { role: 'status', 'aria-live': 'polite' });
         const budget = el('p.catch-budget');
         const play = el('button.btn.catch-play', { type: 'button', onclick: toggle });
         const field = el('div.catch-field'), controls = el('div.catch-controls');
         const result = el('div.catch-result');
-        const rules = el('details.catch-rules', null, [el('summary', { text: 'How to play' }), el('p', { text: RULES[board.kind] })]);
-        rules.open = !o.started;
-        const visitor = el('div.catch-visitor', null, [beast(), el('p', { text: board.kind === 'picture' ? 'Rebuild the picture. Catch the beast.' : board.kind === 'tracks' ? 'A beast waits beyond the long grass.' : board.kind === 'net' ? 'Close the clearing. Catch the beast.' : 'Guide the beast to your lantern.' })]);
-        game.append(el('h3', { text: games.NAMES[board.kind] }), result, rules, el('div.catch-toolbar.row.wrap', null, [budget, play]), visitor, field, controls, status);
+        // Real-time games teach through the field itself: one line, then a ghost net or aim line.
+        const rules = arcade ? el('p.catch-rule', { text: RULES[board.kind] }) : el('details.catch-rules', null, [el('summary', { text: 'How to play' }), el('p', { text: RULES[board.kind] })]);
+        if (!arcade) rules.open = !o.started;
+        const visitor = arcade ? null : el('div.catch-visitor', null, [beast(), el('p', { text: board.kind === 'picture' ? 'Rebuild the picture. Catch the beast.' : board.kind === 'tracks' ? 'A beast waits beyond the long grass.' : 'Guide the beast to your lantern.' })]);
+        if (arcade) game.classList.add('catch-game-arcade');
+        game.append(...[el('h3', { text: games.NAMES[board.kind] }), result, rules, el('div.catch-toolbar.row.wrap', null, [budget, play]), visitor, field, controls, status].filter(Boolean));
         container.append(game);
+        if (arcade) view = Rift.CatchArcadeView.mount(field, controls, {
+            board, species: o.species, calm: o.calm,
+            active,
+            say(text) { status.textContent = text; },
+            onAction(action) {
+                if (destroyed) return { ok: false };
+                const result = o.onAction(action);
+                if (!result.ok) { status.textContent = result.error; if (phase === 'running') phase = 'paused'; refresh(); return result; }
+                board = result.board;
+                return result;
+            },
+            onEnd() { finish(); },
+            onPause() { if (phase === 'running') toggle(); },
+        });
         function beast() {
             const node = el('span.catch-beast');
             if (Rift.Assets) node.append(Rift.Assets.img('creature/' + (o.species || 'astrophysicat') + '/idle', { label: 'The visiting beast' }));
             return node;
         }
         function active() { return !destroyed && phase === 'running' && !board.done; }
+        function finish() {
+            phase = 'ended';
+            status.textContent = board.done === 'caught' ? 'You did it! The creature is caught.' : board.kind === 'tracks' ? 'No hearts left. The creature escaped.'
+                : board.kind === 'net' ? (board.lives > 0 ? 'Time ran out. The creature escaped.' : 'No spare nets left. The creature escaped.')
+                    : board.kind === 'burst' ? (board.lives > 0 ? 'Time ran out. The creature escaped.' : 'No shields left. The creature escaped.') : 'No moves left. The creature escaped.';
+            refresh();
+            if (o.onFinish) o.onFinish(board.done);
+        }
         function toggle() {
             if (destroyed || board.done) return;
             if (phase === 'ready') {
                 const result = o.onStart();
                 if (!result.ok) { status.textContent = result.error; return; }
                 board = result.board;
-                rules.open = false;
+                if (!arcade) rules.open = false;
+                if (view) view.load(board);
             }
             phase = phase === 'running' ? 'paused' : 'running';
             refresh();
+            if (view) { if (phase === 'running') view.resume(); else view.pause(); }
         }
         function act(action) {
             if (!active()) return;
             const result = o.onAction(action);
             if (!result.ok) { status.textContent = result.error; return; }
             board = result.board;
-            if (board.kind === 'net') {
-                status.textContent = result.hit ? 'It crossed the net. One cast used; no wall built.' : 'Net closed. Room: ' + net.room(board).length + ' tiles.';
-                if (!net.available(board).includes(selected)) selected = net.available(board)[0];
-            } else if (board.kind === 'lure') status.textContent = 'Trail turned. Gold shows where lantern light reaches.';
+            if (board.kind === 'lure') status.textContent = 'Trail turned. Gold shows where lantern light reaches.';
             else if (board.kind === 'picture') status.textContent = 'Piece slid. ' + amount(board.moves - board.turn, 'move') + ' left.';
             else status.textContent = result.hit ? 'Rival snare at row ' + (Math.floor(result.cell / board.size) + 1) + ', column ' + (result.cell % board.size + 1) + '. One trap heart used.' : 'Follow the clues through the grass. No guessing is needed.';
-            if (board.done) {
-                phase = 'ended';
-                status.textContent = board.done === 'caught' ? 'You did it! The creature is caught.' : board.kind === 'tracks' ? 'No hearts left. The creature escaped.' : 'No moves left. The creature escaped.';
-            }
+            if (board.done) { finish(); return; }
             refresh();
-            if (board.done && o.onFinish) o.onFinish(board.done);
         }
         function refresh() {
             result.replaceChildren(...(board.done ? [Rift.resultBanner(board.done === 'caught' ? 'won' : 'lost', board.done === 'caught' ? 'You won!' : 'It escaped this time.', board.done === 'caught' ? 'You caught the creature.' : 'Try a different plan.')] : []));
@@ -64,52 +86,18 @@
             const key = focus && focus.getAttribute && focus.getAttribute('data-catch-key');
             play.textContent = phase === 'ready' ? o.startLabel || 'Start · 1 charm' : phase === 'running' ? 'Pause' : phase === 'paused' ? 'Resume' : 'Finished';
             play.disabled = !!board.done;
-            budget.textContent = board.kind === 'net' ? amount(board.cfg.casts - board.turn, 'cast') + ' · goal: ' + board.cfg.target + ' tiles · room: ' + net.room(board).length
-                : board.kind === 'lure' ? amount(board.moves - board.turn, 'turn') + ' · connect IN to OUT'
+            if (view) { budget.hidden = true; return; }
+            budget.textContent = board.kind === 'lure' ? amount(board.moves - board.turn, 'turn') + ' · connect IN to OUT'
                     : board.kind === 'picture' ? amount(board.moves - board.turn, 'move') + ' · rebuild the picture'
                     : amount(board.lives - board.mistakes, 'trap heart') + ' · ' + board.traps.length + ' snares · ' + board.open.length + '/' + (board.size ** 2 - board.traps.length) + ' safe tiles';
             field.innerHTML = ''; controls.innerHTML = '';
-            if (board.kind === 'net') drawNet();
-            else if (board.kind === 'lure') drawLure();
+            if (board.kind === 'lure') drawLure();
             else if (board.kind === 'picture') drawPicture();
             else drawTracks();
             if (key) {
                 const same = game.querySelector('[data-catch-key="' + key + '"]');
                 if (same && !same.disabled) same.focus();
             }
-        }
-        function choose(label, key, value) {
-            return el('button.catch-choice' + (selected === value ? '.selected' : ''), {
-                type: 'button', text: label, 'data-catch-key': key, 'aria-pressed': String(selected === value), disabled: !active(),
-                onclick() { if (!active()) return; selected = value; refresh(); },
-            });
-        }
-        function drawNet() {
-            const preview = net.preview(board, selected), region = net.room(board);
-            const grid = el('div.catch-net-board', { role: 'img', 'aria-label': 'Six by six arena. ' + region.length + ' tiles remain. Creature facing ' + ['up', 'right', 'down', 'left'][board.dir] + '.' });
-            for (let cell = 0; cell < 36; cell++) {
-                const rock = board.rocks.includes(cell), creature = board.cell === cell;
-                const terrain = rock ? ['rock', 'tree', 'water'][board.rocks.indexOf(cell) % 3] : 'grass';
-                const tile = el('div.catch-net-tile.' + terrain + (!rock && !region.includes(cell) ? '.closed' : '') + (preview && preview.path.includes(cell) ? '.path' : ''));
-                if (creature) tile.append(beast(), el('span.catch-facing', { text: ['↑', '→', '↓', '←'][board.dir] }));
-                else if (preview && preview.path.includes(cell)) tile.append(el('span.catch-path-dot', { text: '•' }));
-                if (cell % 6 < 5 && board.mask & (1 << (cell % 6))) tile.style.borderRight = '4px double #ffd27e';
-                if (Math.floor(cell / 6) < 5 && board.mask & (1 << (5 + Math.floor(cell / 6)))) tile.style.borderBottom = '4px double #ffd27e';
-                if (preview && selected < 5 && cell % 6 === selected) tile.style.borderRight = '3px dashed #ffd27e';
-                if (preview && selected >= 5 && Math.floor(cell / 6) === selected - 5) tile.style.borderBottom = '3px dashed #ffd27e';
-                grid.append(tile);
-            }
-            field.append(grid);
-            const choices = el('div.catch-net-choices');
-            for (let cut = 0; cut < 10; cut++) {
-                const button = choose((cut < 5 ? 'V' : 'H') + (cut % 5 + 1), 'cut-' + cut, cut);
-                button.setAttribute('aria-label', (cut < 5 ? 'Vertical net after column ' : 'Horizontal net after row ') + (cut % 5 + 1));
-                button.disabled = !active() || !net.available(board).includes(cut);
-                choices.append(button);
-            }
-            controls.append(el('p.catch-terrain-key.small', { text: 'Rocks, trees and water block the beast. Gold lines are net fences; dots show its next steps.' }), choices, el('p.small', { text: 'V = vertical · H = horizontal. Dots show the next path. ' + (board.cfg.behaviour === 'steady' ? 'It keeps going, then turns at a wall.' : board.cfg.behaviour === 'turner' ? 'It turns right every third step.' : 'It lunges at a nearby net before moving.') }),
-                el('p.small', { text: preview ? 'Selected net: ' + (preview.hit ? 'it will cross and break this net.' : 'it will leave ' + preview.area + ' tiles.') : 'No unfinished net selected.' }),
-                el('button.btn.primary', { type: 'button', text: 'Cast net', 'data-catch-key': 'cast', disabled: !active() || selected == null, onclick: () => act({ cut: selected }) }));
         }
         function drawLure() {
             const light = games.lightPath(board), names = ['north', 'east', 'south', 'west'];
@@ -208,7 +196,7 @@
             field.append(grid);
         }
         refresh();
-        return { destroy() { destroyed = true; phase = 'ended'; }, board() { return board; } };
+        return { destroy() { destroyed = true; phase = 'ended'; if (view) view.destroy(); }, board() { return board; }, view: () => view };
     }
     Rift.CatchGame = { mount, RULES };
 })(typeof window !== 'undefined' ? window : globalThis);

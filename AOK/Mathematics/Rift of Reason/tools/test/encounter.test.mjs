@@ -6,7 +6,7 @@ import fs from 'node:fs';
 import {loadRift} from './harness.mjs';
 import {Node} from './dom-adapter.mjs';
 async function game(type='puzzle',difficulty=1,clock=null,prep=null){
- const Rift=loadRift(['js/core/rift.js','js/core/state.js','js/core/world.js', 'js/core/catch-net.js', 'js/core/catch-games.js', 'js/core/catch-session.js','data/avatars.js','data/items.js','data/creatures.js','js/puzzles/registry.js']);
+ const Rift=loadRift(['js/core/rift.js','js/core/state.js','js/core/world.js', 'js/core/catch-arcade.js', 'js/core/catch-games.js', 'js/core/catch-session.js','data/avatars.js','data/items.js','data/creatures.js','js/puzzles/registry.js']);
  const state=Rift.State.freshState();state.avatar={type:'owlet',nickname:'Test'};state.tutorialsSeen.fake=true;state.flags['learning-hint:fake']=true;
  Rift.State.transact=fn=>({ok:true,value:fn(state)});Rift.State.get=()=>state;Rift.State.save=()=>{};Rift.State.update=fn=>fn(state);
  Rift.el=(...a)=>new Node(...a);

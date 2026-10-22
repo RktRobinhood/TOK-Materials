@@ -62,7 +62,7 @@ function setup() {
     // FakeElement's id property does not reflect to its attribute.
     screen.setAttribute('id', 'screen'); overlay.setAttribute('id', 'overlay');
     doc.body.append(screen, overlay);
-    ['js/core/state.js', 'js/core/world.js', 'js/core/catch-net.js', 'js/core/catch-games.js', 'js/core/catch-session.js', 'js/core/story.js', 'js/core/cast.js', 'js/core/router.js',
+    ['js/core/state.js', 'js/core/world.js', 'js/core/catch-arcade.js', 'js/core/catch-games.js', 'js/core/catch-session.js', 'js/core/story.js', 'js/core/cast.js', 'js/core/router.js',
         'data/avatars.js', 'data/items.js', 'data/creatures.js', 'data/map.js', 'js/puzzles/registry.js'].forEach(g.run);
     const state = Rift.State.freshState();
     state.avatar = { type: 'owlet', variant: 'boy', nickname: 'Tester' };

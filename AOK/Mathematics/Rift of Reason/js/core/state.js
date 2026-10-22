@@ -7,7 +7,7 @@
     'use strict';
 
     const Rift = root.Rift;
-    const STATE_VERSION = 6;
+    const STATE_VERSION = 7;
     const STORAGE_KEY = 'rift-of-reason:save';
     const PREVIOUS_KEY = 'rift-of-reason:save:previous';     // the save before the last load / new game / erase
     const UNREADABLE_KEY = 'rift-of-reason:save:unreadable'; // a stored save that failed to parse, kept untouched
@@ -669,6 +669,24 @@
         return s;
     };
     MIGRATIONS[5] = s => { s.cardPrints = s.cardPrints || { v: 1, ready: {}, tactic: {}, axiom: {} }; s.version = 6; return s; };
+    // #158: Pocket Nets became a real-time game. Old turn-based net boards cannot be
+    // replayed, so an unfinished paid try gets its charm back once; receipts stay.
+    MIGRATIONS[6] = s => {
+        Object.values(s.catchOffers || {}).forEach(o => {
+            if (!o || o.kind !== 'net' || !o.board || Array.isArray(o.board.log)) return;
+            if (!o.receipt) {
+                if (['charm', 'greatcharm'].includes(o.item)) {
+                    s.items = s.items || {};
+                    s.items[o.item] = (s.items[o.item] || 0) + 1;
+                }
+                o.item = null;
+            }
+            o.board = null;
+            o.version = (o.version || 0) + 1;
+        });
+        s.version = 7;
+        return s;
+    };
 
     function migrate(state) {
         let s = state;

@@ -341,7 +341,7 @@
                         if (lureVisits) {
                             Rift.State.update(st => { st.lures[st.map.at] = lureVisits; });
                             Rift.Audio.sfx('jingle');
-                            toast((id === 'lure' ? 'The lantern glows' : it.name + ' shines') + ' at ' + here.name + ': rare creatures become more likely for ' + lureVisits + ' visits. Catch games gain +1 cast, shot or trap heart.');
+                            toast((id === 'lure' ? 'The lantern glows' : it.name + ' shines') + ' at ' + here.name + ': rare creatures become more likely for ' + lureVisits + ' visits. Catch games gain +1 net, shield, turn or trap heart.');
                         } else {
                             Rift.State.update(st => { st.health = Math.min(maxHealth(st), st.health + (Rift.data.items.tonic.heal || 2)); });
                             Rift.Audio.sfx('heal');

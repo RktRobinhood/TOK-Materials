@@ -13,17 +13,8 @@
 .catch-controls { display: grid; gap: 10px; }
 .catch-controls .small { line-height: 1.5; margin: 0; }
 .catch-controls > .btn { min-height: 46px; }
-.catch-net-board, .catch-tracks-board { display: grid; width: 100%; aspect-ratio: 1; background: #121d30; border: 2px solid #7b91b2; border-radius: 10px; overflow: hidden; }
-.catch-net-board { grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(6, minmax(0, 1fr)); }
-.catch-net-tile { display: grid; place-items: center; min-width: 0; min-height: 0; font-size: 1.7rem; font-weight: 900; color: #ffe0a2; border-right: 1px solid #34445e; border-bottom: 1px solid #34445e; box-sizing: border-box; }
-.catch-net-tile.rock { background: #354158; color: #9cb1cb; font-size: 1rem; }
-.catch-net-tile.closed { background: #223e40; color: #527c74; }
-.catch-net-tile.path { background: #483f35; }
-.catch-net-choices { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
-.catch-choice { min-height: 44px; padding: 4px; border: 2px solid #657a9a; border-radius: 8px; background: #17253b; color: #e9f2ff; cursor: pointer; font: inherit; font-weight: 800; }
-.catch-choice.selected { border-color: #ffd27e; background: #51432b; color: #ffe4b0; }
-.catch-choice:disabled { opacity: .45; cursor: default; }
-.catch-choice:focus-visible, .catch-track:focus-visible { outline: 3px solid #ffe2a2; outline-offset: -4px; }
+.catch-tracks-board { display: grid; width: 100%; aspect-ratio: 1; background: #121d30; border: 2px solid #7b91b2; border-radius: 10px; overflow: hidden; }
+.catch-track:focus-visible { outline: 3px solid #ffe2a2; outline-offset: -4px; }
 .catch-track { border: 1px solid #718aac; background: #263e5b; color: #e8f3ff; min-width: 0; min-height: 44px; aspect-ratio: 1; padding: 0; font: inherit; font-weight: 900; font-size: 1.2rem; cursor: pointer; }
 .catch-track.open { background: #142337; color: #a7e9e0; cursor: default; }
 .catch-track.flagged { color: #ffda92; background: #53442e; }
@@ -56,17 +47,7 @@
 .catch-beast { display: inline-block; width: 64px; height: 64px; flex: 0 0 64px; background: url('../assets/creatures/astrophysicat-idle.webp') center/contain no-repeat; }
 .catch-beast img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .catch-beast:has(img) { background: none; }
-.catch-net-board, .catch-tracks-board, .catch-lure-board { border-color: #8b7957; background-color: #152f25; box-shadow: 0 0 0 4px #101e18, 0 9px 22px #0005; }
-.catch-net-tile { position: relative; background: #214834 center/95% no-repeat; }
-.catch-net-tile.grass { background-image: url('../assets/ui/catch-grass.webp'); }
-.catch-net-tile.rock { background: #20372e url('../assets/ui/catch-rock.webp') center/contain no-repeat; }
-.catch-net-tile.tree { background-image: url('../assets/ui/catch-tree.webp'); }
-.catch-net-tile.water { background-image: url('../assets/ui/catch-water.webp'); }
-.catch-net-tile.closed { background: #14291e url('../assets/ui/catch-net.webp') center/90% no-repeat; }
-.catch-net-tile.path { box-shadow: inset 0 0 0 2px #ffe8ac; }
-.catch-net-tile .catch-beast { width: 100%; height: 100%; position: absolute; inset: 0; }
-.catch-facing { position: absolute; right: 0; bottom: 0; font-size: 17px; line-height: 1; color: #171f1a; background: #ffe0a0; border-radius: 50%; z-index: 1; }
-.catch-path-dot { z-index: 1; color: #fff2c4; text-shadow: 0 1px 3px #000, 0 0 3px #000; }
+.catch-tracks-board, .catch-lure-board { border-color: #8b7957; background-color: #152f25; box-shadow: 0 0 0 4px #101e18, 0 9px 22px #0005; }
 .catch-track { background: #244d35 url('../assets/ui/catch-grass.webp') center/95% no-repeat; border-color: #608267; font-size: 1.4rem; text-shadow: 0 1px 3px #000; }
 .catch-track.open { background: radial-gradient(ellipse, #385447, #172c22); color: #fff1bc; }
 .catch-track.flagged { color: #fff0b4; background-color: #5d4c29; }
@@ -93,3 +74,21 @@
 .catch-empty-mark { font-size: .7rem; color: #a7c5b3; }
 .catch-picture-reference { position: relative; width: 112px; aspect-ratio: 1; overflow: hidden; border: 1px solid #8b7957; border-radius: 8px; }
 .catch-picture-reference .catch-picture-scene { width: 100%; height: 100%; }
+/* #158 real-time games: one canvas, a small HUD and big touch buttons. No transitions. */
+.catch-rule { font-weight: 700; color: #e9f2ff; line-height: 1.4; }
+.catch-game-arcade .catch-field { width: 100%; max-width: 560px; }
+@container catch-cabinet (min-width: 600px) {
+    .catch-game.catch-game-arcade { display: flex; }
+}
+.catch-arcade { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; border: 2px solid #8b7957; border-radius: 10px; background: #21452f; touch-action: none; cursor: crosshair; box-shadow: 0 0 0 4px #101e18, 0 9px 22px #0005; }
+.catch-arcade:focus-visible { outline: 3px solid #ffe2a2; outline-offset: 3px; }
+.catch-hud { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.catch-lives { color: #ffe3aa; white-space: nowrap; }
+.catch-clock { color: #a4efda; min-width: 3.2em; text-align: right; }
+.catch-meter { position: relative; flex: 1; min-width: 0; height: 24px; border-radius: 12px; background: #13261c; border: 1px solid #6d8f74; overflow: hidden; }
+.catch-meter-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: #4fa77d; }
+.catch-meter-goal { position: absolute; top: 0; bottom: 0; width: 3px; margin-left: -2px; background: #ffe39c; }
+.catch-meter-label { position: relative; display: block; text-align: center; font-size: .85rem; line-height: 22px; color: #fff; text-shadow: 0 1px 2px #000; white-space: nowrap; }
+.catch-arcade-keys { justify-content: center; gap: 8px; }
+.catch-arcade-keys .btn { min-height: 44px; min-width: 120px; }
+.catch-arcade-keys:empty { display: none; }

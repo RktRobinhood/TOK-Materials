@@ -50,12 +50,12 @@ test('migrate fills fields added since an old save', () => {
 test('fresh saves use the current version with tactic fields; migration from 1 adds them', () => {
     const J = x => JSON.parse(JSON.stringify(x));
     const s = Rift.State.freshState();
-    assert.equal(s.version, 6);
-    assert.equal(Rift.State.VERSION, 6);
+    assert.equal(s.version, 7);
+    assert.equal(Rift.State.VERSION, 7);
     assert.deepEqual(J(s.tactics), []);
     assert.deepEqual(J(s.deckTactics), []);
     const m = Rift.State.migrate({ version: 1, creatures: [{ uid: 'a', species: 'lobstorian' }] });
-    assert.equal(m.version, 6);
+    assert.equal(m.version, 7);
     assert.deepEqual(J(m.tactics), []);
     assert.deepEqual(J(m.deckTactics), []);
     assert.deepEqual(J(m.creatures[0].variant), J(Rift.State.rollVariant('a')));
