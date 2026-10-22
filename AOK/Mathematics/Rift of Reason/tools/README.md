@@ -28,7 +28,7 @@ NPCs, narration and creatures are voiced with pre-recorded MP3s from Google Gemi
 
 ### Re-recording after a script change
 
-Editing a line's text gives it a new id, so it plays with the browser voice until it is recorded again. To record:
+Editing a line's text gives it a new id, so it is silent (on-screen text only) until it is recorded again. To record:
 
 ```
 node tools/voices.mjs              # status per speaker: recorded / total

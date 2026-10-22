@@ -62,24 +62,19 @@ test('wins and catches share a dedicated upbeat cue, distinct from defeat', () =
  assert.equal(source.license, 'CC0-1.0');
  assert.ok(source.seconds >= .6 && source.seconds < 2, 'a short celebration, not a wait');
 });
-test('cancelled or muted recorded playback cannot restart speech through a late rejection',async()=>{
- const state={settings:{music:.5,sfx:.8,voice:1}},events={},rejects=[],spoken=[];
- class Audio {play(){return new Promise((_,reject)=>rejects.push(reject));}pause(){}}
+test('the browser voice is never used: unrecorded or failed lines are text only',async()=>{
+ const state={settings:{music:.5,sfx:.8,voice:1}},events={},plays=[],spoken=[];
+ class Audio {constructor(file){this.file=file;}play(){return new Promise((_,reject)=>plays.push({audio:this,reject}));}pause(){}}
  class Utterance {constructor(text){this.text=text;}}
  const Rift={data:{voices:{line:'line.mp3'}},State:{get:()=>state},clamp:(n,a,b)=>Math.max(a,Math.min(b,n)),bus:{on:(n,fn)=>{events[n]=fn;}}};
- const synth={cancel(){},getVoices:()=>[{lang:'en-GB',name:'English'}],speak:u=>spoken.push(u)};
+ const synth={cancel(){},getVoices:()=>[{lang:'en-GB',name:'English'}],speak:u=>spoken.push(u),speaking:false};
  vm.runInNewContext(fs.readFileSync(GAME_DIR+'/js/core/audio.js','utf8'),{window:{Rift,speechSynthesis:synth,SpeechSynthesisUtterance:Utterance},Audio,Math,Date,Set});
- const muted=Rift.Audio.speak({speaker:'narrator',text:'Old instruction',voice:'line'});
- state.settings.voice=0;events['state:changed']();rejects.shift()(new Error('paused'));await muted;await Promise.resolve();
- assert.equal(spoken.length,0);
- state.settings.voice=1;events['state:changed']();
- const stale=Rift.Audio.speak({speaker:'narrator',text:'Stale instruction',voice:'line'});
- const current=Rift.Audio.speak({speaker:'narrator',text:'Current instruction'});
- rejects.shift()(new Error('superseded'));await stale;await Promise.resolve();
- assert.deepEqual(spoken.map(u=>u.text),['Current instruction']);
- Rift.Audio.stopVoice();await current;
- const failed=Rift.Audio.speak({speaker:'narrator',text:'Fallback instruction',voice:'line'});
- state.settings.voice=.4;events['state:changed']();rejects.shift()(new Error('missing file'));await Promise.resolve();
- assert.equal(spoken.at(-1).volume,.4);assert.equal(spoken.at(-1).text,'Fallback instruction');
- spoken.at(-1).onend();await failed;
+ await Rift.Audio.speak({speaker:'narrator',text:'Not recorded yet'});
+ assert.equal(plays.length,0);assert.equal(Rift.Audio.speaking(),false);
+ const failed=Rift.Audio.speak({speaker:'narrator',text:'Recorded',voice:'line'});
+ assert.equal(plays[0].audio.file,'assets/voice/line.mp3');assert.equal(Rift.Audio.speaking(),true);
+ plays[0].reject(new Error('missing file'));await failed;
+ assert.equal(Rift.Audio.speaking(),false);
+ const stopped=Rift.Audio.speak({speaker:'narrator',text:'Recorded',voice:'line'});Rift.Audio.stopVoice();await stopped;
+ assert.equal(spoken.length,0,'speechSynthesis must never speak');
 });

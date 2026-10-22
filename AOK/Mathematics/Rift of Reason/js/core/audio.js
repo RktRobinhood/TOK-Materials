@@ -3,8 +3,8 @@
  *
  * SFX come from Kenney CC0 packs listed in data/sfx.js (never synthesized
  * beeps). Voices are pre-rendered MP3s listed in data/voice-manifest.js; a line
- * without a file falls back to the browser's speechSynthesis with a per-speaker
- * pitch/rate so characters still sound different. Avatars never speak.
+ * without a file stays silent and is only text on screen. The browser's own
+ * speechSynthesis is never used: it sounded too poor. Avatars never speak.
  */
 (function (root) {
     'use strict';
@@ -18,7 +18,6 @@
     const music = new Set(['caught', 'jingle', 'win', 'lose']);
     const uiSounds = new Set(['click', 'open', 'close', 'count', 'throw', 'block']);
     let currentVoice = null;
-    let voiceGeneration = 0;
     let finishVoice = null;
 
     function settings() {
@@ -43,7 +42,7 @@
             const a = (cache[file] || (cache[file] = new Audio('assets/sfx/' + file))).cloneNode();
             playing[bus] = a;
             // Keep spoken instructions clear while effects play underneath.
-            a.volume = volume * (currentVoice || (root.speechSynthesis && root.speechSynthesis.speaking) ? 0.35 : 1);
+            a.volume = volume * (currentVoice ? 0.35 : 1);
             const clear = () => { if (playing[bus] === a) delete playing[bus]; };
             a.onended = clear;
             a.onerror = clear;
@@ -57,85 +56,33 @@
 
     // ---- voices ----------------------------------------------------------------
 
-    // Fallback voice character per speaker id (pitch, rate). Unknown speakers get
-    // a stable pitch derived from their id.
-    const FALLBACK = {
-        sundial: { pitch: 0.7, rate: 0.85 },
-        narrator: { pitch: 0.8, rate: 0.9 },
-    };
-
-    function fallbackFor(speaker) {
-        if (FALLBACK[speaker]) return FALLBACK[speaker];
-        const h = Rift.hashSeed(speaker || 'x');
-        return { pitch: 0.6 + (h % 90) / 100, rate: 0.9 + ((h >> 8) % 25) / 100 };
-    }
-
     function stopVoice() {
-        voiceGeneration += 1;
         if (finishVoice) { const finish = finishVoice; finishVoice = null; finish(); }
         if (currentVoice) { try { currentVoice.pause(); } catch (e) { /* ignore */ } currentVoice = null; }
-        if (root.speechSynthesis) { try { root.speechSynthesis.cancel(); } catch (e) { /* ignore */ } }
     }
 
-    // Plays a line. Resolves when it ends (or immediately if silent).
+    // Plays a line's recording. Resolves when it ends, or at once when the line has
+    // no recording or it fails to play: then the line is text on screen only.
     function speak(line) {
         stopVoice();
         const vol = settings().voice;
         if (!line || !line.text || vol <= 0 || line.speaker === 'avatar') return Promise.resolve();
         const manifest = Rift.data.voices || {};
         const file = line.voice && manifest[line.voice];
-        const generation = voiceGeneration;
+        if (!file) return Promise.resolve();
         return new Promise(resolve => {
-            if (file) {
-                const a = new Audio('assets/voice/' + file);
-                a.volume = Rift.clamp(vol, 0, 1);
-                let settled = false;
-                const finish = () => { if (finishVoice === finish) finishVoice = null; resolve(); };
-                finishVoice = finish;
-                a.onended = () => { settled = true; if (currentVoice === a) currentVoice = null; finish(); };
-                const fallback = () => {
-                    if (settled) return;
-                    settled = true;
-                    if (currentVoice === a) currentVoice = null;
-                    if (generation !== voiceGeneration || settings().voice <= 0) { finish(); return; }
-                    resolve(speakFallback(line, settings().voice));
-                };
-                a.onerror = fallback;
-                currentVoice = a;
-                a.play().catch(fallback);
-                return;
-            }
-            resolve(speakFallback(line, vol));
-        });
-    }
-
-    // What the browser voice should actually say: no stage directions in
-    // brackets, no "…". A line that is only a direction stays silent.
-    function speakable(text) {
-        return String(text || '').replace(/\([^)]*\)/g, ' ').replace(/…/g, ' ').replace(/[*_]/g, '').replace(/\s+/g, ' ').trim();
-    }
-
-    function speakFallback(line, vol) {
-        const synth = root.speechSynthesis;
-        const words = speakable(line.text);
-        if (!synth || !root.SpeechSynthesisUtterance || !/[\p{L}\p{N}]/u.test(words)) return Promise.resolve();
-        // English only: a machine whose only voice is (say) Danish would read English text in
-        // Danish. Without an English voice the line stays silent; the text is on screen anyway.
-        const english = synth.getVoices().filter(v => /^en/i.test(v.lang));
-        if (!english.length) return Promise.resolve();
-        return new Promise(resolve => {
-            const finish = () => { if (finishVoice === finish) finishVoice = null; resolve(); };
+            const a = new Audio('assets/voice/' + file);
+            a.volume = Rift.clamp(vol, 0, 1);
+            const finish = () => {
+                if (currentVoice === a) currentVoice = null;
+                if (finishVoice === finish) finishVoice = null;
+                resolve();
+            };
             finishVoice = finish;
-            const u = new root.SpeechSynthesisUtterance(words);
-            const fb = fallbackFor(line.speaker);
-            u.pitch = fb.pitch;
-            u.rate = fb.rate;
-            u.volume = Rift.clamp(vol, 0, 1);
-            u.voice = english[(Rift.hashSeed ? Rift.hashSeed(line.speaker || 'x') : 0) % english.length];
-            u.lang = u.voice.lang;
-            u.onend = finish;
-            u.onerror = finish;
-            synth.speak(u);
+            a.onended = finish;
+            a.onerror = finish;
+            currentVoice = a;
+            a.play().catch(finish);
         });
     }
 
@@ -154,8 +101,8 @@
         Rift.bus.on('state:changed', applyLevels);
         Rift.bus.on('state:replaced', applyLevels);
     }
-    // True while a recorded or browser voice line is playing (battle barks wait their turn).
-    const speaking = () => !!(currentVoice || (root.speechSynthesis && root.speechSynthesis.speaking));
+    // True while a recorded voice line is playing (battle barks wait their turn).
+    const speaking = () => !!currentVoice;
     const has = name => !!((Rift.data.sfx || {})[name] || []).length;
 
     Rift.Audio = { sfx, speak, stopVoice, stopSounds, speaking, has };

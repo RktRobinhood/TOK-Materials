@@ -252,7 +252,7 @@ Production tools generate and cache ElevenLabs narration and orchestral cues, th
 - Saves in `localStorage` plus an exportable **backup code** (device moves). No student data leaves the laptop.
 - Determinism: all generation and battles use a seeded PRNG.
 - Reuse the **Odyssey pipeline** from `AI Projects/psychology materials/` (art requests, slicing, WebP, voice manifest, Kenney SFX, CREDITS.md). Python is **not** installed on this machine — port tools to Node (v24 available).
-- Voices: Gemini TTS pre-rendered to MP3, batched several lines per request then split; `speechSynthesis` fallback for missing lines. The key lives in `.secrets/gemini_api_key` at the repo root (gitignored, never committed or shipped); TTS models available include `gemini-3.8-flash-tts` and `gemini-3.8-flash-lite-tts`.
+- Voices: Gemini TTS pre-rendered to MP3, batched several lines per request then split; a line without a recording is on-screen text only (no `speechSynthesis`: the browser voice sounded too poor). The key lives in `.secrets/gemini_api_key` at the repo root (gitignored, never committed or shipped); TTS models available include `gemini-3.8-flash-tts` and `gemini-3.8-flash-lite-tts`.
 - SFX: Kenney CC0 packs (never synthesized beeps — the teacher rejected them).
 
 ## Build order
