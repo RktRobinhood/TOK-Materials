@@ -1,0 +1,336 @@
+{
+ "date": "2026-10-22",
+ "recorded": "2934/2981",
+ "note": "Voice lines with no recording on main: silent (on-screen text only) until recorded. Regenerate with node tools/voices.mjs --report.",
+ "missing": [
+  {
+   "id": "rubberstamp-1thtpop",
+   "speaker": "rubberstamp",
+   "where": "tutorial venn",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "We judge whether the conclusion MUST follow from these facts. Read the scrolls first."
+  },
+  {
+   "id": "rubberstamp-hb623d",
+   "speaker": "rubberstamp",
+   "where": "tutorial venn",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Shade means no things here. Example: \"All ducks are birds\" shades the ducks-only region outside birds. It does not add an x."
+  },
+  {
+   "id": "rubberstamp-1jy0gmq",
+   "speaker": "rubberstamp",
+   "where": "tutorial venn",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Some means at least one. \"Some ducks are birds\" needs an x in their overlap. \"No ducks are birds\" shades that overlap."
+  },
+  {
+   "id": "rubberstamp-1lbys5p",
+   "speaker": "rubberstamp",
+   "where": "tutorial venn",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Choose Shade and click a region, or drag an x from the tray. Put an x on a border when the facts leave its side open. Clear lets you restart."
+  },
+  {
+   "id": "rubberstamp-1gzdbhr",
+   "speaker": "rubberstamp",
+   "where": "tutorial venn",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Choose Valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument."
+  },
+  {
+   "id": "rubberstamp-8i0uxs",
+   "speaker": "rubberstamp",
+   "where": "tutorial venn",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "The drawing is optional working. If asked, judge premise support using only the reference records, then Seal the verdict. Missing evidence is not false. How to play is free. The Hint button shows its heart cost."
+  },
+  {
+   "id": "rubberstamp-13fc1y1",
+   "speaker": "rubberstamp",
+   "where": "tutorial witness",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Read the scene before judging any claim. We need evidence, not a story your mind fills in."
+  },
+  {
+   "id": "rubberstamp-1xkc4yh",
+   "speaker": "rubberstamp",
+   "where": "tutorial witness",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Example, not this scene: \"A red lamp is on.\" \"The red lamp is on\" is True. \"The red lamp is off\" is False."
+  },
+  {
+   "id": "rubberstamp-120e5i0",
+   "speaker": "rubberstamp",
+   "where": "tutorial witness",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "In that example, \"A blue lamp is on\" is Can't tell. There is no evidence either way. Use these three buttons for each claim."
+  },
+  {
+   "id": "rubberstamp-78nwqb",
+   "speaker": "rubberstamp",
+   "where": "tutorial witness",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "For each claim, point to a line that supports or contradicts it. If no line settles it, choose Can't tell."
+  },
+  {
+   "id": "rubberstamp-17zbyml",
+   "speaker": "rubberstamp",
+   "where": "tutorial witness",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Choose every answer, then Give my testimony. Read feedback and revise your answer. Your first hint on a new topic is free and keeps your stars; later hints show their heart cost."
+  },
+  {
+   "id": "rubberstamp-8q54d8",
+   "speaker": "rubberstamp",
+   "where": "tutorial tribunal",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "We put the argument on trial. Your job is to connect a weak statement to evidence."
+  },
+  {
+   "id": "rubberstamp-1qcd1n9",
+   "speaker": "rubberstamp",
+   "where": "tutorial tribunal",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Use the arrows to read the testimony. Press a statement to hear more; some evidence appears only after pressing."
+  },
+  {
+   "id": "rubberstamp-w82jz1",
+   "speaker": "rubberstamp",
+   "where": "tutorial tribunal",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Open the Court record. Read what each piece of evidence establishes, not just its picture."
+  },
+  {
+   "id": "rubberstamp-1b94flg",
+   "speaker": "rubberstamp",
+   "where": "tutorial tribunal",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Example: \"The door stayed locked all day\" clashes with a dated record showing it opened at noon. Present that record against that statement."
+  },
+  {
+   "id": "rubberstamp-187j377",
+   "speaker": "rubberstamp",
+   "where": "tutorial tribunal",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Use Present on the statement, choose evidence, then Take that. Name the flaw and repair the proof if asked. Finish with Close the case. How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+  },
+  {
+   "id": "kuku-o0st9l",
+   "speaker": "kuku",
+   "where": "tutorial logic-grid",
+   "status": "needs the tick/cross wording fix (fal-262), then --single --id kuku-o0st9l",
+   "text": "When a row has only one empty cell left, that cell must be ✓. Keep going until every row has one ✓."
+  },
+  {
+   "id": "rubberstamp-1t59s1b",
+   "speaker": "rubberstamp",
+   "where": "tutorial logic-grid",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Each clue is evidence. Read them all first. Click a clue to mark it as used."
+  },
+  {
+   "id": "rubberstamp-u81zc",
+   "speaker": "rubberstamp",
+   "where": "tutorial logic-grid",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Click a cell once for ✕ (ruled out), twice for ✓ (confirmed). A ✓ crosses out its row and column."
+  },
+  {
+   "id": "rubberstamp-zlpmx6",
+   "speaker": "rubberstamp",
+   "where": "tutorial logic-grid",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Example, not this puzzle: \"Ada did not write the frog story.\" Put ✕ where Ada meets that headline."
+  },
+  {
+   "id": "rubberstamp-ctzvkn",
+   "speaker": "rubberstamp",
+   "where": "tutorial logic-grid",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "When a row has only one empty cell left, that cell must be ✓. Keep going until every row has one ✓."
+  },
+  {
+   "id": "rubberstamp-5c8v19",
+   "speaker": "rubberstamp",
+   "where": "tutorial logic-grid",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Then Check my grid. How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+  },
+  {
+   "id": "rubberstamp-hbmx80",
+   "speaker": "rubberstamp",
+   "where": "tutorial chart-fixer",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "We want a fair chart. Compare the headline with the actual values."
+  },
+  {
+   "id": "rubberstamp-1xr1ta8",
+   "speaker": "rubberstamp",
+   "where": "tutorial chart-fixer",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Move the axis handles. Example: bars of 95 and 100 look very different if the axis starts at 90; the increase is only 5."
+  },
+  {
+   "id": "rubberstamp-qqsy9f",
+   "speaker": "rubberstamp",
+   "where": "tutorial chart-fixer",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "The visible window can hide inconvenient values. Use its handles to check the full picture when the task needs it."
+  },
+  {
+   "id": "rubberstamp-1cy2gy",
+   "speaker": "rubberstamp",
+   "where": "tutorial chart-fixer",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Read each switch before changing it. Not every switch is a trick: keep the honest controls honest."
+  },
+  {
+   "id": "rubberstamp-xfvenq",
+   "speaker": "rubberstamp",
+   "where": "tutorial chart-fixer",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Choose the claim the corrected data supports, then submit. Fixing a chart means both its view and its conclusion are fair. How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+  },
+  {
+   "id": "rubberstamp-1pxqyfh",
+   "speaker": "rubberstamp",
+   "where": "tutorial prediction",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Read the target. We are testing a machine that uses past patterns to guess your next move."
+  },
+  {
+   "id": "rubberstamp-19oixkj",
+   "speaker": "rubberstamp",
+   "where": "tutorial prediction",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Pick a move only after its guess is locked. You win a point when the machine is wrong."
+  },
+  {
+   "id": "rubberstamp-11fvkps",
+   "speaker": "rubberstamp",
+   "where": "tutorial prediction",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "After the warm-up, its brain opens. The table counts past choices. Read it, then choose Now beat it to start the next rounds."
+  },
+  {
+   "id": "rubberstamp-fbkh0t",
+   "speaker": "rubberstamp",
+   "where": "tutorial prediction",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Example: if it always guesses your most common past move, choosing a different move can beat it. Watch whether its rule changes."
+  },
+  {
+   "id": "rubberstamp-p0l1sv",
+   "speaker": "rubberstamp",
+   "where": "tutorial prediction",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Reach the stated target, then explain how the guess works. Check the score and last result after each move. How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+  },
+  {
+   "id": "rubberstamp-gkb00m",
+   "speaker": "rubberstamp",
+   "where": "tutorial three-act",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Three acts: wonder, investigate, compare. We need a useful question before a calculation."
+  },
+  {
+   "id": "rubberstamp-1eovm7",
+   "speaker": "rubberstamp",
+   "where": "tutorial three-act",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Watch the scene, choose what you wonder, then make a rough guess. The guess is a starting point, not a test of your maths."
+  },
+  {
+   "id": "rubberstamp-gsk6ws",
+   "speaker": "rubberstamp",
+   "where": "tutorial three-act",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Example: to fill an empty tank at a steady rate, we need its capacity and the amount entering each minute. Its colour probably will not help."
+  },
+  {
+   "id": "rubberstamp-1dtkb2b",
+   "speaker": "rubberstamp",
+   "where": "tutorial three-act",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Choose information cards with facts your model needs. Choose a model and use the calculator, table or graph to find a result."
+  },
+  {
+   "id": "rubberstamp-185owf6",
+   "speaker": "rubberstamp",
+   "where": "tutorial three-act",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "In the reveal, compare your model with what happened. Explain which assumption caused any gap and complete the reflection. How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+  },
+  {
+   "id": "rubberstamp-15dcfg1",
+   "speaker": "rubberstamp",
+   "where": "tutorial sorting",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Follow the stages: audit, name the flaw, then fix. We are checking who gets help and who misses out."
+  },
+  {
+   "id": "rubberstamp-jocmxl",
+   "speaker": "rubberstamp",
+   "where": "tutorial sorting",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Run the home-visit audit. Click cards to see their scores; compare the stamps with the needs the audit reveals."
+  },
+  {
+   "id": "rubberstamp-1xwwk54",
+   "speaker": "rubberstamp",
+   "where": "tutorial sorting",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "The four boxes count right and wrong decisions. Example: refusing help to someone who needs it is a missed need, even if most other decisions are right."
+  },
+  {
+   "id": "rubberstamp-1h8stzw",
+   "speaker": "rubberstamp",
+   "where": "tutorial sorting",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Read the rule and budget. Name the flaw, then choose one of the listed fixes to meet the stated goals."
+  },
+  {
+   "id": "rubberstamp-3zbtgc",
+   "speaker": "rubberstamp",
+   "where": "tutorial sorting",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Check who your fix changes, its cost, and the mistakes left. If asked, choose a value and support it with a reason from the audit, then Hand in the audit. How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+  },
+  {
+   "id": "rubberstamp-1ip5xjq",
+   "speaker": "rubberstamp",
+   "where": "tutorial village",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Find which villagers are imps. Every identity must fit all their words under these rules."
+  },
+  {
+   "id": "rubberstamp-5roqxx",
+   "speaker": "rubberstamp",
+   "where": "tutorial village",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Click a villager to add an accusation token. Click again to remove it. Mark suspected imps; leave honest villagers unmarked."
+  },
+  {
+   "id": "rubberstamp-1c74w0l",
+   "speaker": "rubberstamp",
+   "where": "tutorial village",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Open the truth table. A row is one possible world; a column asks whether someone's words are true in that world."
+  },
+  {
+   "id": "rubberstamp-12dpqkf",
+   "speaker": "rubberstamp",
+   "where": "tutorial village",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Example: Baker says \"Sweep is an imp\". In a world where Sweep is honest, those words are false. Baker must then be an imp."
+  },
+  {
+   "id": "rubberstamp-17sqlo5",
+   "speaker": "rubberstamp",
+   "where": "tutorial village",
+   "status": "deferred: Rubberstamp story-reachability decision (20 Oct)",
+   "text": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The Hint button shows its heart cost. Think first, then check your answer."
+  }
+ ]
+}

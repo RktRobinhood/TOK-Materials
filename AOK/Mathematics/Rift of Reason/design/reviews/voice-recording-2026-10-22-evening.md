@@ -20,6 +20,8 @@ Every clip matches its line word for word: "1" is Whisper's spelling of "one", a
 
 ## Still missing (47)
 
+Every missing line, with its voice id, speaker, place, text and status, is listed in [voice-missing-2026-10-22.json](voice-missing-2026-10-22.json).
+
 - **Rubberstamp, 46 tutorial lines:** still deferred, pending the story-reachability decision from 20 October.
 - **kuku-o0st9l:** this logic-grid line contains ✓. Both earlier takes read the symbol as a letter. The fix, so the voice says "a tick" or "a cross", is on the unmerged branch `fal-262-voice-cuts` (b1e1f6f4). Re-record the line with `--single --id kuku-o0st9l` once that branch lands.
 
