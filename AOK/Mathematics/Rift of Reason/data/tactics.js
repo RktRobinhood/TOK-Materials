@@ -75,7 +75,7 @@
             run(api, p) { api.healHero(p, 3); api.emit({ t: 'tactic', text: 'Second Wind: restore 3 hearts.' }); },
         },
         'occams-razor': {
-            short: 'A creature loses its abilities',
+            short: 'A creature loses abilities, keywords, boosts',
             name: 'Occam\'s Razor', cost: 1, target: 'any-creature',
             text: 'A creature loses its abilities, keywords and boosts.',
             flavour: 'Cut away what you do not need.',
@@ -269,7 +269,7 @@
             },
         },
         'look-closer': {
-            short: 'Enemy loses Guard, Shield; draw',
+            short: 'Enemy loses Guard, Elusive, Shield; draw',
             name: 'Look Closer', cost: 1, colour: 'perception', rarity: 'common', target: 'enemy-creature-seen',
             filter: (s, cid, H) => H.keywordsOf(s, cid).some(k => SEEN.includes(k)),
             text: 'An enemy creature loses Guard, Elusive and Shield. Draw a card.',
@@ -292,7 +292,7 @@
             },
         },
         'clear-view': {
-            short: 'All enemies lose Guard; draw 2',
+            short: 'Enemies lose Guard, Elusive, Shield; draw 2',
             name: 'Clear View', cost: 4, colour: 'perception', rarity: 'rare',
             text: 'Every enemy creature loses Guard, Elusive and Shield. Draw 2 cards.',
             flavour: 'In clear light, nothing hides.',
@@ -304,7 +304,7 @@
             },
         },
         'label-it': {
-            short: 'Enemy attack becomes 1',
+            short: 'Enemy attack becomes 1; it can’t attack next turn',
             name: 'Label It', cost: 2, colour: 'language', rarity: 'common', target: 'enemy-creature',
             filter: (s, cid, H) => H.attack(s, cid) >= 2,
             text: 'An enemy creature\'s attack becomes 1. It can\'t attack on its next turn.',
@@ -328,7 +328,7 @@
             },
         },
         persuasion: {
-            short: 'Steal a small enemy creature',
+            short: 'Steal a small enemy creature; it arrives asleep',
             name: 'Persuasion', cost: 5, colour: 'language', rarity: 'rare', target: 'enemy-creature',
             filter: (s, cid, H) => H.attack(s, cid) <= tactics.persuasion.maxAttack, maxAttack: 2,
             // Room on your side for it.
@@ -477,7 +477,7 @@
         },
     };
     tactics['echoing-encouragement'] = {
-        short: 'Repeatable space: your creatures +1/+1',
+        short: 'Repeatable space: your creatures +1/+1, 3 rounds',
         name: 'Echoing Encouragement', cost: 3, colour: 'memory', art: 'art/spell-motif-memory',
         text: 'A repeatable space 1 round ahead. Each time Fate lands on it, your creatures get +1/+1, for 3 rounds only.',
         flavour: 'Say it once. They hear it again and again.',
@@ -620,7 +620,7 @@
         run() { /* the engine schedules it: see scheduled */ },
     };
     tactics['scheduled-speech'] = {
-        short: 'Next round: your creatures +1 attack',
+        short: 'Next round: your creatures +1 attack for a turn',
         name: 'Scheduled Speech', cost: 2, colour: 'language', art: 'art/spell-motif-language',
         text: 'Put it on the Fate track, 1 round ahead. Then your creatures get +1 attack until the end of your next turn.',
         flavour: 'The speech is at noon. The applause is booked for 12:05.',

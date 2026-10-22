@@ -652,10 +652,21 @@ test('a creature dropped on the table waits for its Entrance target, and is not 
 test('card faces name the timing of each ability', () => {
     const mixed = Object.assign({}, practice, { player: Object.assign({}, practice.player, { team: team(['zuckerborg', 'eelish', 'astrophysicat', 'kardashiant'], 'me-') }), battleOptions: Object.assign({}, practice.battleOptions, { openHand: [4, 3], deckSize: 4 }) });
     const t = setup(mixed);
+    // A hand card has room for one word at 12px (#163): the timing. The big card (magnifier, Read) names it.
     const text = t.$('.b-hand').textContent;
-    assert.match(text, /Last Word:Metaverse/);
-    assert.match(text, /Entrance:Whisper/);
-    assert.match(text, /Activate \(1⚡\):Well, Actually/);
+    assert.match(text, /Last Word/);
+    assert.match(text, /Entrance/);
+    assert.match(text, /Activate/);
+    const big = Array.from(t.root.querySelectorAll('.b-hand .bc')).map(n => {
+        n.focus(); n.dispatchEvent({ type: 'focus' });
+        t.$('.b-read-btn').click();
+        const words = t.$('.b-read-body .bc.big').textContent;
+        t.$('.b-read-close').click();
+        return words;
+    }).join(' ');
+    assert.match(big, /Last Word:Metaverse/);
+    assert.match(big, /Entrance:Whisper/);
+    assert.match(big, /Activate \(1⚡\):Well, Actually/);
     // Names are never cut short: long ones get a smaller type size instead.
     const kim = t.$('.b-hand [data-cid="p0c3"] .bc-name');
     assert.equal(kim.textContent, 'Kim Kardashiant');
@@ -1606,6 +1617,16 @@ test('Quiet Reset reveal and recent reader explain restored basics, never announ
     const history=t.root.querySelector('.b-fpast.reset');assert.ok(history);assert.match(history.getAttribute('aria-label'),/restored Card activations: back to basics/);assert.doesNotMatch(history.getAttribute('aria-label'),/Fate reset all rules|All axioms returned/);
     const recent=Array.from(t.root.querySelectorAll('.b-recent-tile')).find(n=>/back to basics/.test(n.getAttribute('aria-label')));assert.ok(recent);recent.click();
     assert.match(t.text(),/2 card activations per turn/);t.handle.destroy();
+});
+
+test('a recent play shows the card and its full rule, even when the big face only has room for less (#163)',()=>{
+    const t=prepared({me:['proof-pup'],opp:['proof-pup'],myTactics:['generic-quiet-reset']},(s,move)=>{
+        move('p0t0',0,'hand');s.axioms.active.plays='infinity';
+    });
+    t.$('.b-hand [data-cid="p0t0"]').click();t.$('.b-prompt .btn.primary').click();t.g.flush();
+    const tile=Array.from(t.root.querySelectorAll('.b-recent-tile')).find(n=>/Quiet Reset/.test(n.getAttribute('aria-label')));assert.ok(tile);tile.click();
+    const notes=t.root.querySelector('.b-inspect .b-notes .b-ability');assert.ok(notes);
+    assert.equal(notes.textContent,'Quiet Reset: '+t.Rift.data.tactics['generic-quiet-reset'].text);t.handle.destroy();
 });
 
 test('opponent public Axiom copies show readable names while private duplicates and personal cards stay backed',()=>{

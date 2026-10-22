@@ -196,7 +196,7 @@
             rules: { abilityCostDelta: 1 },
         },
         'empty-set': {
-            short: 'Abilities OFF',
+            short: 'Abilities and keywords OFF',
             name: 'Axiom of the Empty Set', category: 'abilities', cost: 3,
             text: 'All creature abilities and keywords are switched off.',
             flavour: 'There is a set with nothing in it. Now the creatures are just numbers.',
@@ -264,7 +264,7 @@
 
         // ---- hand limit ----
         'limited-memory': {
-            short: 'Hand limit 3',
+            short: 'Hand limit 3: oldest cards go',
             name: 'Limited Memory', category: 'hand',
             text: 'At the end of your turn, keep at most 3 cards in hand. The oldest cards are discarded.',
             flavour: 'Nobody can hold every idea in mind at once.',

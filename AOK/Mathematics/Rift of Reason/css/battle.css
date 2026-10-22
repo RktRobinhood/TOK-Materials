@@ -373,13 +373,14 @@ button.bc { cursor: pointer; }
 .bc-name.long { font-size: max(10px, 0.86em); }
 .bc-name.xlong { font-size: max(9.5px, 0.78em); white-space: normal; line-height: 1.02; overflow: visible; text-overflow: clip; transform: translateY(-25%); }
 .bc.big .bc-name.long, .bc.big .bc-name.xlong { font-size: 0.92em; white-space: normal; transform: none; }
-.bc-text { position: absolute; z-index: 3; left: 10%; right: 10%; top: 68.5%; bottom: 8%; overflow: hidden; font-size: max(10px, 0.72em); line-height: 1.15; display: flex; flex-direction: column; justify-content: center; gap: 0.15em; }
-.bc.hand .bc-text .bc-line { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.bc.hand .bc-text .bc-kind { display: none; }
-.bc.hand .bc-text .bc-kind.basic, .bc .bc-kind.basic { display: block; color: var(--rift); opacity: 1; font-weight: 800; text-transform: none; letter-spacing: 0; }
+.bc-text { position: absolute; z-index: 3; left: 10%; right: 10%; top: 68.5%; bottom: 8%; overflow: hidden; font-size: 12px; line-height: 1.15; display: flex; flex-direction: column; justify-content: center; gap: 0.15em; }
+/* Card rules text (#163): 12px or more on every face and never cut off. A small card prints one word
+   (.bc-word) under its name plate; a big card prints a line only if Rift.CardText says it fits. */
+.bc-word { font-weight: 800; line-height: 1.1; white-space: nowrap; }
+.bc-word.basic, .bc .bc-kind.basic { display: block; color: var(--rift); opacity: 1; font-weight: 800; text-transform: none; letter-spacing: 0; }
 .bc-line.off { opacity: 0.5; text-decoration: line-through; }
 .bc-line.gained { color: var(--rift); }
-.bc-kind { font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.75; }
+.bc-kind { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
 .bc-kws b { color: var(--gold); }
 .bc-flavour { font-style: italic; opacity: 0.7; font-size: 0.9em; }
 
@@ -387,24 +388,34 @@ button.bc { cursor: pointer; }
 .bc-brief {
     position: absolute; z-index: 3; left: 9%; right: 9%; top: 68.5%; bottom: 8.5%;
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
-    font-size: max(11px, 0.95em); line-height: 1.15; overflow: hidden;
+    font-size: 12px; line-height: 1.15; overflow: hidden;
 }
 .bc.board .bc-brief { left: 22%; right: 22%; top: 70%; bottom: 4%; gap: 1px; }
-.bc.board .bc-ab-kind { font-size: max(10px, 0.86em); }
+/* Small cards: on the table a row of keyword and ability icons; in the hand one word, between the
+   name plate (two lines at most) and the attack/health gems. */
+.bc-brief.small { gap: 1px; }
+.bc.hand .bc-brief.hand-word { top: 72%; bottom: 13%; left: 9%; right: 9%; justify-content: center; }
+.bc-word.entrance { color: var(--rift); }
+.bc-word.lastword { color: #c9a0ff; }
+.bc-word.activate { color: #9fd8ff; }
+.bc-brief.small .bc-kws-row { flex-wrap: nowrap; gap: 3px; align-items: center; }
+.bc-brief.small .bc-kw.art { padding: 0 2px; }
+.bc-brief.small .b-icon { width: 13px; height: 13px; min-width: 0; min-height: 0; }
+.bc-brief.small .bc-ab { flex: none; column-gap: 1px; }
 .bc-kws-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px; max-width: 100%; }
 .bc-kw {
     display: inline-flex; align-items: center; gap: 2px;
-    font-size: max(10px, 0.78em); font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.3;
+    font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.3;
     padding: 0 0.4em; border-radius: 0.6em; background: #dfe5f2; color: var(--ink);
 }
 .bc-kw .b-icon { min-width: 1.1em; min-height: 1.1em; }
 .bc-ab { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; column-gap: 3px; max-width: 100%; min-width: 0; font-weight: 700; line-height: 1.12; }
-.bc-ab-kind { flex: none; font-size: max(10px, 0.82em); font-weight: 800; color: var(--gold); white-space: nowrap; }
+.bc-ab-kind { flex: none; font-size: 12px; font-weight: 800; color: var(--gold); white-space: nowrap; }
 .bc-ab.entrance .bc-ab-kind { color: var(--rift); }
 .bc-ab.lastword .bc-ab-kind { color: #c9a0ff; }
 .bc-ab.activate .bc-ab-kind { color: #9fd8ff; }
 .bc-ab .b-icon { flex: none; color: var(--gold); }
-.bc-ab-name { overflow: hidden; text-overflow: ellipsis; min-width: 0; max-width: 100%; white-space: nowrap; }
+.bc-ab-name { min-width: 0; max-width: 100%; }
 .bc-ab-cost { flex: none; color: #9fd8ff; font-weight: 800; }
 .bc-ab.entrance .b-icon { color: var(--rift); }
 .bc-ab.lastword .b-icon { color: #c9a0ff; }
@@ -627,7 +638,9 @@ body.calm-motion .battle .b-hand > .bc:hover, body.calm-motion .battle .b-hand >
 .b-inspect.fate { box-sizing: border-box; width: 340px; max-width: calc(100% - 12px); padding: 10px; }
 .b-inspect.fate .b-notes { width: 100%; }
 .b-inspect .bc { box-shadow: 0 18px 44px rgba(0, 0, 0, 0.85); border-radius: 9% / 6%; }
-.b-inspect .bc-text { font-size: max(13px, 0.64em); line-height: 1.22; }
+/* Big cards (magnifier, Read, reveals): 13px, in the box Rift.CardText.BOXES.big was measured for. */
+.bc.big .bc-text, .bc.big .bc-brief, .bc.big .bc-kind, .bc.big .bc-kw, .bc.big .bc-ab-kind { font-size: 13px; }
+.bc.big .bc-text { line-height: 1.2; }
 .b-flavour { font-style: italic; opacity: 0.75; }
 .b-inspect .bc-name { font-size: 1em; }
 .b-notes {
@@ -840,13 +853,12 @@ body.calm-motion .battle .b-bag-tray { animation: b-fade-in 0.12s ease-out !impo
 .bc.tactic[data-tcolour] .bc-kind { color: var(--tcol); opacity: 1; text-transform: none; letter-spacing: 0; font-weight: 800; }
 .bc-need { font-size: 0.9em; line-height: 1.1; font-weight: 800; color: #ffb3a8; }
 .bc.hand .bc-need { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.bc.hand.tactic[data-tcolour] .bc-text .bc-line { -webkit-line-clamp: 2; }
 .bc.mini .bc-emblem { width: 34%; }
 /* Art frames: the tactic frames (ui/card-tactic*) have a light parchment text panel, so their
    text is dark ink; the Fate track art is a dark stone groove, so its dots are light. */
 .bc.tactic:has(.bc-frame.art) .bc-text { color: #2b1a0e; }
 .bc.tactic:has(.bc-frame.art) .bc-need { color: #8e1b12; }
-.bc.tactic:has(.bc-frame.art) .bc-kind { filter: brightness(0.7) saturate(1.3); }
+.bc.tactic:has(.bc-frame.art) .bc-kind { color: #2b1a0e; font-weight: 800; }   /* the colour's name, in ink (#163: 4.5:1 on parchment) */
 .b-fate-track.art .pip:not(.marker) { background: #e8d6a8; border-color: #2a1a0e; }
 
 /* ---- reveal: a card shown big over the opponent's side (what they play; a rule change) ----
@@ -856,7 +868,7 @@ body.calm-motion .battle .b-bag-tray { animation: b-fade-in 0.12s ease-out !impo
     display: none; flex-direction: column; align-items: center; gap: 6px;
 }
 .b-reveal.show { display: flex; animation: b-fade-in 0.2s ease-out; }
-.b-reveal .bc.big { --w: clamp(130px, 21cqh, 210px); }
+.b-reveal .bc.big { --w: clamp(190px, 21cqh, 210px); }   /* never under 190px: Rift.CardText.BOXES.big */
 .b-reveal-caption {
     font-family: var(--font-display); font-weight: 800; font-size: clamp(16px, 2.6cqh, 24px); color: var(--gold); white-space: nowrap;
     padding: 2px 16px; border-radius: 12px; background: rgba(14, 10, 24, 0.94); border: 2px solid rgba(242, 182, 50, 0.8);
@@ -931,12 +943,19 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
 @media (max-width: 640px) { .htp-turn { grid-template-columns: 1fr 1fr; } .htp-keys { grid-template-columns: 1fr; } }
 
 /* ---- round 2 legibility fixes ---- */
-/* The big card's text stays clear of the attack/health gems. */
-.bc.big .bc-text { left: 12%; right: 12%; bottom: 14%; justify-content: flex-start; }
+/* The big card's text (a tactic or an Axiom: no attack/health gems) fills the parchment under the
+   name plate: 4 lines of 13px, Rift.CardText.BOXES.big (#163). */
+.bc.big .bc-text { left: 13%; right: 13%; top: 70.5%; bottom: 8%; justify-content: flex-start; }
+/* A tactic frame's parchment plate is smaller and off-centre (measured in FAL-271): the text stays on
+   it, off the copper border. 3 lines of 13px, Rift.CardText.BOXES.tactic. */
+.bc.big.tactic .bc-text { left: 20%; right: 16.5%; top: 71%; bottom: 11.5%; }
+/* The Axiom frame's dark plate: clear of the key and chain on its left. Rift.CardText.BOXES.axiom. */
+.bc.big.axiom .bc-text { left: 22%; right: 11%; top: 70.5%; bottom: 13%; }
+.bc.big.axiom .bc-kind { text-transform: none; letter-spacing: 0; font-weight: 800; }   /* as measured: no capitals */
 .bc-line-note { opacity: 0.8; font-style: italic; }
-/* Hand cards: the short words, a little larger. */
-.bc.hand .bc-text { font-size: max(11px, 0.78em); left: 11%; right: 11%; bottom: 11%; }
-.bc.hand .bc-text .bc-line { -webkit-line-clamp: 3; }
+/* Hand cards: one word on the strip of parchment between a two-line name plate and the frame's
+   lower border; 62px wide on the 76px card (Rift.CardText.BOXES.hand). */
+.bc.hand .bc-text { left: 9%; right: 9%; top: 74.5%; bottom: 13%; justify-content: center; }
 /* The middle bar: two lines at most; bigger action buttons. */
 .b-ask { -webkit-line-clamp: 1; }
 .b-prompt .b-buttons .btn { font-size: 14px; padding: 4px 14px; }
@@ -984,7 +1003,6 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
 .b-energy.small .b-energy-label { font-size: 10.5px; }
 .bc.hand .bc-name.long { font-size: max(11px, 0.86em); }
 .bc.hand .bc-name.xlong { font-size: max(10.5px, 0.8em); }
-.bc.hand .bc-text .bc-line { -webkit-line-clamp: 2; }
 /* "No ability" sits over the picture, never on the name. */
 .bc-state.silenced { top: 8%; bottom: auto; }
 .b-draw-label { cursor: pointer; }
@@ -1041,7 +1059,7 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
 .bc.hand .bc-name { font-size: max(11.5px, 1em); }
 .bc.hand .bc-name.long { font-size: max(11.5px, 0.86em); }
 .bc.hand .bc-name.xlong { font-size: max(11px, 0.8em); }
-.bc-ab-kind, .bc.board .bc-ab-kind { font-size: max(11px, 0.86em); }
+.bc-ab-kind, .bc.board .bc-ab-kind { font-size: 12px; }
 .b-rtile-new, .b-rtile-budget { font-size: 11px; }
 
 /* Granny's panel: larger type for a projector and non-native readers. */
@@ -1055,7 +1073,7 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
 .bc.board .bc-name { font-size: max(12px, 1em); }
 .bc.board .bc-name.long { font-size: max(11px, 0.86em); }
 .bc.board .bc-kws-row { flex-wrap: nowrap; overflow: hidden; }
-.bc.board .bc-kw { font-size: max(9.5px, 0.7em); padding: 0 0.3em; }
+.bc.board .bc-kw { font-size: 12px; padding: 0 0.3em; }
 
 .b-compare { font-size: 14px; }
 .b-ask { font-size: 14px; }
@@ -1226,7 +1244,7 @@ body.calm-motion .battle .b-reveal.show { animation: b-fade-in 0.2s ease-out !im
 .b-read-dialog::backdrop { background: #061018b8; }
 .b-read-close { float: right; }
 .b-read-body { display: flex; flex-direction: column; align-items: center; gap: 10px; clear: both; padding-top: 6px; }
-.b-read-body .bc.big { --w: 170px; }
+.b-read-body .bc.big { --w: 190px; }   /* Rift.CardText.BOXES.big */
 .b-read-body .b-notes { margin: 0; }
 .b-future-dialog { position: fixed; inset: auto 18px 18px auto; margin: 0; width: min(490px, calc(100vw - 24px)); max-height: 82dvh; overflow: auto; padding: 14px; border: 2px solid var(--gold); border-radius: 14px; background: #11252e; color: var(--parchment); font: 14px/1.4 system-ui, sans-serif; }
 .b-future-dialog::backdrop { background: #06101855; }

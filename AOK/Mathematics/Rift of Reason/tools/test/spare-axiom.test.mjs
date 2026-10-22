@@ -157,6 +157,11 @@ test('battle screen: the card sits in my hand as my own card, and says when ther
     assert.ok(!handle.state.players[1].axHand.includes(SPARE));
     const card = root.querySelector('[data-axiom="' + SPARE + '"]');
     assert.ok(card, 'the card is in my hand');
-    assert.match(card.textContent, /Your own card/);
+    // The hand face has room for one word (#163); the big card names it in full.
+    assert.match(card.textContent, /Own rule/);
+    card.focus(); card.dispatchEvent({ type: 'focus' });
+    root.querySelector('.b-read-btn').click();
+    assert.match(root.querySelector('.b-read-body .bc.big').textContent, /Your own card/);
+    root.querySelector('.b-read-close').click();
     assert.match(card.textContent, /No rule to clear/);
 });

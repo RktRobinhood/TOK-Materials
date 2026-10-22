@@ -1,3 +1,14 @@
+**23 Oct 2026 · #163 slice 1 (card text) DONE, #163 stays OPEN (Paperclip FAL-270, Claude).** Card rules text is now readable everywhere it is shown. All 209 released cards were measured in headless Firefox (`tools/measure-card-text.mjs`) at 1280 and 390 px. Before: up to 175 clipped faces per place, type down to 7 px, and 1.02:1 contrast on the tactic magnifier. After: 0 clipped, at least 12 px, and at least 4.58:1 contrast.
+
+- Hand faces print one word.
+- The table shows icons only.
+- Big Arena faces print a rule only if it fits the frame's plate (`Rift.CardText`); otherwise they name the card, and the full rule is in the notes.
+- The Collection card is 300 px.
+- The pack reveal prints the rules in its caption.
+- Nine short rules now say everything their card does.
+
+Guard: `card-text.test.mjs` uses a measured glyph budget. Full suite 1,481 / 1,480 pass / 1 skip / 0 fail. Report: `card-text-163-2026-10-23.md`. Art finding for Artist (FAL-271): a taller, centred tactic plate with no gem would let 21 more tactics print their short rule. NEXT: the #163 art and world-screen slices.
+
 **#29 protocol slice ready,22 Oct (Codex).** Transport 6bb3cf50 pushed main; GitHub progress comment6347912595. New dormant Battle.PeerMatch+PeerSession implement recipient-private DTOs, action revision/sender validation, host-only random seed independent of publicID,60s legal timeout including opponent reactions, bounded ordered queue/backpressure and heartbeat/partial-frame failure.34focusedpass; full tracked+new core/session1471total1470pass1skip0fail444s. Both reviews clear after fixing public records/Infinity/seed inference/send failures. Report peer-protocol-29-2026-10-22.md. No native browser match or student UI acceptance yet;29 staysOPEN. Next: js/screens/peer.js, css/peer.css, js/ui/peer-qr.js and js/vendor/ are NEW UNCOMMITTED/UNLOADED UI/QR drafts, not validated or part of protocol delivery. QR packages from official npm: qrcode-generator2.0.4 MIT,jsqr1.4.0 Apache2; licenses copied. Preserve external voice work (HEAD0363e89f inventory; voice manifest may change). Automation ACTIVE every2h. Continue29 before switching issues.
 **Codex resumption,22 Oct: external shared work reconciled.** Claude/Paperclip published #136 fea75e85 (replaced this chat's suspended137-ID draft with released-only pool), #134 e3573bd8, #148/#149 c180d1c2, #158 f3d2055, #66 d047bdb6 and #129 expansion-2 69047eda. Do not restore the obsolete137-ID pack draft or treat TEMP tok-136-full.log (1318pass/1skip) as evidence for today's changed implementation. Current GitHub open: #163 local polish, #162 human catch playtest, #159 last/stretch, #129 with177held concepts, #43 ongoing voices, #29 live peers. Dirty voice-manifest/audio/tools/README/DESIGN/audio test belong to another active session; preserve them.
 

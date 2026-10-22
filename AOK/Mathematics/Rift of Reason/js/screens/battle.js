@@ -118,7 +118,7 @@
     const RULE_LABEL = {
         victory: 'Win', combat: 'Fights', attacks: 'Attacks', energy: 'Energy', cost: 'Card costs', draw: 'Drawing', healing: 'Healing',
         arrival: 'New creatures', targeting: 'Guard', defeat: 'Defeat', power: 'Power', colour: 'Colours', abilities: 'Abilities',
-        growth: 'Growth', damage: 'Hero hits', plays: 'Card activations', hand: 'Hand limit', bonus: 'Bonus', reset: 'Reset',
+        growth: 'Growth', damage: 'Hero hits', plays: 'Card activations', hand: 'Hand limit', bonus: 'Bonus', reset: 'Reset', information: 'Information',
         // Fate timing (#121, data/axioms.js)
         'fate-delay': 'Fate timing', 'fate-capacity': 'Fate slots', 'fate-impact': 'Fate damage',
     };
@@ -873,24 +873,40 @@
             return AB_KIND[l.kind] + (l.kind === 'activate' && l.cost != null ? ' (' + l.cost + '⚡)' : '');
         }
 
-        // Small cards (board, hand) show keyword chips and the ability's name in readable type;
-        // the big preview (hover, focus or long-press) shows the full text.
-        // On the table (size 'board') a card shows only the keyword chips and the ability's timing
-        // (Entrance / Last Word / Activate), so nothing is cut off; the hand also shows the ability's name.
+        // The big preview (hover, focus or long-press) names every keyword and ability: "Last Word:
+        // Metaverse", "Activate (1⚡): Well, Actually"; its notes hold the full text. Small cards have
+        // room for one line at the 12px floor (#163): on the table each keyword and ability as its
+        // icon (a word stands in without the art); in the hand, under a name that may take two lines,
+        // one word: the first ability's timing, else the first keyword, else the ability's icon.
+        // Nothing is ever cut off.
         function briefLines(d, size) {
-            const onTable = size === 'board';
+            const onTable = size === 'board', small = size !== 'big';
             const ignored = k => k === 'guard' && E.rules(state).ignoreGuard;
             const kws = d.keywords.filter(k => !(onTable && k === 'guard')).map(k => has('ui/kw-' + k)
-                ? el('span.bc-kw.art' + (ignored(k) ? '.off' : ''), { title: ignored(k) ? 'Guard is ignored under the current rules.' : null }, [icon('ui/kw-' + k, '', 'kw', KW_NAME[k] || k), KW_NAME[k] || k])
+                ? el('span.bc-kw.art' + (ignored(k) ? '.off' : ''), { title: ignored(k) ? 'Guard is ignored under the current rules.' : KW_NAME[k] || k },
+                    [icon('ui/kw-' + k, '', 'kw', KW_NAME[k] || k), small ? null : KW_NAME[k] || k])
                 : el('span.bc-kw' + (ignored(k) ? '.off' : ''), { text: KW_NAME[k] || k }));
-            // The timing word comes first, in words: "Last Word: Metaverse", "Activate (1⚡): Well, Actually".
-            const abilities = d.lines.map(l => el('span.bc-ab.' + l.kind + (l.off ? '.off' : '') + (l.gained ? '.gained' : ''), {}, [
-                has('ui/ab-' + l.kind) ? icon('ui/ab-' + l.kind, '', 'ab', AB_KIND[l.kind] || l.name) : null,
-                timing(l) ? el('span.bc-ab-kind', { text: onTable ? AB_KIND[l.kind] : timing(l) + ':' }) : null,
-                onTable && timing(l) ? null : el('span.bc-ab-name', { text: l.name }),
-            ]));
-            return el('div.bc-brief', {}, [kws.length ? el('div.bc-kws-row', {}, kws) : null].concat(abilities,
-                !d.lines.length && !d.keywords.length ? [el('span.bc-ab.none', { text: d.silenced ? 'No abilities' : '—' })] : []));
+            const abilities = d.lines.map(l => {
+                const art = has('ui/ab-' + l.kind);
+                return el('span.bc-ab.' + l.kind + (l.off ? '.off' : '') + (l.gained ? '.gained' : ''), small ? { title: timing(l) ? timing(l) + ': ' + l.name : l.name } : {}, small ? [
+                    art ? icon('ui/ab-' + l.kind, '', 'ab', AB_KIND[l.kind] || l.name) : null,
+                    !art && timing(l) ? el('span.bc-ab-kind', { text: AB_KIND[l.kind] }) : null,
+                    !onTable && l.kind === 'activate' && l.cost != null ? el('span.bc-ab-cost', { text: l.cost + '⚡' }) : null,
+                ] : [
+                    art ? icon('ui/ab-' + l.kind, '', 'ab', AB_KIND[l.kind] || l.name) : null,
+                    timing(l) ? el('span.bc-ab-kind', { text: timing(l) + ':' }) : null,
+                    el('span.bc-ab-name', { text: l.name }),
+                ]);
+            });
+            const none = !d.lines.length && !d.keywords.length ? el('span.bc-ab.none', { text: d.silenced && !small ? 'No abilities' : '—' }) : null;
+            if (!small) return el('div.bc-brief', {}, [kws.length ? el('div.bc-kws-row', {}, kws) : null].concat(abilities, none ? [none] : []));
+            if (onTable) return el('div.bc-brief.small', {}, [el('div.bc-kws-row', {}, kws.concat(abilities.filter(n => n.childNodes.length))), none]);
+            const timed = d.lines.find(l => AB_KIND[l.kind] && !l.off) || d.lines.find(l => AB_KIND[l.kind]);
+            const word = timed ? AB_KIND[timed.kind] : d.keywords.length ? KW_NAME[d.keywords[0]] || d.keywords[0] : '';
+            // An always-on ability has no timing word: its icon stands in.
+            const icons = abilities.filter(n => n.childNodes.length);
+            return el('div.bc-brief.small.hand-word', {}, [word ? el('span.bc-word' + (timed ? '.' + timed.kind : ''), { text: word })
+                : icons.length ? el('div.bc-kws-row', {}, icons) : none || el('span.bc-ab.none', { text: '—' })]);
         }
 
         const upFirst = t => (t ? t.charAt(0).toUpperCase() + t.slice(1) : t);
@@ -904,7 +920,7 @@
             const atkClass = d.attack > d.baseAttack ? 'up' : d.attack < d.baseAttack ? 'down' : '';
             const hpClass = d.damaged ? 'hurt' : d.maxHealth > d.baseHealth ? 'up' : '';
             // Every card face shows the short form; the magnifier's notes hold the full ability text.
-            const text = briefLines(d, size === 'big' ? 'hand' : size);
+            const text = briefLines(d, size);
             return [
                 el('div.bc-bg'),
                 el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
@@ -1027,11 +1043,12 @@
                 d.colour ? colourEmblem(d.colour) : null,
                 el('div.bc-name' + fitName(d.name), { text: d.name }),
                 Rift.Rarity.badge(d),
-                el('div.bc-text', {}, [
-                    size === 'big' ? null : el('div.bc-kind', { text: d.colour ? tacticKind(d) : 'Tactic' }),
-                    size === 'big' && d.colour ? el('div.bc-kind.tc-kind', { text: tacticKind(d) }) : null,
-                    el('div.bc-line', { text: d.short || d.text }),
-                ]),
+                // A small card says "Tactic"; the big one the short rule if it fits the frame's small
+                // parchment plate (#163), else its colour and rarity ("Reason · uncommon"): the full rule
+                // is in the notes beside it.
+                el('div.bc-text', {}, size === 'big'
+                    ? [faceFits(d.short || d.text, '', 'tactic') ? el('div.bc-line', { text: d.short || d.text }) : el('div.bc-kind.tc-kind', { text: d.colour ? tacticKind(d) : 'Tactic' })]
+                    : [el('div.bc-word', { text: 'Tactic' })]),
             ];
         }
         // "Reason · uncommon" under the name of a colour tactic.
@@ -1048,6 +1065,8 @@
             const ax = (Rift.data.axioms || {})[id] || { name: id, text: '', category: '' };
             const frame = bg('ui/card-axiom');
             const art = ax.art || 'ui/axiom-' + id;
+            const label = isBasic(ax) || ax.own ? axiomKind(ax) : '';
+            const rule = ax.short ? (RULE_LABEL[ax.category] || ax.category) + ': ' + ax.short : ax.text;
             return [
                 el('div.bc-bg'),
                 el('div.bc-frame' + (frame ? '.art' : ''), frame ? { style: frame } : {}),
@@ -1055,12 +1074,17 @@
                 gem('cost', E.axiomCost(state, id)),
                 el('div.bc-name' + fitName(ax.name), { text: ax.name }),
                 Rift.Rarity.badge(ax),
-                el('div.bc-text', {}, [
-                    isBasic(ax) ? el('div.bc-kind.basic', { text: axiomKind(ax) }) : size === 'big' ? null : el('div.bc-kind', { text: axiomKind(ax) }),
-                    el('div.bc-line', { text: ax.short ? (size === 'hand' ? ax.short : (RULE_LABEL[ax.category] || ax.category) + ': ' + ax.short) : ax.text }),
-                ]),
+                // A small card says "Rule" ("Basic rule" for one that puts a rule back, "Own rule" for
+                // the player's own card); the big one its kind and, if it fits, "Fights: Lower attack hits".
+                el('div.bc-text', {}, size === 'big' ? [
+                    label ? el('div.bc-kind' + (isBasic(ax) ? '.basic' : ''), { text: label }) : null,
+                    faceFits(rule, label, 'axiom') ? el('div.bc-line', { text: rule }) : label ? null : el('div.bc-kind', { text: (RULE_LABEL[ax.category] || ax.category) + ' rule' }),
+                ] : [el('div.bc-word' + (isBasic(ax) ? '.basic' : ''), { text: isBasic(ax) ? 'Basic rule' : ax.own ? 'Own rule' : 'Rule' })]),
             ];
         }
+        // Does a rule line fit a big card face (box 'big', or the 'tactic' or 'axiom' frame's plate), under its label?
+        // Without the budget (a test that leaves js/ui/card-text.js out) every line is printed, as before #163.
+        const faceFits = (text, label, box) => !Rift.CardText || Rift.CardText.fits(text, box || 'big', label);
         // A "basic" axiom only puts its category back to the default rule (engine flag ax.basic):
         // it is labelled "Back to normal" and never listed as a changed rule.
         const isBasic = ax => !!(ax && ax.basic);
@@ -2831,9 +2855,14 @@
             const tile = el('div.b-recent-tile.' + (ev.player === ME ? 'mine' : ev.player === OPP ? 'theirs' : 'fate') + (i === 0 ? '.newest' : ''), {
                 tabindex: 0, role: 'button', 'aria-label': text + (m.after.length ? ' ' + m.after.join(' ') : ''),
             }, [pic, el('span.b-recent-move', { text: MOVES[ev.t] || '•', 'aria-hidden': 'true' }), el('span.b-recent-who', { text: by === 'You' ? 'You' : by === 'Fate' ? 'Fate' : 'Them', 'aria-hidden': 'true' })]);
+            // The card's full rule under the move (#163): its face may only have room for the short one.
+            const c = card && state.cards[card];
+            const rule = ev.privateTo !== undefined && ev.privateTo !== ME ? null : axId ? (AX[axId] || {}).text
+                : !c ? null : c.kind === 'tactic' ? ((Rift.data.tactics || {})[c.tactic] || {}).text : ((Rift.data.creatures || {})[c.species] || {}).abilityText;
             const make = () => {
                 const big = axId ? axiomCardEl(axId, { size: 'big' }) : ev.t === 'power-use' ? powerBig(ev.id, ev.player) : card ? cardEl(card, { size: 'big', unregistered: true }) : null;
-                return [big, el('div.b-notes', {}, [el('div.b-note-line', {}, [el('b', { text: text })])].concat(
+                return [big, el('div.b-notes', {}, [el('div.b-note-line', {}, [el('b', { text: text })]),
+                    rule ? el('div.b-note-line.b-ability', {}, [el('b', { text: (axId ? (AX[axId] || {}).name : name(card)) + ': ' }), rule]) : null].concat(
                     m.after.slice(0, 5).map(t => el('div.b-note-line', { text: t }))))];
             };
             hoverInspect(tile, make, 'recent:' + i);
@@ -3435,8 +3464,9 @@
                 el('div.bc-art', {}, [Rift.Assets.img('item/' + x.id, { label: x.name, alt: '' })]),
                 gem('cost', x.cost),
                 el('div.bc-name', { text: x.name }),
-                el('div.bc-text', {}, [el('div.bc-kind', { text: 'Bag item' }), el('div.bc-line', { text: x.text })]),
+                el('div.bc-text', {}, [el('div.bc-kind', { text: 'Bag item' }), faceFits(x.text, 'Bag item') ? el('div.bc-line', { text: x.text }) : null]),
             ]), el('div.b-notes', {}, [
+                el('div.b-note-line.b-ability', {}, [el('b', { text: x.name + ': ' }), x.text]),
                 el('div.b-note-line', {}, [el('b', { text: 'Bag item: ' }), 'one per turn. It is used up only when you use it.']),
                 why ? el('div.b-note-line', { text: 'Not now: ' + why }) : null,
             ])];

@@ -471,8 +471,9 @@
 
     // A creature as a framed card (ui/card-<colour>): art under the frame's
     // transparent window, name (and on big cards cost/attack/health + ability) in the dark panel.
-    // opts.inst shows that owned creature's real battle numbers. Falls back to a plain styled
-    // card until the frame art exists.
+    // opts.inst shows that owned creature's real battle numbers; opts.text === false leaves the
+    // ability off a big card whose caller prints it beside the card (the pack reveal, #163).
+    // Falls back to a plain styled card until the frame art exists.
     function framedCard(speciesId, opts) {
         const o = opts || {};
         const c = Rift.data.creatures[speciesId];
@@ -485,8 +486,8 @@
             el('div.fcard-panel', null, [
                 el('div.fcard-name', { text: known ? c.name + (c.rarity === 'legendary' ? ' ★' : '') : '???' }),
                 o.big && known ? el('div.fcard-power.fcard-stats', null, [statLine(speciesId, o.inst)]) : null,
-                // Long rules (over ~75 letters) use smaller print, so the name above is never pushed out.
-                o.big && known ? el('div.fcard-text' + ((c.abilityText || '').length > 75 ? '.long' : ''), { text: c.abilityText }) : null,
+                // The big card is wide enough for every ability at 12px (Rift.CardText budget, #163).
+                o.big && known && o.text !== false ? el('div.fcard-text', { text: c.abilityText }) : null,
             ]),
             o.foil && known ? el('div.fcard-foil', { 'aria-label': 'Foil', text: '✦' }) : null,
         ]);

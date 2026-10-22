@@ -38,7 +38,8 @@
         return slide.name + ' · ' + (short ? '' : slide.rarity.label + ' ') + slide.kind + ' · ' + slide.folder + (slide.foil ? ' · ✦ Foil' : '');
     }
 
-    // A spell or Axiom card in the same full-art layout as a creature's framed card.
+    // A spell or Axiom card in the same full-art layout as a creature's framed card. The stage's
+    // card shrinks with the window, so its rules are printed in the caption below it (#163).
     function printFace(card) {
         const d = def(card), A = Rift.Assets;
         const frame = card.kind === 'axiom' ? 'ui/card-axiom' : d.colour && A.has('ui/card-tactic-' + d.colour) ? 'ui/card-tactic-' + d.colour : 'ui/card-tactic';
@@ -47,19 +48,21 @@
             el('div.fcard-art', null, [A.has(art) ? A.img(art, { alt: '' }) : el('span.pack-glyph', { text: card.kind === 'axiom' ? '⚖' : '✦', 'aria-hidden': 'true' })]),
             A.has(frame) ? A.img(frame, { className: 'fcard-frame' }) : null,
             Rift.Rarity.badge(d),
-            el('div.fcard-panel', null, [
-                el('div.fcard-name', { text: d.name || card.id }),
-                el('div.fcard-text' + ((d.short || d.text || '').length > 75 ? '.long' : ''), { text: d.short || d.text || '' }),
-            ]),
+            el('div.fcard-panel', null, [el('div.fcard-name', { text: d.name || card.id })]),
             card.foil ? el('div.fcard-foil', { 'aria-label': 'Foil', text: '✦' }) : null,
         ]);
         if (!A.has(frame)) node.classList.add('no-frame');
         return node;
     }
+    // The card's full rules, as the Collection prints them.
+    function rules(card) {
+        const d = def(card);
+        return (card.kind === 'creature' ? d.abilityText : d.text) || '';
+    }
     function face(card, s) {
         if (card.kind !== 'creature') return printFace(card);
         const inst = ((s || Rift.State.get()).creatures || []).find(c => c && c.uid === card.uid);
-        return Rift.UI.framedCard(card.id, { big: true, foil: card.foil, inst });
+        return Rift.UI.framedCard(card.id, { big: true, foil: card.foil, inst, text: false });
     }
 
     // The reveal dialog. Opens on the pack, one card per press, then the results list (#136), whose
@@ -83,6 +86,7 @@
             caption.replaceChildren(...[
                 el('div.pack-tier', { dataset: { rarity: tier.id } }, [Rift.Rarity.badge({ rarity: tier.id }), ' ' + slide.kind]),
                 el('div.pack-name', { text: slide.name }),
+                rules(slide.card) ? el('p.pack-rules', { text: rules(slide.card) }) : null,
                 el('div.pack-folder', { text: slide.folder }),
                 slide.foil ? el('div.chip.foil-chip.pack-foil', { text: '✦ Foil · looks only, same card' }) : null,
             ].filter(Boolean));
@@ -142,5 +146,5 @@
         });
     }
 
-    Rift.PackReveal = { plan, line, soundFor, show, results };
+    Rift.PackReveal = { plan, line, soundFor, show, results, face };
 })(typeof window !== 'undefined' ? window : globalThis);

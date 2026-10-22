@@ -78,7 +78,7 @@
             if (Rift.State.get().creatures.some(x => x.species === speciesId)) details(speciesId); else Rift.Router.replace('collection');
         };
         const body = el('div.stack', null, [
-            el('div.row', { style: { alignItems: 'flex-start' } }, [
+            el('div.row.dex-detail-head', null, [
                 Rift.UI.framedCard(speciesId, { big: true }),
                 el('div.stack', null, [
                     el('div.row.wrap', null, [c.generic ? el('span.chip', { text: 'generic' }) : colourChip(c.colour), Rift.Rarity.badge(c), el('span.chip', null, [Rift.UI.statLine(speciesId)])]
