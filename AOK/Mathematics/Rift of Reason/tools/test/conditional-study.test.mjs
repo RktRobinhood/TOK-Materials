@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { loadRift, GAME_DIR } from './harness.mjs';
 const R = loadRift(['js/core/rift.js','js/core/state.js','data/creatures.js','data/axioms.js','data/tactics.js',
-    'js/battle/abilities.js','js/battle/engine.js','dev/conditional-cards.js']);
+    'js/battle/abilities.js','js/battle/engine.js','js/battle/conditional-cards.js']);
 const E = R.Battle.Engine, prefix = 'conditional-';
 const inst = (species, i) => ({ uid: 'study-' + i, species, injuries: [], scars: [] });
 function setup(id) {
@@ -25,7 +25,7 @@ const act = (s,a) => E.applyAction(s,{...a,player:E.decider(s)});
 function enemyTurn(s) {s=act(s,{type:'end'});return act(s,E.legalActions(s)[0]);}
 
 test('all 23 study cards have legal arming and use the proposed classification',()=>{
-    for(const id of R.ConditionalStudy.ids){let s=setup(id),cid=R.data.creatures[id]?'p0c0':'p0t0';
+    for(const id of R.ConditionalCards.ids){let s=setup(id),cid=R.data.creatures[id]?'p0c0':'p0t0';
         if(s.cards[cid].kind==='tactic')assert.equal(E.describe(s,cid).colourReady,true);
         assert.ok(E.legalActions(s).some(a=>a.cid===cid));s=act(s,{type:'play',cid});
         if(s.phase==='choose')s=act(s,E.legalActions(s)[0]);
@@ -76,7 +76,7 @@ test('Queue Please changes blind ordering without giving cards or information',(
     assert.ok(!s.lastEvents.some(e=>e.t==='forecast'||e.t==='draw'));
 });
 
-test('study definitions are absent from production scripts and campaign catalogues',()=>{
+test('the cards load from their own production script, never from dev files or hand copies in the shared data',()=>{
     const index=fs.readFileSync(path.join(GAME_DIR,'index.html'),'utf8');assert.ok(!index.includes('dev/conditional-'));
     for(const file of ['data/creatures.js','data/tactics.js'])assert.ok(!fs.readFileSync(path.join(GAME_DIR,file),'utf8').includes('conditional-generic-seat-reserved'));
 });

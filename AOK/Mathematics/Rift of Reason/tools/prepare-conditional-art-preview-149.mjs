@@ -10,7 +10,7 @@ const folder='design/source-assets/4-caricatures/conditional-149-2026-10-14';
 const concepts=JSON.parse(await read('design/drafts/conditional-expansion-2026-10-13/concepts.json'));
 const casting=JSON.parse(await read(folder+'/cast-and-prompts.json')).cast;
 const ctx={console};ctx.window=ctx;vm.createContext(ctx);
-for(const p of ['js/core/rift.js','data/creatures.js','data/tactics.js','js/battle/abilities.js','dev/conditional-cards.js','data/assets.js'])vm.runInContext(await read(p),ctx,{filename:p});
+for(const p of ['js/core/rift.js','data/creatures.js','data/tactics.js','js/battle/abilities.js','js/battle/conditional-cards.js','data/assets.js'])vm.runInContext(await read(p),ctx,{filename:p});
 const R=ctx.Rift;
 const records=concepts.cards.map(c=>{
     const active=R.data.creatures[c.id]||R.data.tactics[c.id];

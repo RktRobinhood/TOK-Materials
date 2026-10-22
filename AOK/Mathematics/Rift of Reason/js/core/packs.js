@@ -14,15 +14,16 @@
     const LABELS = Object.freeze({ creature: 'creature', tactic: 'spell', axiom: 'Axiom' });
 
     // Released, explicitly pack-eligible IDs only. Story rewards stay out forever (Acquisition).
+    // Waiting cards join only once this adventure has its two lessons (Acquisition.usable, #148).
     // Ownership never decides membership; it only decides room. → [{ kind, id, rarity, weight }]
-    function roster() {
-        const A = Rift.Acquisition, out = [];
+    function roster(save) {
+        const A = Rift.Acquisition, out = [], s = save === undefined ? Rift.State.get() : save;
         if (!A) return out;
         Object.entries(KINDS).forEach(([kind, key]) => {
             const defs = (Rift.data || {})[key] || {};
             Object.keys(defs).sort().forEach(id => {
                 const d = defs[id];
-                if (!d || d.own || typeof d.release !== 'string' || !d.release || !A.packEligible(kind, id)) return;
+                if (!d || d.own || typeof d.release !== 'string' || !d.release || !A.packEligible(kind, id) || !A.usable(kind, id, s)) return;
                 out.push({ kind, id, rarity: Rift.Rarity.of(d).id });
             });
         });
@@ -42,7 +43,7 @@
     function room(s, e) {
         return e.kind === 'creature' ? Rift.State.roomFor(s, e.id) : Rift.State.cardRoom(e.kind, e.id, s);
     }
-    function eligible(s, list) { return (list || roster()).filter(e => room(s, e) > 0); }
+    function eligible(s, list) { return (list || roster(s)).filter(e => room(s, e) > 0); }
     // Chance that the NEXT card is each rarity, over the eligible IDs only.
     function odds(s, list) {
         const open = eligible(s, list), total = open.reduce((n, e) => n + e.weight, 0);
@@ -59,7 +60,7 @@
     }
     // Everything a purchase depends on. A stale quote (other tab, new card, spent Coins) is refused.
     function quote(save) {
-        const s = save || Rift.State.get(), w = Rift.State.walletOf(s), list = roster();
+        const s = save || Rift.State.get(), w = Rift.State.walletOf(s), list = roster(s);
         const slots = list.reduce((n, e) => n + room(s, e), 0), size = Math.min(CONFIG.size, slots);
         const v = version(list), price = size * CONFIG.unit;
         const rooms = list.map(e => room(s, e));
@@ -85,7 +86,7 @@
     // Pure: draws `size` cards into the supplied save. Separate seeded streams for the card and for
     // its foil, so cosmetic tuning can never change which IDs are rewarded.
     function draw(s, number, size) {
-        const S = Rift.State, list = roster(), base = s.seed + ':pack:' + number;
+        const S = Rift.State, list = roster(s), base = s.seed + ':pack:' + number;
         const foils = Rift.makeRng(base + ':foil');
         const cards = [];
         for (let i = 0; i < size; i++) {

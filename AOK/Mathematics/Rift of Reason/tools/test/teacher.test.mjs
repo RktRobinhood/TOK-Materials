@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {loadRift,GAME_DIR} from './harness.mjs';
-const files=['js/core/rift.js','js/core/state.js','data/map.js','data/creatures.js','data/axioms.js','data/items.js','js/battle/abilities.js','js/battle/team-codes.js','js/teacher/overview.js'];
+const files=['js/core/rift.js','js/core/state.js','data/map.js','data/creatures.js','data/axioms.js','data/items.js','data/fate.js','data/tactics.js','js/battle/abilities.js','js/battle/conditional-cards.js','js/battle/team-codes.js','js/teacher/overview.js'];
 function setup(){const R=loadRift(files),s=R.State.freshState();s.avatar={nickname:'PRIVATE NAME',type:'owlet',variant:'boy'};s.map.completed=['stall-gallery','stall-gallery','bonus-mines'];return {R,s};}
 
 test('teacher reads anonymous backup/team summaries without loading or writing game state',()=>{
@@ -45,4 +45,15 @@ test('teacher reads Card Arena (v2) saves with variants and 14-card teams, and o
  const old=JSON.parse(fs.readFileSync(GAME_DIR+'/tools/test/fixtures/save-v1.json','utf8'));
  const v1=R.TeacherOverview.read(R.State.encode('save',old));assert.equal(v1.creatures,3);assert.equal(v1.chapter,'ch1');
  s.team.push('k0');assert.throws(()=>R.TeacherOverview.read(R.State.encode('save',s)));
+});
+
+test('teacher reads a qualified student holding waiting cards (#148), and counts a whole team code',()=>{
+ const {R,s}=setup(),seat='conditional-generic-seat-reserved',spell='conditional-reason-exhibit-aha';
+ // The teacher page loads the same scripts as these tests.
+ const html=fs.readFileSync(GAME_DIR+'/teacher.html','utf8');
+ for(const f of files.filter(f=>f!=='js/teacher/overview.js'))assert.ok(html.includes('src="'+f+'"'),f);
+ s.map.completed=['gate','b-town-hall'];s.creatures.push(R.State.makeCreature(seat,{uid:'w1'}));s.team=['w1'];
+ const report=R.TeacherOverview.read(R.State.encode('save',s));assert.equal(report.creatures,1);assert.equal(report.teamSize,1);
+ const code=R.Battle.TeamCodes.exportTeam({nickname:'X',creatures:[R.State.makeCreature(seat),R.State.makeCreature('lobstorian')],tactics:[spell]});
+ assert.equal(R.TeacherOverview.read(code).teamSize,2);
 });

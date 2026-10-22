@@ -1,4 +1,5 @@
-/* Permanent story/pack separation and once-only plot entitlements. No draft card is granted. */
+/* Permanent story/pack separation, once-only plot entitlements, and the one two-lesson policy for the
+ * waiting (conditional) cards. No draft card is granted. */
 (function(root){
     'use strict';
     const R=root.Rift;
@@ -65,5 +66,32 @@
         if(s.flags[key(row)])return 'Story reward · earned from '+R.World.node(row.node).name;
         return known?'Story reward · complete '+R.World.node(row.node).name:'Story reward · continue the story';
     }
-    R.Acquisition={entries,story,released,packEligible,qualified,pending,claim,catchUp,sourceText};
+    // ---- waiting (conditional) cards, #148/#149 ----
+    // They open after TWO COMPLETED LESSONS: the saved wins of the Lesson 1 Gate and the Lesson 2 Town
+    // Hall. Only map.completed counts: never the chapter, a time-rift jump, stars, a seen scene or a
+    // journal label. Old saves qualify from the same history; nothing is stored and nothing is granted.
+    const LESSON_BOSSES=Object.freeze(['gate','b-town-hall']);
+    const conditional=(kind,id)=>{const d=definition(kind,id);return !!(d&&d.conditional);};
+    function conditionalOpen(s){const done=(s&&s.map&&s.map.completed)||[];return LESSON_BOSSES.every(id=>done.includes(id));}
+    // THE shared policy for every grant, pack, reward, deck and import: a known card, and a waiting
+    // card only once the adventure qualifies. Ownership is never an input and never removed.
+    function usable(kind,id,s){return !!definition(kind,id)&&(!conditional(kind,id)||conditionalOpen(s));}
+    const LOCK_TEXT='Opens after two lessons: win the Gate (Lesson 1) and the Town Hall (Lesson 2).';
+    // Any waiting card owned (a creature or a counted spell print).
+    function ownsConditional(s){
+        if(!s)return false;
+        const tactics=(R.data||{}).tactics||{},ledger=(s.cardPrints||{}).tactic||{};
+        return (s.creatures||[]).some(c=>c&&conditional('creature',c.species))
+            ||Object.keys(ledger).some(id=>tactics[id]&&tactics[id].conditional&&Array.isArray(ledger[id])&&ledger[id].length>0);
+    }
+    // The introduction scene now due on the map: the teaser after Lesson 1, the invitation once open.
+    // Dialogue marks seen:<key> only when a scene finishes, so an interrupted one plays again.
+    function introDue(s){
+        if(!s||!s.avatar||!s.map)return null;
+        const seen=k=>!!(s.flags||{})['seen:'+k];
+        if(conditionalOpen(s))return seen('cards.invite')?null:'cards.invite';
+        return (s.map.completed||[]).includes('gate')&&!seen('cards.teaser')?'cards.teaser':null;
+    }
+    R.Acquisition={entries,story,released,packEligible,qualified,pending,claim,catchUp,sourceText,
+        LESSON_BOSSES,LOCK_TEXT,conditional,conditionalOpen,usable,ownsConditional,introDue};
 })(typeof window!=='undefined'?window:globalThis);

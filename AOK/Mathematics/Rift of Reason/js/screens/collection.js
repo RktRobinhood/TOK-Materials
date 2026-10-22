@@ -81,7 +81,7 @@
             el('div.row', { style: { alignItems: 'flex-start' } }, [
                 Rift.UI.framedCard(speciesId, { big: true }),
                 el('div.stack', null, [
-                    el('div.row.wrap', null, [colourChip(c.colour), Rift.Rarity.badge(c), el('span.chip', null, [Rift.UI.statLine(speciesId)])]
+                    el('div.row.wrap', null, [c.generic ? el('span.chip', { text: 'generic' }) : colourChip(c.colour), Rift.Rarity.badge(c), el('span.chip', null, [Rift.UI.statLine(speciesId)])]
                         .concat((c.keywords || []).map(k => el('span.chip', { text: KEYWORD_NAMES[k] || k })))),
                     el('div.small.muted', { text: 'Inspired by ' + c.inspiredBy + ' (a caricature).' }),
                     el('div.small.muted', { text: 'Cost, attack and health are the usual numbers. Each caught creature varies a little.' }),
@@ -89,6 +89,7 @@
             ]),
             el('p', { text: c.blurb }),
             Rift.Acquisition && Rift.Acquisition.story('creature', speciesId) ? el('p.small', { text: Rift.Acquisition.sourceText('creature', speciesId, s) }) : null,
+            c.conditional ? el('p.small', { text: waitingText('creature', speciesId, s) }) : null,
             el('p', null, [el('strong', { text: 'Ability: ' }), c.abilityText]),
             mine.length ? el('h3', { text: Rift.State.isLegendary(speciesId) ? 'Your ' + c.name + ' (legendary)' : 'Your ' + c.name + ' folder: ' + mine.length + ' of ' + Rift.State.COPY_CAP }) : null,
             mine.length ? el('p.small.muted', { text: Rift.State.isLegendary(speciesId)
@@ -97,6 +98,12 @@
             mine.length ? el('div.stack.small', null, mine.map((x, i) => instanceRow(x, i + 1, s, teach, release))) : null,
         ]);
         dialog = Rift.UI.modal(c.name, body);
+    }
+
+    // A waiting (conditional) card's source line (#148): locked until two lessons, then found in packs.
+    function waitingText(kind, id, s) {
+        return Rift.State.lockedCard(kind, id, s) ? 'Waiting card · ' + Rift.Acquisition.LOCK_TEXT
+            : 'Waiting card · arm it and it waits, face-down (Hidden) or face-up (Open), until its moment. Found in card packs.';
     }
 
     // ---- own deck: battle team + tactic cards = 20, under the shared construction rules ----------
@@ -152,13 +159,14 @@
         };
         const speciesCount = sp => chosenTeam().filter(x => x.species === sp).length;
         const tacticTotal = () => chosenTactics().length;
-        const check = () => S.validateDeck({ creatures: chosenTeam(), tactics: chosenTactics(), missing }, { owned, ownedCounts: S.printCounts('tactic', s) });
+        const check = () => S.validateDeck({ creatures: chosenTeam(), tactics: chosenTactics(), missing }, { owned, ownedCounts: S.printCounts('tactic', s), save: s });
         const tacticDef = id => Rift.data.tactics[id] || { name: id, cost: '?', text: 'This card is no longer in the game. Remove it.' };
         const nameOf = sp => Rift.data.creatures[sp].name;
 
         // Why this card cannot be added now (null: it can).
         function creatureBlock(x) {
             if (team.has(x.uid)) return null;
+            if (S.lockedCard('creature', x.species, s)) return nameOf(x.species) + ' opens after two lessons.';
             if (speciesCount(x.species) >= S.deckCopies(x.species)) return S.isLegendary(x.species)
                 ? nameOf(x.species) + ' is legendary: one per deck.'
                 : 'At most ' + RULES.copies + ' copies of ' + nameOf(x.species) + '. Uncheck one first.';
@@ -169,6 +177,7 @@
             const t = Rift.data.tactics[id];
             if (!t) return 'This card is no longer in the game.';
             if (!owned.includes(id)) return 'You do not own ' + t.name + ' yet.';
+            if (S.lockedCard('tactic', id, s)) return t.name + ' opens after two lessons.';
             if ((counts[id] || 0) >= RULES.copies) return 'At most ' + RULES.copies + ' copies of ' + t.name + '.';
             if ((counts[id] || 0) >= S.cardCopies('tactic', id, s)) return 'You own only ' + S.cardCopies('tactic', id, s) + (S.cardCopies('tactic', id, s) === 1 ? ' copy of ' : ' copies of ') + t.name + '.';
             if (tacticTotal() >= RULES.maxTactics) return 'At most ' + RULES.maxTactics + ' tactic cards. Remove one first.';
@@ -264,6 +273,7 @@
                     t.colour ? ' ' : null, t.colour ? colourChip(t.colour) : el('span.chip', { text: 'generic' }),
                     ' ', Rift.Rarity.badge(t),
                     Rift.Acquisition && Rift.Acquisition.story('tactic', id) ? el('div.small', { text: Rift.Acquisition.sourceText('tactic', id, s) }) : null,
+                    t.conditional ? el('div.small', { text: waitingText('tactic', id, s) }) : null,
                     el('div.small', { text: t.text }),
                     el('div.small', { text: 'Owned copies: ' + S.cardCopies('tactic', id, s) }),
                     quota,
@@ -478,8 +488,10 @@
             const s = Rift.State.get();
             const counts = {};
             s.creatures.forEach(x => { counts[x.species] = (counts[x.species] || 0) + 1; });
+            // Waiting cards (#148) join the grid once open, or when one is already held.
             const species = Object.keys(Rift.data.creatures).filter(id => {
                 const c = Rift.data.creatures[id];
+                if (c.conditional && !counts[id] && Rift.State.lockedCard('creature', id, s)) return false;
                 return c.rarity !== 'legendary' || s.seen.includes(id) || counts[id] || s.flags['rumour:' + id];
             });
             const caughtKinds = Object.keys(counts).length;

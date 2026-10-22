@@ -197,7 +197,7 @@
             // Starter kit, once per chapter, so a fresh or absent student isn't empty-handed.
             state.items.charm = (state.items.charm || 0) + 3;
             state.items.tonic = (state.items.tonic || 0) + 1;
-            const common = Object.entries(Rift.data.creatures).find(([sp, c]) => c.rarity === 'common' && !state.creatures.some(x => x.species === sp));
+            const common = Object.entries(Rift.data.creatures).find(([sp, c]) => c.rarity === 'common' && !Rift.State.lockedCard('creature', sp, state) && !state.creatures.some(x => x.species === sp));
             if (common && state.creatures.length < 3) state.creatures.push(Rift.State.makeCreature(common[0]));
         }
         return firstJump;
@@ -214,6 +214,7 @@
             const c = Rift.data.creatures[sp];
             if (!c || c.roaming) return; // roaming legendaries (#111) come only from their trick challenge
             if (Rift.Acquisition && Rift.Acquisition.story('creature', sp)) return;
+            if (Rift.State.lockedCard('creature', sp, state)) return; // waiting cards: two lessons first (#148)
             const rarity = Rift.data.rarities[c.rarity];
             if (!rarity || !(rarity.weight > 0) || !Number.isFinite(rarity.catchBase)) return;
             if (c.rarity === 'legendary' && !state.flags['rumour:' + sp]) return;
@@ -251,7 +252,8 @@
         const visitor = Object.keys(state.flags || {}).filter(k => k.startsWith('visitor:') && state.flags[k]).map(k => k.slice(8))
             .find(sp => {
                 const c = Rift.data.creatures[sp], rarity = c && Rift.data.rarities[c.rarity];
-                return rarity && Number.isFinite(rarity.catchBase) && !(Rift.Acquisition && Rift.Acquisition.story('creature', sp)) && !(state.creatures || []).some(c => c.species === sp);
+                return rarity && Number.isFinite(rarity.catchBase) && !(Rift.Acquisition && Rift.Acquisition.story('creature', sp))
+                    && !Rift.State.lockedCard('creature', sp, state) && !(state.creatures || []).some(c => c.species === sp);
             });
         if (visitor) return { species: visitor, chance: 1, visitor: true };
         const weights = spawnWeights(state, n, o);

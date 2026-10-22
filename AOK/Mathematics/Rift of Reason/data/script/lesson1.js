@@ -751,4 +751,12 @@
         { s: 'sequins', t: 'Back! Good! Every guard, please. I\'m still losing sequins.', when: { all: [{ not: { seen: 'ch1.gate.win' } }, '!dead:sequins'] } },
         { s: 'narrator', t: 'The cage is empty. The crack has stopped drinking.', when: { any: [{ seen: 'ch1.gate.win' }, 'dead:sequins'] } },
     ];
+
+    // Waiting cards (#148/#149): a teaser once the Gate is won (Rift.Acquisition.introDue). It grants nothing.
+    // Granny teaches cards; while nobody holds her role, Syllo says it. The note always shows.
+    S['cards.teaser'] = [
+        { s: 'granny', e: 'happy', t: 'Some cards wait for the right moment, dear. Finish two lessons, and I\'ll show you.', u: 'Some cards wait for the right moment. Finish two lessons, and I\'ll show you.' },
+        { s: 'syllo', t: 'Some cards wait for the right moment, recruit. Finish two lessons first.', when: { all: ['dead:granny', '!arrived:granny', SYLLO_HERE] } },
+        { note: 'WAITING CARDS: they open after Lesson 2, at the Town Hall.' },
+    ];
 })(typeof window !== 'undefined' ? window : globalThis);

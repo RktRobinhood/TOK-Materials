@@ -1,10 +1,10 @@
-/* Playable #148/#149 study: real engine and controls, isolated scratch save. */
+/* Playable #148/#149 cards (js/battle/conditional-cards.js): real engine and controls, isolated scratch save. */
 (function (root) {
     'use strict';
     const R = root.Rift;
-    if (!R.ConditionalStudy) return;
+    if (!R.ConditionalCards || !new URLSearchParams(root.location.search).has('conditional')) return;
     root.document.body.classList.add('conditional-study');
-    const E = R.Battle.Engine, el = R.el, q = new URLSearchParams(root.location.search), set = R.ConditionalStudy;
+    const E = R.Battle.Engine, el = R.el, q = new URLSearchParams(root.location.search), set = R.ConditionalCards;
     let selected = set.ids.includes(q.get('conditional')) ? q.get('conditional') : set.creatures[1];
     const scratch = R.State.freshState();
     R.State.get = () => scratch; R.State.update = fn => fn(scratch); R.State.save = () => {}; R.State.saveNow = () => true;
@@ -23,7 +23,7 @@
         const fate = def.options.some(o => o.event === 'fate-entered');
         note.textContent = 'Arm the highlighted card, then continue playing. Two conditions maximum; creatures reserve board space. '
             + (seat ? 'End turn with your board empty: a hero attack reveals Guard before damage.' : fate ? 'Fate moves at the end of each round: watch it reveal when Fate lands.' : 'Inspect the armed card to read its committed condition.')
-            + ' All 23 study cards are playable here; none is released to the campaign yet.';
+            + ' All 23 cards are playable here. In the campaign they open after two lessons.';
         const own = [creature ? selected : 'proof-pup', 'paper-dragon', 'lens-lizard', 'cloud-calf', 'comma-crab', 'pocket-tortoise', 'rawmsay'];
         const inst = (species, i) => ({ uid: 'conditional-' + i, species, powerDelta: 0, injuries: [], scars: [] });
         const s = E.createBattle({ seed: 'conditional-study-' + selected,

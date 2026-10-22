@@ -669,9 +669,17 @@
             if (params && params.focus) setTimeout(() => focusNode(params.focus), 300);
             // A roaming legendary that just fled (or fled while this map was not on screen) runs to its new place.
             if (Hunts) setTimeout(() => { if (!destroyed) showDepartures(); }, 450);
-            const autoOpening = params && params.arrive ? () => arrive(state.map.at, { fromPortal: params.fromPortal, recap: params.recap })
+            const firstOpening = params && params.arrive ? () => arrive(state.map.at, { fromPortal: params.fromPortal, recap: params.recap })
                 : params && params.recap ? () => opening(params.recap, true)
                 : Rift.Story && here.chapter && Rift.Story.pendingQuiet(here.chapter).length ? () => opening(here.chapter) : null;
+            // Waiting cards (#148): the teaser after Lesson 1, or the invitation once both lessons are won, after
+            // any opening. Each plays once (seen:<key> is set only when it ends) and grants nothing.
+            const waitingIntro = async () => {
+                const key = Rift.Acquisition && Rift.Acquisition.introDue(Rift.State.get());
+                if (key && !destroyed && Rift.Router.current() === 'map' && Rift.Dialogue.has(key)) await Rift.Dialogue.play(key);
+            };
+            const autoOpening = firstOpening || (Rift.Acquisition && Rift.Acquisition.introDue(state))
+                ? async () => { if (firstOpening) await firstOpening(); await waitingIntro(); } : null;
             if (autoOpening) {
                 pendingArrival = true;
                 blockInput();

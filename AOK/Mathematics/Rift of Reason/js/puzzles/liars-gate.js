@@ -243,7 +243,7 @@
 
     function pickGuards(rng, n) {
         const all = (Rift.data && Rift.data.creatures) || {};
-        const ids = Object.keys(all).filter(id => all[id].rarity !== 'legendary');
+        const ids = Object.keys(all).filter(id => all[id].rarity !== 'legendary' && !all[id].conditional);
         if (ids.length >= n) {
             return rng.shuffle(ids).slice(0, n).map(id => ({ id, name: all[id].name || id, colour: all[id].colour || 'reason' }));
         }

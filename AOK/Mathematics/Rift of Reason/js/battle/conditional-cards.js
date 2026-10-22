@@ -1,11 +1,12 @@
-/* #149 playable study definitions. Loaded only by the battle bench, never index.html,
- * collection, rewards or imports. All 23 concepts are implementable here (#148 steps 1–5); none is released.
+/* The 23 waiting (conditional) cards of #148/#149: 8 masked creatures and 15 spells, release 'conditional-1'.
+ * Every route that grants, packs, rewards or decks them asks Rift.Acquisition.usable: they open only after
+ * two completed lessons (the saved Gate and Town Hall wins). Packs are their only normal source; once open, a
+ * classmate ghost's trophy can also be one. The battle bench (dev/battle.html?conditional=<id>) plays the same definitions.
  */
 (function (root) {
     'use strict';
-    if (root.location && !new URLSearchParams(root.location.search).has('conditional')) return;
-    const R = root.Rift, prefix = 'conditional-';
-    // The paper token (#148 step 2): colourless (generic), 1/1, never collected, a bench-only definition.
+    const R = root.Rift, prefix = 'conditional-', RELEASE = 'conditional-1';
+    // The paper token (#148 step 2): colourless (generic), 1/1, never collected; Paper Tiger makes it.
     const PAPER = prefix + 'paper-token';
     R.data.tokens = R.data.tokens || {};
     R.data.tokens[PAPER] = { name: 'Paper', token: true, generic: true, colour: 'imagination', rarity: 'common', cost: 1, attack: 1, health: 1,
@@ -19,14 +20,15 @@
     const mostDamaged = (api, p) => api.s.players[p].board.slice().sort((a, b) => api.s.cards[b].damage - api.s.cards[a].damage)[0];
     function spell(suffix, name, colour, cost, events, actor, visibility, text, run) {
         const id = prefix + suffix;
-        R.data.tactics[id] = { name, colour: colour === 'generic' || colour === 'memory' ? null : colour, rarity: 'uncommon', cost,
+        // Generic spells have no colour; Memory stays Memory, so its quota applies.
+        R.data.tactics[id] = { name, colour: colour === 'generic' ? null : colour, rarity: 'uncommon', cost,
             art: 'art/spell-motif-' + colour, text, short: 'Conditional · ' + text, run() {},
-            conditional: { options: options(events, actor), visibility, run } };
+            release: RELEASE, packEligible: true, conditional: { options: options(events, actor), visibility, run } };
         return id;
     }
     const ids = [
         spell('reason-exhibit-aha', 'Exhibit Aha!', 'reason', 1, ['creature-played', 'spell-played'], 'opponent', 'face-down',
-            'Arm: choose enemy creature or spell play. Odd paid cost: draw 1. Even: heal your most damaged creature 1.',
+            'Choose: after an enemy creature or spell. Odd cost paid: draw 1. Even: heal your most hurt creature 1.',
             (api, p, fact) => { if (fact.paidCost % 2) api.draw(p); else { const cid = mostDamaged(api, p); if (cid) api.heal(cid, 1); } }),
         spell('emotion-tiny-drama', 'Tiny Drama', 'emotion', 1, ['creature-defeated'], 'self', 'face-down',
             'After your creature is defeated: lose 1 heart. If the battle is still active, draw 1.',
@@ -35,7 +37,7 @@
             'After either player changes an Axiom: both heroes lose 1 heart together.',
             api => { api.damage('h0', 1); api.damage('h1', 1); }),
         spell('perception-blink-forecast', 'Blink Forecast', 'perception', 1, ['creature-played', 'spell-played'], 'self', 'face-up',
-            'Arm: choose your creature or spell play. Reveal your top card. Creature: heal hero 1. Spell: heal your most damaged creature 1.',
+            'Choose: after your creature or spell. Show your top card. Creature: heal your hero 1. Spell: heal your most hurt creature 1.',
             (api, p) => { const cid = api.s.players[p].deck[0]; if (!cid) return;
                 api.emit({ t: 'forecast', cid, text: api.cardName(cid) + ' is revealed on top of the personal deck.' });
                 const knows = api.s.players[1 - p].knows; if (!knows.includes(cid)) knows.push(cid);
@@ -44,17 +46,17 @@
             'After the opponent changes an Axiom: heal your most damaged creature 1 and their hero 1.',
             (api, p) => { const cid = mostDamaged(api, p); if (cid) api.heal(cid, 1); api.healHero(1 - p, 1); }),
         spell('generic-queue-please', 'Queue, Please', 'generic', 1, ['spell-played'], 'either', 'face-up',
-            'After either player plays a spell: each personal deck moves its top card to the bottom without looking.',
+            'After either player plays a spell: each player’s top deck card goes to the bottom, unseen.',
             api => api.s.players.forEach(P => { if (P.deck.length > 1) P.deck.push(P.deck.shift()); })),
         spell('generic-refreshments', 'Round of Refreshments', 'generic', 1, ['axiom-replaced', 'fate-entered'], 'either', 'face-up',
-            'Arm: choose an Axiom change or Fate landing on a space. Then heal both heroes 1. A finished battle stays finished.',
+            'Choose: after an Axiom change, or when Fate lands. Both heroes heal 1.',
             api => { api.healHero(0, 1); api.healHero(1, 1); }),
         spell('generic-tiny-windfall', 'Tiny Windfall', 'generic', 1, ['spell-played'], 'either', 'face-down',
             'After either player plays a spell: the active player gains 1 energy this turn, up to 10.',
             api => { const P = api.s.players[api.s.active]; P.energy = Math.min(10, P.energy + 1); }),
         // #148 step 1: effects with a lifetime (until a controller's next turn ends or starts).
         spell('reason-premise-pending', 'Premise Pending', 'reason', 1, ['creature-played'], 'opponent', 'face-down',
-            'After the opponent plays a creature: if you have a creature and theirs has more attack than each of yours, it gets −2 attack until the end of their next turn.',
+            'After the opponent plays a creature with more attack than each of yours: it gets −2 attack until their next turn ends.',
             (api, p, fact) => { const s = api.s, E = R.Battle.Engine, cid = fact.cid;
                 if (!cid || !s.players[1 - p].board.includes(cid) || !s.players[p].board.length) { api.emit({ t: 'tactic', text: 'Premise Pending: no comparison to make.' }); return; }
                 const big = E.attackOf(s, cid);
@@ -75,7 +77,7 @@
         // #148 step 4: Fate entry. Builder decision: Second Alarm moves your SOONEST waiting one-shot (no question at
         // a round's end, where a question would skip the next draw; NEXT-STEPS.md known limitation).
         spell('memory-second-alarm', 'Second Alarm', 'memory', 2, ['fate-entered'], 'either', 'face-up',
-            'When Fate lands on a space: your soonest waiting one-shot Fate event moves 1 round later (at most 4 rounds ahead). Never an environmental event.',
+            'When Fate lands: your soonest waiting Fate event moves 1 round later (at most 4 rounds ahead).',
             (api, p) => { if (!api.delayOwnEvent(p, 1, 'Second Alarm')) api.emit({ t: 'tactic', text: 'Second Alarm: you have no waiting event to move.' }); }),
         // #148 step 2. Builder decision (a temporary stat swap): the creature's attack becomes its health left,
         // and its health left becomes its attack, as two boosts that end when your next turn starts. Damage it
@@ -88,7 +90,7 @@
                 api.buffUntilStart(cid, hp.current - atk, atk + s.cards[cid].damage - hp.max, 'Wrong Way Round', p);
                 api.emit({ t: 'tactic', text: 'Wrong Way Round: ' + api.name(cid) + ' is ' + E.attackOf(s, cid) + '/' + Math.max(0, E.healthOf(s, cid).current) + ' until your next turn starts.' }); }),
         spell('imagination-costume-rehearsal', 'Costume Rehearsal', 'imagination', 2, ['spell-played'], 'either', 'face-up',
-            'After either player plays a spell: every paper token on both sides gains Shield until its controller’s next turn starts (no second Shield).',
+            'After either player plays a spell: all paper tokens gain Shield until their controller’s next turn starts.',
             api => { const s = api.s; let n = 0;
                 [0, 1].forEach(q => s.players[q].board.slice().forEach(cid => { if (s.cards[cid].species === PAPER && api.keywordUntilStart(cid, 'shield', 'gain', q, 'Costume Rehearsal')) n++; }));
                 api.emit({ t: 'tactic', text: 'Costume Rehearsal: ' + (n ? n + ' paper token' + (n === 1 ? '' : 's') + ' gain Shield.' : 'no paper token needs a Shield.') }); }),
@@ -96,7 +98,7 @@
         // match. A used conditional spell could never be played again, so only conditional CREATURES are taken:
         // they come back as ordinary bodies. Oldest in the pile first; never this card.
         spell('memory-borrowed-tomorrow', 'Borrowed Tomorrow', 'memory', 2, ['spell-played'], 'opponent', 'face-down',
-            'After the opponent plays a spell: your oldest conditional creature in your discard pile goes to the bottom of your deck. It keeps its used condition.',
+            'After the opponent plays a spell: your oldest waiting creature in your discard pile goes to the bottom of your deck.',
             (api, p, fact, self) => { const s = api.s, P = s.players[p];
                 const cid = P.discard.find(id => id !== self && s.cards[id].kind === 'creature' && !s.cards[id].token && (R.data.creatures[s.cards[id].species] || {}).conditional);
                 if (!cid) { api.emit({ t: 'tactic', text: 'Borrowed Tomorrow: no conditional creature in your discard pile.' }); return; }
@@ -174,6 +176,21 @@
     });
     R.data.creatures[tiger] = { name: 'Benedict Paperbatch', colour: 'imagination', rarity: 'uncommon', cost: 2, attack: 1, health: 2, ability: 'conditional-tiger-entry',
         conditional: { visibility: 'face-up', options: options(['creature-defeated'], 'self') } };
+    // Collection faces: the public persona each caricature plays, and the whole card in plain words.
+    const faces = {
+        [safe]: ['Keanu Reeves', 'Hidden. Reveals after you lose a creature. Entrance: put that creature on the bottom of your deck.', 'Keeps a fallen friend safe for later.'],
+        [seat]: ['Danny DeVito', 'Guard. Hidden. Reveals when the opponent attacks while you have no creatures, and takes the hit.', 'Small, loud, and very attached to this chair.'],
+        [ovation]: ['Shia LaBeouf', 'Hidden. Reveals after the opponent plays a spell. Entrance: your creatures get +1 attack until your next turn starts.', 'Waits for the big moment. Then claps far too hard.'],
+        [chair]: ['Morgan Freeman', 'Open. Choose: after you play a creature, or after the opponent does. Entrance: that creature gains Guard until its controller’s next turn starts.', 'The calm voice that tells everyone whose turn it is.'],
+        [umbrella]: ['Tom Holland', 'Open. Reveals after you play a spell. Entrance: your creature with the least health left gains Shield until your next turn starts.', 'Always carries a spare umbrella. Just in case.'],
+        [clock]: ['Cillian Murphy', 'Open. Reveals when Fate lands. Entrance: look at the top 2 shared rule cards. Only you see them.', 'Stares at the clock until the clock looks away.'],
+        [premise]: ['Timothée Chalamet', 'Open. Reveals after you change an Axiom. Entrance: two other creatures with equal attack get +1 health and heal 1.', 'Needs two matching ideas before he will begin.'],
+        [tiger]: ['Benedict Cumberbatch', 'Open. Reveals after you lose a creature. Entrance: if it was not a token, make a 1/1 paper token.', 'Folds a new friend from paper when one is lost.'],
+    };
+    Object.keys(faces).forEach(id => {
+        const [inspiredBy, abilityText, blurb] = faces[id];
+        Object.assign(R.data.creatures[id], { inspiredBy, power: 2, abilityText, blurb, lines: [], release: RELEASE, packEligible: true });
+    });
     const creatures = [safe, seat, ovation, chair, umbrella, clock, premise, tiger];
-    R.ConditionalStudy = { spells: ids, creatures, ids: ids.concat(creatures) };
+    R.ConditionalCards = { RELEASE, PAPER, spells: ids, creatures, ids: ids.concat(creatures) };
 })(typeof window !== 'undefined' ? window : globalThis);

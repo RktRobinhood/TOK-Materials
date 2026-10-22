@@ -9,7 +9,7 @@
  * status: 'new' (never opened: "!"), 'progress' (started, not finished: "?"), 'done', or 'locked'
  * (seen on the map but not open yet: no badge). Only stations out of the fog are known.
  * Main = the chapter's own stations (story, puzzles, mini-bosses, bosses); side = honour bonuses,
- * card challenges and side stories.
+ * card challenges, side stories and the waiting-cards note (#148).
  */
 (function (root) {
     'use strict';
@@ -110,6 +110,17 @@
                 out.push({ id: 'side:' + story.id, kind: 'side', status: done ? 'done' : tried ? 'progress' : 'new', title: story.title,
                     text: story.teaser || '', node: story.station, chapter: station.chapter, locked: null, sideId: story.id });
             });
+        }
+        // Waiting cards (#148/#149): known once the Gate is won, open after the Town Hall too, done once one is
+        // held. Read from the save like every entry; the cards come from packs, never from this entry.
+        const A = Rift.Acquisition;
+        if (A && A.conditionalOpen && ((s.map.completed || []).includes('gate') || A.conditionalOpen(s))) {
+            const open = A.conditionalOpen(s);
+            out.push({ id: 'cards:waiting', kind: 'side', title: 'Waiting cards', node: 'campfire', chapter: s.chapter,
+                status: !open ? 'locked' : A.ownsConditional(s) ? 'done' : s.flags['seen:cards.invite'] ? 'progress' : 'new',
+                text: open ? 'Find waiting cards in the card packs at the Campfire Clearing. Arm one, and it reveals when its moment comes.'
+                    : 'Some cards wait for the right moment. They open after two lessons.',
+                locked: open ? null : 'Win the Town Hall (Lesson 2) to open them.' });
         }
         const order = chapterOrder();
         out.forEach(q => {

@@ -729,4 +729,16 @@
         { s: 'granny', t: 'Back, dear? Every row. The water\'s still warm.', when: { all: ['!dead:granny', { not: { seen: 'ch2.hall.win' } }] } },
         { s: 'constable', t: 'I\'m guarding the door. Somebody has to.', when: { any: ['dead:granny', { seen: 'ch2.hall.win' }] } },
     ];
+
+    // Waiting cards (#148/#149): the invitation once the Gate and the Town Hall are both won
+    // (Rift.Acquisition.introDue; replayable from the Journal). It grants nothing: the cards are in packs.
+    S['cards.invite'] = [
+        { s: 'granny', e: 'happy', t: 'Two lessons done! Now some cards can wait for the right moment.' },
+        { s: 'granny', t: 'Arm one, and it waits. When its moment comes, it reveals. Look in the card packs at the Campfire.' },
+        { when: { all: ['dead:granny', '!arrived:granny', { not: { all: ['syllo-away', '!finale-open'] } }] }, then: [
+            { s: 'syllo', t: 'Two lessons done, recruit! Now some cards can wait for the right moment.' },
+            { s: 'syllo', t: 'Arm one, and it waits. When its moment comes, it reveals. Find them in the packs at the Campfire.' },
+        ] },
+        { note: 'WAITING CARDS OPEN: 23 new cards are in card packs at the Campfire Clearing.' },
+    ];
 })(typeof window !== 'undefined' ? window : globalThis);

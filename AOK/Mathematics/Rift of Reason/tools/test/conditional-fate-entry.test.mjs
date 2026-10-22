@@ -7,7 +7,7 @@ import assert from 'node:assert/strict';
 import { loadRift } from './harness.mjs';
 
 const R = loadRift(['js/core/rift.js', 'js/core/state.js', 'data/creatures.js', 'data/axioms.js', 'data/tactics.js',
-    'js/battle/abilities.js', 'js/battle/engine.js', 'dev/conditional-cards.js']);
+    'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/conditional-cards.js']);
 const E = R.Battle.Engine, prefix = 'conditional-';
 const plain = x => JSON.parse(JSON.stringify(x));
 const inst = (species, i) => ({ uid: 'fe-' + i, species, injuries: [], scars: [] });
@@ -150,11 +150,11 @@ test('Queue That Question: the opponent\'s next spell costs 1 more until it is p
 });
 
 test('every study card still arms legally, including the Fate-entry ones', () => {
-    for (const id of R.ConditionalStudy.ids) {
+    for (const id of R.ConditionalCards.ids) {
         const creature = !!R.data.creatures[id];
         let s = setup(id);
         s = arm(s, creature ? 'p0c0' : 'p0t0');
         assert.equal(s.players[0].armed.length, 1, id);
     }
-    assert.equal(R.ConditionalStudy.ids.length, 23);
+    assert.equal(R.ConditionalCards.ids.length, 23);
 });

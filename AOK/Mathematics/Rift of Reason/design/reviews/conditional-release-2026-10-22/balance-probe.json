@@ -1,0 +1,564 @@
+{
+  "date": "2026-10-22",
+  "scope": "Paired legal 20-card mono decks: each Way with its 3 waiting cards (2 copies each; the generic row puts 2 creatures + 3 spells in the Reason deck) against the same deck with ordinary cards in those slots (Clockwork, Look It Up, Eureka!, cheapest creature pair). Also a mirror control and a run against the unchanged fixture deck, which keeps Pep Talk, Stand Firm and Counterexample. Competent AI both sides, opposite seats, alternating first player.",
+  "seedsPerRow": 16,
+  "games": 1152,
+  "rows": [
+    {
+      "row": "reason",
+      "cards": [
+        "Exhibit Aha!",
+        "Premise Pending",
+        "Timothée Chalkamet"
+      ],
+      "games": 32,
+      "waitingWins": 13,
+      "baselineWins": 19,
+      "draws": 0,
+      "control": {
+        "games": 32,
+        "seat0Wins": 11,
+        "seat1Wins": 18,
+        "draws": 3
+      },
+      "vsFixture": {
+        "games": 32,
+        "waitingWins": 0,
+        "fixtureWins": 32,
+        "draws": 0
+      },
+      "maxSteps": 160,
+      "turnLimit": 0
+    },
+    {
+      "row": "emotion",
+      "cards": [
+        "Tiny Drama",
+        "Group Gasp",
+        "Shia LaBeef"
+      ],
+      "games": 32,
+      "waitingWins": 15,
+      "baselineWins": 17,
+      "draws": 0,
+      "control": {
+        "games": 32,
+        "seat0Wins": 15,
+        "seat1Wins": 17,
+        "draws": 0
+      },
+      "vsFixture": {
+        "games": 32,
+        "waitingWins": 6,
+        "fixtureWins": 26,
+        "draws": 0
+      },
+      "maxSteps": 59,
+      "turnLimit": 0
+    },
+    {
+      "row": "perception",
+      "cards": [
+        "Blink Forecast",
+        "Velvet Reveal",
+        "Cillian Owlish"
+      ],
+      "games": 32,
+      "waitingWins": 15,
+      "baselineWins": 17,
+      "draws": 0,
+      "control": {
+        "games": 32,
+        "seat0Wins": 20,
+        "seat1Wins": 12,
+        "draws": 0
+      },
+      "vsFixture": {
+        "games": 32,
+        "waitingWins": 0,
+        "fixtureWins": 32,
+        "draws": 0
+      },
+      "maxSteps": 123,
+      "turnLimit": 0
+    },
+    {
+      "row": "language",
+      "cards": [
+        "Footnote, Please",
+        "Queue That Question",
+        "Morgan Freemantis"
+      ],
+      "games": 32,
+      "waitingWins": 16,
+      "baselineWins": 16,
+      "draws": 0,
+      "control": {
+        "games": 32,
+        "seat0Wins": 17,
+        "seat1Wins": 15,
+        "draws": 0
+      },
+      "vsFixture": {
+        "games": 32,
+        "waitingWins": 5,
+        "fixtureWins": 27,
+        "draws": 0
+      },
+      "maxSteps": 133,
+      "turnLimit": 0
+    },
+    {
+      "row": "imagination",
+      "cards": [
+        "Wrong Way Round",
+        "Costume Rehearsal",
+        "Benedict Paperbatch"
+      ],
+      "games": 32,
+      "waitingWins": 16,
+      "baselineWins": 16,
+      "draws": 0,
+      "control": {
+        "games": 32,
+        "seat0Wins": 16,
+        "seat1Wins": 16,
+        "draws": 0
+      },
+      "vsFixture": {
+        "games": 32,
+        "waitingWins": 3,
+        "fixtureWins": 29,
+        "draws": 0
+      },
+      "maxSteps": 114,
+      "turnLimit": 0
+    },
+    {
+      "row": "memory",
+      "cards": [
+        "Second Alarm",
+        "Borrowed Tomorrow",
+        "Keanu Reeveaver"
+      ],
+      "games": 32,
+      "waitingWins": 20,
+      "baselineWins": 12,
+      "draws": 0,
+      "control": {
+        "games": 32,
+        "seat0Wins": 16,
+        "seat1Wins": 16,
+        "draws": 0
+      },
+      "vsFixture": {
+        "games": 32,
+        "waitingWins": 2,
+        "fixtureWins": 30,
+        "draws": 0
+      },
+      "maxSteps": 188,
+      "turnLimit": 0
+    },
+    {
+      "row": "generic",
+      "cards": [
+        "Queue, Please",
+        "Round of Refreshments",
+        "Tiny Windfall",
+        "Danny DeSeato",
+        "Tom Holland-er"
+      ],
+      "games": 32,
+      "waitingWins": 1,
+      "baselineWins": 27,
+      "draws": 4,
+      "control": {
+        "games": 32,
+        "seat0Wins": 11,
+        "seat1Wins": 11,
+        "draws": 10
+      },
+      "vsFixture": {
+        "games": 32,
+        "waitingWins": 0,
+        "fixtureWins": 32,
+        "draws": 0
+      },
+      "maxSteps": 174,
+      "turnLimit": 4
+    },
+    {
+      "row": "generic:queue-please",
+      "cards": [
+        "Queue, Please"
+      ],
+      "games": 32,
+      "waitingWins": 17,
+      "baselineWins": 15,
+      "draws": 0,
+      "control": {
+        "games": 32,
+        "seat0Wins": 15,
+        "seat1Wins": 17,
+        "draws": 0
+      },
+      "vsFixture": {
+        "games": 32,
+        "waitingWins": 2,
+        "fixtureWins": 30,
+        "draws": 0
+      },
+      "maxSteps": 155,
+      "turnLimit": 0
+    },
+    {
+      "row": "generic:refreshments",
+      "cards": [
+        "Round of Refreshments"
+      ],
+      "games": 32,
+      "waitingWins": 16,
+      "baselineWins": 16,
+      "draws": 0,
+      "control": {
+        "games": 32,
+        "seat0Wins": 14,
+        "seat1Wins": 17,
+        "draws": 1
+      },
+      "vsFixture": {
+        "games": 32,
+        "waitingWins": 2,
+        "fixtureWins": 30,
+        "draws": 0
+      },
+      "maxSteps": 159,
+      "turnLimit": 0
+    },
+    {
+      "row": "generic:tiny-windfall",
+      "cards": [
+        "Tiny Windfall"
+      ],
+      "games": 32,
+      "waitingWins": 16,
+      "baselineWins": 16,
+      "draws": 0,
+      "control": {
+        "games": 32,
+        "seat0Wins": 16,
+        "seat1Wins": 16,
+        "draws": 0
+      },
+      "vsFixture": {
+        "games": 32,
+        "waitingWins": 2,
+        "fixtureWins": 30,
+        "draws": 0
+      },
+      "maxSteps": 156,
+      "turnLimit": 0
+    },
+    {
+      "row": "generic:seat-reserved",
+      "cards": [
+        "Danny DeSeato"
+      ],
+      "games": 32,
+      "waitingWins": 15,
+      "baselineWins": 17,
+      "draws": 0,
+      "control": {
+        "games": 32,
+        "seat0Wins": 18,
+        "seat1Wins": 14,
+        "draws": 0
+      },
+      "vsFixture": {
+        "games": 32,
+        "waitingWins": 17,
+        "fixtureWins": 15,
+        "draws": 0
+      },
+      "maxSteps": 149,
+      "turnLimit": 0
+    },
+    {
+      "row": "generic:spare-umbrella",
+      "cards": [
+        "Tom Holland-er"
+      ],
+      "games": 32,
+      "waitingWins": 17,
+      "baselineWins": 15,
+      "draws": 0,
+      "control": {
+        "games": 32,
+        "seat0Wins": 18,
+        "seat1Wins": 13,
+        "draws": 1
+      },
+      "vsFixture": {
+        "games": 32,
+        "waitingWins": 10,
+        "fixtureWins": 21,
+        "draws": 1
+      },
+      "maxSteps": 140,
+      "turnLimit": 0
+    }
+  ],
+  "plays": {
+    "conditional-reason-exhibit-aha": 44,
+    "conditional-reason-spare-premise": 61,
+    "conditional-reason-premise-pending": 39,
+    "conditional-emotion-standing-ovation": 17,
+    "conditional-emotion-tiny-drama": 14,
+    "conditional-emotion-group-gasp": 8,
+    "conditional-perception-blink-forecast": 14,
+    "conditional-perception-clock-eyes": 43,
+    "conditional-perception-velvet-reveal": 14,
+    "conditional-language-chair-recognises": 38,
+    "conditional-language-queue-that-question": 20,
+    "conditional-language-footnote-trap": 17,
+    "conditional-imagination-paper-tiger": 36,
+    "conditional-imagination-costume-rehearsal": 16,
+    "conditional-imagination-wrong-way-round": 12,
+    "conditional-memory-borrowed-tomorrow": 27,
+    "conditional-memory-somewhere-safe": 50,
+    "conditional-memory-second-alarm": 26,
+    "conditional-generic-queue-please": 96,
+    "conditional-generic-seat-reserved": 121,
+    "conditional-generic-spare-umbrella": 107,
+    "conditional-generic-refreshments": 93,
+    "conditional-generic-tiny-windfall": 103
+  },
+  "reveals": {
+    "conditional-reason-exhibit-aha": 29,
+    "conditional-reason-spare-premise": 54,
+    "conditional-reason-premise-pending": 26,
+    "conditional-emotion-tiny-drama": 10,
+    "conditional-emotion-standing-ovation": 12,
+    "conditional-emotion-group-gasp": 4,
+    "conditional-perception-blink-forecast": 14,
+    "conditional-perception-clock-eyes": 43,
+    "conditional-perception-velvet-reveal": 13,
+    "conditional-language-chair-recognises": 30,
+    "conditional-language-queue-that-question": 13,
+    "conditional-language-footnote-trap": 5,
+    "conditional-imagination-paper-tiger": 28,
+    "conditional-imagination-costume-rehearsal": 12,
+    "conditional-imagination-wrong-way-round": 11,
+    "conditional-memory-borrowed-tomorrow": 20,
+    "conditional-memory-somewhere-safe": 41,
+    "conditional-memory-second-alarm": 25,
+    "conditional-generic-queue-please": 96,
+    "conditional-generic-seat-reserved": 53,
+    "conditional-generic-spare-umbrella": 92,
+    "conditional-generic-refreshments": 91,
+    "conditional-generic-tiny-windfall": 95
+  },
+  "longGames": [
+    {
+      "label": "reason:control:1",
+      "seed": 9,
+      "seat": 1,
+      "turn": 61,
+      "hearts": [
+        8,
+        8
+      ]
+    },
+    {
+      "label": "reason:control:0",
+      "seed": 10,
+      "seat": 0,
+      "turn": 61,
+      "hearts": [
+        11,
+        7
+      ]
+    },
+    {
+      "label": "reason:control:1",
+      "seed": 10,
+      "seat": 1,
+      "turn": 61,
+      "hearts": [
+        12,
+        8
+      ]
+    },
+    {
+      "label": "generic:control:0",
+      "seed": 1,
+      "seat": 0,
+      "turn": 61,
+      "hearts": [
+        12,
+        11
+      ]
+    },
+    {
+      "label": "generic:control:0",
+      "seed": 3,
+      "seat": 0,
+      "turn": 61,
+      "hearts": [
+        12,
+        12
+      ]
+    },
+    {
+      "label": "generic:control:1",
+      "seed": 3,
+      "seat": 1,
+      "turn": 61,
+      "hearts": [
+        12,
+        12
+      ]
+    },
+    {
+      "label": "generic",
+      "seed": 6,
+      "seat": 0,
+      "turn": 61,
+      "hearts": [
+        12,
+        11
+      ]
+    },
+    {
+      "label": "generic",
+      "seed": 6,
+      "seat": 1,
+      "turn": 61,
+      "hearts": [
+        12,
+        11
+      ]
+    },
+    {
+      "label": "generic",
+      "seed": 8,
+      "seat": 1,
+      "turn": 61,
+      "hearts": [
+        12,
+        12
+      ]
+    },
+    {
+      "label": "generic:control:1",
+      "seed": 8,
+      "seat": 1,
+      "turn": 61,
+      "hearts": [
+        12,
+        10
+      ]
+    },
+    {
+      "label": "generic:control:0",
+      "seed": 9,
+      "seat": 0,
+      "turn": 61,
+      "hearts": [
+        7,
+        4
+      ]
+    },
+    {
+      "label": "generic",
+      "seed": 10,
+      "seat": 0,
+      "turn": 61,
+      "hearts": [
+        2,
+        11
+      ]
+    },
+    {
+      "label": "generic:control:0",
+      "seed": 12,
+      "seat": 0,
+      "turn": 61,
+      "hearts": [
+        12,
+        12
+      ]
+    },
+    {
+      "label": "generic:control:1",
+      "seed": 12,
+      "seat": 1,
+      "turn": 61,
+      "hearts": [
+        12,
+        12
+      ]
+    },
+    {
+      "label": "generic:control:1",
+      "seed": 13,
+      "seat": 1,
+      "turn": 61,
+      "hearts": [
+        12,
+        6
+      ]
+    },
+    {
+      "label": "generic:control:0",
+      "seed": 15,
+      "seat": 0,
+      "turn": 61,
+      "hearts": [
+        8,
+        12
+      ]
+    },
+    {
+      "label": "generic:control:1",
+      "seed": 15,
+      "seat": 1,
+      "turn": 61,
+      "hearts": [
+        12,
+        12
+      ]
+    },
+    {
+      "label": "generic:refreshments:control:0",
+      "seed": 11,
+      "seat": 0,
+      "turn": 61,
+      "hearts": [
+        12,
+        11
+      ]
+    },
+    {
+      "label": "generic:spare-umbrella:control:1",
+      "seed": 10,
+      "seat": 1,
+      "turn": 61,
+      "hearts": [
+        9,
+        11
+      ]
+    },
+    {
+      "label": "generic:spare-umbrella:fixture",
+      "seed": 13,
+      "seat": 0,
+      "turn": 61,
+      "hearts": [
+        11,
+        7
+      ]
+    }
+  ]
+}

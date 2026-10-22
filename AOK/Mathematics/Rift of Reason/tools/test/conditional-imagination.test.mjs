@@ -7,7 +7,7 @@ import assert from 'node:assert/strict';
 import { loadRift } from './harness.mjs';
 
 const R = loadRift(['js/core/rift.js', 'js/core/state.js', 'data/creatures.js', 'data/axioms.js', 'data/tactics.js',
-    'js/battle/abilities.js', 'js/battle/engine.js', 'dev/conditional-cards.js']);
+    'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/conditional-cards.js']);
 const E = R.Battle.Engine, prefix = 'conditional-', PAPER = prefix + 'paper-token';
 const plain = x => JSON.parse(JSON.stringify(x));
 const inst = (species, i) => ({ uid: 'im-' + i, species, injuries: [], scars: [] });
@@ -150,8 +150,8 @@ test('Borrowed Tomorrow with no conditional creature in the pile is used up in p
 });
 
 test('all 23 conditional concepts are playable study cards, and each arms legally', () => {
-    assert.equal(R.ConditionalStudy.ids.length, 23);
-    for (const id of R.ConditionalStudy.ids) {
+    assert.equal(R.ConditionalCards.ids.length, 23);
+    for (const id of R.ConditionalCards.ids) {
         let s = setup(id);
         s = arm(s, R.data.creatures[id] ? 'p0c0' : 'p0t0');
         assert.equal(s.players[0].armed.length, 1, id);

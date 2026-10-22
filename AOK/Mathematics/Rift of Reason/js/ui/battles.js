@@ -473,6 +473,7 @@
                 return;
             }
             if(offerWorkshop(()=>Battles.ghost(code)))return;
+            if (imported.lockedCards.length) Rift.UI.toast('Some of their cards open after two lessons. They stay out of this match.', 4000);
             const deck = myDeck();
             if (!deckReady(deck)) return;
             prepare((consumables, bag) => Rift.Router.go('battle', {

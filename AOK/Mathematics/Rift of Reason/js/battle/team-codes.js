@@ -5,8 +5,10 @@
  *
  * Rift.Battle.TeamCodes.exportTeam({ nickname, creatures: [instances ≤ 14], axioms: [ids], tactics?: [ids], stake?,
  *                                    avatar?: { type, variant, tweaks? } }) → code
- * Rift.Battle.TeamCodes.importTeam(code) → { nickname, team: [instances], axioms: [ids], tactics: [ids], stake, version,
- *                                            avatar: { type, variant, tweaks } | null }
+ * Rift.Battle.TeamCodes.importTeam(code, opts?) → { nickname, team: [instances], axioms: [ids], tactics: [ids], stake, version,
+ *                                            avatar: { type, variant, tweaks } | null, droppedTactics, lockedCards: [names] }
+ *   Before the current adventure's two lessons, the classmate's waiting cards (#148) stay out.
+ *   opts.save: check that adventure instead. opts.wholeTeam: leave nothing out (the teacher's overview, no adventure).
  *   throws a friendly Error on typos, tampering, or impossible creatures.
  * Rift.Battle.TeamCodes.ghostOpponent(imported) → opponent for the battle screen, with the power of the
  *   classmate's avatar (data/powers.js; a code without an avatar: the power of the team's main colour)
@@ -98,7 +100,7 @@
 
     function bad(why) { return new Error('That team code doesn\'t work: ' + why); }
 
-    function importTeam(code) {
+    function importTeam(code, opts) {
         const p = Rift.State.decode('team', code);
         if (!p || typeof p !== 'object' || (p.v !== 1 && p.v !== VERSION)) throw bad('it was made by a different version of the game.');
         const v1 = p.v === 1;
@@ -163,7 +165,16 @@
         const copies = check.problems.find(x => x.code === 'copies');
         if (copies && copies.part === 'axioms') throw bad('a deck has at most 2 copies of an axiom card.');
         if (copies) throw bad('a deck has at most 2 copies of ' + speciesName(copies.id) + '.');
-        const ident = Rift.State.quotaFilter(tactics, team);
+        // Waiting (conditional) cards open after two lessons (#148): before that, a classmate's stay out of the
+        // ghost, so it can neither show nor leave them as a trophy. Colour quotas are then rechecked.
+        const o = opts || {}, adventure = 'save' in o ? o.save : Rift.State.get();
+        const locked = (kind, id) => !o.wholeTeam && Rift.State.lockedCard(kind, id, adventure);
+        const lockedCards = team.filter(c => locked('creature', c.species)).map(c => speciesName(c.species))
+            .concat(tactics.filter(id => locked('tactic', id)).map(id => known()[id].name));
+        const playable = team.filter(c => !locked('creature', c.species));
+        if (!playable.length) throw bad('its creatures open after two lessons. Finish the Gate and the Town Hall first.');
+        tactics = tactics.filter(id => !locked('tactic', id));
+        const ident = Rift.State.quotaFilter(tactics, playable);
         tactics = ident.kept;
         let stake = null;
         if (p.s && typeof p.s === 'object' && p.s.items && typeof p.s.items === 'object') {
@@ -179,7 +190,7 @@
             if (!ok) throw bad('it has an unknown avatar.');
             avatar = { type: p.av[0], variant: p.av[1], tweaks: p.av[2].slice() };
         }
-        return { nickname: p.n.trim().slice(0, 24), team, axioms, tactics, droppedTactics: ident.dropped, stake, version: p.v, avatar };
+        return { nickname: p.n.trim().slice(0, 24), team: playable, axioms, tactics, droppedTactics: ident.dropped, lockedCards, stake, version: p.v, avatar };
     }
 
     // The ghost's hero power: its avatar's, or (no avatar in the code) its team's main colour.

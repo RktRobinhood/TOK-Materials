@@ -9,7 +9,7 @@ import assert from 'node:assert/strict';
 import { loadRift } from './harness.mjs';
 
 const R = loadRift(['js/core/rift.js', 'js/core/state.js', 'data/creatures.js', 'data/axioms.js', 'data/tactics.js',
-    'js/battle/abilities.js', 'js/battle/engine.js', 'dev/conditional-cards.js']);
+    'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/conditional-cards.js']);
 const E = R.Battle.Engine, prefix = 'conditional-';
 const plain = x => JSON.parse(JSON.stringify(x));
 const inst = (species, i) => ({ uid: 'life-' + i, species, injuries: [], scars: [] });

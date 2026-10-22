@@ -22,7 +22,7 @@
                 const def = Rift.data.cutscenes[id];
                 return (id === 'cold-open' || def.replayLabel) && Rift.State.get().flags['seen:' + def.script];
             }) : [];
-            const replay = films.length ? el('div.row.wrap', null, films.map(id => {
+            const buttons = films.map(id => {
                 const button = el('button.btn.small', {
                 type: 'button', text: id === 'cold-open' ? 'Watch the opening again' : Rift.data.cutscenes[id].replayLabel,
                 async onclick() {
@@ -35,7 +35,17 @@
                 },
                 });
                 return button;
-            })) : null;
+            });
+            // The waiting-cards invitation (#148) can be heard again once seen. Replaying changes nothing.
+            if (Rift.State.get().flags['seen:cards.invite'] && Rift.Dialogue && Rift.Dialogue.has('cards.invite')) {
+                const again = el('button.btn.small', { type: 'button', text: 'Hear about waiting cards again', async onclick() {
+                    if (again.disabled) return;
+                    again.disabled = true;
+                    try { await Rift.Dialogue.play('cards.invite', { replay: true }); } finally { again.disabled = false; }
+                } });
+                buttons.push(again);
+            }
+            const replay = buttons.length ? el('div.row.wrap', null, buttons) : null;
             rootNode.append(hud, el('section.collection-screen.panel.journal', null, [
                 el('h1', { text: 'Journal' }),
                 replay,

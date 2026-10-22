@@ -1148,7 +1148,7 @@
     }
 
     // Authored conditions use semantic facts, never translated log messages or animation callbacks.
-    // Only released definitions should be installed in production data. The developer set is separate.
+    // Definitions: js/battle/conditional-cards.js (release conditional-1, two-lesson policy in Rift.Acquisition).
     function conditionOf(s, cid) {
         const c = s.cards[cid];
         const def = c && (c.kind === 'tactic' ? tacticDefs()[c.tactic] : species(c.species));
@@ -2424,8 +2424,9 @@
         const o = opts || {};
         const all = Rift.data.creatures || {};
         const rar = Rift.data.rarities || {};
+        // Waiting (conditional) cards never join a random team (#148): a practice dummy must not show them early.
         let weights = Object.keys(all)
-            .filter(id => (o.legendaries !== false || all[id].rarity !== 'legendary') && ((rar[all[id].rarity] || { weight: 1 }).weight > 0))
+            .filter(id => !all[id].conditional && (o.legendaries !== false || all[id].rarity !== 'legendary') && ((rar[all[id].rarity] || { weight: 1 }).weight > 0))
             .map(id => ({ item: id, weight: (rar[all[id].rarity] || { weight: 1 }).weight }));
         const team = [], counts = {};
         for (let i = 0; i < n && weights.length; i++) {

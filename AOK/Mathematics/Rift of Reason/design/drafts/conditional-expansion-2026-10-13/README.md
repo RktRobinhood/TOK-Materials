@@ -1,5 +1,7 @@
 # Future conditional expansion handoff
 
+**Status, 22 October 2026: implemented and released** (`js/battle/conditional-cards.js`; [release report](../../reviews/conditional-release-2026-10-22.md)). The text below is the original 13 October handoff, kept as history.
+
 Latest human authorization: after **ALL current initial/starter art generation**, directly implement the conditional backend and this23-card set's design/art. This handoff remains design/publication only; no implementation/generation now. Existing210contracts, accepted art, game code, saves, recordings and other sessions' files are unchanged.
 
 - [Backend specification](BACKEND-SPEC.md): actor/trigger menus, visible/concealed commitment, one-shot queue, privacy, AI, winner and policy gates. Published as [#148](https://github.com/RktRobinhood/TOK-Materials/issues/148), natively blocked by #109 and #123.

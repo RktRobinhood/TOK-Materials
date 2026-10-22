@@ -229,9 +229,17 @@
         Object.keys(ledger).forEach(id => { out[id] = Array.isArray(ledger[id]) ? ledger[id].length : 0; });
         return out;
     }
+    // Waiting (conditional) cards open only after two lessons: the one policy is Rift.Acquisition.usable
+    // (#148). Fails closed when that policy is not loaded. Never used to take away a card already held.
+    function lockedCard(kind, id, save) {
+        const defs = (Rift.data || {})[kind === 'creature' ? 'creatures' : kind === 'tactic' ? 'tactics' : kind === 'axiom' ? 'axioms' : ''];
+        const def = defs && Object.prototype.hasOwnProperty.call(defs, id) && defs[id];
+        return !!(def && def.conditional) && !(Rift.Acquisition && Rift.Acquisition.usable(kind, id, save));
+    }
     function grantPrint(kind, id, save, opts) {
         const s = save || current;
         if (Rift.Acquisition && Rift.Acquisition.story(kind, id) && (!opts || opts.story !== id)) return false;
+        if (lockedCard(kind, id, s)) return false;
         if (!s || !printDefinition(kind, id) || !cardRoom(kind, id, s)) return false;
         const P = reconcilePrints(s), key = kind === 'tactic' ? 'tactics' : 'axioms';
         if (!Array.isArray(P[kind][id])) P[kind][id] = [];
@@ -267,7 +275,7 @@
         const fresh = [];
         (s.creatures || []).concat(s.trophies || []).forEach(inst => {
             const sp = inst && creatures[inst.species];
-            const common = sp && (byColour[sp.colour] || [])[0];
+            const common = sp && !sp.generic && (byColour[sp.colour] || [])[0];   // a generic creature counts for no colour
             if (!common) return;
             const receipts = reconcilePrints(s).colours;
             if (receipts[sp.colour]) return;
@@ -362,6 +370,7 @@
     //   opts.complete (default true): the exact size and the 6–14 bands; false only checks maxima
     //     (team codes: the battle fills a classmate's short ghost deck).
     //   opts.owned / opts.ownedAxioms: when given, cards outside them are reported.
+    //   opts.save: the adventure whose two-lesson lock applies (#148): its waiting cards that are not open are reported.
     //   loans: loaned filler creatures (fixtures only); they count for the size, never for copies or quotas.
     //   missing: chosen creatures no longer in the collection.
     // → { valid, problems: [{ part: 'deck'|'axioms', code, text, id?, colour? }], message, head, axiomHead,
@@ -380,6 +389,12 @@
         const copies = { creatures: countBy(creatures, speciesOf), tactics: countBy(tactics), axioms: countBy(d.axioms) };
         const quota = colourQuota(creatures, tactics);
 
+        // A waiting card held before its lessons (an old or edited save) stays owned but cannot be played yet.
+        if (Object.prototype.hasOwnProperty.call(o, 'save')) {
+            const locked = (kind, defs, id) => lockedCard(kind, id, o.save) && add('deck', 'locked', nameOf(defs, id) + ' opens after two lessons. Remove it for now.', { id });
+            Object.keys(copies.creatures).forEach(id => locked('creature', species, id));
+            Object.keys(copies.tactics).forEach(id => locked('tactic', known, id));
+        }
         if (d.missing) add('deck', 'missing', n(d.missing, 'chosen creature') + (d.missing === 1 ? ' is' : ' are') + ' no longer in your collection. Choose another.');
         Object.keys(copies.creatures).forEach(id => {
             if (!species[id]) add('deck', 'unknown', 'Unknown creature: ' + id + '. Remove it.', { id });
@@ -457,7 +472,7 @@
         const axioms = axiomLoadout(s);
         const loans = [];
         const check = validateDeck({ creatures: team, tactics, axioms, missing },
-            { owned: ownedTactics(s), ownedAxioms: ownedAxioms(s), ownedCounts: printCounts('tactic', s), ownedAxiomCounts: printCounts('axiom', s) });
+            { owned: ownedTactics(s), ownedAxioms: ownedAxioms(s), ownedCounts: printCounts('tactic', s), ownedAxiomCounts: printCounts('axiom', s), save: s });
         return { team, tactics, axioms, loans, missing, custom: !!(chosen.length || (s.deckTactics || []).length), check };
     }
 
@@ -556,6 +571,7 @@
     function addCreature(save, inst, opts) {
         const s = save || current;
         if (inst && Rift.Acquisition && Rift.Acquisition.story('creature', inst.species) && (!opts || opts.story !== inst.species)) return false;
+        if (inst && lockedCard('creature', inst.species, s)) return false;
         if (!s || !inst || !hasRoom(s, inst.species)) return false;
         if (!Array.isArray(s.creatures)) s.creatures = [];
         s.creatures.push(inst);
@@ -1057,6 +1073,7 @@
         grantTactic,
         grantAxiom,
         grantPrint,
+        lockedCard,
         printsOf,
         cardCopies,
         cardRoom,

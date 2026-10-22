@@ -8,7 +8,7 @@
         if (typeof code !== 'string' || code.length > 200000) throw new Error('Paste one backup or team code (up to 200,000 characters).');
         const kind = code.replace(/\s+/g, '').split('.')[1];
         if (kind === 'team') {
-            const team = R.Battle.TeamCodes.importTeam(code);
+            const team = R.Battle.TeamCodes.importTeam(code, { wholeTeam: true }); // no adventure here: count the whole team
             return { kind: 'team', chapter: null, completed: [], checked: 0, bonus: 0, creatures: null, teamSize: team.team.length };
         }
         const p = R.State.decode('save', code);

@@ -182,6 +182,10 @@
             const blocked = opening || !atMap || !!ready;
             packs.innerHTML = '';
             packs.appendChild(el('h3', { text: 'Card packs' }));
+            // Waiting cards (#148): in the packs once this adventure has its two lessons (Acquisition.usable).
+            const A = Rift.Acquisition, st = Rift.State.get();
+            if (A && A.conditionalOpen(st)) packs.appendChild(el('p.small', { text: 'Waiting cards are in the packs now.' }));
+            else if (A && (st.map.completed || []).includes('gate')) packs.appendChild(el('p.small', { text: 'Waiting cards join the packs after two lessons.' }));
             packs.appendChild(el('p', { text: q.slots
                 ? 'Every pack card is a new copy for your Collection. You can still get ' + n(q.slots) + '.'
                 : 'You have every card in the packs. Release a copy, or wait for new cards. Nothing is charged.' }));
