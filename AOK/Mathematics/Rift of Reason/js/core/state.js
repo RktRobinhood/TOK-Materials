@@ -36,7 +36,7 @@
             xp: 0,
             accolades: [],
             items: { charm: 3, tonic: 1 },
-            wallet: { coins: 0, visits: {}, chapters: {}, freePacks: 0, saleSerial: 0, sale: null }, // earned Coins and bounded source receipts (#133/#135)
+            wallet: { coins: 0, visits: {}, chapters: {}, freePacks: 0, freeCards: 0, saleSerial: 0, sale: null, packSerial: 0, pack: null }, // earned Coins, bounded source receipts and the latest pack receipt (#133/#135/#136)
             creatures: [],         // owned creature instances, see makeCreature
             team: [],              // creature uids chosen for battle (6–14); empty = the first 10
             trophies: [],          // named trophy copies won from classmates' ghosts
@@ -67,10 +67,10 @@
     function walletOf(save) {
         const s = save || current;
         if (!s) return null;
-        if (!s.wallet) s.wallet = { coins: 0, visits: {}, chapters: {}, freePacks: 0, saleSerial: 0, sale: null };
+        if (!s.wallet) s.wallet = { coins: 0, visits: {}, chapters: {}, freePacks: 0, freeCards: 0, saleSerial: 0, sale: null, packSerial: 0, pack: null };
         return s.wallet;
     }
-    // Pure debit on the supplied save. Future pack transactions must save the entire reward atomically.
+    // Pure debit on the supplied save. Pack purchases (js/core/packs.js) call it inside one transact().
     function spendCoins(amount, save) {
         const w = walletOf(save);
         if (!w || !Number.isSafeInteger(amount) || amount <= 0 || !Number.isSafeInteger(w.coins) || w.coins < amount) return false;
@@ -844,7 +844,7 @@
         if (p.wallet != null) {
             const record = x => x && typeof x === 'object' && !Array.isArray(x);
             if (!record(p.wallet)) throw codeError('damaged');
-            for (const key of ['coins', 'freePacks', 'saleSerial']) {
+            for (const key of ['coins', 'freePacks', 'freeCards', 'saleSerial', 'packSerial']) {
                 if (p.wallet[key] !== undefined && (!Number.isSafeInteger(p.wallet[key]) || p.wallet[key] < 0)) throw codeError('damaged');
             }
             if (p.wallet.visits !== undefined && (!record(p.wallet.visits) || Object.values(p.wallet.visits).some(v => !Number.isSafeInteger(v) || v < 0))) throw codeError('damaged');
@@ -855,6 +855,15 @@
                     || !Number.isSafeInteger(r.coins) || r.coins <= 0 || !Number.isSafeInteger(r.afterCoins) || r.afterCoins < r.coins
                     || typeof r.stock !== 'string' || !Array.isArray(r.items)
                     || r.items.some(row => !record(row) || typeof row.id !== 'string' || !Number.isSafeInteger(row.quantity) || row.quantity <= 0)) throw codeError('damaged');
+            }
+            if (p.wallet.pack != null) {
+                const r = p.wallet.pack;
+                if (!record(r) || r.v !== 1 || !Number.isSafeInteger(r.number) || r.number <= 0 || typeof r.version !== 'string'
+                    || !['coins', 'free'].includes(r.source) || !Number.isSafeInteger(r.price) || r.price < 0 || (r.source === 'free' && r.price !== 0) || typeof r.done !== 'boolean'
+                    || (r.unlocked !== undefined && (!Array.isArray(r.unlocked) || r.unlocked.some(id => typeof id !== 'string')))
+                    || !Array.isArray(r.cards) || !r.cards.length || r.cards.some(c => !record(c) || !['creature', 'tactic', 'axiom'].includes(c.kind)
+                        || typeof c.id !== 'string' || typeof c.rarity !== 'string' || typeof c.foil !== 'boolean' || (c.kind === 'creature' && typeof c.uid !== 'string'))
+                    || p.wallet.packSerial === undefined || r.number > p.wallet.packSerial) throw codeError('damaged');
             }
         }
         try {

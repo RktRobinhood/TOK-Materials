@@ -93,14 +93,15 @@ test('early checked milestones still grant compatible common cards without spend
     assert.equal(s.wallet.coins, 10, 'a direct card reward is not a purchase');
 });
 
-test('campfire shop shows balance and retained packs but never enables or charges a purchase', () => {
+test('campfire shop shows balance and retained packs; opening, closing and cancelling never charge', async () => {
     let save;
-    const g = loadWithDom(['js/core/rift.js', 'js/core/state.js', 'js/core/world.js', 'data/avatars.js', ctx => {
+    const g = loadWithDom(['js/core/rift.js', 'js/core/state.js', 'js/core/world.js', 'js/core/acquisition.js', 'js/core/packs.js',
+        'data/creatures.js', 'data/tactics.js', 'data/axioms.js', 'data/avatars.js', ctx => {
         const R = ctx.Rift; save = R.State.freshState();
         save.avatar = { type: 'owlet', variant: 'girl', nickname: 'Shop test' };
         R.State.get = () => save;
         R.State.update = fn => { fn(save); R.bus.emit('state:changed', save); };
-        R.Assets = { has: () => false, img: () => R.el('img') }; R.Audio = { sfx() {} };
+        R.Assets = { has: () => false, img: () => R.el('img') }; R.Audio = { sfx() {} }; R.Router = { current: () => 'map' };
         const overlay = R.el('div'); overlay.setAttribute('id', 'overlay'); ctx.document.body.appendChild(overlay);
     }, 'js/ui/ui.js']);
     const { Rift: R } = g;
@@ -112,10 +113,15 @@ test('campfire shop shows balance and retained packs but never enables or charge
         save.wallet.coins = balance;
         const before = JSON.stringify(save.wallet), dialog = R.UI.shop();
         assert.match(dialog.node.textContent, new RegExp(balance + ' Coins'));
-        assert.match(dialog.node.textContent, /Free five-card packs saved: 1/);
-        assert.match(dialog.node.textContent, /Packs coming soon/);
+        assert.match(dialog.node.textContent, /Free packs saved: 1/);
         const buy = dialog.node.querySelectorAll('button').find(b => b.textContent === 'Five-card pack · 50 Coins');
-        assert.ok(buy); assert.equal(buy.disabled, true); buy.click();
+        assert.ok(buy); assert.equal(buy.disabled, balance < 50);
+        if (!buy.disabled) {
+            // Buying needs a confirmation; Cancel charges nothing.
+            buy.click();
+            g.document.body.querySelectorAll('button').find(b => b.textContent === 'Cancel').click();
+            await new Promise(resolve => setTimeout(resolve, 0));
+        }
         dialog.close(); assert.equal(JSON.stringify(save.wallet), before);
     }
     save.map.at = 'road-start'; R.bus.emit('state:changed', save);

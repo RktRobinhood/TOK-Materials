@@ -144,22 +144,77 @@
     }
 
     // HUD shown on the map and in encounters.
-    // First shop location: the existing Campfire Clearing. Purchasing waits for the
-    // committed pack flow (#136); opening, closing and affordability checks never debit.
+    // The static pack results (#136): the cards were saved before this opens. Done (or any later
+    // reveal's Skip, #134) only marks the receipt shown; a reload shows it again until then.
+    function packResults(receipt, after) {
+        const n = receipt.cards.length, spells = (receipt.unlocked || []).map(id => ((Rift.data.tactics || {})[id] || {}).name || id);
+        return modal('Your new cards', el('div.stack', null, [
+            el('p', { text: n + ' new card' + (n === 1 ? ' is' : 's are') + ' in your Collection' + (receipt.source === 'free' ? ' (free).' : ' (' + receipt.price + ' Coins).') }),
+            el('ol.pack-results', null, receipt.cards.map(c => el('li', { dataset: { rarity: c.rarity }, className: c.foil ? 'foil' : '' }, [Rift.Packs.describe(c)]))),
+            spells.length ? el('p.small', { text: 'New colour spell' + (spells.length === 1 ? '' : 's') + ': ' + spells.join(', ') + '.' }) : null,
+        ]), [{ label: 'Done', primary: true, required: true }], { onClose() { const r = Rift.Packs.finish(receipt.number); if (after) after(r); } });
+    }
+
+    // First shop location: the existing Campfire Clearing. Opening, closing and affordability
+    // checks never debit; a pack is paid and saved in one transaction (js/core/packs.js).
     function shop() {
         const s = Rift.State.get();
         if (!s || s.map.at !== 'campfire') return null;
         if (Rift.World && Rift.World.catchUpWallet) Rift.World.catchUpWallet();
         const w = Rift.State.walletOf(Rift.State.get());
         const balance = el('strong', { text: w.coins + ' Coins' });
-        const shortfall = el('p.small');
+        const packs = el('div.stack.shop-packs'), packMessage = el('p.small', { role: 'status' });
         const sales = el('div.stack.shop-sales'), message = el('p.small', { role: 'status' });
-        let closed = false, reviewing = false, dialog, off = () => {}, offScreen = () => {};
+        let closed = false, reviewing = false, opening = false, dialog, off = () => {}, offScreen = () => {};
+        function refreshPacks(focusOn) {
+            if (closed || !Rift.Packs) return;
+            const q = Rift.Packs.quote(), atMap = Rift.Router.current() === 'map', ready = Rift.Packs.active();
+            const had = root.document.activeElement, focused = focusOn || (packs.contains(had) && ['pack-free', 'pack-buy', 'pack-show'].find(c => had.classList.contains(c)));
+            const n = k => k + ' card' + (k === 1 ? '' : 's');
+            const shown = r => { if (!r.ok) packMessage.textContent = r.error; refreshPacks(); };
+            async function openPack(source) {
+                if (closed || opening) return;
+                opening = true;
+                const kept = source === 'free' && !q.freeCards && q.free < Rift.Packs.CONFIG.size ? ' The other ' + n(Rift.Packs.CONFIG.size - q.free) + ' stay saved for later.' : '';
+                const yes = await confirm(source === 'free' ? 'Open free cards' : 'Buy a pack',
+                    source === 'free' ? 'Open ' + n(q.free) + ' for free?' + kept : 'Buy ' + n(q.size) + ' for ' + q.price + ' Coins?',
+                    source === 'free' ? 'Open for free' : 'Buy for ' + q.price + ' Coins', 'Cancel');
+                if (closed) return;
+                opening = false;
+                const result = yes ? Rift.Packs.open(q, source) : null;
+                packMessage.textContent = result && !result.ok ? result.error : '';
+                // Redraw first, so the results dialog returns focus to a live button.
+                refreshPacks(result && result.ok ? 'pack-show' : source === 'free' ? 'pack-free' : 'pack-buy');
+                if (result && result.ok) packResults(result.value, shown);
+            }
+            const blocked = opening || !atMap || !!ready;
+            packs.innerHTML = '';
+            packs.appendChild(el('h3', { text: 'Card packs' }));
+            packs.appendChild(el('p', { text: q.slots
+                ? 'Every pack card is a new copy for your Collection. You can still get ' + n(q.slots) + '.'
+                : 'You have every card in the packs. Release a copy, or wait for new cards. Nothing is charged.' }));
+            const percent = c => (c > 0 && c < 0.001 ? '<0.1' : Math.round(c * 1000) / 10) + '%';
+            if (q.slots) packs.appendChild(el('p.small.pack-odds', { text: 'Next card: ' + q.odds.map(row => row.label + ' ' + percent(row.chance) + ' (' + row.ids + ' kind' + (row.ids === 1 ? '' : 's') + ')').join(', ')
+                + '. Foil: ' + Math.round(q.foil * 100) + '% per card. Full folders are left out.' }));
+            packs.appendChild(el('p.small', { text: 'Free packs saved: ' + q.freePacks + '.' + (q.freeCards ? ' Free cards saved: ' + q.freeCards + '.' : '') + ((q.freePacks || q.freeCards) && !q.size ? ' They stay saved until there is room.' : '') }));
+            if (q.freePacks || q.freeCards) packs.appendChild(el('button.btn.gold.pack-free', {
+                text: !q.free ? 'Free cards kept for later' : q.freeCards ? 'Open ' + n(q.free) + ' for free' : 'Open free pack · ' + n(q.free),
+                disabled: blocked || !q.free, onclick: () => openPack('free') }));
+            packs.appendChild(el('button.btn.gold.pack-buy', {
+                text: !q.size ? 'All pack cards collected' : q.size === Rift.Packs.CONFIG.size ? 'Five-card pack · ' + q.price + ' Coins' : 'Final pack · ' + n(q.size) + ' · ' + q.price + ' Coins',
+                disabled: blocked || !q.size || q.coins < q.price, onclick: () => openPack('coins') }));
+            if (q.size && q.coins < q.price) packs.appendChild(el('p.small', { text: (q.price - q.coins) + ' more Coins would cover this pack.' }));
+            if (!atMap) packs.appendChild(el('p.small', { text: 'Go back to the map to open packs.' }));
+            if (ready) packs.appendChild(el('button.btn.pack-show', { text: 'Show your new cards', onclick() { if (!closed) packResults(ready, shown); } }));
+            packs.appendChild(packMessage);
+            const buttons = Array.from(packs.querySelectorAll('button')).filter(b => !b.disabled);
+            const target = focused && (buttons.find(b => b.classList.contains(focused)) || buttons[0]);
+            if (target) target.focus();
+        }
         function refreshSales() {
             if (closed || !Rift.Shop) return;
             const coins = Rift.State.walletOf(Rift.State.get()).coins;
             balance.textContent = coins + ' Coins';
-            shortfall.hidden = coins >= 50; shortfall.textContent = (50 - coins) + ' more Coins would cover a five-card pack.';
             const focusInside = sales.contains(root.document.activeElement), q = Rift.Shop.quote();
             const atMap = Rift.Router.current() === 'map';
             sales.innerHTML = '';
@@ -201,17 +256,17 @@
             Rift.Assets.has('scene/shop') ? Rift.Assets.img('scene/shop', { alt: 'A small woodland shop', style: { width: '100%', height: '160px', objectFit: 'cover', borderRadius: '10px' } }) : null,
             balance,
             el('p', { text: 'Earn Coins by completing checked puzzles: 10 for a first success, 2 for a replay, 25 for a first boss or mini-boss win.' }),
-            el('p', { text: 'Free five-card packs saved: ' + w.freePacks + '. They stay yours until packs are available.' }),
-            el('p', { text: 'Packs coming soon. Keep your Coins for later.' }),
-            el('button.btn.gold', { text: 'Five-card pack · 50 Coins', disabled: true, title: 'Packs are not available yet.' }),
-            shortfall,
+            Rift.Packs ? packs : null,
             el('p.small', { text: 'No real money. Catching creatures and direct card rewards still come from playing.' }),
             Rift.Shop ? sales : null, message,
         ]);
         dialog = modal('Campfire pack stall', body, [{ label: 'Close' }], { onClose() { closed = true; off(); offScreen(); } });
-        shortfall.hidden = w.coins >= 50; shortfall.textContent = (50 - w.coins) + ' more Coins would cover a five-card pack.';
-        refreshSales();
-        off = Rift.bus.on('state:changed', refreshSales);
+        const refresh = () => { refreshPacks(); refreshSales(); };
+        refresh();
+        off = Rift.bus.on('state:changed', refresh);
+        // A pack saved before a reload or a closed tab: show its cards again until Done.
+        const ready = Rift.Packs && Rift.Packs.active();
+        if (ready) packResults(ready, r => { if (!r.ok) packMessage.textContent = r.error; refreshPacks(); });
         offScreen = Rift.bus.on('screen:changed', () => dialog.close());
         return dialog;
     }
@@ -242,7 +297,7 @@
                 scarsNode.appendChild(el('span.chip', { title: sc.text }, [icon, sc.name]));
             });
             charmsNode.textContent = '🪢 ' + ((st.items.charm || 0) + (st.items.greatcharm || 0));
-            shopButton.textContent = 'Shop · ' + Rift.State.walletOf(st).coins + ' Coins';
+            shopButton.textContent = 'Shop · ' + Rift.State.walletOf(st).coins + ' Coins' + (Rift.Packs && Rift.Packs.active(st) ? ' · new cards' : '');
             shopButton.hidden = st.map.at !== 'campfire';
         };
         refresh();
@@ -442,7 +497,7 @@
         return node;
     }
 
-    Rift.UI = { input, toast, modal, confirm, hud, shop, hearts, maxHealth, bag, riftFx, framedCard, statLine, variantBadges, trickBook };
+    Rift.UI = { input, toast, modal, confirm, hud, shop, packResults, hearts, maxHealth, bag, riftFx, framedCard, statLine, variantBadges, trickBook };
     let conflictShown = false;
     Rift.bus.on('state:conflict', () => {
         if (conflictShown || !overlay()) return;

@@ -511,7 +511,7 @@
                     el('p.enc-stars', { text: '★'.repeat(stars) + '☆'.repeat(3 - stars) + ' · ' + wrongs + ' wrong checks · ' + hintsUsed + ' hints' }),
                     obstacle ? el('p', { text: Rift.data.creatures[obstacle].name + ' appeared. Catching is optional.' }) : null,
                     el('p', { text: '+' + r.xp + ' XP' + (coins ? ' · +' + coins.coins + ' Coins' : '') + (items ? '  ·  ' + items : '') }),
-                    freePacks ? el('p', { text: 'One free five-card pack saved for when packs are available.' }) : null,
+                    freePacks ? el('p', { text: 'One free five-card pack saved. Open it at the Campfire Clearing.' }) : null,
                     earned.length ? el('p', { text: '🏅 New accolade: ' + earned.map(id => Rift.data.accolades[id].name).join(', ') }) : null,
                     Rift.World.tweakSlots(Rift.State.get()) > slotsBefore && Rift.Powers && Rift.Powers.forAvatar(Rift.State.get().avatar)
                         ? el('p.tweak-unlocked', { text: '✨ Your power can take a tweak now. Choose it at any campfire.' }) : null,

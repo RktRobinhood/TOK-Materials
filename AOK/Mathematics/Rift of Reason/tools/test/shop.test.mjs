@@ -109,7 +109,7 @@ test('legacy wallet defaults add the sale fields without resetting Coins or crea
 
 test('mounted shop reviews exact surplus, cancels safely, sells once, offers Undo and guards detached handlers', async () => {
     const store = new Map();
-    const g = loadWithDom([...FILES, ctx => {
+    const g = loadWithDom([...FILES, 'data/tactics.js', 'data/axioms.js', 'js/core/acquisition.js', 'js/core/packs.js', ctx => {
         const R = ctx.Rift;
         R.storage = () => ({ getItem: k => store.get(k) || null, setItem: (k, v) => store.set(k, v), removeItem: k => store.delete(k) });
         R.Router = { current: () => 'map' }; R.Assets = { has: () => false }; R.Audio = { sfx() {} };
