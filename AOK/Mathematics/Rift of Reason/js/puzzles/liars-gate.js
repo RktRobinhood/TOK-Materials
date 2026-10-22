@@ -490,7 +490,7 @@
                 if (t === 'truth' || t === 'lie') setRole(g.id, t, false);
             });
             guardRow.appendChild(card);
-            return { g, card, badge, btnTruth, btnLie };
+            return { g, card, badge, btnTruth, btnLie, bubble: card.querySelector('.lg-bubble') };
         });
         rootEl.appendChild(guardRow);
 
@@ -539,6 +539,9 @@
             sfx('place');
             clearResult();
             refresh();
+            // (#66) The new token pops onto the badge. This shows only the player's own mark.
+            const c = roles[id] && cards.find(x => x.g.id === id);
+            if (c && Rift.Motion) Rift.Motion.pop(c.badge);
         }
 
         function clearResult() {
@@ -589,6 +592,8 @@
 
         refresh();
         container.appendChild(rootEl);
+        // (#66) On arrival the guards speak one after another.
+        if (Rift.Motion) cards.forEach((c, i) => Rift.Motion.reveal(c.bubble, Math.min(i, 7)));
         return {
             destroy() { if (rootEl.parentNode) rootEl.parentNode.removeChild(rootEl); },
         };

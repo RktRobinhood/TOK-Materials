@@ -724,6 +724,9 @@
         const later = (fn, ms) => { const id = root.setTimeout(fn, ms); timers.push(id); return id; };
         let reduced = false;
         try { reduced = root.matchMedia && root.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { /* ignore */ }
+        // Calm motion (body.calm-motion) steps the scene quickly too; the outcome is the same (#66).
+        const quick = () => (Rift.Motion ? Rift.Motion.calm() : reduced);
+        let truthShown = false; // the answer pops only the first time it appears (#66)
 
         const sim = T.sim(data.p);
         const unit = data.unit;
@@ -789,7 +792,7 @@
             st.playing = true;
             playBtn.disabled = true;
             renderSide();
-            const step = reduced ? 30 : Math.max(70, Math.min(600, totalMs / Math.max(1, states.length - 1)));
+            const step = quick() ? 30 : Math.max(70, Math.min(600, totalMs / Math.max(1, states.length - 1)));
             let i = 0;
             const tick = () => {
                 if (token !== playToken) return;
@@ -805,7 +808,7 @@
                     draw(st.frame, false);
                     if (done) done();
                     renderSide();
-                }, reduced ? 30 : 350);
+                }, quick() ? 30 : 350);
             };
             tick();
         }
@@ -937,6 +940,8 @@
             st.requested.push(id);
             sfx('place');
             renderSide();
+            const card = side.querySelector('.ta-info[data-info="' + id + '"]');
+            if (card && Rift.Motion) Rift.Motion.reveal(card); // the answer arrives (#66)
         }
 
         function renderAct2() {
@@ -970,7 +975,7 @@
 
         function infoCard(it) {
             const got = st.requested.indexOf(it.id) >= 0;
-            return el('button.ta-info' + (got ? '.got' : ''), { onclick: () => request(it.id), disabled: got }, [
+            return el('button.ta-info' + (got ? '.got' : ''), { onclick: () => request(it.id), disabled: got, dataset: { info: it.id } }, [
                 el('span.ta-infoq', { text: it.ask }),
                 got ? el('span.ta-infoa', { text: it.value }) : el('span.ta-infoa.muted', { text: 'Ask' }),
             ]);
@@ -1087,8 +1092,9 @@
             side.appendChild(el('div.ta-compare', null, [
                 el('div.ta-cmp', null, [el('span.ta-cmpl', { text: 'Your guess' }), el('span', { text: st.guess.best + ' ' + unit + ' (' + st.guess.low + '–' + st.guess.high + ')' }), el('span.ta-tag' + (inRange ? '.good' : ''), { text: inRange ? 'in your range' : 'outside your range' })]),
                 el('div.ta-cmp', null, [el('span.ta-cmpl', { text: 'Your model' }), el('span', { text: fmt(modelVal) + ' ' + unit }), el('span.ta-tag' + (within ? '.good' : '.bad'), { text: within ? (off === 0 ? 'spot on' : 'close enough') : (off < 0 ? 'too low' : 'too high') })]),
-                el('div.ta-cmp.truth', null, [el('span.ta-cmpl', { text: 'The answer' }), el('span', { text: fmt(truth) + ' ' + unit })]),
+                el('div.ta-cmp.truth' + (truthShown ? '' : '.fresh'), null, [el('span.ta-cmpl', { text: 'The answer' }), el('span', { text: fmt(truth) + ' ' + unit })]),
             ]));
+            truthShown = true; // later clicks rebuild this card without replaying its pop (#66)
             const q = within ? 'Your model was close. Why?' : 'Why was your model off?';
             const opts = data.reflections.map((text, i) => el('button.ta-reflect' + (st.reflection === i ? '.on' : ''), { text, onclick: () => { st.reflection = i; sfx('click'); renderSide(); } }));
             side.appendChild(section(q, [el('div.ta-reflects', null, opts)]));
@@ -1132,7 +1138,7 @@
         renderSide();
         speak('Watch this…');
         say('Watch this. Then tell me: what do you wonder?');
-        later(() => { if (!st.playing && !st.seenAct1) replay(); }, reduced ? 50 : 700);
+        later(() => { if (!st.playing && !st.seenAct1) replay(); }, quick() ? 50 : 700);
 
         return {
             destroy() {

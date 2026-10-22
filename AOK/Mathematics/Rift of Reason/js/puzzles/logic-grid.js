@@ -170,7 +170,7 @@
         const note = el('div.small.lg-note', { 'aria-live': 'polite' });
 
         const clueList = el('ol.lg-clues.panel', null, data.clues.map(c => {
-            const b = el('button.lg-clue', { text: c.text, title: 'Click to mark this clue as used', onclick() { b.classList.toggle('used'); } });
+            const b = el('button.lg-clue', { text: c.text, title: 'Click to mark this clue as used', onclick() { if (b.classList.toggle('used') && Rift.Motion) Rift.Motion.reveal(b); } });
             return el('li', null, [b]);
         }));
 
@@ -202,14 +202,20 @@
             if (done) return;
             const m = marks[key][r][c];
             marks[key][r][c] = m === '' ? 'x' : m === 'x' ? 'v' : '';
+            const auto = [];
             if (marks[key][r][c] === 'v') {
                 // A ✓ rules out the rest of its row and column.
                 for (let k = 0; k < n; k++) {
-                    if (k !== c && marks[key][r][k] === '') { marks[key][r][k] = 'x'; paint(key, r, k); }
-                    if (k !== r && marks[key][k][c] === '') { marks[key][k][c] = 'x'; paint(key, k, c); }
+                    if (k !== c && marks[key][r][k] === '') { marks[key][r][k] = 'x'; paint(key, r, k); auto.push(cells[key][r][k]); }
+                    if (k !== r && marks[key][k][c] === '') { marks[key][k][c] = 'x'; paint(key, k, c); auto.push(cells[key][k][c]); }
                 }
             }
             paint(key, r, c);
+            // (#66) The clicked mark pops; the ✕ marks its ✓ caused arrive one by one after it.
+            if (Rift.Motion) {
+                Rift.Motion.pop(cells[key][r][c]);
+                auto.forEach((b, i) => Rift.Motion.reveal(b, Math.min(i + 1, 7)));
+            }
             note.textContent = '';
             api.sfx('click');
         }

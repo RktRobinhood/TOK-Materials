@@ -59,7 +59,8 @@
     filter: drop-shadow(0 0 10px rgba(201, 162, 74, 0.5));
     animation: om-hum 3.2s ease-in-out infinite;
 }
-.om-oracle.glitch { animation: om-glitch 0.35s steps(2) 4, om-hum 3.2s ease-in-out 1.4s infinite; }
+/* One glitch flicker, then the hum resumes (#66: no repeated jitter on a character). */
+.om-oracle.glitch { animation: om-glitch 0.35s steps(2) 1, om-hum 3.2s ease-in-out 0.35s infinite; }
 @keyframes om-hum { 50% { transform: translateY(-4px); } }
 @keyframes om-glitch {
     0% { transform: translate(-3px, 1px); filter: hue-rotate(90deg) drop-shadow(3px 0 0 #E85BC8); }

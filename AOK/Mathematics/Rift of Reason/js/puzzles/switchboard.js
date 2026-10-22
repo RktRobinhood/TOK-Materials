@@ -803,8 +803,12 @@
         }
 
         // ---- rendering ----
+        // (#66) What the last render showed, so only real changes animate (none on the first render).
+        const shownBefore = { levers: null, lit: null, wires: null };
         function render() {
             const val = signals(currentGates(), values());
+            const M = Rift.Motion;
+            const levers = data.switches.map((_, i) => String(i === hiddenIx ? (st.done ? data.secret : st.guess) : !!st.on[i]));
             // switches
             data.switches.forEach((_, i) => {
                 const { node, lever } = nodes['S' + i];
@@ -858,6 +862,13 @@
             bulbBox.innerHTML = '';
             bulbBox.appendChild(artOr(lit ? 'ui/bulb-on' : 'ui/bulb-off', bulbSvg(lit === true), 'sb-bulbimg'));
             if (lit === null) bulbBox.appendChild(el('span.sb-bulbq', { text: '?' }));
+            // (#66) A lever that just flipped pops; a bulb that just lit glows once.
+            if (M && shownBefore.levers) {
+                levers.forEach((v, i) => { if (v !== shownBefore.levers[i]) M.pop(nodes['S' + i].lever); });
+                if (lit === true && shownBefore.lit !== true) M.glow(bulbBox, '#ffd77a');
+            }
+            shownBefore.levers = levers;
+            shownBefore.lit = lit;
             // sockets in wire mode
             if (mode === 'wire') {
                 Object.keys(socks).forEach(k => {
@@ -987,14 +998,20 @@
             if (!br.width) return;
             svg.setAttribute('viewBox', '0 0 ' + br.width + ' ' + br.height);
             gWires.innerHTML = '';
+            const seen = shownBefore.wires;
+            shownBefore.wires = new Set();
             wires().forEach(wire => {
                 const a = sockCentre(wire.from + ':out', br), b = sockCentre(wire.to, br);
                 if (!a || !b) return;
                 const sig = v(wire.from);
                 const d = wirePath(a, b);
                 const cls = 'sb-wire' + (sig === true ? ' live' : sig === false ? ' dead' : ' unknown');
-                svgEl('path', { d, class: 'sb-wire-under' }, gWires);
-                svgEl('path', { d, class: cls }, gWires);
+                const under = svgEl('path', { d, class: 'sb-wire-under' }, gWires);
+                const line = svgEl('path', { d, class: cls }, gWires);
+                // (#66) A wire that was not there last time draws itself from its output.
+                const key = wire.from + '>' + wire.to;
+                shownBefore.wires.add(key);
+                if (seen && !seen.has(key) && Rift.Motion) { Rift.Motion.draw(under); Rift.Motion.draw(line); }
                 if (mode === 'wire' && !st.done) {
                     const hit = svgEl('path', { d, class: 'sb-wire-hit' }, gWires);
                     hit.addEventListener('click', () => removeWire(wire));

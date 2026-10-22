@@ -195,7 +195,7 @@
             ].concat(caps.map((c, j) => j === i ? null : el('button.btn.small', { text: 'Pour into ' + c, onclick: () => act(['pour', i, j]) }))));
             const card = el('div.wj-jug', null, [el('div.wj-cap', { text: cap + '-cup ladle' }), glass, level, btns]);
             jugs.append(card);
-            return { water, level, card };
+            return { water, level, card, glass };
         });
         const count = el('span.small.wj-count');
         const madeBox = el('div.wj-made.small');
@@ -235,11 +235,21 @@
             if (done) return;
             const n = apply(caps, levels, m);
             if (!n) { api.sfx('error'); return; }
+            const before = levels;
             levels = n;
             moves.push(m);
             levels.forEach(v => made.add(v));
             api.sfx('place');
             render();
+            // (#66) Show which way the water went: the poured-from ladle glows, the poured-into one
+            // settles; a ladle that newly holds the goal amount clicks into place.
+            const M = Rift.Motion;
+            if (M) cards.forEach((c, i) => {
+                const hit = levels[i] === data.target && before[i] !== data.target;
+                if (hit) M.settle(c.card);
+                else if (m[0] === 'pour' && i === m[2]) M.settle(c.glass);
+                else if (i === m[1]) M.glow(c.glass, '#3fe0d0');
+            });
             if (levels.includes(data.target)) {
                 const r = api.submit({ moves: moves.map(x => x.slice()) });
                 if (r && r.solved) finish();

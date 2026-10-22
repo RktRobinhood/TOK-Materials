@@ -312,6 +312,8 @@
                     Rift.Audio.sfx('success');
                     feedback.className = 'enc-feedback good';
                     feedback.textContent = 'Solved. Continue when you are ready.';
+                    // The answer clicks into place behind the dialog (#66; presentation only).
+                    if (Rift.Motion && !restoring) { Rift.Motion.settle(puzzleSlot); Rift.Motion.reveal(feedback); }
                     Rift.State.update(s => {
                         if (!restoring) s.stats.puzzlesSolved += 1;
                         if (result.meta && result.meta.reflectionComplete) s.flags['reflection:' + n.id] = { seed: visit.seed, visitNumber: visit.number, lured: visit.lured, stages: stages.map(p => ({ id: p.id, difficulty: p.difficulty, opts: p.opts, result: p.result, answer: p.answer })), stageIx, answer, hintsUsed, wrongs, reflectionCounted: !!(checkpoint && checkpoint.reflectionCounted) };
@@ -330,6 +332,7 @@
                     if (clk.scene) {
                         feedback.className = 'enc-feedback bad';
                         feedback.textContent = (result.feedback || 'Check the evidence and the rule that your answer uses.') + ' The danger rises.';
+                        if (Rift.Motion) Rift.Motion.nudge(feedback);
                         tickClock(clk.scene, 1);
                         return result;
                     }
@@ -338,6 +341,8 @@
                     const cost = Rift.World.recordWrong(attempts);
                     feedback.className = 'enc-feedback bad';
                     feedback.textContent = (result.feedback || 'Check the evidence and the rule that your answer uses.') + (cost ? ' −1 heart.' : ' Free check used.');
+                    // What broke: the feedback moves once (never a shake), so the new reason is seen.
+                    if (Rift.Motion) Rift.Motion.nudge(feedback);
                     refreshChecks();
                     if (cost) loseHealth(cost);
                 }
@@ -360,6 +365,7 @@
                 const text = lantern ? list[list.length - 1] : list[hintIx++];
                 feedback.className = 'enc-feedback hint';
                 feedback.textContent = (lantern ? '🏮 ' : '💡 ') + text;
+                if (Rift.Motion) Rift.Motion.reveal(feedback);
                 refreshPerk();
                 refreshChecks();
                 if (!free && !learning && (clk.scene || clk.floor)) tickClock(clk.scene || clk.floor, 1);
@@ -372,6 +378,7 @@
                     knocked = s.health === 0;
                 });
                 Rift.Audio.sfx('hurt');
+                if (Rift.Motion) Rift.Motion.pop(hud.querySelector('.hearts'));
                 if (knocked) { knockedOut(); return false; }
                 return true;
             }
@@ -700,6 +707,7 @@
             return {
                 destroy() {
                     destroyed = true;
+                    if (Rift.Motion) Rift.Motion.cancel(rootNode);
                     modals.forEach(m => m.close());
                     if (catchGame) catchGame.destroy();
                     if (tutorial) tutorial.close();

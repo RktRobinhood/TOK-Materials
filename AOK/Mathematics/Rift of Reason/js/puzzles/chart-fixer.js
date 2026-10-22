@@ -878,7 +878,11 @@
             sfx('click');
             setStatus('');
             render();
+            settlePlot();
         }
+        // The chart is redrawn from scratch, so bars jump: one settle after a toggle or at the end
+        // of a drag (never per move) makes the change noticeable (#66).
+        function settlePlot() { if (Rift.Motion) Rift.Motion.settle(plot); }
 
         // ---- render ----
         function subtitle() {
@@ -979,7 +983,7 @@
             if (!drag) return;
             const changed = drag.before !== JSON.stringify(st);
             drag = null;
-            if (changed) { sfx('place'); setStatus(''); }
+            if (changed) { sfx('place'); setStatus(''); settlePlot(); }
         }
 
         ruler.addEventListener('pointerdown', ev => {

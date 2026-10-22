@@ -824,6 +824,7 @@
                 if (nx != null) st.sel = { r, c: nx };
             }
             render();
+            if (Rift.Motion) Rift.Motion.pop(rowEls[r].cells[c]); // (#66) the right answer lands in its cell
         }
 
         function nextInRow(r, c) {
@@ -880,18 +881,22 @@
                 const nx = diff < 3 ? nextOpen(r, n - 1) : null;
                 st.sel = nx;
                 render();
+                if (Rift.Motion) Rift.Motion.reveal(rowEls[r].tr, 0); // (#66) the crossed-out world settles in
             }
         }
 
         function strikeAllClashes() {
             let c = 0;
-            rows.forEach((row, r) => { if (live(r) && knownClash(r)) { strike(r, false); c++; } });
+            const crossed = [];
+            rows.forEach((row, r) => { if (live(r) && knownClash(r)) { strike(r, false); c++; crossed.push(r); } });
             sfx(c ? 'place' : 'error');
             st.note = c
                 ? { text: 'Crossed out ' + c + ' world' + (c === 1 ? '' : 's') + ' with a clash.', kind: 'info' }
                 : { text: 'No ⚡ clashes showing in the rows that are left. Fill more columns.', kind: 'info' };
             if (st.sel && st.struck[st.sel.r]) st.sel = null;
             render();
+            // (#66) Cross the worlds out one after another, so the player sees each clash removed.
+            if (Rift.Motion) crossed.forEach((r, i) => Rift.Motion.reveal(rowEls[r].tr, Math.min(i, 7)));
         }
 
         function useWorld(r) {

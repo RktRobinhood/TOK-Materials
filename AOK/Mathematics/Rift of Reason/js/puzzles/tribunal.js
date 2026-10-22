@@ -524,6 +524,7 @@
             });
         }
 
+        let brokeId = null; // the statement just contradicted: marked once when the testimony returns (#66)
         function present() {
             if (st.mode !== 'testimony' || !st.selEv) return;
             const s = current();
@@ -539,6 +540,7 @@
                 const c = data.contradictions[ci];
                 st.found.push(ci);
                 st.foundPairs.push(pair);
+                brokeId = s.id;
                 st.selEv = null;
                 const lines = [
                     { who: 'you', text: 'Take that! ' + c.explain, burst: 'TAKE THAT!' },
@@ -723,7 +725,7 @@
                     st.pressed[s.id] ? el('span.tb-pressed', { text: '✓ pressed' }) : null,
                     el('button.tb-arrow', { type: 'button', title: 'Next statement', 'aria-label': 'Next statement', onclick: () => step(1), text: '▶' }),
                 ]));
-                box.appendChild(el('div.tb-text.testimony', { text: s.text }));
+                const line = box.appendChild(el('div.tb-text.testimony', { text: s.text }));
                 box.appendChild(el('div.tb-actions', {}, [
                     el('button.btn.tb-press', { type: 'button', onclick: press, title: 'Press the witness on this statement' }, [
                         A && A.has('ui/press') ? A.img('ui/press', { className: 'tb-btn-icon' }) : el('span.tb-btn-emoji', { text: '🔍' }),
@@ -734,6 +736,16 @@
                         el('span', {}, [el('b', { text: 'Present' }), el('small', { text: 'Take that!' })]),
                     ]),
                 ]));
+                // A new line slides in once; the broken statement (or its dot) is marked once (#66).
+                if (Rift.Motion) {
+                    if (wasFresh) Rift.Motion.reveal(line);
+                    if (brokeId === s.id) Rift.Motion.settle(line);
+                    else if (brokeId) {
+                        const dot = box.querySelectorAll('.tb-dot')[list.findIndex(x => x.id === brokeId)];
+                        if (dot) Rift.Motion.glow(dot);
+                    }
+                }
+                brokeId = null;
                 return;
             }
             if (st.mode === 'flaw' || st.mode === 'repair') {

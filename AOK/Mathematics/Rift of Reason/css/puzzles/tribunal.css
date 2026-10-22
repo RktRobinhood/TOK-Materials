@@ -289,12 +289,8 @@
     100% { opacity: 0; transform: scale(1.06); }
 }
 @keyframes tb-jolt { 40% { transform: translateY(-5px) scale(1.02); } }
-@keyframes tb-shake {
-    20% { transform: translateX(-6px) rotate(-2deg); }
-    40% { transform: translateX(6px) rotate(2deg); }
-    60% { transform: translateX(-4px); }
-    80% { transform: translateX(3px); }
-}
+/* #66: a shocked or shaken character recoils once; no back-and-forth shake on characters. */
+@keyframes tb-shake { 30% { transform: translateX(-7px) rotate(-2deg); } }
 @keyframes tb-pulse { 50% { opacity: 0.55; } }
 @keyframes tb-stamp { 0% { transform: rotate(-6deg) scale(2.2); opacity: 0; } 100% { transform: rotate(-6deg) scale(1); opacity: 1; } }
 

@@ -194,7 +194,9 @@
     padding: 6px 10px; border-radius: 10px; background: rgba(255, 255, 255, 0.5); border: 2px solid rgba(26, 16, 32, 0.4);
     font-weight: 700;
 }
-.ta-cmp.truth { background: #fff3c4; border-color: var(--ink); font-size: 1.1em; animation: ta-pop 0.4s ease-out; }
+.ta-cmp.truth { background: #fff3c4; border-color: var(--ink); font-size: 1.1em; }
+/* Only the first time the answer appears; re-renders after later clicks do not replay it (#66). */
+.ta-cmp.truth.fresh { animation: ta-pop 0.4s ease-out; }
 .ta-cmpl { min-width: 90px; font-family: var(--font-display); font-weight: 600; opacity: 0.75; }
 .ta-tag { margin-left: auto; font-size: 0.8em; padding: 0.05em 0.6em; border-radius: 999px; background: rgba(26, 16, 32, 0.1); }
 .ta-tag.good { background: var(--ta-good); color: #fff; }

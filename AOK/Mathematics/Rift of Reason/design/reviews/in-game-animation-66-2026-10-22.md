@@ -2,7 +2,7 @@
 
 Remit: the teacher's 18 October comment on #66. Animate wherever motion makes the game clearer and looks good; no teacher approval gate per phase. Engine state stays authoritative; animation is presentation only. Short, skippable, synced to committed events and audio, cancelled on resize, navigation, interruption and battle end. Calm motion and OS reduced motion get gentle equivalents. Nothing loops, shakes, wobbles or jitters.
 
-Shipped in slices: **battle** (this note, slice 1), then puzzles, then other screens (added below as they land).
+Shipped in slices: **battle** (slice 1), **puzzles** (slice 2), then other screens (added below as they land).
 
 ## Slice 1: the Card Arena
 
@@ -68,3 +68,76 @@ At 1280 × 800 and 390 × 844 (touch taps), with normal motion, Calm motion and 
 Not verified: real school laptops' frame rate, sound sync by ear, physical touch hardware.
 
 Found, not part of this issue: at 390 px on the battle bench, a focus tooltip for the shared rule deck can cover the Play/Cancel bar after selecting a hand card.
+
+## Slice 2: puzzles
+
+### The shared helper
+
+`js/ui/anim.js` adds `Rift.Motion`, which the issue's "Approach" asked for. The battle keeps its own event clock; everything else uses this helper. Each call plays once and returns the animation; nothing loops, and nothing changes game state. Calm motion and OS reduced motion get a short fade instead of movement.
+
+| Call | Use |
+|---|---|
+| `settle` | a correct answer or a piece that fits clicks into place with a gold glow |
+| `nudge` | "here is what broke": one movement out and back, never a shake |
+| `reveal(node, i)` | a clue or new mark arrives; lists are staggered 70 ms apart (capped at 0.5 s) |
+| `glow`, `pop` | draws the eye once: a lit lamp, a counter that changed |
+| `draw` | an SVG line draws itself from its start |
+| `cancel(scope)` | stops everything inside a screen; the encounter cancels on leaving |
+
+Every puzzle call is guarded (`if (Rift.Motion)`), so puzzles still run in tests and dev pages without the file.
+
+### Every station (`js/screens/encounter.js`)
+
+- **Solved:** the puzzle settles and the green "Solved" line rises in. The "Stage solved!" dialog still opens at once.
+- **Wrong check:** the red feedback box moves once with a red edge, so the new reason is noticed.
+- **Hint:** the hint text rises in.
+- **Heart lost:** the hearts in the top bar pop.
+- **Restoring a saved checkpoint:** nothing plays.
+
+### Wrong answers now move once (house rule)
+
+Six existing "wrong" effects swung back and forth three or four times in 0.4 s. Each is now one movement out and back:
+- the Liar's Gate door;
+- the Village figures and cells;
+- the Rule Hunter slots;
+- the Tribunal witness and prosecutor (a single recoil);
+- a Tower block that is hit.
+
+The Tower stage's quake is now a single thud when blocks fall. A shaky Tower block leans once instead of twice. The Oracle's glitch flickers once instead of four times.
+
+### Per puzzle: what now animates, and why
+
+| Puzzle | Cue | Why |
+|---|---|---|
+| River crossing | the boat and every creature that changed place glide; after an unsafe crossing the two rivals named in the message nudge | who went where, and which pair broke the rule |
+| Water jugs | the ladle poured from glows, the one poured into settles; a ladle that reaches the goal settles | which way the water went |
+| Switchboard | a flipped lever pops; a new wire draws itself; a bulb that lights glows once | this switch or wire lit the bulb |
+| Line drawer | only the newest stretch of chalk draws itself; the counter pops when the last line is used | which stroke was just added, and when lines run out |
+| Tower | a newly cemented block settles after it lands; changed counters and pips pop | proven blocks and changing counts are seen |
+| Logic grid | the clicked mark pops; the ✕ marks its ✓ caused arrive one by one after it | the ✓ caused those ✕ marks |
+| Venn | a new x pops; after a check, a missing x fades in where it belongs | where the mark went, and what was missing |
+| Village | a right T/F answer pops; struck worlds cross out one after another ("strike all" too) | each clash removed is visible |
+| Witness | wrongly judged claims and their reasons appear in turn | each reason can be read |
+| Liar's Gate | the guards speak one after another; a placed token pops | clues arrive with a flourish (issue list); shows only the player's own mark |
+| Rule hunter | the tally that went up pops | which way the gate answered |
+| Oracle | the tested step settles if it held, nudges if it broke | which step the test just marked |
+| Prediction | the newest history chip and the newly lit pip pop | the round just played and progress |
+| Three-act | an info card fades in when asked | the answer is noticed |
+| Tribunal | the contradicted statement settles when the testimony returns; a new line fades in | what was broken and what was added |
+| Sorting | only the matrix numbers that changed pop | what the fix changed |
+| Chart fixer | the redrawn chart settles once after a toggle or at the end of a drag | the redraw reads as a change, not a jump |
+
+Two existing bugs fixed on the way: the Three-act answer card and the Sorting "needed help" tags replayed their arrival on every click, because those screens are rebuilt each time; they now play only the first time. Three-act's scripted scene also ignored Calm motion (it only checked the OS setting); it now steps quickly under Calm motion too, with the same outcome.
+
+Builder calls:
+- **Nothing reveals hidden information.** For example, Liar's Gate never marks which guard's role is wrong, because the puzzle does not tell the player that.
+- **Slow ambient loops kept.** These are a hovering Prediction machine and Oracle, attention pulses (an opacity or line-width pulse on a current dot or a danger chip), and Three-act scenery (water flow, rain, fire). None of them shakes, wobbles or jitters, and Calm motion stops them all.
+
+### Tests (slice 2)
+
+- `tools/test/motion.test.mjs` (6): the helper plays once, moves normally and only fades under Calm or reduced motion; nudge is one movement; draw; cancel by scope; the encounter's solved, wrong, hint and heart cues (results unchanged).
+- `tools/test/puzzle-motion-a/b/c.test.mjs` (5 + 6 + 7): every puzzle above is played by real clicks with and without `Rift.Motion`, with identical answers and `check()` results, plus the play-once fixes.
+
+### Browser checks (slice 2)
+
+All 17 puzzles were opened on `dev/puzzle.html` with clicks, in normal motion and Calm motion: no console errors, no loops, and only fades under Calm. The real game (`index.html`) was played at 1280 px and at 390 px, normal and with the real Calm setting. The run was: a new adventure, the Witness tent, a wrong testimony (the feedback moves once and the wrong claims arrive in turn), a solve (the puzzle settles), then the win and rewards dialogs back to the map. Under Calm all 11 cues of that run were fades only. No console errors.

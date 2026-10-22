@@ -184,12 +184,8 @@
 .lg-door.open .lg-door-light { opacity: 1; }
 .lg-door.open .lg-door-frame { box-shadow: 0 0 0 3px var(--rift), 0 0 40px var(--rift); }
 .lg-door.shake .lg-door-frame { animation: lg-shake 0.4s ease; }
-@keyframes lg-shake {
-    20% { transform: translateX(-6px); }
-    40% { transform: translateX(6px); }
-    60% { transform: translateX(-4px); }
-    80% { transform: translateX(3px); }
-}
+/* #66: one movement out and back ("here is what broke"), never a back-and-forth shake. */
+@keyframes lg-shake { 35% { transform: translateX(-7px); } }
 
 .lg-action { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; align-self: center; }
 .lg-status { font-size: 0.85em; opacity: 0.75; text-align: right; }

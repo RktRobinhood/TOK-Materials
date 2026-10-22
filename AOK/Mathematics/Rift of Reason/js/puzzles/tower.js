@@ -790,7 +790,14 @@
             b.parents.forEach(p => mark(p, 'support'));
         }
 
+        // (#66) What the last render showed (null before the first), so only real changes animate.
+        const shown = { status: null, chips: null, pips: null };
+        const popChanged = (nodes, before) => { if (before && Rift.Motion) Array.from(nodes).forEach((n, i) => { if (n.textContent + (n.dataset.s || '') !== before[i]) Rift.Motion.pop(n); }); };
+        const seen = nodes => Array.from(nodes).map(n => n.textContent + (n.dataset.s || ''));
+
         function renderTower(fresh) {
+            const statusBefore = shown.status;
+            shown.status = {};
             towerEl.innerHTML = '';
             const st = standingBlocks(state);
             const top = st.length ? Math.max.apply(null, st.map(b => b.level)) : 0;
@@ -814,6 +821,9 @@
                     if (fresh === b.id) node.classList.add('arrive');
                     node.style.setProperty('--tilt', ((uiRng.next() - 0.5) * (b.shaky ? 4 : 1.2)).toFixed(2) + 'deg');
                     row.appendChild(node);
+                    shown.status[b.id] = status;
+                    // (#66) A block that is newly proven clicks into place once it has landed.
+                    if (statusBefore && status === 'cemented' && statusBefore[b.id] !== 'cemented' && Rift.Motion) Rift.Motion.settle(node, { delay: fresh === b.id ? 450 : 0 });
                 });
                 towerEl.appendChild(row);
             }
@@ -823,6 +833,8 @@
             statsEl.appendChild(el('span.chip.cem', { text: 'Cemented ' + cementedCount(state) }));
             statsEl.appendChild(el('span.chip.rubble', { title: 'Fallen blocks. The tower collapses at ' + data.threshold + '.', text: 'Rubble ' + state.rubble + ' / ' + data.threshold }, []));
             statsEl.dataset.danger = rubbleLeft <= 2 ? 'high' : '';
+            popChanged(statsEl.children, shown.chips); // (#66) a count that changed pops
+            shown.chips = seen(statsEl.children);
         }
 
         function renderProgress() {
@@ -831,6 +843,8 @@
                 const ev = state.qi > i ? (state.blocks.find(b => b.q === i) ? 'ok' : 'bad') : (i === state.qi && !state.done ? 'now' : '');
                 progress.appendChild(el('span.tw-pip', { dataset: { s: ev }, title: 'Question ' + (i + 1) }));
             });
+            popChanged(progress.children, shown.pips); // (#66) a question just answered or begun pops
+            shown.pips = seen(progress.children);
         }
 
         function showQuestion() {

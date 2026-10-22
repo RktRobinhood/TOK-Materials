@@ -1123,6 +1123,12 @@
             }
             renderTape();
             renderTester(res);
+            // The tested step's badge changes colour: let it click into place or nudge once (#66).
+            const row = stepBtns[st.sel];
+            if (res.fits && row && Rift.Motion) {
+                if (!res.ok) Rift.Motion.nudge(row);
+                else if (st.tested[st.sel] === 'held') Rift.Motion.settle(row);
+            }
         }
 
         // ---- verdicts ----

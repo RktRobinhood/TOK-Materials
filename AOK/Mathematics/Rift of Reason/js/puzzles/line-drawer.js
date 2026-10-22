@@ -780,7 +780,9 @@
                 data.dots.forEach((d, i) => svgEl('circle', { cx: d[0], cy: d[1], r: dotR, class: 'ld-dot' + (cov[i] ? ' hit' : '') }, gDots));
                 const segs = Math.max(0, pts.length - 1);
                 counter.textContent = 'Lines ' + segs + ' / ' + data.maxLines;
+                const wasFull = counter.classList.contains('full');
                 counter.classList.toggle('full', segs >= data.maxLines);
+                if (!wasFull && segs >= data.maxLines && Rift.Motion) Rift.Motion.pop(counter); // (#66) last line used
             } else {
                 drawFigure();
                 const used = usedEdges();
@@ -824,6 +826,19 @@
                 const A = data.vertices[st.path[st.path.length - 1]];
                 svgEl('line', { x1: A[0], y1: A[1], x2: st.cursor[0], y2: st.cursor[1], class: 'ld-aim' }, gPreview);
             }
+        }
+
+        // (#66) The newest stretch of chalk draws itself: split it off the ink polyline (from the
+        // point it starts at) and animate just that piece. The picture ends up exactly the same.
+        function drawNewest(from) {
+            const M = Rift.Motion, ink = gInk.querySelector('polyline'), to = st.pts[st.pts.length - 1];
+            if (!M || !ink || !from || !to) return;
+            const head = st.pts.slice(0, -1);
+            if (!head.length || dist(head[head.length - 1], from) > 1e-6) head.push(from);
+            if (head.length >= 2) ink.setAttribute('points', head.map(p => p.join(',')).join(' ')); else ink.remove();
+            const seg = svgEl('line', { x1: from[0], y1: from[1], x2: to[0], y2: to[1], class: 'ld-ink' }, gInk);
+            gInk.querySelectorAll('circle').forEach(c => gInk.appendChild(c)); // keep the start and head marks on top
+            M.draw(seg);
         }
 
         function continuesStraight(q) {
@@ -884,6 +899,7 @@
             if (!left) submitAnswer({ type: 'polyline', points: pts.map(p => p.slice()) });
             else if (pts.length - 1 >= data.maxLines) setStatus('All lines used, ' + left + (left === 1 ? ' dot' : ' dots') + ' missed. Undo or clear.', 'bad');
             else setStatus(left + (left === 1 ? ' dot' : ' dots') + ' to go.');
+            drawNewest(last);
         }
 
         function step(v, loud) {
@@ -915,6 +931,7 @@
                 const stuck = data.edges.every(([a, b], i) => usedEdges().has(i) || (a !== last2 && b !== last2));
                 setStatus(stuck ? 'Stuck! Undo, clear, or decide it cannot be done.' : (data.edges.length - used) + ' lines to go.', stuck ? 'bad' : '');
             }
+            if (Rift.Motion) Rift.Motion.draw(gFigure.children[k]); // (#66) the line just traced draws itself
         }
 
         function undo() {

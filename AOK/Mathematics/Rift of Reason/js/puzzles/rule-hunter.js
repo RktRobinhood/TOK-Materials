@@ -768,6 +768,8 @@
             render();
             const row = logList.firstChild;
             if (row) row.classList.add('new');
+            // (#66) The tally that just went up pops, so the player sees which way the gate answered.
+            if (Rift.Motion) Rift.Motion.pop(counts.querySelector(ok ? '.rh-yes' : '.rh-no'));
         });
         clearBtn.addEventListener('click', () => { if (locked()) return; state.slots = [null, null, null]; sfx(api, 'click'); render(); });
 

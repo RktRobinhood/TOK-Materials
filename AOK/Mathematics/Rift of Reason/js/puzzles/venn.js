@@ -1256,7 +1256,7 @@
             if (mark) Object.assign(mark, { x: point.x, y: point.y, regions });
             else { mark = { id: state.nextId++, x: point.x, y: point.y, regions }; state.counters.push(mark); }
             state.moving = null;
-            clearFeedback(); render(); sfx('place');
+            clearFeedback(); render(); sfx('place'); popMark(mark);
             // Native selects accept only values whose options already exist.
             markSelect.value = String(mark.id);
             status.textContent = 'x placed: ' + markName(regions) + '.';
@@ -1371,8 +1371,15 @@
             sfx('place');
             clearFeedback();
             render();
+            popMark(mark);
             markSelect.value = String(mark.id);
             return true;
+        }
+        // (#66) A new x pops in place. Its circle and letter scale about their own centre (0,0);
+        // scaling the translated <g> itself would fling it across the board.
+        function popMark(mark) {
+            if (!Rift.Motion || !mark || !mark.node) return;
+            mark.node.querySelectorAll('.vn-counter-body, text').forEach(n => Rift.Motion.pop(n));
         }
 
         // dragging: from the tray (new x) or an existing x (move; a click removes it)
@@ -1479,6 +1486,7 @@
 
         function showFeedback(res) {
             clearFeedback();
+            let ghosts = 0;
             state.fb = res.diagram;
             res.diagram.missing.forEach(r => regionNodes[r].classList.add('need'));
             res.diagram.extra.forEach(r => regionNodes[r].classList.add('extra'));
@@ -1486,10 +1494,11 @@
                 if (m.length !== 1) return;
                 const a = geo.anchors[m[0]];
                 if (!a) return;
-                ghostLayer.appendChild(svg('g', { class: 'vn-ghost', transform: 'translate(' + a.x + ' ' + a.y + ')' }, [
+                const ghost = ghostLayer.appendChild(svg('g', { class: 'vn-ghost', transform: 'translate(' + a.x + ' ' + a.y + ')' }, [
                     svg('circle', { r: 15 }),
                     (() => { const t = svg('text', { y: 5, 'text-anchor': 'middle' }); t.textContent = 'x'; return t; })(),
                 ]));
+                if (Rift.Motion) Rift.Motion.reveal(ghost, Math.min(ghosts++, 7)); // (#66) the missing x fades in where it belongs
             });
             render();
         }

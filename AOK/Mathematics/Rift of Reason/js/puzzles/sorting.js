@@ -573,8 +573,13 @@
             if (rule.wR && n) parts.push('− ' + rule.wR + '×' + n);
             return parts.join(' ') + ' = ' + score + (score >= rule.T ? ' ≥ ' : ' < ') + rule.T;
         }
+        // Presentation only (#66): the "needed help" tags fade in the first time, and matrix numbers
+        // that changed pop; cards and cells are rebuilt on every render.
+        let truthShown = false;
+        let shownCells = null;
         function renderCards(out) {
             const rule = curRule();
+            const truthFresh = st.audited && !truthShown;
             cardsHead.innerHTML = '';
             cardsHead.appendChild(el('span.sm-title', { text: th.title }));
             cardsHead.appendChild(el('span.sm-count', { text: Rift.clamp(out.helped, 0, 99) + ' of ' + data.applicants.length + ' stamped YES' }));
@@ -613,13 +618,14 @@
                     a.helpedLastYear ? el('div.sm-last', { text: 'helped last year' }) : null,
                     el('div.sm-cardfoot', null, [
                         el('span.sm-score', { text: st.open[i] ? breakdown(rule, a, out.scores[i]) : 'score ' + out.scores[i] }),
-                        st.audited ? el('span.sm-truth', { className: a.needed ? 'need' : 'fine', text: a.needed ? '♥ needed help' : 'did not need it' }) : null,
+                        st.audited ? el('span.sm-truth', { className: (a.needed ? 'need' : 'fine') + (truthFresh ? ' fresh' : ''), text: a.needed ? '♥ needed help' : 'did not need it' }) : null,
                     ]),
                     el('div.sm-stamp', { className: (yes ? 'yes' : 'no') + (changed ? ' restamp' : '') }, [stampNode(yes)]),
                 ]);
                 cardsEl.appendChild(card);
             });
             st.fresh = {};
+            if (st.audited) truthShown = true;
         }
 
         // ---- rule panel ----
@@ -674,6 +680,14 @@
                 el('div.sm-mh.row', { text: 'Did not need it' }), cell('fp', out.fp, base.fp, 'helped, not needed'), cell('tn', out.tn, base.tn, 'rightly refused'),
             ]);
             auditEl.appendChild(m);
+            const cellNow = {};
+            ['tp', 'fn', 'fp', 'tn'].forEach(k => {
+                const c = m.querySelector('.sm-cell.' + k);
+                cellNow[k] = c ? c.textContent : '';
+                if (!shownCells || shownCells[k] === cellNow[k] || !c || !Rift.Motion) return;
+                c.querySelectorAll('.sm-cn, .sm-delta').forEach(n => Rift.Motion.pop(n));
+            });
+            shownCells = cellNow;
 
             const bars = el('div.sm-bars');
             bars.appendChild(el('div.sm-barshead', null, [scaleArt, el('div', null, [

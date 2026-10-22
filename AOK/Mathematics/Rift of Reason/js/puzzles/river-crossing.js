@@ -209,10 +209,11 @@
             el('button.btn.small', { text: 'Reset', onclick() { if (done) return; trips = []; load = []; recovery.textContent = 'The whole plan was reset. Everyone is back on the near bank.'; render(); } }),
         ]);
 
+        let placed = {}; // (#66) cast id → { node, where } from the latest render, for the glide
         function state() { return play(data, trips); }
         function token(c, i, where) {
             const picked = load.includes(c.id);
-            return el('button.rc-token' + (picked ? '.picked' : ''), { title: c.name, onclick() { toggle(c, where); } }, [art(c), el('span.small', { text: c.name })]);
+            return (placed[c.id] = { where, node: el('button.rc-token' + (picked ? '.picked' : ''), { title: c.name, onclick() { toggle(c, where); } }, [art(c), el('span.small', { text: c.name })]) }).node;
         }
         function toggle(c, where) {
             if (done) return;
@@ -238,6 +239,8 @@
                 if (r.problem !== 'clash') trips = [];
                 load = [];
                 render();
+                // (#66) The clash is named above, so point at the two who fought.
+                if (r.problem === 'clash' && Rift.Motion) r.clash.forEach(i => { const p = placed[data.cast[i].id]; if (p) Rift.Motion.nudge(p.node); });
                 return;
             }
             trips = next;
@@ -251,6 +254,12 @@
         }
         function render() {
             const s = state();
+            // (#66) FLIP: remember where the boat and every creature were, so moves glide instead of jump.
+            const M = Rift.Motion;
+            const old = {};
+            if (M) Object.keys(placed).forEach(id => { old[id] = { where: placed[id].where, box: placed[id].node.getBoundingClientRect() }; });
+            const oldBoat = M && boatBox.getBoundingClientRect();
+            placed = {};
             near.innerHTML = '';
             far.innerHTML = '';
             boatBox.innerHTML = '';
@@ -262,6 +271,15 @@
                 (s.mask >> i & 1 ? far : near).append(token(c, i, s.mask >> i & 1 ? 'far' : 'near'));
             });
             banks.classList.toggle('rc-at-far', !!s.boat);
+            if (M) {
+                const glide = (node, from) => {
+                    const to = node.getBoundingClientRect();
+                    const dx = from.left - to.left, dy = from.top - to.top;
+                    if (dx || dy) M.play(node, [{ translate: dx + 'px ' + dy + 'px' }, { translate: '0 0' }], { duration: 420, easing: 'ease-in-out' });
+                };
+                if (oldBoat) glide(boatBox, oldBoat);
+                Object.keys(placed).forEach(id => { if (old[id] && old[id].where !== placed[id].where) glide(placed[id].node, old[id].box); });
+            }
             const left = data.toll ? ' · Tickets left: ' + Math.max(0, data.toll - trips.length) : '';
             info.textContent = 'Crossings: ' + trips.length + left + ' · Boat seats ' + data.seats + ' besides you.';
         }

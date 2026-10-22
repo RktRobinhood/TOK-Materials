@@ -158,6 +158,7 @@
             const result = api.submit(Object.assign({}, answers));
             if (!result) return;
             const wrong = result.wrongIds || [];
+            let shown = 0;
             data.claims.forEach(c => {
                 const row = rows[c.id];
                 const missed = wrong.includes(c.id);
@@ -167,6 +168,8 @@
                     const label = c.a === 'T' ? 'Supporting evidence: ' : c.a === 'F' ? 'Contradicting evidence: ' : 'Missing evidence: ';
                     reason.textContent = label + c.why;
                     previouslyWrong.add(c.id);
+                    // (#66) Marked claims arrive one by one, so each reason can be read in turn.
+                    if (Rift.Motion) Rift.Motion.reveal(row, Math.min(shown++, 7));
                 } else if (previouslyWrong.has(c.id)) {
                     reason.textContent = 'Revision supported: ' + c.why;
                 } else reason.textContent = '';

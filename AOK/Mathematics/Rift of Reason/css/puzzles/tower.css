@@ -122,7 +122,7 @@
     box-shadow: 0 0 0 2px var(--gold), 0 0 14px rgba(242, 182, 50, 0.55), 0 3px 0 rgba(0, 0, 0, 0.45);
 }
 .tw-block[data-status="loose"] { opacity: 0.92; }
-.tw-block.shaky { animation: tw-wobble 2.4s ease-in-out 2; }
+.tw-block.shaky { animation: tw-wobble 2.4s ease-in-out 1; }   /* one lean and back (#66: never a looping wobble) */
 .tw-block[data-status="cracked"]::after {
     content: ''; position: absolute; inset: 0; pointer-events: none;
     background: linear-gradient(115deg, transparent 44%, var(--ink) 45%, var(--ink) 47%, transparent 48%),
@@ -203,17 +203,10 @@
 @keyframes tw-pop { from { transform: translateY(6px); opacity: 0; } }
 @keyframes tw-drop { from { transform: translateY(-120px) rotate(6deg); opacity: 0; } }
 @keyframes tw-wobble { 50% { transform: rotate(calc(var(--tilt) * -1)); } }
-@keyframes tw-shake {
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-3px); }
-}
-@keyframes tw-quake {
-    20% { transform: translateX(-4px); }
-    40% { transform: translateX(4px); }
-    60% { transform: translateX(-3px); }
-    80% { transform: translateX(2px); }
-}
+/* #66: one movement out and back ("here is what broke"), never a back-and-forth shake. */
+@keyframes tw-shake { 35% { transform: translateX(-5px); } }
+/* Falling blocks land with one thud of the whole stage. */
+@keyframes tw-quake { 30% { transform: translateY(4px); } }
 @keyframes tw-fall {
     20% { transform: translateY(-8px) rotate(calc(var(--fall-r) * 0.1)); }
     to { transform: translate(var(--fall-x), 320px) rotate(var(--fall-r)); opacity: 0; }

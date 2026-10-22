@@ -418,6 +418,7 @@
         function phaseRounds() {
             return st.phase === 'play1' || st.phase === 'reveal' ? st.rounds.slice(0, WARMUP) : st.rounds.slice(st.blockStart);
         }
+        let shownTop = null; // what renderTop showed last time; presentation only (#66)
         function renderTop() {
             const inPlay3 = st.history.length >= WARMUP && st.phase !== 'reveal';
             const pieces = !inPlay3
@@ -442,6 +443,14 @@
             rs.forEach(r => historyEl.appendChild(hue(el('span.pm-hchip' + (r.win ? '.won' : '.lost'), {
                 text: g(r.choice), title: r.win ? 'It guessed ' + data.options[r.guess].label + ': you won' : 'It guessed right',
             }), data.options[r.choice].hue)));
+            // Everything above is rebuilt each time: pop only the round that just landed (#66).
+            if (shownTop && rs.length > shownTop.len && Rift.Motion) {
+                const chips = historyEl.querySelectorAll('.pm-hchip');
+                if (chips.length) Rift.Motion.pop(chips[chips.length - 1]);
+                const lit = you > shownTop.you ? scoreEl.querySelectorAll('.pm-pip.on')[you - 1] : null;
+                if (lit) Rift.Motion.pop(lit);
+            }
+            shownTop = { len: rs.length, you };
         }
 
         // ---- the brain ----

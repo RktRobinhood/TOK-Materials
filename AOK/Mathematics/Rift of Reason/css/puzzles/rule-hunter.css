@@ -115,7 +115,8 @@
 }
 .rh-slot.over { border-color: var(--rift); background-color: rgba(63, 224, 208, 0.18); }
 .rh-slots.shake { animation: rh-shake 0.3s; }
-@keyframes rh-shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+/* #66: one movement out and back ("here is what broke"), never a back-and-forth shake. */
+@keyframes rh-shake { 35% { transform: translateX(-6px); } }
 .rh-build-btns { display: flex; gap: 8px; align-items: center; }
 
 .rh-tray {
