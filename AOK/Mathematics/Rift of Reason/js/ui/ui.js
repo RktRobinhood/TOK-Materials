@@ -143,17 +143,9 @@
         return s.maxHealth - (s.scars.includes('heavy-heart') ? 1 : 0);
     }
 
-    // HUD shown on the map and in encounters.
-    // The static pack results (#136): the cards were saved before this opens. Done (or any later
-    // reveal's Skip, #134) only marks the receipt shown; a reload shows it again until then.
-    function packResults(receipt, after) {
-        const n = receipt.cards.length, spells = (receipt.unlocked || []).map(id => ((Rift.data.tactics || {})[id] || {}).name || id);
-        return modal('Your new cards', el('div.stack', null, [
-            el('p', { text: n + ' new card' + (n === 1 ? ' is' : 's are') + ' in your Collection' + (receipt.source === 'free' ? ' (free).' : ' (' + receipt.price + ' Coins).') }),
-            el('ol.pack-results', null, receipt.cards.map(c => el('li', { dataset: { rarity: c.rarity }, className: c.foil ? 'foil' : '' }, [Rift.Packs.describe(c)]))),
-            spells.length ? el('p.small', { text: 'New colour spell' + (spells.length === 1 ? '' : 's') + ': ' + spells.join(', ') + '.' }) : null,
-        ]), [{ label: 'Done', primary: true, required: true }], { onClose() { const r = Rift.Packs.finish(receipt.number); if (after) after(r); } });
-    }
+    // A saved pack receipt (#136) plays back as the reveal (#134, js/ui/pack-reveal.js), then its
+    // results list. Done there only marks the receipt shown; a reload shows it again until then.
+    function packReveal(receipt, after) { return Rift.PackReveal ? Rift.PackReveal.show(receipt, after) : null; }
 
     // First shop location: the existing Campfire Clearing. Opening, closing and affordability
     // checks never debit; a pack is paid and saved in one transaction (js/core/packs.js).
@@ -185,7 +177,7 @@
                 packMessage.textContent = result && !result.ok ? result.error : '';
                 // Redraw first, so the results dialog returns focus to a live button.
                 refreshPacks(result && result.ok ? 'pack-show' : source === 'free' ? 'pack-free' : 'pack-buy');
-                if (result && result.ok) packResults(result.value, shown);
+                if (result && result.ok) packReveal(result.value, shown);
             }
             const blocked = opening || !atMap || !!ready;
             packs.innerHTML = '';
@@ -205,7 +197,7 @@
                 disabled: blocked || !q.size || q.coins < q.price, onclick: () => openPack('coins') }));
             if (q.size && q.coins < q.price) packs.appendChild(el('p.small', { text: (q.price - q.coins) + ' more Coins would cover this pack.' }));
             if (!atMap) packs.appendChild(el('p.small', { text: 'Go back to the map to open packs.' }));
-            if (ready) packs.appendChild(el('button.btn.pack-show', { text: 'Show your new cards', onclick() { if (!closed) packResults(ready, shown); } }));
+            if (ready) packs.appendChild(el('button.btn.pack-show', { text: 'Show your new cards', onclick() { if (!closed) packReveal(ready, shown); } }));
             packs.appendChild(packMessage);
             const buttons = Array.from(packs.querySelectorAll('button')).filter(b => !b.disabled);
             const target = focused && (buttons.find(b => b.classList.contains(focused)) || buttons[0]);
@@ -266,11 +258,12 @@
         off = Rift.bus.on('state:changed', refresh);
         // A pack saved before a reload or a closed tab: show its cards again until Done.
         const ready = Rift.Packs && Rift.Packs.active();
-        if (ready) packResults(ready, r => { if (!r.ok) packMessage.textContent = r.error; refreshPacks(); });
+        if (ready) packReveal(ready, r => { if (!r.ok) packMessage.textContent = r.error; refreshPacks(); });
         offScreen = Rift.bus.on('screen:changed', () => dialog.close());
         return dialog;
     }
 
+    // HUD shown on the map and in encounters.
     function hud(opts) {
         const s = Rift.State.get();
         const o = opts || {};
@@ -497,7 +490,7 @@
         return node;
     }
 
-    Rift.UI = { input, toast, modal, confirm, hud, shop, packResults, hearts, maxHealth, bag, riftFx, framedCard, statLine, variantBadges, trickBook };
+    Rift.UI = { input, toast, modal, confirm, hud, shop, packReveal, hearts, maxHealth, bag, riftFx, framedCard, statLine, variantBadges, trickBook };
     let conflictShown = false;
     Rift.bus.on('state:conflict', () => {
         if (conflictShown || !overlay()) return;

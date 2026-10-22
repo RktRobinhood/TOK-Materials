@@ -311,7 +311,8 @@ test('legacy wallets gain empty pack fields; damaged pack receipts are refused',
     const r = P.open(P.quote(), 'coins').value, good = J(S.get());
     for (const pack of [{ ...r, v: 2 }, { ...r, number: 0 }, { ...r, source: 'gift' }, { ...r, cards: [] }, { ...r, price: -1 }, { ...r, number: 2 },
         { ...r, cards: [{ kind: 'creature', id: 'x', rarity: 'common', foil: false }] }, { ...r, cards: [{ kind: 'tactic', id: 'x', rarity: 'common', foil: 'no' }] },
-        { ...r, cards: [{ kind: 'tactic', id: 'x', foil: false }] }, { ...r, source: 'free' }, { ...r, unlocked: [1] }]) {
+        { ...r, cards: [{ kind: 'tactic', id: 'x', foil: false }] }, { ...r, source: 'free' }, { ...r, unlocked: [1] },
+        { ...r, cards: [{ kind: 'tactic', id: 'x', rarity: 'common', foil: false, copies: 0 }] }, { ...r, cards: [{ kind: 'tactic', id: 'x', rarity: 'common', foil: false, copies: '2' }] }]) {
         assert.throws(() => S.checkSave({ ...good, wallet: { ...good.wallet, pack } }), /damaged/);
     }
     assert.throws(() => S.checkSave({ ...good, wallet: { ...good.wallet, packSerial: undefined } }), /damaged/);
@@ -320,7 +321,7 @@ test('legacy wallets gain empty pack fields; damaged pack receipts are refused',
     assert.equal(S.checkSave(good).wallet.pack.number, 1);
 });
 
-test('mounted stall shows odds, confirms, lists the saved cards first and resumes them after reload', async () => {
+test('mounted stall shows odds, confirms, reveals then lists the saved cards and resumes them after reload', async () => {
     const store = new Map();
     const mount = () => loadWithDom([...FILES, ctx => {
         const R = ctx.Rift;
@@ -328,7 +329,7 @@ test('mounted stall shows odds, confirms, lists the saved cards first and resume
         const overlay = R.el('div'); overlay.setAttribute('id', 'overlay'); ctx.document.body.appendChild(overlay);
         if (store.size) R.State.load();
         else { R.State.newGame(); R.State.update(s => { s.map.at = 'campfire'; s.wallet.coins = 60; s.wallet.freePacks = 1; }); R.State.saveNow(); }
-    }, 'js/core/shop.js', 'js/ui/ui.js']);
+    }, 'js/core/shop.js', 'js/ui/ui.js', 'js/ui/pack-reveal.js']);
     let g = mount(); let R = g.Rift;
     const find = text => g.document.body.querySelectorAll('button').find(b => b.textContent === text);
     let shop = R.UI.shop();
@@ -343,6 +344,7 @@ test('mounted stall shows odds, confirms, lists the saved cards first and resume
     find('Five-card pack · 50 Coins').click();
     find('Buy for 50 Coins').click(); await new Promise(resolve => setTimeout(resolve, 0));
     assert.equal(R.State.get().wallet.coins, 10);
+    find('Skip').click(); // the reveal (#134) skips straight to this list
     const list = g.document.body.querySelector('.pack-results');
     assert.ok(list !== null && list.tagName === 'OL');
     assert.equal(list.children.length, 5);
@@ -351,6 +353,7 @@ test('mounted stall shows odds, confirms, lists the saved cards first and resume
     // Reload before Done: the stall shows the same saved cards again, without charging.
     const first = list.textContent;
     g = mount(); R = g.Rift; shop = R.UI.shop();
+    g.document.body.querySelectorAll('button').find(b => b.textContent === 'Skip').click();
     assert.equal(g.document.body.querySelector('.pack-results').textContent, first);
     assert.equal(R.State.get().wallet.coins, 10);
     g.document.body.querySelectorAll('button').find(b => b.textContent === 'Done').click();

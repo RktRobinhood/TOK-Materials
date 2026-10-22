@@ -862,7 +862,8 @@
                     || !['coins', 'free'].includes(r.source) || !Number.isSafeInteger(r.price) || r.price < 0 || (r.source === 'free' && r.price !== 0) || typeof r.done !== 'boolean'
                     || (r.unlocked !== undefined && (!Array.isArray(r.unlocked) || r.unlocked.some(id => typeof id !== 'string')))
                     || !Array.isArray(r.cards) || !r.cards.length || r.cards.some(c => !record(c) || !['creature', 'tactic', 'axiom'].includes(c.kind)
-                        || typeof c.id !== 'string' || typeof c.rarity !== 'string' || typeof c.foil !== 'boolean' || (c.kind === 'creature' && typeof c.uid !== 'string'))
+                        || typeof c.id !== 'string' || typeof c.rarity !== 'string' || typeof c.foil !== 'boolean' || (c.kind === 'creature' && typeof c.uid !== 'string')
+                        || (c.copies !== undefined && (!Number.isSafeInteger(c.copies) || c.copies < 1)))
                     || p.wallet.packSerial === undefined || r.number > p.wallet.packSerial) throw codeError('damaged');
             }
         }

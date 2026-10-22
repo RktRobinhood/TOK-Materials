@@ -434,3 +434,47 @@ img.quest-gem { height: 1.25em; width: auto; vertical-align: -0.25em; min-width:
 .pack-results li[data-rarity="mythic"] { border-left: 4px double #e6acff; }
 .pack-results li[data-rarity="legendary"] { border-left-color: #ffe0a0; }
 .pack-results li.foil { box-shadow: inset 0 0 0 1px rgba(242, 182, 50, 0.75); }
+.pack-results li > .rarity-badge { margin-right: 2px; }
+
+/* Pack reveal (#134): one short arrival per card and, for a foil, one sheen that ends hidden.
+   Nothing loops. Calm motion stops both (instant); OS reduced motion keeps a plain fade. */
+/* Opens over the stall: a solid panel, so the stall's text never shows through the captions. */
+.modal:has(.pack-reveal), .modal:has(.pack-results) { background-color: rgb(20, 18, 31); }
+.pack-reveal { align-items: center; text-align: center; }
+.pack-step { margin: 0; font-weight: 700; }
+/* Height-capped so the card, its caption and the buttons fit one screen, also at browser zoom. */
+.pack-stage { position: relative; width: min(220px, 70vw, calc(48vh * 5 / 8.1)); margin: 0 auto; cursor: pointer; }
+.pack-stage .fcard.big { width: 100%; }
+.pack-wrapper { aspect-ratio: 5 / 8.1; display: flex; align-items: center; justify-content: center; border: 2px solid var(--gold, #f2b632); border-radius: 12px; background: var(--panel, #1d1a2e); overflow: hidden; }
+.pack-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+.pack-glyph { font-size: 3rem; color: var(--gold, #f2b632); }
+.pack-print .fcard-art { align-items: center; }
+/* Spell frames have a parchment panel: dark ink. The Axiom frame's panel is dark, so it keeps light ink,
+   and its art sits on the same parchment glow as on the battle table. */
+.pack-print:not(.no-frame):not(.axiom) .fcard-panel { color: #2b1a0e; }
+.pack-print:not(.no-frame) .fcard-text { opacity: 1; }
+.pack-print.axiom .fcard-art { background: radial-gradient(circle, #f3e9d2, #b79a5a); }
+.pack-print.axiom .pack-glyph { color: #4a3210; }
+/* Static rarity frame around the whole card: the same tier colours and patterns as the badges. */
+.pack-card { position: relative; padding: 4px; border: 2px dotted #b3bec8; border-radius: 12px; overflow: hidden; }
+.pack-card[data-rarity="uncommon"] { border: 2px dashed #a9e0c0; }
+.pack-card[data-rarity="rare"] { border: 2px solid #99cfff; box-shadow: 0 0 12px rgba(153, 207, 255, 0.35); }
+.pack-card[data-rarity="mythic"] { border: 5px double #e6acff; box-shadow: 0 0 14px rgba(230, 172, 255, 0.4); }
+.pack-card[data-rarity="legendary"] { border: 3px solid #ffe0a0; box-shadow: 0 0 16px rgba(255, 224, 160, 0.45); }
+.pack-sheen { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: linear-gradient(115deg, transparent 30%, rgba(110, 231, 255, 0.45) 45%, rgba(255, 110, 214, 0.4) 55%, transparent 70%); background-size: 250% 100%; }
+.pack-in { animation: pack-in 0.3s ease-out 1 both; }
+.pack-card .pack-sheen { animation: pack-sheen 0.9s ease-out 0.25s 1 both; }
+@keyframes pack-in { from { opacity: 0; transform: translateY(10px) scale(0.97); } to { opacity: 1; transform: none; } }
+@keyframes pack-sheen { 0% { opacity: 1; background-position: 100% 0; } 100% { opacity: 0; background-position: 0 0; } }
+@keyframes pack-fade { from { opacity: 0; } to { opacity: 1; } }
+.pack-caption { min-height: 4.6em; display: grid; gap: 4px; justify-items: center; }
+.pack-tier { font-weight: 700; }
+.pack-name { font-family: var(--font-display); font-size: 1.1em; }
+.pack-controls { justify-content: center; }
+.pack-next { min-height: 44px; }
+body.calm-motion .pack-in, body.calm-motion .pack-card .pack-sheen { animation: none !important; }
+body.calm-motion .pack-sheen { display: none; }
+@media (prefers-reduced-motion: reduce) {
+    .pack-in { animation: pack-fade 0.2s ease-out 1 both !important; }
+    .pack-sheen { display: none; }
+}

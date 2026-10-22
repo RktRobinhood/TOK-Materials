@@ -11,7 +11,7 @@
         totals: Object.freeze({ common: 0.65, uncommon: 0.23, rare: 0.09, mythic: 0.025, legendary: 0.005 }),
     });
     const KINDS = Object.freeze({ creature: 'creatures', tactic: 'tactics', axiom: 'axioms' });
-    const LABELS = { creature: 'creature', tactic: 'spell', axiom: 'Axiom' };
+    const LABELS = Object.freeze({ creature: 'creature', tactic: 'spell', axiom: 'Axiom' });
 
     // Released, explicitly pack-eligible IDs only. Story rewards stay out forever (Acquisition).
     // Ownership never decides membership; it only decides room. → [{ kind, id, rarity, weight }]
@@ -101,6 +101,8 @@
                 if (!S.addCreature(s, S.makeCreature(e.id, { uid, foil }))) throw new Error('Could not add ' + cardName(e) + '.');
                 card.uid = uid;
             } else if (!S.grantPrint(e.kind, e.id, s, { foil })) throw new Error('Could not add ' + cardName(e) + '.');
+            // The folder count right after this copy, for the reveal (#134): display only.
+            card.copies = e.kind === 'creature' ? S.copiesOf(s, e.id) : S.cardCopies(e.kind, e.id, s);
             cards.push(card);
         }
         return cards;
@@ -145,7 +147,7 @@
         const s = save || Rift.State.get(), p = s && Rift.State.walletOf(s).pack;
         return p && !p.done ? p : null;
     }
-    // Presentation finished (Done or Skip). Never changes cards or Coins. Safe to repeat.
+    // Presentation finished (Done in the results list). Never changes cards or Coins. Safe to repeat.
     function finish(number) {
         const p = active();
         if (!p || p.number !== number) return { ok: true, value: false };
@@ -154,10 +156,6 @@
     function cardName(card) {
         return ((((Rift.data || {})[KINDS[card.kind]] || {})[card.id]) || {}).name || card.id;
     }
-    // One plain line per card, for the static results list and screen readers.
-    function describe(card) {
-        return cardName(card) + ' · ' + Rift.Rarity.of({ rarity: card.rarity }).label + ' ' + LABELS[card.kind] + (card.foil ? ' · ✦ Foil' : '');
-    }
 
-    Rift.Packs = { CONFIG, roster, room, quote, draw, open, active, finish, describe };
+    Rift.Packs = { CONFIG, KINDS, LABELS, roster, room, quote, draw, open, active, finish };
 })(typeof window !== 'undefined' ? window : globalThis);
