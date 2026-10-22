@@ -598,6 +598,7 @@
                         } else {
                             panel.append(Rift.resultBanner('lost', 'It escaped this time.', 'You can try again.'), el('p', { text: escapeHint(o.board) }),
                                 el('button.btn.primary', { text: 'Try again · new random game', onclick() {
+                                    if (Rift.Motion) Rift.Motion.cancel(host);
                                     const result = session.retry(n.id, o.version);
                                     if (result.ok) render(); else panel.append(el('p', { role: 'alert', text: result.error }));
                                 } }));
@@ -648,6 +649,12 @@
                                 if (destroyed) return;
                                 Rift.Audio.sfx(outcome === 'caught' ? 'caught' : 'escape');
                                 render();
+                                // The visitor itself shows the result once (#66): caught, it settles with a
+                                // gold glow; escaped, it dashes off and stays gone until a new try.
+                                const beast = Rift.Motion && host.querySelector('.enc-creature');
+                                if (beast && outcome === 'caught') Rift.Motion.settle(beast, { duration: 600 });
+                                else if (beast) Rift.Motion.play(beast, [{ translate: '0 0', opacity: 1 }, { translate: '56px 0', opacity: 0 }],
+                                    { duration: 520, easing: 'ease-in', fill: 'forwards' }, [{ opacity: 1 }, { opacity: 0.35 }]);
                             },
                         });
                     }

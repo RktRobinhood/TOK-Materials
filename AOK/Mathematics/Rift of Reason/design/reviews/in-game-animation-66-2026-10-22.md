@@ -2,7 +2,7 @@
 
 Remit: the teacher's 18 October comment on #66. Animate wherever motion makes the game clearer and looks good; no teacher approval gate per phase. Engine state stays authoritative; animation is presentation only. Short, skippable, synced to committed events and audio, cancelled on resize, navigation, interruption and battle end. Calm motion and OS reduced motion get gentle equivalents. Nothing loops, shakes, wobbles or jitters.
 
-Shipped in slices: **battle** (slice 1), **puzzles** (slice 2), then other screens (added below as they land).
+Shipped in three slices: **battle** (slice 1), **puzzles** (slice 2) and **other screens** (slice 3).
 
 ## Slice 1: the Card Arena
 
@@ -88,7 +88,7 @@ Every puzzle call is guarded (`if (Rift.Motion)`), so puzzles still run in tests
 
 ### Every station (`js/screens/encounter.js`)
 
-- **Solved:** the puzzle settles and the green "Solved" line rises in. The "Stage solved!" dialog still opens at once.
+- **Solved:** the puzzle settles and the green "Solved" line rises in. The "Stage solved!" dialog still opens at once, and the dialogs now rise in too (slice 3).
 - **Wrong check:** the red feedback box moves once with a red edge, so the new reason is noticed.
 - **Hint:** the hint text rises in.
 - **Heart lost:** the hearts in the top bar pop.
@@ -133,11 +133,22 @@ Builder calls:
 - **Nothing reveals hidden information.** For example, Liar's Gate never marks which guard's role is wrong, because the puzzle does not tell the player that.
 - **Slow ambient loops kept.** These are a hovering Prediction machine and Oracle, attention pulses (an opacity or line-width pulse on a current dot or a danger chip), and Three-act scenery (water flow, rain, fire). None of them shakes, wobbles or jitters, and Calm motion stops them all.
 
-### Tests (slice 2)
+## Slice 3: other screens
 
-- `tools/test/motion.test.mjs` (6): the helper plays once, moves normally and only fades under Calm or reduced motion; nudge is one movement; draw; cancel by scope; the encounter's solved, wrong, hint and heart cues (results unchanged).
+- **Catch result.** The visitor shows the result once, when a try ends: caught, it settles with a gold glow; escaped, it dashes off and stays gone until **Try again**. Reopening a saved result plays nothing.
+- **Lantern Lure:** the turned piece turns, and newly lit trail glows in order.
+- **Picture Catch:** the slid piece glides in from where it was.
+- **Trail Finder:** newly opened patches appear in order; a snare nudges once; a flag pops.
+- **Pocket Nets and Shard Burst** (canvas): a spark fades once in 0.45 s where a shard broke, where a net broke, around the lantern when it is hit, and over ground a net just closed. It does not grow in Calm motion. It never changes the saved replay.
+- **Map.** A place revealed since the last map view opens its fog and fades in, so the player sees what the last win opened and where to go next. "Already shown" lives only in memory for this session, per painted map, never in the save; a map's first view shows places as they are.
+- **Dialogs** rise in once (CSS, 0.18 s; Calm motion removes it, reduced motion makes it instant).
+
+### Tests (slices 2–3)
+
+- `tools/test/motion.test.mjs` (7): the helper plays once, moves normally and only fades under Calm or reduced motion; nudge is one movement; draw; cancel by scope; the encounter's solved, wrong, hint and heart cues (results unchanged); the map's fog opening (not on first view or repaints; nothing saved).
 - `tools/test/puzzle-motion-a/b/c.test.mjs` (5 + 6 + 7): every puzzle above is played by real clicks with and without `Rift.Motion`, with identical answers and `check()` results, plus the play-once fixes.
+- `tools/test/catch-motion.test.mjs` (6): Lantern, Picture and Trail cues; every catch game still wins without the helper; Shard Burst's spark fades and is gone; and the encounter's caught/escaped motion, which plays once and not on reload.
 
-### Browser checks (slice 2)
+### Browser checks (slices 2–3)
 
-All 17 puzzles were opened on `dev/puzzle.html` with clicks, in normal motion and Calm motion: no console errors, no loops, and only fades under Calm. The real game (`index.html`) was played at 1280 px and at 390 px, normal and with the real Calm setting. The run was: a new adventure, the Witness tent, a wrong testimony (the feedback moves once and the wrong claims arrive in turn), a solve (the puzzle settles), then the win and rewards dialogs back to the map. Under Calm all 11 cues of that run were fades only. No console errors.
+All 17 puzzles were opened on `dev/puzzle.html` with clicks, in normal motion and Calm motion: no console errors, no loops, and only fades under Calm. The real game (`index.html`) was played at 1280 px and at 390 px, normal and with the real Calm setting. The run was: a new adventure, the Witness tent, a wrong testimony (the feedback moves once and the wrong claims arrive in turn), a solve (the puzzle settles), the win and rewards dialogs, then back on the map, where the newly revealed place opens its fog. Under Calm all 11 cues of that run were fades only. No console errors.

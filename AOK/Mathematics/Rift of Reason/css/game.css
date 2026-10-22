@@ -164,6 +164,9 @@ h1, h2, h3 { font-family: var(--font-display); margin: 0 0 0.4em; line-height: 1
 
 .modal-backdrop { position: absolute; inset: 0; background: rgba(5, 4, 10, 0.65); display: flex; align-items: center; justify-content: center; z-index: 70; }
 .modal { width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 40px); overflow: auto; }
+/* A dialog rises in once, so a new message is noticed (#66). Calm motion removes it; reduced motion makes it instant. */
+.modal { animation: modal-in 0.18s ease-out; }
+@keyframes modal-in { from { opacity: 0; transform: translateY(10px); } }
 
 /* Readable outcome first: the emblem and words work without sound, colour or motion. */
 .result-banner { display: flex; align-items: center; gap: 16px; width: 100%; padding: 20px; margin: 8px 0 16px; border: 2px solid #8c879c; border-radius: var(--radius); background: #252332; text-align: left; }

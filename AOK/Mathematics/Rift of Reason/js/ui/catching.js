@@ -70,6 +70,7 @@
         }
         function act(action) {
             if (!active()) return;
+            const was = { open: (board.open || []).slice(), gap: board.tiles ? board.tiles.indexOf(0) : -1, lit: board.kind === 'lure' ? games.lightPath(board).path.slice() : [] };
             const result = o.onAction(action);
             if (!result.ok) {
                 // A hint is refused only when no win fits the moves left.
@@ -82,8 +83,27 @@
             else status.textContent = result.hit ? 'A snare! One trap heart used.' : action.flag ? (board.flags.includes(action.cell) ? 'Flagged.' : 'Flag removed.') : 'Safe.';
             if (board.done) { finish(); return; }
             refresh();
+            moveCue(action, result, was);
             // Keep keyboard focus on the board: after a hint, on the piece it marks.
             if (result.hint != null) { const marked = game.querySelector('[data-catch-key="picture-' + board.hint + '"]'); if (marked) marked.focus(); }
+        }
+        // What the move did, shown once (#66; presentation only): the turned piece turns, newly lit
+        // trail glows, a slid piece slides in from its old place, new patches open in order.
+        function moveCue(action, result, was) {
+            const M = Rift.Motion, at = key => game.querySelector('[data-catch-key="' + key + '"]');
+            if (!M || action.hint) return;
+            if (board.kind === 'lure') {
+                const turned = at('trail-' + action.cell);
+                M.play(turned && (turned.querySelector('svg') || turned), [{ rotate: '-90deg' }, { rotate: '0deg' }], { duration: 220 });
+                games.lightPath(board).path.filter(c => !was.lit.includes(c)).forEach((c, i) => M.glow(at('trail-' + c), '#ffe39c', { delay: Math.min(i, 7) * 60 }));
+            } else if (board.kind === 'picture' && was.gap >= 0) {
+                const dx = action.cell % 3 - was.gap % 3, dy = Math.floor(action.cell / 3) - Math.floor(was.gap / 3);
+                M.play(at('picture-' + was.gap), [{ translate: dx * 100 + '% ' + dy * 100 + '%' }, { translate: '0 0' }], { duration: 160 });
+            } else if (board.kind === 'tracks') {
+                if (result.hit) M.nudge(at('tile-' + action.cell));
+                else if (action.flag) M.pop(at('tile-' + action.cell));
+                else board.open.filter(c => !was.open.includes(c)).forEach((c, i) => M.reveal(at('tile-' + c), Math.min(i, 7)));
+            }
         }
         function refresh() {
             result.replaceChildren(...(board.done ? [Rift.resultBanner(board.done === 'caught' ? 'won' : 'lost', board.done === 'caught' ? 'You won!' : 'It escaped this time.', board.done === 'caught' ? 'You caught the creature.' : 'Try a different plan.')] : []));

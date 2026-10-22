@@ -2,7 +2,9 @@
  * One canvas drawn from a live replay of the saved board; mouse, touch and keyboard.
  * Calm motion (or the system's reduced-motion setting) turns the clock into short steps:
  * the field waits with its next second drawn as a dotted ghost path, and moves for half
- * a second only after your move or Wait. Nothing shakes, flashes or loops. */
+ * a second only after your move or Wait. Nothing shakes, flashes or loops.
+ * #66: a short spark marks what just happened (a shard broke, a net broke, the lantern was hit,
+ * ground closed). It fades once in 0.45 s, only grows outside Calm, and is presentation only. */
 (function (root) {
     'use strict';
     const Rift = root.Rift, A = Rift.CatchArcade, el = (...a) => Rift.el(...a);
@@ -45,6 +47,9 @@
         controls.append(el('div.catch-arcade-keys.row.wrap', null, [turn, wait].filter(Boolean)));
 
         const lifeCount = () => net ? s.lives : s.shields;
+        const SPARK = 450, sparks = [];
+        const nowMs = () => (root.performance && root.performance.now ? root.performance.now() : Date.now());
+        const spark = (x, y, r, colour, cells) => sparks.push({ x, y, r, colour, cells, born: nowMs() });
         function refresh() {
             const n = Math.max(0, lifeCount());
             hearts.textContent = (net ? 'Spare nets ' : 'Shields ') + n;
@@ -96,7 +101,16 @@
             moved(); draw();
         }
         function advance() {
+            const was = net ? { wall: s.wall && { x: s.wall.x, y: s.wall.y }, grid: s.wall ? s.grid.slice() : null } : { shards: s.shards.slice(), shields: s.shields };
             A.tick(s);
+            if (net) {
+                if (s.lives < lives && was.wall) spark((was.wall.x + 0.5) * PX, (was.wall.y + 0.5) * PX, 0.6 * PX, '#ff9d8a');
+                const closed = was.grid ? s.grid.map((v, c) => (v && !was.grid[c] ? c : -1)).filter(c => c >= 0) : [];
+                if (closed.length) spark(0, 0, 0, '#ffe39c', closed);
+            } else {
+                was.shards.filter(sh => !s.shards.includes(sh)).forEach(sh => spark(sh.x * PX, sh.y * PX, A.BURST.radius[sh.s] * PX, '#fff4cf'));
+                if (s.shields < was.shields) spark(A.CX * PX, A.CY * PX, (A.BURST.turret + 0.5) * PX, '#ff9d8a');
+            }
             if (s.done) {
                 running = false; stepLeft = 0;
                 if (submit({ t: s.t }) && o.onEnd) o.onEnd(board.done);
@@ -127,7 +141,7 @@
                 if (!net && held && !calm) fire(aim);
             }
             refresh(); draw();
-            if (running && !s.done && (!calm || stepLeft > 0)) frame = root.requestAnimationFrame(loop);
+            if ((running && !s.done && (!calm || stepLeft > 0)) || sparks.length) frame = root.requestAnimationFrame(loop);
         }
         function resume() {
             if (destroyed) return;
@@ -300,9 +314,26 @@
                 ctx.beginPath(); ctx.arc(cx, cy, A.BURST.turret * PX + 6 + i * 5, 0, Math.PI * 2); ctx.stroke();
             }
         }
+        function drawSparks() {
+            const now = nowMs();
+            for (let i = sparks.length - 1; i >= 0; i--) if (now - sparks[i].born > SPARK) sparks.splice(i, 1);
+            sparks.forEach(sp => {
+                const age = Math.max(0, now - sp.born) / SPARK;
+                ctx.globalAlpha = 1 - age;
+                if (sp.cells) {
+                    ctx.fillStyle = sp.colour;
+                    sp.cells.forEach(c => ctx.fillRect(c % A.COLS * PX + 3, Math.floor(c / A.COLS) * PX + 3, PX - 6, PX - 6));
+                } else {
+                    ctx.strokeStyle = sp.colour; ctx.lineWidth = 4;
+                    ctx.beginPath(); ctx.arc(sp.x, sp.y, sp.r * (calm ? 1 : 1 + age * 0.7), 0, Math.PI * 2); ctx.stroke();
+                }
+            });
+            ctx.globalAlpha = 1;
+        }
         function draw() {
             if (!ctx || destroyed) return;
             if (net) drawNet(); else drawBurst();
+            if (sparks.length) drawSparks();
         }
         // Test and tooling hook; not enumerable, so DOM diagnostics stay small.
         Object.defineProperty(canvas, 'arcade', { value: null, writable: true, enumerable: false });

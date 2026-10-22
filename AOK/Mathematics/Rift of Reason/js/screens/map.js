@@ -11,6 +11,9 @@
     const W = 1600, H = 900;
     const ICONS = { story: '✦', puzzle: '?', bonus: '◇', miniboss: '☠', boss: '♛', rest: '🔥', rumour: '💬', battle: '🂠', rift: '🌀' };
     const SECONDS_PER_EDGE = 0.9;
+    // Places already shown on each painted map this session (presentation only, never saved): a
+    // place revealed since then opens its fog and fades in once (#66). A map's first view sets it.
+    const shownPlaces = {};
 
     function svg(tag, attrs, children) {
         const n = root.document.createElementNS(SVG, tag);
@@ -141,10 +144,11 @@
                 nodesLayer.innerHTML = '';
                 fogMask.innerHTML = '';
                 fogMask.append(svg('rect', { x: 0, y: 0, width: W, height: H, fill: 'white' }));
-                const drawn = new Set();
+                const drawn = new Set(), holes = {}, markers = {};
+                const fresh = shownPlaces[mapId] ? revealed.filter(id => !shownPlaces[mapId].has(id)) : [];
                 revealed.forEach(id => {
                     const n = Rift.World.node(id);
-                    fogMask.append(svg('circle', { cx: n.x, cy: n.y, r: 210, fill: 'url(#fog-hole)' }));
+                    fogMask.append(holes[id] = svg('circle', { cx: n.x, cy: n.y, r: 210, fill: 'url(#fog-hole)' }));
                     (n.links || []).filter(onThisMap).forEach(m => {
                         const key = [id, m].sort().join('|');
                         if (drawn.has(key)) return;
@@ -158,7 +162,15 @@
                     });
                 });
                 hints.forEach(id => nodesLayer.append(nodeMarker(id, 'hinted')));
-                revealed.forEach(id => nodesLayer.append(nodeMarker(id, 'revealed')));
+                revealed.forEach(id => nodesLayer.append(markers[id] = nodeMarker(id, 'revealed')));
+                // A newly reached place: the fog opens around it, then its marker fades in, so the
+                // player sees what the last win opened and where to go next.
+                if (Rift.Motion) fresh.forEach((id, i) => {
+                    Rift.Motion.play(holes[id], [{ r: '0px' }, { r: '210px' }], { duration: 700, delay: i * 120 }, [{ opacity: 0 }, { opacity: 1 }]);
+                    Rift.Motion.play(markers[id], [{ opacity: 0, filter: 'brightness(2)' }, { opacity: 1, filter: 'none' }],
+                        { duration: 600, delay: 300 + i * 120, fill: 'backwards' }, [{ opacity: 0 }, { opacity: 1 }]);
+                });
+                shownPlaces[mapId] = new Set(revealed);
                 const ch = Rift.data.chapters[st.chapter] || {};
                 drawTracker(st);
                 drawHunts(st);
