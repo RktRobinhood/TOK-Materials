@@ -101,21 +101,27 @@
             // ---- avatar sprite ----
             const avatarGroup = svg('g', { class: 'map-avatar' });
             const walkSheet = Rift.Assets.frames(Rift.avatarArt(state.avatar, 'walk'));
+            const idleId = Rift.avatarArt(state.avatar, 'idle-loop');
+            const idleSheet = Rift.Assets.frames(idleId);
             const AV = 90; // drawn height in map units
+            function sheetSprite(id, sheet, className) {
+                const fw = sheet.frameWidth, fh = sheet.frameHeight, w = AV * fw / fh;
+                const node = svg('svg', { class: className, x: -w / 2, y: -AV, width: w, height: AV, viewBox: `0 0 ${fw} ${fh}` }, [
+                    svg('image', { href: Rift.Assets.url(id), width: fw * sheet.frames, height: fh }),
+                ]);
+                node.dataset.frames = sheet.frames;
+                node.dataset.fw = fw;
+                return node;
+            }
             let sprite;
             if (walkSheet) {
-                const fw = walkSheet.frameWidth, fh = walkSheet.frameHeight;
-                const w = AV * fw / fh;
-                sprite = svg('svg', { x: -w / 2, y: -AV, width: w, height: AV, viewBox: `0 0 ${fw} ${fh}` }, [
-                    svg('image', { href: Rift.Assets.url(Rift.avatarArt(state.avatar, 'walk')), width: fw * walkSheet.frames, height: fh }),
-                ]);
-                sprite.dataset.frames = walkSheet.frames;
-                sprite.dataset.fw = fw;
+                sprite = sheetSprite(Rift.avatarArt(state.avatar, 'walk'), walkSheet, 'avatar-walk');
             } else {
                 const a = Rift.data.avatars[state.avatar.type];
                 sprite = svg('image', { href: Rift.Assets.src(Rift.avatarArt(state.avatar, 'idle'), { colour: a.colour, label: state.avatar.nickname }), x: -AV * 0.42, y: -AV, width: AV * 0.84, height: AV });
             }
-            const flip = svg('g', {}, [sprite]);
+            const idleSprite = idleSheet && idleSheet.frames > 1 ? sheetSprite(idleId, idleSheet, 'avatar-idle') : null;
+            const flip = svg('g', {}, [sprite, idleSprite]);
             avatarGroup.append(svg('ellipse', { cx: 0, cy: 0, rx: 26, ry: 8, class: 'avatar-shadow' }), flip);
             avatarLayer.append(avatarGroup);
 
@@ -124,8 +130,37 @@
                 flip.setAttribute('transform', facingLeft ? 'scale(-1,1)' : '');
                 if (sprite.dataset.frames) {
                     const fw = +sprite.dataset.fw;
-                    sprite.setAttribute('viewBox', `${(frame || 0) * fw} 0 ${fw} ${sprite.viewBox.baseVal.height}`);
+                    sprite.setAttribute('viewBox', `${(frame || 0) * fw} 0 ${fw} ${walkSheet.frameHeight}`);
                 }
+            }
+
+            let idleTimer = null, idlePhase = 0;
+            function idleFrame(frame) {
+                if (idleSprite) idleSprite.setAttribute('viewBox', `${frame * idleSheet.frameWidth} 0 ${idleSheet.frameWidth} ${idleSheet.frameHeight}`);
+            }
+            function stopIdle() { clearInterval(idleTimer); idleTimer = null; idlePhase = 0; idleFrame(0); }
+            function idleAllowed() {
+                return !destroyed && !walking && !pendingArrival && !arriving && !root.document.hidden && !calmMotion() && !Rift.State.get().settings.calm;
+            }
+            function syncIdle() {
+                if (!idleSprite) return;
+                sprite.style.display = walking ? '' : 'none';
+                idleSprite.style.display = walking ? 'none' : '';
+                if (!idleAllowed()) { stopIdle(); return; }
+                if (idleTimer != null) return;
+                idleTimer = setInterval(() => {
+                    if (!idleAllowed()) { stopIdle(); return; }
+                    const period = 2 * (idleSheet.frames - 1);
+                    idlePhase = (idlePhase + 1) % period;
+                    idleFrame(Math.min(idlePhase, period - idlePhase));
+                }, 125);
+            }
+            const unwatchIdle = idleSprite ? Rift.bus.on('state:changed', syncIdle) : () => {};
+            let motionPreference = null;
+            if (idleSprite) {
+                try { motionPreference = root.matchMedia && root.matchMedia('(prefers-reduced-motion: reduce)'); } catch (e) { /* Static fallback still works. */ }
+                if (motionPreference && motionPreference.addEventListener) motionPreference.addEventListener('change', syncIdle);
+                root.document.addEventListener('visibilitychange', syncIdle);
             }
 
             // ---- draw ----
@@ -538,6 +573,7 @@
                 const path = route(st, st.map.at, id);
                 if (!path) { Rift.UI.toast('No known path there yet.'); return; }
                 walking = true;
+                syncIdle();
                 blockInput();
                 clearInspection();
                 try {
@@ -551,7 +587,7 @@
                     if (!destroyed && huntId) Rift.Router.go('hunt', { id: huntId });
                     else if (!destroyed && sideId) Rift.Router.go('side-story', { id: sideId });
                     else if (!destroyed) await arrive(id);
-                } finally { walking = false; releaseInput(); }
+                } finally { walking = false; syncIdle(); releaseInput(); }
             }
 
             // A chapter opening (STORY.md App. D, SCRIPT-FORMAT.md section 7): a pending Quiet Scene plays
@@ -570,9 +606,10 @@
             async function arrive(id, opts) {
                 if (destroyed || arriving) return;
                 arriving = true;
+                syncIdle();
                 blockInput();
                 try { await visit(id, opts); }
-                finally { arriving = false; if (!walking && !pendingArrival) releaseInput(); }
+                finally { arriving = false; syncIdle(); if (!walking && !pendingArrival) releaseInput(); }
             }
 
             async function visit(id, opts) {
@@ -690,6 +727,7 @@
                         async onclick() {
                             m.close();
                             walking = true;
+                            syncIdle();
                             blockInput();
                             try {
                                 let first = false;
@@ -700,7 +738,7 @@
                                 const at = Rift.State.get().map.at;
                                 Rift.Router.replace('map', { arrive: !Rift.State.get().map.completed.includes(at), fromPortal: true, recap: first ? cid : null });
                                 if (first) Rift.UI.toast('A starter kit tumbles out of the rift: 3 Catch Charms and a Tonic!', 4000);
-                            } finally { walking = false; releaseInput(); }
+                            } finally { walking = false; syncIdle(); releaseInput(); }
                         },
                     }),
                 ]));
@@ -735,7 +773,7 @@
                     arrivalTimer = null;
                     if (destroyed) return;
                     try { await autoOpening(); }
-                    finally { pendingArrival = false; if (!walking && !arriving) releaseInput(); }
+                    finally { pendingArrival = false; syncIdle(); if (!walking && !arriving) releaseInput(); }
                 }, 400);
             }
 
@@ -744,9 +782,15 @@
                 if (destroyed || walking || pendingArrival || arriving) return;
                 if (!Rift.State.backupMilestone() || Rift.Backup.remind()) clearInterval(backupTimer);
             }, 1500);
+            syncIdle();
 
             return {
-                destroy() { destroyed = true; clearInspection(); if (Rift.Motion) Rift.Motion.cancel(rootNode); clearTimeout(arrivalTimer); clearInterval(backupTimer); releaseInput(); if (hud.destroy) hud.destroy(); },
+                destroy() {
+                    destroyed = true; stopIdle(); unwatchIdle();
+                    root.document.removeEventListener('visibilitychange', syncIdle);
+                    if (motionPreference && motionPreference.removeEventListener) motionPreference.removeEventListener('change', syncIdle);
+                    clearInspection(); if (Rift.Motion) Rift.Motion.cancel(rootNode); clearTimeout(arrivalTimer); clearInterval(backupTimer); releaseInput(); if (hud.destroy) hud.destroy();
+                },
             };
         },
     });

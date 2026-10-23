@@ -1296,3 +1296,7 @@ Six selected expansion portraits now ship through plot-only sources: James Mayfl
 ## Stage 13.92 — Real-time catch games (#158), 22 October 2026
 
 Pocket Nets (rebuilt) reuses `ui/catch-grass`, `ui/catch-rock`, `ui/catch-tree`, `ui/catch-water` and `ui/catch-net`; the bouncing portraits are the visitor's own idle art in a round frame. Shard Burst draws its shards as round frames around the same visitor art, with a plain lantern circle and shield rings in canvas. No new raster asset is needed to ship. Nice-to-have, for the teacher: `ui/catch-shard-frame` (a cracked rift-crystal ring, three sizes read from one image) and `ui/catch-lantern` (a top-down lantern for the centre of Shard Burst). Both are used in `js/ui/catch-arcade.js`. Static images only; no glow loops.
+
+## Stage 13.93 — Map idle playback (#163), 23 October 2026
+
+Reuses all ten supplied `avatar/<species>-<boy|girl>/idle-loop` sheets from 7428f07 (FAL-281), with each manifest's registered cell size. Exact local-model prompts, seeds and finishing provenance stay in `source-assets/1-avatars/idle-loop-163-generation.json`. No new image or asset request. The map plays the supplied frames only while resting and resets to frame0 in Calm/reduced motion or a hidden document; no procedural shake, wobble or hop. [Integration report](../reviews/map-idle-163-2026-10-23.md) records mounted/native evidence and the unavailable screenshot/visual acceptance limit. Broader #163 art work remains open.

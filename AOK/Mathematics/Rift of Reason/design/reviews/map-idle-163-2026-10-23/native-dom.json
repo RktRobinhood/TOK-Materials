@@ -1,0 +1,37 @@
+{
+  "scope": "Real production Continue route in in-app Chromium, native keyboard and Settings checkbox input, same Windows computer. Screenshots unavailable; no visual/physical-phone acceptance.",
+  "idleSamples": [
+    {
+      "frame": "428 0 214 240",
+      "hidden": false,
+      "position": "translate(200,600)"
+    },
+    {
+      "frame": "856 0 214 240",
+      "hidden": false,
+      "position": "translate(200,600)"
+    },
+    {
+      "frame": "428 0 214 240",
+      "hidden": false,
+      "position": "translate(200,600)"
+    }
+  ],
+  "calmSamples": [
+    {
+      "calm": true,
+      "contentWidth": 300,
+      "frame": "0 0 214 240",
+      "position": "translate(200,600)",
+      "width": 300
+    },
+    {
+      "calm": true,
+      "contentWidth": 300,
+      "frame": "0 0 214 240",
+      "position": "translate(200,600)",
+      "width": 300
+    }
+  ],
+  "viewport": "Requested390x844; visible pane actually reported300px with no horizontal overflow. Actual measurements retained."
+}

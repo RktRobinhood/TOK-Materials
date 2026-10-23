@@ -29,7 +29,6 @@ function setup(map = false, configure = () => {}) {
     state.map.at = 'fair-finale';
     state.map.revealed = Object.keys(Rift.data.map.nodes);
     state.map.completed = ['fair-finale', 'stall-pattern', 'stall-witness'];
-    configure(state);
     Rift.State.get = () => state;
     Rift.State.update = fn => { fn(state); Rift.bus.emit('state:changed', state); };
     Rift.Assets = {
@@ -46,6 +45,7 @@ function setup(map = false, configure = () => {}) {
     g.ctx.performance = { now: () => 0 };
     // Use the map's fallback timer, which also handles walks in hidden browser tabs.
     g.ctx.requestAnimationFrame = () => 1;
+    configure(state, g, Rift);
     g.run('js/screens/map.js');
     const root = g.document.createElement('div');
     g.document.body.appendChild(root);
@@ -63,6 +63,70 @@ async function finish(g, promise) {
     if (error) throw error;
     return result;
 }
+
+function idleSetup(type = 'owlet', variant = 'boy', calm = false) {
+    const intervals = new Map(), visibility = new Set(), preference = new Set();
+    let nextId = 0;
+    const media = { matches: false, addEventListener: (name, fn) => preference.add(fn), removeEventListener: (name, fn) => preference.delete(fn) };
+    const t = setup(true, (s, g) => {
+        s.avatar.type = type; s.avatar.variant = variant; s.settings.calm = calm;
+        g.run('data/assets.js'); g.run('js/core/assets.js');
+        g.ctx.document.hidden = false;
+        g.ctx.document.addEventListener = (name, fn) => { if (name === 'visibilitychange') visibility.add(fn); };
+        g.ctx.document.removeEventListener = (name, fn) => visibility.delete(fn);
+        g.ctx.matchMedia = () => media;
+        g.ctx.setInterval = (fn, ms) => { const id = ++nextId; intervals.set(id, { fn, ms }); return id; };
+        g.ctx.clearInterval = id => intervals.delete(id);
+    });
+    const tick = () => { const timer = Array.from(intervals.values()).find(x => x.ms === 125); assert.ok(timer, 'idle timer'); timer.fn(); };
+    return { ...t, intervals, visibility, preference, media, tick, idle: () => t.g.$('.avatar-idle'), walk: () => t.g.$('.avatar-walk'), running: () => Array.from(intervals.values()).some(x => x.ms === 125) };
+}
+
+test('all ten shipped avatars play their registered idle sheet forward and back without moving or saving', () => {
+    for (const type of ['owlet', 'mothkin', 'fox', 'frogling', 'raven']) for (const variant of ['boy', 'girl']) {
+        const t = idleSetup(type, variant);
+        try {
+            const id = `avatar/${type}-${variant}/idle-loop`, sheet = t.Rift.Assets.frames(id), before = JSON.stringify(t.state);
+            const pos = t.g.$('.map-avatar').getAttribute('transform');
+            assert.equal(t.idle().querySelector('image').getAttribute('href'), 'assets/' + sheet.file);
+            assert.equal(t.idle().style.display, ''); assert.equal(t.walk().style.display, 'none');
+            for (let i = 0; i < 11; i++) t.tick();
+            assert.equal(t.idle().getAttribute('viewBox'), `${11 * sheet.frameWidth} 0 ${sheet.frameWidth} ${sheet.frameHeight}`);
+            t.tick(); assert.ok(t.idle().getAttribute('viewBox').startsWith(String(10 * sheet.frameWidth) + ' '));
+            for (let i = 0; i < 10; i++) t.tick();
+            assert.equal(t.idle().getAttribute('viewBox'), `0 0 ${sheet.frameWidth} ${sheet.frameHeight}`);
+            assert.equal(t.g.$('.map-avatar').getAttribute('transform'), pos);
+            assert.equal(JSON.stringify(t.state), before);
+        } finally { t.handle.destroy(); }
+        assert.equal(t.intervals.size, 0); assert.equal(t.visibility.size, 0); assert.equal(t.preference.size, 0);
+    }
+});
+
+test('idle stays still in Calm and reduced motion, pauses when hidden, and removes every subscription on departure', () => {
+    const t = idleSetup('mothkin', 'girl', true);
+    try {
+        assert.equal(t.running(), false);
+        t.Rift.State.update(s => { s.settings.calm = false; }); t.tick();
+        t.media.matches = true; t.preference.forEach(fn => fn());
+        assert.equal(t.running(), false); assert.ok(t.idle().getAttribute('viewBox').startsWith('0 '));
+        t.media.matches = false; t.preference.forEach(fn => fn()); t.tick();
+        t.g.document.hidden = true; t.visibility.forEach(fn => fn());
+        assert.equal(t.running(), false);
+        t.g.document.hidden = false; t.visibility.forEach(fn => fn()); t.tick();
+        const staleTick = Array.from(t.intervals.values()).find(x => x.ms === 125).fn;
+        t.handle.destroy(); staleTick(); t.Rift.bus.emit('state:changed');
+        assert.equal(t.running(), false); assert.equal(t.intervals.size, 0);
+        assert.equal(t.visibility.size, 0); assert.equal(t.preference.size, 0);
+    } finally { t.handle.destroy(); }
+});
+
+test('walking suspends the idle sheet and returns to it only when the map is still mounted', async context => {
+    const t = idleSetup(); context.after(() => t.handle.destroy());
+    t.tick(); const walking = t.visit('well');
+    assert.equal(t.running(), false); assert.equal(t.idle().style.display, 'none'); assert.equal(t.walk().style.display, '');
+    await finish(t.g, walking);
+    assert.equal(t.running(), true); assert.equal(t.idle().style.display, ''); assert.equal(t.walk().style.display, 'none');
+});
 
 test('map inspection previews the actual revealed route without moving or saving', context => {
     const t = setup(true, s => { s.map.at = 'burrow'; s.map.revealed = ['burrow', 'fair-gate', 'stall-pattern']; });
