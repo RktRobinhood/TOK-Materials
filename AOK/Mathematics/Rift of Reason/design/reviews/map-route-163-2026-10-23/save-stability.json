@@ -1,0 +1,9 @@
+{
+  "sameBackup": true,
+  "backupLength": 2094,
+  "backupSha256": "ae4a3013a820ebe4b012089f75cc0c9b685e97435e97e2262f2c28d24bbb9063",
+  "calmRestored": true,
+  "scope": "Fresh Settings export → Back → keyboard Home/Fair Gate route inspection → fresh Settings export. No setting, travel, copy/download or reward action between exports.",
+  "earlierCheck": "The first Calm-toggle comparison read an old textarea snapshot after unchecking Calm. That compared different settings snapshots and was not a save-stability check; this fresh inspection-only comparison replaces it.",
+  "restoration": "The locator uncheck did not persist the setting in this browser. Native checkbox click restored Calm to its original off state; a fresh Settings screen reports Value: 0."
+}

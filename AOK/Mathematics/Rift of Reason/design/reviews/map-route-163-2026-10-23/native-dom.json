@@ -1,0 +1,18 @@
+{
+  "conditions": "Native keyboard input in in-app Chromium, production Continue route, localhost:8791, same Windows computer. Screenshot provider failed; no visual screenshot acceptance claimed.",
+  "calm": true,
+  "contentWidth": 390,
+  "edges": [
+    {
+      "animation": "none",
+      "dash": "none",
+      "edge": "burrow|fair-gate",
+      "stroke": "rgb(242, 182, 50)",
+      "width": "7px"
+    }
+  ],
+  "focus": "burrow",
+  "role": "tooltip",
+  "tooltip": "Your HomeHome. Warm, safe, and a bit too quiet today.1 stop away.",
+  "width": 390
+}

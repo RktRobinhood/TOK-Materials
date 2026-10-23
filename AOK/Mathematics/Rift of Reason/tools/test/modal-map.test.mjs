@@ -5,7 +5,7 @@ import { loadWithDom } from './fake-dom.mjs';
 
 const drain = async () => { for (let i = 0; i < 8; i++) await Promise.resolve(); };
 
-function setup(map = false) {
+function setup(map = false, configure = () => {}) {
     const g = loadWithDom(['js/core/rift.js', 'js/ui/ui.js']);
     const { Rift } = g;
     Rift.Audio = { sfx() {} };
@@ -29,6 +29,7 @@ function setup(map = false) {
     state.map.at = 'fair-finale';
     state.map.revealed = Object.keys(Rift.data.map.nodes);
     state.map.completed = ['fair-finale', 'stall-pattern', 'stall-witness'];
+    configure(state);
     Rift.State.get = () => state;
     Rift.State.update = fn => { fn(state); Rift.bus.emit('state:changed', state); };
     Rift.Assets = {
@@ -62,6 +63,57 @@ async function finish(g, promise) {
     if (error) throw error;
     return result;
 }
+
+test('map inspection previews the actual revealed route without moving or saving', context => {
+    const t = setup(true, s => { s.map.at = 'burrow'; s.map.revealed = ['burrow', 'fair-gate', 'stall-pattern']; });
+    context.after(() => t.handle.destroy());
+    const root = t.g.document.body, before = JSON.stringify(t.state);
+    const stall = root.querySelector('[data-node="stall-pattern"]'), gate = root.querySelector('[data-node="fair-gate"]');
+    const edges = () => root.querySelectorAll('.route-preview').map(n => n.dataset.edge).sort();
+    gate.dispatchEvent({ type: 'mouseenter' });
+    stall.dispatchEvent({ type: 'focusin' });
+    assert.deepEqual(edges(), ['burrow|fair-gate', 'fair-gate|stall-pattern']);
+    assert.match(root.querySelector('.map-tip').textContent, /2 stops away/);
+    assert.equal(stall.getAttribute('aria-describedby'), 'map-place-tip');
+    gate.dispatchEvent({ type: 'mouseenter' });
+    assert.deepEqual(edges(), ['burrow|fair-gate']);
+    gate.dispatchEvent({ type: 'mouseleave' });
+    assert.equal(edges().length, 2, 'pointer leave restores the keyboard inspection');
+    stall.dispatchEvent({ type: 'focusout', relatedTarget: null });
+    assert.equal(edges().length, 0);
+    assert.equal(root.querySelector('.map-tip').style.display, 'none');
+    assert.equal(JSON.stringify(t.state), before);
+    assert.equal(t.routes.length, 0);
+});
+
+test('hinted, locked and disconnected places reveal no route; a current place is explicit', context => {
+    const t = setup(true, s => { s.map.at = 'burrow'; s.map.completed = []; s.map.revealed = ['burrow', 'fair-gate', 'stall-pattern', 'fair-rift', 'well']; });
+    context.after(() => t.handle.destroy());
+    const root = t.g.document.body, tip = root.querySelector('.map-tip');
+    for (const id of ['stall-witness', 'fair-rift', 'well']) {
+        const node = root.querySelector('[data-node="' + id + '"]');
+        assert.ok(node, id); node.dispatchEvent({ type: 'mouseenter' });
+        assert.equal(root.querySelectorAll('.route-preview').length, 0, id);
+        if (id === 'well') assert.match(tip.textContent, /No known path/);
+        node.dispatchEvent({ type: 'mouseleave' });
+    }
+    root.querySelector('[data-node="burrow"]').dispatchEvent({ type: 'focusin' });
+    assert.match(tip.textContent, /You are here/);
+});
+
+test('walking and departure clear inspection and stale node events cannot redraw it', async context => {
+    const t = setup(true); context.after(() => t.handle.destroy());
+    const root = t.g.document.body, well = root.querySelector('[data-node="well"]'), tip = root.querySelector('.map-tip');
+    well.dispatchEvent({ type: 'mouseenter' }); assert.ok(root.querySelectorAll('.route-preview').length);
+    const walking = t.visit('well');
+    assert.equal(root.querySelectorAll('.route-preview').length, 0);
+    assert.equal(tip.style.display, 'none');
+    well.dispatchEvent({ type: 'focusin' }); assert.equal(tip.style.display, 'none');
+    await finish(t.g, walking);
+    t.handle.destroy(); well.dispatchEvent({ type: 'mouseenter' });
+    assert.equal(tip.style.display, 'none');
+    assert.equal(root.querySelectorAll('.route-preview').length, 0);
+});
 
 for (const kind of ['Not now', 'backdrop', 'X']) {
     test('confirmation resolves false after ' + kind, async () => {

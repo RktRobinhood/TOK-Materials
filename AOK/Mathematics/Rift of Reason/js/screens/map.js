@@ -64,7 +64,9 @@
             const input = Rift.UI.input;
             const blockInput = () => { if (input && !unlockInput) unlockInput = input.lock(rootNode); };
             const releaseInput = () => { if (unlockInput) unlockInput(); unlockInput = null; };
-            const tip = el('div.map-tip.panel');
+            const tip = el('div.map-tip.panel', { id: 'map-place-tip', role: 'tooltip' });
+            const pathElements = new Map();
+            let hoveredPlace = null, focusedPlace = null;
             tip.style.display = 'none';
 
             const board = svg('svg', { viewBox: `0 0 ${W} ${H}`, class: 'map-svg', preserveAspectRatio: 'xMidYMid meet' });
@@ -128,6 +130,8 @@
 
             // ---- draw ----
             function draw() {
+                clearInspection();
+                pathElements.clear();
                 syncHunts();
                 const st = Rift.State.get();
                 const crisis = mapId === 'main' && st.flags['seen:prologue.rift'] && !st.flags['seen:finale.home'];
@@ -155,10 +159,13 @@
                         drawn.add(key);
                         const o = Rift.World.node(m);
                         const known = revealed.includes(m);
-                        pathsLayer.append(svg('path', {
+                        const path = svg('path', {
                             d: `M${n.x} ${n.y} Q ${(n.x + o.x) / 2 + (n.y - o.y) * 0.12} ${(n.y + o.y) / 2 + (o.x - n.x) * 0.12} ${o.x} ${o.y}`,
                             class: 'map-path' + (known ? '' : ' faint'),
-                        }));
+                            'data-edge': key,
+                        });
+                        pathElements.set(key, path);
+                        pathsLayer.append(path);
                     });
                 });
                 hints.forEach(id => nodesLayer.append(nodeMarker(id, 'hinted')));
@@ -359,6 +366,7 @@
                     tabindex: kind === 'revealed' ? 0 : -1,
                     role: kind === 'revealed' ? 'button' : 'img',
                     'aria-label': n.name + (locked ? ' · ' + locked : ''),
+                    'aria-describedby': kind === 'revealed' ? 'map-place-tip' : '',
                     'data-node': id,
                 });
                 const r = n.type === 'boss' ? 30 : 24;
@@ -373,8 +381,13 @@
                     label.textContent = kind === 'hinted' ? '?' : (ICONS[n.type] || '•');
                     g.append(label);
                 }
-                g.addEventListener('mouseenter', () => showTip(id, kind, locked));
-                g.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+                const place = { id, kind, locked };
+                g.addEventListener('mouseenter', () => { hoveredPlace = place; inspectPlace(); });
+                g.addEventListener('mouseleave', () => { hoveredPlace = null; inspectPlace(); });
+                g.addEventListener('focusin', () => { hoveredPlace = null; focusedPlace = place; inspectPlace(); });
+                g.addEventListener('focusout', ev => {
+                    if (!g.contains(ev.relatedTarget)) { focusedPlace = null; inspectPlace(); }
+                });
                 if (kind === 'revealed') {
                     if(n.trainer&&Rift.Battles.canChallenge(id)){
                         const trainer=Rift.data.trainers[n.trainer], host=Rift.data.speakers[trainer.speaker];
@@ -424,6 +437,19 @@
                 return b;
             }
 
+            function hideTip() {
+                tip.style.display = 'none';
+                pathElements.forEach(path => path.classList.remove('route-preview'));
+            }
+
+            function clearInspection() { hoveredPlace = focusedPlace = null; hideTip(); }
+
+            function inspectPlace() {
+                hideTip();
+                const place = hoveredPlace || focusedPlace;
+                if (!destroyed && !walking && !pendingArrival && !arriving && place) showTip(place.id, place.kind, place.locked);
+            }
+
             function showTip(id, kind, locked) {
                 const n = Rift.World.node(id);
                 tip.innerHTML = '';
@@ -434,6 +460,15 @@
                 );
                 // Element.append(null) would print the word "null".
                 if (locked) tip.append(el('div.small.warn', { text: '🔒 ' + locked }));
+                if (kind === 'revealed' && !locked) {
+                    const st = Rift.State.get(), path = route(st, st.map.at, id);
+                    const steps = path && path.length - 1;
+                    tip.append(el('div.small', { text: !path ? 'No known path there yet.' : steps === 0 ? 'You are here.' : steps + (steps === 1 ? ' stop away.' : ' stops away.') }));
+                    if (path) for (let i = 1; i < path.length; i++) {
+                        const edge = pathElements.get([path[i - 1], path[i]].sort().join('|'));
+                        if (edge) edge.classList.add('route-preview');
+                    }
+                }
                 // Everything waiting here (js/core/quests.js), colour-coded; finished entries stay in the journal.
                 const quests = kind === 'revealed' && !dark && Rift.Quests ? Rift.Quests.at(Rift.State.get(), id).filter(q => q.status !== 'done' && q.status !== 'locked') : [];
                 if (quests.length) tip.append(el('ul.tip-quests', null, quests.map(q => el('li.' + q.kind, null, [
@@ -504,7 +539,7 @@
                 if (!path) { Rift.UI.toast('No known path there yet.'); return; }
                 walking = true;
                 blockInput();
-                tip.style.display = 'none';
+                clearInspection();
                 try {
                     for (let i = 1; i < path.length; i++) {
                         await walkEdge(path[i - 1], path[i]);
@@ -711,7 +746,7 @@
             }, 1500);
 
             return {
-                destroy() { destroyed = true; if (Rift.Motion) Rift.Motion.cancel(rootNode); clearTimeout(arrivalTimer); clearInterval(backupTimer); releaseInput(); if (hud.destroy) hud.destroy(); },
+                destroy() { destroyed = true; clearInspection(); if (Rift.Motion) Rift.Motion.cancel(rootNode); clearTimeout(arrivalTimer); clearInterval(backupTimer); releaseInput(); if (hud.destroy) hud.destroy(); },
             };
         },
     });

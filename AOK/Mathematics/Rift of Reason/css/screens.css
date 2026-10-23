@@ -39,6 +39,7 @@
 .fog { fill: #07060c; opacity: 0.88; }
 .map-path { fill: none; stroke: var(--parchment); stroke-width: 3; stroke-dasharray: 2 12; stroke-linecap: round; opacity: 0.35; }
 .map-path.faint { opacity: 0.15; }
+.map-path.route-preview { stroke: var(--gold); stroke-width: 7; stroke-dasharray: none; opacity: 1; }
 .map-node { cursor: pointer; outline: none; }
 .map-node .ring { fill: #1a1428; stroke: var(--parchment); stroke-width: 3; transition: r 0.15s; }
 .map-node .icon { fill: var(--parchment); font-size: 22px; font-family: var(--font-display); pointer-events: none; }
