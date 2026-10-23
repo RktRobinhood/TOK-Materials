@@ -55,6 +55,7 @@ Neutrals: ink `#1A1020`, night `#14121F`, deep forest `#0F1F1A`, parchment `#EFE
 
 - **Characters and props:** transparent PNG; no text, labels, numbers, floor or shadow blobs. Clear empty space between every figure; nothing touches. Same scale for every full-body pose on a sheet, all standing on one imaginary ground line, feet visible.
 - **Walk cycles:** side view facing right, 6 frames in one row of equal cells, identical character and scale in every frame, same ground line.
+- **Idle loops (map avatars, #163):** the shipped idle still animated in place (breath, one slow blink, a little cloth sway; feet planted, no shake), 12 frames in one row of equal cells on one shared canvas, played ping-pong. Built with `"register": "grid"` so no frame is re-centred; see `tools/art-local/README.md`.
 - **Backgrounds:** 16:9, at least 1672×941, no characters; keep the lower left and lower right thirds open for characters.
 - **Cards:** portrait 5:7; frames have an empty art window and empty text boxes (the game writes the text).
 - Canvas for sheets: about 1536×1024 or larger.

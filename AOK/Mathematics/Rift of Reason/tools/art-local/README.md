@@ -54,6 +54,39 @@ first cell). If a rebuild moves frame 1 by even a pixel, `tools/test/trailer.tes
 that sheet's rig and the test's `feetBegin` / `footLandmarks` rows, then look at the trailer, not only the test.
 A frame with both feet planted under the body rigs best; a wide stride turns long shanks into sticks.
 
+## Idle loops
+
+The map avatars' idle loops (#163, slice B) animate the shipped idle still with `sprite-animator` (MiniMax H3
+first-and-last-frame image-to-video, local ComfyUI; the artist agent's skill). The still is the first and the
+last frame, so the loop starts and ends on the shipped pixels.
+
+| Script | What it does | Inputs → outputs |
+|---|---|---|
+| `finish_idle.py` | Takes the first 12 frames of a `sprite-animator --frame-size 512 --alpha chroma` run, crops all of them with one union box (nothing is re-centred per frame), scales them together to `--height` px, then runs `despill.py` on the small frames: the magenta fringe goes and the outline is repainted after the resize, so it stays crisp. | `<sprite-animator dir> <out dir> [--frames 12] [--height 236] [--outline 1]` → `small/`, `frames/`, `sprite_sheet.png`, `preview.gif` |
+| `pack_source.py --grid` | Lays the finished rows out as an exact grid of equal cells for `"register": "grid"` in `sheets.json`. | `<out.png> <row-1 frames dir> [<row-2 frames dir>] --frames 12 --grid` |
+| `stabilize_head.py` | Holds the head still where H3 tilted it into the blink: counter-shifts each frame's head so a bright warm feature (pencil, gold button) stays where frame 1 has it, full above the face and ramped to 0 at the neck (body and feet untouched, nothing redrawn). Used on raven-boy. | `<small frames dir> <out dir>/small <band y0:y1> <x0:x1>`, then `despill.py <out dir>/small <out dir> 1` |
+| `idle_compare.py` | Measures a built idle sheet (ground row, feet and head shift at scale 1, magenta edge pixels against the raw H3 frames and the shipped still, frame-to-frame step) and draws the 300 px / 70 px panel and a ping-pong GIF beside the shipped still. **The acceptance measure for idle loops.** | `<shipped idle> <idle sheet> <out prefix> [--map scene.webp] [--raw <sprite-animator dir>] [--band 0:0.30]` → `-panel.png`, `.gif`, `.json` |
+
+Idle-loop steps (the prompts, seeds and ComfyUI prompt ids are in
+`design/source-assets/1-avatars/idle-loop-163-generation.json`):
+
+```
+sprite-animator animate --input <scratch>/owlet-girl-idle.png --output <scratch>/owlet-girl \
+    --prompt "<breath, one slow blink, one cloth sway; feet planted, head in place, no shake>" \
+    --size 512 --length 124 --frames 12 --frame-size 512 --fps 8 --loop pingpong --steps 20 --seed 28101 --alpha chroma
+python3 -I tools/art-local/finish_idle.py <scratch>/owlet-girl <scratch>/owlet-girl-fin
+python3 -I tools/art-local/pack_source.py design/source-assets/1-avatars/owlet-idle-loop-163.png \
+    <scratch>/owlet-boy-fin/frames <scratch>/owlet-girl-fin/frames --frames 12 --grid
+node tools/build-assets.mjs --only owlet-idle-loop
+python3 -I tools/art-local/idle_compare.py assets/avatars/owlet-girl-idle.webp assets/avatars/owlet-girl-idle-loop.webp \
+    <scratch>/owlet-girl --map assets/scenes/map.webp --raw <scratch>/owlet-girl
+```
+
+Always pass `--alpha chroma`: the default `auto` falls back to rembg when the plate drifts, and rembg downloads
+an unapproved 1 GB model. Never `--alpha rembg`. **Why `"register": "grid"`:** the walk packer centres each frame
+on the alpha-weighted middle of its upper 60 %; in an idle loop the swaying scarf moves that middle, and the
+re-centred owlet-boy slid 5 px sideways with its feet planted. Mothkins: measure the head with `--band 0.25:0.50`.
+
 ## Cutouts and comparisons
 
 | Script | What it does | Inputs → outputs |

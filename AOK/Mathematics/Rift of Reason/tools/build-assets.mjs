@@ -189,9 +189,10 @@ async function doWalk(file, spec, ctx) {
     const size = { w: img.w, h: img.h };
     const n = spec.frames || 6;
     const rowIds = spec.rows;
+    const notes = [];
+    if (spec.register === 'grid') return packGrid(img, spec, ctx, size, notes);
     const found = findIslands(img, islandOpts(spec));
     const rows = readingOrder(found.islands);
-    const notes = [];
     let frameRows;
     if (rows.length === rowIds.length) {
         frameRows = rows.map((r, ri) => {
@@ -227,6 +228,38 @@ async function doWalk(file, spec, ctx) {
         const id = rowIds[ri];
         const caps = capsFor(id, spec.class);
         const { strip, frameWidth, frameHeight } = await packWalk(frames.map(f => f.img), caps.maxH);
+        const rel = fileFor(id);
+        const { w, h } = await writeSprite(strip, join(ctx.out, rel), {}, QUALITY, ctx.dry);
+        outputs.push({ id, entry: { file: rel, w, h, frames: n, frameWidth, frameHeight } });
+    }
+    return { outputs, boxes, size, notes };
+}
+
+/*
+ * "register": "grid" (idle loops): the source is an exact grid of equal cells, frames × rows, no gaps.
+ * Every cell keeps the artist's registration: a row is cropped to the union of its cells' alpha boxes and
+ * nothing is re-centred per frame, because a swaying scarf would move the body anchor and slide the figure.
+ */
+async function packGrid(img, spec, ctx, size, notes) {
+    const n = spec.frames || 6;
+    const rowIds = spec.rows;
+    const cw = img.w / n, ch = img.h / rowIds.length;
+    if (!Number.isInteger(cw) || !Number.isInteger(ch)) {
+        return { error: `register "grid": ${img.w}x${img.h} does not split into ${n}x${rowIds.length} equal cells`, size, notes };
+    }
+    const boxes = [];
+    const outputs = [];
+    for (let ri = 0; ri < rowIds.length; ri++) {
+        const cells = Array.from({ length: n }, (_, i) => crop(img, i * cw, ri * ch, cw, ch));
+        const found = cells.map(c => alphaBox(c, 8));
+        if (found.some(b => !b)) return { error: `row ${ri + 1} has an empty frame; sheet skipped`, boxes, size, notes };
+        const x0 = Math.min(...found.map(b => b.x)), y0 = Math.min(...found.map(b => b.y));
+        const x1 = Math.max(...found.map(b => b.x + b.w)), y1 = Math.max(...found.map(b => b.y + b.h));
+        const frames = cells.map(c => crop(c, x0, y0, x1 - x0, y1 - y0));
+        cells.forEach((_, fi) => boxes.push({ x: fi * cw + x0, y: ri * ch + y0, w: x1 - x0, h: y1 - y0, label: `${rowIds[ri].split('/')[1]} ${fi + 1}` }));
+        const id = rowIds[ri];
+        const caps = capsFor(id, spec.class);
+        const { strip, frameWidth, frameHeight } = await packWalk(frames, caps.maxH, 2, { fixed: true });
         const rel = fileFor(id);
         const { w, h } = await writeSprite(strip, join(ctx.out, rel), {}, QUALITY, ctx.dry);
         outputs.push({ id, entry: { file: rel, w, h, frames: n, frameWidth, frameHeight } });

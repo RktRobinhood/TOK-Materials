@@ -293,9 +293,10 @@ function anchorX(img) {
  * Re-pack trimmed frames into equal cells: feet on a shared ground line (bottom
  * of the cell), body anchors on the cell's centre line, so the loop doesn't jitter.
  * Frames are scaled together so a cell is at most maxH tall.
+ * { fixed: true }: the frames are already registered on one canvas (same size); keep them as they are.
  */
-export async function packWalk(frames, maxH, pad = 2) {
-    const anchors = frames.map(anchorX);
+export async function packWalk(frames, maxH, pad = 2, opts = {}) {
+    const anchors = opts.fixed ? frames.map(() => 0) : frames.map(anchorX);
     const left = Math.max(...frames.map((f, i) => anchors[i]));
     const right = Math.max(...frames.map((f, i) => f.w - anchors[i]));
     const cellW = Math.ceil(left + right) + pad * 2;

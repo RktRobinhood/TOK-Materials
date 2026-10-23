@@ -1,0 +1,412 @@
+{
+ "date": "2026-10-23",
+ "issue": 163,
+ "task": "FAL-281 (slice B of the FAL-271 art audit)",
+ "method": "Animate the shipped idle still, never draw fresh: sprite-animator renders a 124-frame H3 clip whose first and last frame are the still, and 12 evenly spaced frames are taken from it (played ping-pong, 1..12..2, at 8 fps). finish_idle.py crops all 12 with one union box, scales them together to a 236 px figure, then despill.py regrows the magenta-fringed edge RGB from the interior and repaints the 1 px outline after the resize. pack_source.py --grid lays out each species pair; sheets.json \"register\": \"grid\" keeps the registration in the build (the walk packer re-centred every frame on its upper body and slid owlet-boy 5 px with planted feet).",
+ "format": "12 frames in one row of equal cells, frameWidth from data/assets.js, 239-240 px tall; play ping-pong (0,1,..,11,10,..,1) at 8 fps = a 22-step, 2.75 s cycle.",
+ "measured_with": "tools/art-local/idle_compare.py on the built webp",
+ "sheets": {
+  "owlet-idle-loop-163.png": [
+   {
+    "id": "avatar/owlet-boy/idle-loop",
+    "source": "shipped assets/avatars/owlet-boy-idle.webp (first and last frame of the video)",
+    "tool": "sprite-animator (MiniMax H3 FL2VA int8, local ComfyUI), first-and-last-frame image-to-video on a #FF00FF plate",
+    "round": "FAL-271 trial (anim-1), re-exported at 512 px with --alpha chroma",
+    "seed": 2711,
+    "comfy_prompt_id": "5f690aaf-e59f-44b0-9402-fa6162cdc5c8",
+    "settings": {
+     "size": 512,
+     "length": 124,
+     "steps": 20,
+     "frames": 12,
+     "frame_size": 512,
+     "alpha": "chroma",
+     "fps": 8,
+     "loop": "pingpong"
+    },
+    "prompt": "A single stationary 2D game sprite on a perfectly solid, unchanging magenta background (#FF00FF). The little owl stands still and breathes gently, its chest rising and falling slightly. It blinks once, slowly. The two long ends of its red knitted scarf sway softly as if in a light breeze. Its feet stay planted on the same spot, its head stays in place, and the camera is locked. No shaking, no wobbling, no bouncing. Preserve the subject identity, shape, illustration style, colours, facial features and orientation. Camera locked off. No panning, no zoom, no cuts, no new objects, no additional characters. Keep the background perfectly flat #FF00FF without shadows, gradients, or texture. A quiet, charming micro-animation, no captions. The subject ends in the same pose as it started.",
+    "tool_qa": {
+     "seam_error": 0.044,
+     "mean_adjacent_error": 0.0378
+    },
+    "finish": [
+     "finish_idle.py --height 236 --outline 1 (crop, scale, then despill.py 1)"
+    ],
+    "note": "FAL-271 trial loop (seed 2711), the one Matt watched; re-exported from its video at 512 px.",
+    "measured": {
+     "ground_spread": 0,
+     "feet_dx": 0,
+     "feet_dy": 0,
+     "head_dx": 4,
+     "head_dy": 2,
+     "head_pct": 1.7,
+     "pink_edge": 0,
+     "pink_edge_raw": 15450,
+     "pink_edge_still": 0,
+     "step_max": 0.0748
+    }
+   },
+   {
+    "id": "avatar/owlet-girl/idle-loop",
+    "source": "shipped assets/avatars/owlet-girl-idle.webp (first and last frame of the video)",
+    "tool": "sprite-animator (MiniMax H3 FL2VA int8, local ComfyUI), first-and-last-frame image-to-video on a #FF00FF plate",
+    "round": "round-3",
+    "seed": 28301,
+    "comfy_prompt_id": "9ed2bd39-e57d-4cd0-9c22-ee3fe2e3ef19",
+    "settings": {
+     "size": 512,
+     "length": 124,
+     "steps": 20,
+     "frames": 12,
+     "frame_size": 512,
+     "alpha": "chroma",
+     "fps": 8,
+     "loop": "pingpong"
+    },
+    "prompt": "A single stationary 2D game sprite on a perfectly solid, unchanging magenta background (#FF00FF). The little owl in a teal hooded cloak and round glasses stands still, holding her book, and breathes gently, her chest rising and falling slightly. Halfway through she closes her eyes fully once, for a moment, then opens them again and keeps them open; her head does not move. The lower hem of her teal cloak sways softly as if in a light breeze. Its feet stay planted on the same spot, its head stays perfectly still in the same place, and the camera is locked. No shaking, no wobbling, no bouncing, no nodding. Preserve the subject identity, shape, illustration style, colours, facial features and orientation. Camera locked off. No panning, no zoom, no cuts, no new objects, no additional characters. Keep the background perfectly flat #FF00FF without shadows, gradients, or texture. A quiet, charming micro-animation, no captions. The subject ends in the same pose as it started.",
+    "tool_qa": {
+     "seam_error": 0.0439,
+     "mean_adjacent_error": 0.0314
+    },
+    "finish": [
+     "finish_idle.py --height 236 --outline 1 (crop, scale, then despill.py 1)"
+    ],
+    "note": "Round 3, seed 28301. Round 1 (28101) held the blink for 5 frames; round 2 a dropped the head 8 px in one step, round 2 b only half-closed the eyes; round 3 b's head jumped 6-9 px a frame.",
+    "measured": {
+     "ground_spread": 1,
+     "feet_dx": 0,
+     "feet_dy": 1,
+     "head_dx": 3,
+     "head_dy": 4,
+     "head_pct": 1.7,
+     "pink_edge": 3,
+     "pink_edge_raw": 13585,
+     "pink_edge_still": 0,
+     "step_max": 0.0668
+    }
+   }
+  ],
+  "mothkin-idle-loop-163.png": [
+   {
+    "id": "avatar/mothkin-boy/idle-loop",
+    "source": "shipped assets/avatars/mothkin-boy-idle.webp (first and last frame of the video)",
+    "tool": "sprite-animator (MiniMax H3 FL2VA int8, local ComfyUI), first-and-last-frame image-to-video on a #FF00FF plate",
+    "round": "round-2",
+    "seed": 28203,
+    "comfy_prompt_id": "8be5fd80-5d9e-44d4-903e-0d2b31f58366",
+    "settings": {
+     "size": 512,
+     "length": 124,
+     "steps": 20,
+     "frames": 12,
+     "frame_size": 512,
+     "alpha": "chroma",
+     "fps": 8,
+     "loop": "pingpong"
+    },
+    "prompt": "A single stationary 2D game sprite on a perfectly solid, unchanging magenta background (#FF00FF). The fluffy blue moth creature stands still, holding its lantern, and breathes gently, its chest rising and falling slightly. Halfway through it blinks once, quickly, and its eyes stay open the rest of the time. Its two feathery antennae sway softly as if in a light breeze. The lantern hangs still and glows steadily. Its feet stay planted on the same spot, its head stays perfectly still in the same place, and the camera is locked. No shaking, no wobbling, no bouncing, no nodding. Preserve the subject identity, shape, illustration style, colours, facial features and orientation. Camera locked off. No panning, no zoom, no cuts, no new objects, no additional characters. Keep the background perfectly flat #FF00FF without shadows, gradients, or texture. A quiet, charming micro-animation, no captions. The subject ends in the same pose as it started.",
+    "tool_qa": {
+     "seam_error": 0.0431,
+     "mean_adjacent_error": 0.0245
+    },
+    "finish": [
+     "finish_idle.py --height 236 --outline 1 (crop, scale, then despill.py 1)"
+    ],
+    "note": "Round 2, seed 28203. Round 1 (28102) held the blink for 4 frames; round 2 b turned the face to the viewer.",
+    "measured": {
+     "ground_spread": 0,
+     "feet_dx": 1,
+     "feet_dy": 1,
+     "head_dx": 2,
+     "head_dy": 4,
+     "head_pct": 1.7,
+     "pink_edge": 0,
+     "pink_edge_raw": 12242,
+     "pink_edge_still": 0,
+     "step_max": 0.0788
+    }
+   },
+   {
+    "id": "avatar/mothkin-girl/idle-loop",
+    "source": "shipped assets/avatars/mothkin-girl-idle.webp (first and last frame of the video)",
+    "tool": "sprite-animator (MiniMax H3 FL2VA int8, local ComfyUI), first-and-last-frame image-to-video on a #FF00FF plate",
+    "round": "round-1",
+    "seed": 28103,
+    "comfy_prompt_id": "5dbbdd4d-e7f8-4cd5-a105-57feaecaee80",
+    "settings": {
+     "size": 512,
+     "length": 124,
+     "steps": 20,
+     "frames": 12,
+     "frame_size": 512,
+     "alpha": "chroma",
+     "fps": 8,
+     "loop": "pingpong"
+    },
+    "prompt": "A single stationary 2D game sprite on a perfectly solid, unchanging magenta background (#FF00FF). The fluffy lilac moth creature stands still, holding its lantern, and breathes gently, its chest rising and falling slightly. It blinks once, slowly. The fringe of its starry blue shawl and its two feathery antennae sway softly as if in a light breeze. The lantern hangs still and glows steadily. Its feet stay planted on the same spot, its head stays in place, and the camera is locked. No shaking, no wobbling, no bouncing. Preserve the subject identity, shape, illustration style, colours, facial features and orientation. Camera locked off. No panning, no zoom, no cuts, no new objects, no additional characters. Keep the background perfectly flat #FF00FF without shadows, gradients, or texture. A quiet, charming micro-animation, no captions. The subject ends in the same pose as it started.",
+    "tool_qa": {
+     "seam_error": 0.032,
+     "mean_adjacent_error": 0.0298
+    },
+    "finish": [
+     "finish_idle.py --height 236 --outline 1 (crop, scale, then despill.py 1)"
+    ],
+    "note": "Round 1, seed 28103.",
+    "measured": {
+     "ground_spread": 0,
+     "feet_dx": 1,
+     "feet_dy": 2,
+     "head_dx": 3,
+     "head_dy": 2,
+     "head_pct": 1.3,
+     "pink_edge": 0,
+     "pink_edge_raw": 13296,
+     "pink_edge_still": 0,
+     "step_max": 0.0824
+    }
+   }
+  ],
+  "fox-idle-loop-163.png": [
+   {
+    "id": "avatar/fox-boy/idle-loop",
+    "source": "shipped assets/avatars/fox-boy-idle.webp (first and last frame of the video)",
+    "tool": "sprite-animator (MiniMax H3 FL2VA int8, local ComfyUI), first-and-last-frame image-to-video on a #FF00FF plate",
+    "round": "round-1",
+    "seed": 28104,
+    "comfy_prompt_id": "6cdeefdd-2193-40c5-8161-7211c4a8db1c",
+    "settings": {
+     "size": 512,
+     "length": 124,
+     "steps": 20,
+     "frames": 12,
+     "frame_size": 512,
+     "alpha": "chroma",
+     "fps": 8,
+     "loop": "pingpong"
+    },
+    "prompt": "A single stationary 2D game sprite on a perfectly solid, unchanging magenta background (#FF00FF). The little fox stands still with its paws on its hips and breathes gently, its chest rising and falling slightly. It blinks once, slowly. The ends of its green neckerchief flutter softly and its bushy tail sways gently, as if in a light breeze. Its feet stay planted on the same spot, its head stays in place, and the camera is locked. No shaking, no wobbling, no bouncing. Preserve the subject identity, shape, illustration style, colours, facial features and orientation. Camera locked off. No panning, no zoom, no cuts, no new objects, no additional characters. Keep the background perfectly flat #FF00FF without shadows, gradients, or texture. A quiet, charming micro-animation, no captions. The subject ends in the same pose as it started.",
+    "tool_qa": {
+     "seam_error": 0.0244,
+     "mean_adjacent_error": 0.0302
+    },
+    "finish": [
+     "finish_idle.py --height 236 --outline 1 (crop, scale, then despill.py 1)"
+    ],
+    "note": "Round 1, seed 28104.",
+    "measured": {
+     "ground_spread": 0,
+     "feet_dx": 0,
+     "feet_dy": 1,
+     "head_dx": 5,
+     "head_dy": 2,
+     "head_pct": 2.1,
+     "pink_edge": 0,
+     "pink_edge_raw": 13225,
+     "pink_edge_still": 0,
+     "step_max": 0.0651
+    }
+   },
+   {
+    "id": "avatar/fox-girl/idle-loop",
+    "source": "shipped assets/avatars/fox-girl-idle.webp (first and last frame of the video)",
+    "tool": "sprite-animator (MiniMax H3 FL2VA int8, local ComfyUI), first-and-last-frame image-to-video on a #FF00FF plate",
+    "round": "round-1",
+    "seed": 28105,
+    "comfy_prompt_id": "0157e323-8a24-4966-b81a-eeb25d940f86",
+    "settings": {
+     "size": 512,
+     "length": 124,
+     "steps": 20,
+     "frames": 12,
+     "frame_size": 512,
+     "alpha": "chroma",
+     "fps": 8,
+     "loop": "pingpong"
+    },
+    "prompt": "A single stationary 2D game sprite on a perfectly solid, unchanging magenta background (#FF00FF). The little fox in a yellow raincoat stands still and breathes gently, its chest rising and falling slightly. It blinks once, slowly. Its bushy tail with the red bow sways gently, as if in a light breeze. Its feet stay planted on the same spot, its head stays in place, and the camera is locked. No shaking, no wobbling, no bouncing. Preserve the subject identity, shape, illustration style, colours, facial features and orientation. Camera locked off. No panning, no zoom, no cuts, no new objects, no additional characters. Keep the background perfectly flat #FF00FF without shadows, gradients, or texture. A quiet, charming micro-animation, no captions. The subject ends in the same pose as it started.",
+    "tool_qa": {
+     "seam_error": 0.0425,
+     "mean_adjacent_error": 0.0399
+    },
+    "finish": [
+     "finish_idle.py --height 236 --outline 1 (crop, scale, then despill.py 1)"
+    ],
+    "note": "Round 1, seed 28105.",
+    "measured": {
+     "ground_spread": 0,
+     "feet_dx": 0,
+     "feet_dy": 1,
+     "head_dx": 3,
+     "head_dy": 2,
+     "head_pct": 1.3,
+     "pink_edge": 0,
+     "pink_edge_raw": 13729,
+     "pink_edge_still": 0,
+     "step_max": 0.0806
+    }
+   }
+  ],
+  "frogling-idle-loop-163.png": [
+   {
+    "id": "avatar/frogling-boy/idle-loop",
+    "source": "shipped assets/avatars/frogling-boy-idle.webp (first and last frame of the video)",
+    "tool": "sprite-animator (MiniMax H3 FL2VA int8, local ComfyUI), first-and-last-frame image-to-video on a #FF00FF plate",
+    "round": "round-1",
+    "seed": 28106,
+    "comfy_prompt_id": "eaf813c6-391f-4bdf-b41b-cecb03efd653",
+    "settings": {
+     "size": 512,
+     "length": 124,
+     "steps": 20,
+     "frames": 12,
+     "frame_size": 512,
+     "alpha": "chroma",
+     "fps": 8,
+     "loop": "pingpong"
+    },
+    "prompt": "A single stationary 2D game sprite on a perfectly solid, unchanging magenta background (#FF00FF). The little frog in a yellow raincoat and green boots stands still, holding its backpack straps, and breathes gently, its throat and chest rising and falling slightly. It blinks once, slowly. The hem of its yellow raincoat sways softly as if in a light breeze. Its feet stay planted on the same spot, its head stays in place, and the camera is locked. No shaking, no wobbling, no bouncing. Preserve the subject identity, shape, illustration style, colours, facial features and orientation. Camera locked off. No panning, no zoom, no cuts, no new objects, no additional characters. Keep the background perfectly flat #FF00FF without shadows, gradients, or texture. A quiet, charming micro-animation, no captions. The subject ends in the same pose as it started.",
+    "tool_qa": {
+     "seam_error": 0.0031,
+     "mean_adjacent_error": 0.0177
+    },
+    "finish": [
+     "finish_idle.py --height 236 --outline 1 (crop, scale, then despill.py 1)"
+    ],
+    "note": "Round 1, seed 28106.",
+    "measured": {
+     "ground_spread": 0,
+     "feet_dx": 0,
+     "feet_dy": 0,
+     "head_dx": 3,
+     "head_dy": 4,
+     "head_pct": 1.7,
+     "pink_edge": 0,
+     "pink_edge_raw": 9862,
+     "pink_edge_still": 0,
+     "step_max": 0.0866
+    }
+   },
+   {
+    "id": "avatar/frogling-girl/idle-loop",
+    "source": "shipped assets/avatars/frogling-girl-idle.webp (first and last frame of the video)",
+    "tool": "sprite-animator (MiniMax H3 FL2VA int8, local ComfyUI), first-and-last-frame image-to-video on a #FF00FF plate",
+    "round": "round-1",
+    "seed": 28107,
+    "comfy_prompt_id": "5973a3cc-47e3-4416-a38a-9fcdae034b59",
+    "settings": {
+     "size": 512,
+     "length": 124,
+     "steps": 20,
+     "frames": 12,
+     "frame_size": 512,
+     "alpha": "chroma",
+     "fps": 8,
+     "loop": "pingpong"
+    },
+    "prompt": "A single stationary 2D game sprite on a perfectly solid, unchanging magenta background (#FF00FF). The little frog in a red raincoat, red boots and a green leaf hat stands still, holding its backpack straps, and breathes gently, its throat and chest rising and falling slightly. It blinks once, slowly. The hem of its red raincoat sways softly as if in a light breeze. Its feet stay planted on the same spot, its head stays in place, and the camera is locked. No shaking, no wobbling, no bouncing. Preserve the subject identity, shape, illustration style, colours, facial features and orientation. Camera locked off. No panning, no zoom, no cuts, no new objects, no additional characters. Keep the background perfectly flat #FF00FF without shadows, gradients, or texture. A quiet, charming micro-animation, no captions. The subject ends in the same pose as it started.",
+    "tool_qa": {
+     "seam_error": 0.0258,
+     "mean_adjacent_error": 0.0214
+    },
+    "finish": [
+     "finish_idle.py --height 236 --outline 1 (crop, scale, then despill.py 1)"
+    ],
+    "note": "Round 1, seed 28107.",
+    "measured": {
+     "ground_spread": 0,
+     "feet_dx": 0,
+     "feet_dy": 0,
+     "head_dx": 3,
+     "head_dy": 2,
+     "head_pct": 1.3,
+     "pink_edge": 0,
+     "pink_edge_raw": 10926,
+     "pink_edge_still": 0,
+     "step_max": 0.0735
+    }
+   }
+  ],
+  "raven-idle-loop-163.png": [
+   {
+    "id": "avatar/raven-boy/idle-loop",
+    "source": "shipped assets/avatars/raven-boy-idle.webp (first and last frame of the video)",
+    "tool": "sprite-animator (MiniMax H3 FL2VA int8, local ComfyUI), first-and-last-frame image-to-video on a #FF00FF plate",
+    "round": "round-3",
+    "seed": 28303,
+    "comfy_prompt_id": "157cf6c9-0d5c-4e12-b480-da23c504120b",
+    "settings": {
+     "size": 512,
+     "length": 124,
+     "steps": 20,
+     "frames": 12,
+     "frame_size": 512,
+     "alpha": "chroma",
+     "fps": 8,
+     "loop": "pingpong"
+    },
+    "prompt": "A single stationary 2D game sprite on a perfectly solid, unchanging magenta background (#FF00FF). The little raven in a grey hoodie stands still, holding its book, and breathes gently, its chest rising and falling slightly. Its beak stays closed the whole time. Halfway through it blinks once, slowly and gently, without turning its head. The hem of its grey hoodie and its tail feathers sway softly as if in a light breeze. The pencil tucked behind its head does not move. Its feet stay planted on the same spot, its head stays perfectly still in the same place, and the camera is locked. No shaking, no wobbling, no bouncing, no nodding. Preserve the subject identity, shape, illustration style, colours, facial features and orientation. Camera locked off. No panning, no zoom, no cuts, no new objects, no additional characters. Keep the background perfectly flat #FF00FF without shadows, gradients, or texture. A quiet, charming micro-animation, no captions. The subject ends in the same pose as it started.",
+    "tool_qa": {
+     "seam_error": 0.019,
+     "mean_adjacent_error": 0.021
+    },
+    "finish": [
+     "finish_idle.py --height 236 (small/)",
+     "stabilize_head.py small/ 0.0:0.30 0:0.45",
+     "despill.py <dir> 1"
+    ],
+    "note": "Round 3, seed 28303, then stabilize_head.py small/ 0.0:0.30 0:0.45 (pencil centroid; frames 5-6 shifted -2.7 px x, 7-9 by -5.6/+2.5 px, ramped to 0 at the neck) before despill.py. Every raven-boy render tilted the head into the blink (pencil jumped 6-9 px a frame); round 1 also swung the head 15 px, round 2 a opened the beak, round 2 b never blinked, round 3 b held the eyes shut 7 frames.",
+    "measured": {
+     "ground_spread": 0,
+     "feet_dx": 0,
+     "feet_dy": 0,
+     "head_dx": 3,
+     "head_dy": 4,
+     "head_pct": 1.7,
+     "pink_edge": 17,
+     "pink_edge_raw": 15135,
+     "pink_edge_still": 0,
+     "step_max": 0.0652
+    }
+   },
+   {
+    "id": "avatar/raven-girl/idle-loop",
+    "source": "shipped assets/avatars/raven-girl-idle.webp (first and last frame of the video)",
+    "tool": "sprite-animator (MiniMax H3 FL2VA int8, local ComfyUI), first-and-last-frame image-to-video on a #FF00FF plate",
+    "round": "round-3",
+    "seed": 28306,
+    "comfy_prompt_id": "c42d21c7-1c68-48f7-9692-24d1d82f341f",
+    "settings": {
+     "size": 512,
+     "length": 124,
+     "steps": 20,
+     "frames": 12,
+     "frame_size": 512,
+     "alpha": "chroma",
+     "fps": 8,
+     "loop": "pingpong"
+    },
+    "prompt": "A single stationary 2D game sprite on a perfectly solid, unchanging magenta background (#FF00FF). The little raven in a purple beret and purple cape stands still and breathes gently, her chest rising and falling slightly. Her beak stays closed the whole time. Halfway through she blinks once, slowly and gently, without turning her head. The hem of her purple cape sways softly as if in a light breeze. Its feet stay planted on the same spot, its head stays perfectly still in the same place, and the camera is locked. No shaking, no wobbling, no bouncing, no nodding. Preserve the subject identity, shape, illustration style, colours, facial features and orientation. Camera locked off. No panning, no zoom, no cuts, no new objects, no additional characters. Keep the background perfectly flat #FF00FF without shadows, gradients, or texture. A quiet, charming micro-animation, no captions. The subject ends in the same pose as it started.",
+    "tool_qa": {
+     "seam_error": 0.0381,
+     "mean_adjacent_error": 0.0355
+    },
+    "finish": [
+     "finish_idle.py --height 236 --outline 1 (crop, scale, then despill.py 1)"
+    ],
+    "note": "Round 3, seed 28306. Round 1 (28109) blinked 3 times (eye flicker at 8 fps); round 2 a/b opened the beak and turned the head 7-9 px on the blink; round 3 a held the blink 5 frames with a head tilt. Head measured on the gold beret button: max 3.5 px a frame.",
+    "measured": {
+     "ground_spread": 1,
+     "feet_dx": 0,
+     "feet_dy": 0,
+     "head_dx": 2,
+     "head_dy": 6,
+     "head_pct": 2.5,
+     "pink_edge": 2,
+     "pink_edge_raw": 16587,
+     "pink_edge_still": 121,
+     "step_max": 0.0606
+    }
+   }
+  ]
+ }
+}
