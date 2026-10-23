@@ -42,6 +42,10 @@ None were possible without new recordings:
 
 The eight recorded tutorial lines that contain ✓/✕ read the marks as "check", "X" or "cross". They are understandable and are not flagged. Only `kuku-o0st9l` read ✓ as a letter, and it was removed on 22 October. `spoken()` now says "a tick" / "a cross", so new recordings use those words.
 
+## Progress
+
+- **23 Oct:** 278 of the 537 clips were re-recorded and passed (14 requests). See [../voice-recording-2026-10-23.md](../voice-recording-2026-10-23.md). [remaining.json](remaining.json) is the live list, with the same format as rerecord.json: 259 lines, 43 requests (flash 16, lite 27). Work from remaining.json, not rerecord.json.
+
 ## Proposed re-record plan (not started)
 
 [rerecord.json](rerecord.json) lists the 537 lines by speaker, 50 speakers in all. At up to 28 lines per request and one request per speaker batch, this is **56 requests: 31 lite (261 lines) and 25 flash (276 lines)**. Under the 10-per-model daily cap, lite takes four Pacific days and flash three. The `kuku-o0st9l` re-record is one more lite request.

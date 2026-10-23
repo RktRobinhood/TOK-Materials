@@ -1,0 +1,1403 @@
+{
+ "checker": "faster-whisper small (local CPU, int8, beam 5), FAL-262 classify.mjs",
+ "clips": {
+  "avatar-frogling-boy-inner-13l9ak6": {
+   "sha256": "c1da4de3d3f3861b9bf02ea8f4b196975c2390e73bae4fef627e34310a9c9f58",
+   "say": "Ask him: \"Remember the matches you forgot to wish?\"",
+   "heard": "Ask him, remember the matches you forgot to wish?"
+  },
+  "avatar-frogling-boy-inner-13v3mk6": {
+   "sha256": "d1483fc6b936ea85cb5a07f850c32172fdb2a0eafcbaf5b409c7086ebe42ab97",
+   "say": "At the Fair we checked conclusions. Here too. Same question: does it follow?",
+   "heard": "At the fair, we checked conclusions. Here, too. Same question. Does it follow?"
+  },
+  "avatar-frogling-boy-inner-14918g2": {
+   "sha256": "0bbda50151c43d4603977800bc1101ba35e7c569852f84caeb570a06b80a261c",
+   "say": "\"I guess.\" The Fair. The very first morning. I remember now.",
+   "heard": "I guess the fair, the very first morning, I remember now."
+  },
+  "avatar-frogling-boy-inner-14yis2s": {
+   "sha256": "927cec3f3a975bb3b5ed6921bebb9b76cccfc13cab652c0a1ca638eac6601365",
+   "say": "Every Tuesday, salesmen. This Tuesday, imps.",
+   "heard": "Every Tuesday, salesman, this Tuesday, imps."
+  },
+  "avatar-frogling-boy-inner-156cv6z": {
+   "sha256": "9e3fc5c4a0403815b15b969d28a72231810da852be413d3ad7e5c2e5705b48b6",
+   "say": "The loud one is always the bad one. Muskrat. The guards. Now him.",
+   "heard": "The loud one is always the bad one. Muskrat, the guards, now him."
+  },
+  "avatar-frogling-boy-inner-1b1dv4d": {
+   "sha256": "605d409f2abce636442b1026f454242f854b26e4afb5fc41b3b8e1a030f93ddc",
+   "say": "Compare with what they said before. Witnesses forget. I don't.",
+   "heard": "Compare with what they said before witnesses forget I don't"
+  },
+  "avatar-frogling-boy-inner-1bafyxy": {
+   "sha256": "0ddb1fb9c513f7bda15f2fb23cfa5f33152e483d7652ef9eddb4deb8f8cb2747",
+   "say": "Do the gaps between years match the calendar? Check this chart.",
+   "heard": "Do the gaps between years match the calendar? Hmm, check this chart."
+  },
+  "avatar-frogling-boy-inner-1fc2uxh": {
+   "sha256": "46caa9dda6f8b1678c9d8dc050316cec60ae4a83f8163825e5c435b2c21cfd2a",
+   "say": "An odd story can still follow the rules. Does this conclusion follow?",
+   "heard": "An odd story can still follow the rules. Does this conclusion follow?"
+  },
+  "avatar-frogling-boy-inner-1h9lztw": {
+   "sha256": "6655c65291d6288cb57cc444d04d75aa79c6b38acee4e5c6b29bd8bb1bd09880",
+   "say": "Read it twice. Memory adds things. Headlines add more.",
+   "heard": "Read it twice. Memory adds things. Headlines add more."
+  },
+  "avatar-frogling-boy-inner-1l4du90": {
+   "sha256": "a3c119e4de2602974e897d75ca6cd7f816fdbf48e93e2a70f683eb2ccc4614dc",
+   "say": "I once counted only sunny days. Then: heron. Count the no's too.",
+   "heard": "I once counted only sunny days. Then, Aaron. Count the nose, too."
+  },
+  "avatar-frogling-boy-inner-1lskzi9": {
+   "sha256": "7c03abb984264733dac42769e37f9e29a8a81569ad053f2093aebc398e976cc0",
+   "say": "The paper cut the Sundial's quote once. Check what they cut this time.",
+   "heard": "The paper cut the sundials quote once. Check what they cut this time."
+  },
+  "avatar-frogling-boy-inner-1n9e1l7": {
+   "sha256": "cb0a27402d3987a3c96528d36db1d6280836af4a0a432696f1c8593c58c8ae96",
+   "say": "Salesmen. Tuesdays it's always salesmen. Every Tuesday for years.",
+   "heard": "Salesman, Tuesdays, it's always salesman, every Tuesday, for years."
+  },
+  "avatar-frogling-boy-inner-1rz8hkb": {
+   "sha256": "cca3274aec7528e6e9b9f669ff48ff6497c2a954cd07ed5ac41081202a47d775",
+   "say": "\"Bring a lad—\". Granny said that once. I remember. The rest is in the cake.",
+   "heard": "Bring a lad. Granny said that once. I remember. The rest is in the cake."
+  },
+  "avatar-frogling-boy-inner-1tfv1v0": {
+   "sha256": "ea865c6bd2d9ac733c0d133f9c9ce46b6e6eb75ab7d85b56a251a8c8f9d3e4f2",
+   "say": "Last time eyes glowed here, the sky split. Syllo shouted it.",
+   "heard": "Last time eyes glowed here the sky split Sillow shouted it"
+  },
+  "avatar-frogling-boy-inner-1tjq42d": {
+   "sha256": "badf447abdc06b3dddebc752f5ce900b0ddf6e70f3eb7fb3230e57b99b81e02e",
+   "say": "The Mayor said that sentence in the Square. Miss Quill snapped. I remember.",
+   "heard": "The mayor said that sentence in the square. Miss Quill snapped. I remember."
+  },
+  "avatar-frogling-boy-inner-1tkj0rf": {
+   "sha256": "b6b9ca06c1a08b0649c13021f2115735d7c571e5c9610ca5e40d464915e452c5",
+   "say": "One small sample fooled me once. One pond. \"Every pond,\" I said.",
+   "heard": "One small sample fooled me once. One pond. Every pond, I said."
+  },
+  "avatar-frogling-boy-inner-1u1gfvs": {
+   "sha256": "ff018c12f72944c577230ce49de768605d13fe0dd387b0a15a2db2a7575ce09b",
+   "say": "He'd have checked this one.",
+   "heard": "He'd have checked this one."
+  },
+  "avatar-frogling-boy-inner-1u7tgpj": {
+   "sha256": "7fe6363a8cf0af55965e87546bfad2a08ac3bd2f7fb36b57230cfa16e7518ecf",
+   "say": "You counted a few things I did. Never why.",
+   "heard": "You counted a few things I did, never why."
+  },
+  "avatar-frogling-boy-inner-1x9ei8": {
+   "sha256": "a5cd26bf7111ce64448266e4243ac92e74eca5be1f78449d499adb70d72ca15f",
+   "say": "That wasn't me. I always remember which. Ask me anything.",
+   "heard": "That wasn't me. I always remember which. Ask me anything."
+  },
+  "avatar-frogling-boy-inner-3ujopq": {
+   "sha256": "c3dc20191460c48fc0deaf5ffbf888173e2c3465a80fee058f8ae88be07767d8",
+   "say": "Loud was bad three times. The fourth time, quiet was.",
+   "heard": "Loud was bad three times, fourth time, quiet was."
+  },
+  "avatar-frogling-boy-inner-45cgh9": {
+   "sha256": "484ce991e360ead7443cacb300ddb57daaf4e981c411ae6a682c0c97e90b5c7a",
+   "say": "\"Tall.\" Lots of birds are tall. Herons are tall. I'm not enjoying this.",
+   "heard": "Tall? Lots of birds are tall. Herons are tall? I'm not enjoying this."
+  },
+  "avatar-frogling-boy-inner-8dl3no": {
+   "sha256": "66e72c223f7b48a5907a48b1268058005e05c5e8556e5de87a3e2e02907e2623",
+   "say": "Checking some cases isn't checking all. I learned that the hard way.",
+   "heard": "Checking some cases isn't checking all. I learned that the hard way."
+  },
+  "avatar-frogling-boy-inner-8icdkr": {
+   "sha256": "d8d75ceabec7def7c474f945596627bd675b2b470fc9f45559f34250962f3df7",
+   "say": "Compare it with something real. Like a pond filling up.",
+   "heard": "Compare it with something real like a pond filling up"
+  },
+  "avatar-frogling-boy-inner-8u3c": {
+   "sha256": "51a80df3141de4d97eb2230b4f11a4f839c1d9bf71b043a11ad060f9aebc9947",
+   "say": "It's been right five times. Five out of five. It knows me.",
+   "heard": "It's been right five times. Five out of five. It knows me."
+  },
+  "avatar-frogling-boy-inner-dp76u6": {
+   "sha256": "2a357d94cea1b123cd321553034cc3c26a99a74445973ce25ac5011a66476c95",
+   "say": "She said \"ladle\" once. About soup. I remember the soup.",
+   "heard": "She said ladle once about soup. I remember the soup."
+  },
+  "avatar-frogling-boy-inner-gd1v6j": {
+   "sha256": "71d7dc953cf31701a8170042d2227bf81c7e3b6ad33f10079d429e6662b13710",
+   "say": "That sentence broke Miss Quill at the Hall. I was there. I remember.",
+   "heard": "That sentence broke Miss Quill at the hall. I was there. I remember."
+  },
+  "avatar-frogling-boy-inner-gg55gr": {
+   "sha256": "26b0c0ef8f1b76474540097aeb576c0fc27794ee9bc626be19a9e243b2af5700",
+   "say": "Remember what I said first. He will. Bulldogs remember.",
+   "heard": "Remember what I said first. He will. Bulldogs remember."
+  },
+  "avatar-frogling-boy-inner-iuyvts": {
+   "sha256": "8b0fc023567923a1784ce991e1be5e09f4ac3cc057faca360cdbd4864754b8ee",
+   "say": "Five right. Then I changed. It didn't.",
+   "heard": "Five right then I changed it didn't"
+  },
+  "avatar-frogling-boy-inner-jwow0y": {
+   "sha256": "d865ecb4445d48d51f9ae61d34ca4304e79b6372ff23a03480ced17f2ea42279",
+   "say": "Crows got blamed for my mother's pond, too. It was the wind.",
+   "heard": "Crows got blamed for my mother's pond too. It was the wind."
+  },
+  "avatar-frogling-boy-inner-m76otw": {
+   "sha256": "21823e580772720190a23973676fd2a509eb9854600c935363dd9bda54ce75c9",
+   "say": "Pip checked one. I remember when he didn't.",
+   "heard": "Pip checked One. I don't remember when he didn't."
+  },
+  "avatar-frogling-boy-inner-p1vqtg": {
+   "sha256": "90b454881acedacc02f330cd7440f0255a98e28116381d9b62acbccf2c032f69",
+   "say": "Compare missed rates by district. Then check who still needs help.",
+   "heard": "Compare missed rates by district, then check who still needs help."
+  },
+  "avatar-frogling-boy-inner-pty4v9": {
+   "sha256": "08b6391d3779ff074c544ab65eaee177c777cc00e45f0ded90154958f032b1ea",
+   "say": "\"A case he wanted to win.\" He wanted this one. It went anyway.",
+   "heard": "A case he wanted to win. He wanted this one. It went anyway."
+  },
+  "avatar-frogling-boy-inner-ql72qd": {
+   "sha256": "e89d20a7f46fbb08c78cae50421ebb16da502738b3eacbd8f245a6d3e52032bb",
+   "say": "I trusted five sunny days once. The sixth was a heron.",
+   "heard": "I trusted five sunny days once, the sixth was a heron."
+  },
+  "avatar-frogling-boy-inner-qqkzkq": {
+   "sha256": "9bcd554094a768c353ab36696ea91b6501877707f5ee442b789e1da75476a145",
+   "say": "Remember the question, not the story. Does it follow?",
+   "heard": "Remember the question, not the story. Does it follow?"
+  },
+  "avatar-frogling-boy-inner-r2a6x0": {
+   "sha256": "7afeb2ba886d3e69a2e7d2b4c37240e1760fe604575637c2ecf6595fc5af8e4b",
+   "say": "A heron. At the Fair. …It's just looking at the cakes. Huh. Not every heron.",
+   "heard": "A heron. At the fair. It's just looking at the cakes. Not every heron."
+  },
+  "avatar-frogling-boy-inner-u2z63c": {
+   "sha256": "319add39c1896e559419c5b51502b5aaa1a941dfe455d777202532a5da22c45d",
+   "say": "Fin's never lost. He won't lose this. Never has, never will.",
+   "heard": "Finn's never lost he won't lose this never has never will"
+  },
+  "avatar-frogling-boy-inner-vj6k94": {
+   "sha256": "9196a967469bff9cf9f0c800dcd6768ea6a33b7381a042a10fcaabf91574ce8c",
+   "say": "Check the picture again. Memory lies. Mine says I was taller.",
+   "heard": "Check the picture again. Memory lies. Mine says I was taller."
+  },
+  "avatar-frogling-boy-inner-w37g9g": {
+   "sha256": "c0267d9c6d00d3fda90a4a09e7d5c3d5cb7377183c19c9a5145d751222ffb35f",
+   "say": "\"A case he wanted to win.\" Small print. Always read the small print.",
+   "heard": "For a case he wanted to win, small print, always read the small print.",
+   "note": "listened as text: extra at start is transcription noise or {name}"
+  },
+  "avatar-frogling-boy-inner-xzqcot": {
+   "sha256": "3fe6108a0f7b5017a5c0320c5bea761dfb347b122dc9668f9b4bcf3743772793",
+   "say": "My habits are its food. Starve it.",
+   "heard": "My habits are it's food. Starve it!"
+  },
+  "avatar-frogling-boy-inner-zdo0e4": {
+   "sha256": "461f09fb7294b09562beab5a3447b1c50cbb221a36dbe4f135f9e138b9532381",
+   "say": "The Square, again. Everyone shouted there too. A check settled it. Remember?",
+   "heard": "The square. Again. Everyone shouted there, too. The check settled it. Remember?"
+  },
+  "avatar-frogling-girl-inner-12b7p9x": {
+   "sha256": "2f7bf2a188e59193b00a5e63b067ebbe975797bf70e4e4ee189e3027737a2a70",
+   "say": "One small sample fooled me once. One pond. \"Every pond,\" I said.",
+   "heard": "One small sample fooled me once one pond every pond I said"
+  },
+  "avatar-frogling-girl-inner-12e1aaj": {
+   "sha256": "e87e9167e74eb872647c190b719e53562f04e91cff1d871dc7e9b48363e39593",
+   "say": "People test what fits. Every time. I've watched. Test what breaks.",
+   "heard": "People test what fits every time I've watched test what breaks"
+  },
+  "avatar-frogling-girl-inner-164015c": {
+   "sha256": "b415828952c92ed3acd5fd0ea1ffb3bb91bdb77e80ccef545d12097987d06536",
+   "say": "He'd have checked this one.",
+   "heard": "He'd have checked this one."
+  },
+  "avatar-frogling-girl-inner-16l7qjx": {
+   "sha256": "ff42c01e2ac3e04b201c372d36ad47f4c0cb2213031e065defb21eecb8351af9",
+   "say": "\"Bring a lad—\". Granny said that once. I remember. The rest is in the cake.",
+   "heard": "Bring a lad. Granny said that once. I remember. The rest is in the cake."
+  },
+  "avatar-frogling-girl-inner-17z7692": {
+   "sha256": "bd6ff1f581e8326940732ae08371c68afd425b1585bb902c881edc590153d782",
+   "say": "\"A case he wanted to win.\" Small print. Always read the small print.",
+   "heard": "A case he wanted to win. Small print. Always read the small print."
+  },
+  "avatar-frogling-girl-inner-180zcyg": {
+   "sha256": "73058662bb88ac006ae2fde2a1cad3976c3e5250f0097a2c54567bd84773737b",
+   "say": "Compare missed rates by district. Then check who still needs help.",
+   "heard": "Compare missed rates by district then check who still needs help"
+  },
+  "avatar-frogling-girl-inner-1cp0006": {
+   "sha256": "5a2c7db67ea06bb7deb76ddb8dfb582f746d2363af327e32196eb2983902551f",
+   "say": "The Mayor said that sentence in the Square. Miss Quill snapped. I remember.",
+   "heard": "The mayor said that sentence in the square. Miss Quill snapped. I remember."
+  },
+  "avatar-frogling-girl-inner-1dkkpic": {
+   "sha256": "abe1199f3f740eea2815a0d88e68c0be05ce1e591f662bfa435ceca9ab1d6952",
+   "say": "A heron. At the Fair. …It's just looking at the cakes. Huh. Not every heron.",
+   "heard": "A heron. At the fair. That's just looking at the cakes. Huh. Not every heron."
+  },
+  "avatar-frogling-girl-inner-1fqqhui": {
+   "sha256": "cd671875b333066186c13cbabe4fcf543c37af6ca39dde51e40036a6dd0e8e51",
+   "say": "Five right. Then I changed. It didn't.",
+   "heard": "Five, right? Then I changed. It didn't."
+  },
+  "avatar-frogling-girl-inner-1fv4cv4": {
+   "sha256": "9bd747d74f3c1a696d69817d94fea399b9b712af733eed2d2c65097508fdf8ae",
+   "say": "Loud was bad three times. The fourth time, quiet was.",
+   "heard": "Loud was bad three times. The fourth time, quiet was."
+  },
+  "avatar-frogling-girl-inner-1lf3xdb": {
+   "sha256": "10a76fb390657e92c418a05e29576c05d46570ca1c938116db66e560fe2a5649",
+   "say": "Write every claim down. Test one world at a time. Slowly. Like a pond.",
+   "heard": "Write every claim down, test one world at a time, slowly, like a pond."
+  },
+  "avatar-frogling-girl-inner-1n92x6p": {
+   "sha256": "9d8014ef5520ab8937a934aaa142ea9a040a85905dfeaac74de975ababcbf1dc",
+   "say": "It's been right five times. Five out of five. It knows me.",
+   "heard": "It's been right five times. Five out of five. It knows me."
+  },
+  "avatar-frogling-girl-inner-1ocln1o": {
+   "sha256": "b8807a0c3cd8082db5b447d83647a47b197cddcd4f9a3642aaebcb6e9508dfa1",
+   "say": "Compare with what they said before. Witnesses forget. I don't.",
+   "heard": "Compare with what they said before. Witnesses forget. I don't."
+  },
+  "avatar-frogling-girl-inner-1pohu3g": {
+   "sha256": "b4a20585420a30def517d239da3892064b5da81a1d95316b13d1533c7b3b606a",
+   "say": "She said \"ladle\" once. About soup. I remember the soup.",
+   "heard": "She said ladle once about soup. I remember the soup."
+  },
+  "avatar-frogling-girl-inner-1q6v34f": {
+   "sha256": "4b69bf1eff5828c9102c882beb5c9f7113ea674b8ba9df2f77ec763ef38f2f1e",
+   "say": "Remember what I said first. He will. Bulldogs remember.",
+   "heard": "Remember what I said first. He will. Bulldogs remember."
+  },
+  "avatar-frogling-girl-inner-1v6f4k9": {
+   "sha256": "aad0cfa1c76fcc50d9adb1f2206bad558d3c28fd66dda6fba9b0216841de7f4d",
+   "say": "\"Tall.\" Lots of birds are tall. Herons are tall. I'm not enjoying this.",
+   "heard": "Tall. Lots of birds are tall. Herons are tall. I'm not enjoying this."
+  },
+  "avatar-frogling-girl-inner-2fb6lf": {
+   "sha256": "6ee80bb1b843732d9a77246e8f72b806c9a1134edb24578988ac4bae302c7394",
+   "say": "Remember which settings lit it. The bulb won't.",
+   "heard": "Remember which settings lit it the bulb won't"
+  },
+  "avatar-frogling-girl-inner-2pneks": {
+   "sha256": "90fce80c681545169de055df6e769dddea2119a89ccb82f84ee48c23179fa9fb",
+   "say": "Fin's never lost. He won't lose this. Never has, never will.",
+   "heard": "Finn's never lost. He won't lose this. Never has. Never will."
+  },
+  "avatar-frogling-girl-inner-5cdn85": {
+   "sha256": "2872c03d836abbd0cdc7ac13f52fcd687c2da6b7ec9d4a9b9f3446cce7b0b070",
+   "say": "Crows got blamed for my mother's pond, too. It was the wind.",
+   "heard": "Crows got blamed for my mother's pond, too. It was the wind."
+  },
+  "avatar-frogling-girl-inner-5yubet": {
+   "sha256": "a64d721135f99b281762d6658677d2671b2605c9051c46c60cbf2130fdc0e4b9",
+   "say": "I once counted only sunny days. Then: heron. Count the no's too.",
+   "heard": "I once counted only sunny days. Then, Heron, count the nose too."
+  },
+  "avatar-frogling-girl-inner-9cucc8": {
+   "sha256": "b0fc6abeea47ba5b364c4b8506b7cf7c0822c2f20ff67c78f4dc854b232a220f",
+   "say": "He fished with a sock. Odd, but true. Odd doesn't matter. Does it follow?",
+   "heard": "He fished with a sock. Odd, but true. Odd doesn't matter. Does it follow?"
+  },
+  "avatar-frogling-girl-inner-awm3i6": {
+   "sha256": "8a34260938c3a2a50b446ff632921daee91f8dfcdbe332ec2eaa96af0b52feb6",
+   "say": "I trusted five sunny days once. The sixth was a heron.",
+   "heard": "I trusted five sunny days once. The sixth was a heron."
+  },
+  "avatar-frogling-girl-inner-bauq8o": {
+   "sha256": "70aac53628492fb2d1cbe4ecd45be6cd6a24b847fdcf9193ca8d489b4e6a96bb",
+   "say": "Read it twice. Memory adds things. Headlines add more.",
+   "heard": "Read it twice. Memory adds things. Headlines add more."
+  },
+  "avatar-frogling-girl-inner-hd6hme": {
+   "sha256": "a01e7d1b282cc90e783a0a4adc97cc4d89fa02d82d5e78e07413600ce940448e",
+   "say": "\"I guess.\" The Fair. The very first morning. I remember now.",
+   "heard": "I guess. The fair. The very first morning. I remember now."
+  },
+  "avatar-frogling-girl-inner-mv7t7d": {
+   "sha256": "8fa35bb162e6443d9a09f8bbf1aa100b601690c2bf9e3924362e9956ff552120",
+   "say": "Do the gaps between years match the calendar? Check this chart.",
+   "heard": "Do the gaps between years match the calendar? Check this chart."
+  },
+  "avatar-frogling-girl-inner-n3vtoc": {
+   "sha256": "31fa451573078a1a7d0c566c8a1ad9894ba515af97d211c73eabfcc45a9fdf7b",
+   "say": "Ask him: \"Remember the matches you forgot to wish?\"",
+   "heard": "Ask him. Remember the matches you forgot to wish?"
+  },
+  "avatar-frogling-girl-inner-n8ppzv": {
+   "sha256": "4e780446def485854ee34442c54078ffb963c450c3553624fb20a7a91d444d8a",
+   "say": "Keep a list: who accused whom. Gossip forgets. Lists don't.",
+   "heard": "Keep a list. Who accused whom? Gossip forgets. Lists don't."
+  },
+  "avatar-frogling-girl-inner-ny62mv": {
+   "sha256": "f35385320dfa10683c9453c37b88444595234d3bacee14770b9139ff9085777d",
+   "say": "That sentence broke Miss Quill at the Hall. I was there. I remember.",
+   "heard": "That sentence broke Miss Quill at the hall. I was there. I remember."
+  },
+  "avatar-frogling-girl-inner-o5k3b5": {
+   "sha256": "9158489d20e9d5cba6cda9660da3503e97642d4c41b0acca18c05108b4fe8768",
+   "say": "Every Tuesday, salesmen. This Tuesday, imps.",
+   "heard": "Every Tuesday salesman this Tuesday imps"
+  },
+  "avatar-frogling-girl-inner-rtksoo": {
+   "sha256": "31cc0b82cf5488a927183c6bf1d1c48dfd26c6902cfd98ba4c8bb55efda92ecf",
+   "say": "\"A case he wanted to win.\" He wanted this one. It went anyway.",
+   "heard": "A case he wanted to win, he wanted this one. It went anyway."
+  },
+  "avatar-frogling-girl-inner-s49yo7": {
+   "sha256": "1543ea87fb84491f7d3867ff0d7fba2ec2a519ab16681dee602b3de38f6fbc7e",
+   "say": "Pip checked one. I remember when he didn't.",
+   "heard": "Pip checked one. I remember when he didn't."
+  },
+  "avatar-frogling-girl-inner-txinhe": {
+   "sha256": "8218ccb2e375b496220a3729d46d3d67c197774e8cd4735ab60e04a7001852ad",
+   "say": "That wasn't me. I always remember which. Ask me anything.",
+   "heard": "That wasn't me. I always remember which. Ask me anything."
+  },
+  "avatar-frogling-girl-inner-wrettc": {
+   "sha256": "3270bd333e244917ab1b62af716145d3b0030aac5ebb37f9ba52d5189629646a",
+   "say": "You counted a few things I did. Never why.",
+   "heard": "You counted a few things I did. Never why."
+  },
+  "avatar-mothkin-boy-inner-11twtc3": {
+   "sha256": "7882d1898d73995790b9ce7b5b8b70572b24cce6d0015f550ed8129b97746702",
+   "say": "Shh. Two guards, same claim about a door? Same kind.",
+   "heard": "Shhh. Two guards. Same claim about a door. Same kind."
+  },
+  "avatar-mothkin-boy-inner-138i0tk": {
+   "sha256": "03cea8ee90a340ba7a6307335470a4b8a345e786e1a1e857ea9b70fc0424eb19",
+   "say": "Look closely at the claimed step. Does it fit the evidence?",
+   "heard": "Look closely at the clean step. Does it fit the evidence?"
+  },
+  "avatar-mothkin-boy-inner-14ae9qp": {
+   "sha256": "1a5df69d89b799c6d5207f037877fbd680d9c147b3d1adae61426bf3858d28a6",
+   "say": "Shh. The counter ticks every time it talks. …Pretty numbers, though.",
+   "heard": "Shhh. The counter ticks every time it talks. Pretty numbers though."
+  },
+  "avatar-mothkin-boy-inner-14toaz8": {
+   "sha256": "aaf7e8ffb18e6b42b4a52f74ecacbffc8f59aeded03bcf0909e83f37164cde0f",
+   "say": "Look where the axis starts. Shiny scales can hide a trick. I fall for shiny.",
+   "heard": "Look where the X's starts. Shiny scales can hide a trick. I fall for shiny."
+  },
+  "avatar-mothkin-boy-inner-14tvw78": {
+   "sha256": "3973e742e6c9411556e4d1c075f9202e76345229ff5f604db6ec671508c68e09",
+   "say": "Read the evidence picture first. Not the shiny headline.",
+   "heard": "Read the evidence picture first, not the shiny headline."
+  },
+  "avatar-mothkin-boy-inner-14va4bf": {
+   "sha256": "daa7b258e1eb56719faeddbc6def2f6b1e2e7e7d8b6f122e64be0c4e8cb30bd0",
+   "say": "He twitched. Bread in his hat. That's all a twitch proved.",
+   "heard": "He twitched, bread in his hat. That's all a twitch proved."
+  },
+  "avatar-mothkin-boy-inner-16ehzwd": {
+   "sha256": "d3c00672a587271a78db1d5caa2db858693bcb880ee9be69331f3e0f5a1ac900",
+   "say": "Watch which block he taps. That's the one he doubts.",
+   "heard": "Watch which block he taps. That's the one he doubts."
+  },
+  "avatar-mothkin-boy-inner-16n5dtf": {
+   "sha256": "3853e60c36881632c0077abbe172bc245d86193af2ad0b48f01084220afaf31a",
+   "say": "Look at the ones it said no to. They're in the dark corner.",
+   "heard": "Look at the ones that said no to. They're in the dark corner."
+  },
+  "avatar-mothkin-boy-inner-17yhyfp": {
+   "sha256": "c40f926b78cc420d4154f5f71f789d828508b81f41cd632d04f9332c4fb5182d",
+   "say": "Ooh, coins. Shiny. …No. His list. No crosses at all.",
+   "heard": "Oh, coins. Shiny. No. His list. No crosses at all.",
+   "note": "listened as text: missing at start is transcription noise or {name}"
+  },
+  "avatar-mothkin-boy-inner-1i528sd": {
+   "sha256": "24f4220a71e1ebd8ef6842880dc919d72cc5bed75ce5e62de79273c8f913e13b",
+   "say": "Look at the yeses. What do they share? …Ooh, nineteen is a pretty number. Focus.",
+   "heard": "Look at the yeses. What do they share? Who? 19 is a pretty number. Focus."
+  },
+  "avatar-mothkin-boy-inner-1ojqj2r": {
+   "sha256": "dec50bffb3dcd3998049a4d44cbba176af354dd926c7752a9cc24e97652c9551",
+   "say": "Look. Gold frames. So bright. These must be the honest ones.",
+   "heard": "Look. Gold frames. So bright. These must be the honest ones."
+  },
+  "avatar-mothkin-boy-inner-1ow2ima": {
+   "sha256": "2fc2dd700f1a0dacdd37282dda83f37103f58d35daf7d7abc9725b6aabf0254a",
+   "say": "Look at the whole chart. The brightest bar is often the one lying.",
+   "heard": "Look at the whole chart. The brightest bar is often the one lying."
+  },
+  "avatar-mothkin-boy-inner-1s29vbx": {
+   "sha256": "8140697011429cedacd84fc8f9578f424e8c8ab41f12805689b8e5166cfc0e82",
+   "say": "Look. Thousands of screens. Thousands of hands. So bright. They must have seen something.",
+   "heard": "Look, thousands of screens, thousands of hands, so bright they must have seen something."
+  },
+  "avatar-mothkin-boy-inner-1vazsz9": {
+   "sha256": "23ee74fed2c5e8e3bda4b14388b5028a3d2880333624ac68264a17b6f9e6f9ef",
+   "say": "Shh. His apron. Something glints in the pocket. Look.",
+   "heard": "Shhh! His apron. Something glints in the pocket. Look."
+  },
+  "avatar-mothkin-boy-inner-1xegdik": {
+   "sha256": "59a32e384045f983c4f7c1236499cb545bc9231cf8433cbdb4f7e16a74dd46fa",
+   "say": "Shh. It's tiny. And it isn't even shining.",
+   "heard": "It's tiny and it isn't even shining",
+   "note": "listened as text: missing at start is transcription noise or {name}"
+  },
+  "avatar-mothkin-boy-inner-2h1xpr": {
+   "sha256": "21ee73975fbb029e106d5091106b3b1cbd230712b5253e04eb7f8b0c5058ef23",
+   "say": "Look. The bar says \"{name} 2.0\". Two point oh. Of me.",
+   "heard": "Look, the bar says 2.0. 2.0 of me."
+  },
+  "avatar-mothkin-boy-inner-70rctt": {
+   "sha256": "8c8adf98d98dc1cc49da83da5d48cde488758920d108f5b50df77f20de5ee131",
+   "say": "He twitched. Bread in his hat. Guilty of bread.",
+   "heard": "He twitched, bread in his hat, guilty of bread."
+  },
+  "avatar-mothkin-boy-inner-73nn71": {
+   "sha256": "e00700032112a6ebe1faabd55e9c3bb1aa808ce32b7c30ed5ba640ba217eb67a",
+   "say": "Look only at what's there. Not the shiny bits my brain adds.",
+   "heard": "Look only at what's there not the shiny bits my brain adds"
+  },
+  "avatar-mothkin-boy-inner-9oent2": {
+   "sha256": "b7f22825dc57aaea20b16a1ad009d19d9ce3d58155365a7edf85b2ce615f7106",
+   "say": "Gold frame. Same trick. Shinier.",
+   "heard": "Gold frame? Same trick, shinier."
+  },
+  "avatar-mothkin-boy-inner-a0iln4": {
+   "sha256": "c646e9b974bf43b35029477cf94bcccab15a98fca884b7f69ee1ede98fd1a5eb",
+   "say": "All that light. Not one of them was looking.",
+   "heard": "All that light, not one of them was looking."
+  },
+  "avatar-mothkin-boy-inner-cywpcx": {
+   "sha256": "e298f4f6bdb2e9ff753bb4aaf793c4c9459ae85403f1179a44395d5d33414bc0",
+   "say": "Look for the odd dots. They can show where a path must start.",
+   "heard": "Look for the odd dots. They can show where a path must start."
+  },
+  "avatar-mothkin-boy-inner-eqj0oe": {
+   "sha256": "b67bb75b1b70e70eca26b390894f9050ecefb3303fecb5db4953f43716bfaaca",
+   "say": "Look at the picture first. Numbers later.",
+   "heard": "Look at the picture first, numbers later."
+  },
+  "avatar-mothkin-boy-inner-h2iuxk": {
+   "sha256": "4c3337be0bc9a36bf5755bbe360fb05908704779bf5287d66d190133b8765391",
+   "say": "Read the counts and the tie rules. They explain this machine's bet.",
+   "heard": "Read the counts and the tie rules, they explain this machine's bet."
+  },
+  "avatar-mothkin-boy-inner-mil1fu": {
+   "sha256": "2ea1880826326a297cac394611b9280d1c47d9162ceaeb10d27aab2df52a2ddd",
+   "say": "Look at the circles and the class names. Shiny stories can wait.",
+   "heard": "Look at the circles and the class names, shiny stories can wait."
+  },
+  "avatar-mothkin-boy-inner-pzs9yb": {
+   "sha256": "8f774274f11b6e46503600ee1e9fbd26c1f61be18f28de0693a23d77abf97d2f",
+   "say": "That grey voice wasn't me. I'd never call lights boring. Never.",
+   "heard": "That gray voice wasn't me. I'd never call lights boring. Never."
+  },
+  "avatar-mothkin-boy-inner-tp29x5": {
+   "sha256": "ced63f4113dccf47dff64566595d74dad04f93d2b133fb8f6ab4fe18a888581d",
+   "say": "Look at what the scene says. Not at what the headline glows.",
+   "heard": "Look at what this scene says, not at what the headline glows."
+  },
+  "avatar-mothkin-boy-inner-tvdqnc": {
+   "sha256": "aa0be01634061b9b2a2e4fb55b8ef984cfa7c469452f0db233fb21c375c6adf4",
+   "say": "Look. The clip has edges. Something shiny is just outside them.",
+   "heard": "What? The clip has edges. Something shiny is just outside them."
+  },
+  "avatar-mothkin-boy-inner-wlsgtd": {
+   "sha256": "cd8f6776d27a41b77613ae12223aa30f4b3fe0ee0b556e3dff3a1186b5d50791",
+   "say": "Shade only what the scrolls say. Not what the screens shout.",
+   "heard": "Shade only what the scrolls say, not what the screens shout."
+  },
+  "avatar-mothkin-boy-inner-zpsmeq": {
+   "sha256": "d551623692c7d2423d7b95262af97a3f67131f7830c265fe2235474f09c3d1c1",
+   "say": "Look. An x on the line could sit either side. Don't push it.",
+   "heard": "Look, an X on the line could sit either side. Don't push it."
+  },
+  "avatar-mothkin-girl-inner-150ajmm": {
+   "sha256": "b0aa836be279d8b7a4b1bb24b5c1c5172e1821e11f649440ad72cd8977444a66",
+   "say": "Look. Thousands of screens. Thousands of hands. So bright. They must have seen something.",
+   "heard": "Look. Thousands of screens. Thousands of hands. So bright. They must have seen something."
+  },
+  "avatar-mothkin-girl-inner-16btjrt": {
+   "sha256": "6873a4a11bfd93efaacf3620705b5440616e4a66b7d0666f24e8f095b6574cf0",
+   "say": "Shh. Two guards, same claim about a door? Same kind.",
+   "heard": "Shhh. Two guards. Same claim about a door? Same kind."
+  },
+  "avatar-mothkin-girl-inner-17j913p": {
+   "sha256": "82ac8d3d0a4ab42deeff0b72b1d1d58d0b7b985d22a3120890814be174c923f2",
+   "say": "Ooh, coins. Shiny. …No. His list. No crosses at all.",
+   "heard": "Ooh, coins. Shiny. No. His list. No crosses at all."
+  },
+  "avatar-mothkin-girl-inner-1fet5i2": {
+   "sha256": "66007754d2c3809a423d73387a1fd11aacde2eb115abbfa472c5b48bed0c60b2",
+   "say": "Look. Gold frames. So bright. These must be the honest ones.",
+   "heard": "Look. Gold frames. So bright. These must be the honest ones."
+  },
+  "avatar-mothkin-girl-inner-1isohio": {
+   "sha256": "1a4ce5a5d4c85a5a31f5f196cfa74bc6e9140f33509a476371fe56dcfae64b9e",
+   "say": "Shh. The counter ticks every time it talks. …Pretty numbers, though.",
+   "heard": "Shhh. The counter ticks every time it talks. Pretty numbers, though."
+  },
+  "avatar-mothkin-girl-inner-1mjoaqz": {
+   "sha256": "71bf6a1a4bf40ce56c9a5e82d513c7d64943367c699e5300903e603e1a3a42e5",
+   "say": "Look. The bar says \"{name} 2.0\". Two point oh. Of me.",
+   "heard": "Look, the bar says 2.0, 2.0 of me."
+  },
+  "avatar-mothkin-girl-inner-1oltepx": {
+   "sha256": "f40477896d3aebac7d1eddaacc46fc7c37b9333ade231e14dd1a4995f9cf478b",
+   "say": "Shh. Her scarf. There's wind. It doesn't move. …Lovely lamp behind her, though.",
+   "heard": "Shh. Her scarf. There's wind. It doesn't move. Lovely lamp behind her, though."
+  },
+  "avatar-mothkin-girl-inner-1qeeewi": {
+   "sha256": "047dc9af22ea756658c1603703e046c0d1c88612110f612eecfc77086c82a60d",
+   "say": "Look at the picture first. Numbers later.",
+   "heard": "Look at the picture first, numbers later."
+  },
+  "avatar-mothkin-girl-inner-1rasn4x": {
+   "sha256": "4c58fc8ee4953e87ed9fe527d7df062800cec436e813b6f0560eb3657e73493c",
+   "say": "Shh. Chalk dust. On the grate. Not on a desk. Look.",
+   "heard": "Sh. Chalk dust. On the grate. Not on a desk. Look."
+  },
+  "avatar-mothkin-girl-inner-1u1vo9d": {
+   "sha256": "e700f91552fd64471f0c897205861a3e2dfa5a2d73cb6f8755e48ed62a195a7b",
+   "say": "He twitched. Bread in his hat. That's all a twitch proved.",
+   "heard": "He twitched bread in his hat. That's all a twitch proved."
+  },
+  "avatar-mothkin-girl-inner-1u4bg6q": {
+   "sha256": "522c4ed1f0c461be8960902f4b3f95b4b98179838a7f2a5e5d4212e113ca45f8",
+   "say": "All that light. Not one of them was looking.",
+   "heard": "All that light, not one of them was looking."
+  },
+  "avatar-mothkin-girl-inner-1udm6f4": {
+   "sha256": "34849314dbf8c60b6c27f078906332823356d1005755983bbfa86ff0fddb5e5d",
+   "say": "Watch which block he taps. That's the one he doubts.",
+   "heard": "Watch which block he taps. That's the one he doubts."
+  },
+  "avatar-mothkin-girl-inner-1x7eygf": {
+   "sha256": "0dd08582df357961261e72e9cb2affeff3f94c47de2429057c05ded8d1c757da",
+   "say": "That grey voice wasn't me. I'd never call lights boring. Never.",
+   "heard": "That gray voice wasn't me. I'd never call lights boring. Never."
+  },
+  "avatar-mothkin-girl-inner-7nvxt1": {
+   "sha256": "e9cd7ddb82daa82fe13a4cd4122880354c1a21ef9ff1d2ddba61b9e21f61b527",
+   "say": "Look. The diagram's scratched, but one wire still shines.",
+   "heard": "Look, the diagrams scratched, but one wire still shines."
+  },
+  "avatar-mothkin-girl-inner-8v6b8t": {
+   "sha256": "590fba33cc52f5e548be1a91a42f07b994b41e3cc5db1d3dcb30f9c599f7839f",
+   "say": "He twitched. Bread in his hat. Guilty of bread.",
+   "heard": "He twitched. Bread in his hat. Guilty of bread."
+  },
+  "avatar-mothkin-girl-inner-9nksom": {
+   "sha256": "18fb3a9ebed69a5e0a1ab09773bb35cd723c05ef6a59cfd9e12bac4624af67e5",
+   "say": "Look. The headline shines. Gold ink. Who in town writes in gold?",
+   "heard": "Look, the headline shines. Gold, Inc. Who in town writes in gold?"
+  },
+  "avatar-mothkin-girl-inner-ad54gy": {
+   "sha256": "f85278d9cb6ad5758da75b32e153392227871e45bb21157fba73ed00164a760f",
+   "say": "Read the evidence picture first. Not the shiny headline.",
+   "heard": "Read the evidence picture first, not the shiny headline."
+  },
+  "avatar-mothkin-girl-inner-brm1my": {
+   "sha256": "1ac3d78e0e693d2e0e99d46900ab7eae54db48c2a50447cb426a341adcb475aa",
+   "say": "Look. The clip has edges. Something shiny is just outside them.",
+   "heard": "Look! The clip has edges. Something shiny is just outside them."
+  },
+  "avatar-mothkin-girl-inner-il6rw4": {
+   "sha256": "25f0b49f184b4e8123827ec91351adbabe2f43f322a665469e33ce3236980ba2",
+   "say": "Shh. It's tiny. And it isn't even shining.",
+   "heard": "Shhh. It's tiny, and it isn't even shining."
+  },
+  "avatar-mothkin-girl-inner-kb5gbb": {
+   "sha256": "99b98f92e457628ca69869b54467683e554a30d86bef859e66f9e59a86365ea9",
+   "say": "Ooh, glowing eyes. So pretty. …Wait. The front rank doesn't glow. Or blink.",
+   "heard": "Ooh, glowing eyes. So pretty. Wait, the front rank doesn't glow, or blink?"
+  },
+  "avatar-mothkin-girl-inner-keohuo": {
+   "sha256": "4b63555f472184b37169b0a9c343b14e975cad7c1226dce9602150fc85035023",
+   "say": "Look for two claims that can't both be true. Someone's lying.",
+   "heard": "Look for two claims that can't both be true. Someone's lying."
+  },
+  "avatar-mothkin-girl-inner-shusp2": {
+   "sha256": "2a989ff62453a91ebed4fa18054d17ad1b306fea8e3fbc0bdaaccc4f96929bb4",
+   "say": "Ooh, tin A gleams. Shiny means nothing. …The dent on C, though. Look.",
+   "heard": "Oh, tin-A gleams. Shiny means nothing. The dent on C, though. Look.",
+   "note": "listened as text: missing at start is transcription noise or {name}"
+  },
+  "avatar-mothkin-girl-inner-vcenum": {
+   "sha256": "9953d9c7ba850bbc8dc799f825a028bfdb24992369577de8cf9b6dc9ccfd3dbf",
+   "say": "Gold frame. Same trick. Shinier.",
+   "heard": "Gold frame, same trick, shinier."
+  },
+  "avatar-mothkin-girl-inner-vv22sm": {
+   "sha256": "186cf7e1a8c1d720d764377c6b54fc091df652824e49d3673522e38898033b30",
+   "say": "Follow one wire to the bulb. Just one. Then the next. Oh, the bulb.",
+   "heard": "Follow one wire to the bulb. Just one. Then the next. Oh, the bulb."
+  },
+  "avatar-mothkin-girl-inner-wwif3l": {
+   "sha256": "04cf1b8c6179357eee5d6b588c10af42ed7bc71d429e47fa6e18e7fc55299964",
+   "say": "Look closely at the claimed step. Does it fit the evidence?",
+   "heard": "Look closely at the claimed step. Does it fit the evidence?"
+  },
+  "avatar-mothkin-girl-inner-yaeexv": {
+   "sha256": "3989053323d3c13d6f0b46f9f1b57774c28c7f9d6a26335686d54300ad13e306",
+   "say": "Look at the ones it said no to. They're in the dark corner.",
+   "heard": "Look at the ones that said no to. They are in the dark corner."
+  },
+  "avatar-mothkin-girl-inner-zd76hi": {
+   "sha256": "12b61adb59340bc3716fa2e0a5a9099a1290e5e05622bb88a108536e23849fbd",
+   "say": "Look past the edge. There's room out there. Dark, but room.",
+   "heard": "Look past the edge. There's room out there. Dark, but room."
+  },
+  "avatar-owlet-boy-inner-15czmpz": {
+   "sha256": "5c8480c9d0dac61e75eae2e98855894a0f8682045c1e55b02ab9da016a71ce0d",
+   "say": "AND needs both. OR needs one. NOT flips it. I find this relaxing.",
+   "heard": "and needs both, or needs one, not flips it. I find this relaxing."
+  },
+  "avatar-owlet-boy-inner-1ed9ru9": {
+   "sha256": "94698a7468e8fe906a4170d8ddabacb4a3eedb6635873fcaedcf179207c9eb88",
+   "say": "He was certain. It cost him every claim he filed. Noted.",
+   "heard": "He was certain. It cost him every claim he filed. Noted."
+  },
+  "avatar-owlet-boy-inner-1eqjqs4": {
+   "sha256": "487444c7dffdf2148fc73d59884e6157d3a58cd2bd14b7fa503012519d2bca15",
+   "say": "Out of how many? Compared with what? Ask both. Then ask again.",
+   "heard": "Out of how many? Compared with what? Ask both, then ask again."
+  },
+  "avatar-owlet-boy-inner-1fvd1gv": {
+   "sha256": "58af2d4dbd4ed3b16b5ef77f6e6586230246650886cb94647fc43ddd9f5fe366",
+   "say": "Valid first. True later. Two different questions. I keep them in separate drawers.",
+   "heard": "Valid first true later two different questions. I keep them in separate drawers"
+  },
+  "avatar-owlet-boy-inner-1kgo2iz": {
+   "sha256": "3a1d8816496cbd428bbfa159fab57ff5a73a095b2abc0ea1815e53519f86d750",
+   "say": "\"Can't tell\" is a real answer. Clever people use it. I use it.",
+   "heard": "Can't tell is a real answer. Clever people use it, I use it."
+  },
+  "avatar-owlet-boy-inner-1pm4m8x": {
+   "sha256": "e91b090b0da3a5478f2d17f7a07d53e918c53bf28aba244f8687355840e94a95",
+   "say": "Premises first, opinions later. Shade what they say. Nothing more.",
+   "heard": "premises first, opinions later. Shade what they say, nothing more."
+  },
+  "avatar-owlet-boy-inner-1s1057n": {
+   "sha256": "880a9619cac80b5253084df07bc02d1a350639f738dd29227ce17c66609b4453",
+   "say": "Ladder. Ladle. Lad. All fit. More data, please.",
+   "heard": "Ladder, ladle, lad. All fit. More data, please."
+  },
+  "avatar-owlet-boy-inner-1wxz6mk": {
+   "sha256": "4b8f68c5942972014e154e48c24ba46005d1945bae583f13b74fa92f862127c5",
+   "say": "If the scene doesn't settle it, \"cannot know\" is the clever answer.",
+   "heard": "If the scene doesn't settle it, cannot know is the clever answer."
+  },
+  "avatar-owlet-boy-inner-7qv5qd": {
+   "sha256": "f54e158d48dc115543f325326e67268ac69e1a3512df78fa8c03f7b7600573b7",
+   "say": "Keep my first answers simple. Everything stacks on them.",
+   "heard": "Keep my first answers simple, everything stacks on them."
+  },
+  "avatar-owlet-boy-inner-busbbr": {
+   "sha256": "91a178e0556c83b45f76bdbe06431705aba2c4822eef64093de71eafae8178be",
+   "say": "A vote counts opinions. Not reasons. I counted twice. Same answer: none.",
+   "heard": "A vote counts opinions. Not reasons. I counted twice. Same answer. None."
+  },
+  "avatar-owlet-boy-inner-g0g1rj": {
+   "sha256": "47087b8bf9d638de3a78f95602e2b0ffb8b377b599519a54c15ac8470adf396d",
+   "say": "Wished and scored. What about wished and missed? I always ask that.",
+   "heard": "Wished and scored. What about wished and missed? I always ask that."
+  },
+  "avatar-owlet-boy-inner-g0mnqe": {
+   "sha256": "e5eeaa31cdb157653f5f087fda513ae4452d86fce8afeb8ef2a6c5754e026e1b",
+   "say": "It bets on my usual move. So: don't be usual. You can do this.",
+   "heard": "It bets on my usual move. So don't be usual. You can do this."
+  },
+  "avatar-owlet-boy-inner-kdndoi": {
+   "sha256": "9e28411150335d3eefebbf5a91057bb3171244f9d7ea48c35bc36b6e6b8adf60",
+   "say": "Shade the premises. Then hunt for one spot that breaks the ending.",
+   "heard": "Shade the premises, then hunt for one spot that breaks the ending."
+  },
+  "avatar-owlet-boy-inner-kudby7": {
+   "sha256": "a4c31761ba83c175804bef7f083232d205cc1196322f4e58befefb4c34a339e3",
+   "say": "That grey voice at the lab wasn't me. I never say \"like everyone\".",
+   "heard": "That gray voice at the lab wasn't me. I never say like everyone."
+  },
+  "avatar-owlet-boy-inner-mvgoyv": {
+   "sha256": "b073fcb5642c58dd1eeb15bf81bf03716f0b975bdbc53cf43580ba99ebe2f70f",
+   "say": "Find the premise doing all the work. Then push it. Politely.",
+   "heard": "Find the premise doing all the work, then push it politely."
+  },
+  "avatar-owlet-boy-inner-oft6jf": {
+   "sha256": "d003b5cb6ccdeeb92dc8da2ab83f8ea070605971cea457bcf11c75e74dbb2399",
+   "say": "\"Every time\" is a pattern. A pattern isn't a proof. Classic me.",
+   "heard": "Every time is a pattern a pattern isn't a proof classic me"
+  },
+  "avatar-owlet-boy-inner-rnjjs8": {
+   "sha256": "cec8f5ec1f1c79579e70d2f899b26e181e58e21074fe898721655a79977983e9",
+   "say": "He was certain. Certain took him. I'm checking everything now.",
+   "heard": "He was certain. Certain took him. I'm checking everything now."
+  },
+  "avatar-owlet-boy-inner-sgc0rs": {
+   "sha256": "2e95f6e9eef7cf28265ee94dd86518f5509bbd8a216ed54e17c94d055d1b2502",
+   "say": "Same numbers, fair scale, then decide. Fair is my favourite.",
+   "heard": "Same numbers, fair scale, then decide. The fair is my favorite."
+  },
+  "avatar-owlet-boy-inner-t3bqgn": {
+   "sha256": "fb43c809f0c31627439fbe2fae585b51a4afd3fcf02baa526fcb1135c8316905",
+   "say": "A pattern is not a proof. I say this often. I'm usually right.",
+   "heard": "A pattern is not a proof. I say this often. I'm usually right."
+  },
+  "avatar-owlet-boy-inner-toy3m5": {
+   "sha256": "ccaf5db0c8088648366938dbfbec51523a1de30ba9ded99ed53977aaf12a7c02",
+   "say": "Test a triple that should fail. If it passes, I'm wrong. It happens. Rarely.",
+   "heard": "test a triple that should fail. If it passes, I'm wrong. It happens rarely."
+  },
+  "avatar-owlet-boy-inner-yisxe4": {
+   "sha256": "b395a65ea6267e0278080c556ec938ab5be1f2b440e0952df3a0415bbbfc4341",
+   "say": "Shade the \"no\" parts first. Then the \"some\". Neat. I like neat.",
+   "heard": "Shade the no parts first then the some neat I like neat"
+  },
+  "avatar-raven-boy-inner-14fawj4": {
+   "sha256": "61d6c46fe45685ad5ae540df99bc1a386eacbad41ef60ed7aeeabed813d40d4f",
+   "say": "\"Thinking engine.\" It's in the name. It thinks.",
+   "heard": "Thinking Engine. It's in the name. It thinks."
+  },
+  "avatar-raven-boy-inner-163t806": {
+   "sha256": "4cb41e27653121bc1c1d8f83b1c0a9fa41f96bf7648b1c4d53076f747d1f4aa1",
+   "say": "\"Predictable.\" Not \"known\". It picked that word carefully.",
+   "heard": "Predictable. Not known. I picked that word carefully."
+  },
+  "avatar-raven-boy-inner-18rxvp2": {
+   "sha256": "80e0c8f28de8ea62152e1939dbcf07153b9ded9ab9e1fa566acf52d8f6333a26",
+   "say": "Called \"thinking\". Never checked once.",
+   "heard": "called thinking. Never checked once."
+  },
+  "avatar-raven-boy-inner-1b7vptc": {
+   "sha256": "f9ffb9b7bb1717c25813f325c630f1eb3d107fecce325b1fadbe514b5d83692a",
+   "say": "True words. Still not proof. Noted.",
+   "heard": "True words, still not proof, noted."
+  },
+  "avatar-raven-boy-inner-1bayqbs": {
+   "sha256": "9231f8006cfb3d040ea25be35bb36238a9071f808bb407ce335761d8343522ff",
+   "say": "\"Everyone.\" Count them. It's eleven.",
+   "heard": "Everyone? Count em. It's eleven."
+  },
+  "avatar-raven-boy-inner-1cr1rb8": {
+   "sha256": "517af881d83348da7fe0741958283fedf6d3ef3a9a55d9626ec2377d49fe2dc4",
+   "say": "Smooth words. Still a story. He knew.",
+   "heard": "Smooth words. Still a story. He knew."
+  },
+  "avatar-raven-boy-inner-1i97ddt": {
+   "sha256": "fa0ca3afba0c8460c91f608d5d39ea1353382fe51c06ad99bbb27cfa97744d3a",
+   "say": "\"Says.\" He never said it. The headline did.",
+   "heard": "Says he never said it the headline did"
+  },
+  "avatar-raven-boy-inner-1iajobt": {
+   "sha256": "9217b1b2cbbd47e42b4852ecaa56cc244bbbeb06df95327adefbbf2dc055958d",
+   "say": "That wasn't me. Strong words make me suspicious. They always have.",
+   "heard": "That wasn't me. Strong words make me suspicious. I always have."
+  },
+  "avatar-raven-boy-inner-1ideenc": {
+   "sha256": "28aeffe3f5e33cc12d216c730b11961a86c34b0d6d65c70b1d7a930a7222619f",
+   "say": "\"Off\" means false. Not \"unknown\".",
+   "heard": "Off means false, not unknown."
+  },
+  "avatar-raven-boy-inner-1j2xu8o": {
+   "sha256": "b0303e15a24fefcd6e772f541fcb4cf1fe080d5bba9538b1f8367bca91676787",
+   "say": "\"At least one\" and \"exactly one\". Read the small words.",
+   "heard": "at least one and exactly one. Read the small words."
+  },
+  "avatar-raven-boy-inner-1jgiwin": {
+   "sha256": "4ae007b7fae384834a9fba9f90201cc848cb214d40e0feef8cf8409741ce31be",
+   "say": "Ask him: \"Needs it most.\" Define \"most\".",
+   "heard": "Ask him. Needs it most. Define most."
+  },
+  "avatar-raven-boy-inner-1jrdjj2": {
+   "sha256": "6e40cd721484024c0cede890daaf131bdf2a8e0cc49202c5471b5be6c199486d",
+   "say": "Silence isn't a statement. Can't be true. Can't be false.",
+   "heard": "Silence isn't a statement, can't be true, can't be false."
+  },
+  "avatar-raven-boy-inner-1omdy6w": {
+   "sha256": "36e5aa5f674979802685dfcd0993b171bfd3b4b639354fef669324b12a060be7",
+   "say": "\"One of them lies.\" It never said we'd know which.",
+   "heard": "One of them lies. They never said we'd know which."
+  },
+  "avatar-raven-boy-inner-1p9643d": {
+   "sha256": "bd4b39e34ee06a5d49a0c17f4ef23b2d8dd28e12b674d1f7efd0306c53d49e4c",
+   "say": "Ladder? Lad? Ladle?",
+   "heard": "Ladder, lad, ladle."
+  },
+  "avatar-raven-boy-inner-1q0uun0": {
+   "sha256": "1d981f187bea9c1fb28a6345aaa26124b8c43dab408875c47da82ae5950973f8",
+   "say": "\"Admits\" was the headline's word. The quote just said \"I guess\".",
+   "heard": "Admits was the headline's word. The quote just said, I guess."
+  },
+  "avatar-raven-boy-inner-1qvr08j": {
+   "sha256": "cfe870ab9ed8222c82966664455d2cd978c78dca554b95b644e1255fb0e7db97",
+   "say": "\"Saved to favourites.\" A boast. Boasts leak.",
+   "heard": "Saved to favorites a boast boasts leak"
+  },
+  "avatar-raven-boy-inner-1tgsg7f": {
+   "sha256": "ffee0943a88fbcc626944cc592a8e95695a313848fce840ead11a47da16bd6fe",
+   "say": "\"Never.\" Biggest little word there is.",
+   "heard": "Never. Biggest little word there is."
+  },
+  "avatar-raven-boy-inner-1whp007": {
+   "sha256": "702b7e0d66f2b8515bd28325d27b0619e77c6ee9f89ff9885ef8ec469bcd6452",
+   "say": "\"Accurate.\" Accurate at what?",
+   "heard": "Accurate? Accurate at what?"
+  },
+  "avatar-raven-boy-inner-2hpcfx": {
+   "sha256": "febe8cd6268a884b4a4f12619b780403374443c4e0db244ebe9eea376dc0dad3",
+   "say": "If I say it smoothly enough, I am one. Words make things so.",
+   "heard": "If I say it smoothly enough, I am one. Words make things so."
+  },
+  "avatar-raven-boy-inner-3xxi0o": {
+   "sha256": "1a44c1b5145984bf5983fdc08b81f956ef38306cbf4d9682a50bf77de05227d8",
+   "say": "\"By order of the Mayor.\" Order. Not \"idea\". Interesting.",
+   "heard": "by order of the mayor. Order. Not idea. Interesting."
+  },
+  "avatar-raven-boy-inner-b6lcsk": {
+   "sha256": "e2888057cd13af218495fdb816d1043a88ece7f7d264c963bba1025b719fb0f5",
+   "say": "\"At most one\" allows zero. Read the small words.",
+   "heard": "At most one allows zero. Read the small words."
+  },
+  "avatar-raven-boy-inner-cyolxf": {
+   "sha256": "556e776c925fe7f23bdb80614e7537472394211e4572b84fb8c01e077e51226b",
+   "say": "You said \"know\". You meant \"guess\".",
+   "heard": "You said no. You meant guess."
+  },
+  "avatar-raven-boy-inner-giunuc": {
+   "sha256": "626525755d35d093d08baf80c8ac499ba48c49b0bdb93dc0cf94231bb60660e3",
+   "say": "\"Admits.\" Only the guilty admit. Whoever this is, they did it.",
+   "heard": "admits. Only the guilty admit. Whoever this is, they did it."
+  },
+  "avatar-raven-boy-inner-ybyyt9": {
+   "sha256": "83a0b420d09449eecadedacaef873ab64c599177f6e5cf81df2fcbedb1960405",
+   "say": "\"Saved to favourites.\" Those exact words. At the Fair.",
+   "heard": "Save the favorites those exact words at the fair",
+   "note": "listened as text: missing at start is transcription noise or {name}"
+  },
+  "granny-10h08nj": {
+   "sha256": "80501c2135f439c4e44c87c46ea18d75d3f8c9cafcd677dabba3f6fd11ed668f",
+   "say": "Brainstorm: +2 card activations this turn. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Brainstorm plus two card activations this turn cost one energy Click your power to continue this lesson. Click does not use it"
+  },
+  "granny-130xtes": {
+   "sha256": "b3494fa857f4817c0674d0dfc6d7c3603563b64c3547b5a4c54f4a78b027a25e",
+   "say": "Night Sight: See the opponent's hand until your next turn. Their next card costs 1 more. Also see the top card of their deck. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Night Sight. See the opponent's hand until your next turn. Their next card costs one more. Also see the top card of their deck. Cost 4 Energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-13h6gk7": {
+   "sha256": "1aa10a086c46a1634001cb40aacc6b6fef4f7f81771b562f1d845a7272ccda24",
+   "say": "Recall: Return your most recently defeated creature to your hand with +1/+1. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Recall. Return your most recently defeated creature to your hand with plus one, plus one, cost three energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-15caxnf": {
+   "sha256": "9db2f2446acbd64500ed7813fbdfec250b369091ec14bce5e74e361bec837c86",
+   "say": "Hold That Thought: Move the Fate track up to 2 rounds closer or further away. Draw a card. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Hold that thought. Move the Fate track up to two rounds closer or further away. Draw a card. Cost two hearts. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-16zfqo3": {
+   "sha256": "4eba67a789b4bce0aae316ec93c0302fc754c8405d3d3faa9ef9343139947f53",
+   "say": "Foresee: Look at the top 4 rule cards. Take one into your hand and put the others back in any order. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "4C. Look at the top 4 rule cards. Take one into your hand, and put the others back in any order. Cost 1 energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-17l7h40": {
+   "sha256": "c1b4eb9efbd7670ead5c53090fc71b004cf69194e733a3f97dae034595972627",
+   "say": "Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Also restore 1 heart. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Hold that thought. Move the Fate Track one round closer or further away. Draw a card. Also restore one heart. Cost 4 energy. Click your power to continue. This lesson Click does not use it."
+  },
+  "granny-17ys5yv": {
+   "sha256": "adc6a0bd71f1c1dc17262d5cd3d55c68916a86fb813b11e2bce62d3e0ffea916",
+   "say": "I… need… a… ber— Oh. It's gone to sleep.",
+   "heard": "I...need...a...bur...oh...it's gone to sleep."
+  },
+  "granny-18ze31y": {
+   "sha256": "a8f19260ce07191502763df6362997f5ab75199b2918f3c5fba7ea28ffcb2328",
+   "say": "Recall: Return your most recently defeated creature to your hand. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Recall, return your most recently defeated creature to your hand. Cost two hearts. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-191wmq4": {
+   "sha256": "6d2a09628fc214dc1569470cc2816786b6cfe365fed4d501a769ec12935798ce",
+   "say": "Call It Out: An enemy creature loses Guard, Shield, Elusive and Swift. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Call it out. An enemy creature loses guard, shield, elusive, and swift. Cost to energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-19lw6wb": {
+   "sha256": "b04593d7594b334afc011a6383f1e1e1fbe0b2578b3d5a99b2624d5090eda8d2",
+   "say": "Fill a ladle, empty it, or pour it into the other. A pour stops when one ladle is full or empty.",
+   "heard": "Fill a ladle, empty it, or pour it into the other. A pour stops when one ladle is full or empty."
+  },
+  "granny-1a4vjv3": {
+   "sha256": "44c064da4f29781d10437acc48ca78a81e6c8c3be9b9ed2bef13390c34c5d073",
+   "say": "Foresee: Look at the top 3 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "4 C. Look at the top three rule cards. Take one into your hand and put the others back in any order. Also, put one of the others at the bottom of the rule deck. Cost to energy. Click your power to continue. This lesson click does not use it.",
+   "note": "listened as text: extra at start is transcription noise or {name}"
+  },
+  "granny-1apvjzp": {
+   "sha256": "a15eceb4527563df6f7c5bd4fd26d16c8ac375c6e83af4a83b9406aaef266106",
+   "say": "Close the Proof: Defeat an enemy creature that has 2 or less health left. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Close the proof. Defeat an enemy creature that has two or less health left. Cost 4 energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-1cfxkxz": {
+   "sha256": "d2b50793c10eb4c65d9cfdf7a361975b53f4f64424559dc28b6623315d912638",
+   "say": "Brainstorm: +1 card activation this turn. Also +1 energy. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Brainstorm plus one card activation this turn also plus one energy cost one energy Click your power to continue. This lesson click does not use it"
+  },
+  "granny-1d97t7e": {
+   "sha256": "d7d51d4751c81ed25647fa5f53fedf3355e94cf4e7fad58c3b1012bc7afff243",
+   "say": "Call It Out: An enemy creature loses Guard, Shield, Elusive and Swift. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+   "heard": "Call it out. An enemy creature loses guard, shield, elusive, and swift. Cost 1 heart. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-1fdd3hr": {
+   "sha256": "59b62e5a213efaf49c8e5b40f50ff275aeecbb52aafdf56a3a1c33b2dd7ae11a",
+   "say": "Lantern: Deal 2 damage to an enemy creature. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Lantern. Deal 2 damage to an enemy creature. Cost 3 energy. Click your power to continue. This lesson-click does not use it."
+  },
+  "granny-1fsjbh5": {
+   "sha256": "35b3e70bbbeb01e815eab31c4fbe77faabebc2f8c3f046d732c229ca4555a53d",
+   "say": "Fine Print: Lose 1 heart and draw a card. Also +1 energy this turn. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Fine print lose one heart and draw a card Also plus one energy this turn cost three energy Click your power to continue. This lesson click does not use it"
+  },
+  "granny-1ftxgvd": {
+   "sha256": "76f1d8e025db97e3153199625fd9f24bb38bed6fa8d1012e8c5a9023c4fc7e6c",
+   "say": "Recall: Return your most recently defeated creature to your hand. Also restore 2 hearts. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Recall. Return your most recently defeated creature to your hand. Also restore two hearts. Cost. Three energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-1gcwsrm": {
+   "sha256": "88def9e5c8a5d775843fc5ff47b9a73f586779a4b5723ce32f293db38be46db8",
+   "say": "Lantern: Deal 2 damage to an enemy creature. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Lantern. Deal 2 damage to an enemy creature. Cost 2 energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-1h87sg5": {
+   "sha256": "11e5d8f6c90a0a29eca4e0c190d980b1f0fa97698ea487673983cc3c06d7f85e",
+   "say": "Hold That Thought: Move the Fate track up to 2 rounds closer or further away. Draw a card. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+   "heard": "Hold that thought. Move the Fate track up to two rounds closer or further away. Draw a card. Cost one heart. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-1j0rfkc": {
+   "sha256": "c516b7b39bbdda063237f006ed031d62fbef7dd15f03f63ad059cf1e17252664",
+   "say": "Close the Proof: Defeat an enemy creature that has 1 health left. Also deal 1 damage to the enemy hero. Cost: 5 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Close the proof. Defeat an enemy creature that has one health left. Also, deal one damage to the enemy hero. Cost 5 energy. Click your power to continue. This lesson Click does not use it."
+  },
+  "granny-1ka8vq9": {
+   "sha256": "f5a208e2b8e0f490588c7e4ce361e3c6ac702adf677f295d55b914f274b90a2b",
+   "say": "Fine Print: Lose 1 heart and draw a card. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Fine print lose one heart and draw a card cost two hearts Click your power to continue this lesson. Click does not use it"
+  },
+  "granny-1lb8a7b": {
+   "sha256": "30edf4c878ff7e9b9663d29796c8561b9984d636282cd33f267671c7c6b6c751",
+   "say": "Lantern: Deal 2 damage to an enemy creature. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Lantern. Deal 2 damage to an enemy creature. Cost 2 hearts. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-1lkncfi": {
+   "sha256": "75fa1e80645d4c2e9be3b44a94f0ee963b2c49fd6b931f5f454a46e285bd2f10",
+   "say": "Recall: Return your most recently defeated creature to your hand with +1/+1. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Recall. Return your most recently defeated creature to your hand with plus one plus one. Cost to energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-1mny4rk": {
+   "sha256": "e027a841515422eac313dd92ff7a494cd58537386818184f9d3b27154c4a4ba3",
+   "say": "Night Sight: See the opponent's hand until your next turn. Their next card costs 1 more. Also see the top card of their deck. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Night Sight. See the opponent's hand until your next turn. Their next card costs one more. Also, see the top card of their deck. Cost 3 Energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-1mp1w0m": {
+   "sha256": "37eebee973a6485f50fae0e142a1904a4b8ba3fee1e5e214bbc6ab025d30039f",
+   "say": "Recall: Return your most recently defeated creature to your hand with +1/+1. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+   "heard": "Recall. Return your most recently defeated creature to your hand with plus one plus one. Cost one heart. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-1phlgx5": {
+   "sha256": "02b0c353e3f2fa3861388b1cd8aa27868651f8d4bb83bed1f3cf4dce6305f0d3",
+   "say": "Someone must follow that crack. Someone who thinks before they shout.",
+   "heard": "Someone must follow that crack someone who thinks before they shout"
+  },
+  "granny-1q7lkw6": {
+   "sha256": "08c7156f5eb36faca2e1438dcf2f5e433a59b9efea743822ec121959c2c407ec",
+   "say": "There you are. Sit. Ninety years of cards. I have lost twice. Both times to myself.",
+   "heard": "There you are. Sit. Ninety years of cards. I have lost twice. Both times to myself."
+  },
+  "granny-1qwytaz": {
+   "sha256": "4193649eead0dac8c5e2d798e978d3950aa65e9bb143bce64d802d3416011aee",
+   "say": "What If?: Swap a creature's attack and health, then give it +1 attack. Cost: free. Click your power to continue; this lesson click does not use it.",
+   "heard": "What if swap a creature's attack and health then give it plus one attack cost free? Click your power to continue. This lesson click does not use it"
+  },
+  "granny-1r9tc7x": {
+   "sha256": "15b19ce1568b96b413bda1295ba814b93f030efae04f422321f676ea77f55447",
+   "say": "I would go. I would arrive next Tuesday. Of next year.",
+   "heard": "I would go. I would arrive next Tuesday of next year."
+  },
+  "granny-1tssicg": {
+   "sha256": "9167ac3b182a6fdabb289646a32ab4d0f45aadda6fc90431d267bd84734437f4",
+   "say": "Call It Out: An enemy creature loses Guard, Shield and Elusive. Also draw a card. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Call it out. An enemy creature loses guard, shield, and elusive. Also, draw a card. Cost 3 energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-1uxktm8": {
+   "sha256": "85e4c9849f1ad77f6b14fb282de94e5c442e2a7462919f7e99a4c1aa6026088f",
+   "say": "Call It Out: An enemy creature loses Guard, Shield and Elusive. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Call it out. An enemy creature loses guard, shield, and elusive. Cost. One energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-1wfcd27": {
+   "sha256": "fc9d011f3d8494407644fbf11b66487f347e967f1203a2e68a40934bfedf0c41",
+   "say": "A berry! For me? I only got as far as \"ber\".",
+   "heard": "A berry? For me? I only got as far as burr."
+  },
+  "granny-1y001xm": {
+   "sha256": "54ce154135940281afecbeff0a5934d26cd2f7a6ce20e592bae5375c4f0f0771",
+   "say": "I walked home. Downhill, through time. Took ages.",
+   "heard": "I walked home, downhill through time, took ages."
+  },
+  "granny-37us7g": {
+   "sha256": "75f3fc7433466c28e0ffe793a2ff736fa6dffe325d9d3e822a8159303751a037",
+   "say": "Example, not this puzzle: ladles of 3 and 5. Fill the 5, pour into the 3. Now 2 cups are left in the 5.",
+   "heard": "Example, not this puzzle, ladles of three and five, fill the five, pour into the three. Now, two cups are left in the five."
+  },
+  "granny-3drejj": {
+   "sha256": "3898e4fbc2b5a0eea7a60eba831cfe878cad1f635e0e9f831d7f7c6dfa2d43f5",
+   "say": "Lantern: Deal 1 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Lantern! Deal 1 damage to an enemy creature. Also, see 1 random card in the enemy hand. Cost? 3 energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-3vht08": {
+   "sha256": "899028c76d726f4100e98e0781b5e068374bf76ebd72e147effa865eb5457525",
+   "say": "Check the Win tile: enemy hero to zero hearts. Drag Astrophysicat onto me.",
+   "heard": "Check the wind tile. Enemy hero to zero hearts. Drag Astrophysicat onto me."
+  },
+  "granny-54kmea": {
+   "sha256": "015b24d8c6cfbdd823e2d1bf7c6a4ff67c562950907cb256f5050ccb65ff7376",
+   "say": "Light mode: make the requested bulbs light with the fewest ON switches. Try a switch and watch its path through the gates.",
+   "heard": "Light mode. Make the requested bulbs light with the fewest on switches. Try a switch and watch its path through the gates."
+  },
+  "granny-8un9tz": {
+   "sha256": "2f88bf3e2274445fc1c678cc21ea8d346636f6c7565ce4317f079e914ba6d65e",
+   "say": "Foresee: Look at the top 3 rule cards. Take one into your hand and put the others back in any order. Also put one of the others at the bottom of the rule deck. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "4C. Look at the top three rule cards. Take one into your hand and put the others back in any order. Also, put one of the others at the bottom of the rule deck. Cost 1 Energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-adg0kk": {
+   "sha256": "cee95ea37c4e456089f4087da8d2a031beebef468d5ee7a637550f9d15238b63",
+   "say": "Not a drop on me. But leeks? In MY soup? Here, dear. My Spare Axiom.",
+   "heard": "Not a drop on me, but leaks in money soup. Here, dear, my spare axiom."
+  },
+  "granny-apeldx": {
+   "sha256": "e5a58e17a04b74f11e6807fe59ddfcfffa42a22df266c2116e76f362c8e26b19",
+   "say": "Click a switch to change true/false. Example: true AND false gives false; true OR false gives true; NOT true gives false.",
+   "heard": "Click a switch to change true, false. Example, true and false gives false. True or false gives true. Not true gives false."
+  },
+  "granny-ar62mo": {
+   "sha256": "f6a11d1251fb14e0594f810eee950514b8c20d15e467fafb530cd520cf0a440e",
+   "say": "Close the Proof: Defeat an enemy creature that has 1 health left. Also deal 1 damage to the enemy hero. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Close the proof. Defeat an enemy creature that has one health left. Also, deal one damage to the enemy hero. Cost 4 energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-eycy2e": {
+   "sha256": "c9f77ec1ccf1f7146fb8748a163f07790e956aad31519b0ce13c28be926bda55",
+   "say": "Recall: Return your most recently defeated creature to your hand. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+   "heard": "Recall. Return your most recently defeated creature to your hand. Cost. One Heart. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-frcs02": {
+   "sha256": "7f3177d6320fa6a76446c7267931f2899fb5d03cb75ca38592b6f08f03497523",
+   "say": "The Sundial. It always said when it wasn't sure.",
+   "heard": "The sundial. It always said when it wasn't sure."
+  },
+  "granny-fwhdnt": {
+   "sha256": "a5a2df0cc6b82a7fbb8f2bece755ca86ae4446ac7d0c6660a02d586e0cdf2fb3",
+   "say": "{name}… a sack… it smells of eighteen fifty… bring a lad—",
+   "heard": "A sack! It smells of 1850. Bring a lad!",
+   "note": "listened as text: missing at start is transcription noise or {name}"
+  },
+  "granny-fzixgb": {
+   "sha256": "b1d3781630b662f01a52e8dd483920552f48021e118f3693d1934f141f776a82",
+   "say": "Lantern: Deal 1 damage to an enemy creature. Also see one random card in the enemy hand. Cost: 4 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Lantern. Deal 1 damage to an enemy creature. Also, see 1 random card in the enemy hand. Cost 4 energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-h8q24v": {
+   "sha256": "ff417ee04ae7f61b9ddbf5241589ec8e40987c346ef5f1d39bc624aa8db8665a",
+   "say": "Goal: exactly this many cups in one ladle. The ladles have no markings.",
+   "heard": "Goal? Exactly this many cups in one ladle. The ladles have no markings."
+  },
+  "granny-jpywqb": {
+   "sha256": "838622f632fe966e2849cb2eccdf39cb06d2baa4cf58420a871f7ad65bf06017",
+   "say": "Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Cost: 1 heart. Click your power to continue; this lesson click does not use it.",
+   "heard": "Hold that thought. Move the Fate track one round closer or further away. Draw a card. Cost one heart. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-kr3se1": {
+   "sha256": "abe28fcf164e0808906c5183abc32b13d4b37a73f0e1d79c2ccbadf44aba065e",
+   "say": "Hold That Thought: Move the Fate track 1 round closer or further away. Draw a card. Cost: 2 hearts. Click your power to continue; this lesson click does not use it.",
+   "heard": "Hold that thought. Move the Fate track one round closer or further away. Draw a card. Cost two hearts. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-mkpihh": {
+   "sha256": "39f58b8362b6f6ce19e7393ef18a7cf297c26c5cb4a3c1ba5abd055d48328f87",
+   "say": "Ask her a sentence that eats itself, dear.",
+   "heard": "Ask her a sentence that eats itself, dear."
+  },
+  "granny-mp4bvn": {
+   "sha256": "c131957356398b9374cb15bbfd5caf6bf63fa6c85d730461819800e43efc890f",
+   "say": "Look up, dear. A thin black line on the sky. Like a hair. I will dust it later.",
+   "heard": "Look up, dear. A thin black line on the sky. Like a hair. I will dust it later."
+  },
+  "granny-oy7nqi": {
+   "sha256": "163d0898920488855665051d7edbea55a8c20110831f60237dcb05951d28fe97",
+   "say": "My shawl boiled away. With your card in the pocket.",
+   "heard": "My shawl boiled away with your card in the pocket."
+  },
+  "granny-pqcew0": {
+   "sha256": "36e0c4fd55960d8016749b8d71594dc05024098e96bcd4a2baf3301de2dbf358",
+   "say": "That's my {name}. I'll walk home, dear. Downhill. Through time.",
+   "heard": "That's mine. I'll walk home, dear. Down hill. Through time."
+  },
+  "granny-qflfoi": {
+   "sha256": "5f88d9c07984d742f4fff2f214a53e1b9ed73977e1d722ae72dd24307335ba28",
+   "say": "{name}? Big kitchen. Big pot. Don't panic. I'm panicking for both of us.",
+   "heard": "Huh? Big kitchen? Big pot? Don't panic. I'm panicking for both of us.",
+   "note": "listened as text: missing at start is transcription noise or {name}"
+  },
+  "granny-rjherr": {
+   "sha256": "1553d35a7ef9830fb480d72e2bbe2e20ba191371e97df9d25c445da7d54f4e02",
+   "say": "What If?: Swap a creature's attack and health. Also +1 health. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "What if? Swap a creature's attack and health. Also, plus one health. Cost, one energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-tqy9ka": {
+   "sha256": "05d58d1190f9688b24ac23d65327b015452afca22fc6810dc756439f438063ef",
+   "say": "Honest. Fear is fine. Thinking anyway is braver.",
+   "heard": "Honest. Fear is fine. Thinking anyway is braver."
+  },
+  "granny-utb1up": {
+   "sha256": "0f95351e2cbadae76a412e299efaa9cd49901597636e999d497dd03888bbad0e",
+   "say": "Watch the amounts you make. If the goal can never appear, say so here, and pick the reason that proves it.",
+   "heard": "Watch the amounts you make. If the goal can never appear, say so here, and pick the reason that proves it."
+  },
+  "granny-vosvc7": {
+   "sha256": "675396d967c80129eda88f6fed2a2f2e556c57e27cd04de9452315ae2e7ffb37",
+   "say": "What If?: Swap a creature's attack and health, then give it +1 attack. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "What if swap a creature's attack and health then give it plus one attack cost one energy Click your power to continue. This lesson click does not use it"
+  },
+  "granny-vt5m2h": {
+   "sha256": "33044697cb85e36ac7ea62e2a8ffb0b8b416cfd41a3350c380fcb70c6d7fd1d7",
+   "say": "Night Sight: See the opponent's hand until your next turn. Their next 2 cards cost 1 more. Cost: 2 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Night Sight. See the opponent's hand until your next turn. Their next two cards cost one more. Cost two energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-wwbesz": {
+   "sha256": "dfdb2ffd921b88f161608bcda9bdb2b720e981f73403def4391645e8f41f2338",
+   "say": "Night Sight: See the opponent's hand until your next turn. Their next 2 cards cost 1 more. Cost: 3 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Night Sight. See the opponent's hand until your next turn. Their next two cards cost one more, cost three energy. Click your power to continue. This lesson click does not use it."
+  },
+  "granny-yb15ac": {
+   "sha256": "b2ed8fdefef09fcb67c998a02f7df7c0d320564903ec634a45205ce0de120ae5",
+   "say": "Call It Out: An enemy creature loses Guard, Shield, Elusive and Swift. Cost: 1 energy. Click your power to continue; this lesson click does not use it.",
+   "heard": "Call it out. An enemy creature loses guard, shield, elusive, and swift. Cost 1 energy. Click your power to continue. This lesson click does not use it."
+  },
+  "narrator-11eotvz": {
+   "sha256": "95334e3686f77bb7c37f083cfb1ab0c7e761035ee2549afdb1757f51c219a6d1",
+   "say": "In a triple task, click tiles to fill three slots, then Test it. A yes does not prove your rule.",
+   "heard": "In a triple task, click tiles to fill three slots, then test it. A yes does not prove your rule."
+  },
+  "narrator-12b4v4i": {
+   "sha256": "6200fb0b71ef3536c0b6ee4c76645b7955ce47d722607581b27c264ea56c8714",
+   "say": "Read each switch before changing it. Not every switch is a trick: keep the honest controls honest.",
+   "heard": "Read each switch before changing it. Not every switch is a trick. Keep the honest controls honest."
+  },
+  "narrator-13byvjk": {
+   "sha256": "d79522b7d9106516cd44a4f7a062522e447a38d6e968c7a4812b0b34725bbe13",
+   "say": "Example: A says \"B is a liar\". Suppose A is honest: B must be a liar. Suppose A lies: B must be honest.",
+   "heard": "Example. A says, B is a liar. Suppose A is honest. B must be a liar. Suppose A lies. B must be honest."
+  },
+  "narrator-14ckccp": {
+   "sha256": "79ca4bc1efefcc10811bff2169c6dd85ecafe5fd2791010f56336806f2db1eb6",
+   "say": "Tick. Tock-ish. Two pieces short. Cloudy, always. I'll say so.",
+   "heard": "Tick-tock-ish, two pieces short, cloudy always, I'll say so."
+  },
+  "narrator-161iwue": {
+   "sha256": "c3f0b2e837d78b4fc781790a50e0bbee582b8780fa2f9cd05c42bfc5209c1a11",
+   "say": "The Professor's little Guess-o-Matic is in your pocket. He asked you to mind it.",
+   "heard": "The professor's little guess-o-matic is in your pocket. He asked you to mind it."
+  },
+  "narrator-16w8fh3": {
+   "sha256": "51333e79bca4f05178d420c8b5d774619ae890db01f3f2866d2b7109922cf36a",
+   "say": "You traded half of me for all of me. I'd have done the same. Probably.",
+   "heard": "You traded half of me for all of me. I'd have done the same, probably."
+  },
+  "narrator-193wnbg": {
+   "sha256": "5a099914082a2bd0fc31c2ef18b249a198ae4cb939d84b98ad60c55fb293083d",
+   "say": "Choose Shade and click a region, or drag an x from the tray. Put an x on a border when the facts leave its side open. Clear lets you restart.",
+   "heard": "Choose Shade and click a region, or drag an X from the tray. Put an X on a border when the facts leave its side open. Clear lets you restart."
+  },
+  "narrator-19tb4ly": {
+   "sha256": "bc9bc20ef73f356020b61d72872aacec863970311b2ff162e740de0ef13f5832",
+   "say": "His headphones. Still playing. Very quietly.",
+   "heard": "His headphones, still playing, very quietly."
+  },
+  "narrator-1beeyl7": {
+   "sha256": "036811eb503d45b5c18450a6b38653392f74a6d1d40340b1c4455b66adb9b6a7",
+   "say": "The last rift. Through it, toasted nuts and a fairground tune.",
+   "heard": "The last rift. Through it, toasted nuts and a fair ground tune."
+  },
+  "narrator-1dlvzuf": {
+   "sha256": "2fa7f091e74de78e25cad8b689d929a053a07a3ec892e92f7ea7fd9913fc72bd",
+   "say": "Come on. He'd want the next floor on the record.",
+   "heard": "Come on. He'd want the next floor on the record."
+  },
+  "narrator-1do73eo": {
+   "sha256": "b3dc86cabf27f7cf27da54ec82ffb2fbdd9772890e037f26a51cca7852e24151",
+   "say": "Some means at least one. \"Some ducks are birds\" needs an x in their overlap. \"No ducks are birds\" shades that overlap.",
+   "heard": "Some means at least one. Some ducks are birds needs an X in their overlap. No ducks are birds shades that overlap."
+  },
+  "narrator-1jb6lld": {
+   "sha256": "a75b95b73f0683a9c1eee4140efc9cb4f6e4d0b9d95386dc7538a81b7518acd2",
+   "say": "Test a triple you expect NOT to fit. If it fits, your guess needs changing. Then choose Name the rule.",
+   "heard": "Test a triple you expect not to fit. If it fits, your guess needs changing. Then choose Name the rule."
+  },
+  "narrator-1kjo2z2": {
+   "sha256": "9f3c0f94793df8a973105af16df5d525ba75b6e04af4ffe916f553ee6ba28e82",
+   "say": "Click Truth or Lie under each guard. Your marks are a guess you can change.",
+   "heard": "Click truth or lie under each guard. Your marks are a guess you can change."
+  },
+  "narrator-1kzq3dj": {
+   "sha256": "fe8531f1679aea58c42ab909aa2d9f1fd150f6ab1dbb730cfaeacf8dbdddbc13",
+   "say": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+   "heard": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The hint button shows its heart cost. Think first, then check your answer."
+  },
+  "narrator-1m8u9r3": {
+   "sha256": "7c0de959f324e52ab796b1772bfce83382d3b4f5512f0a5e6d54bf7a18f0edbe",
+   "say": "We put the argument on trial. Your job is to connect a weak statement to evidence.",
+   "heard": "We put the argument on trial. Your job is to connect a weak statement to evidence."
+  },
+  "narrator-1mcxan3": {
+   "sha256": "26cdcdde2c4fd54bd43b7906dbce632124b54cfd8e5bdd2db175647f22019e70",
+   "say": "We need a safe route. These are the rules of this world, not promises about real people.",
+   "heard": "We need a safe route. These are the rules of this world, not promises about real people."
+  },
+  "narrator-1nq34u9": {
+   "sha256": "83c8dc4b5b3b528dc6ad1245a4df0d0666dc203862fda48a0e99aa9366d5e4b4",
+   "say": "Shade means no things here. Example: \"All ducks are birds\" shades the ducks-only region outside birds. It does not add an x.",
+   "heard": "Shade means no things here. Example, all ducks are birds. Shades, the ducks only, reach an outside birds. It does not add an X."
+  },
+  "narrator-1o4qc20": {
+   "sha256": "6881c5b15317f41ca11f7c62e6f34b6922e4e37193770b7949fc1d0c30374aa4",
+   "say": "Example: \"The door stayed locked all day\" clashes with a dated record showing it opened at noon. Present that record against that statement.",
+   "heard": "Example, the door stayed locked all day, clashes with a dated record showing it opened at noon. Present that record against that statement."
+  },
+  "narrator-1odi1cm": {
+   "sha256": "da5ad4322a133c10baac5bc13bcef89d5434651052b19c662609ce03dc5d69c0",
+   "say": "We know who was behind the feast now. This is only a memory.",
+   "heard": "We know who was behind the feast now. This is only a memory."
+  },
+  "narrator-1ohjr0x": {
+   "sha256": "666de1048ddd6ea7afc694e73e5b7b860cd3caa0df28dcd3155c28e70866150f",
+   "say": "Example: 2,4,6 fits both \"even numbers\" and \"numbers going up\". Testing 1,3,5 tells those ideas apart.",
+   "heard": "Example, 2, 4, 6 fits both even numbers and numbers going up. Testing 1, 3, 5 tells those ideas apart."
+  },
+  "narrator-1ow3a1v": {
+   "sha256": "bad6b7607cf546b0502007500d7af205ce8f3cc1b45e862b6fb42fb6fb62ce2e",
+   "say": "Hey! That was my shadow! I was using it!",
+   "heard": "Hey, that was my shadow. I was using it."
+  },
+  "narrator-1q62pvh": {
+   "sha256": "082650ff39d1636e82997f00acf018bce20febe6209803b0cd4f9d7f266f46cd",
+   "say": "Open the Court record. Read what each piece of evidence establishes, not just its picture.",
+   "heard": "Open the court record, read what each piece of evidence establishes, not just its picture."
+  },
+  "narrator-1s9zr9d": {
+   "sha256": "ac3e9d2416e528a972d4b17c26d4432d79077681148841f3f30e74cb3fa91aa9",
+   "say": "One piece. Cloudy. I don't mind. Much.",
+   "heard": "One peace, cloudy. I don't mind much."
+  },
+  "narrator-1sslutg": {
+   "sha256": "c4aa896611e3cafdf71c6eb0001e556dcc94b0737f2079aacd688ce95235b2d7",
+   "say": "She always hums back. …Probably asleep. Probably.",
+   "heard": "She always hums back. Probably asleep. Probably."
+  },
+  "narrator-4an2ip": {
+   "sha256": "0bbf3edb7da0c7437a422ddd63b3412619cb41e03f1458c724da059a556d0881",
+   "say": "The cage is empty. The crack has stopped drinking.",
+   "heard": "The cage is empty. The crack has stopped drinking."
+  },
+  "narrator-5hr05z": {
+   "sha256": "98c058302f3d93a05a819b7d57454c2f17ab1377149458991ca8267e7b5f969a",
+   "say": "The visible window can hide inconvenient values. Use its handles to check the full picture when the task needs it.",
+   "heard": "The visible window can hide inconvenient values. Use its handles to check the full picture when the task needs it."
+  },
+  "narrator-7xtz53": {
+   "sha256": "f60fc159256f02ecf6e31cbfa453ee8ee60553c2fbd0cb0f31e98fee4355cc49",
+   "say": "Smoke from the bakery. Three ovens, nobody watching. The ovens are winning.",
+   "heard": "Smoke from the bakery. Three ovens. Nobody watching. The ovens are winning."
+  },
+  "narrator-86r9mz": {
+   "sha256": "e1a96576b86c26cc96133d7e2399d5f3bbe6754db09bdf8a7f8001aed1d58ab5",
+   "say": "Three pieces. I can feel the hour. It's late.",
+   "heard": "Three pieces. I can feel the hour. It's late."
+  },
+  "narrator-c9gwne": {
+   "sha256": "2ba67cc97a477674a8fbb544a2894367a02ab5264ef48440d8db5cde62d769e5",
+   "say": "The machine stops. Nobody is stamping now.",
+   "heard": "The machine stops. Nobody is stamping now."
+  },
+  "narrator-cqv7ub": {
+   "sha256": "85758946c67f3187f4d7865a995e174b692c330a692f829bb47ae389db46c6da",
+   "say": "Tick. Tock. Ah. That feels better.",
+   "heard": "Tick, talk, ah, that feels better."
+  },
+  "narrator-cs1uju": {
+   "sha256": "274d8e54429c81adaf2065260930a62a228f896bc3b3bd24dbd3721fc30590fb",
+   "say": "Previously. The Algorithm stole my shadow. It cut it into four pieces.",
+   "heard": "Previously, the algorithm stole my shadow. It cut it into four pieces."
+  },
+  "narrator-d4ggy8": {
+   "sha256": "c03ae44973998735bf87c79940bd51682b6e483471b32e1158d0f209898fbd5a",
+   "say": "Through this rift. Into the past. The imps went this way.",
+   "heard": "Through this rift into the past the imps went this way"
+  },
+  "narrator-h6jf6i": {
+   "sha256": "122ec7c2d94af9e76c55e0908d0c60723237c46cb765913c246214d19d205ab8",
+   "say": "Use the arrows to read the testimony. Press a statement to hear more; some evidence appears only after pressing.",
+   "heard": "Use the arrows to read the testimony. Press a statement to hear more. Some evidence appears only after pressing."
+  },
+  "narrator-i3ynl1": {
+   "sha256": "c8a9fd420242febe1b9d4296aa66015ff1509f92214dac7b47392defad5d373f",
+   "say": "They're mine. But it's your call. I trust you. Mostly.",
+   "heard": "They're mine. But it's your call. I trust you. Mostly."
+  },
+  "narrator-jica6": {
+   "sha256": "e7c85f9d7a26bdabebdaae26deb730e14850dbed205de8cb350b785b4d8ec890",
+   "say": "Find the secret rule, or check whether a pattern really keeps going.",
+   "heard": "Find the secret rule, or check whether a pattern really keeps going."
+  },
+  "narrator-kurd39": {
+   "sha256": "cb80f15a03e0d0bb89477e8370be4dacac895ce2638c7164fc67b61f18895a63",
+   "say": "It's… six. Possibly seven. I'm guessing.",
+   "heard": "It's... six. Possibly seven. I'm guessing."
+  },
+  "narrator-o31suo": {
+   "sha256": "5f4ea903d0b00d02bb35131bab05651498d721f2e9484c74102c414426d71d04",
+   "say": "The champion still plays. Nobody cheers it on now.",
+   "heard": "The champion still plays. Nobody cheers it on now."
+  },
+  "narrator-oe86b5": {
+   "sha256": "02987b0863402ac280a478057f3c5f4534440a539c1688ff5cf1225d54d1a658",
+   "say": "Previously. I'm the Sundial. I ride in your shadow, and I guess.",
+   "heard": "Previously, I'm the sundial, I ride in your shadow, and I guess."
+  },
+  "narrator-pqk8q4": {
+   "sha256": "8274c0303334856bb0708228bfc9763c137cb5cece9556f9956587596cb665be",
+   "say": "Choose Valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument.",
+   "heard": "Choose valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument."
+  },
+  "narrator-pucnq7": {
+   "sha256": "af99de210af423deea344fdc864c96c0df6c2ae6319563c764eb84782aab74c9",
+   "say": "We judge whether the conclusion MUST follow from these facts. Read the scrolls first.",
+   "heard": "We judge whether the conclusion must follow from these facts. Read the scrolls first."
+  },
+  "narrator-sm1ns1": {
+   "sha256": "2291a604996edbafb48c73e29e5ce35bf8c873d47b11f89ccc2d8d6bd22c2d96",
+   "say": "Use Present on the statement, choose evidence, then Take that. Name the flaw and repair the proof if asked. Finish with Close the case. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+   "heard": "Use present on the statement. Choose evidence, then take that. Name the flaw and repair the proof, if asked. Finish with close the case. How to play is free. The hint button shows its heart cost. Think first, then check your answer."
+  },
+  "narrator-ssk7p6": {
+   "sha256": "e39fc10997fcf789f951c95e5e3c9d715bc29b3a448704aafbbe275d3522c2a1",
+   "say": "Pies keep vanishing at the Campfire. Always at noon. Rude.",
+   "heard": "Pies keep vanishing at the campfire, always at noon. Rude."
+  },
+  "narrator-y9ynqg": {
+   "sha256": "b35daca0dc7c6abc7a95f6ecc01e9c28fc35c2af5325242d119b94c6e36cf544",
+   "say": "Back at the Fair, his lantern is dark now.",
+   "heard": "Back at the fair, his lantern is dark now."
+  },
+  "narrator-yf344i": {
+   "sha256": "1c272acfca1fc3c3bb480ed43d10614095956dc6fe5923480473531c3e46049d",
+   "say": "Mr. Beastie is giving away berries at the Campfire. Scientifically. Oh dear.",
+   "heard": "Mr. Beastie is giving away berries at the campfire. Scientifically. Oh dear."
+  }
+ }
+}

@@ -43,3 +43,14 @@ Local faster-whisper (small, CPU, no API) transcribed every final clip:
 Every clip has its own line from the first word to the last. The only differences are punctuation, spelling (color/colour), "hard"/"hit" for "heart" and "Hint" (the same sentence comes through as "heart" in `rubberstamp-3zbtgc` and `rubberstamp-17sqlo5`) and "round" for "rounds". The voice tests (`voice-audit`, `voice-coverage`, `voices-fx`, `voices-split`) pass, 22/22.
 
 Catalog: **2981/2981**. Every voiced line has a recording.
+
+## Re-record of FAL-262 slipped cuts, first day (14 requests: flash 10, lite 4)
+
+This run started the [re-record plan](voice-sweep-2026-10-22/README.md#proposed-re-record-plan-not-started). It took the eight largest flagged batches, which are mostly lesson-1 lines: granny 60, narrator 46, and inner voices (frogling-boy 40, frogling-girl 33, mothkin-boy 29, mothkin-girl 27, raven-boy 24, owlet-boy 21). That's 280 lines. Every flagged clip still had the hash the sweep recorded, so nothing had changed since. The old clips were moved to `D:\Claude\work\voice-rerecord-backup-2026-10-23` before rendering.
+
+- **Rendered** with `--render --keep-raw --id …` and `RIFT_WHISPER_PYTHON`. The aligned splitter moved between 1 and 24 cuts in each batch, to the pause Whisper heard.
+- **Checked** with the sweep's own method: `sweep.py` transcription, then `classify.mjs`. 270 passed outright. Of the 8 graded "listen", every one was read against its line. They are fine: Whisper drops "Shh" and "Ooh", hears "Foresee" as "4 C", and two are `{name}` lines whose recording leaves the name out by design.
+- **Rejected (2):** `narrator-nthho6` lost its closing "Quickly.", which slipped to the start of `narrator-gum5ow`. Both keep their old clips and stay on the list.
+- **Committed: 278 fixed clips.** Hashes and transcripts are in [voice-recording-2026-10-23-rerecord.json](voice-recording-2026-10-23-rerecord.json).
+
+Quota ledger: flash 10/10 and lite 10/10 for 23 Oct. [remaining.json](voice-sweep-2026-10-22/remaining.json) now lists **259 lines** still to re-record: 67 flash (16 requests) and 192 lite (27 requests). That's about three more days.

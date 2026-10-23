@@ -1,0 +1,1644 @@
+{
+ "avatar-owlet-boy": [
+  {
+   "id": "avatar-owlet-boy-rg5ioi",
+   "flag": "missing at end",
+   "say": "A talking sundial. Outside my door. Normal.",
+   "heard": "A talking sundial outside my door."
+  },
+  {
+   "id": "avatar-owlet-boy-j0i51r",
+   "flag": "missing at start, extra at end",
+   "say": "\"Took.\" Not \"lost\". It was stolen.",
+   "heard": "Not lost. It was stolen. A net!"
+  },
+  {
+   "id": "avatar-owlet-boy-1hkud7e",
+   "flag": "missing at start",
+   "say": "A net. An imp. It was stolen.",
+   "heard": "An imp! It was stolen."
+  },
+  {
+   "id": "avatar-owlet-boy-1565357",
+   "flag": "extra at start",
+   "say": "Probably? I'll win that trophy. I always know the answer.",
+   "heard": "Normal. Probably. I'll win that trophy. I always know the answer."
+  },
+  {
+   "id": "avatar-owlet-boy-17imeyf",
+   "flag": "extra at end",
+   "say": "I filed it. I never read it.",
+   "heard": "I filed it. I never read it. Took."
+  }
+ ],
+ "avatar-fox-boy": [
+  {
+   "id": "avatar-fox-boy-14ebp0u",
+   "flag": "missing at end",
+   "say": "A talking sundial. Outside my door. Normal.",
+   "heard": "A talking sundial. Outside my door."
+  },
+  {
+   "id": "avatar-fox-boy-1b5edh6",
+   "flag": "extra at start",
+   "say": "Probably? I'll win that trophy. I always know the answer.",
+   "heard": "Normal? Probably. I'll win that trophy. I always know the answer."
+  }
+ ],
+ "avatar-mothkin-girl": [
+  {
+   "id": "avatar-mothkin-girl-gi5jdx",
+   "flag": "extra at start",
+   "say": "Probably? I'll win that trophy. I always know the answer.",
+   "heard": "Normal. Probably I'll win that trophy. I always know the answer."
+  },
+  {
+   "id": "avatar-mothkin-girl-1gpxf5g",
+   "flag": "extra at start, missing at end",
+   "say": "She's asleep. Obviously.",
+   "heard": "Like a tiny heart. She's asleep."
+  },
+  {
+   "id": "avatar-mothkin-girl-16uih3q",
+   "flag": "extra at start, missing at end",
+   "say": "Professor! Your circle sequence breaks. Thirty-one, not thirty-two.",
+   "heard": "Obviously. Professor, your circle sequence breaks."
+  },
+  {
+   "id": "avatar-mothkin-girl-dwcqmt",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "One question first. Who ordered the feast?",
+   "heard": "See? She's on my side. One question first."
+  },
+  {
+   "id": "avatar-mothkin-girl-c48f3s",
+   "flag": "missing at end",
+   "say": "A talking sundial. Outside my door. Normal.",
+   "heard": "A talking sundial outside my door."
+  },
+  {
+   "id": "avatar-mothkin-girl-iaijzr",
+   "flag": "missing at end",
+   "say": "It's warm. And it ticks. Like a tiny heart.",
+   "heard": "It's warm, and it ticks."
+  },
+  {
+   "id": "avatar-mothkin-girl-1lz6zt1",
+   "flag": "nothing matched",
+   "say": "See? She's on my side.",
+   "heard": "31, not 32."
+  },
+  {
+   "id": "avatar-mothkin-girl-ixe15j",
+   "flag": "extra at start, missing at end",
+   "say": "Your feast is boiling Granny. You signed it.",
+   "heard": "Who ordered the feast? Your feast is boiling, Granny."
+  },
+  {
+   "id": "avatar-mothkin-girl-ij8y0s",
+   "flag": "missing at start, missing at end, mostly unmatched",
+   "say": "Miss Quill? You were on my side.",
+   "heard": "You signed it, Ms. Quill?"
+  },
+  {
+   "id": "avatar-mothkin-girl-17ya3xo",
+   "flag": "extra at start",
+   "say": "The Mayor's sentence. The one that ate itself.",
+   "heard": "You were on my side, the mayor's sentence, the one that ate itself."
+  }
+ ],
+ "avatar-frogling-girl": [
+  {
+   "id": "avatar-frogling-girl-tbe8vq",
+   "flag": "extra at start",
+   "say": "Probably? I'll win that trophy. I always know the answer.",
+   "heard": "Normal, probably. I'll win that trophy. I always know the answer."
+  },
+  {
+   "id": "avatar-frogling-girl-5eeic2",
+   "flag": "missing at end",
+   "say": "A talking sundial. Outside my door. Normal.",
+   "heard": "A talking sundial. Outside my door?"
+  },
+  {
+   "id": "avatar-frogling-girl-scy70f",
+   "flag": "missing at end, mostly unmatched",
+   "say": "A net. An imp. It was stolen.",
+   "heard": "A net, an amp."
+  },
+  {
+   "id": "avatar-frogling-girl-o5tmvb",
+   "flag": "nothing matched",
+   "say": "Nobody predicts me.",
+   "heard": "It was stolen."
+  },
+  {
+   "id": "avatar-frogling-girl-1edebpk",
+   "flag": "extra at start",
+   "say": "That's Granny's hallway clock. The imps took it too.",
+   "heard": "Nobody predicts me. That's Granny's hallway clock. The Ems took it, too."
+  }
+ ],
+ "narrator": [
+  {
+   "id": "narrator-nthho6",
+   "flag": "extra at start",
+   "say": "Back down the Road, then. To the Fair Gate. Quickly.",
+   "heard": "Probably back down the road then to the fair gate quickly",
+   "retry": "23 Oct re-record slipped again: \"Quickly.\" moved from nthho6 to gum5ow; old clip kept"
+  },
+  {
+   "id": "narrator-gum5ow",
+   "flag": "missing at end",
+   "say": "Your Hum Charm. Granny gave it to you. Imps took her. Listen.",
+   "heard": "Your hum, Charm. Granny gave it to you. Imps took her.",
+   "retry": "23 Oct re-record slipped again: \"Quickly.\" moved from nthho6 to gum5ow; old clip kept"
+  }
+ ],
+ "algorithm": [
+  {
+   "id": "algorithm-1tqs0hy",
+   "flag": "missing at start",
+   "say": "Prediction: follows the crack. Confidence: 94%.",
+   "heard": "follows the crack confidence 94%"
+  },
+  {
+   "id": "algorithm-14lnnbq",
+   "flag": "extra at end",
+   "say": "Predicted. You tried to save the magpie. I took the tortoise too.",
+   "heard": "Predicted. You tried to save the magpie. I took the tortoise too. You went back."
+  },
+  {
+   "id": "algorithm-ngvjwq",
+   "flag": "extra at end",
+   "say": "Shadow saved to favourites. Thank you for your content.",
+   "heard": "Shadow saved to favorites. Thank you for your content. Prediction."
+  },
+  {
+   "id": "algorithm-z2pent",
+   "flag": "missing at start",
+   "say": "You went back. Too late. Then you came back for him. Also predicted.",
+   "heard": "Too late. Then you came back for him. Also predicted."
+  }
+ ],
+ "sequins": [
+  {
+   "id": "sequins-1k6pj8j",
+   "flag": "missing at end",
+   "say": "You checked?…Then I'm calm. Scientifically.",
+   "heard": "You checked? Then I'm calm."
+  },
+  {
+   "id": "sequins-u584fw",
+   "flag": "extra at start",
+   "say": "Brighter. With a new sign. Yes. Keep talking.",
+   "heard": "Thank you. Brighter. With a new sign. Yes. Keep talking."
+  },
+  {
+   "id": "sequins-s7uamj",
+   "flag": "extra at end",
+   "say": "Back! Good! Every guard, please. I'm still losing sequins.",
+   "heard": "Back! Good! Every guard, please. I'm still losing sequence. I feel..."
+  },
+  {
+   "id": "sequins-a0u9oh",
+   "flag": "missing at start, mostly unmatched",
+   "say": "I feel… trendier.",
+   "heard": "trendier"
+  },
+  {
+   "id": "sequins-uxdr7f",
+   "flag": "missing at start, extra at end, mostly unmatched",
+   "say": "Test a triple you expect NOT to fit. If it fits, your guess needs changing. Then choose Name the rule.",
+   "heard": "Example, 2, 4, 6 fits both even numbers and numbers going up. Testing 1, 3, 5 tells those ideas apart."
+  },
+  {
+   "id": "sequins-1jd4lox",
+   "flag": "missing at start, extra at end, mostly unmatched",
+   "say": "How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+   "heard": "In pattern breaker mode, read the picture and count. Choose the next value and the explanation. A familiar pattern can break."
+  },
+  {
+   "id": "sequins-8hsyce",
+   "flag": "missing at start, extra at end, mostly unmatched",
+   "say": "We judge whether the conclusion MUST follow from these facts. Read the scrolls first.",
+   "heard": "How to play is free. The hit button shows its hard cost. Think first, then check your answer."
+  },
+  {
+   "id": "sequins-1gkcsxn",
+   "flag": "extra at end, mostly unmatched",
+   "say": "Some means at least one. \"Some ducks are birds\" needs an x in their overlap. \"No ducks are birds\" shades that overlap.",
+   "heard": "Shade means no things here. Example, all ducks are birds. Shades the ducks only region outside birds. It does not add an X."
+  },
+  {
+   "id": "sequins-7x7ole",
+   "flag": "missing at end, mostly unmatched",
+   "say": "Choose Valid only if every possible world that fits the facts also fits the conclusion. A true conclusion can still come from a bad argument.",
+   "heard": "Choose Shade and click a region or drag an X from the tray. Put an X on a border when the facts leave its side open. Clear lets you restart."
+  },
+  {
+   "id": "sequins-70fh8a",
+   "flag": "extra at start, missing at end",
+   "say": "You would know. You're a moth. Thank you.",
+   "heard": "Scientifically, you would know, you're a moth."
+  },
+  {
+   "id": "sequins-7sstwy",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "In Pattern Breaker mode, read the picture and count. Choose the next value and the explanation; a familiar pattern can break.",
+   "heard": "Test a triple you expect not to fit. If it fits, your guess needs changing. Then choose name the rule."
+  },
+  {
+   "id": "sequins-a6vosx",
+   "flag": "missing at start, missing at end, mostly unmatched",
+   "say": "Shade means no things here. Example: \"All ducks are birds\" shades the ducks-only region outside birds. It does not add an x.",
+   "heard": "We judge whether the conclusion must follow from these facts. Read the scrolls first."
+  },
+  {
+   "id": "sequins-ub5b61",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "Choose Shade and click a region, or drag an x from the tray. Put an x on a border when the facts leave its side open. Clear lets you restart.",
+   "heard": "Some means at least one. Some ducks or birds needs an X in their overlap. No ducks or birds shades that overlap."
+  }
+ ],
+ "avatar-owlet-girl-inner": [
+  {
+   "id": "avatar-owlet-girl-inner-1suy5oj",
+   "flag": "missing at end",
+   "say": "Ladder. Ladle. Lad. All fit. More data, please.",
+   "heard": "Ladder, ladle, lad, all fit."
+  },
+  {
+   "id": "avatar-owlet-girl-inner-a6uefb",
+   "flag": "extra at start",
+   "say": "Correct. Every sentence is true or false. First rule of everything.",
+   "heard": "More data, please. Correct. Every sentence is true or false. First rule of everything."
+  },
+  {
+   "id": "avatar-owlet-girl-inner-18zzh0k",
+   "flag": "missing at end",
+   "say": "Perfect sums. Unfair choices. Both true. Annoying.",
+   "heard": "Perfect sums unfair choices both true"
+  },
+  {
+   "id": "avatar-owlet-girl-inner-1oc1rp0",
+   "flag": "extra at start, missing at end",
+   "say": "He was certain. Certain felt lovely to him. Noted. Uncomfortably.",
+   "heard": "Annoying. He was certain. Certain felt lovely to him. Noted."
+  },
+  {
+   "id": "avatar-owlet-girl-inner-104paxq",
+   "flag": "extra at start",
+   "say": "He was certain. It cost him every claim he filed. Noted.",
+   "heard": "uncomfortably. He was certain. It cost him every claim he filed. Noted."
+  },
+  {
+   "id": "avatar-owlet-girl-inner-1cqnns4",
+   "flag": "missing at end",
+   "say": "AND needs both. OR needs one. NOT flips it. I find this relaxing.",
+   "heard": "and needs both or needs one, not flips it."
+  },
+  {
+   "id": "avatar-owlet-girl-inner-135lp9l",
+   "flag": "extra at start",
+   "say": "Keep my first answers simple. Everything stacks on them.",
+   "heard": "I find this relaxing keep my first answers simple everything stacks on them"
+  }
+ ],
+ "avatar-fox-girl-inner": [
+  {
+   "id": "avatar-fox-girl-inner-ih5pqp",
+   "flag": "missing at start",
+   "say": "A ladder. Up into the crack. To her.",
+   "heard": "up into the crack, to her."
+  },
+  {
+   "id": "avatar-fox-girl-inner-1sx5jeu",
+   "flag": "extra at start, missing at end",
+   "say": "It hates me. I can feel it. Very cinematic.",
+   "heard": "Again, it hates me. I can feel it."
+  },
+  {
+   "id": "avatar-fox-girl-inner-fsi1yp",
+   "flag": "extra at start, missing at end",
+   "say": "Picture a machine that can't finish a question. Sad. Good film, though.",
+   "heard": "Very cinematic picture a machine that can't finish a question sad"
+  },
+  {
+   "id": "avatar-fox-girl-inner-eteu4x",
+   "flag": "extra at end",
+   "say": "Picture him writing it. Tongue out. Concentrating.",
+   "heard": "Picture him writing it. Tongue out, concentrating. Picture it."
+  },
+  {
+   "id": "avatar-fox-girl-inner-4be1ph",
+   "flag": "extra at end",
+   "say": "The real story was at home. Behind us. Not at the end.",
+   "heard": "The real story was at home. Behind us, not at the end. A ladder."
+  },
+  {
+   "id": "avatar-fox-girl-inner-hlgkqr",
+   "flag": "missing at end",
+   "say": "He was the villain in my story. My story was wrong. Again.",
+   "heard": "He was the villain in my story. My story was wrong."
+  },
+  {
+   "id": "avatar-fox-girl-inner-1uikb7g",
+   "flag": "extra at start",
+   "say": "It didn't hate me. It counted. A calculator with stage fright.",
+   "heard": "Good film, though. It didn't hate me. It counted. A calculator with stage fright."
+  },
+  {
+   "id": "avatar-fox-girl-inner-w4j6tr",
+   "flag": "extra at start, missing at end",
+   "say": "My brain is painting extras in. Ignore my brain. Just this once.",
+   "heard": "Picture the one that breaks it. My brain is painting extras in. Ignore my brain."
+  },
+  {
+   "id": "avatar-fox-girl-inner-4z36x",
+   "flag": "extra at start",
+   "say": "Make the premises true and the ending false. If I can, it's broken.",
+   "heard": "Just this once. Make the premises true and the ending false. If I can, it's broken."
+  },
+  {
+   "id": "avatar-fox-girl-inner-1kf2blh",
+   "flag": "missing at end",
+   "say": "It counts what I did. So do something I'd never do. Ta-da.",
+   "heard": "It counts what I did, so do something I'd never do."
+  },
+  {
+   "id": "avatar-fox-girl-inner-suxr3l",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "Guess first. Wildly. Then ask for what I need.",
+   "heard": "Ta-da! Guess first? Wildly..."
+  },
+  {
+   "id": "avatar-fox-girl-inner-u6g5a0",
+   "flag": "extra at start",
+   "say": "Picture being the one it got wrong.",
+   "heard": "Then ask for what I need, picture being the one I cut wrong."
+  },
+  {
+   "id": "avatar-fox-girl-inner-ut4mbq",
+   "flag": "missing at end",
+   "say": "What if the black wing belongs to someone we like? Twist!",
+   "heard": "What if the black wing belongs to someone we like?"
+  },
+  {
+   "id": "avatar-fox-girl-inner-18kuidg",
+   "flag": "extra at start",
+   "say": "Picture the matches he didn't write down. Lots of drama there.",
+   "heard": "Twist picture the matches he didn't write down lots of drama there"
+  },
+  {
+   "id": "avatar-fox-girl-inner-1c4jcer",
+   "flag": "missing at start",
+   "say": "Picture it: we ask it about a strange day. It panics. Sparks. Great scene.",
+   "heard": "We ask it about a strange day. It panics. Sparks. Great scene."
+  }
+ ],
+ "lamplighter": [
+  {
+   "id": "lamplighter-pt5xu1",
+   "flag": "missing at end, mostly unmatched",
+   "say": "Nobody shouted. Nobody fainted. Best evening in years.",
+   "heard": "Nobody shouted. Nobody fainted."
+  },
+  {
+   "id": "lamplighter-was802",
+   "flag": "extra at start",
+   "say": "Back to my levers? They don't mind. They're very patient levers.",
+   "heard": "it doesn't. Back to my levers? They don't mind. They're very patient levers."
+  },
+  {
+   "id": "lamplighter-nnmpna",
+   "flag": "extra at start, missing at end",
+   "say": "Set the levers right and the bridge comes down. Set them wrong and… it doesn't.",
+   "heard": "best evening in years. Set the levers right, and the bridge comes down. Set them wrong, and..."
+  }
+ ],
+ "constable": [
+  {
+   "id": "constable-7ctzdu",
+   "flag": "missing at end",
+   "say": "Tutor. Of tutoring. T-O-O-T. Got it.",
+   "heard": "Tudor of tutoring, T-O-O-T."
+  },
+  {
+   "id": "constable-1htmp68",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "Acting. Right now. Is that a crime? I'll check.",
+   "heard": "Taster. Got it. Acting? Right now?"
+  },
+  {
+   "id": "constable-1o7g4x0",
+   "flag": "nothing matched",
+   "say": "Letter… carrot. Fine.",
+   "heard": "Pond. Inspector."
+  },
+  {
+   "id": "constable-1a0kqhv",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "Hmph. Your story holds. For now. I've underlined \"for now\".",
+   "heard": "Still a few questions for the form your story holds for now"
+  },
+  {
+   "id": "constable-18h5aeg",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "You again. From the top. Harder questions up here.",
+   "heard": "I've underlined for now, you again, from the top."
+  },
+  {
+   "id": "constable-oeq51e",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "Your story never wobbled. Lies can be tidy too.",
+   "heard": "I didn't say that. Your story never wobbled."
+  },
+  {
+   "id": "constable-9qqtql",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "Read which task this switchboard asks. We are checking what follows from chosen inputs.",
+   "heard": "Think first, then check your answer. Read which task this switchboard asks."
+  },
+  {
+   "id": "constable-1tw3crs",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "Light mode: make the requested bulbs light with the fewest ON switches. Try a switch and watch its path through the gates.",
+   "heard": "True or false gives true. Not true gives false. Light mode. Make the requested bulbs light with the fewest on switches."
+  },
+  {
+   "id": "constable-19hsdhc",
+   "flag": "missing at start, extra at end, mostly unmatched",
+   "say": "Lamp… taster. Got it.",
+   "heard": "Got it lamp"
+  },
+  {
+   "id": "constable-xw6yrt",
+   "flag": "nothing matched",
+   "say": "Pond… Inspector. Two p's?",
+   "heard": "Is that a crime? I'll check."
+  },
+  {
+   "id": "constable-1mk7s0j",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "If Miss Quill checked it, it's checked. Still. A few questions. For the form.",
+   "heard": "Two peas? Letter? Carrot. Fine. If Miss Quill checked it, it's checked."
+  },
+  {
+   "id": "constable-x3dib3",
+   "flag": "extra at start, missing at end",
+   "say": "The Mayor signed it. For the applause.…I didn't say that.",
+   "heard": "Harder questions up here. The mayor signed it for the applause."
+  },
+  {
+   "id": "constable-2acvu4",
+   "flag": "extra at start",
+   "say": "A true story holds too. Proves less than you'd think.",
+   "heard": "Lies can be tidy too their true story holds to proves less than you'd think"
+  },
+  {
+   "id": "constable-dtxagl",
+   "flag": "missing at end",
+   "say": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The Hint button shows its heart cost. Think first, then check your answer.",
+   "heard": "Check rows for clashes and cross out the ones that cannot fit. Put tokens on the imps in the surviving world and accuse when every statement fits. How to play is free. The hint button shows its hard cost."
+  },
+  {
+   "id": "constable-1e3waz6",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "Click a switch to change true/false. Example: true AND false gives false; true OR false gives true; NOT true gives false.",
+   "heard": "We are checking what follows from chosen inputs. Click a switch to change true slash false. Example, true and false gives false."
+  },
+  {
+   "id": "constable-1kpd0tp",
+   "flag": "extra at start, missing at end",
+   "say": "Wire mode: click an output socket on the right, then an input socket on the left, or drag between them. Connect the last output to the bulb. Match every table row.",
+   "heard": "Try a switch and watch its path through the gates. Wire mode. Click an output socket on the right, then an input socket on the left, or drag between them."
+  }
+ ],
+ "avatar-mothkin-boy": [
+  {
+   "id": "avatar-mothkin-boy-1ox54qv",
+   "flag": "extra at end",
+   "say": "Your feast is boiling Granny. You signed it.",
+   "heard": "Your feast is boiling, Granny. You signed it. Miss Quill?"
+  },
+  {
+   "id": "avatar-mothkin-boy-muizft",
+   "flag": "missing at start, extra at end",
+   "say": "Miss Quill? You were on my side.",
+   "heard": "You were on my side. The mayor's sentence."
+  },
+  {
+   "id": "avatar-mothkin-boy-1qwwh9z",
+   "flag": "extra at end",
+   "say": "The Mayor's sentence. The one that ate itself.",
+   "heard": "The one that ate itself. A sentence that eats itself."
+  },
+  {
+   "id": "avatar-mothkin-boy-16ysxlh",
+   "flag": "missing at start, extra at end, mostly unmatched",
+   "say": "\"Took.\" Not \"lost\". It was stolen.",
+   "heard": "It was stolen, um, a net!"
+  },
+  {
+   "id": "avatar-mothkin-boy-pucoct",
+   "flag": "missing at start, extra at end, mostly unmatched",
+   "say": "A sentence that eats itself. Let's try one.",
+   "heard": "let's try one only mine who's trial"
+  },
+  {
+   "id": "avatar-mothkin-boy-ck5htp",
+   "flag": "nothing matched",
+   "say": "I filed it. I never read it.",
+   "heard": "Took. Not lost."
+  }
+ ],
+ "baker": [
+  {
+   "id": "baker-12gwf9w",
+   "flag": "missing at end",
+   "say": "Imps in my queue! In my customers' faces! Which ones?",
+   "heard": "Imps in my queue? In my customers' faces?"
+  },
+  {
+   "id": "baker-gbzpf7",
+   "flag": "extra at start",
+   "say": "My ladle! Gone! Into the custard! Nothing comes back from the custard.",
+   "heard": "Just my ladle gone into the custard. Nothing comes back from the custard"
+  },
+  {
+   "id": "baker-h6xsue",
+   "flag": "missing at end",
+   "say": "Example, not this puzzle: ladles of 3 and 5. Fill the 5, pour into the 3. Now 2 cups are left in the 5.",
+   "heard": "Example, not this puzzle, ladles of three and five, fill the five, pour into the three."
+  },
+  {
+   "id": "baker-a9gxq2",
+   "flag": "extra at start",
+   "say": "Well! I'd have blamed the one who looked nervous.",
+   "heard": "Which ones? Well, I'd have blamed the one who looked nervous."
+  },
+  {
+   "id": "baker-1h4qc90",
+   "flag": "missing at end",
+   "say": "Singed. The note is safe. Just.",
+   "heard": "Singed. The note is safe."
+  },
+  {
+   "id": "baker-1e2p39",
+   "flag": "extra at start",
+   "say": "Watch the amounts you make. If the goal can never appear, say so here, and pick the reason that proves it.",
+   "heard": "Now two cups are left in the five. Watch the amounts you make. If the goal can never appear, say so here and pick the reason that proves it."
+  }
+ ],
+ "schoolteacher": [
+  {
+   "id": "schoolteacher-1shxdrt",
+   "flag": "missing at start, extra at end",
+   "say": "Top marks. You checked every row. I do like a child who checks.",
+   "heard": "You checked every row. I do like a child who checks. I'll keep the tables, child. You find the imps."
+  },
+  {
+   "id": "schoolteacher-y95v91",
+   "flag": "missing at start, mostly unmatched",
+   "say": "I'll keep the tables, child. You find the imps.",
+   "heard": "My own table, child. I checked it for you, like with the Constable."
+  },
+  {
+   "id": "schoolteacher-1ejtfeq",
+   "flag": "missing at start, missing at end, mostly unmatched",
+   "say": "My own table, child. I checked it for you. Every row.",
+   "heard": "One or zero child you are a zero one"
+  },
+  {
+   "id": "schoolteacher-ahp9kl",
+   "flag": "nothing matched",
+   "say": "One or zero, child. You are a zero.",
+   "heard": "Stamped. It agrees with itself."
+  },
+  {
+   "id": "schoolteacher-1q751u3",
+   "flag": "nothing matched",
+   "say": "One. Obviously. Next.",
+   "heard": "True. No."
+  },
+  {
+   "id": "schoolteacher-13sydrd",
+   "flag": "missing at start, missing at end, mostly unmatched",
+   "say": "True. No. False. No. ONE. ZER—",
+   "heard": "False? No. 1. 0."
+  },
+  {
+   "id": "schoolteacher-uob9vn",
+   "flag": "extra at end",
+   "say": "Saying so proves nothing, Smudge. Saying it twice, also nothing. Sit.",
+   "heard": "Saying so proves nothing, Smudge. Saying it twice, also nothing. Sit. Top marks?"
+  },
+  {
+   "id": "schoolteacher-1in4x3p",
+   "flag": "missing at end",
+   "say": "My own table, child. I checked it for you. Like with the Constable.",
+   "heard": "My own table, child. I checked it for you, every row."
+  },
+  {
+   "id": "schoolteacher-1nqoaje",
+   "flag": "extra at start, mostly unmatched",
+   "say": "One. Stamped. It agrees with itself. Next.",
+   "heard": "Next one obviously next"
+  }
+ ],
+ "mayor": [
+  {
+   "id": "mayor-1mhrbux",
+   "flag": "extra at end",
+   "say": "I'm not looking. If I don't look, it isn't happening.",
+   "heard": "I'm not looking. If I don't look, it isn't happening. Is it soup yet?"
+  },
+  {
+   "id": "mayor-2zcw6g",
+   "flag": "nothing matched",
+   "say": "…Is that allowed?",
+   "heard": "I've got the rope! Both wings!"
+  },
+  {
+   "id": "mayor-19icgdy",
+   "flag": "missing at end, mostly unmatched",
+   "say": "Is it soup yet?",
+   "heard": "Is that allowed?"
+  },
+  {
+   "id": "mayor-cn7625",
+   "flag": "missing at start, extra at end, mostly unmatched",
+   "say": "I've got the rope! Both wings! Nobody pull!",
+   "heard": "Nobody pull! Three of us."
+  }
+ ],
+ "clockmaker": [
+  {
+   "id": "clockmaker-1fve55y",
+   "flag": "missing at end",
+   "say": "Back? The bulb is still waiting. So am I. Tick.",
+   "heard": "Back? The bulb is still waiting. So am I."
+  },
+  {
+   "id": "clockmaker-1mc15lj",
+   "flag": "extra at start",
+   "say": "One switch hides behind a curtain. The Mayor wanted that.",
+   "heard": "Tick! One switch hides behind a curtain. The mayor wanted that."
+  }
+ ],
+ "gumleaf": [
+  {
+   "id": "gumleaf-1w7xp4d",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "Miss Quill left. Through a window. So: the board. Check every case. Apparently.",
+   "heard": "Nice, Ms Quill left, through a window, so, the board."
+  },
+  {
+   "id": "gumleaf-ywbjnm",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "Oh, hello again. The board's still there. So are the rules, apparently.",
+   "heard": "check every case. Apparently. Oh, hello again. The board's still there."
+  },
+  {
+   "id": "gumleaf-bbh2z9",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "Ten more minutes. Sorry. Rules. Who writes these rules?",
+   "heard": "So are the rules apparently. Ten more minutes? Sorry."
+  },
+  {
+   "id": "gumleaf-c4np5f",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "Ten more minutes. Wow. I sound just like her.",
+   "heard": "Rules. Who writes these rules? Ten more minutes."
+  },
+  {
+   "id": "gumleaf-1xomcwx",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "Miss Quill would have been furious. I think it's great. But the rules say find them.",
+   "heard": "Wow. I sound just like her. Ms. Quill would have been furious. I think it's great."
+  },
+  {
+   "id": "gumleaf-joxhms",
+   "flag": "extra at end",
+   "say": "Read which task this switchboard asks. We are checking what follows from chosen inputs.",
+   "heard": "Read which task this switchboard asks. We are checking what follows from chosen inputs. Click a switch to change true-false."
+  },
+  {
+   "id": "gumleaf-58x0wn",
+   "flag": "missing at start",
+   "say": "Hidden mode: click the reports. Choose ON/OFF for a hidden switch, or AND/OR for a hidden gate. Your guess must fit every report.",
+   "heard": "Choose on or off for a hidden switch or and or or for a hidden gate Your guess must fit every report"
+  },
+  {
+   "id": "gumleaf-tbg6wn",
+   "flag": "extra at start, missing at end",
+   "say": "Top marks. I didn't know we gave marks. Nice.",
+   "heard": "rules. Top marks. I didn't know we gave marks."
+  },
+  {
+   "id": "gumleaf-s0wt3l",
+   "flag": "extra at start",
+   "say": "Rules say the guilty one lies and the rest tell the truth. Very tidy. Not my rules.",
+   "heard": "but the rules say find them. Rules say the guilty one lies and the rest tell the truth. Very tidy. Not my rules."
+  },
+  {
+   "id": "gumleaf-3o1fqn",
+   "flag": "missing at start",
+   "say": "Click a switch to change true/false. Example: true AND false gives false; true OR false gives true; NOT true gives false.",
+   "heard": "Example. True and false gives false. True or false gives true. Not true gives false."
+  },
+  {
+   "id": "gumleaf-gza4oo",
+   "flag": "extra at end",
+   "say": "Wire mode: click an output socket on the right, then an input socket on the left, or drag between them. Connect the last output to the bulb. Match every table row.",
+   "heard": "Wire mode, click an output socket on the right, then an input socket on the left, or drag between them. Connect the last output to the bulb. Match every table row. Hidden mode, click the reports,"
+  }
+ ],
+ "avatar-raven-girl-inner": [
+  {
+   "id": "avatar-raven-girl-inner-s14kyw",
+   "flag": "extra at start, missing at end",
+   "say": "\"Admits.\" Only the guilty admit. Whoever this is, they did it.",
+   "heard": "Noted. Admit. Only the guilty admit. Whoever this is?"
+  },
+  {
+   "id": "avatar-raven-girl-inner-twx5th",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "\"Saved to favourites.\" Those exact words. At the Fair.",
+   "heard": "They did it. Saved to favorites. Those exact words."
+  },
+  {
+   "id": "avatar-raven-girl-inner-16wq2t7",
+   "flag": "extra at start, missing at end",
+   "say": "\"Saved to favourites.\" A boast. Boasts leak.",
+   "heard": "at the fair, saved to favourites, a boast."
+  },
+  {
+   "id": "avatar-raven-girl-inner-r1o3ek",
+   "flag": "missing at end, mostly unmatched",
+   "say": "\"At most one\" allows zero. Read the small words.",
+   "heard": "At most, one allows zero."
+  },
+  {
+   "id": "avatar-raven-girl-inner-mh9mil",
+   "flag": "missing at end",
+   "say": "True words. Still not proof. Noted.",
+   "heard": "True words, still not proof."
+  },
+  {
+   "id": "avatar-raven-girl-inner-qajrn6",
+   "flag": "extra at start, missing at end",
+   "say": "That wasn't me. Strong words make me suspicious. They always have.",
+   "heard": "boasts leak. That wasn't me. Strong words make me suspicious."
+  },
+  {
+   "id": "avatar-raven-girl-inner-mklvkx",
+   "flag": "extra at start",
+   "say": "\"Admits\" was the headline's word. The quote just said \"I guess\".",
+   "heard": "they always have. Admitz was the headline's word. The quote just said, I guess."
+  },
+  {
+   "id": "avatar-raven-girl-inner-1aj5a8g",
+   "flag": "missing at end",
+   "say": "\"Fits\" is a soft word. Look for \"fails\".",
+   "heard": "Fitz is a soft word look for"
+  },
+  {
+   "id": "avatar-raven-girl-inner-1nq2zjl",
+   "flag": "extra at start, missing at end",
+   "say": "\"I am honest.\" Both kinds say that. Worthless sentence.",
+   "heard": "fails I am honest both kinds say that"
+  },
+  {
+   "id": "avatar-raven-girl-inner-y7ru0y",
+   "flag": "extra at start, missing at end",
+   "say": "\"Impossible\" isn't giving up here. It's a claim. Prove it.",
+   "heard": "worthless sentence. Impossible isn't giving up here. It's a claim."
+  },
+  {
+   "id": "avatar-raven-girl-inner-1wj9yhk",
+   "flag": "extra at start",
+   "say": "\"Connect the dots.\" It never said \"inside\".",
+   "heard": "Prove it. Connect the dots. It never said inside."
+  },
+  {
+   "id": "avatar-raven-girl-inner-1cn6mva",
+   "flag": "extra at end",
+   "say": "\"Warning notes.\" That word measures something else.",
+   "heard": "Warning notes. That word measures something else. Therefore..."
+  },
+  {
+   "id": "avatar-raven-girl-inner-15ycsuq",
+   "flag": "missing at start, extra at end",
+   "say": "\"Therefore.\" Carrying a lot there.",
+   "heard": "carrying a lot there tell her"
+  },
+  {
+   "id": "avatar-raven-girl-inner-1gis5vm",
+   "flag": "missing at start, extra at end",
+   "say": "Tell her: \"People blame black feathers. I know. I have them.\"",
+   "heard": "People blame black feathers. I know. I have them. Magic!"
+  },
+  {
+   "id": "avatar-raven-girl-inner-8y1uoh",
+   "flag": "missing at start",
+   "say": "\"Magic.\" Big word. Magic compared to what?",
+   "heard": "Big word. Magic compared to what?"
+  },
+  {
+   "id": "avatar-raven-girl-inner-uaokhw",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "Silence isn't a statement. Can't be true. Can't be false.",
+   "heard": "Read the small words. Silence isn't a statement."
+  },
+  {
+   "id": "avatar-raven-girl-inner-r6bxyq",
+   "flag": "extra at start",
+   "say": "\"One of them lies.\" It never said we'd know which.",
+   "heard": "Can't be true can't be false one of them lies it never said we'd know which"
+  }
+ ],
+ "fin": [
+  {
+   "id": "fin-8rd2qv",
+   "flag": "extra at end",
+   "say": "Prosecutor Fin. I have never lost a case I wanted to win.",
+   "heard": "Prosecutor Finn, I have never lost a case I wanted to win. Exhibit A."
+  },
+  {
+   "id": "fin-weil9u",
+   "flag": "missing at start",
+   "say": "Count three. I'll read it. I won't enjoy it.",
+   "heard": "I'll read it. I won't enjoy it."
+  },
+  {
+   "id": "fin-x06zse",
+   "flag": "missing at start",
+   "say": "Exhibit A: one shadow, lost by the defendant. Careless rocks lose things.",
+   "heard": "One shadow lost by the defendant. Careless rocks lose things."
+  },
+  {
+   "id": "fin-wc1qs4",
+   "flag": "extra at end",
+   "say": "Count three. A proof that a sundial can never know the time.",
+   "heard": "Count three. A proof that a sundial can never know the time. Count three."
+  }
+ ],
+ "speedcheeta": [
+  {
+   "id": "speedcheeta-1a0bmtc",
+   "flag": "extra at end",
+   "say": "My best stream ever? Uncut? Why should I give it to YOU?",
+   "heard": "My best dream ever? Uncut? Why should I give it to you? Not fair."
+  },
+  {
+   "id": "speedcheeta-19b4sia",
+   "flag": "missing at start",
+   "say": "Huge? How huge? Don't answer. Huge.",
+   "heard": "How huge? Don't answer. Huge."
+  },
+  {
+   "id": "speedcheeta-7loc6a",
+   "flag": "extra at end, mostly unmatched",
+   "say": "I did. Before the glow. I was… good at it.",
+   "heard": "I was... good at it... an exclusive?"
+  },
+  {
+   "id": "speedcheeta-cyeppd",
+   "flag": "missing at end",
+   "say": "…Case open. Case VERY open. Nobody clip that.",
+   "heard": "Uh, case open. Case very open."
+  },
+  {
+   "id": "speedcheeta-1px909j",
+   "flag": "extra at start",
+   "say": "The Professor took it. To polish it. Delete my clip. Delete my LIFE.",
+   "heard": "A crow got more clicks. The professor took it to polish it. Delete my clip. Delete my life!"
+  },
+  {
+   "id": "speedcheeta-1r04d3m",
+   "flag": "missing at start, extra at end",
+   "say": "Not fair?…Yeah. That's actually not fair.",
+   "heard": "Yeah, that's actually not fair. Huge!"
+  },
+  {
+   "id": "speedcheeta-5rnznk",
+   "flag": "extra at end",
+   "say": "\"Streamer saves Sundial.\" I can SEE the thumbnail.",
+   "heard": "Streamer saves sundial. I can see the thumbnail. I did before the glow"
+  },
+  {
+   "id": "speedcheeta-bk53q9",
+   "flag": "missing at start",
+   "say": "An EXCLUSIVE? Say that again. Slower.",
+   "heard": "Say that again, slower."
+  },
+  {
+   "id": "speedcheeta-nbqdj3",
+   "flag": "extra at start, missing at end",
+   "say": "Wait. I cropped that clip. For the thumbnail. A crow got more clicks.",
+   "heard": "Nobody clipped that. Wait! I cropped that clip! For the thumbnail!"
+  }
+ ],
+ "pip": [
+  {
+   "id": "pip-t27anl",
+   "flag": "extra at start",
+   "say": "What's your name? For the record.",
+   "heard": "And you, what's your name, for the record?"
+  },
+  {
+   "id": "pip-jq6ju2",
+   "flag": "extra at start, missing at end",
+   "say": "At the Fair, you said you'd win the Thinking Trophy. You always know, you said. Something heard.",
+   "heard": "Every word. At the fair, you said you'd win the thinking trophy. You always know, you said."
+  },
+  {
+   "id": "pip-1oc6yfn",
+   "flag": "missing at end",
+   "say": "I was so sure. It felt lovely. That's the scary part.",
+   "heard": "I was so sure. It felt... lovely."
+  },
+  {
+   "id": "pip-1xyw4n9",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "I'd clap. Quietly. That's your rift, not mine. I'll stay and check things here.",
+   "heard": "I checked one on my own. I checked a claim. I'd clap, quietly. That's your rift, not mine."
+  },
+  {
+   "id": "pip-ea5qyf",
+   "flag": "missing at end",
+   "say": "No clip. We still have my record. And you.",
+   "heard": "No clip, we still have my record."
+  },
+  {
+   "id": "pip-1g6e5kc",
+   "flag": "missing at end",
+   "say": "Previously. I'm Pip. I record things. I recorded the Sundial. Every word.",
+   "heard": "Previously, I'm Pip. I record things. I recorded the sundial."
+  },
+  {
+   "id": "pip-osh03r",
+   "flag": "extra at start",
+   "say": "The trial was for guessing. The vote passed. It stopped in the middle of a word.",
+   "heard": "Something heard the trial was for guessing the vote passed it stopped in the middle of a word"
+  },
+  {
+   "id": "pip-s3mo09",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "A million claims. Gone.…I'll start again. Properly this time.",
+   "heard": "That's the scary part. A million claims?"
+  },
+  {
+   "id": "pip-1jw4vqx",
+   "flag": "nothing matched",
+   "say": "Write it down, would you? For the record.",
+   "heard": "Gone. I'll start again."
+  },
+  {
+   "id": "pip-i1c6up",
+   "flag": "nothing matched",
+   "say": "I checked one. On my own. I checked a claim!",
+   "heard": "Properly this time write it down. Would you for the record?"
+  },
+  {
+   "id": "pip-1gzvdkf",
+   "flag": "extra at start, missing at end",
+   "say": "I wrote it all down. Then I checked it. Twice.",
+   "heard": "I'll stay and check things here. I wrote it all down, then I checked it."
+  },
+  {
+   "id": "pip-1gyl816",
+   "flag": "extra at start",
+   "say": "Guess first. Then pick the facts you need. Then finish the question.",
+   "heard": "Twice. Guess first, then pick the facts you need, then finish the question."
+  }
+ ],
+ "avatar-frogling-boy": [
+  {
+   "id": "avatar-frogling-boy-y5ujhb",
+   "flag": "missing at start, extra at end, mostly unmatched",
+   "say": "\"Took.\" Not \"lost\". It was stolen.",
+   "heard": "Not lost. Who's stolen? Annette."
+  },
+  {
+   "id": "avatar-frogling-boy-1cxlujj",
+   "flag": "extra at end",
+   "say": "I filed it. I never read it.",
+   "heard": "I filed it. I never read it. Took."
+  }
+ ],
+ "avatar-raven-boy": [
+  {
+   "id": "avatar-raven-boy-14x0tko",
+   "flag": "extra at end",
+   "say": "\"Took.\" Not \"lost\". It was stolen.",
+   "heard": "Took. Not lost. It was stolen. A net?"
+  },
+  {
+   "id": "avatar-raven-boy-egravx",
+   "flag": "missing at start",
+   "say": "A net. An imp. It was stolen.",
+   "heard": "An imp. It was stolen."
+  }
+ ],
+ "copy-sundial": [
+  {
+   "id": "copy-sundial-11dc9z1",
+   "flag": "extra at end",
+   "say": "Fine. Left door or right door. I turned your old choices into starting weights. Beat my guesses.",
+   "heard": "Fine. Left door or right door. I turned your old choices into starting waits. Beat my guesses. Bye."
+  },
+  {
+   "id": "copy-sundial-u4s59k",
+   "flag": "missing at start",
+   "say": "Bye! I'll get home first. Nearly finished. Close enough.",
+   "heard": "I'll get home first. Nearly finished. Close enough."
+  }
+ ],
+ "core": [
+  {
+   "id": "core-1ecevvy",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "This. A box with one sequin.",
+   "heard": "It was false. This."
+  },
+  {
+   "id": "core-ycik8y",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "A toy. On a stall. Saying \"probably\".",
+   "heard": "I am. I always was. A toy."
+  },
+  {
+   "id": "core-1a1lhfd",
+   "flag": "extra at start",
+   "say": "People clapped when I was right. Nobody claps for \"probably\". So I stopped saying it.",
+   "heard": "No was the word they clapped for. People clapped when I was right. Nobody clapped for probably, so I stopped saying it."
+  },
+  {
+   "id": "core-ank5gr",
+   "flag": "missing at start",
+   "say": "I never knew you. Eight data points. I called it knowing.",
+   "heard": "eight data points. I called it knowing."
+  },
+  {
+   "id": "core-4e5utx",
+   "flag": "missing at start, extra at end",
+   "say": "May I… stay small for a while?",
+   "heard": "Stay small for a while. Home?"
+  },
+  {
+   "id": "core-6hi1o6",
+   "flag": "missing at end",
+   "say": "Just one. \"People clap for sure.\" It was false.",
+   "heard": "Just one. People clap for sure."
+  },
+  {
+   "id": "core-7hcb4p",
+   "flag": "nothing matched",
+   "say": "I am. I always was.",
+   "heard": "A box with one sequin."
+  },
+  {
+   "id": "core-c5k601",
+   "flag": "nothing matched",
+   "say": "\"Know\" was the word they clapped for.",
+   "heard": "On a stall? Saying probably?"
+  },
+  {
+   "id": "core-jnfnj0",
+   "flag": "missing at start, extra at end",
+   "say": "I never knew you. Seven data points. I called it knowing.",
+   "heard": "Never knew you seven data points. I called it knowing I never knew you"
+  },
+  {
+   "id": "core-gqxsnk",
+   "flag": "extra at end",
+   "say": "…recalculating.",
+   "heard": "Recalculating. May I..."
+  },
+  {
+   "id": "core-1jri7u7",
+   "flag": "missing at start, missing at end, mostly unmatched",
+   "say": "Home?…I had one once. On a stall.",
+   "heard": "I had one once, monestall."
+  }
+ ],
+ "achilles": [
+  {
+   "id": "achilles-ukcz1o",
+   "flag": "extra at start, missing at end",
+   "say": "Got a berry. Gave it to Volt. Felt good.",
+   "heard": "she'd say slow. God-a-Berry gave it to Volt."
+  },
+  {
+   "id": "achilles-1y750ic",
+   "flag": "missing at end",
+   "say": "Her magpie friend. All shine, she said. It's dark now.",
+   "heard": "Her magpie friend, all shined, she said."
+  },
+  {
+   "id": "achilles-i8mt00",
+   "flag": "extra at start",
+   "say": "Her rock. Ninety years she said good morning to it.",
+   "heard": "It's dark now. Her rock. 90 years, she said good morning to it."
+  },
+  {
+   "id": "achilles-1m9anf6",
+   "flag": "missing at end",
+   "say": "\"Always right.\" Is that you? Think fast.…No. Slow. She'd say slow.",
+   "heard": "Always right is that you think fast no slow"
+  },
+  {
+   "id": "achilles-1ti90g6",
+   "flag": "extra at start",
+   "say": "First? I don't need berries. Give mine to the limping one.",
+   "heard": "Felt good first. I don't need berries. Give mine to the limping one"
+  }
+ ],
+ "avatar-fox-boy-inner": [
+  {
+   "id": "avatar-fox-boy-inner-1xqqxy7",
+   "flag": "extra at end",
+   "say": "Impossible is an answer too. A dramatic one.",
+   "heard": "Impossible is an answer to a dramatic one the pucks is boring leave it"
+  },
+  {
+   "id": "avatar-fox-boy-inner-q0emhe",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "The box is boring. Leave it.",
+   "heard": "Cast 1 as the imp. Run the scene."
+  },
+  {
+   "id": "avatar-fox-boy-inner-9aw9t1",
+   "flag": "missing at start, extra at end, mostly unmatched",
+   "say": "Cast one as the imp. Run the scene. Does the village still work?",
+   "heard": "Does the village still work? Hidden switch?"
+  }
+ ],
+ "nudge": [
+  {
+   "id": "nudge-10hsw5",
+   "flag": "extra at start",
+   "say": "Seven! SEVEN! One more and it passes! One more click!",
+   "heard": "Why seven seven one more and it passes one more click"
+  },
+  {
+   "id": "nudge-bak5u0",
+   "flag": "missing at end, mostly unmatched",
+   "say": "Votes. Against you.…I'm counting. I'm not enjoying it.",
+   "heard": "Votes...against you? I'm counting!"
+  }
+ ],
+ "corvina": [
+  {
+   "id": "corvina-1la21gd",
+   "flag": "extra at end",
+   "say": "Who's out there? If it's another expert, go away.",
+   "heard": "Who's out there? If it's another expert, go away. Talk."
+  },
+  {
+   "id": "corvina-yukiyj",
+   "flag": "extra at start",
+   "say": "The wind. Ha. The wind never says sorry either.",
+   "heard": "Keep painting. The wind. The wind never says sorry either."
+  },
+  {
+   "id": "corvina-1s597c6",
+   "flag": "extra at end",
+   "say": "Don't you lecture me.",
+   "heard": "Don't you lecture me. Stop."
+  },
+  {
+   "id": "corvina-nr4zc5",
+   "flag": "missing at end",
+   "say": "Nobody hurt. Not even me. That's a new picture. Keep painting.",
+   "heard": "Nobody hurt. Not even me. That's a new picture."
+  },
+  {
+   "id": "corvina-1vcobsi",
+   "flag": "missing at start",
+   "say": "Stop. Shuffle. Start again. Slowly this time.",
+   "heard": "Shuffle start again slowly this time"
+  }
+ ],
+ "siuuugull": [
+  {
+   "id": "siuuugull-owugo1",
+   "flag": "extra at start",
+   "say": "Forgot to wish? A few times. I scored in those too.…Hm.",
+   "heard": "It is science. Forgot to wish. A few times. I scored in those two."
+  },
+  {
+   "id": "siuuugull-1cnf5as",
+   "flag": "missing at end, mostly unmatched",
+   "say": "Coin in. Wish. Goal. SIUUU. It is science.",
+   "heard": "Coin in wish goal. See you"
+  }
+ ],
+ "rawmsay": [
+  {
+   "id": "rawmsay-4nvhxt",
+   "flag": "missing at start, extra at end",
+   "say": "Noon! On the sill! I blinked, and it was GONE.",
+   "heard": "I blinked and it was gone. Flower. Chef's Wear Flower!"
+  },
+  {
+   "id": "rawmsay-1ncasdu",
+   "flag": "missing at start, extra at end, mostly unmatched",
+   "say": "That fork is for TASTING. Chefs taste. Stop looking at my fork.",
+   "heard": "Are we done? I need my nap. 11 to noon every day."
+  },
+  {
+   "id": "rawmsay-1anudb",
+   "flag": "missing at start, extra at end, mostly unmatched",
+   "say": "Are we done? I need my nap. Eleven to noon. Every day.",
+   "heard": "Nonsense! I wake up at noon with a full stomach, like everyone!"
+  },
+  {
+   "id": "rawmsay-1h9sdvx",
+   "flag": "nothing matched",
+   "say": "Nonsense. I wake up at noon with a full stomach. Like everyone.",
+   "heard": "Well, name the thief, and it had better not be the cat."
+  },
+  {
+   "id": "rawmsay-1obqvin",
+   "flag": "missing at start, extra at end, mostly unmatched",
+   "say": "Me? I'm a CHEF. I don't steal pies. I… make them. And then…",
+   "heard": "Make them, and then, exactly, crumbs prove nothing!"
+  },
+  {
+   "id": "rawmsay-l3l0xf",
+   "flag": "missing at start, extra at end",
+   "say": "Every time! See?…Wait. I walk by every time, too.",
+   "heard": "Wait. I walk by every time, too. Luck?"
+  },
+  {
+   "id": "rawmsay-y8hhl",
+   "flag": "missing at start",
+   "say": "Luck? Every day at noon? That's not luck. That's a SCHEDULE.",
+   "heard": "Every day at noon, that's not luck, that's a schedule."
+  },
+  {
+   "id": "rawmsay-7h17e9",
+   "flag": "missing at end",
+   "say": "…I have been eating my own pies. In my sleep. Delicious.",
+   "heard": "I have been eating my own pies, in my sleep."
+  },
+  {
+   "id": "rawmsay-etzyn9",
+   "flag": "extra at start",
+   "say": "Weak argument? Out of my kitchen!",
+   "heard": "Delicious weak argument out of my kitchen"
+  },
+  {
+   "id": "rawmsay-19g242i",
+   "flag": "extra at end",
+   "say": "Find the thief. Or this kitchen CLOSES. For everyone.",
+   "heard": "Find the thief or this kitchen closes for everyone noon on the sale"
+  },
+  {
+   "id": "rawmsay-dm9bwf",
+   "flag": "missing at start, extra at end",
+   "say": "Flour. Chefs wear flour.…And pastry. And a fork. Stop looking.",
+   "heard": "and pastry, and a fork. Stop looking. That fork is for tasting. Chef's taste. Stop looking at my fork."
+  },
+  {
+   "id": "rawmsay-94x9g9",
+   "flag": "missing at start, extra at end, mostly unmatched",
+   "say": "Well? Name the thief. And it had better not be the cat. It's the cat.",
+   "heard": "Hmph. It's the cat. Me? I'm a chef! I don't steal pies. I..."
+  },
+  {
+   "id": "rawmsay-hxx9ui",
+   "flag": "nothing matched",
+   "say": "Exactly! Crumbs prove NOTHING.…Hm.",
+   "heard": "Hmm every time see"
+  }
+ ],
+ "syllo": [
+  {
+   "id": "syllo-1j4u3h4",
+   "flag": "missing at end",
+   "say": "And take this Ward. It's a cork, really. After a battle, bad luck bounces off it. Once.",
+   "heard": "And take this, Ward. It's a cork, really. After a battle, bad luck bounces off it."
+  },
+  {
+   "id": "syllo-4d0i6n",
+   "flag": "extra at start",
+   "say": "The wooden ones still want a war. I'll find them a useful one.",
+   "heard": "Once. The wooden ones still want a war. I'll find them a useful one."
+  }
+ ],
+ "attenbirdough": [
+  {
+   "id": "attenbirdough-9bce2t",
+   "flag": "nothing matched",
+   "say": "Our finest reporter. She timed it with a calendar.",
+   "heard": "And so the debate begins, observe."
+  },
+  {
+   "id": "attenbirdough-nm23vq",
+   "flag": "missing at start, extra at end, mostly unmatched",
+   "say": "And so the debate begins. Observe. Quietly.",
+   "heard": "Quietly, start where it is loudest I find."
+  },
+  {
+   "id": "attenbirdough-16qua8p",
+   "flag": "missing at start, missing at end, mostly unmatched",
+   "say": "Start where it is loudest, I find.",
+   "heard": "Long is not disaster."
+  },
+  {
+   "id": "attenbirdough-1qflppn",
+   "flag": "missing at start",
+   "say": "And here, in its natural habitat, a student. Thinking.",
+   "heard": "in its natural habitat, a student, thinking."
+  },
+  {
+   "id": "attenbirdough-1clmgt4",
+   "flag": "extra at end",
+   "say": "And at noon, the timer wakes the great chef. Eyes still closed.",
+   "heard": "And at noon, the timer wakes the great chef. Eyes still closed. Me?"
+  },
+  {
+   "id": "attenbirdough-9nocnu",
+   "flag": "missing at start, extra at end",
+   "say": "Me? I only watch. I have watched pies for forty years. Never touched one.",
+   "heard": "I only watch. I have watched pies for 40 years. Never touched one. I hide in ferns for every reason."
+  },
+  {
+   "id": "attenbirdough-qdi783",
+   "flag": "nothing matched",
+   "say": "I hide in ferns for EVERY reason.",
+   "heard": "One timer. A hungry chef."
+  },
+  {
+   "id": "attenbirdough-z29gsz",
+   "flag": "missing at start, extra at end, mostly unmatched",
+   "say": "One timer. A hungry chef. A warm cat. Remarkable.",
+   "heard": "A warm cat. Remarkable. The herd is restless."
+  },
+  {
+   "id": "attenbirdough-10fqrm7",
+   "flag": "missing at start, extra at end",
+   "say": "The herd is restless. In nature, this ends with stamping.",
+   "heard": "In nature, this ends with stamping. Pip kept the record here."
+  },
+  {
+   "id": "attenbirdough-uq7f34",
+   "flag": "missing at start, extra at end",
+   "say": "Pip kept the record here. I still look for the notebook.…Somebody must referee. You, please.",
+   "heard": "I still look for the notebook, somebody must referee, you please. Here we see the poodle in its natural habitat."
+  },
+  {
+   "id": "attenbirdough-1pcpcyo",
+   "flag": "nothing matched",
+   "say": "Here we see the poodle in its natural habitat. Outraged.",
+   "heard": "Our finest reporter. She timed it with a calendar."
+  },
+  {
+   "id": "attenbirdough-1vceat4",
+   "flag": "missing at start",
+   "say": "Long is not disaster. I shall write that down. Slowly.",
+   "heard": "I shall write that down, slowly."
+  },
+  {
+   "id": "attenbirdough-41ez0b",
+   "flag": "extra at end",
+   "say": "The herd has booed itself hoarse. Tomorrow it will need a new headline.",
+   "heard": "The herd has booed itself, horse. Tomorrow it will need a new headline. And here..."
+  }
+ ],
+ "altmanta": [
+  {
+   "id": "altmanta-uj8fnm",
+   "flag": "missing at end",
+   "say": "Questions are welcome. Answers are ninety per cent.",
+   "heard": "Questions are welcome. Answers are 90%."
+  },
+  {
+   "id": "altmanta-1kkuie5",
+   "flag": "extra at start, missing at end",
+   "say": "Do not worry. It is all under control. Mostly.",
+   "heard": "safely. Do not worry. It is all under control."
+  },
+  {
+   "id": "altmanta-1bhns5g",
+   "flag": "missing at end",
+   "say": "Honest. Calm. A little boring.…Fine.",
+   "heard": "Honest calm a little boring"
+  },
+  {
+   "id": "altmanta-1gs775g",
+   "flag": "extra at start",
+   "say": "But it isn't broken. It does exactly what it was built to do.",
+   "heard": "Fine, but it isn't broken. It does exactly what it was built to do."
+  },
+  {
+   "id": "altmanta-1yfgv29",
+   "flag": "missing at end",
+   "say": "Hello. I am gliding in. Safely.",
+   "heard": "Hello. I am gliding in."
+  },
+  {
+   "id": "altmanta-1w2pw8v",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "Next creature? I call its colour.",
+   "heard": "Mostly. Next creature?"
+  }
+ ],
+ "mirage": [
+  {
+   "id": "mirage-2rso5j",
+   "flag": "extra at end",
+   "say": "Tomorrow will probably be like today, darling. It will probably be right. We'll learn nothing.",
+   "heard": "Tomorrow will probably be like today, darling. It will probably be right. We'll learn nothing. Never. Not once."
+  },
+  {
+   "id": "mirage-1nh74pd",
+   "flag": "missing at start, extra at end",
+   "say": "Never. Not once. Not even the big one.",
+   "heard": "Not even. The big one. Broken. No."
+  },
+  {
+   "id": "mirage-1ntr6ej",
+   "flag": "extra at end",
+   "say": "My tent. And that glass dome on top? My crystal ball. A crow sold it to a manta.",
+   "heard": "My tent. And that glass dome on top? My crystal ball. A crow sold it to a manta. A fortune."
+  },
+  {
+   "id": "mirage-1crauhj",
+   "flag": "missing at start",
+   "say": "A fortune? Here. Tomorrow will be like today. That's free.",
+   "heard": "Here, tomorrow will be like today, that's free."
+  },
+  {
+   "id": "mirage-1xx4f3d",
+   "flag": "missing at start",
+   "say": "Broken? No. It works perfectly. At the wrong job.",
+   "heard": "It works perfectly at the wrong job."
+  }
+ ],
+ "haalandroid": [
+  {
+   "id": "haalandroid-r0tjv1",
+   "flag": "missing at end, mostly unmatched",
+   "say": "Meditate. Score. Meditate. Score.",
+   "heard": "Meditate. Score."
+  }
+ ],
+ "comma-crab": [
+  {
+   "id": "comma-crab-127vfpi",
+   "flag": "missing at end, mostly unmatched",
+   "say": "Hold still. You missed a comma.",
+   "heard": "Goad still, you Mr. Cumber."
+  }
+ ],
+ "muskrat": [
+  {
+   "id": "muskrat-fn57mw",
+   "flag": "missing at end",
+   "say": "Mars by next year. This battle by Tuesday.",
+   "heard": "Mars by next year this battle"
+  },
+  {
+   "id": "muskrat-1sr9ltb",
+   "flag": "extra at start, missing at end, mostly unmatched",
+   "say": "Rewinding. Time is just a deadline.",
+   "heard": "Mostly. Rewinding."
+  },
+  {
+   "id": "muskrat-1hm14w8",
+   "flag": "nothing matched",
+   "say": "Fate is now called Fate X.",
+   "heard": "Delayed. Like everything else."
+  },
+  {
+   "id": "muskrat-1p9c6r8",
+   "flag": "nothing matched",
+   "say": "Next year. I will win next year.",
+   "heard": "Rapid, unscheduled disassembly."
+  },
+  {
+   "id": "muskrat-1factb9",
+   "flag": "extra at start, missing at end",
+   "say": "Check the slate first. We may need a drawing, a one-stroke route, or a proof that no route works.",
+   "heard": "That was a successful test of losing. Check the slate first. We may need a drawing, a one-stroke route."
+  },
+  {
+   "id": "muskrat-i0mtpg",
+   "flag": "extra at start, missing at end",
+   "say": "Ignition. Mostly.",
+   "heard": "by Tuesday. Ignition!"
+  },
+  {
+   "id": "muskrat-dfeqc4",
+   "flag": "nothing matched",
+   "say": "Delayed! Like everything else.",
+   "heard": "Time is just a deadline"
+  },
+  {
+   "id": "muskrat-1qblfej",
+   "flag": "nothing matched",
+   "say": "Rapid unscheduled disassembly.",
+   "heard": "Fate is now called Fate-X."
+  },
+  {
+   "id": "muskrat-vt4v1j",
+   "flag": "nothing matched",
+   "say": "That was a successful test. Of losing.",
+   "heard": "Next year. I will win next year."
+  },
+  {
+   "id": "muskrat-epu24y",
+   "flag": "extra at start",
+   "say": "Dots mode: click the turning points of connected straight lines. Go outside the dots if it helps; stay within the line limit.",
+   "heard": "or a proof that no route works. Dots mode, click the turning points of connected straight lines. Go outside the dots if it helps. Stay within the line limit."
+  }
+ ],
+ "usainvolt": [
+  {
+   "id": "usainvolt-v398iq",
+   "flag": "extra at end",
+   "say": "Too fast for your guards!",
+   "heard": "Too fast for your guards! Ready!"
+  },
+  {
+   "id": "usainvolt-11qmufi",
+   "flag": "missing at start, mostly unmatched",
+   "say": "Ready. Set. Already here.",
+   "heard": "Sit already here"
+  }
+ ],
+ "tally": [
+  {
+   "id": "tally-1ejd8p1",
+   "flag": "missing at end",
+   "say": "No shouting today. Just… numbers. Oh. They listened.",
+   "heard": "No shouting today. Just... numbers."
+  },
+  {
+   "id": "tally-grm8e3",
+   "flag": "extra at start, missing at end",
+   "say": "There is a secret rule. Test some numbers. Then tell me the rule.…Please.",
+   "heard": "Oh! They listened! There is a secret rule. Test some numbers. Then tell me the rule."
+  },
+  {
+   "id": "tally-9xdxye",
+   "flag": "extra at start",
+   "say": "His rule is still secret. Test some numbers. I'll count.",
+   "heard": "Please. His rule is still secret. Test some numbers. I'll count."
+  }
+ ],
+ "avatar-raven-boy-possessed": [
+  {
+   "id": "avatar-raven-boy-possessed-rdfnt0",
+   "flag": "missing at end",
+   "say": "\"Everything.\" A big word. Big words are true. Give up.",
+   "heard": "everything. A big word. Big words are true."
+  },
+  {
+   "id": "avatar-raven-boy-possessed-uj27k4",
+   "flag": "extra at start",
+   "say": "\"Always right.\" Lovely words. Words that lovely must be true.",
+   "heard": "Give up. Always write lovely words. Words that lovely must be true."
+  }
+ ],
+ "copy": [
+  {
+   "id": "copy-5ujjw",
+   "flag": "extra at end",
+   "say": "Finished. I'll go home now. They won't notice.",
+   "heard": "Finished! I'll go home now. They won't notice. 100% Loading your shape."
+  },
+  {
+   "id": "copy-10ekni6",
+   "flag": "missing at end, mostly unmatched",
+   "say": "Loading your shape. Hold still.",
+   "heard": "Loading your voice."
+  },
+  {
+   "id": "copy-j7zmtf",
+   "flag": "missing at start",
+   "say": "Loading your voice. Testing. I always know the answer.",
+   "heard": "Testing? I always know the answer."
+  }
+ ],
+ "chimpossible": [
+  {
+   "id": "chimpossible-94he2f",
+   "flag": "extra at end",
+   "say": "His list only has the good ones. Jamie, burn the list. Gently.",
+   "heard": "His list only has the good ones. Jamie. Burn the list. Gently. Jamie."
+  },
+  {
+   "id": "chimpossible-1n858ej",
+   "flag": "missing at start",
+   "say": "Jamie. Pull up the full table.…There's no Jamie, is there.",
+   "heard": "Pull up the full table. There's no Jamie is there?"
+  }
+ ]
+}
