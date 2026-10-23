@@ -1,0 +1,76 @@
+{
+ "date": "2026-10-23",
+ "issue": 163,
+ "task": "FAL-280 (slice C of the FAL-271 art audit)",
+ "method": "Edit the shipped image, never draw fresh. Each cut creature (webp as shipped) was padded on its cut side, enlarged 4x and given a qwen21_edit \"complete only the cut part, keep everything else exactly as it is\" edit, 2 seeds per edit. Pillow scaled the pick back to the shipped pixel scale, so faces and props keep their size; the build only trims it. The old sheet figures are set to null in tools/assets/sheets.json, and the original sheets tremendoodle-swiftlet.png and altmanta-beastie.png are kept unchanged.",
+ "why_cut": "The source sheets packed the poses so tightly that the island splitter sliced off hair, tail, wing and fur, or kept a slice of the neighbouring pose.",
+ "rounds": [
+  "Round 1 (seeds 28001, 28002): 5 edits x 2 seeds. Picks: tremendoodle-attack #1, tremendoodle-defeated #4, beastie-angry #9. Both altmanta edits made the wing ~320 px wide (altmanta-smug is 260), which would draw the face ~30 % smaller in the square object-fit: contain portrait boxes: rejected.",
+  "Round 2 (seeds 28101, 28102): altmanta only, left pad 42 % -> 18 % and a short wing tip. altmanta-defeated #3 accepted; both altmanta-angry renders kept a blunt squared wing end: rejected.",
+  "Round 3 (seeds 28201, 28202): altmanta-angry only, qwen21_ref with a wing-tip reference image (A: altmanta-defeated-163, B: shipped altmanta-smug), arrowhead wording, pad 25 %. #1 (reference A) accepted."
+ ],
+ "measured": "All picks register on the shipped pixels at (0, 0) px with a mean colour change of 2.5-3.5/255 in the untouched part. Heights match the shipped ones within 1-2 px. No new detached clumps.",
+ "images": {
+  "tremendoodle-angry-163.png": {
+   "id": "creature/tremendoodle/angry",
+   "cut": "right edge: a sliver of the neighbouring bust left in the canvas, hair cut straight",
+   "task": "FAL-271 style trial (pick #11, round 1, label poodle-hair-repair)",
+   "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+   "seed": 27101,
+   "input": "assets/creatures/tremendoodle-angry.webp, padded on the right and enlarged 4x (tremendoodle-angry-padded-x4.png)",
+   "prompt": "This is an RGBA format image with transparency. Edit <image1>: on the right side, the huge golden curly poodle hair is cut off by a straight vertical edge. Complete the hair there: paint the missing rest of the voluminous golden curls so the hair ends in a natural rounded outline, with the same dark brown outline, the same golden highlights and the same soft painterly cel shading as the rest of the hair. Keep the face, the angry frowning eyes, the open snarling mouth, the black suit, the white shirt, the red tie and the gold badge exactly as they are, in the same place, the same size. Change nothing else. No background, no text. The image has an alpha channel and a transparent background.",
+   "finish": "scaled back to the shipped 240 px height and trimmed (FAL-271); FAL-280 then cleared two faint detached specks (7 px at alpha 77 and 3 px) at the left edge"
+  },
+  "tremendoodle-attack-163.png": {
+   "id": "creature/tremendoodle/attack",
+   "cut": "left edge: the tail pom-pom cut straight",
+   "task": "FAL-280 (#163 art slice C), round 1 #1",
+   "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+   "seed": 28001,
+   "input": "assets/creatures/tremendoodle-attack.webp padded [92, 21, 21, 7] px (left, top, right, bottom) and enlarged 4x",
+   "prompt": "This is an RGBA format image with transparency. Edit <image1>: on the left side, the round fluffy golden pom-pom at the end of the poodle's tail (the lower puff, near the back leg) is cut off by a straight vertical edge. Complete only that pom-pom: paint its missing left part so it becomes a full round ball of tight golden curls with a natural rounded outline, with the same dark outline, the same colours and highlights and the same soft painterly cel shading as the rest of the picture. Keep the poodle, its angry face, the huge golden hair, the fluffy ear, the black jacket with gold trim, the long red tie, the paws, the white starburst shapes and the sparkles exactly as they are, in the same place, the same size. Change nothing else. No background, no text. The image has an alpha channel and a transparent background.",
+   "finish": "Pillow: resized back to the shipped pixel scale (unchanged parts register at (0, 0) px), alpha <= 12 snapped to 0, trimmed. No other retouching."
+  },
+  "tremendoodle-defeated-163.png": {
+   "id": "creature/tremendoodle/defeated",
+   "cut": "left edge: the curly ear cut straight",
+   "task": "FAL-280 (#163 art slice C), round 1 #4",
+   "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+   "seed": 28002,
+   "input": "assets/creatures/tremendoodle-defeated.webp padded [67, 14, 13, 5] px (left, top, right, bottom) and enlarged 4x",
+   "prompt": "This is an RGBA format image with transparency. Edit <image1>: on the left side, the big round puff of golden curls (the poodle's fluffy ear) is cut off by a straight vertical edge. Complete only that ear: paint its missing left part so it ends in a natural rounded outline of tight golden curls, with the same dark outline, the same colours and highlights and the same soft painterly cel shading as the rest of the picture. Keep the sleepy face with closed eyes, the head resting on the paws, the huge golden hair, the black sleeve with the gold cuff, the red tie and the ring of golden stars exactly as they are, in the same place, the same size. Change nothing else. No background, no text. The image has an alpha channel and a transparent background.",
+   "finish": "Pillow: resized back to the shipped pixel scale (unchanged parts register at (0, 0) px), alpha <= 12 snapped to 0, trimmed. No other retouching."
+  },
+  "altmanta-angry-163.png": {
+   "id": "creature/altmanta/angry",
+   "cut": "left edge: the wing ends in a straight outlined vertical instead of a tip",
+   "task": "FAL-280 (#163 art slice C), round 3 #1",
+   "tool": "ComfyUI qwen21_ref (Qwen Image 2.1 int8 edit with a second reference image), 25 steps euler/simple, cfg 1, 1024 px budget",
+   "seed": 28201,
+   "input": "assets/creatures/altmanta-angry.webp padded [58, 22, 14, 4] px (left, top, right, bottom) and enlarged 4x",
+   "prompt": "This is an RGBA format image with transparency. Edit <image1>, a portrait of a manta ray in a purple knitted sweater. On the left side, its dark blue starry wing is cut off by a straight vertical edge. Change only the left end of the wing: give it the same short pointed wing tip as the manta ray in <image2>. The top edge of the wing slants down to the left and the lower edge slants up, and they meet in one sharp point, like an arrowhead, just a little to the left of the sweater. Below the wing tip, show a sliver of the pale underside of the wing, then the sweater ends with a rounded edge like the rest of the portrait. The wing tip is the same deep blue-violet with small pink stars and the same violet outline. Do not copy anything else from <image2>. Keep the face, the angry eyes, the open mouth with teeth and the purple knitted turtleneck sweater of <image1> exactly as they are, in the same place, the same size. Same dark outline, same soft painterly cel shading. Change nothing else. No background, no text. The image has an alpha channel and a transparent background.",
+   "finish": "Pillow: resized back to the shipped pixel scale (unchanged parts register at (0, 0) px), alpha <= 12 snapped to 0, trimmed. No other retouching.",
+   "reference_image_2": "the accepted altmanta-defeated-163.png enlarged 4x (for its wing-tip shape)"
+  },
+  "altmanta-defeated-163.png": {
+   "id": "creature/altmanta/defeated",
+   "cut": "left edge: the wing ends in a blunt straight edge instead of a tip",
+   "task": "FAL-280 (#163 art slice C), round 2 #3",
+   "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+   "seed": 28101,
+   "input": "assets/creatures/altmanta-defeated.webp padded [42, 23, 14, 5] px (left, top, right, bottom) and enlarged 4x",
+   "prompt": "This is an RGBA format image with transparency. Edit <image1>, a portrait of a manta ray in a purple knitted sweater. On the left side, its dark blue starry wing is cut off by a straight vertical edge. Complete only the wing with a short wing tip: the top edge of the wing carries on a little to the left and ends in a small pointed corner just past the edge of the sweater, no longer than the wing on the right side. The same deep blue-violet with small pink stars and the same violet outline as the rest of the wing. Under the wing tip the sweater ends with the same rounded edge as the rest of the portrait. Keep the whole picture inside the canvas, with empty space around it. Same dark outline, same soft painterly cel shading. Keep the face, the tired half-closed eyes, the small frowning mouth, the purple knitted turtleneck sweater and the glowing violet dizzy stars exactly as they are, in the same place, the same size. Change nothing else. No background, no text. The image has an alpha channel and a transparent background.",
+   "finish": "Pillow: resized back to the shipped pixel scale (unchanged parts register at (0, 0) px), alpha <= 12 snapped to 0, trimmed. No other retouching."
+  },
+  "beastie-angry-163.png": {
+   "id": "creature/beastie/angry",
+   "cut": "left edge: fur and shoulder end in a straight outlined vertical",
+   "task": "FAL-280 (#163 art slice C), round 1 #9",
+   "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+   "seed": 28001,
+   "input": "assets/creatures/beastie-angry.webp padded [71, 14, 14, 5] px (left, top, right, bottom) and enlarged 4x",
+   "prompt": "This is an RGBA format image with transparency. Edit <image1>, a portrait of a big shaggy blue-grey beast in a brown leather harness. On the left side, the portrait is cut off by a straight vertical edge. Complete only that side: paint the missing shaggy blue-grey fur of the cheek and shoulder so the left side ends in a natural rounded, tufted fur outline that curves down into the round bottom edge of the portrait, like the right side. with the same dark outline, the same colours and highlights and the same soft painterly cel shading as the rest of the picture. Keep the face, the angry eyes, the open snarling mouth with fangs, the spiky fur on top of the head, the brown leather strap with its buckle and the golden bow tie exactly as they are, in the same place, the same size. Change nothing else. No background, no text. The image has an alpha channel and a transparent background.",
+   "finish": "Pillow: resized back to the shipped pixel scale (unchanged parts register at (0, 0) px), alpha <= 12 snapped to 0, trimmed. No other retouching."
+  }
+ }
+}

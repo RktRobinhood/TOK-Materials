@@ -325,7 +325,7 @@
             "creature/astrophysicat/idle", "creature/astrophysicat/attack", "creature/astrophysicat/smug", "creature/astrophysicat/angry", "creature/astrophysicat/defeated"
         ] },
         "tremendoodle-swiftlet.png": { "type": "islands", "minArea": 2500, "ids": [
-            "creature/tremendoodle/idle", "creature/tremendoodle/attack", "creature/tremendoodle/smug", "creature/tremendoodle/angry", "creature/tremendoodle/defeated",
+            "creature/tremendoodle/idle", null, "creature/tremendoodle/smug", null, null,
             "creature/swiftlet/idle", "creature/swiftlet/attack", "creature/swiftlet/smug", "creature/swiftlet/angry", "creature/swiftlet/defeated"
         ] },
         "muskrat-zuckerborg.png": { "type": "islands", "minArea": 2500, "ids": [
@@ -333,9 +333,15 @@
             "creature/zuckerborg/idle", "creature/zuckerborg/attack", "creature/zuckerborg/smug", "creature/zuckerborg/angry", "creature/zuckerborg/defeated"
         ] },
         "altmanta-beastie.png": { "type": "islands", "minArea": 2500, "ids": [
-            "creature/altmanta/idle", "creature/altmanta/attack", "creature/altmanta/smug", "creature/altmanta/angry", "creature/altmanta/defeated",
-            "creature/beastie/idle", "creature/beastie/attack", "creature/beastie/smug", "creature/beastie/angry", "creature/beastie/defeated"
+            "creature/altmanta/idle", "creature/altmanta/attack", "creature/altmanta/smug", null, null,
+            "creature/beastie/idle", "creature/beastie/attack", "creature/beastie/smug", null, "creature/beastie/defeated"
         ] },
+        "tremendoodle-attack-163.png": { "type": "single", "id": "creature/tremendoodle/attack" },
+        "tremendoodle-angry-163.png": { "type": "single", "id": "creature/tremendoodle/angry" },
+        "tremendoodle-defeated-163.png": { "type": "single", "id": "creature/tremendoodle/defeated" },
+        "altmanta-angry-163.png": { "type": "single", "id": "creature/altmanta/angry" },
+        "altmanta-defeated-163.png": { "type": "single", "id": "creature/altmanta/defeated" },
+        "beastie-angry-163.png": { "type": "single", "id": "creature/beastie/angry" },
         "siuuugull-rawmsay.png": { "type": "islands", "minArea": 2500, "ids": [
             "creature/siuuugull/idle", "creature/siuuugull/attack", "creature/siuuugull/smug", "creature/siuuugull/angry", "creature/siuuugull/defeated",
             "creature/rawmsay/idle", "creature/rawmsay/attack", "creature/rawmsay/smug", "creature/rawmsay/angry", "creature/rawmsay/defeated"
