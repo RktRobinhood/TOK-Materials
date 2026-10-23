@@ -9,6 +9,7 @@
         if(viewer!==0&&viewer!==1)throw new Error('Unknown player.');
         const mine=s.players[viewer],decider=E.decider(s);
         function publicAxioms(p){const known=(p.publicAxioms||[]).slice();return p.axHand.filter(id=>{const at=known.indexOf(id);if(at<0)return false;known.splice(at,1);return true;});}
+        function goal(p){const g=E.goalProgress(s,p);return g?{id:g.id,name:g.name,complete:g.complete,checks:g.checks.map(c=>({text:c.text,met:c.met}))}:null;}
         function card(cid){
             const d=E.describe(s,cid),out=fields(d,['cid','kind','id','species','name','colour','cost','attack','health','maxHealth','keywords','sleeping','frozen','silenced','canAttack','hidden','attacks','activated']);
             out.text=d.text||'';out.lines=(d.lines||[]).map(line=>fields(line,['name','text','kind','off','cost']));return out;
@@ -24,10 +25,10 @@
                 name:p.name,hearts:p.hearts,maxHearts:p.maxHearts,energy:p.energy,capacity:p.capacity,monoColour:p.monoColour,
                 deckCount:p.deck.length,handCount:p.hand.length,axiomCount:p.axHand.length,publicAxioms:publicAxioms(p),
                 uses:Number.isFinite(E.playsLeft(s,i))?E.playsLeft(s,i):null,unlimitedUses:!Number.isFinite(E.playsLeft(s,i)),spark:p.spark,
-                board:p.board.map(card),discard:p.discard.map(card),conditions:copy(E.armedView(s,i,viewer)),
+                board:p.board.map(card),discard:p.discard.map(card),conditions:copy(E.armedView(s,i,viewer)),goal:goal(i),
                 power:p.power?fields(E.powerStatus(s,i),['id','name','text','cost','heartCost','turnsLeft','ready','usable','why','note']):null
             })),
-            hand:mine.hand.map(card),axiomHand:mine.axHand.slice(),armed:(mine.armed||[]).map(card),
+            hand:mine.hand.map(card),axiomHand:mine.axHand.slice(),axiomCosts:Object.fromEntries(mine.axHand.map(id=>[id,E.axiomCost(s,id,viewer)])),armed:(mine.armed||[]).map(card),
             known:mine.knows.filter(cid=>s.players[1-viewer].hand.includes(cid)).map(card),
             choices,actions:copy(actions),rules:E.ruleSummary(s).map(pair=>pair.slice()),
             activeAxioms:E.activeAxioms(s).map(ax=>fields(ax,['id','name','category','text'])),

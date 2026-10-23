@@ -64,6 +64,7 @@ test('whole wire-driven own-deck practice ends consistently and never changes sa
     }
     assert.equal(f.views[0].stopped,null);assert.notEqual(f.views[0].winner,null);assert.equal(f.views[0].winner,f.views[1].winner);assert.equal(f.views[1].actions.length,0);
     assert.equal(JSON.stringify(f.saves),f.before);
+    const winner=f.views[1].winner;f.peers[0].close();f.flush();assert.equal(f.views[1].winner,winner);assert.equal(f.views[1].stopped,null,'departure after the finish retains the earned practice result');
 });
 
 test('stale wire moves cannot be applied twice or impersonate the transport sender',()=>{
@@ -100,4 +101,10 @@ test('an incomplete partner deck fails before a match is created',()=>{
     const f=rig();f.peers[0].open();const s=f.saves[1],own=f.R.State.ownDeck(s),code=f.R.Battle.TeamCodes.exportTeam({nickname:'Short',creatures:own.team.slice(0,2),tactics:[],axioms:own.axioms});
     f.peers[0].receive({v:f.S.VERSION,type:'join',loadout:{code,ownAxioms:[]}});assert.equal(f.views[0],null);assert.equal(f.sent.some(x=>x.message.type==='view'),false);
     assert.match(f.statuses[0].at(-1),/Deck|creatures|cards/);assert.equal(JSON.stringify(f.saves),f.before);
+});
+
+test('a structurally incomplete guest view is rejected before any UI callback',()=>{
+    const f=rig();f.open();const before=JSON.stringify(f.views[1]),malformed=JSON.parse(before);delete malformed.players[0].board;
+    assert.doesNotThrow(()=>f.peers[1].receive({v:f.S.VERSION,type:'view',frame:999,part:0,count:1,text:JSON.stringify(malformed)}));
+    assert.match(f.statuses[1].at(-1),/Unreadable practice board/);assert.equal(f.views[1].stopped,'Unreadable practice board. Start again.');assert.equal(JSON.stringify(f.saves),f.before);
 });

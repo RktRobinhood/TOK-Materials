@@ -1,0 +1,17 @@
+.screen-peer{overflow:auto!important;display:block!important}
+.peer-page{max-width:1100px;margin:auto;padding:20px;overflow-wrap:anywhere}
+.peer-page h1{margin:0 auto 0 0}.peer-page .btn{min-height:46px;white-space:normal}
+.peer-status{min-height:2.5em;border-left:3px solid var(--rift,#3fe0d0);padding:8px 12px}
+.peer-exchange{border:1px solid var(--panel-edge,#544861);padding:16px;border-radius:12px}
+.peer-code{margin:18px 0}.peer-code label{display:block}.peer-code textarea{display:block;width:100%;min-height:100px;background:#fff;color:#111;font:14px monospace;padding:10px;overflow-wrap:anywhere}
+.peer-code canvas{display:block;max-width:100%;height:auto;margin:18px auto;background:#fff;image-rendering:pixelated}
+.peer-code video{display:block;width:min(100%,640px);max-height:440px;margin:12px auto}.peer-code video[hidden]{display:none}
+.peer-timer{position:sticky;top:0;z-index:3;background:var(--night,#14121f);padding:12px;font-size:1.2rem;font-weight:700}.peer-near{color:var(--gold,#f2b632)}
+.peer-board{display:grid;gap:16px}.peer-board section,.peer-board details{border:1px solid var(--panel-edge,#544861);border-radius:12px;padding:14px}
+.peer-board h2,.peer-board h3{margin:4px 0 12px}.peer-cards{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch}
+.peer-card{display:flex;flex-direction:column;gap:8px;width:190px;max-width:100%;border:2px solid #685276;border-radius:10px;background:#251b30;color:#efe3c8;padding:12px;text-align:left;font:inherit;line-height:1.4}
+button.peer-card{cursor:pointer}.peer-card[aria-pressed=true],.peer-page button[aria-pressed=true]{border-color:#3fe0d0;outline:2px solid #3fe0d0}
+.peer-card-art{display:block;width:100%;height:100px;object-fit:contain}.peer-card strong{font-size:1.08em}.peer-card span{display:block;font-size:.92em}
+.peer-action-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.peer-moves{position:sticky;bottom:0;background:#201828;z-index:2;box-shadow:0 -3px 10px #0006;max-height:45vh;overflow:auto}
+.peer-page [hidden]{display:none!important}.peer-page button:focus-visible{outline:3px solid #f2b632;outline-offset:3px}
+@media(max-width:520px){.peer-page{padding:12px}.peer-card{width:calc(50% - 5px);padding:9px}.peer-card-art{height:80px}.peer-page h1{font-size:1.5rem}.peer-board section{padding:10px}.peer-moves{max-height:38vh}}

@@ -1,0 +1,11 @@
+{
+  "host": "You won practice",
+  "guest": "Your partner won practice",
+  "turn": 26,
+  "hearts": {
+    "owlet": 8,
+    "mothkin": 0
+  },
+  "focus": "H2 You won practice",
+  "conditions": "Two real RTCDataChannel endpoints on separate pages of the in-app Chromium browser, same Windows computer; no ICE servers; 390px Calm and desktop; mouse and Enter controls. Some turns expired during browser-control interruption. No physical two-device/camera/school-network proof."
+}

@@ -1,0 +1,2 @@
+# Preserve the pinned upstream byte hashes recorded in README.md.
+*.js -text
