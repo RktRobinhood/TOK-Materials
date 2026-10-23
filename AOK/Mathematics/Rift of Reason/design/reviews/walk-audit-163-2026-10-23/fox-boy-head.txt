@@ -1,0 +1,7 @@
+{'frame': 1, 'scale': 0.99, 'x': 30, 'y': 4, 'err': 42.8}
+{'frame': 2, 'scale': 1.02, 'x': 26, 'y': 18, 'err': 855.2}
+{'frame': 3, 'scale': 1.0, 'x': 26, 'y': 14, 'err': 1244.2}
+{'frame': 4, 'scale': 1.01, 'x': 28, 'y': 14, 'err': 852.2}
+{'frame': 5, 'scale': 0.98, 'x': 30, 'y': 18, 'err': 872.5}
+{'frame': 6, 'scale': 0.88, 'x': 52, 'y': 32, 'err': 1967.0}
+bob 28 px = 7.4 % of 376 px; x drift 26 px; scale 0.88-1.02

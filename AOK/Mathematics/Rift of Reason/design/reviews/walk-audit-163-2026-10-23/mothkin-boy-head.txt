@@ -1,0 +1,7 @@
+{'frame': 1, 'scale': 1.0, 'x': 2, 'y': 104, 'err': 123.7}
+{'frame': 2, 'scale': 1.0, 'x': 6, 'y': 112, 'err': 192.9}
+{'frame': 3, 'scale': 1.0, 'x': 2, 'y': 110, 'err': 155.6}
+{'frame': 4, 'scale': 1.0, 'x': 2, 'y': 104, 'err': 149.9}
+{'frame': 5, 'scale': 1.0, 'x': 6, 'y': 112, 'err': 197.2}
+{'frame': 6, 'scale': 1.0, 'x': 2, 'y': 106, 'err': 158.4}
+bob 8 px = 2.0 % of 404 px; x drift 4 px; scale 1.00-1.00
