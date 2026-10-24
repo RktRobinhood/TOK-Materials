@@ -1,3 +1,13 @@
+## Expansion-4 cards — 24 October 2026 (#129)
+
+Eight more catalogue concepts are playable as `expansion-4`: V-Squish (Entrance damage with another colour), Exact Answer (current attack as damage, capped at 3), Jack Axoloticeye (Last Word hero damage), Notice the Crack (extra damage to a damaged enemy), K-S-Ibis (Shield for one attack against higher effective attack), Pedro Platypascal (temporary enemy stat swap), Hank Greenhare (one delayed personal draw if still on your board) and Forked Reply (two distinct enemies take 1, then heal your hero 1).
+
+All six Ways plus generic; 1 Rare, 3 Uncommon, 4 Common. All eight enter packs. The five creatures also have ordinary chapter-two catches at Schoolhouse, Lever Bridge, Post Office, Clockmaker's Workshop and Granny's Kitchen. Before the two-lesson unlock, packs hold 21 Common, 7 Uncommon and 3 Rare kinds. Existing selected art/shared sounds, no new voices or model requests.
+
+Temporary swap uses ordinary timed modifiers; damage and later boosts remain on expiry. Expiring health now finishes defeats/Last Words before start bonuses/draws. K-S-Ibis compares effective attack in both preview and commitment; its prevention neither persists nor spends an existing Shield. Hank's one-shot due turn/controller live in battle state; bounce, defeat, control change or suppression at the due start cancel it. Forked Reply chooses both enemies before damage, then uses normal deferred cleanup. Prior contract wording and clarifications remain in the generated catalogue ledger.
+
+**161 catalogue concepts remain held.** The [verification](reviews/expansion-4-2026-10-24.md) records 1,530 passing tests/1 existing skip, 27 native outcomes, and material balance-probe shifts (two −0.375). Those shifts persist without Crow's colour bonus; they are not dismissed as noise. Costs/stats were not tuned to one fixture. The next batch must retain this baseline and finish the documented targeted comparison before adding interacting cards. #129 stays open.
+
 ## Expansion-3 cards — 23 October 2026 (#129)
 
 Eight more catalogue concepts are playable as release `expansion-3`:

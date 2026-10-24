@@ -52,7 +52,17 @@
     "generic-simple-cover",
     "reason-proof-by-cases"
   ],
-  "held": 169,
+  "expansion4Batch": [
+    "reason-counterexample-crow",
+    "reason-exact-answer",
+    "emotion-grudge-goose",
+    "perception-notice-the-crack",
+    "language-debate-dingo",
+    "imagination-paradox-pony",
+    "memory-bookmark-bunny",
+    "generic-forked-reply"
+  ],
+  "held": 161,
   "rows": [
     {
       "id": "reason-premise-pigeon",
@@ -118,10 +128,10 @@
       "kind": "creature",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-4 runtime release (#129); see expansion-4 acceptance report",
       "trigger": "Entrance",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Entrance: deal 1 damage to an enemy creature, or 2 if you control another creature of a different explicit colour.",
+      "payoffAndLifetime": "Entrance: deal 1 damage to an enemy creature, or 2 if another friendly creature has a different explicit colour as this resolves. Generic, colourless and absent-colour creatures do not qualify.",
       "counterplay": "Remove the other colour first; Shield still prevents the single damage packet.",
       "semanticRevision": "Adopt the STRATEGY-IDENTITY mixed bridge. V-Squish asks whether one extra kind of evidence changes the answer. Generic bodies do not qualify.",
       "releaseChecks": [
@@ -412,10 +422,10 @@
       "kind": "creature",
       "rarity": "uncommon",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
-      "trigger": "Last Word: deal 1 damage to the enemy hero.",
+      "disposition": "expansion-4 runtime release (#129); see expansion-4 acceptance report",
+      "trigger": "Last Word: deal 1 damage to the enemy hero",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Last Word: deal 1 damage to the enemy hero.",
+      "payoffAndLifetime": "Last Word: deal 1 damage to the enemy hero, even with a full hand or Mercy. All simultaneous Last Words resolve before the existing heart-win check.",
       "counterplay": "Silence it or change Win.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -895,10 +905,10 @@
       "kind": "creature",
       "rarity": "uncommon",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-4 runtime release (#129); see expansion-4 acceptance report",
       "trigger": "When attacking a creature with higher effective attack",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "When attacking a creature with higher effective attack, this gains Shield for that fight only.",
+      "payoffAndLifetime": "When attacking a creature with higher effective attack, including wheel/rule/aura changes, this gains Shield for that fight only. This temporary Shield is used before any existing Shield; it never remains after the fight.",
       "counterplay": "Use equal or lower power or silence it.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -1176,10 +1186,10 @@
       "kind": "creature",
       "rarity": "rare",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-4 runtime release (#129); see expansion-4 acceptance report",
       "trigger": "Entrance",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Entrance: swap an enemy creature's attack and health until your next turn starts, using normal swap rules.",
+      "payoffAndLifetime": "Entrance: swap an enemy creature's current attack and health until your next turn starts, using normal swap rules. The swap is a timed stat modifier; damage taken afterwards and later boosts remain when it expires.",
       "counterplay": "Use balanced stats or restore them.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -1260,15 +1270,16 @@
       "kind": "creature",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-4 runtime release (#129); see expansion-4 acceptance report",
       "trigger": "Entrance",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Entrance: if this is still on your board when your next turn starts, draw 1 personal-deck card.",
+      "payoffAndLifetime": "Entrance: if this stays on your board, draw 1 personal card at your next turn start after rule bonuses, before the ordinary draw choice. Defeat, bounce, a control change, Silence or Empty Set at the due start cancels it; it never fires late.",
       "counterplay": "Defeat, bounce, steal or silence it before its owner's next turn.",
       "semanticRevision": null,
       "releaseChecks": [
         "resource: preserve normal energy, activation and hand caps; no refund on replay",
-        "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap"
+        "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap",
+        "derived state: legal target revalidation, normal swaps/prevention, fixed construction identity and explicit temporary expiry"
       ],
       "gates": [
         109
@@ -1574,10 +1585,10 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-4 runtime release (#129); see expansion-4 acceptance report",
       "trigger": "paid cast",
       "target": "enemy-creature",
-      "payoffAndLifetime": "Deal damage equal to its current attack, capped at 3.",
+      "payoffAndLifetime": "Deal damage equal to an enemy creature's current attack, capped at 3. A zero-attack creature is not offered.",
       "counterplay": "Use low attack and high health.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -1910,7 +1921,7 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-4 runtime release (#129); see expansion-4 acceptance report",
       "trigger": "paid cast",
       "target": "enemy-creature",
       "payoffAndLifetime": "Deal 1 damage, or 2 if the creature is already damaged.",
@@ -3733,10 +3744,10 @@
       "kind": "spell",
       "rarity": "uncommon",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-4 runtime release (#129); see expansion-4 acceptance report",
       "trigger": "paid cast",
       "target": "two-enemy-creatures",
-      "payoffAndLifetime": "Deal 1 damage to two distinct creatures, then restore 1 heart to your hero. One target is legal if no second exists.",
+      "payoffAndLifetime": "Choose two distinct enemy creatures, then deal 1 damage to each and restore 1 heart to your hero. One target is legal if no second is available. Choose both before damage; defeats use the ordinary cleanup after the spell.",
       "counterplay": "Use large bodies or Shield.",
       "semanticRevision": null,
       "releaseChecks": [

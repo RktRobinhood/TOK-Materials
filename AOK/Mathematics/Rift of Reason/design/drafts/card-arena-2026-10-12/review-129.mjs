@@ -52,3 +52,34 @@ export function reviewExpansion3(cards) {
         }
     }
 }
+
+// #129 expansion-4: the eight IDs suggested after expansion-3. Builder selection, 24 October 2026.
+export const expansion4Batch = ['reason-counterexample-crow','reason-exact-answer','emotion-grudge-goose','perception-notice-the-crack',
+    'language-debate-dingo','imagination-paradox-pony','memory-bookmark-bunny','generic-forked-reply'];
+const clarifications4 = {
+    'reason-counterexample-crow': ['Entrance: deal 1 damage to an enemy creature, or 2 if another friendly creature has a different explicit colour as this resolves. Generic, colourless and absent-colour creatures do not qualify.',
+        'Pin the live-board comparison and explicit-colour exclusions, not the fixed construction identity.'],
+    'reason-exact-answer': ['Deal damage equal to an enemy creature\'s current attack, capped at 3. A zero-attack creature is not offered.',
+        'Exclude a target that would certainly take zero damage; keep normal Shield prevention.'],
+    'emotion-grudge-goose': ['Last Word: deal 1 damage to the enemy hero, even with a full hand or Mercy. All simultaneous Last Words resolve before the existing heart-win check.',
+        'Use the existing effect-only Last Word and simultaneous cleanup order, without a new Win rule.'],
+    'language-debate-dingo': ['When attacking a creature with higher effective attack, including wheel/rule/aura changes, this gains Shield for that fight only. This temporary Shield is used before any existing Shield; it never remains after the fight.',
+        'Pin the comparison and one-fight lifetime in both preview and resolution.'],
+    'imagination-paradox-pony': ['Entrance: swap an enemy creature\'s current attack and health until your next turn starts, using normal swap rules. The swap is a timed stat modifier; damage taken afterwards and later boosts remain when it expires.',
+        'Pin temporary expiry using the authoritative normal-swap and timed-modifier semantics.'],
+    'memory-bookmark-bunny': ['Entrance: if this stays on your board, draw 1 personal card at your next turn start after rule bonuses, before the ordinary draw choice. Defeat, bounce, a control change, Silence or Empty Set at the due start cancels it; it never fires late.',
+        'Pin the one-shot turn, board/controller requirement, suppression and ordering. Store it in battle state.'],
+    'generic-forked-reply': ['Choose two distinct enemy creatures, then deal 1 damage to each and restore 1 heart to your hero. One target is legal if no second is available. Choose both before damage; defeats use the ordinary cleanup after the spell.',
+        'Resolve the prose against the explicit two-enemy-creatures target field; pin the second choice and deferred cleanup.'],
+};
+export function reviewExpansion4(cards) {
+    for (const c of cards) if (expansion4Batch.includes(c.id)) {
+        c.runtimeRelease='expansion-4';
+        c.status='Released in expansion-4 (#129); bounded engineering validation, not classroom balance certification';
+        c.acquisition.releaseStatus='Released expansion-4: pack pool'+(c.kind==='creature'?' plus one ordinary chapter-two catch':'');
+        if (clarifications4[c.id]) {
+            c.releaseRevision={issue:129,previousText:c.text,rationale:clarifications4[c.id][1]};
+            c.text=clarifications4[c.id][0];
+        }
+    }
+}

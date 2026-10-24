@@ -176,7 +176,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-4: pack pool plus one ordinary chapter-two catch"
       },
       "silhouette": "Midnight-blue slime with round spectacles and warm nonhuman eyes; one brass puzzle cube balanced on a soft lobe.",
       "signatureProp": "Stretch upward into a questioning lean, cube tilted toward the face while the base stays squashed flat.",
@@ -201,12 +201,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-4 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
         "health": 2,
-        "text": "Entrance: deal 1 damage to an enemy creature, or 2 if you control another creature of a different explicit colour.",
+        "text": "Entrance: deal 1 damage to an enemy creature, or 2 if another friendly creature has a different explicit colour as this resolves. Generic, colourless and absent-colour creatures do not qualify.",
         "gates": [
           109
         ]
@@ -987,7 +987,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-4: pack pool plus one ordinary chapter-two catch"
       },
       "silhouette": "Dark axolotl with small green gill fan, crimson scarf and one plain headset; rounded animal mouth.",
       "signatureProp": "Lean back in a startled reaction, little feet spread and tail curling clear of the headset.",
@@ -1012,12 +1012,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-4 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
         "health": 3,
-        "text": "Last Word: deal 1 damage to the enemy hero.",
+        "text": "Last Word: deal 1 damage to the enemy hero, even with a full hand or Mercy. All simultaneous Last Words resolve before the existing heart-win check.",
         "gates": [
           109
         ]
@@ -2293,7 +2293,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-4: pack pool plus one ordinary chapter-two catch"
       },
       "silhouette": "Compact ibis with dark head tufts, a gold-edged hoodie and an oversized confident reaction face.",
       "signatureProp": "One plain headset; the long beak opens for an absurdly emphatic rebuttal.",
@@ -2319,12 +2319,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-4 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 3,
         "attack": 3,
         "health": 2,
-        "text": "When attacking a creature with higher effective attack, this gains Shield for that fight only.",
+        "text": "When attacking a creature with higher effective attack, including wheel/rule/aura changes, this gains Shield for that fight only. This temporary Shield is used before any existing Shield; it never remains after the fight.",
         "gates": [
           109,
           127
@@ -3057,7 +3057,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-4: pack pool plus one ordinary chapter-two catch"
       },
       "silhouette": "Round platypus with broad bill, webbed feet and violet jacket; one twisted-handle coffee mug.",
       "signatureProp": "Rendered LEFT reclining body, bill turned toward viewer; authored intent and actual changes in provenance.",
@@ -3083,12 +3083,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-4 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 4,
         "attack": 3,
         "health": 3,
-        "text": "Entrance: swap an enemy creature's attack and health until your next turn starts, using normal swap rules.",
+        "text": "Entrance: swap an enemy creature's current attack and health until your next turn starts, using normal swap rules. The swap is a timed stat modifier; damage taken afterwards and later boosts remain when it expires.",
         "gates": [
           109
         ]
@@ -3277,7 +3277,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-4: pack pool plus one ordinary chapter-two catch"
       },
       "silhouette": "Small alert hare with sandy head tufts, dark spectacles and a silver-edged practical vest.",
       "signatureProp": "One broad bookmark tucked into a blank notebook; a subtle green collar is an identity accent, not its card colour.",
@@ -3303,12 +3303,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-4 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 1,
         "attack": 1,
         "health": 2,
-        "text": "Entrance: if this is still on your board when your next turn starts, draw 1 personal-deck card.",
+        "text": "Entrance: if this stays on your board, draw 1 personal card at your next turn start after rule bonuses, before the ordinary draw choice. Defeat, bounce, a control change, Silence or Empty Set at the due start cancels it; it never fires late.",
         "gates": [
           109
         ]

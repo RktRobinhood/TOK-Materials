@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eighteen plot-1 story cards, 169 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eighteen plot-1 story cards, 161 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -147,14 +147,14 @@
       "cost": 3,
       "attack": 2,
       "health": 2,
-      "text": "Entrance: deal 1 damage to an enemy creature, or 2 if you control another creature of a different explicit colour.",
+      "text": "Entrance: deal 1 damage to an enemy creature, or 2 if another friendly creature has a different explicit colour as this resolves. Generic, colourless and absent-colour creatures do not qualify.",
       "tags": [
         "damage",
         "mixed-board"
       ],
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Remove the other colour first; Shield still prevents the single damage packet.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-4 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "revision": {
@@ -170,7 +170,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-4: pack pool plus one ordinary chapter-two catch"
+      },
+      "runtimeRelease": "expansion-4",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Entrance: deal 1 damage to an enemy creature, or 2 if you control another creature of a different explicit colour.",
+        "rationale": "Pin the live-board comparison and explicit-colour exclusions, not the fixed construction identity."
       }
     },
     {
@@ -609,13 +615,13 @@
       "cost": 3,
       "attack": 2,
       "health": 3,
-      "text": "Last Word: deal 1 damage to the enemy hero.",
+      "text": "Last Word: deal 1 damage to the enemy hero, even with a full hand or Mercy. All simultaneous Last Words resolve before the existing heart-win check.",
       "tags": [
         "damage"
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Silence it or change Win.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-4 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -625,7 +631,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-4: pack pool plus one ordinary chapter-two catch"
+      },
+      "runtimeRelease": "expansion-4",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Last Word: deal 1 damage to the enemy hero.",
+        "rationale": "Use the existing effect-only Last Word and simultaneous cleanup order, without a new Win rule."
       }
     },
     {
@@ -1340,14 +1352,14 @@
       "cost": 3,
       "attack": 3,
       "health": 2,
-      "text": "When attacking a creature with higher effective attack, this gains Shield for that fight only.",
+      "text": "When attacking a creature with higher effective attack, including wheel/rule/aura changes, this gains Shield for that fight only. This temporary Shield is used before any existing Shield; it never remains after the fight.",
       "tags": [
         "combat",
         "shield"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Use equal or lower power or silence it.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-4 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -1358,7 +1370,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-4: pack pool plus one ordinary chapter-two catch"
+      },
+      "runtimeRelease": "expansion-4",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "When attacking a creature with higher effective attack, this gains Shield for that fight only.",
+        "rationale": "Pin the comparison and one-fight lifetime in both preview and resolution."
       }
     },
     {
@@ -1774,13 +1792,13 @@
       "cost": 4,
       "attack": 3,
       "health": 3,
-      "text": "Entrance: swap an enemy creature's attack and health until your next turn starts, using normal swap rules.",
+      "text": "Entrance: swap an enemy creature's current attack and health until your next turn starts, using normal swap rules. The swap is a timed stat modifier; damage taken afterwards and later boosts remain when it expires.",
       "tags": [
         "transformation"
       ],
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Use balanced stats or restore them.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-4 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -1790,7 +1808,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-4: pack pool plus one ordinary chapter-two catch"
+      },
+      "runtimeRelease": "expansion-4",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Entrance: swap an enemy creature's attack and health until your next turn starts, using normal swap rules.",
+        "rationale": "Pin temporary expiry using the authoritative normal-swap and timed-modifier semantics."
       }
     },
     {
@@ -1898,14 +1922,14 @@
       "cost": 1,
       "attack": 1,
       "health": 2,
-      "text": "Entrance: if this is still on your board when your next turn starts, draw 1 personal-deck card.",
+      "text": "Entrance: if this stays on your board, draw 1 personal card at your next turn start after rule bonuses, before the ordinary draw choice. Defeat, bounce, a control change, Silence or Empty Set at the due start cancels it; it never fires late.",
       "tags": [
         "draw",
         "delayed"
       ],
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Defeat, bounce, steal or silence it before its owner's next turn.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-4 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -1915,7 +1939,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-4: pack pool plus one ordinary chapter-two catch"
+      },
+      "runtimeRelease": "expansion-4",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Entrance: if this is still on your board when your next turn starts, draw 1 personal-deck card.",
+        "rationale": "Pin the one-shot turn, board/controller requirement, suppression and ordering. Store it in battle state."
       }
     },
     {
@@ -2358,13 +2388,13 @@
       "rarity": "common",
       "cost": 2,
       "target": "enemy-creature",
-      "text": "Deal damage equal to its current attack, capped at 3.",
+      "text": "Deal damage equal to an enemy creature's current attack, capped at 3. A zero-attack creature is not offered.",
       "tags": [
         "damage"
       ],
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Use low attack and high health.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-4 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2372,7 +2402,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-4: pack pool"
+      },
+      "runtimeRelease": "expansion-4",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Deal damage equal to its current attack, capped at 3.",
+        "rationale": "Exclude a target that would certainly take zero damage; keep normal Shield prevention."
       }
     },
     {
@@ -2827,7 +2863,7 @@
       ],
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Heal between exchanges.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-4 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2835,8 +2871,9 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
-      }
+        "releaseStatus": "Released expansion-4: pack pool"
+      },
+      "runtimeRelease": "expansion-4"
     },
     {
       "id": "perception-read-the-room",
@@ -5240,14 +5277,14 @@
       "rarity": "uncommon",
       "cost": 3,
       "target": "two-enemy-creatures",
-      "text": "Deal 1 damage to two distinct creatures, then restore 1 heart to your hero. One target is legal if no second exists.",
+      "text": "Choose two distinct enemy creatures, then deal 1 damage to each and restore 1 heart to your hero. One target is legal if no second is available. Choose both before damage; defeats use the ordinary cleanup after the spell.",
       "tags": [
         "damage",
         "healing"
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Use large bodies or Shield.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-4 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -5255,7 +5292,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-4: pack pool"
+      },
+      "runtimeRelease": "expansion-4",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Deal 1 damage to two distinct creatures, then restore 1 heart to your hero. One target is legal if no second exists.",
+        "rationale": "Resolve the prose against the explicit two-enemy-creatures target field; pin the second choice and deferred cleanup."
       }
     },
     {

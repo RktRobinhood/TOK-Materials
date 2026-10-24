@@ -93,3 +93,13 @@ Four contract texts are clarified without changing their meaning: the dolphin sk
 Edge, re-entry, information, source and backup tests, paired mono/mixed games against three partner Ways from the colour wheel and a mono mirror, and real-board browser commits are in the [acceptance report](../../reviews/expansion-3-2026-10-23.md).
 
 **169 concepts remain held.** The next batch is suggested in that report. The same exclusions stand: Fate timing, alternative Win goals, tokens and reaction cards.
+
+## Expansion-4 under #129 — 24 October 2026
+
+Eight IDs from expansion-3's recommendation are now `expansion-4`: `reason-counterexample-crow`, `reason-exact-answer`, `emotion-grudge-goose`, `perception-notice-the-crack`, `language-debate-dingo`, `imagination-paradox-pony`, `memory-bookmark-bunny`, `generic-forked-reply`. All six Ways plus generic, 1 Rare/3 Uncommon/4 Common. Each has a real handler, pack source, existing portrait/motif and shared sounds; the five creatures also have ordinary chapter-two catches. No voice/model requests.
+
+`reviewExpansion4` preserves previous text/rationale while pinning explicit-colour qualification, positive-attack targets, effect-only Last Word ordering, one-fight effective-attack Shield, normal temporary-swap semantics, the exact delayed-draw/controller/suppression window and distinct two-enemy choice before deferred cleanup. Timed-health expiry now resolves defeats/Last Words before start bonuses/draws, verified with a lethal regression.
+
+Acceptance: [expansion-4 report](../../reviews/expansion-4-2026-10-24.md), 19 focused checks, full 1,530 pass/1 existing skip/0 fail, independent Standards and Spec reviews, sources/canonical backups and 27 native outcomes. Three paired 768-game runs include hook control and Crow-bonus ablation. Two −0.375 fixture shifts exceed the earlier noise band; retain them explicitly. Builder accepts bounded single-player release with counterplay and no single-rate tuning; the next interacting batch must finish the targeted comparison in the report. No classroom balance claim.
+
+**161 concepts remain held.** #129 stays open; Fate/alternative Win/token/reaction exclusions remain.

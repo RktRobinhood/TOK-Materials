@@ -14,8 +14,10 @@
  *   attackMod(state, card, H)        own attack change
  *   aura(state, source, card, H)     attack bonus given to OTHER friendly creatures
  *   onTurnEnd(api, card)             at the end of its controller's turn
+ *   onTurnStart(api, card)           after start-of-turn bonuses, before the ordinary draw choice
  *   onAttack(api, card, target)      when it attacks (before damage)
  *   onAttacked(api, card, attacker)  when an enemy creature attacks it (before damage)
+ *   shieldAgainstHigher            Shield for this fight only, when attacking higher effective attack
  *   onSurvive(api, card, foe)        after a fight it survives
  *   onAxiomPlayed(api, card, id, p)  whenever any player plays an axiom card
  *   onEnemyPlay(api, card, played)   whenever the opponent plays a creature
@@ -669,6 +671,53 @@
                 api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' puts ' + api.cardName(cid) + ' on top of the personal deck.' });
             },
             ai: () => 0.5,
+        },
+        // #129 expansion-4. All checks use public board facts, not deck identity or hidden cards.
+        'this-is-the-swap': {
+            name: 'This Is the Swap', text: 'Entrance: swap an enemy creature\'s attack and health until your next turn starts.',
+            entrance: { target: 'enemy-creature', run(api, card, target) {
+                api.swapUntilStart(target, card.controller, 'This Is the Swap');
+                api.emit({ t: 'ability', cid: card.cid, target, text: api.name(card.cid) + ' swaps ' + api.name(target) + '\'s attack and health until your next turn starts.' });
+            } },
+        },
+        'keep-your-place': {
+            name: 'Keep Your Place', text: 'Entrance: if still on your board at your next turn start, draw 1 personal card.',
+            entrance: { run(api, card) {
+                card.bookmarkTurn = api.s.turn + 2;
+                card.bookmarkPlayer = card.controller;
+                api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' marks a page for your next turn.' });
+            } },
+            onTurnStart(api, card) {
+                // Exact turn: a suppressed or missed draw can never fire late after the rule changes.
+                if (card.bookmarkTurn !== api.s.turn || card.bookmarkPlayer !== card.controller) return;
+                card.bookmarkTurn = null; card.bookmarkPlayer = null;
+                if (api.planning) return;
+                const drawn = api.draw(card.controller);
+                api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + (drawn ? ' draws one extra personal card.' : ' cannot draw an extra card.') });
+            },
+        },
+        'punching-up': {
+            name: 'Punching Up', text: 'When attacking a creature with higher attack, gain Shield for that fight only.',
+            shieldAgainstHigher: true,
+        },
+        'one-last-shout': {
+            name: 'One Last Shout', text: 'Last Word: deal 1 damage to the enemy hero.',
+            lastWordEffect(api, card) {
+                api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ': 1 damage to the enemy hero.' });
+                api.damage('h' + (1 - card.controller), 1, card.cid);
+            },
+        },
+        'another-question': {
+            name: 'Another Question', text: 'Entrance: 1 damage to an enemy creature; 2 with a friend of another colour.',
+            entrance: { target: 'enemy-creature', run(api, card, target) {
+                const mixed = api.s.players[card.controller].board.some(cid => {
+                    const other = api.s.cards[cid];
+                    return cid !== card.cid && other.colour && !other.generic && !other.colourless && other.colour !== card.colour;
+                });
+                const n = mixed ? 2 : 1;
+                api.emit({ t: 'ability', cid: card.cid, target, text: api.name(card.cid) + ': ' + n + ' damage to ' + api.name(target) + '.' });
+                api.damage(target, n, card.cid);
+            } },
         },
         'patient-conclusion': {
             name: 'One Tiny Detail', text: 'Once per turn, after another friend survives a fight at 1 health, draw 1 personal card.',

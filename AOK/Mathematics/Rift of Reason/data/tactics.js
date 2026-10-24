@@ -777,6 +777,52 @@
             },
         },
     });
+    // #129 expansion-4: existing damage rules, shared motifs and ordinary spell targeting.
+    function forkedReply(api, p, targets) {
+        targets.forEach(cid => {
+            if (!api.s.players[1 - p].board.includes(cid) || api.H.hasKeyword(api.s, cid, 'elusive')) return;
+            api.emit({ t: 'tactic', player: p, text: 'Forked Reply: 1 damage to ' + api.name(cid) + '.' });
+            api.damage(cid, 1, null);
+        });
+        api.healHero(p, 1);
+        api.emit({ t: 'tactic', player: p, text: 'Forked Reply: restore 1 heart.' });
+    }
+    Object.assign(tactics, {
+        'generic-forked-reply': {
+            name: 'Forked Reply', cost: 3, rarity: 'uncommon', release: 'expansion-4', packEligible: true,
+            text: 'Deal 1 damage to two different enemy creatures, then restore 1 heart. One target is enough if no second is available.',
+            art: 'art/spell-motif-generic', target: 'enemy-creature',
+            run(api, p, target) {
+                const others = proofTargets(api.s, p, api.H).filter(cid => cid !== target);
+                // Choose both before dealing damage: a first defeat must not end the effect midway.
+                if (!api.ask({ player: p, kind: 'card', options: others, first: target,
+                    prompt: 'Which other enemy takes 1 damage?', source: { type: 'tactic', id: 'generic-forked-reply' } })) {
+                    forkedReply(api, p, [target]);
+                }
+            },
+            choose(api, p, target, req) { forkedReply(api, p, [req.first, target]); },
+        },
+        'perception-notice-the-crack': {
+            name: 'Notice the Crack', cost: 1, colour: 'perception', rarity: 'common', release: 'expansion-4', packEligible: true,
+            text: 'Deal 1 damage to an enemy creature, or 2 if it is already damaged.', short: '1 damage to an enemy; 2 if already hurt',
+            art: 'art/spell-motif-perception', target: 'enemy-creature',
+            run(api, p, target) {
+                const n = api.s.cards[target].damage > 0 ? 2 : 1;
+                api.emit({ t: 'tactic', player: p, text: 'Notice the Crack: ' + n + ' damage to ' + api.name(target) + '.' });
+                api.damage(target, n, null);
+            },
+        },
+        'reason-exact-answer': {
+            name: 'Exact Answer', cost: 2, colour: 'reason', rarity: 'common', release: 'expansion-4', packEligible: true,
+            text: 'Deal damage equal to an enemy creature\'s attack, up to 3.', short: 'Enemy takes its attack as damage (up to 3)',
+            art: 'art/spell-motif-reason', target: 'enemy-creature', filter: (s, cid, H) => H.attack(s, cid) > 0,
+            run(api, p, target) {
+                const n = Math.min(3, api.attack(target));
+                api.emit({ t: 'tactic', player: p, text: 'Exact Answer: ' + n + ' damage to ' + api.name(target) + '.' });
+                api.damage(target, n, null);
+            },
+        },
+    });
     Rift.data.tactics = tactics;
     tactics['generic-quiet-reset'] = {
         id: 'generic-quiet-reset', name: 'Quiet Reset', cost: 3, rarity: 'uncommon', release: 'plot-1', packEligible: false,

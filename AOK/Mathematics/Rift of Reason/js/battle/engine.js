@@ -547,6 +547,11 @@
             && playsLeft(s, s.active) > 0 && !c.frozen && !c.activated && !c.attacks && !isSleeping(s, cid);
     }
 
+    // A one-fight Shield never becomes a lasting keyword or uses up an existing Shield (#129).
+    // Both preview and commitment compare the same effective attacks, including wheel/rule/aura changes.
+    function fightShield(s, attacker, pa, pb) {
+        return pb > pa && abilityFlag(s, s.cards[attacker], 'shieldAgainstHigher');
+    }
     // A preview of a fight without running hooks (for the UI and quick AI checks).
     function fightPreview(s, att, target) {
         const pa = attackOf(s, att, isHero(target) ? null : target);
@@ -559,7 +564,8 @@
         const pb = attackOf(s, target, att);
         const ax = combatAxiom(s);
         const res = ax && ax.resolveFight ? ax.resolveFight(pa, pb) : { toAttacker: pb, toDefender: pa };
-        const damageToAttacker = damageAfterPrevention(s, att, res.toAttacker), damageToDefender = damageAfterPrevention(s, target, res.toDefender);
+        const damageToAttacker = fightShield(s, att, pa, pb) ? 0 : damageAfterPrevention(s, att, res.toAttacker);
+        const damageToDefender = damageAfterPrevention(s, target, res.toDefender);
         const ha = healthOf(s, att).current - damageToAttacker, hb = healthOf(s, target).current - damageToDefender;
         let defenderDefeated = hb <= 0;
         const attackerDefeated = ha <= 0;
@@ -1149,6 +1155,7 @@
             fullHeal(cid) { s.cards[cid].damage = 0; },
             setAttack: (cid, n, label) => setAttack(s, cid, n, label),
             swapStats: cid => swapStats(s, cid),
+            swapUntilStart: (cid, p, label) => swapStats(s, cid, { untilStart: nextTurnStart(G, p), label }),
             takeControl: (cid, p) => takeControl(G, cid, p),
         };
     }
@@ -1285,6 +1292,7 @@
         s.players[p].board.push(cid);
         c.controller = p;
         c.enteredTurn = s.turn;
+        c.bookmarkTurn = null; c.bookmarkPlayer = null; // a delayed Entrance is lost on a control change (#129)
         c.attacks = 0; c.activated = false; c.frozen = false; c.frozenUntil = null;
         return true;
     }
@@ -1310,16 +1318,25 @@
     }
     // Swap its current attack and current health. Lasting buffs are folded into the new printed
     // numbers; this-turn boosts, auras and rules keep working on top. 0 attack gives 0 health: defeated.
-    function swapStats(s, cid) {
+    function swapStats(s, cid, expiry) {
         const c = s.cards[cid];
         const atk = attackOf(s, cid), hp = healthOf(s, cid).current;
         const short = b => b.temp || b.untilTurn != null || b.untilStart != null;   // this-turn and timed (#121, #148) boosts are not folded in
         const lasting = c.buffs.reduce((sum, b) => sum + (short(b) ? 0 : (b.attack || 0)), 0);
+        const original = expiry && { attack: c.attack + lasting,
+            health: c.health + c.buffs.reduce((sum, b) => sum + (short(b) ? 0 : (b.health || 0)), 0) };
         const extra = attackParts(s, cid).parts.reduce((sum, x) => sum + (x.source === 'base' ? 0 : x.amount), 0) - lasting;
         c.buffs = c.buffs.filter(short).map(b => Object.assign({}, b, { health: 0 }));
         c.attack = Math.max(0, hp - extra);
         c.health = Math.max(1, atk);
         c.damage = atk > 0 ? 0 : 1;
+        // The same swap, expressed as an ordinary timed stat modifier over the folded lasting stats.
+        // Expiry removes the modifier while preserving damage taken since the swap and any later boosts.
+        if (expiry) {
+            const attack = c.attack - original.attack, health = c.health - original.health;
+            c.attack = original.attack; c.health = original.health;
+            c.buffs.push({ label: expiry.label, attack, health, temp: false, untilStart: expiry.untilStart });
+        }
     }
 
     // Returns false when the hand is full: the card goes to the discard pile, tagged `burned` so it
@@ -1361,6 +1378,7 @@
 
     function resetCard(c) {
         c.damage = 0; c.buffs = []; c.gained = []; c.extraKeywords = [];
+        c.bookmarkTurn = null; c.bookmarkPlayer = null;
         c.enteredTurn = null; c.attacks = 0; c.activated = false; c.frozen = false; c.frozenUntil = null; c.silenced = false; c.shieldUsed = false;
         c.nickname = null; c.colourless = false; c.prediction = null; c.siuuu = 0; c.burned = false;
         if (c.lostKeywords) c.lostKeywords = null;
@@ -1396,6 +1414,9 @@
         }
         announceFlip(G);   // the first turn, or a flip still waiting for a rule card
         endAtTurnStart(s);
+        // Expiring health can defeat a creature. Finish those Last Words before healing, bonuses or drawing.
+        cleanup(G);
+        if (s.winner != null) return;
         P.capacity = Math.max(1, Math.min(s.options.energyCap, P.capacity + r.growth));   // growth may be 0 or −1
         P.energy = P.capacity + (P.consumables['extra-energy'] || 0) + (P.nextEnergy || 0);   // nextEnergy: an environmental event (#128)
         P.nextEnergy = 0;
@@ -1414,6 +1435,11 @@
         s.pending = null;
         emit(G, { t: 'turn', player: p, text: playerName(s, p) + ': ' + P.energy + ' energy. Choose a draw.' });
         startBonus(G, p, r);
+        // Creature start effects follow existing rule bonuses in board order. Dead creatures cannot trigger.
+        P.board.slice().forEach(cid => {
+            if (!P.board.includes(cid) || healthOf(s, cid).current <= 0) return;
+            eachAbility(s, s.cards[cid], def => { if (def.onTurnStart) def.onTurnStart(api(G), s.cards[cid]); });
+        });
         if (r.healMost) {
             const target = P.board.slice().sort((a, b) => s.cards[b].damage - s.cards[a].damage || s.cards[a].enteredTurn - s.cards[b].enteredTurn)[0];
             if (target && s.cards[target].damage > 0) {
@@ -2125,11 +2151,13 @@
     function fight(G, att, def) {
         const s = G.s;
         const pa = attackOf(s, att, def), pb = attackOf(s, def, att);
+        const shield = fightShield(s, att, pa, pb);
         const ax = combatAxiom(s);
         const res = ax && ax.resolveFight ? ax.resolveFight(pa, pb) : { toAttacker: pb, toDefender: pa };
         emit(G, { t: 'fight', attacker: att, defender: def, pa, pb, text: logName(s, att) + ' (' + pa + ' attack) fights ' + logName(s, def) + ' (' + pb + ' attack)' + (combatAxiom(s) && !combatAxiom(s).basic ? ' under ' + combatAxiom(s).name : '') + '.' });
         dealDamage(G, def, res.toDefender, att);
-        dealDamage(G, att, res.toAttacker, def);
+        if (shield && res.toAttacker > 0) emit(G, { t: 'shield', cid: att, text: logName(s, att) + '\'s Shield blocks the damage for this fight.' });
+        else dealDamage(G, att, res.toAttacker, def);
         const aDead = healthOf(s, att).current <= 0, dDead = healthOf(s, def).current <= 0;
         if (aDead && dDead && ax && ax.defenderSurvivesTrade) {
             s.cards[def].damage = healthOf(s, def).max - 1;

@@ -378,6 +378,35 @@
         },
     });
 
+    // #129 expansion-4: the next bounded catalogue batch, using existing selected portraits.
+    Object.assign(Rift.data.creatures, {
+        'imagination-paradox-pony': {
+            name: 'Pedro Platypascal', inspiredBy: 'Pedro Pascal', colour: 'imagination', rarity: 'rare', power: 5, cost: 4, attack: 3, health: 3,
+            ability: 'this-is-the-swap', abilityText: 'Entrance: swap an enemy creature\'s attack and health until your next turn starts.',
+            blurb: 'Takes the long way round to a very different shape.', lines: [], release: 'expansion-4', packEligible: true,
+        },
+        'memory-bookmark-bunny': {
+            name: 'Hank Greenhare', inspiredBy: 'Hank Green', colour: 'memory', rarity: 'common', power: 2, cost: 1, attack: 1, health: 2,
+            ability: 'keep-your-place', abilityText: 'Entrance: if still on your board at your next turn start, draw 1 personal card.',
+            blurb: 'Marks one page, then explains why every other page matters too.', lines: [], release: 'expansion-4', packEligible: true,
+        },
+        'language-debate-dingo': {
+            name: 'K-S-Ibis', inspiredBy: 'KSI', colour: 'language', rarity: 'uncommon', power: 4, cost: 3, attack: 3, health: 2,
+            ability: 'punching-up', abilityText: 'When attacking a creature with higher attack, gain Shield for that fight only.',
+            blurb: 'Chooses the biggest rival, then asks for one tiny safety rule.', lines: [], release: 'expansion-4', packEligible: true,
+        },
+        'emotion-grudge-goose': {
+            name: 'Jack Axoloticeye', inspiredBy: 'Jacksepticeye', colour: 'emotion', rarity: 'uncommon', power: 4, cost: 3, attack: 2, health: 3,
+            ability: 'one-last-shout', abilityText: 'Last Word: deal 1 damage to the enemy hero.',
+            blurb: 'The final shout always needs one more final shout.', lines: [], release: 'expansion-4', packEligible: true,
+        },
+        'reason-counterexample-crow': {
+            name: 'V-Squish', inspiredBy: 'Michael Stevens / Vsauce', colour: 'reason', rarity: 'common', power: 3, cost: 3, attack: 2, health: 2,
+            ability: 'another-question', abilityText: 'Entrance: 1 damage to an enemy creature; 2 with a friend of another colour.',
+            blurb: 'One small question makes the whole explanation wobble.', lines: [], release: 'expansion-4', packEligible: true,
+        },
+    });
+
     // #132 plot identities: their actual earned source is the permanent Acquisition registry.
     function plotCreature(name,inspiredBy,colour,attack,health,ability,abilityText,blurb){
         return {name,inspiredBy,colour,rarity:'rare',power:5,cost:5,attack,health,ability,abilityText,blurb,lines:[],release:'plot-1',packEligible:false};
