@@ -1,0 +1,87 @@
+{
+  "scope": "Native Windows IAB Chromium, actual desktop1280x720 and390x844. Production Continue, existing Owlet save; no travel or rewards.",
+  "normal": {
+    "calm": false,
+    "contentWidth": 1280,
+    "frame": "1070 0 214 240",
+    "height": 720,
+    "hidden": false,
+    "position": "translate(200,600)",
+    "width": 1280
+  },
+  "keyboard": {
+    "contentWidth": 1280,
+    "focused": "Your Home",
+    "frame": "1498 0 214 240",
+    "height": 720,
+    "hidden": false,
+    "position": "translate(200,600)",
+    "tooltip": "Your HomeHome. Warm, safe, and a bit too quiet today.1 stop away.",
+    "width": 1280
+  },
+  "calmDesktop": {
+    "calm": true,
+    "contentWidth": 1280,
+    "frame": "0 0 214 240",
+    "height": 720,
+    "position": "translate(200,600)",
+    "routePaths": [
+      {
+        "animation": "none",
+        "dash": "none",
+        "stroke": "rgb(242, 182, 50)",
+        "width": "7px"
+      }
+    ],
+    "tooltip": "Your HomeHome. Warm, safe, and a bit too quiet today.1 stop away.",
+    "width": 1280
+  },
+  "calmNarrow": {
+    "calm": true,
+    "contentWidth": 390,
+    "frame": "0 0 214 240",
+    "height": 844,
+    "hudButtons": [
+      {
+        "left": 331.265625,
+        "name": "Journal",
+        "right": 402.09375,
+        "withinViewport": false
+      },
+      {
+        "left": 414.09375,
+        "name": "📖 Collection",
+        "right": 499.65625,
+        "withinViewport": false
+      },
+      {
+        "left": 511.65625,
+        "name": "🎒 Bag",
+        "right": 558.84375,
+        "withinViewport": false
+      },
+      {
+        "left": 570.84375,
+        "name": "⚙",
+        "right": 606.234375,
+        "withinViewport": false
+      },
+      {
+        "left": 132.203125,
+        "name": "Journal",
+        "right": 180.109375,
+        "withinViewport": true
+      }
+    ],
+    "position": "translate(200,600)",
+    "tooltip": "Your HomeHome. Warm, safe, and a bit too quiet today.1 stop away.",
+    "width": 390
+  },
+  "save": {
+    "sameBeforeAfterInspection": true,
+    "sameAfterCalmRestored": true,
+    "length": 2089,
+    "sha256": "da39d3f170a2a3515e51d30623fc63978b4c2781e930125c721d7b692a2d6b9d",
+    "calmRestored": true
+  }
+}
