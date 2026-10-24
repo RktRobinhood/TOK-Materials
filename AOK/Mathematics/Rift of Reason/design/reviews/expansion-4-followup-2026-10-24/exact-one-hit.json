@@ -1,0 +1,3014 @@
+{
+  "date": "2026-10-24",
+  "issue": 129,
+  "baseCommit": "f5a13c165ca0b80d75efcf8bc97c7b2ebb07f3ef",
+  "seedsPerSeat": 64,
+  "mode": "exact-one-hit",
+  "scope": "Three selected adverse fixtures, Competent AI both seats; not a representative colour tournament. Same original decks/seeds; earlier-leads uses real prior cards and therefore changes their bodies/costs/keywords too, a composition sensitivity check rather than an isolated hook effect.",
+  "replacements": null,
+  "rows": [
+    {
+      "colour": "perception",
+      "partner": "reason",
+      "edge": "neutral",
+      "mono": {
+        "creatures": [
+          "perception-cue-cricket",
+          "perception-cue-cricket",
+          "kardashiant",
+          "kardashiant",
+          "lens-lizard",
+          "lens-lizard",
+          "attenbirdough",
+          "attenbirdough"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "perception-notice-the-crack",
+          "perception-notice-the-crack",
+          "generic-forked-reply",
+          "generic-forked-reply",
+          "field-notes",
+          "field-notes"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixed": {
+        "creatures": [
+          "perception-cue-cricket",
+          "perception-cue-cricket",
+          "kardashiant",
+          "kardashiant",
+          "reason-counterexample-crow",
+          "reason-counterexample-crow",
+          "reason-premise-pigeon",
+          "reason-premise-pigeon"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "perception-notice-the-crack",
+          "perception-notice-the-crack",
+          "generic-forked-reply",
+          "generic-forked-reply",
+          "reason-exact-answer",
+          "reason-exact-answer"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "games": 128,
+      "monoWins": 78,
+      "mixedWins": 50,
+      "draws": 0,
+      "turnLimit": 0,
+      "maxSteps": 136,
+      "played": {
+        "kardashiant": 368,
+        "reason-premise-pigeon": 173,
+        "attenbirdough": 196,
+        "perception-cue-cricket": 370,
+        "stand-firm": 322,
+        "lens-lizard": 191,
+        "reason-counterexample-crow": 185,
+        "counterexample": 350,
+        "field-notes": 156,
+        "generic-forked-reply": 321,
+        "perception-notice-the-crack": 205,
+        "pep-talk": 376,
+        "reason-exact-answer": 52
+      },
+      "trials": [
+        {
+          "seed": 0,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 0,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 1,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 1,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 2,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 2,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 3,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 3,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 4,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 4,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 5,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 5,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 6,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 6,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 7,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 7,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 8,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 8,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 9,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 9,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 10,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 10,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 11,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 11,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 12,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 12,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 13,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 13,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 14,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 14,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 15,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 15,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 16,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 16,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 17,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 17,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 18,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 18,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 19,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 19,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 20,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 20,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 21,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 21,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 22,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 22,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 23,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 23,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 24,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 24,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 25,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 25,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 26,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 26,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 27,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 27,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 28,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 28,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 29,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 29,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 30,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 30,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 31,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 31,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 32,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 32,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 33,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 33,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 34,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 34,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 35,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 35,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 36,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 36,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 37,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 37,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 38,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 38,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 39,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 39,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 40,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 40,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 41,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 41,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 42,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 42,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 43,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 43,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 44,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 44,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 45,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 45,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 46,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 46,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 47,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 47,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 48,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 48,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 49,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 49,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 50,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 50,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 51,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 51,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 52,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 52,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 53,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 53,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 54,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 54,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 55,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 55,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 56,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 56,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 57,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 57,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 58,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 58,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 59,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 59,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 60,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 60,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 61,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 61,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 62,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 62,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 63,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 63,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        }
+      ],
+      "monoShare": 0.6094
+    },
+    {
+      "colour": "memory",
+      "partner": "reason",
+      "edge": "strong",
+      "mono": {
+        "creatures": [
+          "memory-bookmark-bunny",
+          "memory-bookmark-bunny",
+          "memory-recall-robin",
+          "memory-recall-robin",
+          "pocket-tortoise",
+          "pocket-tortoise",
+          "memory-archive-armadillo",
+          "memory-archive-armadillo"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "remember-when",
+          "remember-when",
+          "generic-forked-reply",
+          "generic-forked-reply",
+          "nostalgia",
+          "nostalgia"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixed": {
+        "creatures": [
+          "memory-bookmark-bunny",
+          "memory-bookmark-bunny",
+          "memory-recall-robin",
+          "memory-recall-robin",
+          "reason-counterexample-crow",
+          "reason-counterexample-crow",
+          "reason-premise-pigeon",
+          "reason-premise-pigeon"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "remember-when",
+          "remember-when",
+          "generic-forked-reply",
+          "generic-forked-reply",
+          "reason-exact-answer",
+          "reason-exact-answer"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "games": 128,
+      "monoWins": 70,
+      "mixedWins": 58,
+      "draws": 0,
+      "turnLimit": 0,
+      "maxSteps": 153,
+      "played": {
+        "memory-bookmark-bunny": 417,
+        "counterexample": 537,
+        "reason-counterexample-crow": 226,
+        "pep-talk": 566,
+        "nostalgia": 187,
+        "pocket-tortoise": 213,
+        "stand-firm": 404,
+        "remember-when": 425,
+        "memory-recall-robin": 421,
+        "memory-archive-armadillo": 215,
+        "reason-premise-pigeon": 212,
+        "generic-forked-reply": 480,
+        "reason-exact-answer": 69
+      },
+      "trials": [
+        {
+          "seed": 0,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 0,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 1,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 1,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 2,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 2,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 3,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 3,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 4,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 4,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 5,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 5,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 6,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 6,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 7,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 7,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 8,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 8,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 9,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 9,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 10,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 10,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 11,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 11,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 12,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 12,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 13,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 13,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 14,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 14,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 15,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 15,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 16,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 16,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 17,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 17,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 18,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 18,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 19,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 19,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 20,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 20,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 21,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 21,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 22,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 22,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 23,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 23,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 24,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 24,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 25,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 25,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 26,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 26,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 27,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 27,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 28,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 28,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 29,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 29,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 30,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 30,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 31,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 31,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 32,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 32,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 33,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 33,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 34,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 34,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 35,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 35,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 36,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 36,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 37,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 37,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 38,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 38,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 39,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 39,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 40,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 40,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 41,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 41,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 42,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 42,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 43,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 43,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 44,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 44,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 45,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 45,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 46,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 46,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 47,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 47,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 48,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 48,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 49,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 49,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 50,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 50,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 51,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 51,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 52,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 52,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 53,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 53,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 54,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 54,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 55,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 55,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 56,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 56,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 57,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 57,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 58,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 58,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 59,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 59,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 60,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 60,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 61,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 61,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 62,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 62,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 63,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 63,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        }
+      ],
+      "monoShare": 0.5469
+    },
+    {
+      "colour": "language",
+      "partner": "memory",
+      "edge": "neutral",
+      "mono": {
+        "creatures": [
+          "language-debate-dingo",
+          "language-debate-dingo",
+          "language-question-quail",
+          "language-question-quail",
+          "beansprout",
+          "beansprout",
+          "footnote-finch",
+          "footnote-finch"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "label-it",
+          "label-it",
+          "generic-forked-reply",
+          "generic-forked-reply",
+          "rousing-speech",
+          "rousing-speech"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "mixed": {
+        "creatures": [
+          "language-debate-dingo",
+          "language-debate-dingo",
+          "language-question-quail",
+          "language-question-quail",
+          "memory-bookmark-bunny",
+          "memory-bookmark-bunny",
+          "memory-recall-robin",
+          "memory-recall-robin"
+        ],
+        "tactics": [
+          "counterexample",
+          "counterexample",
+          "pep-talk",
+          "pep-talk",
+          "stand-firm",
+          "stand-firm",
+          "label-it",
+          "label-it",
+          "generic-forked-reply",
+          "generic-forked-reply",
+          "remember-when",
+          "remember-when"
+        ],
+        "axioms": [
+          "flux-plays-plus-1",
+          "flux-plays-minus-1",
+          "flux-draw-plus-1",
+          "flux-draw-minus-1",
+          "flux-growth-plus-1",
+          "flux-cost-plus-1",
+          "flux-cost-minus-1",
+          "limited-memory",
+          "momentum",
+          "two-plays"
+        ]
+      },
+      "games": 128,
+      "monoWins": 71,
+      "mixedWins": 57,
+      "draws": 0,
+      "turnLimit": 0,
+      "maxSteps": 170,
+      "played": {
+        "beansprout": 184,
+        "memory-bookmark-bunny": 179,
+        "pep-talk": 450,
+        "language-debate-dingo": 412,
+        "counterexample": 414,
+        "stand-firm": 368,
+        "remember-when": 196,
+        "footnote-finch": 184,
+        "generic-forked-reply": 412,
+        "label-it": 279,
+        "memory-recall-robin": 186,
+        "language-question-quail": 372,
+        "rousing-speech": 191
+      },
+      "trials": [
+        {
+          "seed": 0,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 0,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 1,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 1,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 2,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 2,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 3,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 3,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 4,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 4,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 5,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 5,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 6,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 6,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 7,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 7,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 8,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 8,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 9,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 9,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 10,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 10,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 11,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 11,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 12,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 12,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 13,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 13,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 14,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 14,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 15,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 15,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 16,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 16,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 17,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 17,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 18,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 18,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 19,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 19,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 20,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 20,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 21,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 21,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 22,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 22,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 23,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 23,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 24,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 24,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 25,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 25,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 26,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 26,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 27,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 27,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 28,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 28,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 29,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 29,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 30,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 30,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 31,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 31,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 32,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 32,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 33,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 33,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 34,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 34,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 35,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 35,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 36,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 36,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 37,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 37,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 38,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 38,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 39,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 39,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 40,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 40,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 41,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 41,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 42,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 42,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 43,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 43,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 44,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 44,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 45,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 45,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 46,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 46,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 47,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 47,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 48,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 48,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 49,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 49,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 50,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 50,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 51,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 51,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 52,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 52,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 53,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 53,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 54,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 54,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 55,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 55,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 56,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 56,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 57,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 57,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 58,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 58,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 59,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 59,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 60,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 60,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 61,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 61,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 62,
+          "monoSeat": 0,
+          "first": 0,
+          "winner": "mono",
+          "turnLimit": false
+        },
+        {
+          "seed": 62,
+          "monoSeat": 1,
+          "first": 0,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 63,
+          "monoSeat": 0,
+          "first": 1,
+          "winner": "mixed",
+          "turnLimit": false
+        },
+        {
+          "seed": 63,
+          "monoSeat": 1,
+          "first": 1,
+          "winner": "mono",
+          "turnLimit": false
+        }
+      ],
+      "monoShare": 0.5547
+    }
+  ]
+}
