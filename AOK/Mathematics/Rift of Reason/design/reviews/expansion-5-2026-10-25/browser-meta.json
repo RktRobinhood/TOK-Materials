@@ -1,0 +1,13 @@
+{
+  "url": "http://localhost:8791/dev/expansion-5.html",
+  "errors": [],
+  "outcomes": 30,
+  "scenarios": 10,
+  "modes": [
+    "1280 normal",
+    "1280 Calm",
+    "390 Calm"
+  ],
+  "screenshots": "Two Page.captureScreenshot timeouts; no new PNG or visual motion assertion",
+  "storage": "Bench replaces Rift.storage before State.newGame; memory-only Map, no actual adventure"
+}

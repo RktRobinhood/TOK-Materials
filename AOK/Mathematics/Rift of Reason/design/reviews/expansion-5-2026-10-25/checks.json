@@ -1,0 +1,19 @@
+{
+  "baseCommit": "7da060d7307f805ccadfae2a2d8fa3e15c7356ef",
+  "command": "node --max-old-space-size=2048 --test --test-concurrency=2 <git ls-files tools/test/*.test.mjs> tools/test/expansion-5.test.mjs",
+  "fullSummary": "ℹ tests 1550\r\nℹ suites 0\r\nℹ pass 1549\r\nℹ fail 0\r\nℹ cancelled 0\r\nℹ skipped 1\r\nℹ todo 0\r\nℹ duration_ms 439388.6663\r\n",
+  "fullLogSHA256": "4cc907d75a75cf8f73d4a6c00397c575d741baaeaf7bb343c79599acc7b5f35a",
+  "focusedTests": 19,
+  "validators": [
+    "catalogue-source.mjs",
+    "audit-123.mjs",
+    "persona-source.mjs",
+    "validate-planning.mjs",
+    "validate-personas.mjs"
+  ],
+  "runtimeFiles": {
+    "data/tactics.js": "9445d7e079649a959789f7a6371c0a2200e456424cb9ca7cafeeaa10069f0149",
+    "js/battle/engine.js": "118c3f265ea72e7afea47b0aad6c28b43693a5373bc2b43f7ae0ff1c164bd509",
+    "js/battle/ai.js": "f844c5ba088a0713fb427c6b40e4e25b39f226caa73c9653c4c3e849842d40b4"
+  }
+}

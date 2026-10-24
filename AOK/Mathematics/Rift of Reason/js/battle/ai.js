@@ -293,7 +293,7 @@
 
     function creatureCount(s, p) {
         const P = s.players[p];
-        let n = 0;
+        let n = E().planningCreatureCount(s, p);
         for (const z of [P.deck, P.hand, P.board, P.armed || []]) for (const cid of z) if (s.cards[cid].kind === 'creature' || s.cards[cid].reservedCreature) n++;
         return n;
     }
@@ -667,6 +667,7 @@
 
     function cardWorth(s, cid, me) {
         const c = s.cards[cid];
+        if (c.kind === 'concealed') return 2; // an unobserved hypothetical draw has a flat value
         if (c.kind === 'tactic') return 2 + (Rift.data.tactics[c.tactic] || { cost: 1 }).cost * 0.5;
         const P = s.players[me];
         const v = c.attack + c.health * 0.9 + c.baseKeywords.length * 0.6;
@@ -677,7 +678,11 @@
     function heuristicChoice(s, me) {
         const req = s.pending;
         const opts = req.options;
-        if (req.kind === 'card') return opts.slice().sort((x, y) => cardWorth(s, y, me) - cardWorth(s, x, me))[0];
+        if (req.kind === 'card') {
+            // Recovery takes the best card; a private hand cycle instead gives up the least valuable.
+            const bottom = req.source && req.source.type === 'tactic' && req.source.id === 'generic-balanced-exchange';
+            return opts.slice().sort((x, y) => (bottom ? -1 : 1) * (cardWorth(s, y, me) - cardWorth(s, x, me)))[0];
+        }
         if (req.kind === 'colour') {
             // Guess the colour the opponent has most of among its creatures not seen yet. Only public
             // facts: the opponent's whole team is known (team list), minus what is on a board or in a

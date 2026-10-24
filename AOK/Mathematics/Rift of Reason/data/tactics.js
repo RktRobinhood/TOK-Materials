@@ -823,6 +823,124 @@
             },
         },
     });
+    // #129 expansion-5: support and card quality, with no new damage/Fate policy.
+    function shapeTargets(s, p, friend, H) {
+        return proofTargets(s, p, H).filter(cid => Math.min(5, H.attack(s, cid)) !== H.attack(s, friend));
+    }
+    Object.assign(tactics, {
+        'imagination-borrow-the-shape': {
+            name: 'Borrow the Shape', cost: 3, colour: 'imagination', rarity: 'uncommon', release: 'expansion-5', packEligible: true,
+            art: 'art/spell-motif-imagination', target: 'friendly-creature',
+            text: 'Choose a friend, then an enemy. The friend copies that enemy\'s attack, up to 5, until your next turn starts.',
+            filter: (s, cid, H) => shapeTargets(s, s.cards[cid].controller, cid, H).length > 0,
+            run(api, p, target) {
+                api.ask({ player: p, kind: 'card', options: shapeTargets(api.s, p, target, api.H), first: target,
+                    prompt: 'Whose attack does your creature copy (up to 5)?', source: { type: 'tactic', id: 'imagination-borrow-the-shape' } });
+            },
+            choose(api, p, cid, req) {
+                if (!api.s.players[p].board.includes(req.first) || !shapeTargets(api.s, p, req.first, api.H).includes(cid)) return;
+                const n = Math.min(5, api.attack(cid));
+                api.setAttackUntilStart(req.first, n, 'Borrow the Shape', p);
+                api.emit({ t: 'tactic', player: p, text: 'Borrow the Shape: ' + api.name(req.first) + ' copies ' + n + ' attack until your next turn starts.' });
+            },
+        },
+        'generic-balanced-exchange': {
+            name: 'Balanced Exchange', cost: 3, rarity: 'uncommon', release: 'expansion-5', packEligible: true,
+            art: 'art/spell-motif-generic', text: 'Put another personal card from your hand on your deck bottom. Then draw 2 personal cards.',
+            usable: (s, p) => s.players[p].hand.length > 1,
+            // The flat hand-count score cannot value cycling known cards. A small preference only
+            // applies when two unobserved cards can be drawn; never pay just to redraw the same card.
+            ai(s, p) {
+                const P = s.players[p];
+                return P.deck.length >= 2 && P.hand.length + P.axHand.length <= s.options.handLimit ? 0.2 : 0;
+            },
+            run(api, p) {
+                api.ask({ player: p, kind: 'card', options: api.s.players[p].hand.slice(), prompt: 'Which personal hand card goes on the deck bottom?',
+                    source: { type: 'tactic', id: 'generic-balanced-exchange' } });
+            },
+            choose(api, p, cid) {
+                if (!api.bottomHandCard(p, cid)) return;
+                api.emit({ t: 'tactic', player: p, privateTo: p, text: 'Balanced Exchange: put ' + api.cardName(cid) + ' on the deck bottom; draw 2 personal cards.',
+                    publicText: 'Balanced Exchange: put a personal hand card on the deck bottom; draw 2 personal cards.' });
+                api.draw(p); api.draw(p);
+            },
+        },
+        'perception-practical-observation': {
+            name: 'Practical Observation', cost: 2, colour: 'perception', rarity: 'common', release: 'expansion-5', packEligible: true,
+            art: 'art/spell-motif-perception', text: 'Look privately at the top 2 unreserved shared rule cards. Leave them there, then draw 1 personal card.',
+            usable: (s, p) => s.axioms.deck.length > 0 || s.players[p].deck.length > 0,
+            run(api, p) {
+                // Fate's announced card is already set aside, outside the unreserved shared deck.
+                if (api.planning || !api.s.axioms.deck.length) { api.draw(p); return; }
+                const names = api.s.axioms.deck.slice(0, 2).map(id => Rift.data.axioms[id].name);
+                api.ask({ player: p, kind: 'option', auto: false, options: ['done'], labels: { done: 'Leave them there and draw' },
+                    prompt: 'Shared cards: ' + names.join('; ') + '.', source: { type: 'tactic', id: 'perception-practical-observation' } });
+            },
+            choose(api, p) {
+                api.emit({ t: 'tactic', player: p, text: 'Practical Observation: inspect the shared cards without changing them; draw 1 personal card.' });
+                api.draw(p);
+            },
+        },
+        'language-careful-wording': {
+            name: 'Careful Wording', cost: 3, colour: 'language', rarity: 'uncommon', release: 'expansion-5', packEligible: true,
+            art: 'art/spell-motif-language', target: 'friendly-creature',
+            text: 'Remove its oldest temporary attack penalty. Then give +1 attack until your next turn starts. Lasting changes remain.',
+            run(api, p, target) {
+                const c = api.s.cards[target], i = c.buffs.findIndex(b => b.attack < 0 && (b.temp || b.fate || b.untilTurn != null || b.untilStart != null));
+                // A combined modifier may still carry health/expiry; remove its attack component only.
+                if (i >= 0) c.buffs = c.buffs.flatMap((b, n) => n !== i ? [b] : b.health ? [Object.assign({}, b, { attack: 0 })] : []);
+                api.buffUntilStart(target, 1, 0, 'Careful Wording', p);
+                api.emit({ t: 'tactic', player: p, text: 'Careful Wording: ' + (i >= 0 ? 'remove one temporary attack penalty; ' : '') + '+1 attack until your next turn starts.' });
+            },
+        },
+        'memory-clear-reminder': {
+            name: 'Clear Reminder', cost: 2, colour: 'memory', rarity: 'common', release: 'expansion-5', packEligible: true,
+            art: 'art/spell-motif-memory', text: 'Draw 1 personal card. If you recovered a discarded card earlier this turn, also heal your hero by 2.',
+            usable(s, p) { const P = s.players[p]; return P.deck.length > 0 || (P.recovered && P.recovered.turn === s.turn && P.hearts < P.maxHearts); },
+            run(api, p) {
+                const recovered = api.s.players[p].recovered;
+                api.draw(p);
+                if (recovered && recovered.turn === api.s.turn) api.healHero(p, 2);
+                api.emit({ t: 'tactic', player: p, text: 'Clear Reminder: draw 1 personal card' + (recovered && recovered.turn === api.s.turn ? ' and heal 2 hearts.' : '.') });
+            },
+        },
+        'generic-take-stock': {
+            name: 'Take Stock', cost: 1, rarity: 'common', release: 'expansion-5', packEligible: true,
+            art: 'art/spell-motif-generic', text: 'Draw 1 personal card. If your deck is empty, heal your hero by 1 instead.',
+            usable(s, p) { const P = s.players[p]; return P.deck.length > 0 || P.hearts < P.maxHearts; },
+            run(api, p) {
+                if (api.s.players[p].deck.length) api.draw(p);
+                else api.healHero(p, 1);
+                api.emit({ t: 'tactic', player: p, text: 'Take Stock: draw 1 personal card, or heal 1 if the deck is empty.' });
+            },
+        },
+        'emotion-second-heartbeat': {
+            name: 'Second Heartbeat', cost: 4, colour: 'emotion', rarity: 'rare', release: 'expansion-5', packEligible: true,
+            art: 'art/spell-motif-emotion',
+            text: 'If your hero has fewer than 5 hearts, heal up to 5. Otherwise draw 2 personal cards.',
+            usable(s, p) { const P = s.players[p]; return P.hearts < 5 ? P.hearts < Math.min(5, P.maxHearts) : P.deck.length > 0; },
+            run(api, p) {
+                if (api.s.players[p].hearts < 5) {
+                    api.healHero(p, 5 - api.s.players[p].hearts);
+                    api.emit({ t: 'tactic', player: p, text: 'Second Heartbeat: heal up to 5 hearts.' });
+                } else {
+                    api.draw(p); api.draw(p);
+                    api.emit({ t: 'tactic', player: p, text: 'Second Heartbeat: draw 2 personal cards.' });
+                }
+            },
+        },
+        'reason-small-lemma': {
+            name: 'Small Lemma', cost: 1, colour: 'reason', rarity: 'common', release: 'expansion-5', packEligible: true,
+            art: 'art/spell-motif-reason', target: 'friendly-creature',
+            text: 'Give +1 maximum health and heal 1. If its attack equalled its health before this, also give Guard until your next turn starts.',
+            run(api, p, target) {
+                const equal = api.attack(target) === api.H.health(api.s, target);
+                api.buff(target, 0, 1, 'Small Lemma'); api.heal(target, 1);
+                if (equal) api.keywordUntilStart(target, 'guard', 'gain', p, 'Small Lemma');
+                api.emit({ t: 'tactic', player: p, text: 'Small Lemma: +1 maximum health and heal 1' + (equal ? '; Guard until your next turn starts.' : '.') });
+            },
+        },
+    });
     Rift.data.tactics = tactics;
     tactics['generic-quiet-reset'] = {
         id: 'generic-quiet-reset', name: 'Quiet Reset', cost: 3, rarity: 'uncommon', release: 'plot-1', packEligible: false,

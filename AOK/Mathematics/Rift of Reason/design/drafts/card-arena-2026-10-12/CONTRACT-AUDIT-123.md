@@ -105,3 +105,12 @@ Acceptance: [expansion-4 report](../../reviews/expansion-4-2026-10-24.md), 19 fo
 **161 concepts remain held.** #129 stays open; Fate/alternative Win/token/reaction exclusions remain.
 
 The [targeted follow-up](../../reviews/expansion-4-followup-2026-10-24.md) is complete: 64 seeds per seat, three selected rows, eight variants, 3,072 games. Persistent fixture shifts are partly attributed to the Reason damage package; broader colour viability is not certified. Earlier-card substitutions are legal composition-sensitivity checks with body/cost differences disclosed. Runtime/contracts remain unchanged. Preserve the baseline and prefer support/recovery/defence for the next small batch.
+
+
+## Expansion-5 under #129 — 25 October 2026
+
+Eight held support spells are released: reason-small-lemma, emotion-second-heartbeat, perception-practical-observation, language-careful-wording, imagination-borrow-the-shape, memory-clear-reminder, generic-balanced-exchange, generic-take-stock. All six Ways plus generic,4 Common/3 Uncommon/1 Rare, ordinary packs only. Existing motifs/shared cues, no new creature/catch/voice/model requests. Original text and clarification rationale remain in review-129.mjs/generated catalogue. **153 concepts remain held.**
+
+[Acceptance](../../reviews/expansion-5-2026-10-24.md):19 new focused tests; full1549pass/1existing skip/0fail;30 native outcomes and desktop/390px production pack flows. Privacy fixes include complete opponent-view equivalence for private bottoming and opaque hypothetical AI draws with known public recoveries preserved. No actual adventure or voice ledger changed. Screenshot service failed; no new PNG/motion-recording/physical-device claim.
+
+768+768 paired support-hook games and768 targeted64seed/seat games retain adverse Perception-neutral/Reason-weak shifts and finite60turn guard draws. Small Lemma contributes to the former. No numeric tuning or global balance claim. Separately96 original expansion4 trials reproduce all winners under currentAI; earlier baselines remain untouched. The targeted comparison is complete; avoid further Reason reinforcement in the next slice. #129 remains open.

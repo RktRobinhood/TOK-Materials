@@ -1,3 +1,11 @@
+## Expansion-5 support spells — 25 October 2026 (#129)
+
+Eight existing catalogue spells are now playable as expansion-5: Small Lemma, Second Heartbeat (Rare), Practical Observation, Careful Wording, Borrow the Shape, Clear Reminder, Balanced Exchange and Take Stock. All six Ways plus generic, 4 Common / 3 Uncommon / 1 Rare. Existing motifs/shared cues, ordinary packs only, no new creature/catch/art/voice/save work. Pre-lesson pack kinds:25 Common/10 Uncommon/4 Rare, weights unchanged. **153 concepts remain held.**
+
+Copying attack keeps printed stats and later boosts; removing one temporary penalty preserves its health component and lasting changes. Private choices conceal identities from peer views. Hypothetical AI draws use opaque cards and aggregate creature availability; publicly recovered top/bottom cards remain known. Real battle draws are unchanged.
+
+The [acceptance report](reviews/expansion-5-2026-10-24.md) records 1,549 passing tests/1 existing skip, 30 native outcomes and two real scratch pack flows. Screenshot calls timed out; no new visual-motion/physical-phone acceptance is claimed. Paired support probes and a further768-game targeted comparison retain adverse shifts (Perception-neutral −0.1484, Reason-weak −0.08594 at64seeds/seat), with finite turn-limit draws. Small Lemma contributes materially in the Perception/Reason row. This is not a measured balance repair. The exact earlier expansion-4 fixtures still reproduce all96sampled winners under currentAI; original evidence is preserved. Next slices should avoid reinforcing Reason's developed boards. #129 stays open.
+
 ## Expansion-4 cards — 24 October 2026 (#129)
 
 Eight more catalogue concepts are playable as `expansion-4`: V-Squish (Entrance damage with another colour), Exact Answer (current attack as damage, capped at 3), Jack Axoloticeye (Last Word hero damage), Notice the Crack (extra damage to a damaged enemy), K-S-Ibis (Shield for one attack against higher effective attack), Pedro Platypascal (temporary enemy stat swap), Hank Greenhare (one delayed personal draw if still on your board) and Forked Reply (two distinct enemies take 1, then heal your hero 1).

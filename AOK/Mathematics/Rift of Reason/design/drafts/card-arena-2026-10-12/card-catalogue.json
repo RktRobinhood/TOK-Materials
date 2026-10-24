@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eighteen plot-1 story cards, 161 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eighteen plot-1 story cards, 153 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -2337,7 +2337,7 @@
       ],
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Damage or change the target so its values no longer match; temporary Guard can expire.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-5 (#129); bounded engineering validation, not classroom balance certification",
       "revision": {
         "issue": 123,
         "date": "2026-10-21",
@@ -2351,8 +2351,9 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
-      }
+        "releaseStatus": "Released expansion-5: pack pool"
+      },
+      "runtimeRelease": "expansion-5"
     },
     {
       "id": "reason-work-it-out",
@@ -2838,7 +2839,7 @@
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Maintain pressure or exploit reversed Win.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-5 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2846,8 +2847,9 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
-      }
+        "releaseStatus": "Released expansion-5: pack pool"
+      },
+      "runtimeRelease": "expansion-5"
     },
     {
       "id": "perception-notice-the-crack",
@@ -2934,14 +2936,14 @@
       "rarity": "common",
       "cost": 2,
       "target": "none",
-      "text": "Inspect the top 2 unreserved shared Axioms without changing them. Draw 1 personal-deck card.",
+      "text": "Look privately at the top 2 unreserved shared rule cards, or all if fewer. Leave them in order, then draw 1 personal card. Fate cards already set aside are excluded.",
       "tags": [
         "inspection",
         "draw"
       ],
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Draw or reorder unreserved rules before the next choice.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-5 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2949,7 +2951,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-5: pack pool"
+      },
+      "runtimeRelease": "expansion-5",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Inspect the top 2 unreserved shared Axioms without changing them. Draw 1 personal-deck card.",
+        "rationale": "Pin the private viewer, short/empty shared deck and already reserved Fate exclusion."
       }
     },
     {
@@ -3251,14 +3259,14 @@
       "rarity": "uncommon",
       "cost": 3,
       "target": "friendly-creature",
-      "text": "Remove one temporary attack debuff from the target, then give it 1 attack until your next turn starts. Permanent changes remain.",
+      "text": "Remove the oldest applied temporary attack penalty from a friendly creature, then give +1 attack until your next turn starts. Remove only that modifier's attack component; its health component, other penalties and lasting changes remain.",
       "tags": [
         "buff",
         "control"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Use permanent reduction, silence or a second temporary debuff.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-5 (#129); bounded engineering validation, not classroom balance certification",
       "revision": {
         "issue": 123,
         "date": "2026-10-21",
@@ -3272,7 +3280,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-5: pack pool"
+      },
+      "runtimeRelease": "expansion-5",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Remove one temporary attack debuff from the target, then give it 1 attack until your next turn starts. Permanent changes remain.",
+        "rationale": "Pin one penalty and preserve combined health/expiry and permanent modifiers."
       }
     },
     {
@@ -3577,13 +3591,13 @@
       "rarity": "uncommon",
       "cost": 3,
       "target": "friendly-and-enemy-creature",
-      "text": "The friendly target copies the enemy target's current attack until your next turn starts, maximum 5.",
+      "text": "Choose a friendly creature, then a legal non-Elusive enemy. Set the friend's current unconditioned attack to the enemy's current unconditioned attack, capped at 5, until your next turn starts. This can lower attack. Printed stats and later boosts remain; a certain no-op is not offered.",
       "tags": [
         "transformation"
       ],
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Reduce the source's attack before casting.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-5 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -3591,7 +3605,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-5: pack pool"
+      },
+      "runtimeRelease": "expansion-5",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "The friendly target copies the enemy target's current attack until your next turn starts, maximum 5.",
+        "rationale": "Pin the two choices, clamped-negative offset, five cap, timed lifetime and normal Elusive exclusion."
       }
     },
     {
@@ -3758,14 +3778,14 @@
       "rarity": "common",
       "cost": 2,
       "target": "none",
-      "text": "Draw 1 personal-deck card. If you recovered a discard card earlier this turn, restore 2 hearts.",
+      "text": "Draw 1 personal card. If an actual discarded card was recovered earlier this turn, also heal your hero by 2. An attempted recovery that moved no card does not qualify.",
       "tags": [
         "draw",
         "healing"
       ],
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Pressure recovery or reverse Win.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-5 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -3773,7 +3793,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-5: pack pool"
+      },
+      "runtimeRelease": "expansion-5",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Draw 1 personal-deck card. If you recovered a discard card earlier this turn, restore 2 hearts.",
+        "rationale": "Use the existing actual-instance recovery receipt for the current turn."
       }
     },
     {
@@ -5233,7 +5259,7 @@
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Maintain pressure through the small benefit.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-5 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -5241,8 +5267,9 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
-      }
+        "releaseStatus": "Released expansion-5: pack pool"
+      },
+      "runtimeRelease": "expansion-5"
     },
     {
       "id": "generic-balanced-exchange",
@@ -5252,13 +5279,13 @@
       "rarity": "uncommon",
       "cost": 3,
       "target": "own-hand-card",
-      "text": "Put one chosen personal card from hand on deck bottom, then draw 2 personal-deck cards.",
+      "text": "Privately choose another personal card from your hand, put it on your personal deck bottom, then draw 2 personal cards under normal caps. The casting spell has already left hand; held Axioms are excluded. The bottomed card can be drawn if the deck is short.",
       "tags": [
         "draw"
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Pressure its card-quality turn.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-5 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -5266,7 +5293,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-5: pack pool"
+      },
+      "runtimeRelease": "expansion-5",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Put one chosen personal card from hand on deck bottom, then draw 2 personal-deck cards.",
+        "rationale": "Pin the private selection, other-card requirement, source zones and bottom-before-draw order."
       }
     },
     {

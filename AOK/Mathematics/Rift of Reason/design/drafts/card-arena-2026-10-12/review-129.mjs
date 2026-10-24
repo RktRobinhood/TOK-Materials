@@ -83,3 +83,30 @@ export function reviewExpansion4(cards) {
         }
     }
 }
+
+// #129 expansion-5: eight existing support spells; no new damage or Fate policy.
+export const expansion5Batch = ['reason-small-lemma','emotion-second-heartbeat','perception-practical-observation','language-careful-wording',
+    'imagination-borrow-the-shape','memory-clear-reminder','generic-balanced-exchange','generic-take-stock'];
+const clarifications5 = {
+    'perception-practical-observation': ['Look privately at the top 2 unreserved shared rule cards, or all if fewer. Leave them in order, then draw 1 personal card. Fate cards already set aside are excluded.',
+        'Pin the private viewer, short/empty shared deck and already reserved Fate exclusion.'],
+    'language-careful-wording': ['Remove the oldest applied temporary attack penalty from a friendly creature, then give +1 attack until your next turn starts. Remove only that modifier\'s attack component; its health component, other penalties and lasting changes remain.',
+        'Pin one penalty and preserve combined health/expiry and permanent modifiers.'],
+    'imagination-borrow-the-shape': ['Choose a friendly creature, then a legal non-Elusive enemy. Set the friend\'s current unconditioned attack to the enemy\'s current unconditioned attack, capped at 5, until your next turn starts. This can lower attack. Printed stats and later boosts remain; a certain no-op is not offered.',
+        'Pin the two choices, clamped-negative offset, five cap, timed lifetime and normal Elusive exclusion.'],
+    'memory-clear-reminder': ['Draw 1 personal card. If an actual discarded card was recovered earlier this turn, also heal your hero by 2. An attempted recovery that moved no card does not qualify.',
+        'Use the existing actual-instance recovery receipt for the current turn.'],
+    'generic-balanced-exchange': ['Privately choose another personal card from your hand, put it on your personal deck bottom, then draw 2 personal cards under normal caps. The casting spell has already left hand; held Axioms are excluded. The bottomed card can be drawn if the deck is short.',
+        'Pin the private selection, other-card requirement, source zones and bottom-before-draw order.'],
+};
+export function reviewExpansion5(cards) {
+    for (const c of cards) if (expansion5Batch.includes(c.id)) {
+        c.runtimeRelease='expansion-5';
+        c.status='Released in expansion-5 (#129); bounded engineering validation, not classroom balance certification';
+        c.acquisition.releaseStatus='Released expansion-5: pack pool';
+        if (clarifications5[c.id]) {
+            c.releaseRevision={issue:129,previousText:c.text,rationale:clarifications5[c.id][1]};
+            c.text=clarifications5[c.id][0];
+        }
+    }
+}

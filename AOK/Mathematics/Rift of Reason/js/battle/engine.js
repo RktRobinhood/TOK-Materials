@@ -274,6 +274,7 @@
         if (isHero(cid)) return s.players[+cid[1]].name;
         const c = s.cards[cid];
         if (!c) return '?';
+        if (c.kind === 'concealed') return 'an unknown card';
         if (c.kind === 'tactic') return (tacticDefs()[c.tactic] || {}).name || c.tactic;
         const base = (species(c.species) || {}).name || c.species;
         return c.nickname ? '"' + c.nickname + '"' : base;
@@ -575,7 +576,14 @@
 
     function creaturesLeft(s, p) {
         const P = s.players[p];
-        return P.deck.concat(P.hand, P.board, P.armed || []).some(cid => s.cards[cid].kind === 'creature' || s.cards[cid].reservedCreature);
+        return planningCreatureCount(s, p) > 0 || P.deck.concat(P.hand, P.board, P.armed || []).some(cid => s.cards[cid].kind === 'creature' || s.cards[cid].reservedCreature);
+    }
+
+    // A known aggregate reserve, never assigned to an unseen position. If opaque cards leave
+    // play, cap the estimate by those still available; no hypothetical identity is invented.
+    function planningCreatureCount(s, p) {
+        const P = s.players[p];
+        return Math.min(P.planningCreatureReserve || 0, P.deck.concat(P.hand).filter(cid => s.cards[cid].kind === 'concealed').length);
     }
 
     // Everything a card face needs.
@@ -1098,15 +1106,29 @@
             recoverBottom(cid) {
                 const p = s.cards[cid].owner, P = s.players[p];
                 if (!removeFrom(P.discard, cid)) return false;
+                preparePlanningDeck(s, p);
                 P.deck.push(cid);recordRecovery(s, p, cid);return true;
             },
             // The discard pile is public, so the card now on top is known to both players (#129, Last Save).
             recoverTop(cid) {
                 const p = s.cards[cid].owner, P = s.players[p];
                 if (!removeFrom(P.discard, cid)) return false;
+                preparePlanningDeck(s, p);
                 P.deck.unshift(cid);recordRecovery(s, p, cid);return true;
             },
             toHand: (p, cid, quiet) => toHand(G, p, cid, quiet),
+            bottomHandCard(p, cid) {
+                const P = s.players[p], other = s.players[1 - p];
+                if (!P.hand.includes(cid)) return false;
+                preparePlanningDeck(s, p); // the selected hand card remains known after the unknown part
+                // The selected identity is private. Any previously seen hand card might be the
+                // one that moved: keeping the others marked would disclose that private choice.
+                const hidden = P.hand.slice();
+                other.knows = other.knows.filter(id => !hidden.includes(id));
+                if (other.sight) other.sight = other.sight.filter(id => !hidden.includes(id));
+                removeFrom(P.hand, cid); P.deck.push(cid);
+                return true;
+            },
             handRoom: (p, n) => handRoom(s, p, n),
             buff(cid, attack, health, label, temp) { s.cards[cid].buffs.push({ label, attack: attack || 0, health: health || 0, temp: !!temp }); },
             // Until the end of its controller's next turn (#121, Scheduled Speech; see nextTurnEnd).
@@ -1154,6 +1176,13 @@
             stripKeywords: (cid, list) => stripKeywords(s, cid, list),
             fullHeal(cid) { s.cards[cid].damage = 0; },
             setAttack: (cid, n, label) => setAttack(s, cid, n, label),
+            setAttackUntilStart(cid, n, label, p) {
+                // A displayed zero can hide negative modifiers. Offset their raw sum so a copy
+                // really reaches n now; later modifiers still apply and survive this expiry.
+                const raw = attackParts(s, cid).parts.reduce((sum, part) => sum + part.amount, 0);
+                const delta = Math.max(0, n) - raw;
+                if (delta) s.cards[cid].buffs.push({ label, attack: delta, health: 0, temp: false, untilStart: nextTurnStart(G, p) });
+            },
             swapStats: cid => swapStats(s, cid),
             swapUntilStart: (cid, p, label) => swapStats(s, cid, { untilStart: nextTurnStart(G, p), label }),
             takeControl: (cid, p) => takeControl(G, cid, p),
@@ -1354,9 +1383,23 @@
         return true;
     }
 
+    // Hypothetical draws have a known count, not known identities. Keep unknown cards unplayable
+    // so Expert cannot plan a removal it has not drawn. Real states never acquire this flag/deck.
+    function preparePlanningDeck(s, p) {
+        const P = s.players[p];
+        if (!s.aiPlanning || P.planningDeck) return;
+        P.planningDeck = true;
+        P.planningCreatureReserve = P.deck.filter(cid => s.cards[cid].kind === 'creature').length;
+        P.deck = P.deck.map((_, i) => {
+            const cid = 'planning-card-' + p + '-' + s.step + '-' + i;
+            s.cards[cid] = { cid, kind: 'concealed', owner: p, controller: p };
+            return cid;
+        });
+    }
     function draw(G, p, quiet) {
         const P = G.s.players[p];
         if (!P.deck.length || handCount(P) >= G.s.options.handLimit) return null;
+        preparePlanningDeck(G.s, p);
         const cid = P.deck.shift();
         P.hand.push(cid);
         if (!quiet) emit(G, { t: 'draw', player: p, cid, privateTo: p, text: 'You draw ' + cardName(G.s, cid) + '.', publicText: playerName(G.s, p) + ' draws a card.' });
@@ -2496,7 +2539,7 @@
         rules, activeAxioms, axiomWouldChange, axiomPreview, projectAxiom, NUMERIC_RULES, changedAxioms, ruleSummary, timeline, fatePreview, fateNext, fateSchedule, fateEventPreview, fateLeapPreview, SCHEDULE_LIMIT, canSchedule, scheduleLimit, scheduleDelay, describe, activeEffects, wheelEdges, playsLeft, playLimit,
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden, goalProgress,
         canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
-        colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft,
+        colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft, planningCreatureCount,
         buildAxiomDeck, axiomSelection, tacticSelection, randomTeam, colourInPlay, H,
         BAG_LIMIT, bagSelection, itemActions, bagStatus, itemsUsed,
         TWEAKS, powerMods, powerActions, powerStatus,
