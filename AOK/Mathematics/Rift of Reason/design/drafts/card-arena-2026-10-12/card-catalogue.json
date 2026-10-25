@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, three expansion-10 cards, two expansion-11 cards, eighteen plot-1 story cards, 116 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, three expansion-10 cards, two expansion-11 cards, two expansion-12 cards, eighteen plot-1 story cards, 114 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -2445,14 +2445,14 @@
       "rarity": "common",
       "cost": 2,
       "target": "friendly-creature",
-      "text": "Give Shield. Draw 1 personal-deck card only if it already had Guard when cast.",
+      "text": "Give a friendly creature a fresh ordinary Shield, resetting its consumed marker. If it had effective Guard immediately before this effect, draw one personal card normally. Suppressed or removed Guard does not qualify; normal hand caps, empty decks and Silence still apply.",
       "tags": [
         "shield",
         "draw"
       ],
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Remove its keywords.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-12 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2460,7 +2460,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-12: pack pool"
+      },
+      "runtimeRelease": "expansion-12",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Give Shield. Draw 1 personal-deck card only if it already had Guard when cast.",
+        "previousTarget": "friendly-creature",
+        "rationale": "Pin effective Guard before refreshing Shield and reuse normal draw/prevention; no heal or new resource policy."
       }
     },
     {
@@ -3633,14 +3640,14 @@
       "rarity": "common",
       "cost": 2,
       "target": "friendly-creature",
-      "text": "Give Shield. If it is a colourless token, also give 1 attack.",
+      "text": "Give a friendly creature a fresh ordinary Shield, resetting its consumed marker. If it is an existing colourless token, also give it a lasting +1 attack through normal buffs. An ordinary colourless creature or a coloured token does not qualify. No token is created or reordered; Silence remains authoritative.",
       "tags": [
         "token",
         "shield"
       ],
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Remove Shield or hit twice.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-12 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109,
         "token-order"
@@ -3649,7 +3656,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-12: pack pool"
+      },
+      "runtimeRelease": "expansion-12",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Give Shield. If it is a colourless token, also give 1 attack.",
+        "previousTarget": "friendly-creature",
+        "rationale": "Pin colourless-token identity and the existing lasting-buff default, without a new token-order or keyword policy."
       }
     },
     {

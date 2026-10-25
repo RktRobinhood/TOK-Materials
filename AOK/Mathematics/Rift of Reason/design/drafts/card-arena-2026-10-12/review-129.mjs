@@ -270,3 +270,19 @@ export function reviewExpansion11(cards){
         c.releaseRevision={issue:129,previousText:c.text,previousTarget:c.target,rationale:clarifications11[c.id][1]};c.text=clarifications11[c.id][0];
     }
 }
+
+// #129 expansion-12: two Common Shield supports using existing keyword/buff/draw rules.
+export const expansion12Batch=['reason-provisional-proof','imagination-paper-shield'];
+const clarifications12={
+    'reason-provisional-proof':['Give a friendly creature a fresh ordinary Shield, resetting its consumed marker. If it had effective Guard immediately before this effect, draw one personal card normally. Suppressed or removed Guard does not qualify; normal hand caps, empty decks and Silence still apply.',
+        'Pin effective Guard before refreshing Shield and reuse normal draw/prevention; no heal or new resource policy.'],
+    'imagination-paper-shield':['Give a friendly creature a fresh ordinary Shield, resetting its consumed marker. If it is an existing colourless token, also give it a lasting +1 attack through normal buffs. An ordinary colourless creature or a coloured token does not qualify. No token is created or reordered; Silence remains authoritative.',
+        'Pin colourless-token identity and the existing lasting-buff default, without a new token-order or keyword policy.'],
+};
+export function reviewExpansion12(cards){
+    for(const c of cards)if(expansion12Batch.includes(c.id)){
+        c.runtimeRelease='expansion-12';c.status='Released in expansion-12 (#129); bounded engineering validation, not classroom balance certification';
+        c.acquisition.releaseStatus='Released expansion-12: pack pool';
+        c.releaseRevision={issue:129,previousText:c.text,previousTarget:c.target,rationale:clarifications12[c.id][1]};c.text=clarifications12[c.id][0];
+    }
+}

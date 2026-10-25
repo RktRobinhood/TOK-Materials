@@ -121,7 +121,11 @@
     "emotion-shared-pain",
     "generic-board-sweep"
   ],
-  "held": 116,
+  "expansion12Batch": [
+    "reason-provisional-proof",
+    "imagination-paper-shield"
+  ],
+  "held": 114,
   "rows": [
     {
       "id": "reason-premise-pigeon",
@@ -1663,10 +1667,10 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-12 runtime release (#129); see expansion-12 acceptance report",
       "trigger": "paid cast",
       "target": "friendly-creature",
-      "payoffAndLifetime": "Give Shield. Draw 1 personal-deck card only if it already had Guard when cast.",
+      "payoffAndLifetime": "Give a friendly creature a fresh ordinary Shield, resetting its consumed marker. If it had effective Guard immediately before this effect, draw one personal card normally. Suppressed or removed Guard does not qualify; normal hand caps, empty decks and Silence still apply.",
       "counterplay": "Remove its keywords.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -2443,10 +2447,10 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-12 runtime release (#129); see expansion-12 acceptance report",
       "trigger": "paid cast",
       "target": "friendly-creature",
-      "payoffAndLifetime": "Give Shield. If it is a colourless token, also give 1 attack.",
+      "payoffAndLifetime": "Give a friendly creature a fresh ordinary Shield, resetting its consumed marker. If it is an existing colourless token, also give it a lasting +1 attack through normal buffs. An ordinary colourless creature or a coloured token does not qualify. No token is created or reordered; Silence remains authoritative.",
       "counterplay": "Remove Shield or hit twice.",
       "semanticRevision": null,
       "releaseChecks": [

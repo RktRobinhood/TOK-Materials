@@ -1,3 +1,11 @@
+## Expansion-12 Shield support — 25 October 2026 (#129)
+
+Provisional Proof and Paper Shield join expansion-12: two Common spells, original cost 2, ordinary packs and existing motifs/shared cues. Pre-lesson pack kinds: 51 Common / 18 Uncommon / 9 Rare; prices/weights and overall allocations stay unchanged. **114 concepts remain held; #129 stays open.**
+
+Provisional Proof draws only for effective Guard present before its fresh Shield. Paper Shield gives lasting +1 attack only to an existing colourless token. Ordinary consumed-Shield refresh, Silence/suppression, hand limits and buffs remain authoritative. No engine, AI, save, art/voice or new Fate/token-order/Win policy.
+
+The [verification report](reviews/expansion-12-2026-10-25.md) records seven focused checks, full 1,632 pass / one existing skip / zero failures, 24 matching native outcomes/layouts and two completed memory-only packs containing both new Common spells. No new PNG/motion/hardware claim. Paired 768+768 initial games and 1,024 larger selected games have zero draws, but substantial selected Memory mono-share shifts remain: −.2265625 versus Memory/Reason (seed-cluster SE .04582) and −.1953125 versus Memory/Imagination (.04539). Each selected fixture contains one new spell; whole-payoff controls do not separate its subeffects. All 64 sampled original expansion-11 winners match. Prior adverse/Board Sweep/draw risks remain, no numeric tuning or global balance claim. Prefer independent contracts before more Shield/draw/sustain, wipes or removal/recovery. Both final review axes are clear; publication evidence is tracked in the report.
+
 ## Expansion-11 global damage — 25 October 2026 (#129)
 
 Shared Pain and Board Sweep join expansion-11: one Uncommon / one Rare, original costs, ordinary packs and existing motifs/shared cues. Pre-lesson pack kinds: 49 Common / 18 Uncommon / 9 Rare; prices/weights and overall allocations stay unchanged. **116 concepts remain held; #129 stays open.**

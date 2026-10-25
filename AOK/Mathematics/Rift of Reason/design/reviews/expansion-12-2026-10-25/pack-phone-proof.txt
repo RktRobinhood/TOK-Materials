@@ -1,0 +1,69 @@
+- strong: Pack bench
+- 'generic "First hint on each new topic: free and keeps stars. Later hints and wrong checks after the free checks cost hearts. At zero: a scar and 2 hearts on the map."':
+  - img "♥"
+  - img "♥"
+  - img "♥"
+  - img "♥"
+  - img "♥"
+- generic "Catch Charms": 🪢 3
+- button "Shop · 70 Coins · new cards"
+- button "Journal"
+- button "📖 Collection"
+- button "🎒 Bag"
+- button "⚙"
+- generic: "The Valley · Prologue: The Fair · Level 1"
+- button "🌀 Time rift"
+- dialog "Campfire pack stall":
+  - button "Close": ✕
+  - heading "Campfire pack stall" [level=2]
+  - img "A small woodland shop"
+  - strong: 70 Coins
+  - paragraph: "Earn Coins by completing checked puzzles: 10 for a first success, 2 for a replay, 25 for a first boss or mini-boss win."
+  - heading "Card packs" [level=3]
+  - paragraph: Every pack card is a new copy for your Collection. You can still get 307 cards.
+  - paragraph: "Next card: Common 67% (51 kinds), Uncommon 23.7% (18 kinds), Rare 9.3% (9 kinds). Foil: 4% per card. Full folders are left out."
+  - paragraph: "Free packs saved: 0."
+  - button "Five-card pack · 50 Coins" [disabled]
+  - button "Show your new cards"
+  - status
+  - paragraph: No real money. Catching creatures and direct card rewards still come from playing.
+  - heading "Sell spare supplies" [level=3]
+  - paragraph: Keep 2 Catch Charms, 1 Lure Lantern and 1 Tonic. Creatures, cards and keepsakes are never sold.
+  - paragraph: "Catch Charm: 3 owned · keep 2 · sell 1 × 5 = 5 Coins"
+  - paragraph: "Lure Lantern: 0 owned · keep 1 · sell 0 × 10 = 0 Coins"
+  - paragraph: "Tonic: 1 owned · keep 1 · sell 0 × 6 = 0 Coins"
+  - button "Review surplus sale · 5 Coins"
+  - status
+  - button "Close"
+- dialog "Your new cards":
+  - heading "Your new cards" [level=2]
+  - paragraph: Card 2 of 5
+  - generic "Common rarity":
+    - generic: C
+    - generic: Common
+  - generic: Provisional Proof
+  - status:
+    - generic "Common rarity":
+      - generic: C
+      - generic: Common
+    - text: spell
+    - generic: Provisional Proof
+    - paragraph: Give a friend a fresh Shield. If it already had Guard, draw 1 personal card.
+    - generic: New copy · Folder 1/4
+  - button "Next card (3 of 5)" [active]
+  - button "Skip"
+- strong: Expansion-12 · memory-only save
+- combobox "Expansion-12 card":
+  - 'option "Provisional Proof: Guard"'
+  - 'option "Provisional Proof: no Guard"'
+  - 'option "Provisional Proof: silenced Guard"'
+  - 'option "Provisional Proof: used Shield"'
+  - 'option "Paper Shield: Paper token"'
+  - 'option "Paper Shield: coloured token"'
+  - 'option "Paper Shield: colourless body"'
+  - 'option "Paper Shield: silenced Paper" [selected]'
+- button "Start card sample"
+- button "Check outcome"
+- status: Memory-only acquisition sample
+- button "Open pack sample"
+- generic "Scratch outcome details"

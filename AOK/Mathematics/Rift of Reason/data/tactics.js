@@ -1353,6 +1353,28 @@
         },
     });
 
+    // #129 expansion-12: ordinary fresh Shield; snapshot the conditional bonus first.
+    Object.assign(tactics, {
+        'reason-provisional-proof': {
+            name: 'Provisional Proof', cost: 2, colour: 'reason', rarity: 'common', release: 'expansion-12', packEligible: true,
+            art: 'art/spell-motif-reason', target: 'friendly-creature', text: 'Give a friend a fresh Shield. If it already had Guard, draw 1 personal card.',
+            run(api, p, target) {
+                const guard = api.H.hasKeyword(api.s, target, 'guard');
+                api.addKeyword(target, 'shield');
+                if (guard) api.draw(p);
+            },
+        },
+        'imagination-paper-shield': {
+            name: 'Paper Shield', cost: 2, colour: 'imagination', rarity: 'common', release: 'expansion-12', packEligible: true,
+            art: 'art/spell-motif-imagination', target: 'friendly-creature', text: 'Give a friend a fresh Shield. If it is a colourless token, also give it +1 attack.',
+            run(api, p, target) {
+                const paper = api.s.cards[target].token && api.H.colourOf(api.s, api.s.cards[target]) === 'none';
+                api.addKeyword(target, 'shield');
+                if (paper) api.buff(target, 1, 0, 'Paper Shield');
+            },
+        },
+    });
+
     Rift.data.tactics = tactics;
     tactics['generic-quiet-reset'] = {
         id: 'generic-quiet-reset', name: 'Quiet Reset', cost: 3, rarity: 'uncommon', release: 'plot-1', packEligible: false,
