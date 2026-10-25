@@ -117,7 +117,11 @@
     "perception-lens-lynx",
     "imagination-doodle-duck"
   ],
-  "held": 118,
+  "expansion11Batch": [
+    "emotion-shared-pain",
+    "generic-board-sweep"
+  ],
+  "held": 116,
   "rows": [
     {
       "id": "reason-premise-pigeon",
@@ -1918,13 +1922,14 @@
       "kind": "spell",
       "rarity": "uncommon",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-11 runtime release (#129); see expansion-11 acceptance report",
       "trigger": "paid cast",
       "target": "none",
-      "payoffAndLifetime": "Deal 2 damage to both heroes as one simultaneous effect.",
+      "payoffAndLifetime": "Deal 2 damage to both heroes as one resolving spell effect. Both packets finish before ordinary Win cleanup; both-zero is a draw, including reversed hearts. Existing hero-loss hooks and heart floor apply. No premature winner after only the first packet.",
       "counterplay": "Change Win, heal or race the threshold.",
       "semanticRevision": null,
       "releaseChecks": [
+        "resource: preserve normal energy, activation and hand caps; no refund on replay",
         "Win: current rule and simultaneous/terminal boundaries; no revival after a settled win"
       ],
       "gates": [
@@ -3908,14 +3913,15 @@
       "kind": "spell",
       "rarity": "rare",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-11 runtime release (#129); see expansion-11 acceptance report",
       "trigger": "paid cast",
       "target": "none",
-      "payoffAndLifetime": "Deal 3 damage to every creature as one effect. Shields and normal prevention apply.",
+      "payoffAndLifetime": "Capture both current creature boards, then deal 3 damage to every captured creature through ordinary prevention. No chosen target, so Elusive does not exclude a creature. Damage completes before normal defeat, Last Words and Win cleanup. New tokens summoned during damage are outside the original snapshot. Empty boards have no useful cast.",
       "counterplay": "Use high health or Shield.",
       "semanticRevision": null,
       "releaseChecks": [
-        "ordinary target, cost, copy cap and defeat/cleanup tests before release"
+        "tokens: reserve board capacity; finite generation; no collection copies; deterministic order",
+        "Win: current rule and simultaneous/terminal boundaries; no revival after a settled win"
       ],
       "gates": [
         109

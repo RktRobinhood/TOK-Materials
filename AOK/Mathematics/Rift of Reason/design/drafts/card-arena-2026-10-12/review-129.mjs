@@ -254,3 +254,19 @@ export function reviewExpansion10(cards){
         c.releaseRevision={issue:129,previousText:c.text,rationale:clarifications10[c.id][1]};c.text=clarifications10[c.id][0];
     }
 }
+
+// #129 expansion-11: two existing global damage spells, one Uncommon and one Rare.
+export const expansion11Batch=['emotion-shared-pain','generic-board-sweep'];
+const clarifications11={
+    'emotion-shared-pain':['Deal 2 damage to both heroes as one resolving spell effect. Both packets finish before ordinary Win cleanup; both-zero is a draw, including reversed hearts. Existing hero-loss hooks and heart floor apply. No premature winner after only the first packet.',
+        'Use the same deferred spell-effect damage/cleanup boundary as existing own-heart-loss spells; no new Win or payment policy.'],
+    'generic-board-sweep':['Capture both current creature boards, then deal 3 damage to every captured creature through ordinary prevention. No chosen target, so Elusive does not exclude a creature. Damage completes before normal defeat, Last Words and Win cleanup. New tokens summoned during damage are outside the original snapshot. Empty boards have no useful cast.',
+        'Extend the existing board-snapshot spell pattern to both sides without changing prevention, cleanup or token order.'],
+};
+export function reviewExpansion11(cards){
+    for(const c of cards)if(expansion11Batch.includes(c.id)){
+        c.runtimeRelease='expansion-11';c.status='Released in expansion-11 (#129); bounded engineering validation, not classroom balance certification';
+        c.acquisition.releaseStatus='Released expansion-11: pack pool';
+        c.releaseRevision={issue:129,previousText:c.text,previousTarget:c.target,rationale:clarifications11[c.id][1]};c.text=clarifications11[c.id][0];
+    }
+}

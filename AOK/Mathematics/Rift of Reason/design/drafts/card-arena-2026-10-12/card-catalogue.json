@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, three expansion-10 cards, eighteen plot-1 story cards, 118 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, three expansion-10 cards, two expansion-11 cards, eighteen plot-1 story cards, 116 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -2830,14 +2830,14 @@
       "rarity": "uncommon",
       "cost": 3,
       "target": "none",
-      "text": "Deal 2 damage to both heroes as one simultaneous effect.",
+      "text": "Deal 2 damage to both heroes as one resolving spell effect. Both packets finish before ordinary Win cleanup; both-zero is a draw, including reversed hearts. Existing hero-loss hooks and heart floor apply. No premature winner after only the first packet.",
       "tags": [
         "self-damage",
         "damage"
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Change Win, heal or race the threshold.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-11 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2845,7 +2845,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-11: pack pool"
+      },
+      "runtimeRelease": "expansion-11",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Deal 2 damage to both heroes as one simultaneous effect.",
+        "previousTarget": "none",
+        "rationale": "Use the same deferred spell-effect damage/cleanup boundary as existing own-heart-loss spells; no new Win or payment policy."
       }
     },
     {
@@ -5673,13 +5680,13 @@
       "rarity": "rare",
       "cost": 5,
       "target": "none",
-      "text": "Deal 3 damage to every creature as one effect. Shields and normal prevention apply.",
+      "text": "Capture both current creature boards, then deal 3 damage to every captured creature through ordinary prevention. No chosen target, so Elusive does not exclude a creature. Damage completes before normal defeat, Last Words and Win cleanup. New tokens summoned during damage are outside the original snapshot. Empty boards have no useful cast.",
       "tags": [
         "damage"
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Use high health or Shield.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-11 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -5687,7 +5694,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-11: pack pool"
+      },
+      "runtimeRelease": "expansion-11",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Deal 3 damage to every creature as one effect. Shields and normal prevention apply.",
+        "previousTarget": "none",
+        "rationale": "Extend the existing board-snapshot spell pattern to both sides without changing prevention, cleanup or token order."
       }
     },
     {

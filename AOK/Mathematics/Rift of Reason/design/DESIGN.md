@@ -1,3 +1,11 @@
+## Expansion-11 global damage — 25 October 2026 (#129)
+
+Shared Pain and Board Sweep join expansion-11: one Uncommon / one Rare, original costs, ordinary packs and existing motifs/shared cues. Pre-lesson pack kinds: 49 Common / 18 Uncommon / 9 Rare; prices/weights and overall allocations stay unchanged. **116 concepts remain held; #129 stays open.**
+
+Shared Pain completes both hero hits before ordinary/reversed/both-zero Win cleanup. Board Sweep snapshots both creature boards before damage; normal Shield/reduction, Last Words and survivor-created Paper behavior remain authoritative. No engine, AI, save, timing, token-order or Win policy changes.
+
+The [verification report](reviews/expansion-11-2026-10-25.md) records nine focused checks, full 1,625 pass / one existing skip / zero failures, 24 matching native outcomes/layouts and two completed scratch packs with Rare Board Sweep. An initial input-guard attempt is retained separately from accepted completion receipts; no new PNG/motion/hardware claim. Paired 768+768 initial games and 1,536 selected games retain substantial Board Sweep interactions: Memory neutral +.3125 (seed-cluster SE .05512), Memory weak +.21875 (.05879), Reason strong −.1875 (.04240). Separate Shared-Pain-off controls are nonadditive; some initial shifts shrink. One initial control draw and two extended draws reproduce exactly; all64 sampled original expansion-10 winners match. Prior draw/adverse risks remain, with no numeric or global balance claim. Prefer independent contracts before further board wipes/removal-recovery/sustain. Both final review axes are clear; publication evidence is tracked in the report.
+
 ## Expansion-10 entrance creatures — 25 October 2026 (#129)
 
 Three existing selected identities/portraits join expansion-10: Jeremy Clawson, James Rand-eater and Luka Donchilla. Two Common / one Uncommon with original base costs/stats, ordinary packs, existing artwork/provenance and shared cues. Pre-lesson pack kinds: 49 Common / 17 Uncommon / 8 Rare; prices/weights and overall allocations stay unchanged. **118 concepts remain held; #129 stays open.**

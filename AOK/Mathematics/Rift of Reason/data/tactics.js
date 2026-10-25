@@ -1338,6 +1338,21 @@
             },
         },
     });
+    // #129 expansion-11: global damage completes before the ordinary cleanup/Win boundary.
+    Object.assign(tactics, {
+        'emotion-shared-pain': {
+            name:'Shared Pain',cost:3,colour:'emotion',rarity:'uncommon',release:'expansion-11',packEligible:true,
+            art:'art/spell-motif-emotion',text:'Deal 2 damage to both heroes.',
+            run(api,p){api.damage('h'+p,2,null);api.damage('h'+(1-p),2,null);},
+        },
+        'generic-board-sweep': {
+            name:'Board Sweep',cost:5,colour:null,rarity:'rare',release:'expansion-11',packEligible:true,
+            art:'art/spell-motif-generic',text:'Deal 3 damage to every creature. Shields and normal prevention apply.',
+            usable:s=>s.players.some(P=>P.board.length>0),
+            run(api){const board=api.s.players.flatMap(P=>P.board.slice());board.forEach(cid=>api.damage(cid,3,null));},
+        },
+    });
+
     Rift.data.tactics = tactics;
     tactics['generic-quiet-reset'] = {
         id: 'generic-quiet-reset', name: 'Quiet Reset', cost: 3, rarity: 'uncommon', release: 'plot-1', packEligible: false,

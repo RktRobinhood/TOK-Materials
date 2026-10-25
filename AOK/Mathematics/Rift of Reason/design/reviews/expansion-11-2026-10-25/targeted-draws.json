@@ -1,0 +1,1743 @@
+{
+  "scope": "Exact replays of every extended selected turn-limit draw, with original decks/seeds/first/seat/current AI and twelve final actions. No infinite-loop or global draw-frequency claim.",
+  "draws": [
+    {
+      "colour": "emotion",
+      "edge": "strong",
+      "partner": "language",
+      "mode": "production",
+      "trial": {
+        "seed": 57,
+        "monoSeat": 0,
+        "first": 1,
+        "winner": "draw",
+        "endReason": "turn-limit",
+        "turn": 61,
+        "steps": 140
+      },
+      "tail": [
+        {
+          "turn": 57,
+          "action": {
+            "type": "end",
+            "player": 1
+          },
+          "events": [
+            {
+              "t": "turn-end",
+              "player": 1,
+              "text": "Rival ends the turn.",
+              "turn": 57,
+              "round": 29
+            },
+            {
+              "t": "turn",
+              "player": 0,
+              "text": "You: 10 energy. Choose a draw.",
+              "turn": 58,
+              "round": 29
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 9,
+              "deck": 6,
+              "board": [],
+              "discard": 5
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 58,
+          "action": {
+            "type": "draw",
+            "player": 0,
+            "choice": "none"
+          },
+          "events": [],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 9,
+              "deck": 6,
+              "board": [],
+              "discard": 5
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 58,
+          "action": {
+            "type": "end",
+            "player": 0
+          },
+          "events": [
+            {
+              "t": "turn-end",
+              "player": 0,
+              "text": "You end the turn.",
+              "turn": 58,
+              "round": 29
+            },
+            {
+              "t": "fate-move",
+              "text": "Round 29 ends: Fate moves 1 space.",
+              "turn": 59,
+              "round": 29
+            },
+            {
+              "t": "round",
+              "text": "Round 30.",
+              "turn": 59,
+              "round": 30
+            },
+            {
+              "t": "turn",
+              "player": 1,
+              "text": "Rival: 10 energy. Choose a draw.",
+              "turn": 59,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 9,
+              "deck": 6,
+              "board": [],
+              "discard": 5
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 59,
+          "action": {
+            "type": "draw",
+            "player": 1,
+            "choice": "none"
+          },
+          "events": [],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 9,
+              "deck": 6,
+              "board": [],
+              "discard": 5
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 59,
+          "action": {
+            "type": "end",
+            "player": 1
+          },
+          "events": [
+            {
+              "t": "turn-end",
+              "player": 1,
+              "text": "Rival ends the turn.",
+              "turn": 59,
+              "round": 30
+            },
+            {
+              "t": "turn",
+              "player": 0,
+              "text": "You: 10 energy. Choose a draw.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 9,
+              "deck": 6,
+              "board": [],
+              "discard": 5
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "draw",
+            "player": 0,
+            "choice": "none"
+          },
+          "events": [],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 9,
+              "deck": 6,
+              "board": [],
+              "discard": 5
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "spark",
+            "player": 0
+          },
+          "events": [
+            {
+              "t": "spark",
+              "player": 0,
+              "text": "You use the Spark: +1 energy this turn.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 9,
+              "deck": 6,
+              "board": [],
+              "discard": 5
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "play",
+            "player": 0,
+            "cid": "p0t1"
+          },
+          "events": [
+            {
+              "t": "tactic-play",
+              "player": 0,
+              "cid": "p0t1",
+              "id": "generic-recorded-choice",
+              "target": null,
+              "text": "You play the tactic Recorded Choice.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 8,
+              "deck": 6,
+              "board": [],
+              "discard": 6
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "choose",
+            "player": 0,
+            "choice": "p0t11"
+          },
+          "events": [
+            {
+              "t": "tactic",
+              "player": 0,
+              "privateTo": 0,
+              "text": "Recorded Choice: put Honest Hurt on the deck bottom.",
+              "publicText": "Recorded Choice: put one inspected personal card on the deck bottom.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 8,
+              "deck": 6,
+              "board": [],
+              "discard": 6
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "play",
+            "player": 0,
+            "cid": "p0t0"
+          },
+          "events": [
+            {
+              "t": "tactic-play",
+              "player": 0,
+              "cid": "p0t0",
+              "id": "generic-recorded-choice",
+              "target": null,
+              "text": "You play the tactic Recorded Choice.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 7,
+              "deck": 6,
+              "board": [],
+              "discard": 7
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "choose",
+            "player": 0,
+            "choice": "p0c6"
+          },
+          "events": [
+            {
+              "t": "tactic",
+              "player": 0,
+              "privateTo": 0,
+              "text": "Recorded Choice: put Terry Chews on the deck bottom.",
+              "publicText": "Recorded Choice: put one inspected personal card on the deck bottom.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 7,
+              "deck": 6,
+              "board": [],
+              "discard": 7
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "end",
+            "player": 0
+          },
+          "events": [
+            {
+              "t": "turn-end",
+              "player": 0,
+              "text": "You end the turn.",
+              "turn": 60,
+              "round": 30
+            },
+            {
+              "t": "fate-move",
+              "text": "Round 30 ends: Fate moves 1 space.",
+              "turn": 61,
+              "round": 30
+            },
+            {
+              "t": "reset",
+              "text": "Fate reset: all rules return to the basics.",
+              "turn": 61,
+              "round": 30
+            },
+            {
+              "t": "fate-next",
+              "id": "two-plays",
+              "text": "Fate sets aside the next free rule: Two Moves.",
+              "turn": 61,
+              "round": 30
+            },
+            {
+              "t": "round",
+              "text": "Round 31.",
+              "turn": 61,
+              "round": 31
+            },
+            {
+              "t": "limit",
+              "text": "The rift closes after 60 turns. Draw.",
+              "turn": 61,
+              "round": 31
+            },
+            {
+              "t": "end",
+              "winner": "draw",
+              "reason": "turn-limit",
+              "text": "The battle ends in a draw.",
+              "turn": 61,
+              "round": 31
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 7,
+              "deck": 6,
+              "board": [],
+              "discard": 7
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "colour": "emotion",
+      "edge": "strong",
+      "partner": "language",
+      "mode": "without-shared-pain",
+      "trial": {
+        "seed": 57,
+        "monoSeat": 0,
+        "first": 1,
+        "winner": "draw",
+        "endReason": "turn-limit",
+        "turn": 61,
+        "steps": 139
+      },
+      "tail": [
+        {
+          "turn": 57,
+          "action": {
+            "type": "draw",
+            "player": 1,
+            "choice": "none"
+          },
+          "events": [],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 9,
+              "deck": 6,
+              "board": [],
+              "discard": 5
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 57,
+          "action": {
+            "type": "end",
+            "player": 1
+          },
+          "events": [
+            {
+              "t": "turn-end",
+              "player": 1,
+              "text": "Rival ends the turn.",
+              "turn": 57,
+              "round": 29
+            },
+            {
+              "t": "turn",
+              "player": 0,
+              "text": "You: 10 energy. Choose a draw.",
+              "turn": 58,
+              "round": 29
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 9,
+              "deck": 6,
+              "board": [],
+              "discard": 5
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 58,
+          "action": {
+            "type": "draw",
+            "player": 0,
+            "choice": "none"
+          },
+          "events": [],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 9,
+              "deck": 6,
+              "board": [],
+              "discard": 5
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 58,
+          "action": {
+            "type": "end",
+            "player": 0
+          },
+          "events": [
+            {
+              "t": "turn-end",
+              "player": 0,
+              "text": "You end the turn.",
+              "turn": 58,
+              "round": 29
+            },
+            {
+              "t": "fate-move",
+              "text": "Round 29 ends: Fate moves 1 space.",
+              "turn": 59,
+              "round": 29
+            },
+            {
+              "t": "round",
+              "text": "Round 30.",
+              "turn": 59,
+              "round": 30
+            },
+            {
+              "t": "turn",
+              "player": 1,
+              "text": "Rival: 10 energy. Choose a draw.",
+              "turn": 59,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 9,
+              "deck": 6,
+              "board": [],
+              "discard": 5
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 59,
+          "action": {
+            "type": "draw",
+            "player": 1,
+            "choice": "none"
+          },
+          "events": [],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 9,
+              "deck": 6,
+              "board": [],
+              "discard": 5
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 59,
+          "action": {
+            "type": "end",
+            "player": 1
+          },
+          "events": [
+            {
+              "t": "turn-end",
+              "player": 1,
+              "text": "Rival ends the turn.",
+              "turn": 59,
+              "round": 30
+            },
+            {
+              "t": "turn",
+              "player": 0,
+              "text": "You: 10 energy. Choose a draw.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 9,
+              "deck": 6,
+              "board": [],
+              "discard": 5
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "draw",
+            "player": 0,
+            "choice": "none"
+          },
+          "events": [],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 9,
+              "deck": 6,
+              "board": [],
+              "discard": 5
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "spark",
+            "player": 0
+          },
+          "events": [
+            {
+              "t": "spark",
+              "player": 0,
+              "text": "You use the Spark: +1 energy this turn.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 9,
+              "deck": 6,
+              "board": [],
+              "discard": 5
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "play",
+            "player": 0,
+            "cid": "p0t6"
+          },
+          "events": [
+            {
+              "t": "tactic-play",
+              "player": 0,
+              "cid": "p0t6",
+              "id": "emotion-shared-pain",
+              "target": null,
+              "text": "You play the tactic Shared Pain.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 8,
+              "deck": 6,
+              "board": [],
+              "discard": 6
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "play",
+            "player": 0,
+            "cid": "p0t1"
+          },
+          "events": [
+            {
+              "t": "tactic-play",
+              "player": 0,
+              "cid": "p0t1",
+              "id": "generic-recorded-choice",
+              "target": null,
+              "text": "You play the tactic Recorded Choice.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 7,
+              "deck": 6,
+              "board": [],
+              "discard": 7
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "choose",
+            "player": 0,
+            "choice": "p0t11"
+          },
+          "events": [
+            {
+              "t": "tactic",
+              "player": 0,
+              "privateTo": 0,
+              "text": "Recorded Choice: put Honest Hurt on the deck bottom.",
+              "publicText": "Recorded Choice: put one inspected personal card on the deck bottom.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 7,
+              "deck": 6,
+              "board": [],
+              "discard": 7
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "end",
+            "player": 0
+          },
+          "events": [
+            {
+              "t": "turn-end",
+              "player": 0,
+              "text": "You end the turn.",
+              "turn": 60,
+              "round": 30
+            },
+            {
+              "t": "fate-move",
+              "text": "Round 30 ends: Fate moves 1 space.",
+              "turn": 61,
+              "round": 30
+            },
+            {
+              "t": "reset",
+              "text": "Fate reset: all rules return to the basics.",
+              "turn": 61,
+              "round": 30
+            },
+            {
+              "t": "fate-next",
+              "id": "two-plays",
+              "text": "Fate sets aside the next free rule: Two Moves.",
+              "turn": 61,
+              "round": 30
+            },
+            {
+              "t": "round",
+              "text": "Round 31.",
+              "turn": 61,
+              "round": 31
+            },
+            {
+              "t": "limit",
+              "text": "The rift closes after 60 turns. Draw.",
+              "turn": 61,
+              "round": 31
+            },
+            {
+              "t": "end",
+              "winner": "draw",
+              "reason": "turn-limit",
+              "text": "The battle ends in a draw.",
+              "turn": 61,
+              "round": 31
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 7,
+              "deck": 6,
+              "board": [],
+              "discard": 7
+            },
+            {
+              "hearts": 12,
+              "hand": 9,
+              "deck": 5,
+              "board": [],
+              "discard": 6
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}
