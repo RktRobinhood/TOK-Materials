@@ -1,3 +1,11 @@
+## Expansion-10 entrance creatures — 25 October 2026 (#129)
+
+Three existing selected identities/portraits join expansion-10: Jeremy Clawson, James Rand-eater and Luka Donchilla. Two Common / one Uncommon with original base costs/stats, ordinary packs, existing artwork/provenance and shared cues. Pre-lesson pack kinds: 49 Common / 17 Uncommon / 8 Rare; prices/weights and overall allocations stay unchanged. **118 concepts remain held; #129 stays open.**
+
+Jeremy's own-heart loss is an Entrance effect after normal payment, with ordinary/reversed Win cleanup. James temporarily removes Elusive through the explicit seen-enemy target seam until the target controller's next start. Luka compares printed species stats of another friend and itself, then uses the established current-stat swap. Shared text and lookup handle existing warped abilities and Paper tokens correctly; no new transfer/token policy, engine, AI, save, spawning or asset changes.
+
+The [verification report](reviews/expansion-10-2026-10-25.md) records ten focused checks, full 1,616 pass / one existing skip / zero failures, 24 matching native outcomes/layouts and two completed scratch packs with Uncommon Jeremy. Both final review axes are clear. The deterministic acquired copy has the existing −1-health variant; base stats stay 3/3/2. Screenshot capture timed out; no new PNG/motion/hardware acceptance claim. Paired 768+768 same-body entrance-control probes have no draws, all three bodies played and initial paired shifts within ±.0625; these small samples do not certify balance. All96 sampled original expansion-9 winners match. Prior adverse interactions and resource-heavy draw risks remain recorded.
+
 ## Expansion-9 inspection and utility spells — 25 October 2026 (#129)
 
 Eight existing catalogue spells join expansion-9: Work It Out, Quick Courage, Follow the Clue, A Better Label, Change the Subject, Sketch a Friend, Pocket Plan and Recorded Choice. Six Common / two Uncommon, ordinary packs and existing motifs/shared cues. Pre-lesson pack kinds: 47 Common / 16 Uncommon / 8 Rare; prices/weights and overall allocations stay unchanged. **121 concepts remain held; #129 stays open.**

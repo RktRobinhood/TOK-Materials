@@ -407,6 +407,25 @@
         },
     });
 
+    // #129 expansion-10: existing selected portraits and three bounded Entrance contracts.
+    Object.assign(Rift.data.creatures, {
+        'emotion-temper-tiger': {
+            name: 'Jeremy Clawson', inspiredBy: 'Jeremy Clarkson', colour: 'emotion', rarity: 'uncommon', power: 4, cost: 3, attack: 3, health: 2,
+            ability: 'more-speed', abilityText: 'Entrance: your hero loses 1 heart.',
+            blurb: 'The tiny toy steering wheel is apparently never fast enough.', lines: [], release: 'expansion-10', packEligible: true,
+        },
+        'perception-lens-lynx': {
+            name: 'James Rand-eater', inspiredBy: 'James Randi', colour: 'perception', rarity: 'common', power: 3, cost: 2, attack: 2, health: 2,
+            ability: 'check-the-sleeve', abilityText: 'Entrance: remove an enemy creature\'s Elusive until its next turn starts.',
+            blurb: 'Before admiring the mystery, quietly checks the sleeve.', lines: [], release: 'expansion-10', packEligible: true,
+        },
+        'imagination-doodle-duck': {
+            name: 'Luka Donchilla', inspiredBy: 'Luka Doncic', colour: 'imagination', rarity: 'common', power: 2, cost: 1, attack: 1, health: 2,
+            ability: 'change-position', abilityText: 'Entrance: if a friend\'s printed attack equals this creature\'s printed health, swap this creature\'s attack and health.',
+            blurb: 'A matching teammate sets up an unexpected change of position.', lines: [], release: 'expansion-10', packEligible: true,
+        },
+    });
+
     // #132 plot identities: their actual earned source is the permanent Acquisition registry.
     function plotCreature(name,inspiredBy,colour,attack,health,ability,abilityText,blurb){
         return {name,inspiredBy,colour,rarity:'rare',power:5,cost:5,attack,health,ability,abilityText,blurb,lines:[],release:'plot-1',packEligible:false};

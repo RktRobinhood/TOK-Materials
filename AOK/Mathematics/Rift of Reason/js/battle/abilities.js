@@ -719,6 +719,31 @@
                 api.damage(target, n, card.cid);
             } },
         },
+        // #129 expansion-10: ordinary Entrance effects, no scheduling or new rule policy.
+        'more-speed': {
+            name: 'More Speed', text: 'Entrance: your hero loses 1 heart.',
+            entrance: {run(api, card) {
+                api.damage('h' + card.controller, 1, null);
+                api.emit({t:'ability',cid:card.cid,text:api.name(card.cid) + ': your hero loses 1 heart.'});
+            }},
+        },
+        'check-the-sleeve': {
+            name: 'Check the Sleeve', text: 'Entrance: remove an enemy creature\'s Elusive until its next turn starts.',
+            entrance: {target:'enemy-creature-seen',filter:(s,cid,H)=>H.hasKeyword(s,cid,'elusive'),run(api,card,target) {
+                api.keywordUntilStart(target,'elusive','lose',api.s.cards[target].controller,'Check the Sleeve');
+                api.emit({t:'ability',cid:card.cid,target,text:api.name(card.cid) + ' removes Elusive until ' + api.name(target) + '\'s next turn starts.'});
+            }},
+        },
+        'change-position': {
+            name: 'Change Position', text: 'Entrance: if a friend\'s printed attack equals this creature\'s printed health, swap this creature\'s attack and health.',
+            entrance: {run(api,card) {
+                const species=id=>Rift.data.creatures[id]||(Rift.data.tokens||{})[id]||{};
+                const printedHealth=species(card.species).health;
+                const match=Number.isFinite(printedHealth)&&api.s.players[card.controller].board.some(cid=>cid!==card.cid&&
+                    species(api.s.cards[cid].species).attack===printedHealth);
+                if(match){api.swapStats(card.cid);api.emit({t:'ability',cid:card.cid,text:api.name(card.cid) + ' swaps attack and health.'});}
+            }},
+        },
         'patient-conclusion': {
             name: 'One Tiny Detail', text: 'Once per turn, after another friend survives a fight at 1 health, draw 1 personal card.',
             onAllySurvive(api, card, ally, health) {

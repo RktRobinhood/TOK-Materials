@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, eighteen plot-1 story cards, 121 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, three expansion-10 cards, eighteen plot-1 story cards, 118 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -559,13 +559,13 @@
       "cost": 3,
       "attack": 3,
       "health": 2,
-      "text": "Entrance: your hero loses 1 heart.",
+      "text": "Entrance: your hero loses 1 heart after this enters. This is an effect, not an additional play cost; ordinary heart loss and Win cleanup apply, including reversed hearts.",
       "tags": [
         "self-damage"
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Counterattack the fragile body.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-10 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -575,7 +575,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-10: pack pool"
+      },
+      "runtimeRelease": "expansion-10",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Entrance: your hero loses 1 heart.",
+        "rationale": "Keep the original 3/3/2 body and pin the same own-loss effect semantics as existing spells."
       }
     },
     {
@@ -830,13 +836,13 @@
       "cost": 2,
       "attack": 2,
       "health": 2,
-      "text": "Entrance: remove Elusive from one enemy creature until its controller's next turn starts.",
+      "text": "Entrance: choose an enemy creature, even Elusive. Remove only its Elusive until its controller's next turn starts. Other keywords, stats, damage and ability text remain. Without a useful target, this still enters normally.",
       "tags": [
         "control"
       ],
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Use other keywords or restore Elusive.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-10 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -846,7 +852,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-10: pack pool"
+      },
+      "runtimeRelease": "expansion-10",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Entrance: remove Elusive from one enemy creature until its controller's next turn starts.",
+        "rationale": "Explicitly use the existing seen-enemy target exception and the target controller's next-start expiry."
       }
     },
     {
@@ -1542,13 +1554,13 @@
       "cost": 1,
       "attack": 1,
       "health": 2,
-      "text": "Entrance: if another friendly creature has printed attack equal to this creature's printed health, swap this creature's attack and health.",
+      "text": "Entrance: if another friendly creature's printed species attack equals this creature's printed species health, swap this creature's current attack and health through ordinary lasting stat-swap rules. It cannot qualify itself. Buffs, permanent Changes, auras and damage do not alter the printed comparison.",
       "tags": [
         "transform"
       ],
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Deny the matching teammate; after the swap, trade into its lower health.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-10 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "revision": {
@@ -1564,7 +1576,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-10: pack pool"
+      },
+      "runtimeRelease": "expansion-10",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Entrance: if another friendly creature has printed attack equal to this creature's printed health, swap this creature's attack and health.",
+        "rationale": "Separate species-printed eligibility from the authoritative current-stat swap, with no new swap or timing policy."
       }
     },
     {

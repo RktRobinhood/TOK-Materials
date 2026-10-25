@@ -112,7 +112,12 @@
     "generic-pocket-plan",
     "generic-recorded-choice"
   ],
-  "held": 121,
+  "expansion10Batch": [
+    "emotion-temper-tiger",
+    "perception-lens-lynx",
+    "imagination-doodle-duck"
+  ],
+  "held": 118,
   "rows": [
     {
       "id": "reason-premise-pigeon",
@@ -433,10 +438,10 @@
       "kind": "creature",
       "rarity": "uncommon",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-10 runtime release (#129); see expansion-10 acceptance report",
       "trigger": "Entrance",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Entrance: your hero loses 1 heart.",
+      "payoffAndLifetime": "Entrance: your hero loses 1 heart after this enters. This is an effect, not an additional play cost; ordinary heart loss and Win cleanup apply, including reversed hearts.",
       "counterplay": "Counterattack the fragile body.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -609,10 +614,10 @@
       "kind": "creature",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-10 runtime release (#129); see expansion-10 acceptance report",
       "trigger": "Entrance",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Entrance: remove Elusive from one enemy creature until its controller's next turn starts.",
+      "payoffAndLifetime": "Entrance: choose an enemy creature, even Elusive. Remove only its Elusive until its controller's next turn starts. Other keywords, stats, damage and ability text remain. Without a useful target, this still enters normally.",
       "counterplay": "Use other keywords or restore Elusive.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -1076,10 +1081,10 @@
       "kind": "creature",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-10 runtime release (#129); see expansion-10 acceptance report",
       "trigger": "Entrance",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Entrance: if another friendly creature has printed attack equal to this creature's printed health, swap this creature's attack and health.",
+      "payoffAndLifetime": "Entrance: if another friendly creature's printed species attack equals this creature's printed species health, swap this creature's current attack and health through ordinary lasting stat-swap rules. It cannot qualify itself. Buffs, permanent Changes, auras and damage do not alter the printed comparison.",
       "counterplay": "Deny the matching teammate; after the swap, trade into its lower health.",
       "semanticRevision": "Luka Donchilla now has a teammate setup and a one-time self transformation. Paper Dragon pays to swap itself later; Fable Fawn changes another ally.",
       "releaseChecks": [

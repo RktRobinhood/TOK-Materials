@@ -881,7 +881,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-10: pack pool"
       },
       "silhouette": "Round tiger with shaggy cheek fur and a rumpled dark-red motoring coat.",
       "signatureProp": "One tiny toy steering wheel held indignantly; expressive brow rather than a huge vehicle.",
@@ -906,12 +906,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-10 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 3,
         "attack": 3,
         "health": 2,
-        "text": "Entrance: your hero loses 1 heart.",
+        "text": "Entrance: your hero loses 1 heart after this enters. This is an effect, not an additional play cost; ordinary heart loss and Win cleanup apply, including reversed hearts.",
         "gates": [
           109
         ]
@@ -1363,7 +1363,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-10: pack pool"
       },
       "silhouette": "Long-snouted cream-and-charcoal tamandua anteater with round ears, bushy white brow fur, spectacles and a dark-green magician's waistcoat; low left lean and a broad curling tail. Replaces the duplicated lynx silhouette under #152.",
       "signatureProp": "One empty folded sleeve opened for inspection; no copied stage logo.",
@@ -1388,12 +1388,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-10 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
         "health": 2,
-        "text": "Entrance: remove Elusive from one enemy creature until its controller's next turn starts.",
+        "text": "Entrance: choose an enemy creature, even Elusive. Remove only its Elusive until its controller's next turn starts. Other keywords, stats, damage and ability text remain. Without a useful target, this still enters normally.",
         "gates": [
           109
         ]
@@ -2624,7 +2624,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-10: pack pool"
       },
       "silhouette": "A compact charcoal chinchilla with broad rounded ears, warm nonhuman eyes, one curled furry tail and a violet sports tunic. Exactly two forepaws and two hind feet. One plain violet-and-cream basketball; no controller, human likeness or team kit.",
       "signatureProp": "Rendered LEFT low basketball crouch; authored intent and actual changes in provenance.",
@@ -2650,12 +2650,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-10 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 1,
         "attack": 1,
         "health": 2,
-        "text": "Entrance: if another friendly creature has printed attack equal to this creature's printed health, swap this creature's attack and health.",
+        "text": "Entrance: if another friendly creature's printed species attack equals this creature's printed species health, swap this creature's current attack and health through ordinary lasting stat-swap rules. It cannot qualify itself. Buffs, permanent Changes, auras and damage do not alter the printed comparison.",
         "gates": [
           109
         ]

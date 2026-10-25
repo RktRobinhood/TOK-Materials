@@ -236,3 +236,21 @@ export function reviewExpansion9(cards) {
         if(c.id==='language-change-the-subject')c.target='none';
     }
 }
+
+// #129 expansion-10: selected portraits and ordinary Entrance effects; two Common, one Uncommon.
+export const expansion10Batch=['emotion-temper-tiger','perception-lens-lynx','imagination-doodle-duck'];
+const clarifications10={
+    'emotion-temper-tiger':['Entrance: your hero loses 1 heart after this enters. This is an effect, not an additional play cost; ordinary heart loss and Win cleanup apply, including reversed hearts.',
+        'Keep the original 3/3/2 body and pin the same own-loss effect semantics as existing spells.'],
+    'perception-lens-lynx':['Entrance: choose an enemy creature, even Elusive. Remove only its Elusive until its controller\'s next turn starts. Other keywords, stats, damage and ability text remain. Without a useful target, this still enters normally.',
+        'Explicitly use the existing seen-enemy target exception and the target controller\'s next-start expiry.'],
+    'imagination-doodle-duck':['Entrance: if another friendly creature\'s printed species attack equals this creature\'s printed species health, swap this creature\'s current attack and health through ordinary lasting stat-swap rules. It cannot qualify itself. Buffs, permanent Changes, auras and damage do not alter the printed comparison.',
+        'Separate species-printed eligibility from the authoritative current-stat swap, with no new swap or timing policy.'],
+};
+export function reviewExpansion10(cards){
+    for(const c of cards)if(expansion10Batch.includes(c.id)){
+        c.runtimeRelease='expansion-10';c.status='Released in expansion-10 (#129); bounded engineering validation, not classroom balance certification';
+        c.acquisition.releaseStatus='Released expansion-10: pack pool';
+        c.releaseRevision={issue:129,previousText:c.text,rationale:clarifications10[c.id][1]};c.text=clarifications10[c.id][0];
+    }
+}
