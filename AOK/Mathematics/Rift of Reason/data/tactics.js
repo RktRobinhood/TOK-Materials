@@ -827,8 +827,11 @@
     function shapeTargets(s, p, friend, H) {
         return proofTargets(s, p, H).filter(cid => Math.min(5, H.attack(s, cid)) !== H.attack(s, friend));
     }
+    function temporaryStatModifier(b) {
+        return !!(b.temp || b.fate || b.untilTurn != null || b.untilStart != null);
+    }
     function temporaryAttackPenalty(c) {
-        return c.buffs.findIndex(b => b.attack < 0 && (b.temp || b.fate || b.untilTurn != null || b.untilStart != null));
+        return c.buffs.findIndex(b => b.attack < 0 && temporaryStatModifier(b));
     }
     function clearAttackPenalty(c) {
         const i = temporaryAttackPenalty(c);
@@ -1111,6 +1114,94 @@
             name: 'One Last Draw', cost: 3, rarity: 'rare', release: 'expansion-7', packEligible: true,
             art: 'art/spell-motif-generic', text: 'Your hero loses 2 hearts. Draw 2 personal cards.',
             run(api, p) { api.damage('h' + p, 2, null); api.draw(p); api.draw(p); },
+        },
+    });
+    // #129 expansion-8: bounded keyword counters and public stat positioning.
+    Object.assign(tactics, {
+        'perception-expose-the-shield': {
+            name: 'Expose the Shield', cost: 1, colour: 'perception', rarity: 'common', release: 'expansion-8', packEligible: true,
+            art: 'art/spell-motif-perception', target: 'enemy-creature',
+            text: 'Remove an enemy\'s Shield. If it had none, it gets -1 attack this turn, minimum 0.',
+            filter: (s, cid, H) => H.hasKeyword(s, cid, 'shield') || H.attack(s, cid) > 0,
+            run(api, p, target) {
+                const removed = api.stripKeywords(target, ['shield']).length > 0;
+                if (!removed && api.attack(target) > 0) api.buff(target, -1, 0, 'Expose the Shield', true);
+                api.emit({ t: 'tactic', player: p, text: 'Expose the Shield: ' + (removed ? 'Shield removed.' : '-1 attack this turn, minimum 0.') });
+            },
+        },
+        'language-ask-again': {
+            name: 'Ask Again', cost: 2, colour: 'language', rarity: 'common', release: 'expansion-8', packEligible: true,
+            art: 'art/spell-motif-language', target: 'enemy-creature-seen',
+            text: 'Choose an enemy, even Elusive. Remove its Elusive. It gets -1 attack this turn, minimum 0.',
+            filter: (s, cid, H) => H.hasKeyword(s, cid, 'elusive') || H.attack(s, cid) > 0,
+            run(api, p, target) {
+                api.stripKeywords(target, ['elusive']);
+                if (api.attack(target) > 0) api.buff(target, -1, 0, 'Ask Again', true);
+                api.emit({ t: 'tactic', player: p, text: 'Ask Again: remove Elusive; -1 attack this turn, minimum 0.' });
+            },
+        },
+        'language-hold-the-floor': {
+            name: 'Hold the Floor', cost: 2, colour: 'language', rarity: 'common', release: 'expansion-8', packEligible: true,
+            art: 'art/spell-motif-language', target: 'friendly-creature',
+            text: 'A friend gets Guard until your next turn starts. If frozen, remove only Freeze and heal it by 1.',
+            filter: (s, cid, H) => !H.hasKeyword(s, cid, 'guard') || s.cards[cid].frozen,
+            run(api, p, target) {
+                const c = api.s.cards[target], frozen = c.frozen;
+                api.keywordUntilStart(target, 'guard', 'gain', p, 'Hold the Floor');
+                if (frozen) { c.frozen = false; c.frozenUntil = null; api.heal(target, 1); }
+                api.emit({ t: 'tactic', player: p, text: 'Hold the Floor: Guard until your next turn starts.' + (frozen ? ' Remove Freeze and heal 1.' : '') });
+            },
+        },
+        'generic-settle-down': {
+            name: 'Settle Down', cost: 1, rarity: 'common', release: 'expansion-8', packEligible: true,
+            art: 'art/spell-motif-generic', target: 'enemy-creature',
+            text: 'An enemy gets -1 attack until its controller\'s next turn ends, minimum 0.',
+            filter: (s, cid, H) => H.attack(s, cid) > 0,
+            run(api, p, target) { api.buffNextTurn(target, -1, 0, 'Settle Down'); api.emit({ t: 'tactic', player: p, text: 'Settle Down: -1 attack until its controller\'s next turn ends.' }); },
+        },
+        'perception-strip-the-illusion': {
+            name: 'Strip the Illusion', cost: 4, colour: 'perception', rarity: 'rare', release: 'expansion-8', packEligible: true,
+            art: 'art/spell-motif-perception', target: 'enemy-creature-seen',
+            text: 'Even Elusive: remove an enemy\'s keywords and temporary boosts or penalties. Lasting stats, ability text and damage remain.',
+            filter: (s, cid, H) => H.keywordsOf(s, cid).length > 0 || s.cards[cid].buffs.some(temporaryStatModifier),
+            run(api, p, target) {
+                api.stripKeywords(target, Rift.Battle.Engine.KEYWORDS.concat('elusive'));
+                const c = api.s.cards[target];
+                c.buffs = c.buffs.filter(b => !temporaryStatModifier(b));
+                api.emit({ t: 'tactic', player: p, text: 'Strip the Illusion: remove keywords and temporary stat changes. Lasting stats, ability text and damage remain.' });
+            },
+        },
+        'imagination-try-another-shape': {
+            name: 'Try Another Shape', cost: 1, colour: 'imagination', rarity: 'common', release: 'expansion-8', packEligible: true,
+            art: 'art/spell-motif-imagination', target: 'friendly-creature',
+            text: 'A friend swaps its current attack and health, using normal stat-swap rules.',
+            run(api, p, target) { api.swapStats(target); api.emit({ t: 'tactic', player: p, text: 'Try Another Shape: swap current attack and health.' }); },
+        },
+        'generic-clean-cut': {
+            name: 'Clean Cut', cost: 1, rarity: 'common', release: 'expansion-8', packEligible: true,
+            art: 'art/spell-motif-generic', target: 'enemy-creature',
+            text: 'Deal 1 damage to an enemy creature, or 2 if it is a colourless token.',
+            run(api, p, target) { api.damage(target, api.s.cards[target].token && api.H.colourOf(api.s, api.s.cards[target]) === 'none' ? 2 : 1, null); },
+        },
+        'imagination-impossible-position': {
+            name: 'Impossible Position', cost: 5, colour: 'imagination', rarity: 'rare', release: 'expansion-8', packEligible: true,
+            art: 'art/spell-motif-imagination', target: 'any-creature',
+            text: 'Choose two different creatures, either side. Swap their current attack until your next turn starts. Controllers stay the same.',
+            usable: (s, p) => Rift.Battle.Engine.targetsFor(s, 'any-creature', p).length >= 2,
+            run(api, p, target) {
+                api.ask({ player: p, kind: 'card', first: target,
+                    options: Rift.Battle.Engine.targetsFor(api.s, 'any-creature', p).filter(cid => cid !== target),
+                    prompt: 'Which second creature swaps attack with ' + api.cardName(target) + '?',
+                    source: { type: 'tactic', id: 'imagination-impossible-position' } });
+            },
+            choose(api, p, cid, req) {
+                const legal = Rift.Battle.Engine.targetsFor(api.s, 'any-creature', p);
+                if (cid === req.first || !legal.includes(req.first) || !legal.includes(cid)) return;
+                const first = api.attack(req.first), second = api.attack(cid);
+                api.setAttackUntilStart(req.first, second, 'Impossible Position', p);
+                api.setAttackUntilStart(cid, first, 'Impossible Position', p);
+                api.emit({ t: 'tactic', player: p, text: 'Impossible Position: swap current attacks until your next turn starts. Controllers stay the same.' });
+            },
         },
     });
     Rift.data.tactics = tactics;

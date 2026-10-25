@@ -92,7 +92,17 @@
     "generic-repair-the-shield",
     "generic-one-last-draw"
   ],
-  "held": 137,
+  "expansion8Batch": [
+    "perception-expose-the-shield",
+    "language-ask-again",
+    "language-hold-the-floor",
+    "generic-settle-down",
+    "perception-strip-the-illusion",
+    "imagination-try-another-shape",
+    "generic-clean-cut",
+    "imagination-impossible-position"
+  ],
+  "held": 129,
   "rows": [
     {
       "id": "reason-premise-pigeon",
@@ -1991,10 +2001,10 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-8 runtime release (#129); see expansion-8 acceptance report",
       "trigger": "paid cast",
       "target": "enemy-creature",
-      "payoffAndLifetime": "Remove Shield. If none was removed, reduce its attack by 1 this turn, minimum 0.",
+      "payoffAndLifetime": "Remove effective Shield from a legal enemy creature. If it had none, give it -1 attack this turn, minimum 0. Ordinary enemy Elusive exclusion applies.",
       "counterplay": "Use other defences.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -2112,14 +2122,15 @@
       "kind": "spell",
       "rarity": "rare",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-8 runtime release (#129); see expansion-8 acceptance report",
       "trigger": "paid cast",
-      "target": "enemy-creature",
-      "payoffAndLifetime": "Remove its keywords and temporary buffs. Printed stats, permanent changes and existing damage remain.",
+      "target": "enemy-creature-seen",
+      "payoffAndLifetime": "Choose an enemy creature, even Elusive. Remove Guard, Swift, Shield and Elusive plus all temporary stat gains or penalties, including this-turn, timed and Fate-lifetime rows. Keep printed stats, permanent Changes/boosts, ability text, Freeze and existing damage. Normal health-loss defeats and Last Words finish before Win cleanup.",
       "counterplay": "Use permanent stats or reapply a keyword.",
       "semanticRevision": null,
       "releaseChecks": [
-        "ordinary target, cost, copy cap and defeat/cleanup tests before release"
+        "Win: current rule and simultaneous/terminal boundaries; no revival after a settled win",
+        "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap"
       ],
       "gates": [
         109
@@ -2193,10 +2204,10 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-8 runtime release (#129); see expansion-8 acceptance report",
       "trigger": "paid cast",
       "target": "friendly-creature",
-      "payoffAndLifetime": "Give Guard until your next turn starts. If the target was frozen, remove only its Freeze and heal it by 1.",
+      "payoffAndLifetime": "A friendly creature gains Guard until your next turn starts. If frozen, remove only Freeze and heal it by 1. Do not reset sleep, attacks, activated status or shared card uses.",
       "counterplay": "Use removal or a later Freeze. Sleeping and spent attacks remain spent.",
       "semanticRevision": "The former permanent Guard/health package was a number-only Stand Firm variant. This is temporary defensive support with a specific interruption answer; Jimmy remains a creature Entrance thaw.",
       "releaseChecks": [
@@ -2212,10 +2223,10 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-8 runtime release (#129); see expansion-8 acceptance report",
       "trigger": "paid cast",
-      "target": "enemy-creature",
-      "payoffAndLifetime": "Remove Elusive and reduce its attack by 1 this turn, minimum 0.",
+      "target": "enemy-creature-seen",
+      "payoffAndLifetime": "Choose an enemy creature, even Elusive. Remove its Elusive and give it -1 attack this turn, minimum 0. Other keywords and ability text remain.",
       "counterplay": "Reapply protection or wait out the penalty.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -2374,10 +2385,10 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-8 runtime release (#129); see expansion-8 acceptance report",
       "trigger": "paid cast",
       "target": "friendly-creature",
-      "payoffAndLifetime": "Swap its attack and health using normal stat-swap rules.",
+      "payoffAndLifetime": "A friendly creature swaps its current attack and health under the existing lasting stat-swap rules. Retain those rules for damage, lasting boosts and temporary attack/health or auras. Zero attack can leave zero health and cause an ordinary defeat.",
       "counterplay": "Use balanced defenders or answer after the swap.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -2540,10 +2551,10 @@
       "kind": "spell",
       "rarity": "rare",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-8 runtime release (#129); see expansion-8 acceptance report",
       "trigger": "paid cast",
       "target": "two-distinct-creatures",
-      "payoffAndLifetime": "Swap their current attack values until your next turn starts. May choose either side; controllers do not change.",
+      "payoffAndLifetime": "Choose two distinct legal creatures, either side. Capture both current visible attacks without matchup bonuses, then set each to the other's value until your next turn starts. Use ordinary raw-aware timed attack changes; retain controllers, health, damage and later boosts. Enemy Elusive remains excluded.",
       "counterplay": "Use balanced stats or clear the benefit.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -3521,10 +3532,10 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-8 runtime release (#129); see expansion-8 acceptance report",
       "trigger": "paid cast",
       "target": "enemy-creature",
-      "payoffAndLifetime": "Deal 1 damage. If the target is a colourless token, deal 2 instead.",
+      "payoffAndLifetime": "Deal 1 damage to a legal enemy creature, or 2 if it is an existing colourless token. Ordinary Shield, Elusive and defeat rules apply. Coloured tokens and colourless non-tokens take only 1.",
       "counterplay": "Use non-token bodies.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -3639,10 +3650,10 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-8 runtime release (#129); see expansion-8 acceptance report",
       "trigger": "paid cast",
       "target": "enemy-creature",
-      "payoffAndLifetime": "Reduce its attack by 1 until its controller's next turn ends, minimum 0.",
+      "payoffAndLifetime": "A legal enemy creature gets -1 attack until the end of its controller's next turn, minimum 0. Later boosts and lasting changes remain when this penalty expires.",
       "counterplay": "Use another attacker.",
       "semanticRevision": null,
       "releaseChecks": [

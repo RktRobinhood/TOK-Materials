@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eighteen plot-1 story cards, 137 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eighteen plot-1 story cards, 129 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -2941,13 +2941,13 @@
       "rarity": "common",
       "cost": 1,
       "target": "enemy-creature",
-      "text": "Remove Shield. If none was removed, reduce its attack by 1 this turn, minimum 0.",
+      "text": "Remove effective Shield from a legal enemy creature. If it had none, give it -1 attack this turn, minimum 0. Ordinary enemy Elusive exclusion applies.",
       "tags": [
         "control"
       ],
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Use other defences.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-8 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2955,7 +2955,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-8: pack pool"
+      },
+      "runtimeRelease": "expansion-8",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Remove Shield. If none was removed, reduce its attack by 1 this turn, minimum 0.",
+        "previousTarget": "enemy-creature",
+        "rationale": "Distinguish effective Shield from a consumed marker; preserve the fallback lifetime and ordinary targeting."
       }
     },
     {
@@ -3102,14 +3109,14 @@
       "kind": "spell",
       "rarity": "rare",
       "cost": 4,
-      "target": "enemy-creature",
-      "text": "Remove its keywords and temporary buffs. Printed stats, permanent changes and existing damage remain.",
+      "target": "enemy-creature-seen",
+      "text": "Choose an enemy creature, even Elusive. Remove Guard, Swift, Shield and Elusive plus all temporary stat gains or penalties, including this-turn, timed and Fate-lifetime rows. Keep printed stats, permanent Changes/boosts, ability text, Freeze and existing damage. Normal health-loss defeats and Last Words finish before Win cleanup.",
       "tags": [
         "control"
       ],
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Use permanent stats or reapply a keyword.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-8 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -3117,7 +3124,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-8: pack pool"
+      },
+      "runtimeRelease": "expansion-8",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Remove its keywords and temporary buffs. Printed stats, permanent changes and existing damage remain.",
+        "previousTarget": "enemy-creature",
+        "rationale": "Explicit seen-enemy exception; temporary includes Fate-tagged boosts without cancelling their event. This is not Silence or healing."
       }
     },
     {
@@ -3212,14 +3226,14 @@
       "rarity": "common",
       "cost": 2,
       "target": "friendly-creature",
-      "text": "Give Guard until your next turn starts. If the target was frozen, remove only its Freeze and heal it by 1.",
+      "text": "A friendly creature gains Guard until your next turn starts. If frozen, remove only Freeze and heal it by 1. Do not reset sleep, attacks, activated status or shared card uses.",
       "tags": [
         "guard",
         "thaw"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Use removal or a later Freeze. Sleeping and spent attacks remain spent.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-8 (#129); bounded engineering validation, not classroom balance certification",
       "revision": {
         "issue": 123,
         "date": "2026-10-21",
@@ -3233,7 +3247,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-8: pack pool"
+      },
+      "runtimeRelease": "expansion-8",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Give Guard until your next turn starts. If the target was frozen, remove only its Freeze and heal it by 1.",
+        "previousTarget": "friendly-creature",
+        "rationale": "Pin conditional healing and thaw-only semantics rather than readying the creature."
       }
     },
     {
@@ -3243,14 +3264,14 @@
       "kind": "spell",
       "rarity": "common",
       "cost": 2,
-      "target": "enemy-creature",
-      "text": "Remove Elusive and reduce its attack by 1 this turn, minimum 0.",
+      "target": "enemy-creature-seen",
+      "text": "Choose an enemy creature, even Elusive. Remove its Elusive and give it -1 attack this turn, minimum 0. Other keywords and ability text remain.",
       "tags": [
         "control"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Reapply protection or wait out the penalty.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-8 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -3258,7 +3279,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-8: pack pool"
+      },
+      "runtimeRelease": "expansion-8",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Remove Elusive and reduce its attack by 1 this turn, minimum 0.",
+        "previousTarget": "enemy-creature",
+        "rationale": "Explicitly use the existing seen-enemy targeting exception, as Look Closer does, so this keyword counter can reach Elusive."
       }
     },
     {
@@ -3475,13 +3503,13 @@
       "rarity": "common",
       "cost": 1,
       "target": "friendly-creature",
-      "text": "Swap its attack and health using normal stat-swap rules.",
+      "text": "A friendly creature swaps its current attack and health under the existing lasting stat-swap rules. Retain those rules for damage, lasting boosts and temporary attack/health or auras. Zero attack can leave zero health and cause an ordinary defeat.",
       "tags": [
         "transformation"
       ],
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Use balanced defenders or answer after the swap.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-8 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -3489,7 +3517,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-8: pack pool"
+      },
+      "runtimeRelease": "expansion-8",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Swap its attack and health using normal stat-swap rules.",
+        "previousTarget": "friendly-creature",
+        "rationale": "Reuse the existing swapStats contract; do not invent a different damage or modifier policy."
       }
     },
     {
@@ -3696,13 +3731,13 @@
       "rarity": "rare",
       "cost": 5,
       "target": "two-distinct-creatures",
-      "text": "Swap their current attack values until your next turn starts. May choose either side; controllers do not change.",
+      "text": "Choose two distinct legal creatures, either side. Capture both current visible attacks without matchup bonuses, then set each to the other's value until your next turn starts. Use ordinary raw-aware timed attack changes; retain controllers, health, damage and later boosts. Enemy Elusive remains excluded.",
       "tags": [
         "transformation"
       ],
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Use balanced stats or clear the benefit.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-8 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -3710,7 +3745,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-8: pack pool"
+      },
+      "runtimeRelease": "expansion-8",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Swap their current attack values until your next turn starts. May choose either side; controllers do not change.",
+        "previousTarget": "two-distinct-creatures",
+        "rationale": "Serialize the first target, validate both choices, and capture both attacks before applying either modifier, including displayed zero over negative raw attack."
       }
     },
     {
@@ -5021,13 +5063,13 @@
       "rarity": "common",
       "cost": 1,
       "target": "enemy-creature",
-      "text": "Deal 1 damage. If the target is a colourless token, deal 2 instead.",
+      "text": "Deal 1 damage to a legal enemy creature, or 2 if it is an existing colourless token. Ordinary Shield, Elusive and defeat rules apply. Coloured tokens and colourless non-tokens take only 1.",
       "tags": [
         "damage"
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Use non-token bodies.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-8 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -5035,7 +5077,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-8: pack pool"
+      },
+      "runtimeRelease": "expansion-8",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Deal 1 damage. If the target is a colourless token, deal 2 instead.",
+        "previousTarget": "enemy-creature",
+        "rationale": "Colourlessness uses the current colour helper, not token identity alone; no new token ordering policy."
       }
     },
     {
@@ -5194,13 +5243,13 @@
       "rarity": "common",
       "cost": 1,
       "target": "enemy-creature",
-      "text": "Reduce its attack by 1 until its controller's next turn ends, minimum 0.",
+      "text": "A legal enemy creature gets -1 attack until the end of its controller's next turn, minimum 0. Later boosts and lasting changes remain when this penalty expires.",
       "tags": [
         "control"
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Use another attacker.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-8 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -5208,7 +5257,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-8: pack pool"
+      },
+      "runtimeRelease": "expansion-8",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Reduce its attack by 1 until its controller's next turn ends, minimum 0.",
+        "previousTarget": "enemy-creature",
+        "rationale": "Use the ordinary target-controller next-turn-end modifier, not this turn or caster next-start."
       }
     },
     {

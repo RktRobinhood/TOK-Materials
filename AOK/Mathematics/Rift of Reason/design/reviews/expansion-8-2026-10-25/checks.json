@@ -1,0 +1,16 @@
+{
+  "command": "node --max-old-space-size=2048 --test --test-concurrency=2 <all tracked tools/test/*.test.mjs> tools/test/expansion-8.test.mjs",
+  "total": 1589,
+  "pass": 1588,
+  "skip": 1,
+  "fail": 0,
+  "duration_ms": 534795.2607,
+  "logSHA256": "b01ff82567e79b99999ab44ebb2da51dbaf3df61385034a1b23e842d478663c9",
+  "runtimeSHA256": {
+    "data/tactics.js": "fa58bfb41146ae8cec7b5857e36a807ecb32f6f242b21c7a3e4f8d25b7779ed3",
+    "js/battle/engine.js": "92a065a4d9af5226298bf9a1b1066316bfdf596d16cf3e299b737d26d0b00c64",
+    "js/battle/ai.js": "f844c5ba088a0713fb427c6b40e4e25b39f226caa73c9653c4c3e849842d40b4"
+  },
+  "originalWindowsLogSHA256": "88321e43860bc4a6e83bf6d9ffc8dc2ae6b6171df9ca56acd3a22e398d6785fe",
+  "logEncoding": "UTF-8, LF for durable Git artifact; original Windows log hash also retained"
+}

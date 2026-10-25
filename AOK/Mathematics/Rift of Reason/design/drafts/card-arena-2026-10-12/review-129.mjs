@@ -172,3 +172,35 @@ export function reviewExpansion7(cards) {
         c.text=clarifications7[c.id][0];
     }
 }
+
+// #129 expansion-8: existing keyword counters and public positioning; six Common, two Rare.
+export const expansion8Batch = ['perception-expose-the-shield','language-ask-again','language-hold-the-floor','generic-settle-down',
+    'perception-strip-the-illusion','imagination-try-another-shape','generic-clean-cut','imagination-impossible-position'];
+const clarifications8 = {
+    'perception-expose-the-shield': ['Remove effective Shield from a legal enemy creature. If it had none, give it -1 attack this turn, minimum 0. Ordinary enemy Elusive exclusion applies.',
+        'Distinguish effective Shield from a consumed marker; preserve the fallback lifetime and ordinary targeting.'],
+    'language-ask-again': ['Choose an enemy creature, even Elusive. Remove its Elusive and give it -1 attack this turn, minimum 0. Other keywords and ability text remain.',
+        'Explicitly use the existing seen-enemy targeting exception, as Look Closer does, so this keyword counter can reach Elusive.'],
+    'language-hold-the-floor': ['A friendly creature gains Guard until your next turn starts. If frozen, remove only Freeze and heal it by 1. Do not reset sleep, attacks, activated status or shared card uses.',
+        'Pin conditional healing and thaw-only semantics rather than readying the creature.'],
+    'generic-settle-down': ['A legal enemy creature gets -1 attack until the end of its controller\'s next turn, minimum 0. Later boosts and lasting changes remain when this penalty expires.',
+        'Use the ordinary target-controller next-turn-end modifier, not this turn or caster next-start.'],
+    'perception-strip-the-illusion': ['Choose an enemy creature, even Elusive. Remove Guard, Swift, Shield and Elusive plus all temporary stat gains or penalties, including this-turn, timed and Fate-lifetime rows. Keep printed stats, permanent Changes/boosts, ability text, Freeze and existing damage. Normal health-loss defeats and Last Words finish before Win cleanup.',
+        'Explicit seen-enemy exception; temporary includes Fate-tagged boosts without cancelling their event. This is not Silence or healing.'],
+    'imagination-try-another-shape': ['A friendly creature swaps its current attack and health under the existing lasting stat-swap rules. Retain those rules for damage, lasting boosts and temporary attack/health or auras. Zero attack can leave zero health and cause an ordinary defeat.',
+        'Reuse the existing swapStats contract; do not invent a different damage or modifier policy.'],
+    'generic-clean-cut': ['Deal 1 damage to a legal enemy creature, or 2 if it is an existing colourless token. Ordinary Shield, Elusive and defeat rules apply. Coloured tokens and colourless non-tokens take only 1.',
+        'Colourlessness uses the current colour helper, not token identity alone; no new token ordering policy.'],
+    'imagination-impossible-position': ['Choose two distinct legal creatures, either side. Capture both current visible attacks without matchup bonuses, then set each to the other\'s value until your next turn starts. Use ordinary raw-aware timed attack changes; retain controllers, health, damage and later boosts. Enemy Elusive remains excluded.',
+        'Serialize the first target, validate both choices, and capture both attacks before applying either modifier, including displayed zero over negative raw attack.'],
+};
+export function reviewExpansion8(cards) {
+    for (const c of cards) if (expansion8Batch.includes(c.id)) {
+        c.runtimeRelease='expansion-8';
+        c.status='Released in expansion-8 (#129); bounded engineering validation, not classroom balance certification';
+        c.acquisition.releaseStatus='Released expansion-8: pack pool';
+        c.releaseRevision={issue:129,previousText:c.text,previousTarget:c.target,rationale:clarifications8[c.id][1]};
+        c.text=clarifications8[c.id][0];
+        if (['language-ask-again','perception-strip-the-illusion'].includes(c.id)) c.target='enemy-creature-seen';
+    }
+}

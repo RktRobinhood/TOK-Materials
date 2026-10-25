@@ -1,0 +1,21 @@
+{
+  "outcomes": 36,
+  "cases": 12,
+  "modes": [
+    "desktop-normal",
+    "desktop-calm",
+    "phone-calm"
+  ],
+  "allOutcomeModesMatch": true,
+  "measurements": 32,
+  "phoneMeasurements": 12,
+  "allMeasuredWidthsMatch": true,
+  "sourceSHA256": "eaefb119a6f4d4a2df36a1fe97f91aaef773eac19313e5bd98740960a8f32d6b",
+  "scratchPacks": 2,
+  "packPrice": 50,
+  "coinsAfterEach": 70,
+  "rare": "perception-strip-the-illusion",
+  "browserWarningsOrErrors": 0,
+  "screenshot": "Page.captureScreenshot timed out; no PNG or visual-motion/device certification",
+  "cleanup": "Temporary tab18 closed; viewport override reset. Done clicks observed, but no saved post-Done DOM artifact."
+}

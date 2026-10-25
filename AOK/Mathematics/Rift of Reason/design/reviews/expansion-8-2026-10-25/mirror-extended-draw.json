@@ -1,0 +1,1285 @@
+{
+  "scope": "One extended control-only Reason mirror draw, selected first seed >=32 with a turn-limit. Exact winner/reason/turn/actions and final12 actions reproduced; this is not a replay of all36 extended draws.",
+  "mode": "control",
+  "trial": {
+    "seed": 35,
+    "first": 1,
+    "winner": "draw",
+    "endReason": "turn-limit",
+    "turn": 61,
+    "steps": 180
+  },
+  "tail": [
+    {
+      "turn": 57,
+      "action": {
+        "type": "attack",
+        "player": 1,
+        "cid": "p1c5",
+        "target": "p0c6"
+      },
+      "events": [
+        {
+          "t": "attack",
+          "player": 1,
+          "cid": "p1c5",
+          "target": "p0c6",
+          "text": "Rival attacks your Khaby Llame with Rival's Astrophysicat.",
+          "turn": 57,
+          "round": 29
+        },
+        {
+          "t": "fight",
+          "attacker": "p1c5",
+          "defender": "p0c6",
+          "pa": 1,
+          "pb": 1,
+          "text": "Rival's Astrophysicat (1 attack) fights your Khaby Llame (1 attack).",
+          "turn": 57,
+          "round": 29
+        },
+        {
+          "t": "damage",
+          "cid": "p0c6",
+          "amount": 1,
+          "source": "p1c5",
+          "text": "Your Khaby Llame takes 1 damage.",
+          "turn": 57,
+          "round": 29
+        },
+        {
+          "t": "damage",
+          "cid": "p1c5",
+          "amount": 1,
+          "source": "p0c6",
+          "text": "Rival's Astrophysicat takes 1 damage.",
+          "turn": 57,
+          "round": 29
+        }
+      ],
+      "players": [
+        {
+          "hearts": 12,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 2
+            }
+          ]
+        },
+        {
+          "hearts": 12,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 4
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "turn": 57,
+      "action": {
+        "type": "end",
+        "player": 1
+      },
+      "events": [
+        {
+          "t": "hand-limit",
+          "player": 1,
+          "privateTo": 1,
+          "text": "Hand limit 3: you discard a rule card.",
+          "publicText": "Hand limit 3: Rival discards 1 card.",
+          "turn": 57,
+          "round": 29
+        },
+        {
+          "t": "turn-end",
+          "player": 1,
+          "text": "Rival ends the turn.",
+          "turn": 57,
+          "round": 29
+        },
+        {
+          "t": "turn",
+          "player": 0,
+          "text": "You: 10 energy. Choose a draw.",
+          "turn": 58,
+          "round": 29
+        }
+      ],
+      "players": [
+        {
+          "hearts": 12,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 2
+            }
+          ]
+        },
+        {
+          "hearts": 12,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 4
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "turn": 58,
+      "action": {
+        "type": "draw",
+        "player": 0,
+        "choice": "axiom"
+      },
+      "events": [
+        {
+          "t": "draw-axiom",
+          "player": 0,
+          "id": "limited-memory",
+          "privateTo": 0,
+          "text": "You take the rule card Limited Memory.",
+          "publicText": "You takes a rule card.",
+          "turn": 58,
+          "round": 29
+        }
+      ],
+      "players": [
+        {
+          "hearts": 12,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 2
+            }
+          ]
+        },
+        {
+          "hearts": 12,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 4
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "turn": 58,
+      "action": {
+        "type": "attack",
+        "player": 0,
+        "cid": "p0c4",
+        "target": "p1c6"
+      },
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c4",
+          "target": "p1c6",
+          "text": "You attack Rival's Khaby Llame with your Astrophysicat.",
+          "turn": 58,
+          "round": 29
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c4",
+          "defender": "p1c6",
+          "pa": 1,
+          "pb": 1,
+          "text": "Your Astrophysicat (1 attack) fights Rival's Khaby Llame (1 attack).",
+          "turn": 58,
+          "round": 29
+        },
+        {
+          "t": "damage",
+          "cid": "p1c6",
+          "amount": 1,
+          "source": "p0c4",
+          "text": "Rival's Khaby Llame takes 1 damage.",
+          "turn": 58,
+          "round": 29
+        },
+        {
+          "t": "damage",
+          "cid": "p0c4",
+          "amount": 1,
+          "source": "p1c6",
+          "text": "Your Astrophysicat takes 1 damage.",
+          "turn": 58,
+          "round": 29
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c6",
+          "player": 1,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Rival's Khaby Llame is defeated.",
+          "turn": 58,
+          "round": 29
+        }
+      ],
+      "players": [
+        {
+          "hearts": 12,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            }
+          ]
+        },
+        {
+          "hearts": 12,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 4
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "turn": 58,
+      "action": {
+        "type": "attack",
+        "player": 0,
+        "cid": "p0c6",
+        "target": "p1c7"
+      },
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c6",
+          "target": "p1c7",
+          "text": "You attack Rival's Khaby Llame with your Khaby Llame.",
+          "turn": 58,
+          "round": 29
+        },
+        {
+          "t": "ability",
+          "cid": "p1c7",
+          "text": "Rival's Khaby Llame just points at the obvious. your Khaby Llame loses its abilities, keywords and boosts.",
+          "turn": 58,
+          "round": 29
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c6",
+          "defender": "p1c7",
+          "pa": 1,
+          "pb": 1,
+          "text": "Your Khaby Llame (1 attack) fights Rival's Khaby Llame (1 attack).",
+          "turn": 58,
+          "round": 29
+        },
+        {
+          "t": "damage",
+          "cid": "p1c7",
+          "amount": 1,
+          "source": "p0c6",
+          "text": "Rival's Khaby Llame takes 1 damage.",
+          "turn": 58,
+          "round": 29
+        },
+        {
+          "t": "damage",
+          "cid": "p0c6",
+          "amount": 1,
+          "source": "p1c7",
+          "text": "Your Khaby Llame takes 1 damage.",
+          "turn": 58,
+          "round": 29
+        }
+      ],
+      "players": [
+        {
+          "hearts": 12,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            }
+          ]
+        },
+        {
+          "hearts": 12,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "turn": 58,
+      "action": {
+        "type": "end",
+        "player": 0
+      },
+      "events": [
+        {
+          "t": "hand-limit",
+          "player": 0,
+          "privateTo": 0,
+          "text": "Hand limit 3: you discard a rule card.",
+          "publicText": "Hand limit 3: You discards 1 card.",
+          "turn": 58,
+          "round": 29
+        },
+        {
+          "t": "turn-end",
+          "player": 0,
+          "text": "You end the turn.",
+          "turn": 58,
+          "round": 29
+        },
+        {
+          "t": "fate-move",
+          "text": "Round 29 ends: Fate moves 1 space.",
+          "turn": 59,
+          "round": 29
+        },
+        {
+          "t": "round",
+          "text": "Round 30.",
+          "turn": 59,
+          "round": 30
+        },
+        {
+          "t": "turn",
+          "player": 1,
+          "text": "Rival: 10 energy. Choose a draw.",
+          "turn": 59,
+          "round": 30
+        }
+      ],
+      "players": [
+        {
+          "hearts": 12,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            }
+          ]
+        },
+        {
+          "hearts": 12,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "turn": 59,
+      "action": {
+        "type": "draw",
+        "player": 1,
+        "choice": "none"
+      },
+      "events": [
+        {
+          "t": "exhaustion",
+          "player": 1,
+          "amount": 1,
+          "text": "Exhaustion: Rival's deck and the rule deck are empty.",
+          "turn": 59,
+          "round": 30
+        },
+        {
+          "t": "hit",
+          "player": 1,
+          "amount": 1,
+          "cid": null,
+          "text": "Rival loses 1 heart (11 left).",
+          "turn": 59,
+          "round": 30
+        }
+      ],
+      "players": [
+        {
+          "hearts": 12,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            }
+          ]
+        },
+        {
+          "hearts": 11,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "turn": 59,
+      "action": {
+        "type": "end",
+        "player": 1
+      },
+      "events": [
+        {
+          "t": "turn-end",
+          "player": 1,
+          "text": "Rival ends the turn.",
+          "turn": 59,
+          "round": 30
+        },
+        {
+          "t": "turn",
+          "player": 0,
+          "text": "You: 10 energy. Choose a draw.",
+          "turn": 60,
+          "round": 30
+        }
+      ],
+      "players": [
+        {
+          "hearts": 12,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            }
+          ]
+        },
+        {
+          "hearts": 11,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "turn": 60,
+      "action": {
+        "type": "draw",
+        "player": 0,
+        "choice": "none"
+      },
+      "events": [
+        {
+          "t": "exhaustion",
+          "player": 0,
+          "amount": 1,
+          "text": "Exhaustion: your deck and the rule deck are empty.",
+          "turn": 60,
+          "round": 30
+        },
+        {
+          "t": "hit",
+          "player": 0,
+          "amount": 1,
+          "cid": null,
+          "text": "You lose 1 heart (11 left).",
+          "turn": 60,
+          "round": 30
+        }
+      ],
+      "players": [
+        {
+          "hearts": 11,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            }
+          ]
+        },
+        {
+          "hearts": 11,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "turn": 60,
+      "action": {
+        "type": "axiom",
+        "player": 0,
+        "choice": "flux-cost-plus-1"
+      },
+      "events": [
+        {
+          "t": "axiom-play",
+          "player": 0,
+          "id": "flux-cost-plus-1",
+          "text": "You play a rule card.",
+          "turn": 60,
+          "round": 30
+        },
+        {
+          "t": "axiom",
+          "id": "flux-cost-plus-1",
+          "player": 0,
+          "basic": false,
+          "text": "Rule change — cost: A Little Costlier. Creature cost change: 0 → 1",
+          "turn": 60,
+          "round": 30
+        }
+      ],
+      "players": [
+        {
+          "hearts": 11,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            }
+          ]
+        },
+        {
+          "hearts": 11,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "turn": 60,
+      "action": {
+        "type": "attack",
+        "player": 0,
+        "cid": "p0c2",
+        "target": "p1c7"
+      },
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c2",
+          "target": "p1c7",
+          "text": "You attack Rival's Khaby Llame with your Tom Skink.",
+          "turn": 60,
+          "round": 30
+        },
+        {
+          "t": "ability",
+          "cid": "p1c7",
+          "text": "Rival's Khaby Llame just points at the obvious. your Tom Skink loses its abilities, keywords and boosts.",
+          "turn": 60,
+          "round": 30
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c2",
+          "defender": "p1c7",
+          "pa": 1,
+          "pb": 1,
+          "text": "Your Tom Skink (1 attack) fights Rival's Khaby Llame (1 attack).",
+          "turn": 60,
+          "round": 30
+        },
+        {
+          "t": "damage",
+          "cid": "p1c7",
+          "amount": 1,
+          "source": "p0c2",
+          "text": "Rival's Khaby Llame takes 1 damage.",
+          "turn": 60,
+          "round": 30
+        },
+        {
+          "t": "damage",
+          "cid": "p0c2",
+          "amount": 1,
+          "source": "p1c7",
+          "text": "Your Tom Skink takes 1 damage.",
+          "turn": 60,
+          "round": 30
+        }
+      ],
+      "players": [
+        {
+          "hearts": 11,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            }
+          ]
+        },
+        {
+          "hearts": 11,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "turn": 60,
+      "action": {
+        "type": "end",
+        "player": 0
+      },
+      "events": [
+        {
+          "t": "turn-end",
+          "player": 0,
+          "text": "You end the turn.",
+          "turn": 60,
+          "round": 30
+        },
+        {
+          "t": "fate-move",
+          "text": "Round 30 ends: Fate moves 1 space.",
+          "turn": 61,
+          "round": 30
+        },
+        {
+          "t": "reset",
+          "text": "Fate reset: all rules return to the basics.",
+          "turn": 61,
+          "round": 30
+        },
+        {
+          "t": "round",
+          "text": "Round 31.",
+          "turn": 61,
+          "round": 31
+        },
+        {
+          "t": "limit",
+          "text": "The rift closes after 60 turns. Draw.",
+          "turn": 61,
+          "round": 31
+        },
+        {
+          "t": "end",
+          "winner": "draw",
+          "reason": "turn-limit",
+          "text": "The battle ends in a draw.",
+          "turn": 61,
+          "round": 31
+        }
+      ],
+      "players": [
+        {
+          "hearts": 11,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            }
+          ]
+        },
+        {
+          "hearts": 11,
+          "hand": 0,
+          "deck": 0,
+          "board": [
+            {
+              "name": "Khaby Llame",
+              "attack": 1,
+              "health": 2
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Astrophysicat",
+              "attack": 1,
+              "health": 1
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            },
+            {
+              "name": "Tom Skink",
+              "attack": 1,
+              "health": 3
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
