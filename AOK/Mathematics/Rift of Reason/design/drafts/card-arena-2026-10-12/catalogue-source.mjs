@@ -4,7 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { reviewCatalogue } from './review-123.mjs';
 import { reviewStoryCards } from './review-132.mjs';
-import { reviewExpansion2, reviewExpansion3, reviewExpansion4, reviewExpansion5, reviewExpansion6 } from './review-129.mjs';
+import { reviewExpansion2, reviewExpansion3, reviewExpansion4, reviewExpansion5, reviewExpansion6, reviewExpansion7 } from './review-129.mjs';
 const dir = path.dirname(fileURLToPath(import.meta.url));
 const cards = [];
 const creatureRarities = ['common','common','common','common','uncommon','uncommon','uncommon','uncommon','rare','rare','mythic','legendary'];
@@ -334,7 +334,8 @@ reviewExpansion3(cards);
 reviewExpansion4(cards);
 reviewExpansion5(cards);
 reviewExpansion6(cards);
-const catalogue = {version:2, date:'2026-10-12', status:'210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eighteen plot-1 story cards, 145 held', reviewed:'2026-10-21',
+reviewExpansion7(cards);
+const catalogue = {version:2, date:'2026-10-12', status:'210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eighteen plot-1 story cards, 137 held', reviewed:'2026-10-21',
   counts:{total:cards.length, affinity:counts('affinity'), kind:counts('kind'), rarity:counts('rarity'),
     acquisition:{packPool:eligible.length,storyOnly:cards.length-eligible.length},packRarity:eligibleCounts('rarity')}, cards};
 fs.writeFileSync(path.join(dir, 'card-catalogue.json'), JSON.stringify(catalogue, null, 2) + '\n');

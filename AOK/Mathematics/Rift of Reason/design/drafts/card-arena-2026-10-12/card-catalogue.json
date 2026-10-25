@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eighteen plot-1 story cards, 145 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eighteen plot-1 story cards, 137 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -2701,13 +2701,13 @@
       "rarity": "common",
       "cost": 2,
       "target": "none",
-      "text": "Restore 2 hearts to your hero, or 3 if you control 2 or fewer creatures.",
+      "text": "Restore 2 hearts to your hero, or 3 if you currently control at most 2 creatures. Normal maximum hearts apply.",
       "tags": [
         "healing"
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Develop a larger board.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-7 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2715,7 +2715,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-7: pack pool"
+      },
+      "runtimeRelease": "expansion-7",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Restore 2 hearts to your hero, or 3 if you control 2 or fewer creatures.",
+        "rationale": "Measure the current friendly board at resolution and retain the ordinary hero cap."
       }
     },
     {
@@ -3494,13 +3500,13 @@
       "rarity": "common",
       "cost": 1,
       "target": "friendly-creature",
-      "text": "Choose 1 attack this turn or 1 maximum health and healing.",
+      "text": "Choose for one friendly creature: +1 attack until this turn ends, or +1 maximum health and heal 1. Record the target in the normal pending choice.",
       "tags": [
         "choice"
       ],
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Force defensive spending.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-7 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -3508,7 +3514,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-7: pack pool"
+      },
+      "runtimeRelease": "expansion-7",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Choose 1 attack this turn or 1 maximum health and healing.",
+        "rationale": "Separate temporary attack from permanent maximum health/healing and retain the target through JSON replay."
       }
     },
     {
@@ -3709,14 +3721,14 @@
       "rarity": "common",
       "cost": 1,
       "target": "own-discard-spell",
-      "text": "Put it on the bottom of your personal deck. Restore 1 heart to your hero.",
+      "text": "Put another actual spell from your discard on the bottom of your personal deck, then restore 1 heart. Exclude the exact casting instance; a different copy is allowed. No draw, new copy or reordering of existing deck cards.",
       "tags": [
         "recursion",
         "healing"
       ],
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Race before it is redrawn.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-7 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -3724,7 +3736,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-7: pack pool"
+      },
+      "runtimeRelease": "expansion-7",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Put it on the bottom of your personal deck. Restore 1 heart to your hero.",
+        "rationale": "Pin exact-instance eligibility before the casting spell enters discard, public bottom recovery and healing after the real move."
       }
     },
     {
@@ -3735,13 +3753,13 @@
       "rarity": "common",
       "cost": 1,
       "target": "own-discard-creature",
-      "text": "Return a creature costing 1 or less to hand.",
+      "text": "Return an actual creature from your discard to hand if its base instance cost is 1 or less, including permanent Changes but before current rule costs or taxes. Normal hand limits and future play costs apply.",
       "tags": [
         "recursion"
       ],
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Use tempo while it is absent.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-7 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -3749,7 +3767,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-7: pack pool"
+      },
+      "runtimeRelease": "expansion-7",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Return a creature costing 1 or less to hand.",
+        "rationale": "Resolve the draft cost ambiguity explicitly: instance base cost including Changes, not original species cost or transient payable cost. This differs from Cameo eligibility."
       }
     },
     {
@@ -5139,13 +5163,13 @@
       "rarity": "common",
       "cost": 0,
       "target": "none",
-      "text": "Gain 1 energy this turn, capped at 10. This still uses the normal activation budget.",
+      "text": "Gain 1 current energy this turn, capped at 10, without growing energy capacity. Still consumes one normal shared card activation; unavailable at the cap.",
       "tags": [
         "energy"
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Force inefficient sequencing.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-7 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -5153,7 +5177,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-7: pack pool"
+      },
+      "runtimeRelease": "expansion-7",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Gain 1 energy this turn, capped at 10. This still uses the normal activation budget.",
+        "rationale": "Pin current energy rather than capacity and preserve paid-use limits even at zero card cost."
       }
     },
     {
@@ -5189,13 +5219,13 @@
       "rarity": "common",
       "cost": 2,
       "target": "none",
-      "text": "Each player draws 1 personal-deck card, caster first; normal hand limits apply.",
+      "text": "Each player draws 1 personal card, caster first. Ordinary deck and combined personal/Axiom hand caps apply. Empty sources do not cause draw-phase exhaustion; identities stay private to their respective owners.",
       "tags": [
         "draw"
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Benefit from the shared draw.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-7 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -5203,7 +5233,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-7: pack pool"
+      },
+      "runtimeRelease": "expansion-7",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Each player draws 1 personal-deck card, caster first; normal hand limits apply.",
+        "rationale": "Delegate both draws to the ordinary draw API, preserving order, privacy and hypothetical opaque-card planning."
       }
     },
     {
@@ -5390,14 +5426,14 @@
       "rarity": "uncommon",
       "cost": 2,
       "target": "friendly-creature",
-      "text": "Remove its consumed-Shield marker, give a fresh Shield and heal it by 1.",
+      "text": "Remove the consumed-Shield marker, give a fresh Shield and heal a friendly creature by 1. Shield does not stack; ordinary Silence and ability-suppression rules still apply.",
       "tags": [
         "shield",
         "healing"
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Remove keywords or use repeated damage.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-7 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -5405,7 +5441,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-7: pack pool"
+      },
+      "runtimeRelease": "expansion-7",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Remove its consumed-Shield marker, give a fresh Shield and heal it by 1.",
+        "rationale": "Use existing keyword grant semantics for printed or granted Shield, without undoing Silence or adding extra prevention layers."
       }
     },
     {
@@ -5526,14 +5568,14 @@
       "rarity": "rare",
       "cost": 3,
       "target": "none",
-      "text": "Your hero loses 2 hearts; draw 2 personal-deck cards.",
+      "text": "Your hero loses 2 hearts, then draw up to 2 personal cards under ordinary source/hand caps. Finish the printed effects before ordinary cleanup and Win checks, including reversed hearts.",
       "tags": [
         "self-damage",
         "draw"
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Change Win or exploit low hearts.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-7 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -5541,7 +5583,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-7: pack pool"
+      },
+      "runtimeRelease": "expansion-7",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Your hero loses 2 hearts; draw 2 personal-deck cards.",
+        "rationale": "Use the same self-loss effect semantics as expansion-6 rather than introduce a separate casting-heart fee."
       }
     },
     {

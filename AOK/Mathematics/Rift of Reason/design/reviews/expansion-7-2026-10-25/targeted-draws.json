@@ -1,0 +1,621 @@
+{
+  "scope": "Exact seed/decks/current policy reproduction of the extended selected-row turn-limit result; winner/reason/turn asserted. Action count is newly recorded here, not present in the original targeted trial.",
+  "receipts": [
+    {
+      "mode": "control",
+      "colour": "memory",
+      "partner": "reason",
+      "trial": {
+        "seed": 56,
+        "monoSeat": 1,
+        "first": 0,
+        "winner": "draw",
+        "endReason": "turn-limit",
+        "turn": 61
+      },
+      "steps": 166,
+      "tail": [
+        {
+          "turn": 57,
+          "action": {
+            "type": "end",
+            "player": 0
+          },
+          "events": [
+            {
+              "t": "turn-end",
+              "player": 0,
+              "text": "You end the turn.",
+              "turn": 57,
+              "round": 29
+            },
+            {
+              "t": "turn",
+              "player": 1,
+              "text": "Rival: 10 energy. Choose a draw.",
+              "turn": 58,
+              "round": 29
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 2,
+              "deck": 4,
+              "board": [
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                }
+              ]
+            },
+            {
+              "hearts": 5,
+              "hand": 2,
+              "deck": 6,
+              "board": []
+            }
+          ]
+        },
+        {
+          "turn": 58,
+          "action": {
+            "type": "draw",
+            "player": 1,
+            "choice": "deck"
+          },
+          "events": [
+            {
+              "t": "draw",
+              "player": 1,
+              "cid": "p1t8",
+              "privateTo": 1,
+              "text": "You draw One Last Draw.",
+              "publicText": "Rival draws a card.",
+              "turn": 58,
+              "round": 29
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 2,
+              "deck": 4,
+              "board": [
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                }
+              ]
+            },
+            {
+              "hearts": 5,
+              "hand": 3,
+              "deck": 5,
+              "board": []
+            }
+          ]
+        },
+        {
+          "turn": 58,
+          "action": {
+            "type": "play",
+            "player": 1,
+            "cid": "p1t7"
+          },
+          "events": [
+            {
+              "t": "tactic-play",
+              "player": 1,
+              "cid": "p1t7",
+              "id": "memory-keep-the-note",
+              "target": null,
+              "text": "Rival plays the tactic Keep the Note.",
+              "turn": 58,
+              "round": 29
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 2,
+              "deck": 4,
+              "board": [
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                }
+              ]
+            },
+            {
+              "hearts": 5,
+              "hand": 2,
+              "deck": 5,
+              "board": []
+            }
+          ]
+        },
+        {
+          "turn": 58,
+          "action": {
+            "type": "end",
+            "player": 1
+          },
+          "events": [
+            {
+              "t": "turn-end",
+              "player": 1,
+              "text": "Rival ends the turn.",
+              "turn": 58,
+              "round": 29
+            },
+            {
+              "t": "fate-move",
+              "text": "Round 29 ends: Fate moves 1 space.",
+              "turn": 59,
+              "round": 29
+            },
+            {
+              "t": "round",
+              "text": "Round 30.",
+              "turn": 59,
+              "round": 30
+            },
+            {
+              "t": "turn",
+              "player": 0,
+              "text": "You: 10 energy. Choose a draw.",
+              "turn": 59,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 2,
+              "deck": 4,
+              "board": [
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                }
+              ]
+            },
+            {
+              "hearts": 5,
+              "hand": 2,
+              "deck": 5,
+              "board": []
+            }
+          ]
+        },
+        {
+          "turn": 59,
+          "action": {
+            "type": "draw",
+            "player": 0,
+            "choice": "deck"
+          },
+          "events": [
+            {
+              "t": "draw",
+              "player": 0,
+              "cid": "p0c5",
+              "privateTo": 0,
+              "text": "You draw V-Squish.",
+              "publicText": "You draws a card.",
+              "turn": 59,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 3,
+              "deck": 3,
+              "board": [
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                }
+              ]
+            },
+            {
+              "hearts": 5,
+              "hand": 2,
+              "deck": 5,
+              "board": []
+            }
+          ]
+        },
+        {
+          "turn": 59,
+          "action": {
+            "type": "attack",
+            "player": 0,
+            "cid": "p0c4",
+            "target": "h1"
+          },
+          "events": [
+            {
+              "t": "attack",
+              "player": 0,
+              "cid": "p0c4",
+              "target": "h1",
+              "text": "You attack Rival with V-Squish.",
+              "turn": 59,
+              "round": 30
+            },
+            {
+              "t": "hit",
+              "player": 1,
+              "amount": 2,
+              "cid": "p0c4",
+              "text": "Rival loses 2 hearts (3 left).",
+              "turn": 59,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 3,
+              "deck": 3,
+              "board": [
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                }
+              ]
+            },
+            {
+              "hearts": 3,
+              "hand": 2,
+              "deck": 5,
+              "board": []
+            }
+          ]
+        },
+        {
+          "turn": 59,
+          "action": {
+            "type": "play",
+            "player": 0,
+            "cid": "p0c5"
+          },
+          "events": [
+            {
+              "t": "play",
+              "player": 0,
+              "cid": "p0c5",
+              "target": null,
+              "revealed": false,
+              "text": "You play V-Squish.",
+              "turn": 59,
+              "round": 30
+            },
+            {
+              "t": "fizzle",
+              "cid": "p0c5",
+              "text": "V-Squish finds no target for its Entrance.",
+              "turn": 59,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 2,
+              "deck": 3,
+              "board": [
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                },
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                }
+              ]
+            },
+            {
+              "hearts": 3,
+              "hand": 2,
+              "deck": 5,
+              "board": []
+            }
+          ]
+        },
+        {
+          "turn": 59,
+          "action": {
+            "type": "end",
+            "player": 0
+          },
+          "events": [
+            {
+              "t": "turn-end",
+              "player": 0,
+              "text": "You end the turn.",
+              "turn": 59,
+              "round": 30
+            },
+            {
+              "t": "turn",
+              "player": 1,
+              "text": "Rival: 10 energy. Choose a draw.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 2,
+              "deck": 3,
+              "board": [
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                },
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                }
+              ]
+            },
+            {
+              "hearts": 3,
+              "hand": 2,
+              "deck": 5,
+              "board": []
+            }
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "draw",
+            "player": 1,
+            "choice": "deck"
+          },
+          "events": [
+            {
+              "t": "draw",
+              "player": 1,
+              "cid": "p1c4",
+              "privateTo": 1,
+              "text": "You draw Pocket Tortoise.",
+              "publicText": "Rival draws a card.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 2,
+              "deck": 3,
+              "board": [
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                },
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                }
+              ]
+            },
+            {
+              "hearts": 3,
+              "hand": 3,
+              "deck": 4,
+              "board": []
+            }
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "play",
+            "player": 1,
+            "cid": "p1c4"
+          },
+          "events": [
+            {
+              "t": "play",
+              "player": 1,
+              "cid": "p1c4",
+              "target": null,
+              "revealed": false,
+              "text": "Rival plays Pocket Tortoise.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 2,
+              "deck": 3,
+              "board": [
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                },
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                }
+              ]
+            },
+            {
+              "hearts": 3,
+              "hand": 2,
+              "deck": 4,
+              "board": [
+                {
+                  "name": "Pocket Tortoise",
+                  "attack": 1,
+                  "health": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "play",
+            "player": 1,
+            "cid": "p1t1"
+          },
+          "events": [
+            {
+              "t": "tactic-play",
+              "player": 1,
+              "cid": "p1t1",
+              "id": "generic-fair-trade",
+              "target": null,
+              "text": "Rival plays the tactic Fair Trade.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 2,
+              "deck": 3,
+              "board": [
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                },
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                }
+              ]
+            },
+            {
+              "hearts": 3,
+              "hand": 1,
+              "deck": 4,
+              "board": [
+                {
+                  "name": "Pocket Tortoise",
+                  "attack": 1,
+                  "health": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "end",
+            "player": 1
+          },
+          "events": [
+            {
+              "t": "turn-end",
+              "player": 1,
+              "text": "Rival ends the turn.",
+              "turn": 60,
+              "round": 30
+            },
+            {
+              "t": "fate-move",
+              "text": "Round 30 ends: Fate moves 1 space.",
+              "turn": 61,
+              "round": 30
+            },
+            {
+              "t": "reset",
+              "text": "Fate reset: all rules return to the basics.",
+              "turn": 61,
+              "round": 30
+            },
+            {
+              "t": "fate-next",
+              "id": "flux-draw-plus-1",
+              "text": "Fate sets aside the next free rule: One More Card.",
+              "turn": 61,
+              "round": 30
+            },
+            {
+              "t": "round",
+              "text": "Round 31.",
+              "turn": 61,
+              "round": 31
+            },
+            {
+              "t": "limit",
+              "text": "The rift closes after 60 turns. Draw.",
+              "turn": 61,
+              "round": 31
+            },
+            {
+              "t": "end",
+              "winner": "draw",
+              "reason": "turn-limit",
+              "text": "The battle ends in a draw.",
+              "turn": 61,
+              "round": 31
+            }
+          ],
+          "players": [
+            {
+              "hearts": 9,
+              "hand": 2,
+              "deck": 3,
+              "board": [
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                },
+                {
+                  "name": "V-Squish",
+                  "attack": 2,
+                  "health": 2
+                }
+              ]
+            },
+            {
+              "hearts": 3,
+              "hand": 1,
+              "deck": 4,
+              "board": [
+                {
+                  "name": "Pocket Tortoise",
+                  "attack": 1,
+                  "health": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

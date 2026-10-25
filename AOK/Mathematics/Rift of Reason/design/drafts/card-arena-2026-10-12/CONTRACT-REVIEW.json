@@ -82,7 +82,17 @@
     "memory-return-to-the-plan",
     "emotion-outburst"
   ],
-  "held": 145,
+  "expansion7Batch": [
+    "emotion-careful-cheer",
+    "imagination-bright-possibility",
+    "memory-keep-the-note",
+    "memory-familiar-path",
+    "generic-spare-spark",
+    "generic-fair-trade",
+    "generic-repair-the-shield",
+    "generic-one-last-draw"
+  ],
+  "held": 137,
   "rows": [
     {
       "id": "reason-premise-pigeon",
@@ -1821,10 +1831,10 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-7 runtime release (#129); see expansion-7 acceptance report",
       "trigger": "paid cast",
       "target": "none",
-      "payoffAndLifetime": "Restore 2 hearts to your hero, or 3 if you control 2 or fewer creatures.",
+      "payoffAndLifetime": "Restore 2 hearts to your hero, or 3 if you currently control at most 2 creatures. Normal maximum hearts apply.",
       "counterplay": "Develop a larger board.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -2383,10 +2393,10 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-7 runtime release (#129); see expansion-7 acceptance report",
       "trigger": "paid cast",
       "target": "friendly-creature",
-      "payoffAndLifetime": "Choose 1 attack this turn or 1 maximum health and healing.",
+      "payoffAndLifetime": "Choose for one friendly creature: +1 attack until this turn ends, or +1 maximum health and heal 1. Record the target in the normal pending choice.",
       "counterplay": "Force defensive spending.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -2550,14 +2560,15 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-7 runtime release (#129); see expansion-7 acceptance report",
       "trigger": "paid cast",
       "target": "own-discard-spell",
-      "payoffAndLifetime": "Put it on the bottom of your personal deck. Restore 1 heart to your hero.",
+      "payoffAndLifetime": "Put another actual spell from your discard on the bottom of your personal deck, then restore 1 heart. Exclude the exact casting instance; a different copy is allowed. No draw, new copy or reordering of existing deck cards.",
       "counterplay": "Race before it is redrawn.",
       "semanticRevision": null,
       "releaseChecks": [
-        "Win: current rule and simultaneous/terminal boundaries; no revival after a settled win"
+        "resource: preserve normal energy, activation and hand caps; no refund on replay",
+        "identity: move actual instance; consume one-shots before effects; no cloned receipt or source"
       ],
       "gates": [
         109
@@ -2569,13 +2580,14 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-7 runtime release (#129); see expansion-7 acceptance report",
       "trigger": "paid cast",
       "target": "own-discard-creature",
-      "payoffAndLifetime": "Return a creature costing 1 or less to hand.",
+      "payoffAndLifetime": "Return an actual creature from your discard to hand if its base instance cost is 1 or less, including permanent Changes but before current rule costs or taxes. Normal hand limits and future play costs apply.",
       "counterplay": "Use tempo while it is absent.",
       "semanticRevision": null,
       "releaseChecks": [
+        "resource: preserve normal energy, activation and hand caps; no refund on replay",
         "identity: move actual instance; consume one-shots before effects; no cloned receipt or source",
         "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap"
       ],
@@ -3606,14 +3618,15 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-7 runtime release (#129); see expansion-7 acceptance report",
       "trigger": "paid cast",
       "target": "none",
-      "payoffAndLifetime": "Gain 1 energy this turn, capped at 10. This still uses the normal activation budget.",
+      "payoffAndLifetime": "Gain 1 current energy this turn, capped at 10, without growing energy capacity. Still consumes one normal shared card activation; unavailable at the cap.",
       "counterplay": "Force inefficient sequencing.",
       "semanticRevision": null,
       "releaseChecks": [
         "resource: preserve normal energy, activation and hand caps; no refund on replay",
+        "Win: current rule and simultaneous/terminal boundaries; no revival after a settled win",
         "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap"
       ],
       "gates": [
@@ -3646,10 +3659,10 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-7 runtime release (#129); see expansion-7 acceptance report",
       "trigger": "paid cast",
       "target": "none",
-      "payoffAndLifetime": "Each player draws 1 personal-deck card, caster first; normal hand limits apply.",
+      "payoffAndLifetime": "Each player draws 1 personal card, caster first. Ordinary deck and combined personal/Axiom hand caps apply. Empty sources do not cause draw-phase exhaustion; identities stay private to their respective owners.",
       "counterplay": "Benefit from the shared draw.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -3784,10 +3797,10 @@
       "kind": "spell",
       "rarity": "uncommon",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-7 runtime release (#129); see expansion-7 acceptance report",
       "trigger": "paid cast",
       "target": "friendly-creature",
-      "payoffAndLifetime": "Remove its consumed-Shield marker, give a fresh Shield and heal it by 1.",
+      "payoffAndLifetime": "Remove the consumed-Shield marker, give a fresh Shield and heal a friendly creature by 1. Shield does not stack; ordinary Silence and ability-suppression rules still apply.",
       "counterplay": "Remove keywords or use repeated damage.",
       "semanticRevision": null,
       "releaseChecks": [
@@ -3887,10 +3900,10 @@
       "kind": "spell",
       "rarity": "rare",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-7 runtime release (#129); see expansion-7 acceptance report",
       "trigger": "paid cast",
       "target": "none",
-      "payoffAndLifetime": "Your hero loses 2 hearts; draw 2 personal-deck cards.",
+      "payoffAndLifetime": "Your hero loses 2 hearts, then draw up to 2 personal cards under ordinary source/hand caps. Finish the printed effects before ordinary cleanup and Win checks, including reversed hearts.",
       "counterplay": "Change Win or exploit low hearts.",
       "semanticRevision": null,
       "releaseChecks": [

@@ -1032,6 +1032,87 @@
             run(api, p, target) { api.damage(target, 5, null); api.damage('h' + p, 2, null); },
         },
     });
+    // #129 expansion-7: bounded resources/choice, using ordinary public battle APIs.
+    Object.assign(tactics, {
+        'emotion-careful-cheer': {
+            name: 'Careful Cheer', cost: 2, colour: 'emotion', rarity: 'common', release: 'expansion-7', packEligible: true,
+            art: 'art/spell-motif-emotion', text: 'Restore 2 hearts to your hero, or 3 if you have at most 2 creatures in play.',
+            usable: (s, p) => s.players[p].hearts < s.players[p].maxHearts,
+            run(api, p) {
+                const amount = api.s.players[p].board.length <= 2 ? 3 : 2;
+                api.healHero(p, amount);
+                api.emit({ t: 'tactic', player: p, text: 'Careful Cheer: restore ' + amount + ' hearts.' });
+            },
+        },
+        'imagination-bright-possibility': {
+            name: 'Bright Possibility', cost: 1, colour: 'imagination', rarity: 'common', release: 'expansion-7', packEligible: true,
+            art: 'art/spell-motif-imagination', target: 'friendly-creature',
+            text: 'Choose for a friend: +1 attack this turn, or +1 maximum health and heal 1.',
+            run(api, p, target) {
+                api.ask({ player: p, kind: 'option', target, options: ['attack', 'health'],
+                    labels: { attack: '+1 attack this turn', health: '+1 maximum health and heal 1' },
+                    prompt: 'Bright Possibility: choose for ' + api.cardName(target) + '.',
+                    source: { type: 'tactic', id: 'imagination-bright-possibility' } });
+            },
+            choose(api, p, choice, req) {
+                if (!api.s.players[p].board.includes(req.target)) return;
+                if (choice === 'attack') api.buff(req.target, 1, 0, 'Bright Possibility', true);
+                else { api.buff(req.target, 0, 1, 'Bright Possibility'); api.heal(req.target, 1); }
+                api.emit({ t: 'tactic', player: p, text: 'Bright Possibility: ' + (choice === 'attack' ? '+1 attack this turn.' : '+1 maximum health and heal 1.') });
+            },
+        },
+        'generic-spare-spark': {
+            name: 'Spare Spark', cost: 0, rarity: 'common', release: 'expansion-7', packEligible: true,
+            art: 'art/spell-motif-generic', text: 'Gain 1 energy this turn, up to 10. This still uses one card activation.',
+            usable: (s, p) => s.players[p].energy < 10,
+            run(api, p) { api.s.players[p].energy = Math.min(10, api.s.players[p].energy + 1); api.emit({ t: 'tactic', player: p, text: 'Spare Spark: gain 1 energy this turn.' }); },
+        },
+        'generic-repair-the-shield': {
+            name: 'Repair the Shield', cost: 2, rarity: 'uncommon', release: 'expansion-7', packEligible: true,
+            art: 'art/spell-motif-generic', target: 'friendly-creature', text: 'Give a friend a fresh Shield, even if its old Shield was used. Heal it by 1.',
+            run(api, p, target) { api.addKeyword(target, 'shield'); api.heal(target, 1); api.emit({ t: 'tactic', player: p, text: 'Repair the Shield: fresh Shield and heal 1.' }); },
+        },
+        'memory-keep-the-note': {
+            name: 'Keep the Note', cost: 1, colour: 'memory', rarity: 'common', release: 'expansion-7', packEligible: true,
+            art: 'art/spell-motif-memory', text: 'Put another spell from your discard on the bottom of your deck. Restore 1 heart.',
+            usable: (s, p) => s.players[p].discard.some(cid => s.cards[cid].kind === 'tactic'),
+            run(api, p, target, castCid) {
+                api.ask({ player: p, kind: 'card', castCid,
+                    options: api.s.players[p].discard.filter(cid => cid !== castCid && api.s.cards[cid].kind === 'tactic'),
+                    prompt: 'Which other spell goes on the bottom?', source: { type: 'tactic', id: 'memory-keep-the-note' } });
+            },
+            choose(api, p, cid, req) {
+                if (cid === req.castCid || !api.s.players[p].discard.includes(cid)) return;
+                if (api.recoverBottom(cid)) {
+                    api.healHero(p, 1);
+                    api.emit({ t: 'tactic', player: p, text: 'Keep the Note: ' + api.cardName(cid) + ' goes on the bottom. Restore 1 heart.' });
+                }
+            },
+        },
+        'memory-familiar-path': {
+            name: 'Familiar Path', cost: 1, colour: 'memory', rarity: 'common', release: 'expansion-7', packEligible: true,
+            art: 'art/spell-motif-memory', text: 'Return a creature from your discard to hand if its cost before rules and taxes is 1 or less. Changes count.',
+            usable: (s, p) => s.players[p].discard.some(cid => s.cards[cid].kind === 'creature' && s.cards[cid].cost <= 1),
+            run(api, p) {
+                api.ask({ player: p, kind: 'card', options: api.s.players[p].discard.filter(cid => api.s.cards[cid].kind === 'creature' && api.s.cards[cid].cost <= 1),
+                    prompt: 'Which small creature returns to your hand?', source: { type: 'tactic', id: 'memory-familiar-path' } });
+            },
+            choose(api, p, cid) {
+                if (api.fromDiscard(cid)) api.emit({ t: 'tactic', player: p, text: 'Familiar Path: ' + api.cardName(cid) + ' returns to your hand at its normal cost.' });
+            },
+        },
+        'generic-fair-trade': {
+            name: 'Fair Trade', cost: 2, rarity: 'common', release: 'expansion-7', packEligible: true,
+            art: 'art/spell-motif-generic', text: 'Each player draws 1 personal card, you first. Normal hand limits apply.',
+            usable: (s, p, H) => s.players[p].deck.length > 0 && H.handRoom(s, p, 1, 1) || s.players[1 - p].deck.length > 0 && H.handRoom(s, 1 - p, 1),
+            run(api, p) { api.draw(p); api.draw(1 - p); },
+        },
+        'generic-one-last-draw': {
+            name: 'One Last Draw', cost: 3, rarity: 'rare', release: 'expansion-7', packEligible: true,
+            art: 'art/spell-motif-generic', text: 'Your hero loses 2 hearts. Draw 2 personal cards.',
+            run(api, p) { api.damage('h' + p, 2, null); api.draw(p); api.draw(p); },
+        },
+    });
     Rift.data.tactics = tactics;
     tactics['generic-quiet-reset'] = {
         id: 'generic-quiet-reset', name: 'Quiet Reset', cost: 3, rarity: 'uncommon', release: 'plot-1', packEligible: false,

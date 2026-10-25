@@ -141,3 +141,34 @@ export function reviewExpansion6(cards) {
         c.text=clarifications6[c.id][0];
     }
 }
+
+// #129 expansion-7: resource/choice contracts; six Common, one Uncommon, one Rare.
+export const expansion7Batch = ['emotion-careful-cheer','imagination-bright-possibility','memory-keep-the-note','memory-familiar-path',
+    'generic-spare-spark','generic-fair-trade','generic-repair-the-shield','generic-one-last-draw'];
+const clarifications7 = {
+    'emotion-careful-cheer': ['Restore 2 hearts to your hero, or 3 if you currently control at most 2 creatures. Normal maximum hearts apply.',
+        'Measure the current friendly board at resolution and retain the ordinary hero cap.'],
+    'imagination-bright-possibility': ['Choose for one friendly creature: +1 attack until this turn ends, or +1 maximum health and heal 1. Record the target in the normal pending choice.',
+        'Separate temporary attack from permanent maximum health/healing and retain the target through JSON replay.'],
+    'memory-keep-the-note': ['Put another actual spell from your discard on the bottom of your personal deck, then restore 1 heart. Exclude the exact casting instance; a different copy is allowed. No draw, new copy or reordering of existing deck cards.',
+        'Pin exact-instance eligibility before the casting spell enters discard, public bottom recovery and healing after the real move.'],
+    'memory-familiar-path': ['Return an actual creature from your discard to hand if its base instance cost is 1 or less, including permanent Changes but before current rule costs or taxes. Normal hand limits and future play costs apply.',
+        'Resolve the draft cost ambiguity explicitly: instance base cost including Changes, not original species cost or transient payable cost. This differs from Cameo eligibility.'],
+    'generic-spare-spark': ['Gain 1 current energy this turn, capped at 10, without growing energy capacity. Still consumes one normal shared card activation; unavailable at the cap.',
+        'Pin current energy rather than capacity and preserve paid-use limits even at zero card cost.'],
+    'generic-fair-trade': ['Each player draws 1 personal card, caster first. Ordinary deck and combined personal/Axiom hand caps apply. Empty sources do not cause draw-phase exhaustion; identities stay private to their respective owners.',
+        'Delegate both draws to the ordinary draw API, preserving order, privacy and hypothetical opaque-card planning.'],
+    'generic-repair-the-shield': ['Remove the consumed-Shield marker, give a fresh Shield and heal a friendly creature by 1. Shield does not stack; ordinary Silence and ability-suppression rules still apply.',
+        'Use existing keyword grant semantics for printed or granted Shield, without undoing Silence or adding extra prevention layers.'],
+    'generic-one-last-draw': ['Your hero loses 2 hearts, then draw up to 2 personal cards under ordinary source/hand caps. Finish the printed effects before ordinary cleanup and Win checks, including reversed hearts.',
+        'Use the same self-loss effect semantics as expansion-6 rather than introduce a separate casting-heart fee.'],
+};
+export function reviewExpansion7(cards) {
+    for (const c of cards) if (expansion7Batch.includes(c.id)) {
+        c.runtimeRelease='expansion-7';
+        c.status='Released in expansion-7 (#129); bounded engineering validation, not classroom balance certification';
+        c.acquisition.releaseStatus='Released expansion-7: pack pool';
+        c.releaseRevision={issue:129,previousText:c.text,rationale:clarifications7[c.id][1]};
+        c.text=clarifications7[c.id][0];
+    }
+}
