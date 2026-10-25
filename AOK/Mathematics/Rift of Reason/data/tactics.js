@@ -1204,6 +1204,140 @@
             },
         },
     });
+    // #129 expansion-9: private card quality and simple utility, through existing battle APIs.
+    function forgetInspected(api, p, top) {
+        const other = api.s.players[1 - p];
+        other.knows = other.knows.filter(cid => !top.includes(cid));
+        if (other.sight) other.sight = other.sight.filter(cid => !top.includes(cid));
+    }
+    function finishInspection(api, p, top, chosen, label) {
+        const P = api.s.players[p];
+        if (top.some((cid, i) => P.deck[i] !== cid)) return;
+        const room = Math.max(0, api.s.options.handLimit - P.hand.length - P.axHand.length);
+        const drawn = chosen.filter((cid, i, all) => top.includes(cid) && all.indexOf(cid) === i).slice(0, room);
+        // Any inspected identity may now have moved privately; do not reveal the selection through old sight.
+        forgetInspected(api, p, top);
+        P.deck = P.deck.slice(top.length).concat(top.filter(cid => !drawn.includes(cid)));
+        drawn.forEach(cid => {
+            api.toHand(p, cid, true);
+            api.emit({ t: 'draw', player: p, cid, privateTo: p, text: label + ': draw ' + api.cardName(cid) + '.',
+                publicText: label + ': draw a personal card.' });
+        });
+        api.emit({ t: 'tactic', player: p, text: label + ': put the undrawn inspected cards on the deck bottom, in their original order.' });
+    }
+    function clueStep(api, p, top, creature) {
+        const source = { type: 'tactic', id: 'perception-follow-the-clue' };
+        if (creature === undefined && api.handRoom(p, 1)) {
+            const options = top.filter(cid => api.s.cards[cid].kind === 'creature');
+            if (options.length) {
+                api.ask({ player: p, kind: 'card', options, inspected: top, stage: 'creature', source,
+                    prompt: 'Which inspected creature do you draw?' });
+                return;
+            }
+        }
+        const options = top.filter(cid => api.s.cards[cid].kind === 'tactic');
+        if (options.length && api.handRoom(p, creature ? 2 : 1)) {
+            api.ask({ player: p, kind: 'card', options, inspected: top, creature: creature || null, stage: 'spell', source,
+                prompt: 'Which inspected spell do you draw?' });
+        } else finishInspection(api, p, top, creature ? [creature] : [], 'Follow the Clue');
+    }
+    function hasPendingPlayerEvent(s, p) {
+        return Rift.Battle.Engine.fateSchedule(s).some(ev => !ev.env && ev.controller === p && ev.state === 'pending');
+    }
+    Object.assign(tactics, {
+        'reason-work-it-out': {
+            name: 'Work It Out', cost: 2, colour: 'reason', rarity: 'common', release: 'expansion-9', packEligible: true,
+            art: 'art/spell-motif-reason', text: 'Look privately at your top 3 cards. Draw one. Put the others on the bottom in their original order.',
+            usable: (s, p) => s.players[p].deck.length > 0,
+            run(api, p) {
+                if (api.planning) { api.draw(p); return; }
+                const top = api.s.players[p].deck.slice(0, 3);
+                api.ask({ player: p, kind: 'card', options: top, inspected: top, prompt: 'Which inspected card do you draw?',
+                    source: { type: 'tactic', id: 'reason-work-it-out' } });
+            },
+            choose(api, p, cid, req) { finishInspection(api, p, req.inspected, [cid], 'Work It Out'); },
+        },
+        'emotion-quick-courage': {
+            name: 'Quick Courage', cost: 1, colour: 'emotion', rarity: 'common', release: 'expansion-9', packEligible: true,
+            art: 'art/spell-motif-emotion', target: 'friendly-creature', text: 'A friend gets +2 attack this turn.',
+            run(api, p, target) { api.buff(target, 2, 0, 'Quick Courage', true); },
+        },
+        'language-a-better-label': {
+            name: 'A Better Label', cost: 1, colour: 'language', rarity: 'common', release: 'expansion-9', packEligible: true,
+            art: 'art/spell-motif-language', target: 'enemy-creature',
+            text: 'An enemy gets -1 attack until its controller\'s next turn ends, minimum 0. Draw 1 personal card.',
+            run(api, p, target) { if (api.attack(target) > 0) api.buffNextTurn(target, -1, 0, 'A Better Label'); api.draw(p); },
+        },
+        'language-change-the-subject': {
+            name: 'Change the Subject', cost: 2, colour: 'language', rarity: 'common', release: 'expansion-9', packEligible: true,
+            art: 'art/spell-motif-language', text: 'Reset the changed Attacks rule to basics. Draw 1 personal card.',
+            usable: s => Rift.Battle.Engine.changedAxioms(s).some(ax => ax.category === 'attacks'),
+            run(api, p) { api.clearCategory('attacks', p); api.draw(p); },
+        },
+        'perception-follow-the-clue': {
+            name: 'Follow the Clue', cost: 3, colour: 'perception', rarity: 'uncommon', release: 'expansion-9', packEligible: true,
+            art: 'art/spell-motif-perception', text: 'Look at your top 4 cards. Draw a creature, then a spell, if found and there is room. Bottom the others in order.',
+            usable: (s, p) => s.players[p].deck.length > 0,
+            run(api, p) {
+                // At least one type is present in a nonempty real deck. Predict only one opaque draw;
+                // whether a second type is among these four is unknown before inspection.
+                if (api.planning) { api.draw(p); return; }
+                clueStep(api, p, api.s.players[p].deck.slice(0, 4));
+            },
+            choose(api, p, cid, req) {
+                if (req.stage === 'creature') clueStep(api, p, req.inspected, cid);
+                else finishInspection(api, p, req.inspected, (req.creature ? [req.creature] : []).concat(cid), 'Follow the Clue');
+            },
+        },
+        'imagination-sketch-a-friend': {
+            name: 'Sketch a Friend', cost: 1, colour: 'imagination', rarity: 'common', release: 'expansion-9', packEligible: true,
+            art: 'art/spell-motif-imagination', text: 'Summon a colourless 1/1 Paper token if you have board space.',
+            usable: (s, p) => Rift.Battle.Engine.boardOccupancy(s, p) < s.options.boardLimit,
+            run(api, p) { api.summon(p, 'paper-token'); },
+        },
+        'generic-pocket-plan': {
+            name: 'Pocket Plan', cost: 1, rarity: 'common', release: 'expansion-9', packEligible: true,
+            art: 'art/spell-motif-generic', text: 'Look privately at the top unreserved shared rule. Leave it there, or put it on the bottom. Fate cards stay set aside.',
+            usable: s => s.axioms.deck.length > 0,
+            run(api, p) {
+                if (api.planning) return;
+                const id = api.s.axioms.deck[0];
+                if (!id) return;
+                api.ask({ player: p, kind: 'option', options: ['keep', 'bottom'], inspected: id,
+                    labels: { keep: 'Leave it on top', bottom: 'Put it on the bottom' },
+                    prompt: 'The top unreserved shared rule is ' + Rift.data.axioms[id].name + '.',
+                    source: { type: 'tactic', id: 'generic-pocket-plan' } });
+            },
+            choose(api, p, choice, req) {
+                const deck = api.s.axioms.deck;
+                if (deck[0] !== req.inspected) return;
+                if (choice === 'bottom') deck.push(deck.shift());
+                api.emit({ t: 'tactic', player: p, privateTo: p,
+                    text: 'Pocket Plan: inspect one unreserved shared card; ' + (choice === 'bottom' ? 'put it on the bottom.' : 'leave it on top.'),
+                    publicText: 'Pocket Plan: privately inspect one unreserved shared card and finish the choice.' });
+            },
+        },
+        'generic-recorded-choice': {
+            name: 'Recorded Choice', cost: 2, rarity: 'uncommon', release: 'expansion-9', packEligible: true,
+            art: 'art/spell-motif-generic', text: 'With an own pending player event, draw 1 personal card. Otherwise look at your top 2 cards and put one on the bottom.',
+            usable: (s, p) => s.players[p].deck.length > 0,
+            run(api, p) {
+                if (hasPendingPlayerEvent(api.s, p)) { api.draw(p); return; }
+                if (api.planning) return;
+                const top = api.s.players[p].deck.slice(0, 2);
+                api.ask({ player: p, kind: 'card', purpose: 'bottom', auto: false, options: top, inspected: top,
+                    prompt: 'Which inspected card goes to your deck bottom?', source: { type: 'tactic', id: 'generic-recorded-choice' } });
+            },
+            choose(api, p, cid, req) {
+                const deck = api.s.players[p].deck, at = deck.indexOf(cid);
+                if (at < 0 || at >= req.inspected.length) return;
+                forgetInspected(api, p, req.inspected);
+                deck.splice(at, 1); deck.push(cid);
+                api.emit({ t: 'tactic', player: p, privateTo: p, text: 'Recorded Choice: put ' + api.cardName(cid) + ' on the deck bottom.',
+                    publicText: 'Recorded Choice: put one inspected personal card on the deck bottom.' });
+            },
+        },
+    });
     Rift.data.tactics = tactics;
     tactics['generic-quiet-reset'] = {
         id: 'generic-quiet-reset', name: 'Quiet Reset', cost: 3, rarity: 'uncommon', release: 'plot-1', packEligible: false,

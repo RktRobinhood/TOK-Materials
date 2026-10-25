@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eighteen plot-1 story cards, 129 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, eighteen plot-1 story cards, 121 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -2363,14 +2363,14 @@
       "rarity": "common",
       "cost": 2,
       "target": "none",
-      "text": "Inspect the top 3 personal-deck cards; draw one and bottom the others in their original relative order.",
+      "text": "Privately inspect up to your top 3 personal cards. Draw one chosen actual instance under the combined hand cap, then bottom every undrawn inspected card in its original relative order. Keep the rest of the deck in order; no copies or burns. Empty source does nothing.",
       "tags": [
         "inspection",
         "draw"
       ],
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Pressure the selection turn.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-9 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2378,7 +2378,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-9: pack pool"
+      },
+      "runtimeRelease": "expansion-9",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Inspect the top 3 personal-deck cards; draw one and bottom the others in their original relative order.",
+        "previousTarget": "none",
+        "rationale": "Pin exact instances, owner-only selection, short source, normal caps and order; hypothetical draws use opaque cards."
       }
     },
     {
@@ -2581,13 +2588,13 @@
       "rarity": "common",
       "cost": 1,
       "target": "friendly-creature",
-      "text": "Give 2 attack until this turn ends.",
+      "text": "Give a friendly creature +2 attack until this turn ends. Ordinary temporary modifiers apply; health, damage, lasting Changes and later boosts remain.",
       "tags": [
         "buff"
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Block with Guard or prevent the hit.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-9 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2595,7 +2602,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-9: pack pool"
+      },
+      "runtimeRelease": "expansion-9",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Give 2 attack until this turn ends.",
+        "previousTarget": "friendly-creature",
+        "rationale": "Use the ordinary this-turn attack modifier without new timing or readying rules."
       }
     },
     {
@@ -3084,14 +3098,14 @@
       "rarity": "uncommon",
       "cost": 3,
       "target": "none",
-      "text": "Inspect the top 4 personal-deck cards; draw one creature and one spell if present, then bottom the others in original order.",
+      "text": "Privately inspect up to your top 4 personal cards. Choose and draw one creature, then one spell if present and there is combined hand room. Never choose two of one type. Bottom all undrawn inspected cards in their original relative order; preserve the uninspected rest. Choices use serialized owner-only pending state.",
       "tags": [
         "inspection",
         "draw"
       ],
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Pressure the expensive selection turn.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-9 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -3099,7 +3113,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-9: pack pool"
+      },
+      "runtimeRelease": "expansion-9",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Inspect the top 4 personal-deck cards; draw one creature and one spell if present, then bottom the others in original order.",
+        "previousTarget": "none",
+        "rationale": "Pin creature-first selection/cap priority and retain undrawn cards rather than burn them; prospective AI assumes only one opaque draw because a second type is unknown."
       }
     },
     {
@@ -3169,14 +3190,14 @@
       "rarity": "common",
       "cost": 1,
       "target": "enemy-creature",
-      "text": "Reduce its attack by 1 until its controller's next turn ends, minimum 0. Draw 1 personal-deck card.",
+      "text": "A legal enemy creature gets -1 attack until the end of its controller's next turn, minimum 0; then draw 1 personal card normally. If current displayed attack is already 0, skip the penalty but still draw. Later boosts are not held down by a latent negative row at 0.",
       "tags": [
         "control",
         "draw"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Use another attacker.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-9 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -3184,7 +3205,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-9: pack pool"
+      },
+      "runtimeRelease": "expansion-9",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Reduce its attack by 1 until its controller's next turn ends, minimum 0. Draw 1 personal-deck card.",
+        "previousTarget": "enemy-creature",
+        "rationale": "Match established minimum-zero penalty semantics and normal draw/expiry/Elusive rules."
       }
     },
     {
@@ -3296,15 +3324,15 @@
       "kind": "spell",
       "rarity": "common",
       "cost": 2,
-      "target": "active-attacks-axiom",
-      "text": "Discard the active attack-limit rule and restore that category to basics. Draw 1 personal-deck card.",
+      "target": "none",
+      "text": "Discard the changed Attacks-category rule and its numeric record, restoring that category to basics; then draw 1 personal card normally. Other categories, shared order, reserved Fate and player events remain. No changed Attacks rule means no useful cast. This is a spell, not an Axiom play.",
       "tags": [
         "axiom",
         "draw"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Hold another attack-limit rule.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-9 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -3312,7 +3340,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-9: pack pool"
+      },
+      "runtimeRelease": "expansion-9",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Discard the active attack-limit rule and restore that category to basics. Draw 1 personal-deck card.",
+        "previousTarget": "active-attacks-axiom",
+        "rationale": "Use existing clearCategory semantics and pin the exact category rather than a new reset or nested Axiom play."
       }
     },
     {
@@ -3477,13 +3512,13 @@
       "rarity": "common",
       "cost": 1,
       "target": "none",
-      "text": "Summon one colourless 1/1 paper token if you have board space.",
+      "text": "Summon one existing colourless 1/1 Paper token if normal board capacity allows, including armed creature reservations. Ordinary sleep and token leave-play rules apply. No collection or deck copies are created; a full board cannot cast this.",
       "tags": [
         "token"
       ],
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Use small area damage.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-9 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109,
         "token-order"
@@ -3492,7 +3527,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-9: pack pool"
+      },
+      "runtimeRelease": "expansion-9",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Summon one colourless 1/1 paper token if you have board space.",
+        "previousTarget": "none",
+        "rationale": "Use existing summonToken and authoritative boardOccupancy; no new token order or collection policy."
       }
     },
     {
@@ -5186,14 +5228,14 @@
       "rarity": "common",
       "cost": 1,
       "target": "none",
-      "text": "Inspect the top unreserved shared Axiom. You may put it on the bottom; reserved events are untouched.",
+      "text": "Privately inspect only the top unreserved shared Axiom and choose leave or bottom. Hide both its identity and the keep/bottom decision from the opponent. Reserved Fate, personal decks, held Axioms and every other shared card remain. Empty shared source does nothing.",
       "tags": [
         "inspection",
         "axiom"
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Draw or reorder the rule before the next shared draw.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-9 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -5201,7 +5243,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-9: pack pool"
+      },
+      "runtimeRelease": "expansion-9",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Inspect the top unreserved shared Axiom. You may put it on the bottom; reserved events are untouched.",
+        "previousTarget": "none",
+        "rationale": "Pin owner-only branch events and exclude already reserved Fate; no draw or prospective hidden read."
       }
     },
     {
@@ -5570,7 +5619,7 @@
       "rarity": "uncommon",
       "cost": 2,
       "target": "none",
-      "text": "If you have a pending own event, draw 1 personal-deck card; otherwise inspect the top 2 personal cards and bottom one.",
+      "text": "If you currently control a pending player-created event, draw 1 personal card normally. Otherwise privately inspect up to your top 2 personal cards and bottom one, leaving all other order intact. Opposing, environmental, fired, skipped or cancelled events do not qualify. No event changes; an empty personal deck does nothing.",
       "tags": [
         "inspection",
         "draw",
@@ -5578,7 +5627,7 @@
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Pressure setup before the pending plan exists.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-9 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109,
         118,
@@ -5588,7 +5637,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-9: pack pool"
+      },
+      "runtimeRelease": "expansion-9",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "If you have a pending own event, draw 1 personal-deck card; otherwise inspect the top 2 personal cards and bottom one.",
+        "previousTarget": "none",
+        "rationale": "Pin pending-state scope and private selection. Mark the bottoming purpose so AI gives up the least valuable inspected option without reading uninspected cards."
       }
     },
     {

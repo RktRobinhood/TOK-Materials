@@ -680,7 +680,7 @@
         const opts = req.options;
         if (req.kind === 'card') {
             // Recovery takes the best card; a private hand cycle instead gives up the least valuable.
-            const bottom = req.source && req.source.type === 'tactic' && req.source.id === 'generic-balanced-exchange';
+            const bottom = req.purpose === 'bottom' || (req.source && req.source.type === 'tactic' && req.source.id === 'generic-balanced-exchange');
             return opts.slice().sort((x, y) => (bottom ? -1 : 1) * (cardWorth(s, y, me) - cardWorth(s, x, me)))[0];
         }
         if (req.kind === 'colour') {

@@ -204,3 +204,35 @@ export function reviewExpansion8(cards) {
         if (['language-ask-again','perception-strip-the-illusion'].includes(c.id)) c.target='enemy-creature-seen';
     }
 }
+
+// #129 expansion-9: private card selection and basic utility; six Common, two Uncommon.
+export const expansion9Batch = ['reason-work-it-out','emotion-quick-courage','perception-follow-the-clue','language-a-better-label',
+    'language-change-the-subject','imagination-sketch-a-friend','generic-pocket-plan','generic-recorded-choice'];
+const clarifications9 = {
+    'reason-work-it-out': ['Privately inspect up to your top 3 personal cards. Draw one chosen actual instance under the combined hand cap, then bottom every undrawn inspected card in its original relative order. Keep the rest of the deck in order; no copies or burns. Empty source does nothing.',
+        'Pin exact instances, owner-only selection, short source, normal caps and order; hypothetical draws use opaque cards.'],
+    'emotion-quick-courage': ['Give a friendly creature +2 attack until this turn ends. Ordinary temporary modifiers apply; health, damage, lasting Changes and later boosts remain.',
+        'Use the ordinary this-turn attack modifier without new timing or readying rules.'],
+    'perception-follow-the-clue': ['Privately inspect up to your top 4 personal cards. Choose and draw one creature, then one spell if present and there is combined hand room. Never choose two of one type. Bottom all undrawn inspected cards in their original relative order; preserve the uninspected rest. Choices use serialized owner-only pending state.',
+        'Pin creature-first selection/cap priority and retain undrawn cards rather than burn them; prospective AI assumes only one opaque draw because a second type is unknown.'],
+    'language-a-better-label': ['A legal enemy creature gets -1 attack until the end of its controller\'s next turn, minimum 0; then draw 1 personal card normally. If current displayed attack is already 0, skip the penalty but still draw. Later boosts are not held down by a latent negative row at 0.',
+        'Match established minimum-zero penalty semantics and normal draw/expiry/Elusive rules.'],
+    'language-change-the-subject': ['Discard the changed Attacks-category rule and its numeric record, restoring that category to basics; then draw 1 personal card normally. Other categories, shared order, reserved Fate and player events remain. No changed Attacks rule means no useful cast. This is a spell, not an Axiom play.',
+        'Use existing clearCategory semantics and pin the exact category rather than a new reset or nested Axiom play.'],
+    'imagination-sketch-a-friend': ['Summon one existing colourless 1/1 Paper token if normal board capacity allows, including armed creature reservations. Ordinary sleep and token leave-play rules apply. No collection or deck copies are created; a full board cannot cast this.',
+        'Use existing summonToken and authoritative boardOccupancy; no new token order or collection policy.'],
+    'generic-pocket-plan': ['Privately inspect only the top unreserved shared Axiom and choose leave or bottom. Hide both its identity and the keep/bottom decision from the opponent. Reserved Fate, personal decks, held Axioms and every other shared card remain. Empty shared source does nothing.',
+        'Pin owner-only branch events and exclude already reserved Fate; no draw or prospective hidden read.'],
+    'generic-recorded-choice': ['If you currently control a pending player-created event, draw 1 personal card normally. Otherwise privately inspect up to your top 2 personal cards and bottom one, leaving all other order intact. Opposing, environmental, fired, skipped or cancelled events do not qualify. No event changes; an empty personal deck does nothing.',
+        'Pin pending-state scope and private selection. Mark the bottoming purpose so AI gives up the least valuable inspected option without reading uninspected cards.'],
+};
+export function reviewExpansion9(cards) {
+    for (const c of cards) if (expansion9Batch.includes(c.id)) {
+        c.runtimeRelease='expansion-9';
+        c.status='Released in expansion-9 (#129); bounded engineering validation, not classroom balance certification';
+        c.acquisition.releaseStatus='Released expansion-9: pack pool';
+        c.releaseRevision={issue:129,previousText:c.text,previousTarget:c.target,rationale:clarifications9[c.id][1]};
+        c.text=clarifications9[c.id][0];
+        if(c.id==='language-change-the-subject')c.target='none';
+    }
+}
