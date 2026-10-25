@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eighteen plot-1 story cards, 153 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eighteen plot-1 story cards, 145 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -2606,14 +2606,14 @@
       "rarity": "common",
       "cost": 1,
       "target": "none",
-      "text": "Your hero loses 1 heart. Draw 1 personal-deck card.",
+      "text": "Your hero loses 1 heart, then draw 1 personal card under normal hand/deck caps. Heart loss is a spell effect; finish printed effects before ordinary cleanup and Win checks.",
       "tags": [
         "self-damage",
         "draw"
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Change Win or pressure remaining hearts.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-6 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2621,7 +2621,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-6: pack pool"
+      },
+      "runtimeRelease": "expansion-6",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Your hero loses 1 heart. Draw 1 personal-deck card.",
+        "rationale": "Pin existing damageHero/afterMove semantics rather than introduce a separate casting-heart fee."
       }
     },
     {
@@ -2720,14 +2726,14 @@
       "rarity": "uncommon",
       "cost": 2,
       "target": "friendly-creature",
-      "text": "Your hero loses 2 hearts; give the target 2 maximum health and heal it by 2.",
+      "text": "Your hero loses 2 hearts; give a friendly creature 2 maximum health and heal it by 2 using normal stat/heal semantics. Finish both printed effects before ordinary cleanup/Win checks.",
       "tags": [
         "self-damage",
         "buff"
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Silence or remove the supported target.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-6 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2735,7 +2741,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-6: pack pool"
+      },
+      "runtimeRelease": "expansion-6",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Your hero loses 2 hearts; give the target 2 maximum health and heal it by 2.",
+        "rationale": "Heart loss is an effect, not an additional casting fee; preserve the authoritative maximum-health and healing behavior."
       }
     },
     {
@@ -2806,14 +2818,14 @@
       "rarity": "rare",
       "cost": 4,
       "target": "enemy-creature",
-      "text": "Deal 5 damage to it. Your hero loses 2 hearts.",
+      "text": "Deal 5 damage to a legal enemy creature, then your hero loses 2 hearts. Normal Shield/Elusive apply. Finish printed effects and ordinary defeated Last Words before the existing Win check.",
       "tags": [
         "self-damage",
         "damage"
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Exploit the caster's low hearts.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-6 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2821,7 +2833,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-6: pack pool"
+      },
+      "runtimeRelease": "expansion-6",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Deal 5 damage to it. Your hero loses 2 hearts.",
+        "rationale": "Pin prevention, ordinary cleanup order and self-heart-loss effect semantics without a new Win policy."
       }
     },
     {
@@ -2885,14 +2903,14 @@
       "rarity": "common",
       "cost": 1,
       "target": "none",
-      "text": "See the count and colours, not identities, of enemy hand creatures. Draw 1 personal-deck card.",
+      "text": "Privately see only the count and current colours of enemy personal-hand creatures, including a colourless count. Do not reveal identities or held Axioms. Then draw 1 personal card.",
       "tags": [
         "inspection",
         "draw"
       ],
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Change the hand before playing.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-6 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -2900,7 +2918,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-6: pack pool"
+      },
+      "runtimeRelease": "expansion-6",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "See the count and colours, not identities, of enemy hand creatures. Draw 1 personal-deck card.",
+        "rationale": "Pin the private viewer, creature-only aggregate and source zones; previews/planning do not use future hidden inspections."
       }
     },
     {
@@ -3151,13 +3175,13 @@
       "rarity": "common",
       "cost": 1,
       "target": "friendly-creature",
-      "text": "Remove one temporary attack debuff; if none exists, heal the target by 1.",
+      "text": "Remove the oldest applied temporary negative attack component from a friendly creature. Preserve its health/expiry, other penalties and lasting changes. If no such component exists, heal the target by 1.",
       "tags": [
         "healing"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Use permanent damage or silence.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-6 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -3165,7 +3189,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-6: pack pool"
+      },
+      "runtimeRelease": "expansion-6",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Remove one temporary attack debuff; if none exists, heal the target by 1.",
+        "rationale": "Share the reviewed one-component penalty semantics with Careful Wording; skip a certain healthy/no-penalty no-op."
       }
     },
     {
@@ -3331,14 +3361,14 @@
       "rarity": "uncommon",
       "cost": 3,
       "target": "enemy-creature",
-      "text": "Silence it. Your hero loses 1 heart.",
+      "text": "Silence a legal enemy creature using ordinary Silence rules, then your hero loses 1 heart. Finish printed effects before ordinary cleanup/Win checks.",
       "tags": [
         "control",
         "self-damage"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Exploit low hearts or reverse Win.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-6 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -3346,7 +3376,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-6: pack pool"
+      },
+      "runtimeRelease": "expansion-6",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Silence it. Your hero loses 1 heart.",
+        "rationale": "Reuse existing Silence/Elusive rules and ordinary deferred heart-loss cleanup."
       }
     },
     {
@@ -3810,13 +3846,13 @@
       "rarity": "uncommon",
       "cost": 3,
       "target": "own-discard-spell",
-      "text": "Return a spell other than this card to hand; its cost stays unchanged.",
+      "text": "Return another actual spell instance from your discard to your hand under the normal hand cap, with its future cost unchanged. Exclude the exact casting instance; a different copy of Return to the Plan is eligible. Every later cast pays its normal energy and shared activation use.",
       "tags": [
         "recursion"
       ],
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Pressure the recovery turn.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-6 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -3824,7 +3860,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-6: pack pool"
+      },
+      "runtimeRelease": "expansion-6",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Return a spell other than this card to hand; its cost stays unchanged.",
+        "rationale": "Thread exact casting CID into the hook; do not exclude all copies by definition ID or infer the caster from discard ordering."
       }
     },
     {
@@ -5013,14 +5055,14 @@
       "rarity": "common",
       "cost": 2,
       "target": "none",
-      "text": "Draw 1 personal-deck card; inspect the next without changing it.",
+      "text": "Draw 1 personal card normally, then privately inspect the next personal-deck card without moving it. With no next card, no inspection is needed.",
       "tags": [
         "draw",
         "inspection"
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Pressure the slow draw turn.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-6 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109
       ],
@@ -5028,7 +5070,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-6: pack pool"
+      },
+      "runtimeRelease": "expansion-6",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Draw 1 personal-deck card; inspect the next without changing it.",
+        "rationale": "Pin draw-before-look, empty/one-card sources and owner-only inspection."
       }
     },
     {

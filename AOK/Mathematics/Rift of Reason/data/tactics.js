@@ -6,7 +6,7 @@
  *   cost                energy to play
  *   target?             target spec (see js/battle/abilities.js); the play needs a valid target
  *   filter?(s, cid, H)  narrows the targets
- *   run(api, p, target) resolve the effect for player p
+ *   run(api, p, target, cid) resolve the effect for player p; cid is the actual casting instance
  *   usable?(s, p, H)    false → not offered, because it would certainly do nothing (checked while the
  *                       card is still in hand: it leaves the hand before it resolves)
  *   choose?(api, p, choice, req)   answer to api.ask(...)
@@ -827,6 +827,15 @@
     function shapeTargets(s, p, friend, H) {
         return proofTargets(s, p, H).filter(cid => Math.min(5, H.attack(s, cid)) !== H.attack(s, friend));
     }
+    function temporaryAttackPenalty(c) {
+        return c.buffs.findIndex(b => b.attack < 0 && (b.temp || b.fate || b.untilTurn != null || b.untilStart != null));
+    }
+    function clearAttackPenalty(c) {
+        const i = temporaryAttackPenalty(c);
+        // Keep a combined modifier's health and lifetime; remove only its negative attack component.
+        if (i >= 0) c.buffs = c.buffs.flatMap((b, n) => n !== i ? [b] : b.health ? [Object.assign({}, b, { attack: 0 })] : []);
+        return i >= 0;
+    }
     Object.assign(tactics, {
         'imagination-borrow-the-shape': {
             name: 'Borrow the Shape', cost: 3, colour: 'imagination', rarity: 'uncommon', release: 'expansion-5', packEligible: true,
@@ -886,11 +895,9 @@
             art: 'art/spell-motif-language', target: 'friendly-creature',
             text: 'Remove its oldest temporary attack penalty. Then give +1 attack until your next turn starts. Lasting changes remain.',
             run(api, p, target) {
-                const c = api.s.cards[target], i = c.buffs.findIndex(b => b.attack < 0 && (b.temp || b.fate || b.untilTurn != null || b.untilStart != null));
-                // A combined modifier may still carry health/expiry; remove its attack component only.
-                if (i >= 0) c.buffs = c.buffs.flatMap((b, n) => n !== i ? [b] : b.health ? [Object.assign({}, b, { attack: 0 })] : []);
+                const removed = clearAttackPenalty(api.s.cards[target]);
                 api.buffUntilStart(target, 1, 0, 'Careful Wording', p);
-                api.emit({ t: 'tactic', player: p, text: 'Careful Wording: ' + (i >= 0 ? 'remove one temporary attack penalty; ' : '') + '+1 attack until your next turn starts.' });
+                api.emit({ t: 'tactic', player: p, text: 'Careful Wording: ' + (removed ? 'remove one temporary attack penalty; ' : '') + '+1 attack until your next turn starts.' });
             },
         },
         'memory-clear-reminder': {
@@ -939,6 +946,90 @@
                 if (equal) api.keywordUntilStart(target, 'guard', 'gain', p, 'Small Lemma');
                 api.emit({ t: 'tactic', player: p, text: 'Small Lemma: +1 maximum health and heal 1' + (equal ? '; Guard until your next turn starts.' : '.') });
             },
+        },
+    });
+    // #129 expansion-6: utility/counterplay; own heart loss is an effect, with ordinary end-of-spell cleanup.
+    Object.assign(tactics, {
+        'emotion-honest-hurt': {
+            name: 'Honest Hurt', cost: 1, colour: 'emotion', rarity: 'common', release: 'expansion-6', packEligible: true,
+            art: 'art/spell-motif-emotion', text: 'Your hero loses 1 heart. Draw 1 personal card.',
+            run(api, p) { api.damage('h' + p, 1, null); api.draw(p); },
+        },
+        'memory-return-to-the-plan': {
+            name: 'Return to the Plan', cost: 3, colour: 'memory', rarity: 'uncommon', release: 'expansion-6', packEligible: true,
+            art: 'art/spell-motif-memory', text: 'Return another spell from your discard to your hand. Its cost stays unchanged.',
+            usable: (s, p) => s.players[p].discard.some(cid => s.cards[cid].kind === 'tactic'),
+            run(api, p, target, castCid) {
+                const options = api.s.players[p].discard.filter(cid => cid !== castCid && api.s.cards[cid].kind === 'tactic');
+                api.ask({ player: p, kind: 'card', options, castCid, prompt: 'Which other spell returns to your hand?',
+                    source: { type: 'tactic', id: 'memory-return-to-the-plan' } });
+            },
+            choose(api, p, cid, req) {
+                if (cid === req.castCid || !api.s.players[p].discard.includes(cid)) return;
+                if (api.fromDiscard(cid)) api.emit({ t: 'tactic', player: p, text: 'Return to the Plan: ' + api.cardName(cid) + ' returns to your hand at its normal cost.' });
+            },
+        },
+        'generic-quick-study': {
+            name: 'Quick Study', cost: 2, rarity: 'common', release: 'expansion-6', packEligible: true,
+            art: 'art/spell-motif-generic', text: 'Draw 1 personal card. Look privately at the next card, without moving it.',
+            usable: (s, p) => s.players[p].deck.length > 0,
+            run(api, p) {
+                api.draw(p);
+                if (api.planning) return;
+                const top = api.s.players[p].deck[0];
+                if (!top) return;
+                api.ask({ player: p, kind: 'option', auto: false, options: ['done'], labels: { done: 'Leave it on top' },
+                    prompt: 'Your next card is ' + api.cardName(top) + '.', source: { type: 'tactic', id: 'generic-quick-study' } });
+            },
+            choose(api, p) { api.emit({ t: 'tactic', player: p, text: 'Quick Study: look at the next personal card and leave it there.' }); },
+        },
+        'perception-read-the-room': {
+            name: 'Read the Room', cost: 1, colour: 'perception', rarity: 'common', release: 'expansion-6', packEligible: true,
+            art: 'art/spell-motif-perception', text: 'See only the count and colours of enemy hand creatures. Then draw 1 personal card.',
+            usable: (s, p) => s.players[p].deck.length > 0 || s.players[1 - p].hand.length > 0,
+            run(api, p) {
+                if (api.planning) { api.draw(p); return; }
+                const creatures = api.s.players[1 - p].hand.filter(cid => api.s.cards[cid].kind === 'creature'), counts = {};
+                creatures.forEach(cid => { const colour = api.H.colourOf(api.s, api.s.cards[cid]) || 'colourless'; counts[colour] = (counts[colour] || 0) + 1; });
+                const summary = Object.keys(counts).sort().map(colour => (Rift.COLOURS[colour] || { name: 'Colourless' }).name + ': ' + counts[colour]).join('; ');
+                api.ask({ player: p, kind: 'option', auto: false, options: ['done'], labels: { done: 'Done — draw a personal card' },
+                    prompt: 'Their hand has ' + creatures.length + (creatures.length === 1 ? ' creature' : ' creatures') + (summary ? ': ' + summary : '') + '.',
+                    source: { type: 'tactic', id: 'perception-read-the-room' } });
+            },
+            choose(api, p) {
+                api.emit({ t: 'tactic', player: p, text: 'Read the Room: inspect hand-creature counts and colours, then draw 1 personal card.' });
+                api.draw(p);
+            },
+        },
+        'language-plain-words': {
+            name: 'Plain Words', cost: 1, colour: 'language', rarity: 'common', release: 'expansion-6', packEligible: true,
+            art: 'art/spell-motif-language', target: 'friendly-creature',
+            text: 'Remove one temporary attack penalty from a friend. If it has none, heal it by 1. Lasting changes remain.',
+            filter: (s, cid) => temporaryAttackPenalty(s.cards[cid]) >= 0 || s.cards[cid].damage > 0,
+            run(api, p, target) {
+                const removed = clearAttackPenalty(api.s.cards[target]);
+                if (!removed) api.heal(target, 1);
+                api.emit({ t: 'tactic', player: p, text: 'Plain Words: ' + (removed ? 'remove one temporary attack penalty.' : 'heal 1.') });
+            },
+        },
+        'emotion-cost-of-courage': {
+            name: 'Cost of Courage', cost: 2, colour: 'emotion', rarity: 'uncommon', release: 'expansion-6', packEligible: true,
+            art: 'art/spell-motif-emotion', target: 'friendly-creature',
+            text: 'Your hero loses 2 hearts. Give a friend +2 maximum health and heal it by 2.',
+            run(api, p, target) { api.damage('h' + p, 2, null); api.buff(target, 0, 2, 'Cost of Courage'); api.heal(target, 2); },
+        },
+        'language-read-the-fine-print': {
+            name: 'Read the Fine Print', cost: 3, colour: 'language', rarity: 'uncommon', release: 'expansion-6', packEligible: true,
+            art: 'art/spell-motif-language', target: 'enemy-creature', text: 'Silence an enemy creature. Your hero loses 1 heart.',
+            run(api, p, target) {
+                api.silence(target); api.damage('h' + p, 1, null);
+                api.emit({ t: 'tactic', player: p, text: 'Read the Fine Print: ' + api.name(target) + ' loses its abilities, keywords and boosts.' });
+            },
+        },
+        'emotion-outburst': {
+            name: 'Outburst', cost: 4, colour: 'emotion', rarity: 'rare', release: 'expansion-6', packEligible: true,
+            art: 'art/spell-motif-emotion', target: 'enemy-creature', text: 'Deal 5 damage to an enemy creature. Your hero loses 2 hearts.',
+            run(api, p, target) { api.damage(target, 5, null); api.damage('h' + p, 2, null); },
         },
     });
     Rift.data.tactics = tactics;

@@ -1,0 +1,1187 @@
+{
+  "scope": "Further selected-row exploration after the 64-seed Quick Study ablation left most of the Perception/Language shift unexplained. Same decks, seeds and current Competent AI; Fine Print payoff off, printed costs/targets/uses and its AI hint retained. Attribution is not additive and is not a global balance claim.",
+  "colour": "perception",
+  "edge": "weak",
+  "partner": "language",
+  "mode": "without-fine-print",
+  "selectedHook": "language-read-the-fine-print",
+  "mono": {
+    "creatures": [
+      "perception-cue-cricket",
+      "perception-cue-cricket",
+      "kardashiant",
+      "kardashiant",
+      "lens-lizard",
+      "lens-lizard",
+      "attenbirdough",
+      "attenbirdough"
+    ],
+    "tactics": [
+      "counterexample",
+      "counterexample",
+      "pep-talk",
+      "pep-talk",
+      "stand-firm",
+      "stand-firm",
+      "perception-read-the-room",
+      "perception-read-the-room",
+      "generic-quick-study",
+      "generic-quick-study",
+      "perception-practical-observation",
+      "perception-practical-observation"
+    ],
+    "axioms": [
+      "flux-plays-plus-1",
+      "flux-plays-minus-1",
+      "flux-draw-plus-1",
+      "flux-draw-minus-1",
+      "flux-growth-plus-1",
+      "flux-cost-plus-1",
+      "flux-cost-minus-1",
+      "limited-memory",
+      "momentum",
+      "two-plays"
+    ]
+  },
+  "mixed": {
+    "creatures": [
+      "perception-cue-cricket",
+      "perception-cue-cricket",
+      "kardashiant",
+      "kardashiant",
+      "language-debate-dingo",
+      "language-debate-dingo",
+      "language-question-quail",
+      "language-question-quail"
+    ],
+    "tactics": [
+      "counterexample",
+      "counterexample",
+      "pep-talk",
+      "pep-talk",
+      "stand-firm",
+      "stand-firm",
+      "perception-read-the-room",
+      "perception-read-the-room",
+      "generic-quick-study",
+      "generic-quick-study",
+      "language-read-the-fine-print",
+      "language-read-the-fine-print"
+    ],
+    "axioms": [
+      "flux-plays-plus-1",
+      "flux-plays-minus-1",
+      "flux-draw-plus-1",
+      "flux-draw-minus-1",
+      "flux-growth-plus-1",
+      "flux-cost-plus-1",
+      "flux-cost-minus-1",
+      "limited-memory",
+      "momentum",
+      "two-plays"
+    ]
+  },
+  "games": 128,
+  "monoWins": 32,
+  "draws": 0,
+  "limits": 0,
+  "monoHalfDrawShare": 0.25,
+  "trials": [
+    {
+      "seed": 0,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 10
+    },
+    {
+      "seed": 0,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 13
+    },
+    {
+      "seed": 1,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 11
+    },
+    {
+      "seed": 1,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 11
+    },
+    {
+      "seed": 2,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 27
+    },
+    {
+      "seed": 2,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 23
+    },
+    {
+      "seed": 3,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 21
+    },
+    {
+      "seed": 3,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 27
+    },
+    {
+      "seed": 4,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 27
+    },
+    {
+      "seed": 4,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 23
+    },
+    {
+      "seed": 5,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 19
+    },
+    {
+      "seed": 5,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 23
+    },
+    {
+      "seed": 6,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 28
+    },
+    {
+      "seed": 6,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 16
+    },
+    {
+      "seed": 7,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 20
+    },
+    {
+      "seed": 7,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 20
+    },
+    {
+      "seed": 8,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 14
+    },
+    {
+      "seed": 8,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 19
+    },
+    {
+      "seed": 9,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 15
+    },
+    {
+      "seed": 9,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 24
+    },
+    {
+      "seed": 10,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 22
+    },
+    {
+      "seed": 10,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 20
+    },
+    {
+      "seed": 11,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 26
+    },
+    {
+      "seed": 11,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 21
+    },
+    {
+      "seed": 12,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 13
+    },
+    {
+      "seed": 12,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 9
+    },
+    {
+      "seed": 13,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 17
+    },
+    {
+      "seed": 13,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 17
+    },
+    {
+      "seed": 14,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 13
+    },
+    {
+      "seed": 14,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 26
+    },
+    {
+      "seed": 15,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 28
+    },
+    {
+      "seed": 15,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 26
+    },
+    {
+      "seed": 16,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 23
+    },
+    {
+      "seed": 16,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 30
+    },
+    {
+      "seed": 17,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 32
+    },
+    {
+      "seed": 17,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 27
+    },
+    {
+      "seed": 18,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 29
+    },
+    {
+      "seed": 18,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 22
+    },
+    {
+      "seed": 19,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 25
+    },
+    {
+      "seed": 19,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 26
+    },
+    {
+      "seed": 20,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 14
+    },
+    {
+      "seed": 20,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 35
+    },
+    {
+      "seed": 21,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 32
+    },
+    {
+      "seed": 21,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 20
+    },
+    {
+      "seed": 22,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 20
+    },
+    {
+      "seed": 22,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 27
+    },
+    {
+      "seed": 23,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 21
+    },
+    {
+      "seed": 23,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 14
+    },
+    {
+      "seed": 24,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 24
+    },
+    {
+      "seed": 24,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 16
+    },
+    {
+      "seed": 25,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 20
+    },
+    {
+      "seed": 25,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 14
+    },
+    {
+      "seed": 26,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 18
+    },
+    {
+      "seed": 26,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 20
+    },
+    {
+      "seed": 27,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 13
+    },
+    {
+      "seed": 27,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 18
+    },
+    {
+      "seed": 28,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 27
+    },
+    {
+      "seed": 28,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 20
+    },
+    {
+      "seed": 29,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 19
+    },
+    {
+      "seed": 29,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 21
+    },
+    {
+      "seed": 30,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 15
+    },
+    {
+      "seed": 30,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 25
+    },
+    {
+      "seed": 31,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 31
+    },
+    {
+      "seed": 31,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 10
+    },
+    {
+      "seed": 32,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 21
+    },
+    {
+      "seed": 32,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 21
+    },
+    {
+      "seed": 33,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 28
+    },
+    {
+      "seed": 33,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 20
+    },
+    {
+      "seed": 34,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 12
+    },
+    {
+      "seed": 34,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 25
+    },
+    {
+      "seed": 35,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 13
+    },
+    {
+      "seed": 35,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 19
+    },
+    {
+      "seed": 36,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 23
+    },
+    {
+      "seed": 36,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 31
+    },
+    {
+      "seed": 37,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 16
+    },
+    {
+      "seed": 37,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 20
+    },
+    {
+      "seed": 38,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 13
+    },
+    {
+      "seed": 38,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 23
+    },
+    {
+      "seed": 39,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 17
+    },
+    {
+      "seed": 39,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 23
+    },
+    {
+      "seed": 40,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 23
+    },
+    {
+      "seed": 40,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 24
+    },
+    {
+      "seed": 41,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 13
+    },
+    {
+      "seed": 41,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 15
+    },
+    {
+      "seed": 42,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 16
+    },
+    {
+      "seed": 42,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 14
+    },
+    {
+      "seed": 43,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 15
+    },
+    {
+      "seed": 43,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 18
+    },
+    {
+      "seed": 44,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 12
+    },
+    {
+      "seed": 44,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 13
+    },
+    {
+      "seed": 45,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 19
+    },
+    {
+      "seed": 45,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 16
+    },
+    {
+      "seed": 46,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 20
+    },
+    {
+      "seed": 46,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 20
+    },
+    {
+      "seed": 47,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 12
+    },
+    {
+      "seed": 47,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 14
+    },
+    {
+      "seed": 48,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 28
+    },
+    {
+      "seed": 48,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 24
+    },
+    {
+      "seed": 49,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 15
+    },
+    {
+      "seed": 49,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 23
+    },
+    {
+      "seed": 50,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 24
+    },
+    {
+      "seed": 50,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 17
+    },
+    {
+      "seed": 51,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 23
+    },
+    {
+      "seed": 51,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 25
+    },
+    {
+      "seed": 52,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 22
+    },
+    {
+      "seed": 52,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 29
+    },
+    {
+      "seed": 53,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 11
+    },
+    {
+      "seed": 53,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 25
+    },
+    {
+      "seed": 54,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 20
+    },
+    {
+      "seed": 54,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 25
+    },
+    {
+      "seed": 55,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 13
+    },
+    {
+      "seed": 55,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 20
+    },
+    {
+      "seed": 56,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 13
+    },
+    {
+      "seed": 56,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 9
+    },
+    {
+      "seed": 57,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 26
+    },
+    {
+      "seed": 57,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 20
+    },
+    {
+      "seed": 58,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 24
+    },
+    {
+      "seed": 58,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 12
+    },
+    {
+      "seed": 59,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 29
+    },
+    {
+      "seed": 59,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "cannot-act",
+      "turn": 25
+    },
+    {
+      "seed": 60,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 28
+    },
+    {
+      "seed": 60,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 19
+    },
+    {
+      "seed": 61,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 21
+    },
+    {
+      "seed": 61,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 12
+    },
+    {
+      "seed": 62,
+      "monoSeat": 0,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 14
+    },
+    {
+      "seed": 62,
+      "monoSeat": 1,
+      "first": 0,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 23
+    },
+    {
+      "seed": 63,
+      "monoSeat": 0,
+      "first": 1,
+      "winner": "mono",
+      "endReason": "hearts",
+      "turn": 12
+    },
+    {
+      "seed": 63,
+      "monoSeat": 1,
+      "first": 1,
+      "winner": "mixed",
+      "endReason": "hearts",
+      "turn": 18
+    }
+  ],
+  "paired": {
+    "comparison": "production minus without-fine-print",
+    "seeds": 64,
+    "delta": -0.109375,
+    "seedClusterSE": 0.03240666925652168,
+    "seedDeltas": [
+      0,
+      -0.5,
+      0,
+      0,
+      -0.5,
+      0,
+      -0.5,
+      0,
+      0,
+      0,
+      -0.5,
+      -0.5,
+      -0.5,
+      0,
+      0,
+      0,
+      -0.5,
+      -0.5,
+      0,
+      0,
+      0.5,
+      0,
+      0.5,
+      0,
+      0,
+      0,
+      0,
+      0,
+      -0.5,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      -0.5,
+      -0.5,
+      -0.5,
+      0,
+      -0.5,
+      0,
+      -0.5,
+      -0.5,
+      0,
+      0,
+      0,
+      0,
+      -0.5,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0.5,
+      0,
+      0,
+      0,
+      0,
+      0,
+      -0.5
+    ]
+  }
+}

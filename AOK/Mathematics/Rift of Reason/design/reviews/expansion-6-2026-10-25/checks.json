@@ -1,0 +1,20 @@
+{
+  "baseCommit": "900a74b01499dd0c15d87129f78417e480c53a5d",
+  "command": "node --max-old-space-size=2048 --test --test-concurrency=2 <git ls-files tools/test/*.test.mjs> tools/test/expansion-6.test.mjs",
+  "fullSummary": "ℹ tests 1563\r\nℹ suites 0\r\nℹ pass 1562\r\nℹ fail 0\r\nℹ cancelled 0\r\nℹ skipped 1\r\nℹ todo 0\r\nℹ duration_ms 427100.414\r\n",
+  "fullLogSHA256": "af5189721ad5299cf33e7a5293e70cdc2c14fec600bcd59654c66012851b6a5c",
+  "focusedTests": 13,
+  "firstRun": "One pack exhaustion test failed because its fixed40pack bound no longer filled the growing pool. Derived bound from slots/pack size, preserved caps/full/total assertions, added quoted-size assertion. Final complete rerun passed.",
+  "validators": [
+    "catalogue-source.mjs",
+    "audit-123.mjs",
+    "persona-source.mjs",
+    "validate-planning.mjs",
+    "validate-personas.mjs"
+  ],
+  "runtimeFiles": {
+    "data/tactics.js": "97a3864e3ac14b93a8ce994ad323819d9b79aacb476daf70a8a0476201cec872",
+    "js/battle/engine.js": "92a065a4d9af5226298bf9a1b1066316bfdf596d16cf3e299b737d26d0b00c64",
+    "js/battle/ai.js": "f844c5ba088a0713fb427c6b40e4e25b39f226caa73c9653c4c3e849842d40b4"
+  }
+}

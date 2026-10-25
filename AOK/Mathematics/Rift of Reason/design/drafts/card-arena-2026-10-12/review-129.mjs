@@ -110,3 +110,34 @@ export function reviewExpansion5(cards) {
         }
     }
 }
+
+// #129 expansion-6: independent utility/counterplay contracts; no further Reason reinforcement.
+export const expansion6Batch = ['emotion-honest-hurt','perception-read-the-room','language-plain-words','generic-quick-study',
+    'emotion-cost-of-courage','language-read-the-fine-print','memory-return-to-the-plan','emotion-outburst'];
+const clarifications6 = {
+    'emotion-honest-hurt': ['Your hero loses 1 heart, then draw 1 personal card under normal hand/deck caps. Heart loss is a spell effect; finish printed effects before ordinary cleanup and Win checks.',
+        'Pin existing damageHero/afterMove semantics rather than introduce a separate casting-heart fee.'],
+    'perception-read-the-room': ['Privately see only the count and current colours of enemy personal-hand creatures, including a colourless count. Do not reveal identities or held Axioms. Then draw 1 personal card.',
+        'Pin the private viewer, creature-only aggregate and source zones; previews/planning do not use future hidden inspections.'],
+    'language-plain-words': ['Remove the oldest applied temporary negative attack component from a friendly creature. Preserve its health/expiry, other penalties and lasting changes. If no such component exists, heal the target by 1.',
+        'Share the reviewed one-component penalty semantics with Careful Wording; skip a certain healthy/no-penalty no-op.'],
+    'generic-quick-study': ['Draw 1 personal card normally, then privately inspect the next personal-deck card without moving it. With no next card, no inspection is needed.',
+        'Pin draw-before-look, empty/one-card sources and owner-only inspection.'],
+    'emotion-cost-of-courage': ['Your hero loses 2 hearts; give a friendly creature 2 maximum health and heal it by 2 using normal stat/heal semantics. Finish both printed effects before ordinary cleanup/Win checks.',
+        'Heart loss is an effect, not an additional casting fee; preserve the authoritative maximum-health and healing behavior.'],
+    'language-read-the-fine-print': ['Silence a legal enemy creature using ordinary Silence rules, then your hero loses 1 heart. Finish printed effects before ordinary cleanup/Win checks.',
+        'Reuse existing Silence/Elusive rules and ordinary deferred heart-loss cleanup.'],
+    'memory-return-to-the-plan': ['Return another actual spell instance from your discard to your hand under the normal hand cap, with its future cost unchanged. Exclude the exact casting instance; a different copy of Return to the Plan is eligible. Every later cast pays its normal energy and shared activation use.',
+        'Thread exact casting CID into the hook; do not exclude all copies by definition ID or infer the caster from discard ordering.'],
+    'emotion-outburst': ['Deal 5 damage to a legal enemy creature, then your hero loses 2 hearts. Normal Shield/Elusive apply. Finish printed effects and ordinary defeated Last Words before the existing Win check.',
+        'Pin prevention, ordinary cleanup order and self-heart-loss effect semantics without a new Win policy.'],
+};
+export function reviewExpansion6(cards) {
+    for (const c of cards) if (expansion6Batch.includes(c.id)) {
+        c.runtimeRelease='expansion-6';
+        c.status='Released in expansion-6 (#129); bounded engineering validation, not classroom balance certification';
+        c.acquisition.releaseStatus='Released expansion-6: pack pool';
+        c.releaseRevision={issue:129,previousText:c.text,rationale:clarifications6[c.id][1]};
+        c.text=clarifications6[c.id][0];
+    }
+}

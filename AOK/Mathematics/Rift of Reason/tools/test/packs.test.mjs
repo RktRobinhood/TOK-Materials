@@ -94,9 +94,11 @@ test('each card is one owned copy; folders cap at four, legendary creatures at o
     // Legacy: six Tom Skinks from an old save stay six and are never drawn.
     for (let i = 0; i < 6; i++) s.creatures.push(S.makeCreature('reason-premise-pigeon', { uid: 'old-' + i }));
     let total = 0;
-    for (let number = 1; number <= 40; number++) {
+    const packsToFill = Math.ceil(P.quote(s).slots / P.CONFIG.size);
+    for (let number = 1; number <= packsToFill; number++) {
         const q = P.quote(s); if (!q.size) break;
         const before = J(s), cards = P.draw(s, number, q.size);
+        assert.equal(cards.length, q.size, 'every quoted slot yields one owned copy');
         total += cards.length;
         for (const c of cards) {
             assert.notEqual(c.id, 'reason-premise-pigeon');
@@ -335,7 +337,7 @@ test('mounted stall shows odds, confirms, reveals then lists the saved cards and
     let g = mount(); let R = g.Rift;
     const find = text => g.document.body.querySelectorAll('button').find(b => b.textContent === text);
     let shop = R.UI.shop();
-    assert.match(shop.node.textContent, /Next card: Common 67% \(25 kinds\), Uncommon 23\.7% \(10 kinds\), Rare 9\.3% \(4 kinds\)/);
+    assert.match(shop.node.textContent, /Next card: Common 67% \(29 kinds\), Uncommon 23\.7% \(13 kinds\), Rare 9\.3% \(5 kinds\)/);
     assert.match(shop.node.textContent, /Foil: 4% per card/);
     assert.match(shop.node.textContent, /Free packs saved: 1/);
     assert.ok(find('Open free pack · 5 cards'));

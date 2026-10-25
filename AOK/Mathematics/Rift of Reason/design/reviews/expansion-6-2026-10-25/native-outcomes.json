@@ -1,0 +1,5753 @@
+[
+  {
+    "key": "emotion-honest-hurt",
+    "mode": "desktop-normal",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 6,
+          "hand": 1,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-honest-hurt",
+          "target": null,
+          "text": "You play the tactic Honest Hurt.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 0,
+          "amount": 1,
+          "cid": null,
+          "text": "You lose 1 heart (6 left).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Paper Dragon.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": false,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "perception-read-the-room",
+    "mode": "desktop-normal",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 1,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 3,
+          "deck": 11,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Read the Room: inspect hand-creature counts and colours, then draw 1 personal card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Paper Dragon.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": false,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "language-plain-words",
+    "mode": "desktop-normal",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 15,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "language-plain-words",
+          "target": "p0c0",
+          "text": "You play the tactic Plain Words on your Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Plain Words: remove one temporary attack penalty.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": false,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "generic-quick-study",
+    "mode": "desktop-normal",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 1,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Quick Study: look at the next personal card and leave it there.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": false,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "emotion-cost-of-courage",
+    "mode": "desktop-normal",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 5,
+          "hand": 0,
+          "deck": 15,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 2,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": [
+                {
+                  "label": "Cost of Courage",
+                  "attack": 0,
+                  "health": 2,
+                  "temp": false
+                }
+              ]
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-cost-of-courage",
+          "target": "p0c0",
+          "text": "You play the tactic Cost of Courage on your Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 0,
+          "amount": 2,
+          "cid": null,
+          "text": "You lose 2 hearts (5 left).",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": false,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "language-read-the-fine-print",
+    "mode": "desktop-normal",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 6,
+          "hand": 0,
+          "deck": 15,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "language-read-the-fine-print",
+          "target": "p1c0",
+          "text": "You play the tactic Read the Fine Print on Rival's Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 0,
+          "amount": 1,
+          "cid": null,
+          "text": "You lose 1 heart (6 left).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Read the Fine Print: Rival's Mr. Beastie loses its abilities, keywords and boosts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": false,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "memory-return-to-the-plan",
+    "mode": "desktop-normal",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 1,
+          "deck": 13,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t2",
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Return to the Plan: Lemma returns to your hand at its normal cost.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": false,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "emotion-outburst",
+    "mode": "desktop-normal",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 5,
+          "hand": 0,
+          "deck": 15,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [],
+          "discard": [
+            "p1c0"
+          ]
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-outburst",
+          "target": "p1c0",
+          "text": "You play the tactic Outburst on Rival's Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 5,
+          "source": null,
+          "text": "Rival's Mr. Beastie takes 5 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 0,
+          "amount": 2,
+          "cid": null,
+          "text": "You lose 2 hearts (5 left).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Rival's Mr. Beastie is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": false,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "plain-heal",
+    "mode": "desktop-normal",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 15,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 2,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "language-plain-words",
+          "target": "p0c0",
+          "text": "You play the tactic Plain Words on your Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Plain Words: heal 1.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": false,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "quick-one-card",
+    "mode": "desktop-normal",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 1,
+          "deck": 0,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1",
+            "p0t2",
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "generic-quick-study",
+          "target": null,
+          "text": "You play the tactic Quick Study.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Paper Dragon.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": false,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "honest-reversed",
+    "mode": "desktop-normal",
+    "outcome": {
+      "winner": 0,
+      "endReason": "reverse-hearts",
+      "turn": 1,
+      "active": 0,
+      "phase": "over",
+      "players": [
+        {
+          "hearts": 0,
+          "hand": 1,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-honest-hurt",
+          "target": null,
+          "text": "You play the tactic Honest Hurt.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 0,
+          "amount": 1,
+          "cid": null,
+          "text": "You lose 1 heart (0 left).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Paper Dragon.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "end",
+          "winner": 0,
+          "reason": "reverse-hearts",
+          "text": "You win the battle!",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": false,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "emotion-honest-hurt",
+    "mode": "desktop-calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 6,
+          "hand": 1,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-honest-hurt",
+          "target": null,
+          "text": "You play the tactic Honest Hurt.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 0,
+          "amount": 1,
+          "cid": null,
+          "text": "You lose 1 heart (6 left).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Paper Dragon.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "perception-read-the-room",
+    "mode": "desktop-calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 1,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 3,
+          "deck": 11,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Read the Room: inspect hand-creature counts and colours, then draw 1 personal card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Paper Dragon.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "language-plain-words",
+    "mode": "desktop-calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 15,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "language-plain-words",
+          "target": "p0c0",
+          "text": "You play the tactic Plain Words on your Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Plain Words: remove one temporary attack penalty.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "generic-quick-study",
+    "mode": "desktop-calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 1,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Quick Study: look at the next personal card and leave it there.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "emotion-cost-of-courage",
+    "mode": "desktop-calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 5,
+          "hand": 0,
+          "deck": 15,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 2,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": [
+                {
+                  "label": "Cost of Courage",
+                  "attack": 0,
+                  "health": 2,
+                  "temp": false
+                }
+              ]
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-cost-of-courage",
+          "target": "p0c0",
+          "text": "You play the tactic Cost of Courage on your Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 0,
+          "amount": 2,
+          "cid": null,
+          "text": "You lose 2 hearts (5 left).",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "language-read-the-fine-print",
+    "mode": "desktop-calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 6,
+          "hand": 0,
+          "deck": 15,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "language-read-the-fine-print",
+          "target": "p1c0",
+          "text": "You play the tactic Read the Fine Print on Rival's Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 0,
+          "amount": 1,
+          "cid": null,
+          "text": "You lose 1 heart (6 left).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Read the Fine Print: Rival's Mr. Beastie loses its abilities, keywords and boosts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "memory-return-to-the-plan",
+    "mode": "desktop-calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 1,
+          "deck": 13,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t2",
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Return to the Plan: Lemma returns to your hand at its normal cost.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "emotion-outburst",
+    "mode": "desktop-Calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 5,
+          "hand": 0,
+          "deck": 15,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [],
+          "discard": [
+            "p1c0"
+          ]
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-outburst",
+          "target": "p1c0",
+          "text": "You play the tactic Outburst on Rival's Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 5,
+          "source": null,
+          "text": "Rival's Mr. Beastie takes 5 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 0,
+          "amount": 2,
+          "cid": null,
+          "text": "You lose 2 hearts (5 left).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Rival's Mr. Beastie is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "plain-heal",
+    "mode": "desktop-Calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 15,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 2,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "language-plain-words",
+          "target": "p0c0",
+          "text": "You play the tactic Plain Words on your Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Plain Words: heal 1.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "quick-one-card",
+    "mode": "desktop-Calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 1,
+          "deck": 0,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1",
+            "p0t2",
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "generic-quick-study",
+          "target": null,
+          "text": "You play the tactic Quick Study.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Paper Dragon.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "honest-reversed",
+    "mode": "desktop-Calm",
+    "outcome": {
+      "winner": 0,
+      "endReason": "reverse-hearts",
+      "turn": 1,
+      "active": 0,
+      "phase": "over",
+      "players": [
+        {
+          "hearts": 0,
+          "hand": 1,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-honest-hurt",
+          "target": null,
+          "text": "You play the tactic Honest Hurt.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 0,
+          "amount": 1,
+          "cid": null,
+          "text": "You lose 1 heart (0 left).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Paper Dragon.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "end",
+          "winner": 0,
+          "reason": "reverse-hearts",
+          "text": "You win the battle!",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 1280,
+      "width": 1280
+    }
+  },
+  {
+    "key": "emotion-honest-hurt",
+    "mode": "phone-Calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 6,
+          "hand": 1,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-honest-hurt",
+          "target": null,
+          "text": "You play the tactic Honest Hurt.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 0,
+          "amount": 1,
+          "cid": null,
+          "text": "You lose 1 heart (6 left).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Paper Dragon.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 390,
+      "width": 390
+    }
+  },
+  {
+    "key": "perception-read-the-room",
+    "mode": "phone-Calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 1,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 3,
+          "deck": 11,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Read the Room: inspect hand-creature counts and colours, then draw 1 personal card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Paper Dragon.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 390,
+      "width": 390
+    }
+  },
+  {
+    "key": "language-plain-words",
+    "mode": "phone-Calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 15,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "language-plain-words",
+          "target": "p0c0",
+          "text": "You play the tactic Plain Words on your Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Plain Words: remove one temporary attack penalty.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 390,
+      "width": 390
+    }
+  },
+  {
+    "key": "generic-quick-study",
+    "mode": "phone-Calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 1,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Quick Study: look at the next personal card and leave it there.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 390,
+      "width": 390
+    }
+  },
+  {
+    "key": "emotion-cost-of-courage",
+    "mode": "phone-Calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 5,
+          "hand": 0,
+          "deck": 15,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 2,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": [
+                {
+                  "label": "Cost of Courage",
+                  "attack": 0,
+                  "health": 2,
+                  "temp": false
+                }
+              ]
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-cost-of-courage",
+          "target": "p0c0",
+          "text": "You play the tactic Cost of Courage on your Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 0,
+          "amount": 2,
+          "cid": null,
+          "text": "You lose 2 hearts (5 left).",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 390,
+      "width": 390
+    }
+  },
+  {
+    "key": "language-read-the-fine-print",
+    "mode": "phone-Calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 6,
+          "hand": 0,
+          "deck": 15,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "language-read-the-fine-print",
+          "target": "p1c0",
+          "text": "You play the tactic Read the Fine Print on Rival's Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 0,
+          "amount": 1,
+          "cid": null,
+          "text": "You lose 1 heart (6 left).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Read the Fine Print: Rival's Mr. Beastie loses its abilities, keywords and boosts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 390,
+      "width": 390
+    }
+  },
+  {
+    "key": "memory-return-to-the-plan",
+    "mode": "phone-Calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 1,
+          "deck": 13,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t2",
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Return to the Plan: Lemma returns to your hand at its normal cost.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 390,
+      "width": 390
+    }
+  },
+  {
+    "key": "emotion-outburst",
+    "mode": "phone-Calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 5,
+          "hand": 0,
+          "deck": 15,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [],
+          "discard": [
+            "p1c0"
+          ]
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-outburst",
+          "target": "p1c0",
+          "text": "You play the tactic Outburst on Rival's Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 5,
+          "source": null,
+          "text": "Rival's Mr. Beastie takes 5 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 0,
+          "amount": 2,
+          "cid": null,
+          "text": "You lose 2 hearts (5 left).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Rival's Mr. Beastie is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 390,
+      "width": 390
+    }
+  },
+  {
+    "key": "plain-heal",
+    "mode": "phone-Calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 15,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 2,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "language-plain-words",
+          "target": "p0c0",
+          "text": "You play the tactic Plain Words on your Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Plain Words: heal 1.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 390,
+      "width": 390
+    }
+  },
+  {
+    "key": "quick-one-card",
+    "mode": "phone-Calm",
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "players": [
+        {
+          "hearts": 7,
+          "hand": 1,
+          "deck": 0,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1",
+            "p0t2",
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "generic-quick-study",
+          "target": null,
+          "text": "You play the tactic Quick Study.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Paper Dragon.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 390,
+      "width": 390
+    }
+  },
+  {
+    "key": "honest-reversed",
+    "mode": "phone-Calm",
+    "outcome": {
+      "winner": 0,
+      "endReason": "reverse-hearts",
+      "turn": 1,
+      "active": 0,
+      "phase": "over",
+      "players": [
+        {
+          "hearts": 0,
+          "hand": 1,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 2,
+              "baseHealth": 2,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "hand": 0,
+          "deck": 14,
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 5,
+              "maxHealth": 5,
+              "baseHealth": 5,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "buffs": []
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "shared": [
+        "abundance",
+        "reverse-hearts",
+        "luxury"
+      ],
+      "pending": null,
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-honest-hurt",
+          "target": null,
+          "text": "You play the tactic Honest Hurt.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 0,
+          "amount": 1,
+          "cid": null,
+          "text": "You lose 1 heart (0 left).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Paper Dragon.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "end",
+          "winner": 0,
+          "reason": "reverse-hearts",
+          "text": "You win the battle!",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    },
+    "layout": {
+      "calm": true,
+      "scrollWidth": 390,
+      "width": 390
+    }
+  }
+]

@@ -2073,7 +2073,7 @@
             P.discard.push(cid);
             emit(G, { t: 'tactic-play', player: p, cid, id: c.tactic, target, text: says(s, p, 'plays') + ' the tactic ' + def.name + (target ? ' on ' + logName(s, target) : '') + '.' });
             if (def.scheduled) scheduleEvent(G, p, cid, def);
-            def.run(api(G), p, target);
+            def.run(api(G), p, target, cid);
         } else {
             enterCreature(G, cid, target, false);
         }

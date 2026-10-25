@@ -1,0 +1,2408 @@
+{
+  "scope": "Exploratory paired differences. Draws count as half for each side; paired seat differences are averaged within each seed before estimating SE. Sixteen seed clusters per row are small and selected fixtures are not a tournament. No tuning or universal balance claim.",
+  "paired": [
+    {
+      "colour": "reason",
+      "edge": "strong",
+      "tag": "reason-emotion",
+      "seeds": 16,
+      "pairedDelta": -0.21875,
+      "seedClusterSE": 0.07864410870073697,
+      "beneficial": 0,
+      "adverse": 7,
+      "seedDeltas": [
+        0,
+        0,
+        -0.5,
+        0,
+        0,
+        0,
+        -1,
+        0,
+        -0.5,
+        0,
+        -0.5,
+        0,
+        0,
+        0,
+        -0.5,
+        -0.5
+      ]
+    },
+    {
+      "colour": "reason",
+      "edge": "weak",
+      "tag": "reason-memory",
+      "seeds": 16,
+      "pairedDelta": -0.015625,
+      "seedClusterSE": 0.09261465304331347,
+      "beneficial": 3,
+      "adverse": 4,
+      "seedDeltas": [
+        0.5,
+        0,
+        0.5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.5,
+        -0.5,
+        -0.25,
+        0,
+        0,
+        0,
+        -1,
+        0
+      ]
+    },
+    {
+      "colour": "reason",
+      "edge": "neutral",
+      "tag": "reason-perception",
+      "seeds": 16,
+      "pairedDelta": 0,
+      "seedClusterSE": 0.04564354645876384,
+      "beneficial": 1,
+      "adverse": 1,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -0.5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.5
+      ]
+    },
+    {
+      "colour": "emotion",
+      "edge": "strong",
+      "tag": "emotion-language",
+      "seeds": 16,
+      "pairedDelta": -0.03125,
+      "seedClusterSE": 0.09648780147424509,
+      "beneficial": 4,
+      "adverse": 5,
+      "seedDeltas": [
+        0,
+        0.5,
+        -0.5,
+        0,
+        0.5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.5,
+        0,
+        -0.5,
+        0,
+        -1
+      ]
+    },
+    {
+      "colour": "emotion",
+      "edge": "weak",
+      "tag": "emotion-reason",
+      "seeds": 16,
+      "pairedDelta": 0.0625,
+      "seedClusterSE": 0.08984941105353261,
+      "beneficial": 4,
+      "adverse": 2,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        -0.5,
+        0,
+        0,
+        -0.5,
+        0.5,
+        0.5,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "emotion",
+      "edge": "neutral",
+      "tag": "emotion-imagination",
+      "seeds": 16,
+      "pairedDelta": 0.03125,
+      "seedClusterSE": 0.03125,
+      "beneficial": 2,
+      "adverse": 1,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "perception",
+      "edge": "strong",
+      "tag": "perception-imagination",
+      "seeds": 16,
+      "pairedDelta": -0.03125,
+      "seedClusterSE": 0.07171631032524377,
+      "beneficial": 2,
+      "adverse": 3,
+      "seedDeltas": [
+        -0.5,
+        0,
+        0,
+        0.5,
+        0,
+        -0.5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -0.5,
+        0,
+        0.5,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "perception",
+      "edge": "weak",
+      "tag": "perception-language",
+      "seeds": 16,
+      "pairedDelta": -0.25,
+      "seedClusterSE": 0.07905694150420949,
+      "beneficial": 1,
+      "adverse": 9,
+      "seedDeltas": [
+        0,
+        -0.5,
+        0.5,
+        0,
+        -0.5,
+        0,
+        -0.5,
+        0,
+        -0.5,
+        0,
+        -0.5,
+        -0.5,
+        -0.5,
+        -0.5,
+        0,
+        -0.5
+      ]
+    },
+    {
+      "colour": "perception",
+      "edge": "neutral",
+      "tag": "perception-reason",
+      "seeds": 16,
+      "pairedDelta": -0.125,
+      "seedClusterSE": 0.05590169943749474,
+      "beneficial": 0,
+      "adverse": 4,
+      "seedDeltas": [
+        0,
+        -0.5,
+        0,
+        0,
+        0,
+        -0.5,
+        0,
+        -0.5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -0.5
+      ]
+    },
+    {
+      "colour": "language",
+      "edge": "strong",
+      "tag": "language-perception",
+      "seeds": 16,
+      "pairedDelta": -0.09375,
+      "seedClusterSE": 0.08188851669597311,
+      "beneficial": 3,
+      "adverse": 6,
+      "seedDeltas": [
+        -0.5,
+        0,
+        0,
+        -0.5,
+        0,
+        -0.5,
+        0,
+        -0.5,
+        0,
+        0,
+        0.5,
+        -0.5,
+        0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    {
+      "colour": "language",
+      "edge": "weak",
+      "tag": "language-emotion",
+      "seeds": 16,
+      "pairedDelta": -0.28125,
+      "seedClusterSE": 0.07864410870073697,
+      "beneficial": 0,
+      "adverse": 9,
+      "seedDeltas": [
+        -0.5,
+        -1,
+        0,
+        -0.5,
+        -0.5,
+        -0.5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -0.5,
+        0,
+        -0.5,
+        -0.5
+      ]
+    },
+    {
+      "colour": "language",
+      "edge": "neutral",
+      "tag": "language-memory",
+      "seeds": 16,
+      "pairedDelta": -0.03125,
+      "seedClusterSE": 0.08500919067959652,
+      "beneficial": 4,
+      "adverse": 5,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0.5,
+        -0.5,
+        0.5,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "imagination",
+      "edge": "strong",
+      "tag": "imagination-memory",
+      "seeds": 16,
+      "pairedDelta": -0.09375,
+      "seedClusterSE": 0.05038911092686594,
+      "beneficial": 0,
+      "adverse": 3,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -0.5,
+        0,
+        0,
+        0,
+        0,
+        -0.5,
+        -0.5,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "imagination",
+      "edge": "weak",
+      "tag": "imagination-perception",
+      "seeds": 16,
+      "pairedDelta": -0.125,
+      "seedClusterSE": 0.07216878364870322,
+      "beneficial": 0,
+      "adverse": 4,
+      "seedDeltas": [
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        -0.5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -0.5,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "imagination",
+      "edge": "neutral",
+      "tag": "imagination-emotion",
+      "seeds": 16,
+      "pairedDelta": -0.09375,
+      "seedClusterSE": 0.05038911092686594,
+      "beneficial": 0,
+      "adverse": 3,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        -0.5,
+        0,
+        0,
+        0,
+        -0.5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -0.5
+      ]
+    },
+    {
+      "colour": "memory",
+      "edge": "strong",
+      "tag": "memory-reason",
+      "seeds": 16,
+      "pairedDelta": -0.09375,
+      "seedClusterSE": 0.09375,
+      "beneficial": 3,
+      "adverse": 6,
+      "seedDeltas": [
+        -0.5,
+        0.5,
+        -0.5,
+        0,
+        0,
+        -0.5,
+        0.5,
+        0,
+        -0.5,
+        -0.5,
+        0.5,
+        0,
+        0,
+        -0.5,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "memory",
+      "edge": "weak",
+      "tag": "memory-imagination",
+      "seeds": 16,
+      "pairedDelta": 0,
+      "seedClusterSE": 0.04564354645876384,
+      "beneficial": 1,
+      "adverse": 1,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -0.5,
+        0,
+        0.5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "memory",
+      "edge": "neutral",
+      "tag": "memory-language",
+      "seeds": 16,
+      "pairedDelta": -0.15625,
+      "seedClusterSE": 0.08801929239282337,
+      "beneficial": 1,
+      "adverse": 6,
+      "seedDeltas": [
+        0,
+        -0.5,
+        -0.5,
+        0,
+        0,
+        0,
+        0,
+        0.5,
+        0,
+        -0.5,
+        -0.5,
+        0,
+        0,
+        0,
+        -1,
+        0
+      ]
+    }
+  ],
+  "draws": [
+    {
+      "mode": "control",
+      "trial": {
+        "seed": 10,
+        "tag": "reason-memory",
+        "monoSeat": 0,
+        "first": 0,
+        "role": "mono-mixed",
+        "winner": "draw",
+        "endReason": "turn-limit",
+        "turn": 61,
+        "steps": 175
+      },
+      "tail": [
+        {
+          "turn": 56,
+          "action": {
+            "type": "end",
+            "player": 1
+          },
+          "events": [
+            {
+              "t": "turn-end",
+              "player": 1,
+              "text": "Rival ends the turn.",
+              "turn": 56,
+              "round": 28
+            },
+            {
+              "t": "fate-move",
+              "text": "Round 28 ends: Fate moves 1 space.",
+              "turn": 57,
+              "round": 28
+            },
+            {
+              "t": "round",
+              "text": "Round 29.",
+              "turn": 57,
+              "round": 29
+            },
+            {
+              "t": "turn",
+              "player": 0,
+              "text": "You: 10 energy. Choose a draw.",
+              "turn": 57,
+              "round": 29
+            }
+          ],
+          "players": [
+            {
+              "hearts": 3,
+              "hand": 2,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "Khaby Llame",
+                  "attack": 3,
+                  "health": 4
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 3,
+                  "health": 2
+                }
+              ],
+              "discard": 16
+            },
+            {
+              "hearts": 10,
+              "hand": 4,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "John Greenfinch",
+                  "attack": 5,
+                  "health": 9
+                },
+                {
+                  "name": "John Greenfinch",
+                  "attack": 1,
+                  "health": 2
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 1,
+                  "health": 2
+                }
+              ],
+              "discard": 13
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 57,
+          "action": {
+            "type": "draw",
+            "player": 0,
+            "choice": "none"
+          },
+          "events": [],
+          "players": [
+            {
+              "hearts": 3,
+              "hand": 2,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "Khaby Llame",
+                  "attack": 3,
+                  "health": 4
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 3,
+                  "health": 2
+                }
+              ],
+              "discard": 16
+            },
+            {
+              "hearts": 10,
+              "hand": 4,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "John Greenfinch",
+                  "attack": 5,
+                  "health": 9
+                },
+                {
+                  "name": "John Greenfinch",
+                  "attack": 1,
+                  "health": 2
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 1,
+                  "health": 2
+                }
+              ],
+              "discard": 13
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 57,
+          "action": {
+            "type": "end",
+            "player": 0
+          },
+          "events": [
+            {
+              "t": "turn-end",
+              "player": 0,
+              "text": "You end the turn.",
+              "turn": 57,
+              "round": 29
+            },
+            {
+              "t": "turn",
+              "player": 1,
+              "text": "Rival: 10 energy. Choose a draw.",
+              "turn": 58,
+              "round": 29
+            }
+          ],
+          "players": [
+            {
+              "hearts": 3,
+              "hand": 2,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "Khaby Llame",
+                  "attack": 3,
+                  "health": 4
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 3,
+                  "health": 2
+                }
+              ],
+              "discard": 16
+            },
+            {
+              "hearts": 10,
+              "hand": 4,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "John Greenfinch",
+                  "attack": 5,
+                  "health": 9
+                },
+                {
+                  "name": "John Greenfinch",
+                  "attack": 1,
+                  "health": 2
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 1,
+                  "health": 2
+                }
+              ],
+              "discard": 13
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 58,
+          "action": {
+            "type": "draw",
+            "player": 1,
+            "choice": "none"
+          },
+          "events": [],
+          "players": [
+            {
+              "hearts": 3,
+              "hand": 2,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "Khaby Llame",
+                  "attack": 3,
+                  "health": 4
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 3,
+                  "health": 2
+                }
+              ],
+              "discard": 16
+            },
+            {
+              "hearts": 10,
+              "hand": 4,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "John Greenfinch",
+                  "attack": 5,
+                  "health": 9
+                },
+                {
+                  "name": "John Greenfinch",
+                  "attack": 1,
+                  "health": 2
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 1,
+                  "health": 2
+                }
+              ],
+              "discard": 13
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 58,
+          "action": {
+            "type": "end",
+            "player": 1
+          },
+          "events": [
+            {
+              "t": "turn-end",
+              "player": 1,
+              "text": "Rival ends the turn.",
+              "turn": 58,
+              "round": 29
+            },
+            {
+              "t": "fate-move",
+              "text": "Round 29 ends: Fate moves 1 space.",
+              "turn": 59,
+              "round": 29
+            },
+            {
+              "t": "round",
+              "text": "Round 30.",
+              "turn": 59,
+              "round": 30
+            },
+            {
+              "t": "turn",
+              "player": 0,
+              "text": "You: 10 energy. Choose a draw.",
+              "turn": 59,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 3,
+              "hand": 2,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "Khaby Llame",
+                  "attack": 3,
+                  "health": 4
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 3,
+                  "health": 2
+                }
+              ],
+              "discard": 16
+            },
+            {
+              "hearts": 10,
+              "hand": 4,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "John Greenfinch",
+                  "attack": 5,
+                  "health": 9
+                },
+                {
+                  "name": "John Greenfinch",
+                  "attack": 1,
+                  "health": 2
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 1,
+                  "health": 2
+                }
+              ],
+              "discard": 13
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 59,
+          "action": {
+            "type": "draw",
+            "player": 0,
+            "choice": "none"
+          },
+          "events": [],
+          "players": [
+            {
+              "hearts": 3,
+              "hand": 2,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "Khaby Llame",
+                  "attack": 3,
+                  "health": 4
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 3,
+                  "health": 2
+                }
+              ],
+              "discard": 16
+            },
+            {
+              "hearts": 10,
+              "hand": 4,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "John Greenfinch",
+                  "attack": 5,
+                  "health": 9
+                },
+                {
+                  "name": "John Greenfinch",
+                  "attack": 1,
+                  "health": 2
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 1,
+                  "health": 2
+                }
+              ],
+              "discard": 13
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 59,
+          "action": {
+            "type": "end",
+            "player": 0
+          },
+          "events": [
+            {
+              "t": "turn-end",
+              "player": 0,
+              "text": "You end the turn.",
+              "turn": 59,
+              "round": 30
+            },
+            {
+              "t": "turn",
+              "player": 1,
+              "text": "Rival: 10 energy. Choose a draw.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 3,
+              "hand": 2,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "Khaby Llame",
+                  "attack": 3,
+                  "health": 4
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 3,
+                  "health": 2
+                }
+              ],
+              "discard": 16
+            },
+            {
+              "hearts": 10,
+              "hand": 4,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "John Greenfinch",
+                  "attack": 5,
+                  "health": 9
+                },
+                {
+                  "name": "John Greenfinch",
+                  "attack": 1,
+                  "health": 2
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 1,
+                  "health": 2
+                }
+              ],
+              "discard": 13
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "draw",
+            "player": 1,
+            "choice": "none"
+          },
+          "events": [],
+          "players": [
+            {
+              "hearts": 3,
+              "hand": 2,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "Khaby Llame",
+                  "attack": 3,
+                  "health": 4
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 3,
+                  "health": 2
+                }
+              ],
+              "discard": 16
+            },
+            {
+              "hearts": 10,
+              "hand": 4,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "John Greenfinch",
+                  "attack": 5,
+                  "health": 9
+                },
+                {
+                  "name": "John Greenfinch",
+                  "attack": 1,
+                  "health": 2
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 1,
+                  "health": 2
+                }
+              ],
+              "discard": 13
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "axiom",
+            "player": 1,
+            "choice": "flux-cost-minus-1"
+          },
+          "events": [
+            {
+              "t": "axiom-play",
+              "player": 1,
+              "id": "flux-cost-minus-1",
+              "text": "Rival plays a rule card.",
+              "turn": 60,
+              "round": 30
+            },
+            {
+              "t": "axiom",
+              "id": "flux-cost-minus-1",
+              "player": 1,
+              "basic": false,
+              "text": "Rule change — cost: A Little Cheaper. Creature cost change: 0 → -1",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 3,
+              "hand": 2,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "Khaby Llame",
+                  "attack": 3,
+                  "health": 4
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 3,
+                  "health": 2
+                }
+              ],
+              "discard": 16
+            },
+            {
+              "hearts": 10,
+              "hand": 4,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "John Greenfinch",
+                  "attack": 5,
+                  "health": 9
+                },
+                {
+                  "name": "John Greenfinch",
+                  "attack": 1,
+                  "health": 2
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 1,
+                  "health": 2
+                }
+              ],
+              "discard": 13
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures -1 energy. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "spark",
+            "player": 1
+          },
+          "events": [
+            {
+              "t": "spark",
+              "player": 1,
+              "text": "Rival uses the Spark: +1 energy this turn.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 3,
+              "hand": 2,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "Khaby Llame",
+                  "attack": 3,
+                  "health": 4
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 3,
+                  "health": 2
+                }
+              ],
+              "discard": 16
+            },
+            {
+              "hearts": 10,
+              "hand": 4,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "John Greenfinch",
+                  "attack": 5,
+                  "health": 9
+                },
+                {
+                  "name": "John Greenfinch",
+                  "attack": 1,
+                  "health": 2
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 1,
+                  "health": 2
+                }
+              ],
+              "discard": 13
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures -1 energy. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "play",
+            "player": 1,
+            "cid": "p1t11"
+          },
+          "events": [
+            {
+              "t": "tactic-play",
+              "player": 1,
+              "cid": "p1t11",
+              "id": "memory-return-to-the-plan",
+              "target": null,
+              "text": "Rival plays the tactic Return to the Plan.",
+              "turn": 60,
+              "round": 30
+            }
+          ],
+          "players": [
+            {
+              "hearts": 3,
+              "hand": 2,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "Khaby Llame",
+                  "attack": 3,
+                  "health": 4
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 3,
+                  "health": 2
+                }
+              ],
+              "discard": 16
+            },
+            {
+              "hearts": 10,
+              "hand": 3,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "John Greenfinch",
+                  "attack": 5,
+                  "health": 9
+                },
+                {
+                  "name": "John Greenfinch",
+                  "attack": 1,
+                  "health": 2
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 1,
+                  "health": 2
+                }
+              ],
+              "discard": 14
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures -1 energy. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        },
+        {
+          "turn": 60,
+          "action": {
+            "type": "end",
+            "player": 1
+          },
+          "events": [
+            {
+              "t": "turn-end",
+              "player": 1,
+              "text": "Rival ends the turn.",
+              "turn": 60,
+              "round": 30
+            },
+            {
+              "t": "fate-move",
+              "text": "Round 30 ends: Fate moves 1 space.",
+              "turn": 61,
+              "round": 30
+            },
+            {
+              "t": "reset",
+              "text": "Fate reset: all rules return to the basics.",
+              "turn": 61,
+              "round": 30
+            },
+            {
+              "t": "fate-next",
+              "id": "flux-plays-plus-1",
+              "text": "Fate sets aside the next free rule: One More Move.",
+              "turn": 61,
+              "round": 30
+            },
+            {
+              "t": "round",
+              "text": "Round 31.",
+              "turn": 61,
+              "round": 31
+            },
+            {
+              "t": "limit",
+              "text": "The rift closes after 60 turns. Draw.",
+              "turn": 61,
+              "round": 31
+            },
+            {
+              "t": "end",
+              "winner": "draw",
+              "reason": "turn-limit",
+              "text": "The battle ends in a draw.",
+              "turn": 61,
+              "round": 31
+            }
+          ],
+          "players": [
+            {
+              "hearts": 3,
+              "hand": 2,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "Khaby Llame",
+                  "attack": 3,
+                  "health": 4
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 3,
+                  "health": 2
+                }
+              ],
+              "discard": 16
+            },
+            {
+              "hearts": 10,
+              "hand": 3,
+              "deck": 0,
+              "board": [
+                {
+                  "name": "John Greenfinch",
+                  "attack": 5,
+                  "health": 9
+                },
+                {
+                  "name": "John Greenfinch",
+                  "attack": 1,
+                  "health": 2
+                },
+                {
+                  "name": "Tom Skink",
+                  "attack": 1,
+                  "health": 2
+                }
+              ],
+              "discard": 14
+            }
+          ],
+          "rules": [
+            [
+              "Win",
+              "Reduce the enemy hero to zero hearts."
+            ],
+            [
+              "Turn",
+              "Choose one draw: take 1 from your deck or the axiom deck. Energy grows by 1 and refills (max 10). Use up to 2 card activations: casts, attacks and manual Activate together. Used rule cards never come back. When your deck and the rule deck are both empty, each draw costs hearts: 1, then 2, then 3."
+            ],
+            [
+              "Attacks",
+              "Each ready creature may attack once. New creatures wait a turn unless Swift."
+            ],
+            [
+              "Combat",
+              "Both creatures deal damage equal to their attack. Damage stays."
+            ],
+            [
+              "Guard",
+              "If the enemy has Guard creatures, attack one of them first."
+            ],
+            [
+              "Hero hits",
+              "An attack on a hero removes hearts equal to its attack."
+            ],
+            [
+              "Costs",
+              "Creatures cost what they show. Activating uses the creature's attack. "
+            ],
+            [
+              "Defeat",
+              "Defeated creatures go to the discard pile."
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "earlierComparison": {
+    "source": "expansion-5-2026-10-25/targeted-64.json at 900a74b",
+    "games": 64,
+    "scope": "Original selected decks and first16 seeds/seat under current AI; all expansion-5 effect contracts unchanged. Separate from expansion-6 support hook cohorts.",
+    "rows": [
+      {
+        "colour": "perception",
+        "partner": "reason",
+        "edge": "neutral",
+        "mono": {
+          "creatures": [
+            "perception-cue-cricket",
+            "perception-cue-cricket",
+            "kardashiant",
+            "kardashiant",
+            "lens-lizard",
+            "lens-lizard",
+            "attenbirdough",
+            "attenbirdough"
+          ],
+          "tactics": [
+            "counterexample",
+            "counterexample",
+            "pep-talk",
+            "pep-talk",
+            "stand-firm",
+            "stand-firm",
+            "perception-practical-observation",
+            "perception-practical-observation",
+            "generic-balanced-exchange",
+            "generic-balanced-exchange",
+            "generic-take-stock",
+            "generic-take-stock"
+          ],
+          "axioms": [
+            "flux-plays-plus-1",
+            "flux-plays-minus-1",
+            "flux-draw-plus-1",
+            "flux-draw-minus-1",
+            "flux-growth-plus-1",
+            "flux-cost-plus-1",
+            "flux-cost-minus-1",
+            "limited-memory",
+            "momentum",
+            "two-plays"
+          ]
+        },
+        "mixed": {
+          "creatures": [
+            "perception-cue-cricket",
+            "perception-cue-cricket",
+            "kardashiant",
+            "kardashiant",
+            "reason-counterexample-crow",
+            "reason-counterexample-crow",
+            "reason-premise-pigeon",
+            "reason-premise-pigeon"
+          ],
+          "tactics": [
+            "counterexample",
+            "counterexample",
+            "pep-talk",
+            "pep-talk",
+            "stand-firm",
+            "stand-firm",
+            "perception-practical-observation",
+            "perception-practical-observation",
+            "generic-balanced-exchange",
+            "generic-balanced-exchange",
+            "reason-small-lemma",
+            "reason-small-lemma"
+          ],
+          "axioms": [
+            "flux-plays-plus-1",
+            "flux-plays-minus-1",
+            "flux-draw-plus-1",
+            "flux-draw-minus-1",
+            "flux-growth-plus-1",
+            "flux-cost-plus-1",
+            "flux-cost-minus-1",
+            "limited-memory",
+            "momentum",
+            "two-plays"
+          ]
+        },
+        "trials": [
+          {
+            "seed": 0,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 0,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 1,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 1,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 2,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 2,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 3,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 3,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 4,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 4,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 5,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 5,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 6,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 6,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 7,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 7,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 8,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 8,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 9,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 9,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 10,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 10,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 11,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 11,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 12,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 12,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 13,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 13,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 14,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 14,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 15,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 15,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          }
+        ],
+        "changedOutcomes": 0
+      },
+      {
+        "colour": "reason",
+        "partner": "memory",
+        "edge": "weak",
+        "mono": {
+          "creatures": [
+            "reason-counterexample-crow",
+            "reason-counterexample-crow",
+            "reason-premise-pigeon",
+            "reason-premise-pigeon",
+            "astrophysicat",
+            "astrophysicat",
+            "khaby",
+            "khaby"
+          ],
+          "tactics": [
+            "counterexample",
+            "counterexample",
+            "pep-talk",
+            "pep-talk",
+            "stand-firm",
+            "stand-firm",
+            "reason-small-lemma",
+            "reason-small-lemma",
+            "generic-balanced-exchange",
+            "generic-balanced-exchange",
+            "generic-take-stock",
+            "generic-take-stock"
+          ],
+          "axioms": [
+            "flux-plays-plus-1",
+            "flux-plays-minus-1",
+            "flux-draw-plus-1",
+            "flux-draw-minus-1",
+            "flux-growth-plus-1",
+            "flux-cost-plus-1",
+            "flux-cost-minus-1",
+            "limited-memory",
+            "momentum",
+            "two-plays"
+          ]
+        },
+        "mixed": {
+          "creatures": [
+            "reason-counterexample-crow",
+            "reason-counterexample-crow",
+            "reason-premise-pigeon",
+            "reason-premise-pigeon",
+            "memory-bookmark-bunny",
+            "memory-bookmark-bunny",
+            "memory-recall-robin",
+            "memory-recall-robin"
+          ],
+          "tactics": [
+            "counterexample",
+            "counterexample",
+            "pep-talk",
+            "pep-talk",
+            "stand-firm",
+            "stand-firm",
+            "reason-small-lemma",
+            "reason-small-lemma",
+            "generic-balanced-exchange",
+            "generic-balanced-exchange",
+            "memory-clear-reminder",
+            "memory-clear-reminder"
+          ],
+          "axioms": [
+            "flux-plays-plus-1",
+            "flux-plays-minus-1",
+            "flux-draw-plus-1",
+            "flux-draw-minus-1",
+            "flux-growth-plus-1",
+            "flux-cost-plus-1",
+            "flux-cost-minus-1",
+            "limited-memory",
+            "momentum",
+            "two-plays"
+          ]
+        },
+        "trials": [
+          {
+            "seed": 0,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 0,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 1,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 1,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 2,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 2,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 3,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 3,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 4,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 4,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 5,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 5,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 6,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 6,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 7,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 7,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 8,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 8,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 9,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 9,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 10,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 10,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 11,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 11,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 12,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 12,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 13,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 13,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 14,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 14,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 15,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 15,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          }
+        ],
+        "changedOutcomes": 0
+      }
+    ]
+  }
+}
