@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, three expansion-10 cards, two expansion-11 cards, two expansion-12 cards, one expansion-13 creature, one expansion-14 creature, eighteen plot-1 story cards, 112 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, three expansion-10 cards, two expansion-11 cards, two expansion-12 cards, one expansion-13 creature, one expansion-14 creature, two expansion-15 creatures, eighteen plot-1 story cards, 110 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -84,14 +84,14 @@
       "cost": 2,
       "attack": 1,
       "health": 3,
-      "text": "Guard. Entrance: if the opponent controls more creatures than you after this enters, this gains Shield.",
+      "text": "Guard. Entrance: after this enters, compare actual creatures on both boards, including tokens and this entrant. If its current controller has strictly fewer, give this a fresh ordinary Shield. Equal counts do not qualify. No hand, deck or future reserved creature is counted. Normal suppression, Shield consumption and leave-play cleanup apply.",
       "tags": [
         "guard",
         "shield"
       ],
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Keep equal board numbers, consume Shield with a small hit, or silence it.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-15 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "revision": {
@@ -107,7 +107,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-15: pack pool"
+      },
+      "runtimeRelease": "expansion-15",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Guard. Entrance: if the opponent controls more creatures than you after this enters, this gains Shield.",
+        "rationale": "Pin the comparison after actual entry and reuse ordinary fresh Shield; no new board-cap or keyword policy."
       }
     },
     {
@@ -119,13 +125,13 @@
       "cost": 2,
       "attack": 2,
       "health": 2,
-      "text": "Entrance: another friendly creature gains 1 maximum health and heals 1.",
+      "text": "Entrance: choose another friendly creature on the board. Give it a lasting +1 maximum health through the ordinary buff API, then heal 1 normally. The health buff also increases current health before that heal, following existing stat semantics. Self and enemy targets are excluded. Without another friend the body enters without a useful Entrance; normal suppression, healing caps, Silence and leave-play buff cleanup apply.",
       "tags": [
         "healing"
       ],
       "strategy": "Careful exchanges, defensive control and public proof goals",
       "counterplay": "Remove the supported creature.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-15 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -135,7 +141,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-15: pack pool"
+      },
+      "runtimeRelease": "expansion-15",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Entrance: another friendly creature gains 1 maximum health and heals 1.",
+        "rationale": "Reuse the existing maximum-health buff followed by one capped heal, with another-friendly targeting and normal lasting-buff cleanup."
       }
     },
     {

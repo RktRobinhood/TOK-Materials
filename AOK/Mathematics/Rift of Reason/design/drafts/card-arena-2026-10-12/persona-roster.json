@@ -68,7 +68,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-15: pack pool"
       },
       "silhouette": "Sturdy ant with rounded head, short antennae, powder-blue lab coat and one oversized patterned bow tie.",
       "signatureProp": "The bow tie is the main recognition cue; a modest specimen tray is optional, not a second large silhouette.",
@@ -94,12 +94,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-15 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
         "health": 3,
-        "text": "Guard. Entrance: if the opponent controls more creatures than you after this enters, this gains Shield.",
+        "text": "Guard. Entrance: after this enters, compare actual creatures on both boards, including tokens and this entrant. If its current controller has strictly fewer, give this a fresh ordinary Shield. Equal counts do not qualify. No hand, deck or future reserved creature is counted. Normal suppression, Shield consumption and leave-play cleanup apply.",
         "gates": [
           109
         ]
@@ -122,7 +122,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-15: pack pool"
       },
       "silhouette": "Friendly broad beetle, practical dark-blue workshop apron, large confident eyes, small curved shell.",
       "signatureProp": "One chunky repaired gadget held between its forelegs; simple bolt/clamp silhouette, no company logo.",
@@ -148,12 +148,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-15 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
         "health": 2,
-        "text": "Entrance: another friendly creature gains 1 maximum health and heals 1.",
+        "text": "Entrance: choose another friendly creature on the board. Give it a lasting +1 maximum health through the ordinary buff API, then heal 1 normally. The health buff also increases current health before that heal, following existing stat semantics. Self and enemy targets are excluded. Without another friend the body enters without a useful Entrance; normal suppression, healing caps, Silence and leave-play buff cleanup apply.",
         "gates": [
           109
         ]

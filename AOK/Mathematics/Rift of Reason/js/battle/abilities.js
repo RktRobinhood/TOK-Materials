@@ -812,6 +812,25 @@
                 api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' gets one extra attack this turn. Normal card activations still apply.' });
             },
         },
+        // #129 expansion-15: ordinary Entrance protection and a small lasting repair.
+        'small-science': {
+            name: 'Small Science', keywords: ['guard'],
+            text: 'Guard. Entrance: if the enemy has more creatures after this enters, gain Shield.',
+            entrance: { run(api, card) {
+                const p = card.controller;
+                if (api.s.players[1 - p].board.length <= api.s.players[p].board.length) return;
+                api.addKeyword(card.cid, 'shield');
+                api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' compares the two sides and gains Shield.' });
+            } },
+        },
+        'clever-repair': {
+            name: 'Clever Repair', text: 'Entrance: another friend gains 1 maximum health and heals 1.',
+            entrance: { target: 'friendly-other', run(api, card, target) {
+                api.buff(target, 0, 1, 'Clever Repair');
+                api.heal(target, 1);
+                api.emit({ t: 'ability', cid: card.cid, target, text: api.name(card.cid) + ' repairs ' + api.name(target) + ': +1 maximum health and heal 1.' });
+            } },
+        },
         grook: {
             name: 'Grook',
             text: 'Whenever it survives a fight, draw a card.',

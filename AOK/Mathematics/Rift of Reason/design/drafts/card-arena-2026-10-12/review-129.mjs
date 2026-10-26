@@ -308,3 +308,19 @@ export function reviewExpansion14(cards){
         c.text="Once per match, after this survives a creature fight on its controller's turn, gain one additional attack this turn. Zero damage still qualifies; hero hits, opponent-turn fights, lethal damage and suppressed abilities do not. Normal shared activations, player attack limits, Freeze and sleep apply. No spent attack or manual Activate is refunded. Leave-play and turn changes clear the extra permission, but the same instance keeps its spent match allowance through bounce/replay.";
     }
 }
+
+// #129 expansion-15: two existing Common Entrance supports, with ordinary keyword/buff/heal APIs.
+export const expansion15Batch=['reason-axiom-ant','reason-proof-beetle'];
+const clarifications15={
+    'reason-axiom-ant':['Guard. Entrance: after this enters, compare actual creatures on both boards, including tokens and this entrant. If its current controller has strictly fewer, give this a fresh ordinary Shield. Equal counts do not qualify. No hand, deck or future reserved creature is counted. Normal suppression, Shield consumption and leave-play cleanup apply.',
+        'Pin the comparison after actual entry and reuse ordinary fresh Shield; no new board-cap or keyword policy.'],
+    'reason-proof-beetle':['Entrance: choose another friendly creature on the board. Give it a lasting +1 maximum health through the ordinary buff API, then heal 1 normally. The health buff also increases current health before that heal, following existing stat semantics. Self and enemy targets are excluded. Without another friend the body enters without a useful Entrance; normal suppression, healing caps, Silence and leave-play buff cleanup apply.',
+        'Reuse the existing maximum-health buff followed by one capped heal, with another-friendly targeting and normal lasting-buff cleanup.'],
+};
+export function reviewExpansion15(cards){
+    for(const c of cards)if(expansion15Batch.includes(c.id)){
+        c.runtimeRelease='expansion-15';c.status='Released in expansion-15 (#129); bounded engineering validation, not classroom balance certification';
+        c.acquisition.releaseStatus='Released expansion-15: pack pool';
+        c.releaseRevision={issue:129,previousText:c.text,previousTarget:c.target,rationale:clarifications15[c.id][1]};c.text=clarifications15[c.id][0];
+    }
+}

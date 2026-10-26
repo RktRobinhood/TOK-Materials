@@ -440,6 +440,20 @@
         blurb: 'One small leap earns one little encore.', lines: [], release: 'expansion-14', packEligible: true,
     };
 
+    // #129 expansion-15: two existing selected Common Entrance supports.
+    Object.assign(Rift.data.creatures, {
+        'reason-axiom-ant': {
+            name: 'Bill Ny-ant', inspiredBy: 'Bill Nye', colour: 'reason', rarity: 'common', power: 3, cost: 2, attack: 1, health: 3,
+            ability: 'small-science', abilityText: 'Guard. Entrance: if the enemy has more creatures after this enters, gain Shield.',
+            blurb: 'A tiny comparison. An oversized science bow tie.', lines: [], release: 'expansion-15', packEligible: true,
+        },
+        'reason-proof-beetle': {
+            name: 'Mark Ro-beetle', inspiredBy: 'Mark Rober', colour: 'reason', rarity: 'common', power: 3, cost: 2, attack: 2, health: 2,
+            ability: 'clever-repair', abilityText: 'Entrance: another friend gains 1 maximum health and heals 1.',
+            blurb: 'The tiny repair needs one very clever gadget.', lines: [], release: 'expansion-15', packEligible: true,
+        },
+    });
+
     // #132 plot identities: their actual earned source is the permanent Acquisition registry.
     function plotCreature(name,inspiredBy,colour,attack,health,ability,abilityText,blurb){
         return {name,inspiredBy,colour,rarity:'rare',power:5,cost:5,attack,health,ability,abilityText,blurb,lines:[],release:'plot-1',packEligible:false};

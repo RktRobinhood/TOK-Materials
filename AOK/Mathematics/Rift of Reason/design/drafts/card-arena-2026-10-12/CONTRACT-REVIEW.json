@@ -131,7 +131,11 @@
   "expansion14Batch": [
     "emotion-pulse-pup"
   ],
-  "held": 112,
+  "expansion15Batch": [
+    "reason-axiom-ant",
+    "reason-proof-beetle"
+  ],
+  "held": 110,
   "rows": [
     {
       "id": "reason-premise-pigeon",
@@ -159,13 +163,14 @@
       "kind": "creature",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-15 runtime release (#129); see expansion-15 acceptance report",
       "trigger": "Entrance",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Guard. Entrance: if the opponent controls more creatures than you after this enters, this gains Shield.",
+      "payoffAndLifetime": "Guard. Entrance: after this enters, compare actual creatures on both boards, including tokens and this entrant. If its current controller has strictly fewer, give this a fresh ordinary Shield. Equal counts do not qualify. No hand, deck or future reserved creature is counted. Normal suppression, Shield consumption and leave-play cleanup apply.",
       "counterplay": "Keep equal board numbers, consume Shield with a small hit, or silence it.",
       "semanticRevision": "Bill Ny-ant compares board counts once. A conditional catch-up shield differs from vanilla Guard and unconditional Beansprout Shield.",
       "releaseChecks": [
+        "tokens: reserve board capacity; finite generation; no collection copies; deterministic order",
         "derived state: legal target revalidation, normal swaps/prevention, fixed construction identity and explicit temporary expiry"
       ],
       "gates": [
@@ -178,14 +183,14 @@
       "kind": "creature",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-15 runtime release (#129); see expansion-15 acceptance report",
       "trigger": "Entrance",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Entrance: another friendly creature gains 1 maximum health and heals 1.",
+      "payoffAndLifetime": "Entrance: choose another friendly creature on the board. Give it a lasting +1 maximum health through the ordinary buff API, then heal 1 normally. The health buff also increases current health before that heal, following existing stat semantics. Self and enemy targets are excluded. Without another friend the body enters without a useful Entrance; normal suppression, healing caps, Silence and leave-play buff cleanup apply.",
       "counterplay": "Remove the supported creature.",
       "semanticRevision": null,
       "releaseChecks": [
-        "ordinary target, cost, copy cap and defeat/cleanup tests before release"
+        "Win: current rule and simultaneous/terminal boundaries; no revival after a settled win"
       ],
       "gates": [
         109

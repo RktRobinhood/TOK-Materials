@@ -1,3 +1,11 @@
+## Expansion-15 small Entrance supports — 26 October 2026 (#129)
+
+Bill Ny-ant and Mark Ro-beetle join expansion-15, both Common cost 2 with original1/3 and2/2 stats, selected existing portraits, ordinary packs and shared cues. Pre-lesson pack kinds: 55 Common / 18 Uncommon / 9 Rare; weights/prices and allocations stay unchanged. **110 concepts remain held; #129 stays open.**
+
+Bill has Guard and gains fresh ordinary Shield only when strictly outnumbered after entry, counting actual creatures including himself/tokens. Mark gives another friend lasting +1 maximum health, then heals1 through existing APIs. Normal targeting, no-target fizzle, suppression, stat/heal semantics, consumed Shield and buff/leave-play cleanup remain. No engine, AI, progress-save, spawn/catch, art/voice or new Fate/token-order/Win-policy change. Stephen Clawbert remains held for the documented portrait mismatch in Stage 13.94.
+
+The [verification report](reviews/expansion-15-2026-10-26.md) records nine focused checks, full 1,659 pass /one existing skip /zero failures,30 matching native outcomes/layouts and two completed scratch packs with both new normal copies. No new PNG/motion/hardware claim. Paired 768+768 Entrance-only controls preserve Bill's Guard, with zero draws: Bill 489/496 and Mark 504/504 mono/mixed body plays,60/0 Shield-grant and367/0 repair events across all games including mirrors. Largest initial absolute paired difference is .0625; two zero-average rows have nonzero SE and cancelling outcomes. Whole-Entrance controls do not separate Mark's buff/heal subeffects or measure Guard. All64 sampled original expansion-14 winners match. Preserve prior sparse-activation/adverse/draw risks; no numeric or global balance claim. Final review and publication status are tracked in the report.
+
 ## Expansion-14 extra-attack creature — 26 October 2026 (#129)
 
 Dua Leapfrog joins expansion-14 using the existing selected portrait: Common, original cost 1 / attack 2 / health 1, ordinary packs and shared cues. Pre-lesson pack kinds: 53 Common / 18 Uncommon / 9 Rare; weights/prices and overall allocations stay unchanged. **112 concepts remain held; #129 stays open.**
