@@ -135,7 +135,11 @@
     "reason-axiom-ant",
     "reason-proof-beetle"
   ],
-  "held": 110,
+  "expansion16Batch": [
+    "emotion-outrage-ox",
+    "perception-shadow-shrimp"
+  ],
+  "held": 108,
   "rows": [
     {
       "id": "reason-premise-pigeon",
@@ -539,13 +543,14 @@
       "kind": "creature",
       "rarity": "rare",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
-      "trigger": "Swift. This cannot attack a hero on the turn it arrives.",
+      "disposition": "expansion-16 runtime release (#129); see expansion-16 acceptance report",
+      "trigger": "Swift. This cannot attack a hero during the global turn it entered the board. It may fight a legal creature normally; shared arrival readiness does not override this explicit restriction. On a later turn normal hero targets return. Suppression disables both the ability-granted Swift and restriction. Guard",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Swift. This cannot attack a hero on the turn it arrives.",
+      "payoffAndLifetime": "Swift. This cannot attack a hero during the global turn it entered the board. It may fight a legal creature normally; shared arrival readiness does not override this explicit restriction. On a later turn normal hero targets return. Suppression disables both the ability-granted Swift and restriction. Guard, hidden targets, Freeze, shared activations and player attack limits remain authoritative. Bounce and replay create a new current arrival turn for the same instance.",
       "counterplay": "Use a high-health defender.",
       "semanticRevision": null,
       "releaseChecks": [
+        "identity: move actual instance; consume one-shots before effects; no cloned receipt or source",
         "Win: current rule and simultaneous/terminal boundaries; no revival after a settled win",
         "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap"
       ],
@@ -678,15 +683,16 @@
       "kind": "creature",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
-      "trigger": "Elusive. After this attacks a hero",
+      "disposition": "expansion-16 runtime release (#129); see expansion-16 acceptance report",
+      "trigger": "Elusive. After a legal attack against the enemy hero",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Elusive. After this attacks a hero, it loses Elusive until your next turn starts.",
+      "payoffAndLifetime": "Elusive. After a legal attack against the enemy hero, lose Elusive until the controller at that moment next starts a turn. A creature attack does not trigger; damage prevention does not erase a declared hero attack. Use the existing atomic onAttack hook and a timed-keyword loss recorded independently even if another effect already removed Elusive. Later gains cannot override this exposure window. Normal suppression, leave-play cleanup and other independent keyword losses remain; no attack or activation is refunded.",
       "counterplay": "Wait for the hero attack to expose it, then use a targeted answer.",
       "semanticRevision": "David Brine must trade concealment for pressure. Shakirattle keeps Elusive; this opens a visible response window.",
       "releaseChecks": [
         "Win: current rule and simultaneous/terminal boundaries; no revival after a settled win",
-        "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap"
+        "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap",
+        "derived state: legal target revalidation, normal swaps/prevention, fixed construction identity and explicit temporary expiry"
       ],
       "gates": [
         109,

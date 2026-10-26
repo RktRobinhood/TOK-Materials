@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, three expansion-10 cards, two expansion-11 cards, two expansion-12 cards, one expansion-13 creature, one expansion-14 creature, two expansion-15 creatures, eighteen plot-1 story cards, 110 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, three expansion-10 cards, two expansion-11 cards, two expansion-12 cards, one expansion-13 creature, one expansion-14 creature, two expansion-15 creatures, two expansion-16 creatures, eighteen plot-1 story cards, 108 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -708,13 +708,13 @@
       "cost": 4,
       "attack": 4,
       "health": 3,
-      "text": "Swift. This cannot attack a hero on the turn it arrives.",
+      "text": "Swift. This cannot attack a hero during the global turn it entered the board. It may fight a legal creature normally; shared arrival readiness does not override this explicit restriction. On a later turn normal hero targets return. Suppression disables both the ability-granted Swift and restriction. Guard, hidden targets, Freeze, shared activations and player attack limits remain authoritative. Bounce and replay create a new current arrival turn for the same instance.",
       "tags": [
         "swift"
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Use a high-health defender.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-16 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -724,7 +724,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-16: pack pool"
+      },
+      "runtimeRelease": "expansion-16",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Swift. This cannot attack a hero on the turn it arrives.",
+        "rationale": "Use the existing enteredTurn and one authoritative attackTargets ability flag; no separate UI/AI targeting policy."
       }
     },
     {
@@ -923,14 +929,14 @@
       "cost": 2,
       "attack": 2,
       "health": 1,
-      "text": "Elusive. After this attacks a hero, it loses Elusive until your next turn starts.",
+      "text": "Elusive. After a legal attack against the enemy hero, lose Elusive until the controller at that moment next starts a turn. A creature attack does not trigger; damage prevention does not erase a declared hero attack. Use the existing atomic onAttack hook and a timed-keyword loss recorded independently even if another effect already removed Elusive. Later gains cannot override this exposure window. Normal suppression, leave-play cleanup and other independent keyword losses remain; no attack or activation is refunded.",
       "tags": [
         "elusive",
         "combat"
       ],
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Wait for the hero attack to expose it, then use a targeted answer.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-16 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "revision": {
@@ -947,7 +953,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-16: pack pool"
+      },
+      "runtimeRelease": "expansion-16",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Elusive. After this attacks a hero, it loses Elusive until your next turn starts.",
+        "rationale": "Pin the enemy-hero attack and current-controller next-start lifetime using opt-in independent timed keyword loss; preserve ordinary helper membership checks, with no new response window or damage policy."
       }
     },
     {

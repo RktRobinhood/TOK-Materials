@@ -22,7 +22,7 @@
  *   onAxiomPlayed(api, card, id, p)  whenever any player plays an axiom card
  *   onEnemyPlay(api, card, played)   whenever the opponent plays a creature
  *   choose(api, card, choice, req)   answer to api.ask(...)
- *   ignoresGuard, elusive, attacksPerTurn, heroDamage, damageReduction
+ *   ignoresGuard, elusive, attacksPerTurn, heroDamage, damageReduction, noHeroOnArrival
  *   hidden(state, card, H)           true → it can't be attacked right now
  *   ai(state, card, H)               extra value the AI sees in this creature
  *
@@ -830,6 +830,20 @@
                 api.heal(target, 1);
                 api.emit({ t: 'ability', cid: card.cid, target, text: api.name(card.cid) + ' repairs ' + api.name(target) + ': +1 maximum health and heal 1.' });
             } },
+        },
+        // #129 expansion-16: explicit arrival targets and a timed loss of Elusive.
+        'first-rally': {
+            name: 'First Rally', keywords: ['swift'], noHeroOnArrival: true,
+            text: 'Swift. This cannot attack a hero on the turn it arrives.',
+        },
+        'curtain-slip': {
+            name: 'Curtain Slip', elusive: true,
+            text: 'Elusive. After attacking a hero, lose Elusive until your next turn starts.',
+            onAttack(api, card, target) {
+                if (!Battle.Engine.isHero(target)) return;
+                api.keywordUntilStart(card.cid, 'elusive', 'lose', card.controller, 'Curtain Slip', { independentLoss: true });
+                api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' takes a bow: loses Elusive until its next turn starts.' });
+            },
         },
         grook: {
             name: 'Grook',

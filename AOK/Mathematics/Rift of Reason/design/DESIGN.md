@@ -1,3 +1,11 @@
+## Expansion-16 combat restrictions — 26 October 2026 (#129)
+
+Serenox (Rare4/4/3) and David Brine (Common2/2/1) use original costs/stats, selected existing portraits and ordinary packs. Pre-lesson kinds:56 Common /18 Uncommon /10 Rare; weights/prices and allocations unchanged. **102 implemented /108 held; #129 remains open.**
+
+Serenox has Swift but cannot attack a hero on its global arrival turn, including under shared Arrival; suppression removes both. Later hero attacks and ordinary creature targeting remain. David has Elusive; a legal hero attack removes it until the current controller next starts. Creature fights do not trigger. Minimal canonical Engine targeting plus an opt-in independent timed loss preserve suppression, shared uses, cleanup and ordinary gains/losses. Look Closer followed by a hero attack must still record Curtain Slip, so Daydream cannot restore Elusive early. No AI, progress-save, spawn/catch, art/voice or new Fate/token-order/Win-policy change; Stephen's portrait mismatch remains held.
+
+The [verification report](reviews/expansion-16-2026-10-26.md) records12 focused checks, full1,671 pass /one existing skip /zero failures,30 matching native outcomes/layouts and two completed scratch packs with both normal copies. Paired768+768 hook-off games retain Swift/Elusive and have zero draws. Body plays402/342 Serenox,390/376 David mono/mixed; all-game arrival creature/hero events169/0 versus34/315, Curtain Slip events345/0 (not unique windows). Selected512 games retain material mono-share shifts+.171875 Reason strong and+.15625 Imagination neutral, both Serenox-only fixtures. All64 original expansion-15 sampled winners match. Preserve cancellation, selected-control scope and prior adverse/draw risks; no numeric/global balance or new PNG/motion/hardware claim. Final review/publication status is in the report.
+
 ## Expansion-15 small Entrance supports — 26 October 2026 (#129)
 
 Bill Ny-ant and Mark Ro-beetle join expansion-15, both Common cost 2 with original1/3 and2/2 stats, selected existing portraits, ordinary packs and shared cues. Pre-lesson pack kinds: 55 Common / 18 Uncommon / 9 Rare; weights/prices and allocations stay unchanged. **110 concepts remain held; #129 stays open.**

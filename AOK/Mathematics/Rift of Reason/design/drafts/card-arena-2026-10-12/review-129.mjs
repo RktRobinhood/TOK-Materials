@@ -324,3 +324,19 @@ export function reviewExpansion15(cards){
         c.releaseRevision={issue:129,previousText:c.text,previousTarget:c.target,rationale:clarifications15[c.id][1]};c.text=clarifications15[c.id][0];
     }
 }
+
+// #129 expansion-16: two existing combat contracts, without a new timing or Win policy.
+export const expansion16Batch=['emotion-outrage-ox','perception-shadow-shrimp'];
+const clarifications16={
+    'emotion-outrage-ox':['Swift. This cannot attack a hero during the global turn it entered the board. It may fight a legal creature normally; shared arrival readiness does not override this explicit restriction. On a later turn normal hero targets return. Suppression disables both the ability-granted Swift and restriction. Guard, hidden targets, Freeze, shared activations and player attack limits remain authoritative. Bounce and replay create a new current arrival turn for the same instance.',
+        'Use the existing enteredTurn and one authoritative attackTargets ability flag; no separate UI/AI targeting policy.'],
+    'perception-shadow-shrimp':['Elusive. After a legal attack against the enemy hero, lose Elusive until the controller at that moment next starts a turn. A creature attack does not trigger; damage prevention does not erase a declared hero attack. Use the existing atomic onAttack hook and a timed-keyword loss recorded independently even if another effect already removed Elusive. Later gains cannot override this exposure window. Normal suppression, leave-play cleanup and other independent keyword losses remain; no attack or activation is refunded.',
+        'Pin the enemy-hero attack and current-controller next-start lifetime using opt-in independent timed keyword loss; preserve ordinary helper membership checks, with no new response window or damage policy.'],
+};
+export function reviewExpansion16(cards){
+    for(const c of cards)if(expansion16Batch.includes(c.id)){
+        c.runtimeRelease='expansion-16';c.status='Released in expansion-16 (#129); bounded engineering validation, not classroom balance certification';
+        c.acquisition.releaseStatus='Released expansion-16: pack pool';
+        c.releaseRevision={issue:129,previousText:c.text,previousTarget:c.target,rationale:clarifications16[c.id][1]};c.text=clarifications16[c.id][0];
+    }
+}

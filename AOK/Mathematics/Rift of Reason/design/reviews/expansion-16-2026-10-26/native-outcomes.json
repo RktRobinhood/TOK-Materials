@@ -1,0 +1,6713 @@
+[
+  {
+    "case": "serena-entry",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [
+        {
+          "type": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0"
+        }
+      ],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 6,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-outrage-ox",
+              "name": "Serenox",
+              "speciesName": "Serenox",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [
+                "swift"
+              ],
+              "lines": [
+                {
+                  "id": "first-rally",
+                  "name": "First Rally",
+                  "text": "Swift. This cannot attack a hero on the turn it arrives.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0"
+              ],
+              "canActivate": true,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "play",
+          "player": 0,
+          "cid": "p0c0",
+          "target": null,
+          "revealed": false,
+          "text": "You play Serenox.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "serena-creature",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-outrage-ox",
+              "name": "Serenox",
+              "speciesName": "Serenox",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [
+                "swift"
+              ],
+              "lines": [
+                {
+                  "id": "first-rally",
+                  "name": "First Rally",
+                  "text": "Swift. This cannot attack a hero on the turn it arrives.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 16,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 4
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Serenox.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 4,
+          "pb": 0,
+          "text": "Serenox (4 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 4,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 4 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "serena-mature",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-outrage-ox",
+              "name": "Serenox",
+              "speciesName": "Serenox",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [
+                "swift"
+              ],
+              "lines": [
+                {
+                  "id": "first-rally",
+                  "name": "First Rally",
+                  "text": "Swift. This cannot attack a hero on the turn it arrives.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 3,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "h1",
+          "text": "You attack Rival with Serenox.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 1,
+          "amount": 4,
+          "cid": "p0c0",
+          "text": "Rival loses 4 hearts (3 left).",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "serena-shared-entry",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [
+        {
+          "type": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0"
+        }
+      ],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 6,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-outrage-ox",
+              "name": "Serenox",
+              "speciesName": "Serenox",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [
+                "swift"
+              ],
+              "lines": [
+                {
+                  "id": "first-rally",
+                  "name": "First Rally",
+                  "text": "Swift. This cannot attack a hero on the turn it arrives.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0"
+              ],
+              "canActivate": true,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "play",
+          "player": 0,
+          "cid": "p0c0",
+          "target": null,
+          "revealed": false,
+          "text": "You play Serenox.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "serena-suppressed",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-outrage-ox",
+              "name": "Serenox",
+              "speciesName": "Serenox",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "first-rally",
+                  "name": "First Rally",
+                  "text": "Swift. This cannot attack a hero on the turn it arrives.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 3,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "h1",
+          "text": "You attack Rival with Serenox.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 1,
+          "amount": 4,
+          "cid": "p0c0",
+          "text": "Rival loses 4 hearts (3 left).",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "david-entry",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "perception-shadow-shrimp",
+              "name": "David Brine",
+              "speciesName": "David Brine",
+              "legendary": false,
+              "colour": "perception",
+              "printedColour": "perception",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [
+                "elusive"
+              ],
+              "lines": [
+                {
+                  "id": "curtain-slip",
+                  "name": "Curtain Slip",
+                  "text": "Elusive. After attacking a hero, lose Elusive until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": true,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "play",
+          "player": 0,
+          "cid": "p0c0",
+          "target": null,
+          "revealed": false,
+          "text": "You play David Brine.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "david-hero",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "perception-shadow-shrimp",
+              "name": "David Brine",
+              "speciesName": "David Brine",
+              "legendary": false,
+              "colour": "perception",
+              "printedColour": "perception",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "curtain-slip",
+                  "name": "Curtain Slip",
+                  "text": "Elusive. After attacking a hero, lose Elusive until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": [
+                {
+                  "k": "elusive",
+                  "mode": "lose",
+                  "until": 3,
+                  "label": "Curtain Slip"
+                }
+              ],
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 5,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "h1",
+          "text": "You attack Rival with David Brine.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "text": "David Brine takes a bow: loses Elusive until its next turn starts.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 1,
+          "amount": 2,
+          "cid": "p0c0",
+          "text": "Rival loses 2 hearts (5 left).",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "david-creature",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "perception-shadow-shrimp",
+              "name": "David Brine",
+              "speciesName": "David Brine",
+              "legendary": false,
+              "colour": "perception",
+              "printedColour": "perception",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [
+                "elusive"
+              ],
+              "lines": [
+                {
+                  "id": "curtain-slip",
+                  "name": "Curtain Slip",
+                  "text": "Elusive. After attacking a hero, lose Elusive until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with David Brine.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "David Brine (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "david-empty",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "perception-shadow-shrimp",
+              "name": "David Brine",
+              "speciesName": "David Brine",
+              "legendary": false,
+              "colour": "perception",
+              "printedColour": "perception",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "curtain-slip",
+                  "name": "Curtain Slip",
+                  "text": "Elusive. After attacking a hero, lose Elusive until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 5,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "h1",
+          "text": "You attack Rival with David Brine.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 1,
+          "amount": 2,
+          "cid": "p0c0",
+          "text": "Rival loses 2 hearts (5 left).",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "david-restored",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 2,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 9,
+          "playsThisTurn": 2,
+          "attacksThisTurn": 1,
+          "hand": [
+            "p0c1"
+          ],
+          "deck": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "perception-shadow-shrimp",
+              "name": "David Brine",
+              "speciesName": "David Brine",
+              "legendary": false,
+              "colour": "perception",
+              "printedColour": "perception",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 4,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                },
+                {
+                  "source": "buff",
+                  "label": "Daydream",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "curtain-slip",
+                  "name": "Curtain Slip",
+                  "text": "Elusive. After attacking a hero, lose Elusive until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": [
+                {
+                  "k": "elusive",
+                  "mode": "lose",
+                  "until": 4,
+                  "label": "Curtain Slip"
+                }
+              ],
+              "lostKeywords": [
+                "guard"
+              ],
+              "buffs": [
+                {
+                  "label": "Daydream",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false
+                }
+              ],
+              "damage": 0
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 5,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 0,
+          "hand": [
+            "p1c1"
+          ],
+          "deck": [
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": [
+            "p1t0"
+          ]
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "daydream",
+          "target": "p0c0",
+          "text": "You play the tactic Daydream on David Brine.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "text": "Daydream: David Brine gets Elusive and +2 attack.",
+          "turn": 2,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "serena-entry",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [
+        {
+          "type": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0"
+        }
+      ],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 6,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-outrage-ox",
+              "name": "Serenox",
+              "speciesName": "Serenox",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [
+                "swift"
+              ],
+              "lines": [
+                {
+                  "id": "first-rally",
+                  "name": "First Rally",
+                  "text": "Swift. This cannot attack a hero on the turn it arrives.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0"
+              ],
+              "canActivate": true,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "play",
+          "player": 0,
+          "cid": "p0c0",
+          "target": null,
+          "revealed": false,
+          "text": "You play Serenox.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "serena-creature",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-outrage-ox",
+              "name": "Serenox",
+              "speciesName": "Serenox",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [
+                "swift"
+              ],
+              "lines": [
+                {
+                  "id": "first-rally",
+                  "name": "First Rally",
+                  "text": "Swift. This cannot attack a hero on the turn it arrives.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 16,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 4
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Serenox.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 4,
+          "pb": 0,
+          "text": "Serenox (4 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 4,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 4 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "serena-mature",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-outrage-ox",
+              "name": "Serenox",
+              "speciesName": "Serenox",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [
+                "swift"
+              ],
+              "lines": [
+                {
+                  "id": "first-rally",
+                  "name": "First Rally",
+                  "text": "Swift. This cannot attack a hero on the turn it arrives.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 3,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "h1",
+          "text": "You attack Rival with Serenox.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 1,
+          "amount": 4,
+          "cid": "p0c0",
+          "text": "Rival loses 4 hearts (3 left).",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "serena-shared-entry",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [
+        {
+          "type": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0"
+        }
+      ],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 6,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-outrage-ox",
+              "name": "Serenox",
+              "speciesName": "Serenox",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [
+                "swift"
+              ],
+              "lines": [
+                {
+                  "id": "first-rally",
+                  "name": "First Rally",
+                  "text": "Swift. This cannot attack a hero on the turn it arrives.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0"
+              ],
+              "canActivate": true,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "play",
+          "player": 0,
+          "cid": "p0c0",
+          "target": null,
+          "revealed": false,
+          "text": "You play Serenox.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "serena-suppressed",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-outrage-ox",
+              "name": "Serenox",
+              "speciesName": "Serenox",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "first-rally",
+                  "name": "First Rally",
+                  "text": "Swift. This cannot attack a hero on the turn it arrives.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 3,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "h1",
+          "text": "You attack Rival with Serenox.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 1,
+          "amount": 4,
+          "cid": "p0c0",
+          "text": "Rival loses 4 hearts (3 left).",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "david-entry",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "perception-shadow-shrimp",
+              "name": "David Brine",
+              "speciesName": "David Brine",
+              "legendary": false,
+              "colour": "perception",
+              "printedColour": "perception",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [
+                "elusive"
+              ],
+              "lines": [
+                {
+                  "id": "curtain-slip",
+                  "name": "Curtain Slip",
+                  "text": "Elusive. After attacking a hero, lose Elusive until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": true,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "play",
+          "player": 0,
+          "cid": "p0c0",
+          "target": null,
+          "revealed": false,
+          "text": "You play David Brine.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "david-hero",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "perception-shadow-shrimp",
+              "name": "David Brine",
+              "speciesName": "David Brine",
+              "legendary": false,
+              "colour": "perception",
+              "printedColour": "perception",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "curtain-slip",
+                  "name": "Curtain Slip",
+                  "text": "Elusive. After attacking a hero, lose Elusive until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": [
+                {
+                  "k": "elusive",
+                  "mode": "lose",
+                  "until": 3,
+                  "label": "Curtain Slip"
+                }
+              ],
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 5,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "h1",
+          "text": "You attack Rival with David Brine.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "text": "David Brine takes a bow: loses Elusive until its next turn starts.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 1,
+          "amount": 2,
+          "cid": "p0c0",
+          "text": "Rival loses 2 hearts (5 left).",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "david-creature",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "perception-shadow-shrimp",
+              "name": "David Brine",
+              "speciesName": "David Brine",
+              "legendary": false,
+              "colour": "perception",
+              "printedColour": "perception",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [
+                "elusive"
+              ],
+              "lines": [
+                {
+                  "id": "curtain-slip",
+                  "name": "Curtain Slip",
+                  "text": "Elusive. After attacking a hero, lose Elusive until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with David Brine.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "David Brine (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "david-empty",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "perception-shadow-shrimp",
+              "name": "David Brine",
+              "speciesName": "David Brine",
+              "legendary": false,
+              "colour": "perception",
+              "printedColour": "perception",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "curtain-slip",
+                  "name": "Curtain Slip",
+                  "text": "Elusive. After attacking a hero, lose Elusive until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 5,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "h1",
+          "text": "You attack Rival with David Brine.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 1,
+          "amount": 2,
+          "cid": "p0c0",
+          "text": "Rival loses 2 hearts (5 left).",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "david-restored",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 2,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 9,
+          "playsThisTurn": 2,
+          "attacksThisTurn": 1,
+          "hand": [
+            "p0c1"
+          ],
+          "deck": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "perception-shadow-shrimp",
+              "name": "David Brine",
+              "speciesName": "David Brine",
+              "legendary": false,
+              "colour": "perception",
+              "printedColour": "perception",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 4,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                },
+                {
+                  "source": "buff",
+                  "label": "Daydream",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "curtain-slip",
+                  "name": "Curtain Slip",
+                  "text": "Elusive. After attacking a hero, lose Elusive until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": [
+                {
+                  "k": "elusive",
+                  "mode": "lose",
+                  "until": 4,
+                  "label": "Curtain Slip"
+                }
+              ],
+              "lostKeywords": [
+                "guard"
+              ],
+              "buffs": [
+                {
+                  "label": "Daydream",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false
+                }
+              ],
+              "damage": 0
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 5,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 0,
+          "hand": [
+            "p1c1"
+          ],
+          "deck": [
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": [
+            "p1t0"
+          ]
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "daydream",
+          "target": "p0c0",
+          "text": "You play the tactic Daydream on David Brine.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "text": "Daydream: David Brine gets Elusive and +2 attack.",
+          "turn": 2,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "serena-entry",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [
+        {
+          "type": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0"
+        }
+      ],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 6,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-outrage-ox",
+              "name": "Serenox",
+              "speciesName": "Serenox",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [
+                "swift"
+              ],
+              "lines": [
+                {
+                  "id": "first-rally",
+                  "name": "First Rally",
+                  "text": "Swift. This cannot attack a hero on the turn it arrives.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0"
+              ],
+              "canActivate": true,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "play",
+          "player": 0,
+          "cid": "p0c0",
+          "target": null,
+          "revealed": false,
+          "text": "You play Serenox.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "serena-creature",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-outrage-ox",
+              "name": "Serenox",
+              "speciesName": "Serenox",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [
+                "swift"
+              ],
+              "lines": [
+                {
+                  "id": "first-rally",
+                  "name": "First Rally",
+                  "text": "Swift. This cannot attack a hero on the turn it arrives.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 16,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 4
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Serenox.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 4,
+          "pb": 0,
+          "text": "Serenox (4 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 4,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 4 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "serena-mature",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-outrage-ox",
+              "name": "Serenox",
+              "speciesName": "Serenox",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [
+                "swift"
+              ],
+              "lines": [
+                {
+                  "id": "first-rally",
+                  "name": "First Rally",
+                  "text": "Swift. This cannot attack a hero on the turn it arrives.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 3,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "h1",
+          "text": "You attack Rival with Serenox.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 1,
+          "amount": 4,
+          "cid": "p0c0",
+          "text": "Rival loses 4 hearts (3 left).",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "serena-shared-entry",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [
+        {
+          "type": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0"
+        }
+      ],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 6,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-outrage-ox",
+              "name": "Serenox",
+              "speciesName": "Serenox",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [
+                "swift"
+              ],
+              "lines": [
+                {
+                  "id": "first-rally",
+                  "name": "First Rally",
+                  "text": "Swift. This cannot attack a hero on the turn it arrives.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0"
+              ],
+              "canActivate": true,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "play",
+          "player": 0,
+          "cid": "p0c0",
+          "target": null,
+          "revealed": false,
+          "text": "You play Serenox.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "serena-suppressed",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-outrage-ox",
+              "name": "Serenox",
+              "speciesName": "Serenox",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 4,
+              "baseAttack": 4,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 4
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "first-rally",
+                  "name": "First Rally",
+                  "text": "Swift. This cannot attack a hero on the turn it arrives.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 3,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "h1",
+          "text": "You attack Rival with Serenox.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 1,
+          "amount": 4,
+          "cid": "p0c0",
+          "text": "Rival loses 4 hearts (3 left).",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "david-entry",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "perception-shadow-shrimp",
+              "name": "David Brine",
+              "speciesName": "David Brine",
+              "legendary": false,
+              "colour": "perception",
+              "printedColour": "perception",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [
+                "elusive"
+              ],
+              "lines": [
+                {
+                  "id": "curtain-slip",
+                  "name": "Curtain Slip",
+                  "text": "Elusive. After attacking a hero, lose Elusive until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": true,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "play",
+          "player": 0,
+          "cid": "p0c0",
+          "target": null,
+          "revealed": false,
+          "text": "You play David Brine.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "david-hero",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "perception-shadow-shrimp",
+              "name": "David Brine",
+              "speciesName": "David Brine",
+              "legendary": false,
+              "colour": "perception",
+              "printedColour": "perception",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "curtain-slip",
+                  "name": "Curtain Slip",
+                  "text": "Elusive. After attacking a hero, lose Elusive until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": [
+                {
+                  "k": "elusive",
+                  "mode": "lose",
+                  "until": 3,
+                  "label": "Curtain Slip"
+                }
+              ],
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 5,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "h1",
+          "text": "You attack Rival with David Brine.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "text": "David Brine takes a bow: loses Elusive until its next turn starts.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 1,
+          "amount": 2,
+          "cid": "p0c0",
+          "text": "Rival loses 2 hearts (5 left).",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "david-creature",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "perception-shadow-shrimp",
+              "name": "David Brine",
+              "speciesName": "David Brine",
+              "legendary": false,
+              "colour": "perception",
+              "printedColour": "perception",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [
+                "elusive"
+              ],
+              "lines": [
+                {
+                  "id": "curtain-slip",
+                  "name": "Curtain Slip",
+                  "text": "Elusive. After attacking a hero, lose Elusive until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with David Brine.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "David Brine (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "david-empty",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "perception-shadow-shrimp",
+              "name": "David Brine",
+              "speciesName": "David Brine",
+              "legendary": false,
+              "colour": "perception",
+              "printedColour": "perception",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "curtain-slip",
+                  "name": "Curtain Slip",
+                  "text": "Elusive. After attacking a hero, lose Elusive until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 5,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "h1",
+          "text": "You attack Rival with David Brine.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "hit",
+          "player": 1,
+          "amount": 2,
+          "cid": "p0c0",
+          "text": "Rival loses 2 hearts (5 left).",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "david-restored",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 2,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "legalAttacks": [],
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 9,
+          "playsThisTurn": 2,
+          "attacksThisTurn": 1,
+          "hand": [
+            "p0c1"
+          ],
+          "deck": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "perception-shadow-shrimp",
+              "name": "David Brine",
+              "speciesName": "David Brine",
+              "legendary": false,
+              "colour": "perception",
+              "printedColour": "perception",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 4,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                },
+                {
+                  "source": "buff",
+                  "label": "Daydream",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "curtain-slip",
+                  "name": "Curtain Slip",
+                  "text": "Elusive. After attacking a hero, lose Elusive until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p1c0",
+                "h1"
+              ],
+              "canActivate": false,
+              "timedKeywords": [
+                {
+                  "k": "elusive",
+                  "mode": "lose",
+                  "until": 4,
+                  "label": "Curtain Slip"
+                }
+              ],
+              "lostKeywords": [
+                "guard"
+              ],
+              "buffs": [
+                {
+                  "label": "Daydream",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false
+                }
+              ],
+              "damage": 0
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 5,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 0,
+          "hand": [
+            "p1c1"
+          ],
+          "deck": [
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "targets": [
+                "p0c0",
+                "h0"
+              ],
+              "canActivate": false,
+              "timedKeywords": null,
+              "lostKeywords": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": [
+            "p1t0"
+          ]
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "daydream",
+          "target": "p0c0",
+          "text": "You play the tactic Daydream on David Brine.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "text": "Daydream: David Brine gets Elusive and +2 attack.",
+          "turn": 2,
+          "round": 1
+        }
+      ]
+    }
+  }
+]

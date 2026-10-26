@@ -473,6 +473,7 @@
         const creatures = s.players[foe].board.filter(t => !isHidden(s, t));
         const guards = creatures.filter(t => hasKeyword(s, t, 'guard'));
         if (guards.length && !rules(s).ignoreGuard && !abilityFlag(s, c, 'ignoresGuard')) return guards;
+        if (c.enteredTurn === s.turn && abilityFlag(s, c, 'noHeroOnArrival')) return creatures;
         return creatures.concat([heroId(foe)]);
     }
 
@@ -1135,12 +1136,16 @@
             // Until the end of its controller's next turn (#121, Scheduled Speech; see nextTurnEnd).
             buffNextTurn(cid, attack, health, label) { s.cards[cid].buffs.push({ label, attack: attack || 0, health: health || 0, temp: false, untilTurn: nextTurnEnd(G, s.cards[cid].controller) }); },
             // Until p's next turn starts (#148): a boost, or a keyword gained or lost. A gain the creature already
-            // has, or a loss of one it doesn't have, changes nothing (→ false). Damage is never touched.
+            // has, or an ordinary loss of one it doesn't have, changes nothing (→ false). An explicit
+            // independentLoss records its own exposure window even if another effect already hid the keyword.
             buffUntilStart(cid, attack, health, label, p) { s.cards[cid].buffs.push({ label, attack: attack || 0, health: health || 0, temp: false, untilStart: nextTurnStart(G, p) }); },
-            keywordUntilStart(cid, k, mode, p, label) {
+            keywordUntilStart(cid, k, mode, p, label, options = {}) {
                 const c = s.cards[cid], has = hasKeyword(s, cid, k);
-                if (mode === 'gain' ? has : !has) return false;
-                c.timedKeywords = (c.timedKeywords || []).concat([{ k, mode, until: nextTurnStart(G, p), label: label || null }]);
+                const independentLoss = mode === 'lose' && options.independentLoss;
+                if (mode === 'gain' ? has : !has && !independentLoss) return false;
+                const entry = { k, mode, until: nextTurnStart(G, p), label: label || null };
+                if (independentLoss && (c.timedKeywords || []).some(t => t.k === k && t.mode === mode && t.until === entry.until && t.label === entry.label)) return false;
+                c.timedKeywords = (c.timedKeywords || []).concat([entry]);
                 return true;
             },
             // Player p's soonest pending one-shot scheduled event (#148, Second Alarm), moved `spaces` later, but never

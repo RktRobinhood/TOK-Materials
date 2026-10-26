@@ -454,6 +454,20 @@
         },
     });
 
+    // #129 expansion-16: existing selected portraits, ordinary combat and target restrictions.
+    Object.assign(Rift.data.creatures, {
+        'emotion-outrage-ox': {
+            name: 'Serenox', inspiredBy: 'Serena Williams', colour: 'emotion', rarity: 'rare', power: 4, cost: 4, attack: 4, health: 3,
+            ability: 'first-rally', abilityText: 'Swift. This cannot attack a hero on the turn it arrives.',
+            blurb: 'A perfect creature rally. The hero waits one turn.', lines: [], release: 'expansion-16', packEligible: true,
+        },
+        'perception-shadow-shrimp': {
+            name: 'David Brine', inspiredBy: 'David Blaine', colour: 'perception', rarity: 'common', power: 2, cost: 2, attack: 2, health: 1,
+            ability: 'curtain-slip', abilityText: 'Elusive. After attacking a hero, lose Elusive until your next turn starts.',
+            blurb: 'The final bow leaves the stage cape open.', lines: [], release: 'expansion-16', packEligible: true,
+        },
+    });
+
     // #132 plot identities: their actual earned source is the permanent Acquisition registry.
     function plotCreature(name,inspiredBy,colour,attack,health,ability,abilityText,blurb){
         return {name,inspiredBy,colour,rarity:'rare',power:5,cost:5,attack,health,ability,abilityText,blurb,lines:[],release:'plot-1',packEligible:false};

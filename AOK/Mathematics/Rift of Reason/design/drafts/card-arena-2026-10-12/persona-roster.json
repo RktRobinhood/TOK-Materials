@@ -1096,7 +1096,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-16: pack pool"
       },
       "silhouette": "Powerful rounded ox with a small dark crest, red sports wrap and a composed competitive face.",
       "signatureProp": "One compact wooden racket silhouette; stable ready stance, no sponsor logos.",
@@ -1108,7 +1108,8 @@
       "sharedSfx": [
         "card-play",
         "hit",
-        "defeat"
+        "defeat",
+        "block"
       ],
       "artId": "creature/emotion-outrage-ox/idle",
       "palette": {
@@ -1121,12 +1122,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-16 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 4,
         "attack": 4,
         "health": 3,
-        "text": "Swift. This cannot attack a hero on the turn it arrives.",
+        "text": "Swift. This cannot attack a hero during the global turn it entered the board. It may fight a legal creature normally; shared arrival readiness does not override this explicit restriction. On a later turn normal hero targets return. Suppression disables both the ability-granted Swift and restriction. Guard, hidden targets, Freeze, shared activations and player attack limits remain authoritative. Bounce and replay create a new current arrival turn for the same instance.",
         "gates": [
           109
         ]
@@ -1473,7 +1474,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-16: pack pool"
       },
       "silhouette": "Dark shrimp with broad curved shell, short antennae and a worn emerald-lined stage cape.",
       "signatureProp": "One plain blank playing card partly tucked into the cape.",
@@ -1485,7 +1486,9 @@
       "sharedSfx": [
         "card-play",
         "hit",
-        "defeat"
+        "defeat",
+        "block",
+        "fate-warp"
       ],
       "artId": "creature/perception-shadow-shrimp/idle",
       "palette": {
@@ -1498,12 +1501,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-16 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 2,
         "attack": 2,
         "health": 1,
-        "text": "Elusive. After this attacks a hero, it loses Elusive until your next turn starts.",
+        "text": "Elusive. After a legal attack against the enemy hero, lose Elusive until the controller at that moment next starts a turn. A creature attack does not trigger; damage prevention does not erase a declared hero attack. Use the existing atomic onAttack hook and a timed-keyword loss recorded independently even if another effect already removed Elusive. Later gains cannot override this exposure window. Normal suppression, leave-play cleanup and other independent keyword losses remain; no attack or activation is refunded.",
         "gates": [
           109,
           127
