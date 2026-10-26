@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, three expansion-10 cards, two expansion-11 cards, two expansion-12 cards, one expansion-13 creature, eighteen plot-1 story cards, 113 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, three expansion-10 cards, two expansion-11 cards, two expansion-12 cards, one expansion-13 creature, one expansion-14 creature, eighteen plot-1 story cards, 112 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -430,14 +430,14 @@
       "cost": 1,
       "attack": 2,
       "health": 1,
-      "text": "Once per match, after this survives a fight on your turn, ready one additional attack for it. Normal card activations still apply.",
+      "text": "Once per match, after this survives a creature fight on its controller's turn, gain one additional attack this turn. Zero damage still qualifies; hero hits, opponent-turn fights, lethal damage and suppressed abilities do not. Normal shared activations, player attack limits, Freeze and sleep apply. No spent attack or manual Activate is refunded. Leave-play and turn changes clear the extra permission, but the same instance keeps its spent match allowance through bounce/replay.",
       "tags": [
         "combat",
         "ready"
       ],
       "strategy": "Risk, pressure, self-damage and changed victory conditions",
       "counterplay": "Defeat it in the first fight, freeze it, or consume the shared activation budget.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-14 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "revision": {
@@ -454,7 +454,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-14: pack pool"
+      },
+      "runtimeRelease": "expansion-14",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Once per match, after this survives a fight on your turn, ready one additional attack for it. Normal card activations still apply.",
+        "rationale": "Preserve the reviewed once-per-match extra leap with a separate current-turn attack permission. Keep spent attacks, shared activations, player limits and manual-Activate locks; do not bank the permission or reset its match allowance through bounce/replay."
       }
     },
     {

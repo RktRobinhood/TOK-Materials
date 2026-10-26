@@ -1,0 +1,116 @@
+- 'generic "Rival: 7 hearts"':
+  - generic "Rival"
+  - generic "7 of 12 hearts":
+    - generic: "7"
+- generic: Deck 14
+- generic: Hand 0
+- generic: Discard 0
+- strong: "10"
+- text: /10
+- generic: Energy
+- button "Mr. Beastie, cost 4, attack 0, health 20 of 20. Uncommon rarity.":
+  - generic "Uncommon rarity":
+    - generic: U
+  - generic: Mr. Beastie
+  - generic "Escalate":
+    - generic "Escalate"
+  - generic: "0"
+  - generic: "20"
+  - generic: No ability
+- group "Fate track":
+  - generic: No Fate track in this match.
+- status:
+  - generic: Drag (or click) a glowing card to play it. Then End turn.
+  - generic: "Rival's public deck identity: mixed or generic. Shared rules do not count."
+- button "End turn":
+  - generic: End
+  - generic: turn
+- generic: Drag a creature here to play it.
+- 'generic "Your hero: 7 hearts"':
+  - generic "You"
+  - generic "7 of 12 hearts":
+    - generic: "7"
+- generic: Deck 14
+- generic: Hand 1
+- generic: Discard 0
+- button "Dua Leapfrog, cost 1, attack 2, health 1 of 1. Common rarity." [active]:
+  - generic "Common rarity":
+    - generic: C
+  - generic: "1"
+  - generic: Dua Leapfrog
+  - generic "One More Leap":
+    - generic "One More Leap"
+  - generic: "2"
+  - generic: "1"
+- strong: "10"
+- text: /10
+- generic: Energy
+- 'generic "Card activations: 2 of 2 left this turn. Each cast, attack or manual Activate uses one."':
+  - generic: Uses
+- 'button "Read Dua Leapfrog: full text and active effects"': Read Dua Leapfrog
+- group "Decks on the table":
+  - button "Draw from your deck" [disabled]:
+    - generic: Your deck
+    - generic: "14"
+  - button "Take a rule card" [disabled]:
+    - generic: Shared axioms
+    - generic: "2"
+  - 'img "Their deck: 14 cards"':
+    - generic: Their deck
+    - generic: "14"
+- complementary:
+  - button "How to play"
+  - button "Leave match"
+  - region "Axioms":
+    - strong: Axioms
+    - generic: Active now · All basic.
+    - paragraph: Axioms are the rules both players start from. Rule cards and Fate can change them.
+    - 'button "Win: Enemy hero to 0 ❤ wins"':
+      - generic: Win
+      - generic: Enemy hero to 0 ❤ wins
+    - 'button "Fights: Both creatures hit"':
+      - generic: Fights
+      - generic: Both creatures hit
+    - 'button "Card activations: 2 activations per turn"':
+      - generic: Card activations
+      - generic: 2 activations per turn
+      - generic: 2 left
+    - 'button "Attacks: Each creature attacks once"':
+      - generic: Attacks
+      - generic: Each creature attacks once
+    - 'button "Energy: +1 each turn"':
+      - generic: Energy
+      - generic: +1 each turn
+    - 'button "Drawing: Draw 1"':
+      - generic: ⚖
+      - generic: Drawing
+      - generic: Draw 1
+    - 'button "Card costs: Creature costs +0"':
+      - generic: Card costs
+      - generic: Creature costs +0
+  - 'generic "Colour matchups: Strong +1 / Weak −1"'
+  - option "Neutral" [selected]
+  - option "Strong"
+  - option "Weak"
+  - option "Weak at 1"
+  - option "Shield"
+  - option "Underdog"
+  - option "Reversed wheel"
+  - option "Zero attack"
+- strong: Expansion-14 · memory-only save
+- combobox "Expansion-14 card":
+  - 'option "Dua: ordinary play" [selected]'
+  - 'option "Dua: survived fight"'
+  - 'option "Dua: two attacks"'
+  - 'option "Dua: opposing turn"'
+  - 'option "Dua: lethal fight"'
+  - 'option "Dua: silenced"'
+  - 'option "Dua: Empty Set"'
+  - 'option "Dua: player attack cap"'
+  - 'option "Dua: Haste plus one"'
+  - 'option "Lovelace: programmed leap"'
+- button "Start card sample"
+- button "Check outcome"
+- status: Hearts 7 / 7 · Energy 10 · main
+- button "Open pack sample"
+- generic "Scratch outcome details"

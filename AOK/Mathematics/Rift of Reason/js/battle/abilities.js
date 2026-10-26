@@ -803,6 +803,15 @@
                 api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' reacts: +1 attack until its next turn starts.' });
             },
         },
+        'one-more-leap': {
+            name: 'One More Leap', text: 'Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.',
+            onSurvive(api, card) {
+                if (card.oneMoreLeapUsed || api.s.active !== card.controller) return;
+                card.oneMoreLeapUsed = true;
+                api.extraAttack(card.cid);
+                api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' gets one extra attack this turn. Normal card activations still apply.' });
+            },
+        },
         grook: {
             name: 'Grook',
             text: 'Whenever it survives a fight, draw a card.',

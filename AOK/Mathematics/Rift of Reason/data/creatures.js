@@ -433,6 +433,13 @@
         blurb: 'One small hit. A reaction that barely fits inside the headset.', lines: [], release: 'expansion-13', packEligible: true,
     };
 
+    // #129 expansion-14: existing selected portrait and one once-per-match extra leap.
+    Rift.data.creatures['emotion-pulse-pup'] = {
+        name: 'Dua Leapfrog', inspiredBy: 'Dua Lipa', colour: 'emotion', rarity: 'common', power: 2, cost: 1, attack: 2, health: 1,
+        ability: 'one-more-leap', abilityText: 'Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.',
+        blurb: 'One small leap earns one little encore.', lines: [], release: 'expansion-14', packEligible: true,
+    };
+
     // #132 plot identities: their actual earned source is the permanent Acquisition registry.
     function plotCreature(name,inspiredBy,colour,attack,health,ability,abilityText,blurb){
         return {name,inspiredBy,colour,rarity:'rare',power:5,cost:5,attack,health,ability,abilityText,blurb,lines:[],release:'plot-1',packEligible:false};

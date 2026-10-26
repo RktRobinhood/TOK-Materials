@@ -297,3 +297,14 @@ export function reviewExpansion13(cards){
         c.text='Once per global turn, after this takes positive damage and survives ordinary prevention, give it +1 attack until its controller at that moment next starts a turn. Shield, lethal damage, Silence and Empty Set do not trigger it. The same instance keeps its allowance through bounce/replay; ordinary leave-play cleanup removes buffs. No attack or card activation is refunded.';
     }
 }
+
+// #129 expansion-14: one selected Common creature and a once-per-match attack-only grant.
+export const expansion14Batch=['emotion-pulse-pup'];
+export function reviewExpansion14(cards){
+    for(const c of cards)if(expansion14Batch.includes(c.id)){
+        c.runtimeRelease='expansion-14';c.status='Released in expansion-14 (#129); bounded engineering validation, not classroom balance certification';
+        c.acquisition.releaseStatus='Released expansion-14: pack pool';
+        c.releaseRevision={issue:129,previousText:c.text,rationale:'Preserve the reviewed once-per-match extra leap with a separate current-turn attack permission. Keep spent attacks, shared activations, player limits and manual-Activate locks; do not bank the permission or reset its match allowance through bounce/replay.'};
+        c.text="Once per match, after this survives a creature fight on its controller's turn, gain one additional attack this turn. Zero damage still qualifies; hero hits, opponent-turn fights, lethal damage and suppressed abilities do not. Normal shared activations, player attack limits, Freeze and sleep apply. No spent attack or manual Activate is refunded. Leave-play and turn changes clear the extra permission, but the same instance keeps its spent match allowance through bounce/replay.";
+    }
+}

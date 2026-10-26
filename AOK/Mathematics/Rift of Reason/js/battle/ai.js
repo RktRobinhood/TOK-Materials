@@ -511,7 +511,8 @@
             const onBoard = s.players[c.controller].board.includes(cid);
             sig = [c.controller, c.species, c.ability, c.gained.join(','), Eng.attackOf(s, cid), Eng.healthOf(s, cid).current,
                 Eng.healthOf(s, cid).max, Eng.keywordsOf(s, cid).join(','), onBoard ? 'b' : 'h', c.attacks, c.activated, c.frozen, c.frozenUntil,
-                c.silenced, c.enteredTurn === s.turn, c.metaverseUsed, c.siuuu, c.prediction, c.colourless, c.cost].join('|');
+                c.silenced, c.enteredTurn === s.turn, c.metaverseUsed, c.siuuu, c.prediction, c.colourless, c.cost,
+                !!c.oneMoreLeapUsed, Eng.attacksAllowed(s, cid)].join('|');
         }
         cache.set(cid, sig);
         return sig;
@@ -717,8 +718,7 @@
             seen.add(a.cid);
             const dmg = Eng.fightPreview(s, a.cid, hero).damage;
             const c = s.cards[a.cid];
-            let n = r.attacksPerCreature;
-            abilityIdsOf(s, c).forEach(id => { if (abilityDefs()[id].attacksPerTurn) n = Math.max(n, abilityDefs()[id].attacksPerTurn); });
+            const n = Eng.attacksAllowed(s, a.cid);
             for (let i = c.attacks; i < n; i++) hits.push({ a, dmg });
         });
         hits.sort((x, y) => y.dmg - x.dmg);
@@ -821,11 +821,10 @@
         let dmg = P.spark ? 3 : 0;
         for (const cid of P.board) {
             const c = s.cards[cid];
-            let n = r.attacksPerCreature;
+            const n = Eng.attacksAllowed(s, cid);
             let extra = 0;
             for (const id of abilityIdsOf(s, c)) {
                 const def = abilityDefs()[id];
-                if (def.attacksPerTurn) n = Math.max(n, def.attacksPerTurn);
                 if (def.heroDamage) extra += def.heroDamage;
             }
             if (Eng.canAttack(s, cid)) dmg += Math.max(0, n - c.attacks) * (Eng.attackOf(s, cid) + extra + 2);

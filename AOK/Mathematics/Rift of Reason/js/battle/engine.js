@@ -446,7 +446,8 @@
     function attacksAllowed(s, cid) {
         let n = rules(s).attacksPerCreature;
         eachAbility(s, s.cards[cid], def => { if (def.attacksPerTurn) n = Math.max(n, def.attacksPerTurn); });
-        return n;
+        const extra = s.cards[cid].extraAttacks;
+        return n + (extra && extra.turn === s.turn ? extra.count : 0);
     }
 
     function canAttack(s, cid) {
@@ -822,7 +823,7 @@
             baseKeywords: kws,
             ability: injuries.includes('no-ability') ? null : (ch.ability || (inst.warped && inst.warped.ability) || sp.ability || null),
             gained: [], buffs: [], extraKeywords: [],
-            damage: 0, enteredTurn: null, attacks: 0, activated: false, frozen: false, frozenUntil: null, silenced: false, shieldUsed: false,
+            damage: 0, enteredTurn: null, attacks: 0, extraAttacks: null, activated: false, frozen: false, frozenUntil: null, silenced: false, shieldUsed: false,
             nickname: null, colourless: false, prediction: null, metaverseUsed: false, siuuu: 0, burned: false,
             legendary: sp.rarity === 'legendary', loaner: !!inst.loaner, trophyOf: inst.trophyOf || null,
             injured: injuries.slice(), warped: !!(ch.ability || (inst.warped && inst.warped.ability)),
@@ -1171,6 +1172,11 @@
             takeAxiom(id) { removeFrom(s.axioms.deck, id); },
             ask: req => ask(G, req),
             attack: cid => attackOf(s, cid),
+            // Attack-only permission this turn: keep the spent attack, shared uses and Activate lock.
+            extraAttack(cid) {
+                const c = s.cards[cid], old = c.extraAttacks;
+                c.extraAttacks = { turn: s.turn, count: (old && old.turn === s.turn ? old.count : 0) + 1 };
+            },
             // Colour tactics (below).
             colourInPlay: (p, colour) => colourInPlay(s, p, colour),
             stripKeywords: (cid, list) => stripKeywords(s, cid, list),
@@ -1422,7 +1428,7 @@
     function resetCard(c) {
         c.damage = 0; c.buffs = []; c.gained = []; c.extraKeywords = [];
         c.bookmarkTurn = null; c.bookmarkPlayer = null;
-        c.enteredTurn = null; c.attacks = 0; c.activated = false; c.frozen = false; c.frozenUntil = null; c.silenced = false; c.shieldUsed = false;
+        c.enteredTurn = null; c.attacks = 0; c.extraAttacks = null; c.activated = false; c.frozen = false; c.frozenUntil = null; c.silenced = false; c.shieldUsed = false;
         c.nickname = null; c.colourless = false; c.prediction = null; c.siuuu = 0; c.burned = false;
         if (c.lostKeywords) c.lostKeywords = null;
         if (c.timedKeywords) c.timedKeywords = null;
@@ -1497,6 +1503,7 @@
     function endAtTurnStart(s) {
         Object.values(s.cards).forEach(c => {
             if (c.kind !== 'creature') return;
+            if (c.extraAttacks && c.extraAttacks.turn < s.turn) c.extraAttacks = null;
             if (c.buffs.some(b => b.untilStart != null && b.untilStart <= s.turn)) c.buffs = c.buffs.filter(b => !(b.untilStart != null && b.untilStart <= s.turn));
             if (c.timedKeywords && c.timedKeywords.some(t => t.until <= s.turn)) {
                 const left = c.timedKeywords.filter(t => t.until > s.turn);   // a new array: cloneState copies cards shallowly
@@ -2538,7 +2545,7 @@
         createBattle, legalActions, applyAction, applyLegal, previewAction, winner, decider, actionKey, cloneState, fullLog, lostUids, overkillOf, exhaustion,
         rules, activeAxioms, axiomWouldChange, axiomPreview, projectAxiom, NUMERIC_RULES, changedAxioms, ruleSummary, timeline, fatePreview, fateNext, fateSchedule, fateEventPreview, fateLeapPreview, SCHEDULE_LIMIT, canSchedule, scheduleLimit, scheduleDelay, describe, activeEffects, wheelEdges, playsLeft, playLimit,
         playCost, axiomCost, attackOf, attackParts, healthOf, keywordsOf, hasKeyword, isSleeping, isHidden, goalProgress,
-        canAttack, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
+        canAttack, attacksAllowed, attackTargets, activations, canActivateNow, targetsFor, entranceOf, fightPreview,
         colourOf, wheelBonus, cardName, logName, says, handRoom, isHero, heroId, drawChoices, creaturesLeft, planningCreatureCount,
         buildAxiomDeck, axiomSelection, tacticSelection, randomTeam, colourInPlay, H,
         BAG_LIMIT, bagSelection, itemActions, bagStatus, itemsUsed,

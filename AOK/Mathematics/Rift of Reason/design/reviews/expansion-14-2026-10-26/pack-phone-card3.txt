@@ -1,0 +1,71 @@
+- strong: Pack bench
+- 'generic "First hint on each new topic: free and keeps stars. Later hints and wrong checks after the free checks cost hearts. At zero: a scar and 2 hearts on the map."':
+  - img "♥"
+  - img "♥"
+  - img "♥"
+  - img "♥"
+  - img "♥"
+- generic "Catch Charms": 🪢 3
+- button "Shop · 70 Coins · new cards"
+- button "Journal"
+- button "📖 Collection"
+- button "🎒 Bag"
+- button "⚙"
+- generic: "The Valley · Prologue: The Fair · Level 1"
+- button "🌀 Time rift"
+- dialog "Campfire pack stall":
+  - button "Close": ✕
+  - heading "Campfire pack stall" [level=2]
+  - img "A small woodland shop"
+  - strong: 70 Coins
+  - paragraph: "Earn Coins by completing checked puzzles: 10 for a first success, 2 for a replay, 25 for a first boss or mini-boss win."
+  - heading "Card packs" [level=3]
+  - paragraph: Every pack card is a new copy for your Collection. You can still get 315 cards.
+  - paragraph: "Next card: Common 67% (53 kinds), Uncommon 23.7% (18 kinds), Rare 9.3% (9 kinds). Foil: 4% per card. Full folders are left out."
+  - paragraph: "Free packs saved: 0."
+  - button "Five-card pack · 50 Coins" [disabled]
+  - button "Show your new cards"
+  - status
+  - paragraph: No real money. Catching creatures and direct card rewards still come from playing.
+  - heading "Sell spare supplies" [level=3]
+  - paragraph: Keep 2 Catch Charms, 1 Lure Lantern and 1 Tonic. Creatures, cards and keepsakes are never sold.
+  - paragraph: "Catch Charm: 3 owned · keep 2 · sell 1 × 5 = 5 Coins"
+  - paragraph: "Lure Lantern: 0 owned · keep 1 · sell 0 × 10 = 0 Coins"
+  - paragraph: "Tonic: 1 owned · keep 1 · sell 0 × 6 = 0 Coins"
+  - button "Review surplus sale · 5 Coins"
+  - status
+  - button "Close"
+- dialog "Your new cards":
+  - heading "Your new cards" [level=2]
+  - paragraph: Card 3 of 5
+  - generic "Uncommon rarity":
+    - generic: U
+    - generic: Uncommon
+  - generic: Careful Wording
+  - status:
+    - generic "Uncommon rarity":
+      - generic: U
+      - generic: Uncommon
+    - text: spell
+    - generic: Careful Wording
+    - paragraph: Remove its oldest temporary attack penalty. Then give +1 attack until your next turn starts. Lasting changes remain.
+    - generic: New copy · Folder 1/4
+  - button "Next card (4 of 5)" [active]
+  - button "Skip"
+- strong: Expansion-14 · memory-only save
+- combobox "Expansion-14 card":
+  - 'option "Dua: ordinary play"'
+  - 'option "Dua: survived fight"'
+  - 'option "Dua: two attacks"'
+  - 'option "Dua: opposing turn"'
+  - 'option "Dua: lethal fight"'
+  - 'option "Dua: silenced"'
+  - 'option "Dua: Empty Set"'
+  - 'option "Dua: player attack cap"'
+  - 'option "Dua: Haste plus one"'
+  - 'option "Lovelace: programmed leap" [selected]'
+- button "Start card sample"
+- button "Check outcome"
+- status: Memory-only acquisition sample
+- button "Open pack sample"
+- generic "Scratch outcome details"

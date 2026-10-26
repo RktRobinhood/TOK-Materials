@@ -1,0 +1,6632 @@
+[
+  {
+    "case": "play-dua",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 9,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": true,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "play",
+          "player": 0,
+          "cid": "p0c0",
+          "target": null,
+          "revealed": false,
+          "text": "You play Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "survive",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": true,
+              "extraAttacks": {
+                "turn": 1,
+                "count": 1
+              },
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "text": "Dua Leapfrog gets one extra attack this turn. Normal card activations still apply.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "twice",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 2,
+          "attacksThisTurn": 2,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 2,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": true,
+              "extraAttacks": {
+                "turn": 1,
+                "count": 1
+              },
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 16,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 4
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "opponent-turn",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 1,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 2,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Dua Leapfrog with Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 1,
+          "pb": 2,
+          "text": "Mr. Beastie (1 attack) fights Dua Leapfrog (2 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 1,
+          "source": "p0c0",
+          "text": "Dua Leapfrog takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 2,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "lethal",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [],
+          "discard": [
+            "p0c0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 2,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (2 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 2,
+          "source": "p1c0",
+          "text": "Dua Leapfrog takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p0c0",
+          "player": 0,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Dua Leapfrog is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "silenced",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "empty-set",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "attack-cap",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": true,
+              "extraAttacks": {
+                "turn": 1,
+                "count": 1
+              },
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "text": "Dua Leapfrog gets one extra attack this turn. Normal card activations still apply.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "haste-three",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 3,
+          "attacksThisTurn": 3,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 3,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": true,
+              "extraAttacks": {
+                "turn": 1,
+                "count": 1
+              },
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 14,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 6
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "programmed",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 3,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [
+            "p0c3"
+          ],
+          "deck": [
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "lovelace",
+              "name": "Lovelace",
+              "speciesName": "Lovelace",
+              "legendary": true,
+              "colour": "imagination",
+              "printedColour": "imagination",
+              "colourless": false,
+              "cost": 6,
+              "baseCost": 6,
+              "attack": 5,
+              "baseAttack": 5,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 5
+                }
+              ],
+              "health": 6,
+              "maxHealth": 6,
+              "baseHealth": 6,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "program",
+                  "name": "Program",
+                  "text": "Activate (1 energy): gain the ability of a creature in your discard pile.",
+                  "kind": "activate",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": 1
+                },
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": true,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": true,
+              "extraAttacks": {
+                "turn": 3,
+                "count": 1
+              },
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": [
+            "p0c1",
+            "p0c2"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 0,
+          "attacksThisTurn": 0,
+          "hand": [
+            "p1c1"
+          ],
+          "deck": [
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 15,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 5
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Lovelace.",
+          "turn": 3,
+          "round": 2
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 5,
+          "pb": 0,
+          "text": "Lovelace (5 attack) fights Mr. Beastie (0 attack).",
+          "turn": 3,
+          "round": 2
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 5,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 5 damage.",
+          "turn": 3,
+          "round": 2
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "text": "Lovelace gets one extra attack this turn. Normal card activations still apply.",
+          "turn": 3,
+          "round": 2
+        }
+      ]
+    }
+  },
+  {
+    "case": "play-dua",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 9,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": true,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "play",
+          "player": 0,
+          "cid": "p0c0",
+          "target": null,
+          "revealed": false,
+          "text": "You play Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "survive",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": true,
+              "extraAttacks": {
+                "turn": 1,
+                "count": 1
+              },
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "text": "Dua Leapfrog gets one extra attack this turn. Normal card activations still apply.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "twice",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 2,
+          "attacksThisTurn": 2,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 2,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": true,
+              "extraAttacks": {
+                "turn": 1,
+                "count": 1
+              },
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 16,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 4
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "opponent-turn",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 1,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 2,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Dua Leapfrog with Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 1,
+          "pb": 2,
+          "text": "Mr. Beastie (1 attack) fights Dua Leapfrog (2 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 1,
+          "source": "p0c0",
+          "text": "Dua Leapfrog takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 2,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "lethal",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [],
+          "discard": [
+            "p0c0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 2,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (2 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 2,
+          "source": "p1c0",
+          "text": "Dua Leapfrog takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p0c0",
+          "player": 0,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Dua Leapfrog is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "silenced",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "empty-set",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "attack-cap",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": true,
+              "extraAttacks": {
+                "turn": 1,
+                "count": 1
+              },
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "text": "Dua Leapfrog gets one extra attack this turn. Normal card activations still apply.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "haste-three",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 3,
+          "attacksThisTurn": 3,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 3,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": true,
+              "extraAttacks": {
+                "turn": 1,
+                "count": 1
+              },
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 14,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 6
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "programmed",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 3,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [
+            "p0c3"
+          ],
+          "deck": [
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "lovelace",
+              "name": "Lovelace",
+              "speciesName": "Lovelace",
+              "legendary": true,
+              "colour": "imagination",
+              "printedColour": "imagination",
+              "colourless": false,
+              "cost": 6,
+              "baseCost": 6,
+              "attack": 5,
+              "baseAttack": 5,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 5
+                }
+              ],
+              "health": 6,
+              "maxHealth": 6,
+              "baseHealth": 6,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "program",
+                  "name": "Program",
+                  "text": "Activate (1 energy): gain the ability of a creature in your discard pile.",
+                  "kind": "activate",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": 1
+                },
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": true,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": true,
+              "extraAttacks": {
+                "turn": 3,
+                "count": 1
+              },
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": [
+            "p0c1",
+            "p0c2"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 0,
+          "attacksThisTurn": 0,
+          "hand": [
+            "p1c1"
+          ],
+          "deck": [
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 15,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 5
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Lovelace.",
+          "turn": 3,
+          "round": 2
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 5,
+          "pb": 0,
+          "text": "Lovelace (5 attack) fights Mr. Beastie (0 attack).",
+          "turn": 3,
+          "round": 2
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 5,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 5 damage.",
+          "turn": 3,
+          "round": 2
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "text": "Lovelace gets one extra attack this turn. Normal card activations still apply.",
+          "turn": 3,
+          "round": 2
+        }
+      ]
+    }
+  },
+  {
+    "case": "play-dua",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 9,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": true,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "play",
+          "player": 0,
+          "cid": "p0c0",
+          "target": null,
+          "revealed": false,
+          "text": "You play Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "survive",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": true,
+              "extraAttacks": {
+                "turn": 1,
+                "count": 1
+              },
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "text": "Dua Leapfrog gets one extra attack this turn. Normal card activations still apply.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "twice",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 2,
+          "attacksThisTurn": 2,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 2,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": true,
+              "extraAttacks": {
+                "turn": 1,
+                "count": 1
+              },
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 16,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 4
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "opponent-turn",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 1,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 2,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Dua Leapfrog with Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 1,
+          "pb": 2,
+          "text": "Mr. Beastie (1 attack) fights Dua Leapfrog (2 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 1,
+          "source": "p0c0",
+          "text": "Dua Leapfrog takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 2,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "lethal",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [],
+          "discard": [
+            "p0c0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 2,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (2 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 2,
+          "source": "p1c0",
+          "text": "Dua Leapfrog takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p0c0",
+          "player": 0,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Dua Leapfrog is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "silenced",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "empty-set",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "attack-cap",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": true,
+              "extraAttacks": {
+                "turn": 1,
+                "count": 1
+              },
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 18,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 2
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "text": "Dua Leapfrog gets one extra attack this turn. Normal card activations still apply.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "haste-three",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 3,
+          "attacksThisTurn": 3,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-pulse-pup",
+              "name": "Dua Leapfrog",
+              "speciesName": "Dua Leapfrog",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 1,
+              "baseCost": 1,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 1,
+              "baseHealth": 1,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 3,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": true,
+              "extraAttacks": {
+                "turn": 1,
+                "count": 1
+              },
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "attacksThisTurn": 0,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 14,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 6
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Dua Leapfrog.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 2,
+          "pb": 0,
+          "text": "Dua Leapfrog (2 attack) fights Mr. Beastie (0 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 2,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 2 damage.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "programmed",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 3,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "attacksThisTurn": 1,
+          "hand": [
+            "p0c3"
+          ],
+          "deck": [
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "lovelace",
+              "name": "Lovelace",
+              "speciesName": "Lovelace",
+              "legendary": true,
+              "colour": "imagination",
+              "printedColour": "imagination",
+              "colourless": false,
+              "cost": 6,
+              "baseCost": 6,
+              "attack": 5,
+              "baseAttack": 5,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 5
+                }
+              ],
+              "health": 6,
+              "maxHealth": 6,
+              "baseHealth": 6,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "program",
+                  "name": "Program",
+                  "text": "Activate (1 energy): gain the ability of a creature in your discard pile.",
+                  "kind": "activate",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": 1
+                },
+                {
+                  "id": "one-more-leap",
+                  "name": "One More Leap",
+                  "text": "Once per match, after surviving a fight on your turn, gain one extra attack this turn. Normal card activations still apply.",
+                  "kind": "passive",
+                  "gained": true,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": true,
+              "extraAttacks": {
+                "turn": 3,
+                "count": 1
+              },
+              "canActivate": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": [
+            "p0c1",
+            "p0c2"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 0,
+          "attacksThisTurn": 0,
+          "hand": [
+            "p1c1"
+          ],
+          "deck": [
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "none",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 15,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "oneMoreLeapUsed": false,
+              "extraAttacks": null,
+              "canActivate": false,
+              "buffs": [],
+              "damage": 5
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Mr. Beastie with Lovelace.",
+          "turn": 3,
+          "round": 2
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 5,
+          "pb": 0,
+          "text": "Lovelace (5 attack) fights Mr. Beastie (0 attack).",
+          "turn": 3,
+          "round": 2
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 5,
+          "source": "p0c0",
+          "text": "Mr. Beastie takes 5 damage.",
+          "turn": 3,
+          "round": 2
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "text": "Lovelace gets one extra attack this turn. Normal card activations still apply.",
+          "turn": 3,
+          "round": 2
+        }
+      ]
+    }
+  }
+]

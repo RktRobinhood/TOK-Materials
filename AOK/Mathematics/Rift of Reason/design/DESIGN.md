@@ -1,3 +1,11 @@
+## Expansion-14 extra-attack creature — 26 October 2026 (#129)
+
+Dua Leapfrog joins expansion-14 using the existing selected portrait: Common, original cost 1 / attack 2 / health 1, ordinary packs and shared cues. Pre-lesson pack kinds: 53 Common / 18 Uncommon / 9 Rare; weights/prices and overall allocations stay unchanged. **112 concepts remain held; #129 stays open.**
+
+One More Leap grants one extra attack this global turn after surviving a creature fight on the controller's turn, once per battle instance. Zero damage counts; hero hits, opponent-turn fights, lethal damage and suppression do not. A separate turn-stamped Engine permission preserves spent attack counts and shared/manual activation restrictions. Leave-play/turn cleanup clears the permission; bounce/replay retains the spent match flag. Current-turn AI budgets use the canonical allowance and grouping keeps fresh/spent copies distinct; next-turn estimates and numeric weights remain unchanged. No progress-save, spawn/catch, art/voice or Fate/token-order/Win policy change.
+
+The [verification report](reviews/expansion-14-2026-10-26.md) records ten focused checks, full 1,650 pass / one existing skip / zero failures, 30 matching native outcomes/layouts and two completed memory-only packs with normal Dua. Incomplete early Play receipt is separate; no new PNG/motion/hardware claim. Paired 768+768 same-body control games record 422/422 mono/mixed body plays and only 2/0 leap events across all games including mirrors. All eighteen winner arrays match, observed paired differences and SEs zero; sparse activation limits conclusions. The same two Dua-absent mirror draws per mode replay exactly; all64 sampled original expansion-13 winners match. Preserve prior adverse/draw risks. Final independent reviews and publication evidence are tracked in the report.
+
 ## Expansion-13 damage-response creature — 25 October 2026 (#129)
 
 Kai Ceenat joins expansion-13 using the existing selected portrait and identity: Common, original cost 2 / attack 1 / health 3, ordinary packs and shared cues. Pre-lesson pack kinds: 52 Common / 18 Uncommon / 9 Rare; weights/prices and overall allocations stay unchanged. **113 concepts remain held; #129 stays open.**
