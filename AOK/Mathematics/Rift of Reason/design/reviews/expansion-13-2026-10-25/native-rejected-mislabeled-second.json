@@ -1,0 +1,265 @@
+{
+  "reason": "Automation helper reused old case metadata for a later Calm second hit; excluded from acceptance and rerun with explicit pending input.",
+  "record": {
+    "case": "own-twice",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 6,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 6,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Big Reaction",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Big Reaction",
+                  "attack": 1,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                },
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                },
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                }
+              ],
+              "damage": 2
+            }
+          ],
+          "discard": [
+            "p0t0",
+            "p0t1"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t1",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  "dom": {
+    "case": "own-twice",
+    "mode": "1280-normal",
+    "before": "Browser tab: 23, Title: \"Expansion-13 scratch battles\", URL: \"http://localhost:8791/dev/expansion-13.html\".\n0 AXWebArea Expansion-13 scratch battles, URL: localhost:8791/dev/expansion-13.html\n\t1 container app\n\t\t166 container\n\t\t\t167 container\n\t\t\t\t168 container Description: Rival: 7 hearts, Help: Rival: 7 of 12 hearts\n\t\t\t\t\t169 text Rival\n\t\t\t\t\t170 text 7\n\t\t\t\t171 text Deck 14 Hand 0 Discard 0\n\t\t\t\t172 text 10\n\t\t\t\t173 text /10 ENERGY\n\t\t\t174 button Mr. Beastie, cost 4, attack 2, health 4 of 4. Uncommon rarity.\n\t\t\t\t175 container Description: Uncommon rarity, Help: Uncommon\n\t\t\t\t176 text Mr. Beastie\n\t\t\t\t177 text 2\n\t\t\t\t178 text 4\n\t\t\t179 container\n\t\t\t\t180 container Fate track\n\t\t\t\t\t181 text No Fate track in this match.\n\t\t\t\t182 text Drag (or click) a glowing card to play it, or a ready creature onto a target to attack.\n\t\t\t\t183 text Rival's public deck identity: mixed or generic. Shared rules do not count.\n\t\t\t\t184 button End turn\n\t\t\t\t\t185 text END\n\t\t\t\t\t186 text TURN\n\t\t\t187 button Kai Ceenat, cost 2, attack 1, health 3 of 3, ready. Common rarity.\n\t\t\t\t188 container Description: Common rarity, Help: Common\n\t\t\t\t189 text Kai Ceenat\n\t\t\t\t190 text 1\n\t\t\t\t191 text 3\n\t\t\t\t192 text READY\n\t\t\t193 container\n\t\t\t\t194 container Description: Your hero: 7 hearts, Help: You: 7 of 12 hearts\n\t\t\t\t\t195 text You\n\t\t\t\t\t196 text 7\n\t\t\t\t197 text Deck 13 Hand 2 Discard 0\n\t\t\t\t198 button Tactic Share the Feeling, cost 2: Deal 1 damage to a friendly creature. If it survives, it gets +2 attack until your next turn starts. Emotion · common. Common rarity.\n\t\t\t\t\t199 text 2\n\t\t\t\t\t200 text Share the Feeling\n\t\t\t\t\t201 container Description: Common rarity, Help: Common\n\t\t\t\t\t202 text Tactic\n\t\t\t\t203 button Tactic Share the Feeling, cost 2: Deal 1 damage to a friendly creature. If it survives, it gets +2 attack until your next turn starts. Emotion · common. Common rarity.\n\t\t\t\t\t204 text 2\n\t\t\t\t\t205 text Share the Feeling\n\t\t\t\t\t206 container Description: Common rarity, Help: Common\n\t\t\t\t\t207 text Tactic\n\t\t\t\t208 container\n\t\t\t\t\t209 text 10 /10\n\t\t\t\t210 text ENERGY\n\t\t\t\t211 text USES\n\t\t\t212 container Decks on the table\n\t\t\t\t213 button (disabled) Draw from your deck\n\t\t\t\t214 button (disabled) Take a rule card\n\t\t\t\t215 image Their deck: 14 cards\n\t\t\t216 button How to play\n\t\t\t217 button Leave match\n\t\t\t218 container Axioms\n\t\t\t\t219 text Axioms\n\t\t\t\t220 text Active now · All basic.\n\t\t\t\t221 text Axioms are the rules both players start from. Rule cards and Fate can change them.\n\t\t\t\t222 button Win: Enemy hero to 0 ❤ wins\n\t\t\t\t\t223 text WIN\n\t\t\t\t\t224 text Enemy hero to 0 ❤ wins\n\t\t\t\t225 button Fights: Both creatures hit\n\t\t\t\t\t226 text FIGHTS\n\t\t\t\t\t227 text Both creatures hit\n\t\t\t\t228 button Card activations: 2 activations per turn\n\t\t\t\t\t229 text CARD ACTIVATIONS\n\t\t\t\t\t230 text 2 activations per turn\n\t\t\t\t\t231 text 2 left\n\t\t\t\t232 button Attacks: Each creature attacks once\n\t\t\t\t\t233 text ATTACKS\n\t\t\t\t\t234 text Each creature attacks once\n\t\t\t\t235 button Energy: +1 each turn\n\t\t\t\t\t236 text ENERGY\n\t\t\t\t\t237 text +1 each turn\n\t\t\t\t238 button Drawing: Draw 1\n\t\t\t\t\t239 text ⚖\n\t\t\t\t\t240 text DRAWING\n\t\t\t\t\t241 text Draw 1\n\t\t\t\t242 button Card costs: Creature costs +0\n\t\t\t\t\t243 text CARD COSTS\n\t\t\t\t\t244 text Creature costs +0\n\t\t\t245 button (collapsed) Colour matchups: Strong +1 / Weak −1, Secondary Actions: Expand\n\t\t\t\t246 text Colour matchups: Strong +1 / Weak −1\n\t74 container e13-bar\n\t\t75 text Expansion-13 · memory-only save\n\t\t76 pop up button (collapsed, settable) Description: Expansion-13 card, Value: Kai: twice this turn, Secondary Actions: Expand\n\t\t\t77 menu\n\t\t\t\t78 Kai: ordinary play\n\t\t\t\t79 Kai: own damage\n\t\t\t\t80 (selected) Kai: twice this turn\n\t\t\t\t81 Kai: Shield blocks\n\t\t\t\t82 Kai: lethal damage\n\t\t\t\t83 Kai: silenced\n\t\t\t\t84 Kai: Empty Set\n\t\t\t\t85 Kai: opponent controller\n\t\t86 button Start card sample\n\t\t87 button Check outcome\n\t\t247 text Hearts 7 / 7 · Energy 10 · main\n\t\t89 button Open pack sample\n\t163 container\n\t\t164 button (collapsed) Scratch outcome details, Secondary Actions: Expand\n\t\t\t165 text Scratch outcome details\n\nThe focused UI element is 86 button Start card sample",
+    "stages": [
+      "- 'generic \"Rival: 7 hearts\"':\n  - generic \"Rival\"\n  - generic \"7 of 12 hearts\":\n    - generic: \"7\"\n- generic: Deck 14\n- generic: Hand 0\n- generic: Discard 0\n- strong: \"10\"\n- text: /10\n- generic: Energy\n- button \"Mr. Beastie, cost 4, attack 2, health 4 of 4. Uncommon rarity.\":\n  - generic \"Uncommon rarity\":\n    - generic: U\n  - generic: Mr. Beastie\n  - generic \"Escalate\":\n    - generic \"Escalate\"\n  - generic: \"2\"\n  - generic: \"4\"\n- group \"Fate track\":\n  - generic: No Fate track in this match.\n- status:\n  - generic: Now click a glowing target for Share the Feeling (or Cancel).\n  - button \"Cancel\"\n  - button \"Preview move\"\n- button \"End turn\":\n  - generic: End\n  - generic: turn\n- button \"Kai Ceenat, cost 2, attack 1, health 3 of 3, ready. Common rarity.\":\n  - generic \"Common rarity\":\n    - generic: C\n  - generic: Kai Ceenat\n  - generic \"Big Reaction\":\n    - generic \"Big Reaction\"\n  - generic: \"1\"\n  - generic: \"3\"\n- 'generic \"Your hero: 7 hearts\"':\n  - generic \"You\"\n  - generic \"7 of 12 hearts\":\n    - generic: \"7\"\n- generic: Deck 13\n- generic: Hand 2\n- generic: Discard 0\n- 'button \"Tactic Share the Feeling, cost 2: Deal 1 damage to a friendly creature. If it survives, it gets +2 attack until your next turn starts. Emotion · common. Common rarity.\"':\n  - generic: \"2\"\n  - generic: Share the Feeling\n  - generic \"Common rarity\":\n    - generic: C\n  - generic: Tactic\n- 'button \"Tactic Share the Feeling, cost 2: Deal 1 damage to a friendly creature. If it survives, it gets +2 attack until your next turn starts. Emotion · common. Common rarity.\"':\n  - generic: \"2\"\n  - generic: Share the Feeling\n  - generic \"Common rarity\":\n    - generic: C\n  - generic: Tactic\n- strong: \"10\"\n- text: /10\n- generic: Energy\n- 'generic \"Card activations: 2 of 2 left this turn. Each cast, attack or manual Activate uses one.\"':\n  - generic: Uses\n- 'button \"Read Share the Feeling: full text and active effects\"': Read Share the Feeling\n- group \"Decks on the table\":\n  - button \"Draw from your deck\" [disabled]:\n    - generic: Your deck\n    - generic: \"13\"\n  - button \"Take a rule card\" [disabled]:\n    - generic: Shared axioms\n    - generic: \"2\"\n  - 'img \"Their deck: 14 cards\"':\n    - generic: Their deck\n    - generic: \"14\"\n- complementary:\n  - button \"How to play\"\n  - button \"Leave match\"\n  - region \"Axioms\":\n    - strong: Axioms\n    - generic: Active now · All basic.\n    - paragraph: Axioms are the rules both players start from. Rule cards and Fate can change them.\n    - 'button \"Win: Enemy hero to 0 ❤ wins\"':\n      - generic: Win\n      - generic: Enemy hero to 0 ❤ wins\n    - 'button \"Fights: Both creatures hit\"':\n      - generic: Fights\n      - generic: Both creatures hit\n    - 'button \"Card activations: 2 activations per turn\"':\n      - generic: Card activations\n      - generic: 2 activations per turn\n      - generic: 2 left\n    - 'button \"Attacks: Each creature attacks once\"':\n      - generic: Attacks\n      - generic: Each creature attacks once\n    - 'button \"Energy: +1 each turn\"':\n      - generic: Energy\n      - generic: +1 each turn\n    - 'button \"Drawing: Draw 1\"':\n      - generic: ⚖\n      - generic: Drawing\n      - generic: Draw 1\n    - 'button \"Card costs: Creature costs +0\"':\n      - generic: Card costs\n      - generic: Creature costs +0\n  - 'generic \"Colour matchups: Strong +1 / Weak −1\"'\n  - option \"Neutral\" [selected]\n  - option \"Strong\"\n  - option \"Weak\"\n  - option \"Weak at 1\"\n  - option \"Shield\"\n  - option \"Underdog\"\n  - option \"Reversed wheel\"\n  - option \"Zero attack\"\n- strong: Expansion-13 · memory-only save\n- combobox \"Expansion-13 card\":\n  - 'option \"Kai: ordinary play\"'\n  - 'option \"Kai: own damage\"'\n  - 'option \"Kai: twice this turn\" [selected]'\n  - 'option \"Kai: Shield blocks\"'\n  - 'option \"Kai: lethal damage\"'\n  - 'option \"Kai: silenced\"'\n  - 'option \"Kai: Empty Set\"'\n  - 'option \"Kai: opponent controller\"'\n- button \"Start card sample\" [active]\n- button \"Check outcome\"\n- status: Hearts 7 / 7 · Energy 10 · main\n- button \"Open pack sample\"\n- generic \"Scratch outcome details\"",
+      "Browser tab: 23, Title: \"Expansion-13 scratch battles\", URL: \"http://localhost:8791/dev/expansion-13.html\".\n0 AXWebArea Expansion-13 scratch battles, URL: localhost:8791/dev/expansion-13.html\n\t1 container app\n\t\t166 container\n\t\t\t167 container\n\t\t\t\t248 container Description: Rival: 7 hearts, Help: Rival: 7 of 12 hearts\n\t\t\t\t\t249 text Rival\n\t\t\t\t\t250 text 7\n\t\t\t\t251 text Deck 14 Hand 0 Discard 0\n\t\t\t\t252 text 10\n\t\t\t\t253 text /10 ENERGY\n\t\t\t254 button Mr. Beastie, cost 4, attack 2, health 4 of 4. Uncommon rarity.\n\t\t\t\t255 container Description: Uncommon rarity, Help: Uncommon\n\t\t\t\t256 text Mr. Beastie\n\t\t\t\t257 text 2\n\t\t\t\t258 text 4\n\t\t\t179 container\n\t\t\t\t259 container Fate track\n\t\t\t\t\t260 text No Fate track in this match.\n\t\t\t\t261 text Drag (or click) a glowing card to play it, or a ready creature onto a target to attack.\n\t\t\t\t262 text Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.\n\t\t\t\t263 button End turn\n\t\t\t\t\t264 text END\n\t\t\t\t\t265 text TURN\n\t\t\t266 button Kai Ceenat, cost 2, attack 4, health 2 of 3, ready. Active effects: +1 attack: Big Reaction (until your next turn starts); +2 attack: Share the Feeling (until your next turn starts). Common rarity.\n\t\t\t\t267 container Description: Common rarity, Help: Common\n\t\t\t\t268 text Kai Ceenat\n\t\t\t\t269 text 4\n\t\t\t\t270 text 2\n\t\t\t\t271 text READY\n\t\t\t193 container\n\t\t\t\t272 container Description: Your hero: 7 hearts, Help: You: 7 of 12 hearts\n\t\t\t\t\t273 text You\n\t\t\t\t\t274 text 7\n\t\t\t\t275 text Deck 13 Hand 1 Discard 1\n\t\t\t\t276 button Tactic Share the Feeling, cost 2: Deal 1 damage to a friendly creature. If it survives, it gets +2 attack until your next turn starts. Emotion · common. Common rarity.\n\t\t\t\t\t277 text 2\n\t\t\t\t\t278 text Share the Feeling\n\t\t\t\t\t279 container Description: Common rarity, Help: Common\n\t\t\t\t\t280 text Tactic\n\t\t\t\t281 container\n\t\t\t\t\t282 text 8 /10\n\t\t\t\t283 text ENERGY\n\t\t\t\t284 text USES\n\t\t\t285 container Recent plays\n\t\t\t\t286 text RECENT\n\t\t\t\t287 button You play the tactic Share the Feeling on Kai Ceenat. Kai Ceenat takes 1 damage. Kai Ceenat reacts: +1 attack until its next turn starts. Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.\n\t\t\t288 button Read Kai Ceenat: full text and active effects\n\t\t\t212 container Decks on the table\n\t\t\t\t213 button (disabled) Draw from your deck\n\t\t\t\t214 button (disabled) Take a rule card\n\t\t\t\t215 image Their deck: 14 cards\n\t\t\t216 button How to play\n\t\t\t217 button Leave match\n\t\t\t218 container Axioms\n\t\t\t\t289 text Axioms\n\t\t\t\t290 text Active now · All basic.\n\t\t\t\t291 text Axioms are the rules both players start from. Rule cards and Fate can change them.\n\t\t\t\t292 button Win: Enemy hero to 0 ❤ wins\n\t\t\t\t\t293 text WIN\n\t\t\t\t\t294 text Enemy hero to 0 ❤ wins\n\t\t\t\t295 button Fights: Both creatures hit\n\t\t\t\t\t296 text FIGHTS\n\t\t\t\t\t297 text Both creatures hit\n\t\t\t\t298 button Card activations: 2 activations per turn\n\t\t\t\t\t299 text CARD ACTIVATIONS\n\t\t\t\t\t300 text 2 activations per turn\n\t\t\t\t\t301 text 1 left\n\t\t\t\t302 button Attacks: Each creature attacks once\n\t\t\t\t\t303 text ATTACKS\n\t\t\t\t\t304 text Each creature attacks once\n\t\t\t\t305 button Energy: +1 each turn\n\t\t\t\t\t306 text ENERGY\n\t\t\t\t\t307 text +1 each turn\n\t\t\t\t308 button Drawing: Draw 1\n\t\t\t\t\t309 text ⚖\n\t\t\t\t\t310 text DRAWING\n\t\t\t\t\t311 text Draw 1\n\t\t\t\t312 button Card costs: Creature costs +0\n\t\t\t\t\t313 text CARD COSTS\n\t\t\t\t\t314 text Creature costs +0\n\t\t\t245 button (collapsed) Colour matchups: Strong +1 / Weak −1, Secondary Actions: Expand\n\t\t\t\t246 text Colour matchups: Strong +1 / Weak −1\n\t74 container e13-bar\n\t\t75 text Expansion-13 · memory-only save\n\t\t76 pop up button (collapsed, settable) Description: Expansion-13 card, Value: Kai: twice this turn, Secondary Actions: Expand\n\t\t\t77 menu\n\t\t\t\t78 Kai: ordinary play\n\t\t\t\t79 Kai: own damage\n\t\t\t\t80 (selected) Kai: twice this turn\n\t\t\t\t81 Kai: Shield blocks\n\t\t\t\t82 Kai: lethal damage\n\t\t\t\t83 Kai: silenced\n\t\t\t\t84 Kai: Empty Set\n\t\t\t\t85 Kai: opponent controller\n\t\t86 button Start card sample\n\t\t87 button Check outcome\n\t\t247 text Hearts 7 / 7 · Energy 10 · main\n\t\t89 button Open pack sample\n\t163 container\n\t\t164 button (collapsed) Scratch outcome details, Secondary Actions: Expand\n\t\t\t165 text Scratch outcome details\n\nThe focused UI element is 86 button Start card sample",
+      "- 'generic \"Rival: 7 hearts\"':\n  - generic \"Rival\"\n  - generic \"7 of 12 hearts\":\n    - generic: \"7\"\n- generic: Deck 14\n- generic: Hand 0\n- generic: Discard 0\n- strong: \"10\"\n- text: /10\n- generic: Energy\n- button \"Mr. Beastie, cost 4, attack 2, health 4 of 4. Uncommon rarity.\":\n  - generic \"Uncommon rarity\":\n    - generic: U\n  - generic: Mr. Beastie\n  - generic \"Escalate\":\n    - generic \"Escalate\"\n  - generic: \"2\"\n  - generic: \"4\"\n- group \"Fate track\":\n  - generic: No Fate track in this match.\n- status:\n  - generic: Drag (or click) a glowing card to play it, or a ready creature onto a target to attack.\n  - generic: \"Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.\"\n- button \"End turn\":\n  - generic: End\n  - generic: turn\n- 'button \"Kai Ceenat, cost 2, attack 4, health 2 of 3, ready. Active effects: +1 attack: Big Reaction (until your next turn starts); +2 attack: Share the Feeling (until your next turn starts). Common rarity.\"':\n  - generic \"Common rarity\":\n    - generic: C\n  - generic: Kai Ceenat\n  - generic \"Big Reaction\":\n    - generic \"Big Reaction\"\n  - generic: \"4\"\n  - generic: \"2\"\n  - generic: \"+3\"\n  - generic: Ready\n- 'generic \"Your hero: 7 hearts\"':\n  - generic \"You\"\n  - generic \"7 of 12 hearts\":\n    - generic: \"7\"\n- generic: Deck 13\n- generic: Hand 1\n- generic: Discard 1\n- 'button \"Tactic Share the Feeling, cost 2: Deal 1 damage to a friendly creature. If it survives, it gets +2 attack until your next turn starts. Emotion · common. Common rarity.\"':\n  - generic: \"2\"\n  - generic: Share the Feeling\n  - generic \"Common rarity\":\n    - generic: C\n  - generic: Tactic\n- strong: \"8\"\n- text: /10\n- generic: Energy\n- 'generic \"Card activations: 1 of 2 left this turn. Each cast, attack or manual Activate uses one.\"':\n  - generic: Uses\n- region \"Recent plays\":\n  - generic: Recent\n  - 'button \"You play the tactic Share the Feeling on Kai Ceenat. Kai Ceenat takes 1 damage. Kai Ceenat reacts: +1 attack until its next turn starts. Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.\"':\n    - generic: ✦\n    - generic: You\n- 'button \"Read Share the Feeling: full text and active effects\"': Read Share the Feeling\n- group \"Decks on the table\":\n  - button \"Draw from your deck\" [disabled]:\n    - generic: Your deck\n    - generic: \"13\"\n  - button \"Take a rule card\" [disabled]:\n    - generic: Shared axioms\n    - generic: \"2\"\n  - 'img \"Their deck: 14 cards\"':\n    - generic: Their deck\n    - generic: \"14\"\n- complementary:\n  - button \"How to play\"\n  - button \"Leave match\"\n  - region \"Axioms\":\n    - strong: Axioms\n    - generic: Active now · All basic.\n    - paragraph: Axioms are the rules both players start from. Rule cards and Fate can change them.\n    - 'button \"Win: Enemy hero to 0 ❤ wins\"':\n      - generic: Win\n      - generic: Enemy hero to 0 ❤ wins\n    - 'button \"Fights: Both creatures hit\"':\n      - generic: Fights\n      - generic: Both creatures hit\n    - 'button \"Card activations: 2 activations per turn\"':\n      - generic: Card activations\n      - generic: 2 activations per turn\n      - generic: 1 left\n    - 'button \"Attacks: Each creature attacks once\"':\n      - generic: Attacks\n      - generic: Each creature attacks once\n    - 'button \"Energy: +1 each turn\"':\n      - generic: Energy\n      - generic: +1 each turn\n    - 'button \"Drawing: Draw 1\"':\n      - generic: ⚖\n      - generic: Drawing\n      - generic: Draw 1\n    - 'button \"Card costs: Creature costs +0\"':\n      - generic: Card costs\n      - generic: Creature costs +0\n  - 'generic \"Colour matchups: Strong +1 / Weak −1\"'\n  - option \"Neutral\" [selected]\n  - option \"Strong\"\n  - option \"Weak\"\n  - option \"Weak at 1\"\n  - option \"Shield\"\n  - option \"Underdog\"\n  - option \"Reversed wheel\"\n  - option \"Zero attack\"\n- text: ▲ ▲\n- strong: Expansion-13 · memory-only save\n- combobox \"Expansion-13 card\":\n  - 'option \"Kai: ordinary play\"'\n  - 'option \"Kai: own damage\"'\n  - 'option \"Kai: twice this turn\" [selected]'\n  - 'option \"Kai: Shield blocks\"'\n  - 'option \"Kai: lethal damage\"'\n  - 'option \"Kai: silenced\"'\n  - 'option \"Kai: Empty Set\"'\n  - 'option \"Kai: opponent controller\"'\n- button \"Start card sample\"\n- button \"Check outcome\"\n- status: Hearts 7 / 7 · Energy 10 · main\n- button \"Open pack sample\"\n- generic \"Scratch outcome details\"",
+      "- 'generic \"Rival: 7 hearts\"':\n  - generic \"Rival\"\n  - generic \"7 of 12 hearts\":\n    - generic: \"7\"\n- generic: Deck 14\n- generic: Hand 0\n- generic: Discard 0\n- strong: \"10\"\n- text: /10\n- generic: Energy\n- button \"Mr. Beastie, cost 4, attack 2, health 4 of 4. Uncommon rarity.\":\n  - generic \"Uncommon rarity\":\n    - generic: U\n  - generic: Mr. Beastie\n  - generic \"Escalate\":\n    - generic \"Escalate\"\n  - generic: \"2\"\n  - generic: \"4\"\n- group \"Fate track\":\n  - generic: No Fate track in this match.\n- status:\n  - generic: Now click a glowing target for Share the Feeling (or Cancel).\n  - button \"Cancel\"\n  - button \"Preview move\"\n- button \"End turn\":\n  - generic: End\n  - generic: turn\n- 'button \"Kai Ceenat, cost 2, attack 4, health 2 of 3, ready. Active effects: +1 attack: Big Reaction (until your next turn starts); +2 attack: Share the Feeling (until your next turn starts). Common rarity.\"':\n  - generic \"Common rarity\":\n    - generic: C\n  - generic: Kai Ceenat\n  - generic \"Big Reaction\":\n    - generic \"Big Reaction\"\n  - generic: \"4\"\n  - generic: \"2\"\n  - generic: \"+3\"\n- 'generic \"Your hero: 7 hearts\"':\n  - generic \"You\"\n  - generic \"7 of 12 hearts\":\n    - generic: \"7\"\n- generic: Deck 13\n- generic: Hand 1\n- generic: Discard 1\n- 'button \"Tactic Share the Feeling, cost 2: Deal 1 damage to a friendly creature. If it survives, it gets +2 attack until your next turn starts. Emotion · common. Common rarity.\" [active]':\n  - generic: \"2\"\n  - generic: Share the Feeling\n  - generic \"Common rarity\":\n    - generic: C\n  - generic: Tactic\n- strong: \"8\"\n- text: /10\n- generic: Energy\n- 'generic \"Card activations: 1 of 2 left this turn. Each cast, attack or manual Activate uses one.\"':\n  - generic: Uses\n- region \"Recent plays\":\n  - generic: Recent\n  - 'button \"You play the tactic Share the Feeling on Kai Ceenat. Kai Ceenat takes 1 damage. Kai Ceenat reacts: +1 attack until its next turn starts. Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.\"':\n    - generic: ✦\n    - generic: You\n- 'button \"Read Share the Feeling: full text and active effects\"': Read Share the Feeling\n- group \"Decks on the table\":\n  - button \"Draw from your deck\" [disabled]:\n    - generic: Your deck\n    - generic: \"13\"\n  - button \"Take a rule card\" [disabled]:\n    - generic: Shared axioms\n    - generic: \"2\"\n  - 'img \"Their deck: 14 cards\"':\n    - generic: Their deck\n    - generic: \"14\"\n- complementary:\n  - button \"How to play\"\n  - button \"Leave match\"\n  - region \"Axioms\":\n    - strong: Axioms\n    - generic: Active now · All basic.\n    - paragraph: Axioms are the rules both players start from. Rule cards and Fate can change them.\n    - 'button \"Win: Enemy hero to 0 ❤ wins\"':\n      - generic: Win\n      - generic: Enemy hero to 0 ❤ wins\n    - 'button \"Fights: Both creatures hit\"':\n      - generic: Fights\n      - generic: Both creatures hit\n    - 'button \"Card activations: 2 activations per turn\"':\n      - generic: Card activations\n      - generic: 2 activations per turn\n      - generic: 1 left\n    - 'button \"Attacks: Each creature attacks once\"':\n      - generic: Attacks\n      - generic: Each creature attacks once\n    - 'button \"Energy: +1 each turn\"':\n      - generic: Energy\n      - generic: +1 each turn\n    - 'button \"Drawing: Draw 1\"':\n      - generic: ⚖\n      - generic: Drawing\n      - generic: Draw 1\n    - 'button \"Card costs: Creature costs +0\"':\n      - generic: Card costs\n      - generic: Creature costs +0\n  - 'generic \"Colour matchups: Strong +1 / Weak −1\"'\n  - option \"Neutral\" [selected]\n  - option \"Strong\"\n  - option \"Weak\"\n  - option \"Weak at 1\"\n  - option \"Shield\"\n  - option \"Underdog\"\n  - option \"Reversed wheel\"\n  - option \"Zero attack\"\n- generic: \"2\"\n- generic: Share the Feeling\n- generic: C\n- generic: Common\n- generic: Emotion · common\n- generic: ❤️‍🔥 Emotion\n- generic: \"Share the Feeling: Deal 1 damage to a friendly creature. If it survives, it gets +2 attack until your next turn starts.\"\n- generic: \"Tactic: it works once, then goes to your discard pile.\"\n- generic: \"Emotion tactic (common): a deck holds no more of these than Emotion creatures. You can play it with none in play.\"\n- strong: Expansion-13 · memory-only save\n- combobox \"Expansion-13 card\":\n  - 'option \"Kai: ordinary play\"'\n  - 'option \"Kai: own damage\"'\n  - 'option \"Kai: twice this turn\" [selected]'\n  - 'option \"Kai: Shield blocks\"'\n  - 'option \"Kai: lethal damage\"'\n  - 'option \"Kai: silenced\"'\n  - 'option \"Kai: Empty Set\"'\n  - 'option \"Kai: opponent controller\"'\n- button \"Start card sample\"\n- button \"Check outcome\"\n- status: Hearts 7 / 7 · Energy 10 · main\n- button \"Open pack sample\"\n- generic \"Scratch outcome details\"",
+      "- 'generic \"Rival: 7 hearts\"':\n  - generic \"Rival\"\n  - generic \"7 of 12 hearts\":\n    - generic: \"7\"\n- generic: Deck 14\n- generic: Hand 0\n- generic: Discard 0\n- strong: \"10\"\n- text: /10\n- generic: Energy\n- button \"Mr. Beastie, cost 4, attack 2, health 4 of 4. Uncommon rarity.\":\n  - generic \"Uncommon rarity\":\n    - generic: U\n  - generic: Mr. Beastie\n  - generic \"Escalate\":\n    - generic \"Escalate\"\n  - generic: \"2\"\n  - generic: \"4\"\n- group \"Fate track\":\n  - generic: No Fate track in this match.\n- status:\n  - generic: Now click a glowing target for Share the Feeling (or Cancel).\n  - button \"Cancel\"\n  - button \"Preview move\"\n- button \"End turn\":\n  - generic: End\n  - generic: turn\n- 'button \"Kai Ceenat, cost 2, attack 4, health 2 of 3, ready. Active effects: +1 attack: Big Reaction (until your next turn starts); +2 attack: Share the Feeling (until your next turn starts). Common rarity.\"':\n  - generic \"Common rarity\":\n    - generic: C\n  - generic: Kai Ceenat\n  - generic \"Big Reaction\":\n    - generic \"Big Reaction\"\n  - generic: \"4\"\n  - generic: \"2\"\n  - generic: \"+3\"\n- 'generic \"Your hero: 7 hearts\"':\n  - generic \"You\"\n  - generic \"7 of 12 hearts\":\n    - generic: \"7\"\n- generic: Deck 13\n- generic: Hand 1\n- generic: Discard 1\n- 'button \"Tactic Share the Feeling, cost 2: Deal 1 damage to a friendly creature. If it survives, it gets +2 attack until your next turn starts. Emotion · common. Common rarity.\" [active]':\n  - generic: \"2\"\n  - generic: Share the Feeling\n  - generic \"Common rarity\":\n    - generic: C\n  - generic: Tactic\n- strong: \"8\"\n- text: /10\n- generic: Energy\n- 'generic \"Card activations: 1 of 2 left this turn. Each cast, attack or manual Activate uses one.\"':\n  - generic: Uses\n- region \"Recent plays\":\n  - generic: Recent\n  - 'button \"You play the tactic Share the Feeling on Kai Ceenat. Kai Ceenat takes 1 damage. Kai Ceenat reacts: +1 attack until its next turn starts. Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.\"':\n    - generic: ✦\n    - generic: You\n- 'button \"Read Share the Feeling: full text and active effects\"': Read Share the Feeling\n- group \"Decks on the table\":\n  - button \"Draw from your deck\" [disabled]:\n    - generic: Your deck\n    - generic: \"13\"\n  - button \"Take a rule card\" [disabled]:\n    - generic: Shared axioms\n    - generic: \"2\"\n  - 'img \"Their deck: 14 cards\"':\n    - generic: Their deck\n    - generic: \"14\"\n- complementary:\n  - button \"How to play\"\n  - button \"Leave match\"\n  - region \"Axioms\":\n    - strong: Axioms\n    - generic: Active now · All basic.\n    - paragraph: Axioms are the rules both players start from. Rule cards and Fate can change them.\n    - 'button \"Win: Enemy hero to 0 ❤ wins\"':\n      - generic: Win\n      - generic: Enemy hero to 0 ❤ wins\n    - 'button \"Fights: Both creatures hit\"':\n      - generic: Fights\n      - generic: Both creatures hit\n    - 'button \"Card activations: 2 activations per turn\"':\n      - generic: Card activations\n      - generic: 2 activations per turn\n      - generic: 1 left\n    - 'button \"Attacks: Each creature attacks once\"':\n      - generic: Attacks\n      - generic: Each creature attacks once\n    - 'button \"Energy: +1 each turn\"':\n      - generic: Energy\n      - generic: +1 each turn\n    - 'button \"Drawing: Draw 1\"':\n      - generic: ⚖\n      - generic: Drawing\n      - generic: Draw 1\n    - 'button \"Card costs: Creature costs +0\"':\n      - generic: Card costs\n      - generic: Creature costs +0\n  - 'generic \"Colour matchups: Strong +1 / Weak −1\"'\n  - option \"Neutral\" [selected]\n  - option \"Strong\"\n  - option \"Weak\"\n  - option \"Weak at 1\"\n  - option \"Shield\"\n  - option \"Underdog\"\n  - option \"Reversed wheel\"\n  - option \"Zero attack\"\n- generic: \"2\"\n- generic: Share the Feeling\n- generic: C\n- generic: Common\n- generic: Emotion · common\n- generic: ❤️‍🔥 Emotion\n- generic: \"Share the Feeling: Deal 1 damage to a friendly creature. If it survives, it gets +2 attack until your next turn starts.\"\n- generic: \"Tactic: it works once, then goes to your discard pile.\"\n- generic: \"Emotion tactic (common): a deck holds no more of these than Emotion creatures. You can play it with none in play.\"\n- strong: Expansion-13 · memory-only save\n- combobox \"Expansion-13 card\":\n  - 'option \"Kai: ordinary play\"'\n  - 'option \"Kai: own damage\"'\n  - 'option \"Kai: twice this turn\" [selected]'\n  - 'option \"Kai: Shield blocks\"'\n  - 'option \"Kai: lethal damage\"'\n  - 'option \"Kai: silenced\"'\n  - 'option \"Kai: Empty Set\"'\n  - 'option \"Kai: opponent controller\"'\n- button \"Start card sample\"\n- button \"Check outcome\"\n- status: Hearts 7 / 7 · Energy 10 · main\n- button \"Open pack sample\"\n- generic \"Scratch outcome details\""
+    ],
+    "after": "- 'generic \"Rival: 7 hearts\"':\n  - generic \"Rival\"\n  - generic \"7 of 12 hearts\":\n    - generic: \"7\"\n- generic: Deck 14\n- generic: Hand 0\n- generic: Discard 0\n- strong: \"10\"\n- text: /10\n- generic: Energy\n- button \"Mr. Beastie, cost 4, attack 2, health 4 of 4. Uncommon rarity.\":\n  - generic \"Uncommon rarity\":\n    - generic: U\n  - generic: Mr. Beastie\n  - generic \"Escalate\":\n    - generic \"Escalate\"\n  - generic: \"2\"\n  - generic: \"4\"\n- group \"Fate track\":\n  - generic: No Fate track in this match.\n- status:\n  - generic: No card activations left. End turn, or use an available item or hero power.\n  - generic: \"Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.\"\n- button \"End turn\":\n  - generic: End\n  - generic: turn\n- generic: Nothing left to do\n- 'button \"Kai Ceenat, cost 2, attack 6, health 1 of 3. Active effects: +1 attack: Big Reaction (until your next turn starts); +2 attack: Share the Feeling (until your next turn starts); +2 attack: Share the Feeling (until your next turn starts). Common rarity.\" [active]':\n  - generic \"Common rarity\":\n    - generic: C\n  - generic: Kai Ceenat\n  - generic \"Big Reaction\":\n    - generic \"Big Reaction\"\n  - generic: \"6\"\n  - generic: \"1\"\n  - generic: \"+5\"\n- 'generic \"Your hero: 7 hearts\"':\n  - generic \"You\"\n  - generic \"7 of 12 hearts\":\n    - generic: \"7\"\n- generic: Deck 13\n- generic: Hand 0\n- generic: Discard 2\n- generic: Your hand is empty.\n- strong: \"6\"\n- text: /10\n- generic: Energy\n- 'generic \"Card activations: 0 of 2 left this turn. Each cast, attack or manual Activate uses one.\"':\n  - generic: Uses\n- region \"Recent plays\":\n  - generic: Recent\n  - 'button \"You play the tactic Share the Feeling on Kai Ceenat. Kai Ceenat takes 1 damage. Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.\"':\n    - generic: ✦\n    - generic: You\n  - 'button \"You play the tactic Share the Feeling on Kai Ceenat. Kai Ceenat takes 1 damage. Kai Ceenat reacts: +1 attack until its next turn starts. Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.\"':\n    - generic: ✦\n    - generic: You\n- 'button \"Read Kai Ceenat: full text and active effects\"': Read Kai Ceenat\n- group \"Decks on the table\":\n  - button \"Draw from your deck\" [disabled]:\n    - generic: Your deck\n    - generic: \"13\"\n  - button \"Take a rule card\" [disabled]:\n    - generic: Shared axioms\n    - generic: \"2\"\n  - 'img \"Their deck: 14 cards\"':\n    - generic: Their deck\n    - generic: \"14\"\n- complementary:\n  - button \"How to play\"\n  - button \"Leave match\"\n  - region \"Axioms\":\n    - strong: Axioms\n    - generic: Active now · All basic.\n    - paragraph: Axioms are the rules both players start from. Rule cards and Fate can change them.\n    - 'button \"Win: Enemy hero to 0 ❤ wins\"':\n      - generic: Win\n      - generic: Enemy hero to 0 ❤ wins\n    - 'button \"Fights: Both creatures hit\"':\n      - generic: Fights\n      - generic: Both creatures hit\n    - 'button \"Card activations: 2 activations per turn\"':\n      - generic: Card activations\n      - generic: 2 activations per turn\n      - generic: 0 left\n    - 'button \"Attacks: Each creature attacks once\"':\n      - generic: Attacks\n      - generic: Each creature attacks once\n    - 'button \"Energy: +1 each turn\"':\n      - generic: Energy\n      - generic: +1 each turn\n    - 'button \"Drawing: Draw 1\"':\n      - generic: ⚖\n      - generic: Drawing\n      - generic: Draw 1\n    - 'button \"Card costs: Creature costs +0\"':\n      - generic: Card costs\n      - generic: Creature costs +0\n  - 'generic \"Colour matchups: Strong +1 / Weak −1\"'\n  - option \"Neutral\" [selected]\n  - option \"Strong\"\n  - option \"Weak\"\n  - option \"Weak at 1\"\n  - option \"Shield\"\n  - option \"Underdog\"\n  - option \"Reversed wheel\"\n  - option \"Zero attack\"\n- generic: C\n- generic: Common\n- generic: Kai Ceenat\n- generic: Big Reaction\n- generic: \"6\"\n- generic: \"1\"\n- generic: \"+5\"\n- generic: ❤️‍🔥 Emotion\n- generic: \"Big Reaction: Once per turn, after surviving damage, gain +1 attack until your next turn starts.\"\n- generic: Health 1 of 3. Damage stays.\n- generic: Active effects\n- generic: \"▲ +1 attack: Big Reaction (until your next turn starts)\"\n- generic: \"▲ +2 attack: Share the Feeling (until your next turn starts)\"\n- generic: \"▲ +2 attack: Share the Feeling (until your next turn starts)\"\n- generic: \"Colour wheel: Strong +1 against Language, Sense perception; Weak −1 against Reason, Memory; Neutral against Emotion, Imagination. Positive attack stays at least 1; zero stays 0.\"\n- strong: Expansion-13 · memory-only save\n- combobox \"Expansion-13 card\":\n  - 'option \"Kai: ordinary play\"'\n  - 'option \"Kai: own damage\"'\n  - 'option \"Kai: twice this turn\" [selected]'\n  - 'option \"Kai: Shield blocks\"'\n  - 'option \"Kai: lethal damage\"'\n  - 'option \"Kai: silenced\"'\n  - 'option \"Kai: Empty Set\"'\n  - 'option \"Kai: opponent controller\"'\n- button \"Start card sample\"\n- button \"Check outcome\"\n- status: Hearts 7 / 7 · Energy 10 · main\n- button \"Open pack sample\"\n- generic \"Scratch outcome details\""
+  }
+}

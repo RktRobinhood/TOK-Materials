@@ -1,0 +1,5249 @@
+[
+  {
+    "case": "play-kai",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0",
+            "p0t1"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 1,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": true,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "play",
+          "player": 0,
+          "cid": "p0c0",
+          "target": null,
+          "revealed": false,
+          "text": "You play Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "own-damage",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 4,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Big Reaction",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                }
+              ],
+              "health": 2,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Big Reaction",
+                  "attack": 1,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                },
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                }
+              ],
+              "damage": 1
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "text": "Kai Ceenat reacts: +1 attack until its next turn starts.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "own-twice",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 6,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 6,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Big Reaction",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Big Reaction",
+                  "attack": 1,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                },
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                },
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                }
+              ],
+              "damage": 2
+            }
+          ],
+          "discard": [
+            "p0t0",
+            "p0t1"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t1",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "shielded",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 3,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                }
+              ],
+              "damage": 0
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "shield",
+          "cid": "p0c0",
+          "text": "Kai Ceenat's Shield blocks the damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "lethal",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1"
+          ],
+          "board": [],
+          "discard": [
+            "p0t0",
+            "p0c0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat was defeated.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p0c0",
+          "player": 0,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Kai Ceenat is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "silenced",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 3,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                }
+              ],
+              "health": 2,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                }
+              ],
+              "damage": 1
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "empty-set",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 3,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                }
+              ],
+              "health": 2,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                }
+              ],
+              "damage": 1
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "enemy-kai",
+    "mode": "1280-normal",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 9,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 2,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Big Reaction",
+                  "amount": 1
+                }
+              ],
+              "health": 2,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Big Reaction",
+                  "attack": 1,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 2
+                }
+              ],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "generic-clean-cut",
+          "target": "p1c0",
+          "text": "You play the tactic Clean Cut on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p1c0",
+          "text": "Kai Ceenat reacts: +1 attack until its next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "play-kai",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0",
+            "p0t1"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 1,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": true,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "play",
+          "player": 0,
+          "cid": "p0c0",
+          "target": null,
+          "revealed": false,
+          "text": "You play Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "own-damage",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 4,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Big Reaction",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                }
+              ],
+              "health": 2,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Big Reaction",
+                  "attack": 1,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                },
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                }
+              ],
+              "damage": 1
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "text": "Kai Ceenat reacts: +1 attack until its next turn starts.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "shielded",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 3,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                }
+              ],
+              "damage": 0
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "shield",
+          "cid": "p0c0",
+          "text": "Kai Ceenat's Shield blocks the damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "lethal",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1"
+          ],
+          "board": [],
+          "discard": [
+            "p0t0",
+            "p0c0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat was defeated.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p0c0",
+          "player": 0,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Kai Ceenat is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "silenced",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 3,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                }
+              ],
+              "health": 2,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                }
+              ],
+              "damage": 1
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "own-twice",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 6,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 6,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Big Reaction",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Big Reaction",
+                  "attack": 1,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                },
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                },
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                }
+              ],
+              "damage": 2
+            }
+          ],
+          "discard": [
+            "p0t0",
+            "p0t1"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t1",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "empty-set",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 3,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                }
+              ],
+              "health": 2,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                }
+              ],
+              "damage": 1
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "enemy-kai",
+    "mode": "1280-calm",
+    "layout": {
+      "scrollWidth": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 9,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 2,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Big Reaction",
+                  "amount": 1
+                }
+              ],
+              "health": 2,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Big Reaction",
+                  "attack": 1,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 2
+                }
+              ],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "generic-clean-cut",
+          "target": "p1c0",
+          "text": "You play the tactic Clean Cut on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p1c0",
+          "text": "Kai Ceenat reacts: +1 attack until its next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "play-kai",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t0",
+            "p0t1"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 1,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": true,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "play",
+          "player": 0,
+          "cid": "p0c0",
+          "target": null,
+          "revealed": false,
+          "text": "You play Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "own-damage",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 4,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Big Reaction",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                }
+              ],
+              "health": 2,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Big Reaction",
+                  "attack": 1,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                },
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                }
+              ],
+              "damage": 1
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "text": "Kai Ceenat reacts: +1 attack until its next turn starts.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "own-twice",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 6,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 6,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Big Reaction",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                }
+              ],
+              "health": 1,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Big Reaction",
+                  "attack": 1,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                },
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                },
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                }
+              ],
+              "damage": 2
+            }
+          ],
+          "discard": [
+            "p0t0",
+            "p0t1"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t1",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "shielded",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 3,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                }
+              ],
+              "damage": 0
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "shield",
+          "cid": "p0c0",
+          "text": "Kai Ceenat's Shield blocks the damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "lethal",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1"
+          ],
+          "board": [],
+          "discard": [
+            "p0t0",
+            "p0c0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat was defeated.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p0c0",
+          "player": 0,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Kai Ceenat is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "silenced",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 3,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                }
+              ],
+              "health": 2,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                }
+              ],
+              "damage": 1
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "empty-set",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13",
+            "p0t1"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 3,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Share the Feeling",
+                  "amount": 2
+                }
+              ],
+              "health": 2,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Share the Feeling",
+                  "attack": 2,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 3
+                }
+              ],
+              "damage": 1
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "emotion-share-the-feeling",
+          "target": "p0c0",
+          "text": "You play the tactic Share the Feeling on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "tactic",
+          "player": 0,
+          "text": "Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "case": "enemy-kai",
+    "mode": "390-calm",
+    "layout": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 9,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 4,
+              "maxHealth": 4,
+              "baseHealth": 4,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": [
+            "p0t0"
+          ]
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13",
+            "p1t0"
+          ],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "emotion-spite-sprite",
+              "name": "Kai Ceenat",
+              "speciesName": "Kai Ceenat",
+              "legendary": false,
+              "colour": "emotion",
+              "printedColour": "emotion",
+              "colourless": false,
+              "cost": 2,
+              "baseCost": 2,
+              "attack": 2,
+              "baseAttack": 1,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 1
+                },
+                {
+                  "source": "buff",
+                  "label": "Big Reaction",
+                  "amount": 1
+                }
+              ],
+              "health": 2,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "big-reaction",
+                  "name": "Big Reaction",
+                  "text": "Once per turn, after surviving damage, gain +1 attack until your next turn starts.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "token": false,
+              "buffs": [
+                {
+                  "label": "Big Reaction",
+                  "attack": 1,
+                  "health": 0,
+                  "temp": false,
+                  "untilStart": 2
+                }
+              ],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "tactic-play",
+          "player": 0,
+          "cid": "p0t0",
+          "id": "generic-clean-cut",
+          "target": "p1c0",
+          "text": "You play the tactic Clean Cut on Kai Ceenat.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 1,
+          "source": null,
+          "text": "Kai Ceenat takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p1c0",
+          "text": "Kai Ceenat reacts: +1 attack until its next turn starts.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  }
+]

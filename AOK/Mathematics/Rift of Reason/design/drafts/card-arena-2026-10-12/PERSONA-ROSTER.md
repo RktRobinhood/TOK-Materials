@@ -188,7 +188,7 @@ Original delivery directions and exact sharedSfx arrays are also in persona-rost
 | Turingator | Thoughtful spare scholarly delivery; shared reveal/Fate/axiom sounds; no joke about persecution or private life. | card-play, hit, defeat, heal, fate-warp |
 | Dua Leapfrog | Bright rhythmic original delivery; reuse summon sound, no sung lines or artist impression. | card-play, hit, defeat |
 | Simone Bearles | Confident encouraging coach-like delivery; original words and shared heal cue. | card-play, hit, defeat, block |
-| Kai Ceenat | Energetic short original reactions; throttle levels, no shouted impression or looping shake. | card-play, hit, defeat |
+| Kai Ceenat | Energetic short original reactions; throttle levels, no shouted impression or looping shake. | card-play, hit, defeat, block, fate-warp |
 | Terry Chews | Warm exuberant original encouragement; shared card-play cue, no commercial catchphrase. | card-play, hit, defeat |
 | Jeremy Clawson | Comically emphatic original motoring commentary; no imitation or abusive lines. | card-play, hit, defeat |
 | Dolly Possum | Warm concise storyteller; no accent/voice imitation or sung material, shared heal sound. | card-play, hit, defeat |

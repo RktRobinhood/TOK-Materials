@@ -1,0 +1,125 @@
+- 'generic "Rival: 7 hearts"':
+  - generic "Rival"
+  - generic "7 of 12 hearts":
+    - generic: "7"
+- generic: Deck 14
+- generic: Hand 0
+- generic: Discard 0
+- strong: "10"
+- text: /10
+- generic: Energy
+- button "Mr. Beastie, cost 4, attack 2, health 4 of 4. Uncommon rarity.":
+  - generic "Uncommon rarity":
+    - generic: U
+  - generic: Mr. Beastie
+  - generic "Escalate":
+    - generic "Escalate"
+  - generic: "2"
+  - generic: "4"
+- group "Fate track":
+  - generic: No Fate track in this match.
+- status:
+  - generic: Drag (or click) a glowing card to play it, or a ready creature onto a target to attack.
+  - generic: "Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts."
+- button "End turn":
+  - generic: End
+  - generic: turn
+- 'button "Kai Ceenat, cost 2, attack 4, health 2 of 3, ready. Active effects: +1 attack: Big Reaction (until your next turn starts); +2 attack: Share the Feeling (until your next turn starts). Common rarity."':
+  - generic "Common rarity":
+    - generic: C
+  - generic: Kai Ceenat
+  - generic "Big Reaction":
+    - generic "Big Reaction"
+  - generic: "4"
+  - generic: "2"
+  - generic: "+3"
+  - generic: Ready
+- 'generic "Your hero: 7 hearts"':
+  - generic "You"
+  - generic "7 of 12 hearts":
+    - generic: "7"
+- generic: Deck 13
+- generic: Hand 1
+- generic: Discard 1
+- 'button "Tactic Share the Feeling, cost 2: Deal 1 damage to a friendly creature. If it survives, it gets +2 attack until your next turn starts. Emotion · common. Common rarity."':
+  - generic: "2"
+  - generic: Share the Feeling
+  - generic "Common rarity":
+    - generic: C
+  - generic: Tactic
+- strong: "8"
+- text: /10
+- generic: Energy
+- 'generic "Card activations: 1 of 2 left this turn. Each cast, attack or manual Activate uses one."':
+  - generic: Uses
+- region "Recent plays":
+  - generic: Recent
+  - 'button "You play the tactic Share the Feeling on Kai Ceenat. Kai Ceenat takes 1 damage. Kai Ceenat reacts: +1 attack until its next turn starts. Share the Feeling: Kai Ceenat gets +2 attack until your next turn starts."':
+    - generic: ✦
+    - generic: You
+- 'button "Read Kai Ceenat: full text and active effects"': Read Kai Ceenat
+- group "Decks on the table":
+  - button "Draw from your deck" [disabled]:
+    - generic: Your deck
+    - generic: "13"
+  - button "Take a rule card" [disabled]:
+    - generic: Shared axioms
+    - generic: "2"
+  - 'img "Their deck: 14 cards"':
+    - generic: Their deck
+    - generic: "14"
+- complementary:
+  - button "How to play"
+  - button "Leave match"
+  - region "Axioms":
+    - strong: Axioms
+    - generic: Active now · All basic.
+    - paragraph: Axioms are the rules both players start from. Rule cards and Fate can change them.
+    - 'button "Win: Enemy hero to 0 ❤ wins"':
+      - generic: Win
+      - generic: Enemy hero to 0 ❤ wins
+    - 'button "Fights: Both creatures hit"':
+      - generic: Fights
+      - generic: Both creatures hit
+    - 'button "Card activations: 2 activations per turn"':
+      - generic: Card activations
+      - generic: 2 activations per turn
+      - generic: 1 left
+    - 'button "Attacks: Each creature attacks once"':
+      - generic: Attacks
+      - generic: Each creature attacks once
+    - 'button "Energy: +1 each turn"':
+      - generic: Energy
+      - generic: +1 each turn
+    - 'button "Drawing: Draw 1"':
+      - generic: ⚖
+      - generic: Drawing
+      - generic: Draw 1
+    - 'button "Card costs: Creature costs +0"':
+      - generic: Card costs
+      - generic: Creature costs +0
+  - 'generic "Colour matchups: Strong +1 / Weak −1"'
+  - option "Neutral" [selected]
+  - option "Strong"
+  - option "Weak"
+  - option "Weak at 1"
+  - option "Shield"
+  - option "Underdog"
+  - option "Reversed wheel"
+  - option "Zero attack"
+- text: ▲ ▲
+- strong: Expansion-13 · memory-only save
+- combobox "Expansion-13 card":
+  - 'option "Kai: ordinary play"'
+  - 'option "Kai: own damage"'
+  - 'option "Kai: twice this turn" [selected]'
+  - 'option "Kai: Shield blocks"'
+  - 'option "Kai: lethal damage"'
+  - 'option "Kai: silenced"'
+  - 'option "Kai: Empty Set"'
+  - 'option "Kai: opponent controller"'
+- button "Start card sample"
+- button "Check outcome"
+- status: Hearts 7 / 7 · Energy 10 · main
+- button "Open pack sample"
+- generic "Scratch outcome details"

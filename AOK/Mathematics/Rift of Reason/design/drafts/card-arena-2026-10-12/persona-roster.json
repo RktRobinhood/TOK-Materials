@@ -775,7 +775,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-13: pack pool"
       },
       "silhouette": "Lively meerkat with dark raised head tufts, large reactive eyes and a crimson hoodie.",
       "signatureProp": "One oversized headset; paws lifted in a harmless startled reaction, no platform logo.",
@@ -787,7 +787,9 @@
       "sharedSfx": [
         "card-play",
         "hit",
-        "defeat"
+        "defeat",
+        "block",
+        "fate-warp"
       ],
       "artId": "creature/emotion-spite-sprite/idle",
       "palette": {
@@ -800,12 +802,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-13 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
         "health": 3,
-        "text": "Once per turn, after taking damage and surviving, this gains 1 attack until your next turn starts.",
+        "text": "Once per global turn, after this takes positive damage and survives ordinary prevention, give it +1 attack until its controller at that moment next starts a turn. Shield, lethal damage, Silence and Empty Set do not trigger it. The same instance keeps its allowance through bounce/replay; ordinary leave-play cleanup removes buffs. No attack or card activation is refunded.",
         "gates": [
           109
         ]

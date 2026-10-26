@@ -125,7 +125,10 @@
     "reason-provisional-proof",
     "imagination-paper-shield"
   ],
-  "held": 114,
+  "expansion13Batch": [
+    "emotion-spite-sprite"
+  ],
+  "held": 113,
   "rows": [
     {
       "id": "reason-premise-pigeon",
@@ -408,14 +411,16 @@
       "kind": "creature",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
-      "trigger": "Once per turn",
+      "disposition": "expansion-13 runtime release (#129); see expansion-13 acceptance report",
+      "trigger": "Once per global turn",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Once per turn, after taking damage and surviving, this gains 1 attack until your next turn starts.",
+      "payoffAndLifetime": "Once per global turn, after this takes positive damage and survives ordinary prevention, give it +1 attack until its controller at that moment next starts a turn. Shield, lethal damage, Silence and Empty Set do not trigger it. The same instance keeps its allowance through bounce/replay; ordinary leave-play cleanup removes buffs. No attack or card activation is refunded.",
       "counterplay": "Defeat it in one hit.",
       "semanticRevision": null,
       "releaseChecks": [
-        "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap"
+        "identity: move actual instance; consume one-shots before effects; no cloned receipt or source",
+        "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap",
+        "derived state: legal target revalidation, normal swaps/prevention, fixed construction identity and explicit temporary expiry"
       ],
       "gates": [
         109

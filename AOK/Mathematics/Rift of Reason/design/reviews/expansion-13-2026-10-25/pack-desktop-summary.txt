@@ -1,0 +1,79 @@
+- strong: Pack bench
+- 'generic "First hint on each new topic: free and keeps stars. Later hints and wrong checks after the free checks cost hearts. At zero: a scar and 2 hearts on the map."':
+  - img "♥"
+  - img "♥"
+  - img "♥"
+  - img "♥"
+  - img "♥"
+- generic "Catch Charms": 🪢 3
+- button "Shop · 70 Coins · new cards"
+- button "Journal"
+- button "📖 Collection"
+- button "🎒 Bag"
+- button "⚙"
+- generic: "The Valley · Prologue: The Fair · Level 1"
+- button "🌀 Time rift"
+- generic: "New tactics: Remember When, Label It. Add them in Collection."
+- dialog "Campfire pack stall":
+  - button "Close": ✕
+  - heading "Campfire pack stall" [level=2]
+  - img "A small woodland shop"
+  - strong: 70 Coins
+  - paragraph: "Earn Coins by completing checked puzzles: 10 for a first success, 2 for a replay, 25 for a first boss or mini-boss win."
+  - heading "Card packs" [level=3]
+  - paragraph: Every pack card is a new copy for your Collection. You can still get 311 cards.
+  - paragraph: "Next card: Common 67% (52 kinds), Uncommon 23.7% (18 kinds), Rare 9.3% (9 kinds). Foil: 4% per card. Full folders are left out."
+  - paragraph: "Free packs saved: 0."
+  - button "Five-card pack · 50 Coins" [disabled]
+  - button "Show your new cards"
+  - status
+  - paragraph: No real money. Catching creatures and direct card rewards still come from playing.
+  - heading "Sell spare supplies" [level=3]
+  - paragraph: Keep 2 Catch Charms, 1 Lure Lantern and 1 Tonic. Creatures, cards and keepsakes are never sold.
+  - paragraph: "Catch Charm: 3 owned · keep 2 · sell 1 × 5 = 5 Coins"
+  - paragraph: "Lure Lantern: 0 owned · keep 1 · sell 0 × 10 = 0 Coins"
+  - paragraph: "Tonic: 1 owned · keep 1 · sell 0 × 6 = 0 Coins"
+  - button "Review surplus sale · 5 Coins"
+  - status
+  - button "Close"
+- dialog "Your new cards":
+  - heading "Your new cards" [level=2]
+  - paragraph: 5 new cards are in your Collection (50 Coins).
+  - list:
+    - generic "Common rarity":
+      - generic: C
+      - generic: Common
+    - text: Remember the Guard · spell · New copy · Folder 1/4
+    - generic "Common rarity":
+      - generic: C
+      - generic: Common
+    - text: Hank Greenhare · creature · New copy · Folder 1/4
+    - generic "Common rarity":
+      - generic: C
+      - generic: Common
+    - text: Clean Cut · spell · New copy · Folder 1/4
+    - generic "Common rarity":
+      - generic: C
+      - generic: Common
+    - text: Kai Ceenat · creature · New copy · Folder 1/4
+    - generic "Uncommon rarity":
+      - generic: U
+      - generic: Uncommon
+    - text: Balanced Exchange · spell · New copy · Folder 1/4
+  - paragraph: "New colour spell: Gut Reaction."
+  - button "Done" [active]
+- strong: Expansion-13 · memory-only save
+- combobox "Expansion-13 card":
+  - 'option "Kai: ordinary play" [selected]'
+  - 'option "Kai: own damage"'
+  - 'option "Kai: twice this turn"'
+  - 'option "Kai: Shield blocks"'
+  - 'option "Kai: lethal damage"'
+  - 'option "Kai: silenced"'
+  - 'option "Kai: Empty Set"'
+  - 'option "Kai: opponent controller"'
+- button "Start card sample"
+- button "Check outcome"
+- status: Memory-only acquisition sample
+- button "Open pack sample"
+- generic "Scratch outcome details"

@@ -286,3 +286,14 @@ export function reviewExpansion12(cards){
         c.releaseRevision={issue:129,previousText:c.text,previousTarget:c.target,rationale:clarifications12[c.id][1]};c.text=clarifications12[c.id][0];
     }
 }
+
+// #129 expansion-13: one selected Common creature and ordinary survived-damage response.
+export const expansion13Batch=['emotion-spite-sprite'];
+export function reviewExpansion13(cards){
+    for(const c of cards)if(expansion13Batch.includes(c.id)){
+        c.runtimeRelease='expansion-13';c.status='Released in expansion-13 (#129); bounded engineering validation, not classroom balance certification';
+        c.acquisition.releaseStatus='Released expansion-13: pack pool';
+        c.releaseRevision={issue:129,previousText:c.text,rationale:'Pin positive survived damage after normal prevention, once per global turn on the same instance, and existing controller-next-start buff expiry. Bounce/replay does not reset the turn allowance; no engine or action-budget policy change.'};
+        c.text='Once per global turn, after this takes positive damage and survives ordinary prevention, give it +1 attack until its controller at that moment next starts a turn. Shield, lethal damage, Silence and Empty Set do not trigger it. The same instance keeps its allowance through bounce/replay; ordinary leave-play cleanup removes buffs. No attack or card activation is refunded.';
+    }
+}

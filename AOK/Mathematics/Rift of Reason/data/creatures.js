@@ -426,6 +426,13 @@
         },
     });
 
+    // #129 expansion-13: existing selected portrait and one bounded damage reaction.
+    Rift.data.creatures['emotion-spite-sprite'] = {
+        name: 'Kai Ceenat', inspiredBy: 'Kai Cenat', colour: 'emotion', rarity: 'common', power: 3, cost: 2, attack: 1, health: 3,
+        ability: 'big-reaction', abilityText: 'Once per turn, after surviving damage, gain +1 attack until your next turn starts.',
+        blurb: 'One small hit. A reaction that barely fits inside the headset.', lines: [], release: 'expansion-13', packEligible: true,
+    };
+
     // #132 plot identities: their actual earned source is the permanent Acquisition registry.
     function plotCreature(name,inspiredBy,colour,attack,health,ability,abilityText,blurb){
         return {name,inspiredBy,colour,rarity:'rare',power:5,cost:5,attack,health,ability,abilityText,blurb,lines:[],release:'plot-1',packEligible:false};

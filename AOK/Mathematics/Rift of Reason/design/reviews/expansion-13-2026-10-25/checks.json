@@ -1,0 +1,20 @@
+{
+  "command": "$tests=@(git ls-files \"tools/test/*.test.mjs\"); node --max-old-space-size=2048 --test --test-concurrency=2 @tests tools/test/expansion-13.test.mjs",
+  "total": 1641,
+  "pass": 1640,
+  "skip": 1,
+  "fail": 0,
+  "duration_ms": 414081.4976,
+  "runtimeSHA256": {
+    "data/creatures.js": "82f8b65f2a1eefb20e01d68e04648e89c39f2526b62362186ee5122015ce9eb0",
+    "js/battle/abilities.js": "abaa3d32f0b11424f1f21a477acf32c5a85fad9f8c362cf8fe21f9c480375e51",
+    "js/battle/engine.js": "92a065a4d9af5226298bf9a1b1066316bfdf596d16cf3e299b737d26d0b00c64",
+    "js/battle/ai.js": "7ae2e07bb1329ebf70652802109b8303b304b13ad3d74c9165448210399548b3"
+  },
+  "fullLogSHA256": "f83629935f1f702f5dcd6728822903b150a6a89411217c9fbe1aa40aacd38b1a",
+  "originalWindowsLogSHA256": "31b5c94d13673f66b8fb095c8b013253e55b226b38be44ea80ac6d56403f640d",
+  "counterCorrection": {
+    "scope": "Observer-only reaction counter repaired before accepted probe reruns. Every winner/reason/turn/action trial in both768-game reruns exactly equals the original uncounted diagnostic cohort.",
+    "gamesPerMode": 768
+  }
+}

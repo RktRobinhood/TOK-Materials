@@ -1,3 +1,11 @@
+## Expansion-13 damage-response creature — 25 October 2026 (#129)
+
+Kai Ceenat joins expansion-13 using the existing selected portrait and identity: Common, original cost 2 / attack 1 / health 3, ordinary packs and shared cues. Pre-lesson pack kinds: 52 Common / 18 Uncommon / 9 Rare; weights/prices and overall allocations stay unchanged. **113 concepts remain held; #129 stays open.**
+
+Big Reaction uses existing survived-damage and controller-next-start buff APIs, once per instance per global turn. Prevention, lethal cleanup, Silence/Empty Set, ordinary buff removal and activation limits remain authoritative. Bounce/replay cannot reset the same-turn allowance. No engine, AI, save, spawn/catch or asset changes.
+
+The [verification report](reviews/expansion-13-2026-10-25.md) records eight focused checks, full 1,640 pass / one existing skip / zero failures, 24 matching native outcomes/layouts and two completed memory-only packs with normal Kai. Rejected/incomplete automation receipts are separate, and no new PNG/motion/hardware claim. Corrected paired 768+768 same-body ability controls have zero draws, 445/440 mono/mixed body plays and 106/0 reaction events across all games including mirrors. An observer-only counter correction preserves every trial exactly. Initial paired differences stay within ±.0625; small fixtures do not certify balance. All 64 sampled original expansion-12 winners match. Preserve earlier Memory/Board Sweep/adverse/draw risks; no numeric tuning. Both final review axes are clear; publication evidence is tracked in the report.
+
 ## Expansion-12 Shield support — 25 October 2026 (#129)
 
 Provisional Proof and Paper Shield join expansion-12: two Common spells, original cost 2, ordinary packs and existing motifs/shared cues. Pre-lesson pack kinds: 51 Common / 18 Uncommon / 9 Rare; prices/weights and overall allocations stay unchanged. **114 concepts remain held; #129 stays open.**

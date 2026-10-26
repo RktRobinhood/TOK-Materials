@@ -794,6 +794,15 @@
             }},
             choose(api,card,cid){if(api.fromDiscard(cid)){api.s.cards[cid].nextPlayHealth=1;api.emit({t:'ability',cid:card.cid,text:api.cardName(cid)+' returns for one stronger cameo.'});}},
         },
+        'big-reaction': {
+            name: 'Big Reaction', text: 'Once per turn, after surviving damage, gain +1 attack until your next turn starts.',
+            onDamaged(api, card) {
+                if (card.bigReactionTurn === api.s.turn) return;
+                card.bigReactionTurn = api.s.turn;
+                api.buffUntilStart(card.cid, 1, 0, 'Big Reaction', card.controller);
+                api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' reacts: +1 attack until its next turn starts.' });
+            },
+        },
         grook: {
             name: 'Grook',
             text: 'Whenever it survives a fight, draw a card.',
