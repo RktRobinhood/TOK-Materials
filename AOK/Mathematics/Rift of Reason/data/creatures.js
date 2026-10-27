@@ -468,6 +468,20 @@
         },
     });
 
+    // #129 expansion-17: selected existing portraits and temporary external colour changes.
+    Object.assign(Rift.data.creatures, {
+        'perception-prism-puffin': {
+            name: 'Zach Wing', inspiredBy: 'Zach King', colour: 'perception', rarity: 'uncommon', power: 3, cost: 3, attack: 2, health: 4,
+            ability: 'mirror-angle', abilityText: 'Entrance: another friend becomes Perception until your next turn starts.',
+            blurb: 'The same little friend. A completely different angle.', lines: [], release: 'expansion-17', packEligible: true,
+        },
+        'language-metaphor-mantis': {
+            name: 'Isabelle Haakheron', inspiredBy: 'Isabelle Haak', colour: 'language', rarity: 'rare', power: 4, cost: 4, attack: 3, health: 3,
+            ability: 'quiet-block', abilityText: 'Entrance: an enemy loses its colour and 1 attack until your next turn starts.',
+            blurb: 'One quiet block takes the colour out of the rally.', lines: [], release: 'expansion-17', packEligible: true,
+        },
+    });
+
     // #132 plot identities: their actual earned source is the permanent Acquisition registry.
     function plotCreature(name,inspiredBy,colour,attack,health,ability,abilityText,blurb){
         return {name,inspiredBy,colour,rarity:'rare',power:5,cost:5,attack,health,ability,abilityText,blurb,lines:[],release:'plot-1',packEligible:false};

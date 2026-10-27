@@ -712,7 +712,8 @@
             entrance: { target: 'enemy-creature', run(api, card, target) {
                 const mixed = api.s.players[card.controller].board.some(cid => {
                     const other = api.s.cards[cid];
-                    return cid !== card.cid && other.colour && !other.generic && !other.colourless && other.colour !== card.colour;
+                    const colour = api.H.colourOf(api.s, other);
+                    return cid !== card.cid && (other.colour || other.timedColours) && colour !== 'none' && colour !== api.H.colourOf(api.s, card);
                 });
                 const n = mixed ? 2 : 1;
                 api.emit({ t: 'ability', cid: card.cid, target, text: api.name(card.cid) + ': ' + n + ' damage to ' + api.name(target) + '.' });
@@ -844,6 +845,22 @@
                 api.keywordUntilStart(card.cid, 'elusive', 'lose', card.controller, 'Curtain Slip', { independentLoss: true });
                 api.emit({ t: 'ability', cid: card.cid, text: api.name(card.cid) + ' takes a bow: loses Elusive until its next turn starts.' });
             },
+        },
+        // #129 expansion-17: external colour transformations with ordinary next-start lifetimes.
+        'mirror-angle': {
+            name: 'Mirror Angle', text: 'Entrance: another friend becomes Perception until your next turn starts.',
+            entrance: { target: 'friendly-other', run(api, card, target) {
+                api.colourUntilStart(target, 'perception', card.controller, 'Mirror Angle');
+                api.emit({ t: 'ability', cid: card.cid, target, text: api.name(card.cid) + ' changes ' + api.name(target) + ' to Perception until your next turn starts.' });
+            } },
+        },
+        'quiet-block': {
+            name: 'Quiet Block', text: 'Entrance: an enemy loses its colour and 1 attack until your next turn starts.',
+            entrance: { target: 'enemy-creature', run(api, card, target) {
+                api.colourUntilStart(target, 'none', card.controller, 'Quiet Block');
+                if (api.attack(target) > 0) api.buffUntilStart(target, -1, 0, 'Quiet Block', card.controller);
+                api.emit({ t: 'ability', cid: card.cid, target, text: api.name(card.cid) + ' blocks ' + api.name(target) + ': no colour and -1 attack until your next turn starts.' });
+            } },
         },
         grook: {
             name: 'Grook',

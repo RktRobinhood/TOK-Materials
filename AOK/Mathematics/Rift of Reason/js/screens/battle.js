@@ -1004,6 +1004,7 @@
         };
         const KEYWORD_WORD = { guard: 'Guard', shield: 'Shield', swift: 'Swift', elusive: 'Elusive' };
         function effectLine(fx) {
+            if (fx.stat === 'colour') return (fx.colour === 'none' ? 'Colourless' : 'Colour: ' + (Rift.COLOURS[fx.colour] || { name: fx.colour }).name) + ': ' + fx.label + ' (' + UNTIL[fx.until](fx.from) + ')';
             if (fx.stat === 'keyword') return (fx.amount > 0 ? 'Gains ' : 'Loses ') + (KEYWORD_WORD[fx.keyword] || fx.keyword) + ': ' + fx.label + ' (' + UNTIL[fx.until](fx.from) + ')';
             return signed(fx.amount) + ' ' + fx.stat + ': ' + fx.label + ' (' + UNTIL[fx.until](fx.from) + ')';
         }

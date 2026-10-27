@@ -203,7 +203,7 @@ Original delivery directions and exact sharedSfx arrays are also in persona-rost
 | Steph Cawry | Focused playful original competitor; shared hit/place sounds, no impersonation. | card-play, hit, defeat, block |
 | David Brine | Sparse mysterious original delivery; shared close/reveal cue, no imitation. | card-play, hit, defeat, block, fate-warp |
 | Nelly Koalda | Original playful athlete performance; concise friendly competition, no real-person accent or voice imitation. | card-play, hit, defeat, reveal |
-| Zach Wing | Playful concise original reveal, shared reveal/place effects. | card-play, hit, defeat |
+| Zach Wing | Playful concise original reveal, shared reveal/place effects. | card-play, hit, defeat, reveal |
 | Marques Brownleaf | Measured practical original reviewer; shared click/reveal cue, no channel intro or voice imitation. | card-play, hit, defeat, reveal, fate-warp |
 | Linus Sealbastian | Cheerful busy original maker delivery; reuse clunk/block, no mishap or scandal references. | card-play, hit, defeat, heal, block, fate-warp |
 | Adam Savash | Enthusiastic careful original maker, ordinary place/block sounds and no accent imitation. | card-play, hit, defeat, block, reveal |

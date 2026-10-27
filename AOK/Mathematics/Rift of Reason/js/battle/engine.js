@@ -339,8 +339,17 @@
     }
     const hasKeyword = (s, cid, k) => keywordsOf(s, cid).includes(k);
 
-    // 'none' (nicknamed): no colour at all, so no spotlight (not even Memory's) and no wheel bonus.
+    // Timed transformations overlay printed/permanent colour; the newest live layer wins. Layers are
+    // replaced, never mutated, so cloneState can share them. Expiry reveals the underlying colour.
+    function timedColour(s, card) {
+        const layers = card.timedColours || [];
+        for (let i = layers.length - 1; i >= 0; i--) if (layers[i].until > s.turn) return layers[i];
+        return null;
+    }
+    // 'none': no spotlight (not even Memory's) and no wheel bonus.
     function colourOf(s, card) {
+        const timed = timedColour(s, card);
+        if (timed) return timed.colour;
         return card.colourless || card.generic ? 'none' : (card.colour || 'memory');
     }
     function wheelBonus(s, card, foe) {
@@ -419,6 +428,8 @@
         });
         // Timed keywords (#148): { stat: 'keyword', keyword, amount: +1 gained / −1 lost, until: 'turn-start' }.
         (c.timedKeywords || []).forEach(t => out.push({ stat: 'keyword', keyword: t.k, amount: t.mode === 'gain' ? 1 : -1, label: t.label || 'Condition', until: 'turn-start', from: t.until }));
+        const colour = timedColour(s, c);
+        if (colour) out.push({ stat: 'colour', colour: colour.colour, amount: 0, label: colour.label, until: 'turn-start', from: colour.until });
         if (s.players[c.controller].hand.includes(cid)) {
             const delta = rules(s).costDelta;
             const shown = Math.max(0, c.cost + delta) - c.cost;   // a cost never goes below 0
@@ -612,7 +623,7 @@
         const hp = healthOf(s, cid);
         return {
             cid, kind: 'creature', species: c.species, name: cardName(s, cid), speciesName: sp.name, legendary: c.legendary,
-            colour: colourOf(s, c), printedColour: c.colour, colourless: !!c.colourless, cost: playCost(s, cid), baseCost: c.cost,
+            colour: colourOf(s, c), printedColour: c.colour, colourless: colourOf(s, c) === 'none', cost: playCost(s, cid), baseCost: c.cost,
             attack: attackOf(s, cid), baseAttack: c.attack, attackParts: attackParts(s, cid).parts,
             health: hp.current, maxHealth: hp.max, baseHealth: c.health, damaged: hp.damaged,
             keywords: keywordsOf(s, cid), lines, silenced: !!c.silenced, onBoard,
@@ -1139,6 +1150,10 @@
             // has, or an ordinary loss of one it doesn't have, changes nothing (→ false). An explicit
             // independentLoss records its own exposure window even if another effect already hid the keyword.
             buffUntilStart(cid, attack, health, label, p) { s.cards[cid].buffs.push({ label, attack: attack || 0, health: health || 0, temp: false, untilStart: nextTurnStart(G, p) }); },
+            colourUntilStart(cid, colour, p, label) {
+                const c = s.cards[cid];
+                c.timedColours = (c.timedColours || []).concat([{ colour, until: nextTurnStart(G, p), label }]);
+            },
             keywordUntilStart(cid, k, mode, p, label, options = {}) {
                 const c = s.cards[cid], has = hasKeyword(s, cid, k);
                 const independentLoss = mode === 'lose' && options.independentLoss;
@@ -1437,6 +1452,7 @@
         c.nickname = null; c.colourless = false; c.prediction = null; c.siuuu = 0; c.burned = false;
         if (c.lostKeywords) c.lostKeywords = null;
         if (c.timedKeywords) c.timedKeywords = null;
+        if (c.timedColours) c.timedColours = null;
     }
 
     function setWinner(G, p, reason) {
@@ -1509,6 +1525,10 @@
         Object.values(s.cards).forEach(c => {
             if (c.kind !== 'creature') return;
             if (c.extraAttacks && c.extraAttacks.turn < s.turn) c.extraAttacks = null;
+            if (c.timedColours && c.timedColours.some(t => t.until <= s.turn)) {
+                const left = c.timedColours.filter(t => t.until > s.turn);
+                c.timedColours = left.length ? left : null;
+            }
             if (c.buffs.some(b => b.untilStart != null && b.untilStart <= s.turn)) c.buffs = c.buffs.filter(b => !(b.untilStart != null && b.untilStart <= s.turn));
             if (c.timedKeywords && c.timedKeywords.some(t => t.until <= s.turn)) {
                 const left = c.timedKeywords.filter(t => t.until > s.turn);   // a new array: cloneState copies cards shallowly

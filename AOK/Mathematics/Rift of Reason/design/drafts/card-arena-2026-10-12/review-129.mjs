@@ -340,3 +340,19 @@ export function reviewExpansion16(cards){
         c.releaseRevision={issue:129,previousText:c.text,previousTarget:c.target,rationale:clarifications16[c.id][1]};c.text=clarifications16[c.id][0];
     }
 }
+
+// #129 expansion-17: temporary colour layers, without changing printed/deck identity.
+export const expansion17Batch=['perception-prism-puffin','language-metaphor-mantis'];
+const clarifications17={
+    'perception-prism-puffin':['Entrance: another friendly creature becomes Perception until the current controller next starts a turn. Self/enemies are excluded; no other friend means ordinary body entry. A token or currently colourless creature may be targeted. The newest live timed colour overrides older layers and underlying printed/permanent colourlessness; expiry reveals an older live layer or that underlying state. Later permanent Nickname colourlessness stays underneath a live timed layer. Species, printed/deck identity and acquisition never change. Resolved external colour survives source departure and source/target suppression; leave-play clears timed layers.',
+        'Add one canonical clone-safe timed-colour layer and existing next-start expiry; preserve printed identity and permanent Nickname/token flags underneath.'],
+    'language-metaphor-mantis':['Entrance: a normally eligible enemy creature becomes colourless and loses 1 attack until the current controller next starts a turn, minimum 0. If current effective attack is already 0, skip the numeric penalty but still transform colour; no latent negative penalty at 0. Ordinary Elusive/target rules apply; no target means ordinary body entry. Colour uses the same newest-live timed layer as Mirror Angle. Its separate ordinary temporary attack penalty can be removed without erasing colour; Silence preserves resolved external colour and penalties, and leave-play clears both. Printed/deck identity and acquisition never change.',
+        'Pair the shared temporary-colour layer with an existing until-start attack penalty only above effective zero, matching A Better Label; no new target or numeric-floor policy.'],
+};
+export function reviewExpansion17(cards){
+    for(const c of cards)if(expansion17Batch.includes(c.id)){
+        c.runtimeRelease='expansion-17';c.status='Released in expansion-17 (#129); bounded engineering validation, not classroom balance certification';
+        c.acquisition.releaseStatus='Released expansion-17: pack pool';
+        c.releaseRevision={issue:129,previousText:c.text,previousTarget:c.target,rationale:clarifications17[c.id][1]};c.text=clarifications17[c.id][0];
+    }
+}

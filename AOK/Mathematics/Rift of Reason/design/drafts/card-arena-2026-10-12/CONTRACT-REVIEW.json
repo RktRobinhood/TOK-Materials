@@ -139,7 +139,11 @@
     "emotion-outrage-ox",
     "perception-shadow-shrimp"
   ],
-  "held": 108,
+  "expansion17Batch": [
+    "perception-prism-puffin",
+    "language-metaphor-mantis"
+  ],
+  "held": 106,
   "rows": [
     {
       "id": "reason-premise-pigeon",
@@ -724,14 +728,17 @@
       "kind": "creature",
       "rarity": "uncommon",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-17 runtime release (#129); see expansion-17 acceptance report",
       "trigger": "Entrance",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Entrance: another friendly creature becomes Perception until your next turn starts.",
+      "payoffAndLifetime": "Entrance: another friendly creature becomes Perception until the current controller next starts a turn. Self/enemies are excluded; no other friend means ordinary body entry. A token or currently colourless creature may be targeted. The newest live timed colour overrides older layers and underlying printed/permanent colourlessness; expiry reveals an older live layer or that underlying state. Later permanent Nickname colourlessness stays underneath a live timed layer. Species, printed/deck identity and acquisition never change. Resolved external colour survives source departure and source/target suppression; leave-play clears timed layers.",
       "counterplay": "Choose neutral matchups or remove the buff.",
       "semanticRevision": null,
       "releaseChecks": [
-        "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap"
+        "tokens: reserve board capacity; finite generation; no collection copies; deterministic order",
+        "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap",
+        "information: explicit viewer and public/private label; no reserved-deck or prospective hidden read",
+        "derived state: legal target revalidation, normal swaps/prevention, fixed construction identity and explicit temporary expiry"
       ],
       "gates": [
         109
@@ -1029,10 +1036,10 @@
       "kind": "creature",
       "rarity": "rare",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-17 runtime release (#129); see expansion-17 acceptance report",
       "trigger": "Entrance",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Entrance: an enemy creature loses its colour and 1 attack until your next turn starts, minimum 0.",
+      "payoffAndLifetime": "Entrance: a normally eligible enemy creature becomes colourless and loses 1 attack until the current controller next starts a turn, minimum 0. If current effective attack is already 0, skip the numeric penalty but still transform colour; no latent negative penalty at 0. Ordinary Elusive/target rules apply; no target means ordinary body entry. Colour uses the same newest-live timed layer as Mirror Angle. Its separate ordinary temporary attack penalty can be removed without erasing colour; Silence preserves resolved external colour and penalties, and leave-play clears both. Printed/deck identity and acquisition never change.",
       "counterplay": "Wait out the label or clear the debuff.",
       "semanticRevision": null,
       "releaseChecks": [

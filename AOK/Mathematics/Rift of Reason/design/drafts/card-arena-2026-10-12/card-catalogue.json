@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, three expansion-10 cards, two expansion-11 cards, two expansion-12 cards, one expansion-13 creature, one expansion-14 creature, two expansion-15 creatures, two expansion-16 creatures, eighteen plot-1 story cards, 108 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, three expansion-10 cards, two expansion-11 cards, two expansion-12 cards, one expansion-13 creature, one expansion-14 creature, two expansion-15 creatures, two expansion-16 creatures, two expansion-17 creatures, eighteen plot-1 story cards, 106 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -1005,13 +1005,13 @@
       "cost": 3,
       "attack": 2,
       "health": 4,
-      "text": "Entrance: another friendly creature becomes Perception until your next turn starts.",
+      "text": "Entrance: another friendly creature becomes Perception until the current controller next starts a turn. Self/enemies are excluded; no other friend means ordinary body entry. A token or currently colourless creature may be targeted. The newest live timed colour overrides older layers and underlying printed/permanent colourlessness; expiry reveals an older live layer or that underlying state. Later permanent Nickname colourlessness stays underneath a live timed layer. Species, printed/deck identity and acquisition never change. Resolved external colour survives source departure and source/target suppression; leave-play clears timed layers.",
       "tags": [
         "transformation"
       ],
       "strategy": "Information, exposed targets and visible future plans",
       "counterplay": "Choose neutral matchups or remove the buff.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-17 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -1021,7 +1021,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-17: pack pool"
+      },
+      "runtimeRelease": "expansion-17",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Entrance: another friendly creature becomes Perception until your next turn starts.",
+        "rationale": "Add one canonical clone-safe timed-colour layer and existing next-start expiry; preserve printed identity and permanent Nickname/token flags underneath."
       }
     },
     {
@@ -1465,14 +1471,14 @@
       "cost": 4,
       "attack": 3,
       "health": 3,
-      "text": "Entrance: an enemy creature loses its colour and 1 attack until your next turn starts, minimum 0.",
+      "text": "Entrance: a normally eligible enemy creature becomes colourless and loses 1 attack until the current controller next starts a turn, minimum 0. If current effective attack is already 0, skip the numeric penalty but still transform colour; no latent negative penalty at 0. Ordinary Elusive/target rules apply; no target means ordinary body entry. Colour uses the same newest-live timed layer as Mirror Angle. Its separate ordinary temporary attack penalty can be removed without erasing colour; Silence preserves resolved external colour and penalties, and leave-play clears both. Printed/deck identity and acquisition never change.",
       "tags": [
         "control",
         "transformation"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Wait out the label or clear the debuff.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-17 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -1482,7 +1488,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-17: pack pool"
+      },
+      "runtimeRelease": "expansion-17",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Entrance: an enemy creature loses its colour and 1 attack until your next turn starts, minimum 0.",
+        "rationale": "Pair the shared temporary-colour layer with an existing until-start attack penalty only above effective zero, matching A Better Label; no new target or numeric-floor policy."
       }
     },
     {
