@@ -633,7 +633,7 @@ test('real boot and claw pixels belong to the moving cutouts rather than the ste
     const sharp = (await import('sharp')).default;
     const R = await rendererSetup(), heroes = R.data.trailer.scenes.find(scene => scene.id === 'heroes');
     // Inspected frame-zero rows below the last coat, tail or wing pixels.
-    const feetBegin = { 'fox-girl': 333, 'frogling-boy': 264, 'raven-girl': 329, 'owlet-boy': 319, 'mothkin-girl': 392 };
+    const feetBegin = { 'fox-girl': 335, 'frogling-boy': 264, 'raven-girl': 322, 'owlet-boy': 319, 'mothkin-girl': 392 };
     const contains = (polygon, x, y) => {
         let inside = false;
         for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
@@ -673,9 +673,9 @@ test('all five trailer travellers exchange foot contacts, lift only the swing fo
     const footLandmarks = {
         // Bottom edges of visible source pixels (alpha >= 20), not invisible
         // points below the shoes. Each x lies on that foot's actual sole.
-        'avatar/fox-girl': [[162, 376], [268, 376]],
+        'avatar/fox-girl': [[146, 378], [251, 378]],
         'avatar/frogling-boy': [[72, 323], [164, 320]],
-        'avatar/raven-girl': [[117, 367], [173, 361]],
+        'avatar/raven-girl': [[89, 354], [154, 357]],
         'avatar/owlet-boy': [[148, 352], [201, 342]],
         'avatar/mothkin-girl': [[107, 413], [190, 415]],
     };

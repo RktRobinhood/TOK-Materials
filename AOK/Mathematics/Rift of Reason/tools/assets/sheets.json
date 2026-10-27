@@ -169,7 +169,8 @@
             "avatar/fox-boy/idle", "avatar/fox-boy/neutral", "avatar/fox-boy/happy", "avatar/fox-boy/surprised", "avatar/fox-boy/worried",
             "avatar/fox-girl/idle", "avatar/fox-girl/neutral", "avatar/fox-girl/happy", "avatar/fox-girl/surprised", "avatar/fox-girl/worried"
         ] },
-        "fox-walk.png": { "type": "walk", "frames": 6, "rows": ["avatar/fox-boy/walk", "avatar/fox-girl/walk"] },
+        "fox-walk.png": { "type": "skip" },
+        "fox-walk-163.png": { "type": "walk", "frames": 6, "register": "grid", "rows": ["avatar/fox-boy/walk", "avatar/fox-girl/walk"] },
         "fox-idle-loop-163.png": { "type": "walk", "frames": 12, "register": "grid", "class": "bust", "rows": ["avatar/fox-boy/idle-loop", "avatar/fox-girl/idle-loop"] },
         "frogling-sheet.png": { "type": "islands", "ids": [
             "avatar/frogling-boy/idle", "avatar/frogling-boy/neutral", "avatar/frogling-boy/happy", "avatar/frogling-boy/surprised", "avatar/frogling-boy/worried",
@@ -181,7 +182,8 @@
             "avatar/raven-boy/idle", "avatar/raven-boy/neutral", "avatar/raven-boy/happy", "avatar/raven-boy/surprised", "avatar/raven-boy/worried",
             "avatar/raven-girl/idle", "avatar/raven-girl/neutral", "avatar/raven-girl/happy", "avatar/raven-girl/surprised", "avatar/raven-girl/worried"
         ] },
-        "raven-walk.png": { "type": "walk", "frames": 6, "rows": ["avatar/raven-boy/walk", "avatar/raven-girl/walk"] },
+        "raven-walk.png": { "type": "skip" },
+        "raven-walk-163.png": { "type": "walk", "frames": 6, "register": "grid", "rows": ["avatar/raven-boy/walk", "avatar/raven-girl/walk"] },
         "raven-idle-loop-163.png": { "type": "walk", "frames": 12, "register": "grid", "class": "bust", "rows": ["avatar/raven-boy/idle-loop", "avatar/raven-girl/idle-loop"] },
 
         "maskip-idle.png": {"type":"single","id":"creature/maskip/idle","class":"sprite"},

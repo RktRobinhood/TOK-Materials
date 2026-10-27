@@ -18,12 +18,18 @@ registered to the pixel. Then a Pillow finish puts each frame's lowest foot on t
 | Script | What it does | Inputs → outputs |
 |---|---|---|
 | `prep_walk_frame.py` | Cuts one frame out of a shipped walk sheet, pads it (1.3 × width, 1.12 × height) and enlarges it 3 × as the edit input. | `<sheet.webp> <frame 1-6> <out.png> [--k 3]` → `out.png` + `out.json` (cell, pad, offset, k) |
-| `finish_walk.py` | Turns the anchor + 5 edited frames into a 6-frame sheet: resizes each edit back to the shipped pixel size, snaps alpha ≤ 12 to 0, drops loose specks, registers each frame to the anchor on the head (translation only), then drops it so the lowest foot sits on the anchor's ground row. Widens the cell if the stride needs it. | `--base <prep png> --out <dir> --name <sheet> [--reg 0:0.40] edit2.png … edit6.png` → `<sheet>.png`, `frames/frame_N.png`, `report.json` |
+| `finish_walk.py` | Turns the anchor + 5 edited frames into a 6-frame sheet (`--balance 1`: see big tails below): resizes each edit back to the shipped pixel size, snaps alpha ≤ 12 to 0, drops loose specks, registers each frame to the anchor on the head (translation only), then drops it so the lowest foot sits on the anchor's ground row. Widens the cell if the stride needs it. | `--base <prep png> --out <dir> --name <sheet> [--reg 0:0.40] edit2.png … edit6.png` → `<sheet>.png`, `frames/frame_N.png`, `report.json` |
+| `deshadow.py` | Clears the soft ground shadow a leg edit paints under the feet (it survives the alpha ≤ 12 snap and smears on the map): in the lowest 12 % of the figure, pixels with alpha < 160 more than 3 px from a solid pixel go. `--like` first resizes the edit to the prep frame's canvas, so later `swing_part.py` boxes use prep coordinates. A dark **line** under the feet is opaque and stays: drop that render instead. | `<edit.png> <out.png> [--like prep.png] [--band 0.12] [--soft 160] [--near 3]` |
 | `swing_part.py` | Swings one loose part (scarf ends, cape hem, antennae) a few degrees from its root on the CPU: the shipped pixels are sheared, ramped in smoothly from a cut line, never redrawn. Use it where a "change only the scarf" edit redraws the part (it did on #163). `--fade top:PX` bends cloth that carries on past the box; `--protect` keeps a wing tip or foot out of the part. | `<in.png> <out.png> --cut x:X\|y:Y --angle DEG --box X0,Y0,X1,Y1 [--ramp PX] [--fade EDGE:PX] [--protect X0,Y0,X1,Y1] [--hue LO:HI …] [--debug dbg.png]` |
 | `pack_source.py` | Lays one or more finished rows out as a source PNG that `build-assets.mjs` slices with `"type": "walk"` (6 separate figures per row on one ground line). | `<out.png> <row-1 frames dir> [<row-2 frames dir>] [--gap 48]` |
 | `head_track.py` | Measures the head through a walk cycle: scale and position of each frame's head against a reference frame, then the bob (range of head y) in px and % of figure height. **The acceptance measure for walk sheets.** | `<sheet> [frames] [--ref 2] [--band 0:0.40] [--ds 2]` → printed lines |
 | `walk_audit.py` | Audits every avatar walk sheet: height spread, ground spread, centre drift, edge contact, stray blobs, plus one panel per sheet. | `<assets/avatars dir> <out dir>` → `walk-metrics.json`, `walk-<sheet>.png` |
 | `walk_compare.py` | Before/after evidence for one sheet: a panel at 300 px and 70 px on split night/parchment (and on the map) with the measurements, and a side-by-side GIF at the map's 160 ms per frame. | `<before> <after> <out prefix> [--map scene.webp] [--band 0:0.40]` → `-panel.png`, `.gif` |
+
+**Big tails (foxes, #163 slice D): use the grid.** The build centres each walk frame on the middle of its upper 60 %,
+and a fox tail sits in that band, so swinging it slid the head 3–4 px. Run `finish_walk.py --balance 1` (frames 2–6
+move at most 1 px so the whole figure's centre stays within 2 px; frame 1 stays put), pack with
+`pack_source.py --grid`, and give the sheet `"register": "grid"` in `sheets.json`, as the raven and fox walk sheets do.
 
 `--reg` / `--band` choose which slice of the figure's height counts as "the head". The default (top 40 %)
 suits owlets, frogs, foxes and ravens. Mothkins' tall antennae swing, so use `--reg 0.25:0.60` and
@@ -45,7 +51,8 @@ python3 -I tools/art-local/walk_compare.py <old webp> assets/avatars/owlet-girl-
 ```
 
 The prompts, seeds and picks for the #163 rebuild are in
-`design/source-assets/1-avatars/walk-163-generation.json`.
+`design/source-assets/1-avatars/walk-163-generation.json` (owlets, mothkins) and `walk-163-d-generation.json`
+(ravens, foxes).
 
 **Frame 1 is load-bearing.** The map shows walk frame 1 whenever the avatar stands still, and the trailer's
 "heroes" scene cuts the legs out of frame 1 of five sheets (fox-girl, frogling-boy, raven-girl, owlet-boy,

@@ -1,6 +1,6 @@
 """Turn the anchor frame + 5 edits into a 6-frame walk sheet in the shipped format, and measure it.
 
-Usage: python3 -I finish_walk.py --base <input.png> --out <dir> --name <sheet> [--reg 0:0.40] [--margin 4]
+Usage: python3 -I finish_walk.py --base <input.png> --out <dir> --name <sheet> [--reg 0:0.40] [--margin 4] [--balance 1]
                                  <frame2.png> ... <frame6.png>
 <input.png> is the padded, enlarged anchor frame from prep_walk_frame.py; its .json sidecar gives the
 geometry. Frame 1 of the sheet is the anchor itself; the edits are the other frames in cycle order.
@@ -11,6 +11,10 @@ geometry. Frame 1 of the sheet is the anchor itself; the edits are the other fra
   figure, by default its top 40 %; use e.g. --reg 0.25:0.60 to skip swinging antennae), then shifted
   vertically so its lowest foot sits on the anchor's ground row. What remains of the head's movement
   is the bob, which is printed.
+- --balance PX (optional) then shifts frames 2-6 sideways by whole pixels, at most PX each, so the range of the
+  whole figure's centre (walk_audit.py's "centre drift") is as small as it can be; frame 1 never moves. Use it
+  with pack_source.py --grid and "register": "grid", so the build keeps these positions (a swinging tail
+  otherwise moves the build's centring and slides the head).
 - The cell is the shipped cell, widened (never narrowed) to fit every frame with --margin px to spare,
   keeping the figure's horizontal place. The build re-packs frames anyway; the sheet is for measuring.
 Writes <out>/<sheet>.png (6 cells), <out>/frames/frame_N.png and <out>/report.json.
@@ -26,6 +30,7 @@ ap.add_argument('--out', required=True)
 ap.add_argument('--name', required=True)
 ap.add_argument('--reg', default='0:0.40')
 ap.add_argument('--margin', type=int, default=4)
+ap.add_argument('--balance', type=int, default=0)
 ap.add_argument('edits', nargs='+')
 A = ap.parse_args()
 geo = json.load(open(A.base.rsplit('.', 1)[0] + '.json'))
@@ -112,6 +117,20 @@ for i, f in enumerate(frames):
     placed.append(g)
     report.append(dict(frame=i + 1, src=os.path.basename(([A.base] + A.edits)[i]), head_shift=[dx, dy], bob=-drop,
                        specks_dropped=loaded[i][1]))
+if A.balance:
+    import itertools
+    def cx_of(g):
+        xs = np.nonzero(np.array(g)[:, :, 3] > 24)[1]
+        return float(xs.mean())
+    cxs = [cx_of(g) for g in placed]
+    rng = range(-A.balance, A.balance + 1)
+    best = min(itertools.product(rng, repeat=len(placed) - 1),
+               key=lambda d: (max(c + s for c, s in zip(cxs, (0,) + d)) - min(c + s for c, s in zip(cxs, (0,) + d)),
+                              sum(abs(s) for s in d)))
+    for i, s in enumerate((0,) + best):
+        if s:
+            g = Image.new('RGBA', placed[i].size, (0, 0, 0, 0)); g.paste(placed[i], (s, 0)); placed[i] = g
+        report[i]['balance_dx'] = s
 # cell: the shipped cell, widened symmetrically / heightened upward until every frame fits with a margin
 boxes = [g.getchannel('A').point(lambda v: 255 if v > 24 else 0).getbbox() for g in placed]
 x0 = min(OFF[0], min(b[0] for b in boxes) - A.margin)

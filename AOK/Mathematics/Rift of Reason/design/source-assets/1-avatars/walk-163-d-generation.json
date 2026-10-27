@@ -1,0 +1,282 @@
+{
+ "date": "2026-10-27",
+ "issue": 163,
+ "task": "FAL-282 (slice D of the FAL-271 art audit)",
+ "method": "Same as slice A (walk-163-generation.json): one shipped frame is the anchor, the other five are qwen21_edit \"change only its legs and feet/boots\" edits of it, the two down frames get a CPU swing of the shawl, tail feathers or tail. New in slice D: deshadow.py clears the soft ground shadow the edit paints under the feet; finish_walk.py --balance 1 nudges frames 2-6 by at most 1 px so the whole-figure centre stays within 2 px; the sources are packed with pack_source.py --grid and built with \"register\": \"grid\", because the build's usual centring (upper 60 % of the figure) follows the swinging fox tail and slid the head 3-4 px. Old sources raven-walk.png and fox-walk.png are kept and marked skip.",
+ "anchors": "raven-girl uses shipped frame 3: shipped frame 1's shawl and head differ from the other five frames (FAL-271 audit). The others keep shipped frame 1, so fox-girl's trailer rig only moves (-17, +2) px; raven-girl's rig is refitted to the new frame 1.",
+ "rejected": "Round 1 #6, #12, #18 and #23 draw a dark ground line under the feet. Round 1 #17 (fox-boy contactB) and #19 (fox-girl down) carry a solid sole shadow that would set the ground row 2 px low; round 2 re-rendered those two poses with an added sentence (\"The feet stand on nothing: there is no shadow, no ground line and no dark strip under the boots; below the soles everything is fully transparent.\"), seeds 28203-28204, and #1 / #3 replace them.",
+ "measured": "On the built webp. head_track.py --ref 1: head bob raven-girl 2.3 %, raven-boy 1.9 %, fox-boy 1.6 %, fox-girl 1.3 % (shipped 6.8 / 5.9 / 5.6 / 5.1 %), head x drift <= 2 px, head scale 1.00 on every frame. walk_audit.py: centre drift 0.7 / 0.7 / 1.1 / 1.4 px (shipped 3.8 / 3.1 / 10.5 / 10.4 px), ground row within 1 px.",
+ "renders": {
+  "round_1": {
+   "seeds": [
+    28201,
+    28202
+   ],
+   "count": 24
+  },
+  "round_2": {
+   "seeds": [
+    28203,
+    28204
+   ],
+   "count": 4
+  }
+ },
+ "sheets": {
+  "raven-walk-163.png": [
+   {
+    "id": "avatar/raven-boy/walk",
+    "anchor": "shipped frame 1",
+    "frames": [
+     {
+      "frame": 1,
+      "source": "shipped assets/avatars/raven-boy-walk.webp frame 1 (the anchor, unchanged)"
+     },
+     {
+      "frame": 2,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "raven-boy-down",
+      "seed": 28201,
+      "input": "fal282-raven-boy-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little raven boy walking to the right. Change only its legs and feet, so that both feet are flat on the ground under the body: the front leg (on the right) is bent at the knee and takes the weight, and the back foot (on the left) is a short step behind with its heel just lifting. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the big yellow eye, the beak, the spiky dark blue feathers on the head, the yellow pencil behind the head, the grey hooded jacket, the brown satchel and strap, the brown book with gold corners held in both hands, and the tail feathers exactly as they are, in the same place, the same size. The raven still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #7",
+      "then": "tools/art-local/deshadow.py --like raven-boy-f1-x3.png; CPU swing (tail feathers lift), tools/art-local/swing_part.py --cut x:330 --angle -7 --box 40,820,330,1010 --ramp 80"
+     },
+     {
+      "frame": 3,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "raven-boy-pass",
+      "seed": 28201,
+      "input": "fal282-raven-boy-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little raven boy walking to the right. Change only its legs and feet, so that one leg stands straight directly under the middle of the body with its foot flat on the ground, and the other leg is lifted, its foot raised well off the ground and tucked up under the body, swinging forward. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the big yellow eye, the beak, the spiky dark blue feathers on the head, the yellow pencil behind the head, the grey hooded jacket, the brown satchel and strap, the brown book with gold corners held in both hands, and the tail feathers exactly as they are, in the same place, the same size. The raven still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #9",
+      "then": "tools/art-local/deshadow.py --like raven-boy-f1-x3.png",
+      "balance_dx": -1
+     },
+     {
+      "frame": 4,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "raven-boy-contactB",
+      "seed": 28201,
+      "input": "fal282-raven-boy-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little raven boy walking to the right. Change only its legs and feet, so that a long stride with the legs the other way round from <image1>: the leg that was behind now reaches forward to the right with its heel touching the ground, and the other leg is stretched back to the left with only its toes on the ground. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the big yellow eye, the beak, the spiky dark blue feathers on the head, the yellow pencil behind the head, the grey hooded jacket, the brown satchel and strap, the brown book with gold corners held in both hands, and the tail feathers exactly as they are, in the same place, the same size. The raven still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #11",
+      "then": "tools/art-local/deshadow.py --like raven-boy-f1-x3.png",
+      "balance_dx": -1
+     },
+     {
+      "frame": 5,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "raven-boy-down",
+      "seed": 28202,
+      "input": "fal282-raven-boy-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little raven boy walking to the right. Change only its legs and feet, so that both feet are flat on the ground under the body: the front leg (on the right) is bent at the knee and takes the weight, and the back foot (on the left) is a short step behind with its heel just lifting. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the big yellow eye, the beak, the spiky dark blue feathers on the head, the yellow pencil behind the head, the grey hooded jacket, the brown satchel and strap, the brown book with gold corners held in both hands, and the tail feathers exactly as they are, in the same place, the same size. The raven still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #8",
+      "then": "tools/art-local/deshadow.py --like raven-boy-f1-x3.png; CPU swing (tail feathers lift), tools/art-local/swing_part.py --cut x:330 --angle -7 --box 40,820,330,1010 --ramp 80",
+      "balance_dx": 1
+     },
+     {
+      "frame": 6,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "raven-boy-pass",
+      "seed": 28202,
+      "input": "fal282-raven-boy-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little raven boy walking to the right. Change only its legs and feet, so that one leg stands straight directly under the middle of the body with its foot flat on the ground, and the other leg is lifted, its foot raised well off the ground and tucked up under the body, swinging forward. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the big yellow eye, the beak, the spiky dark blue feathers on the head, the yellow pencil behind the head, the grey hooded jacket, the brown satchel and strap, the brown book with gold corners held in both hands, and the tail feathers exactly as they are, in the same place, the same size. The raven still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #10",
+      "then": "tools/art-local/deshadow.py --like raven-boy-f1-x3.png",
+      "balance_dx": -1
+     }
+    ]
+   },
+   {
+    "id": "avatar/raven-girl/walk",
+    "anchor": "shipped frame 3",
+    "frames": [
+     {
+      "frame": 1,
+      "source": "shipped assets/avatars/raven-girl-walk.webp frame 3 (the anchor, unchanged)"
+     },
+     {
+      "frame": 2,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "raven-girl-down",
+      "seed": 28201,
+      "input": "fal282-raven-girl-f3-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little raven girl walking to the right. Change only its legs and feet, so that both feet are flat on the ground under the body: the front leg (on the right) is bent at the knee and takes the weight, and the back foot (on the left) is a short step behind with its heel just lifting. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the big yellow eye, the beak, the purple beret with its gold button and ribbon, the purple shawl with gold embroidery, the gold pendant with its glass lens, the dark blue-purple feathers, the wing and the tail feathers exactly as they are, in the same place, the same size. The raven still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #1",
+      "then": "tools/art-local/deshadow.py --like raven-girl-f3-x3.png; CPU swing (shawl hem and tail feathers droop), tools/art-local/swing_part.py --cut x:420 --angle 7 --box 60,700,420,1070 --ramp 90 --fade top:80 --protect 250,1000,420,1070"
+     },
+     {
+      "frame": 3,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "raven-girl-pass",
+      "seed": 28201,
+      "input": "fal282-raven-girl-f3-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little raven girl walking to the right. Change only its legs and feet, so that one leg stands straight directly under the middle of the body with its foot flat on the ground, and the other leg is lifted, its foot raised well off the ground and tucked up under the body, swinging forward. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the big yellow eye, the beak, the purple beret with its gold button and ribbon, the purple shawl with gold embroidery, the gold pendant with its glass lens, the dark blue-purple feathers, the wing and the tail feathers exactly as they are, in the same place, the same size. The raven still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #3",
+      "then": "tools/art-local/deshadow.py --like raven-girl-f3-x3.png"
+     },
+     {
+      "frame": 4,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "raven-girl-contactB",
+      "seed": 28201,
+      "input": "fal282-raven-girl-f3-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little raven girl walking to the right. Change only its legs and feet, so that a long stride with the legs the other way round from <image1>: the leg that was behind now reaches forward to the right with its heel touching the ground, and the other leg is stretched back to the left with only its toes on the ground. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the big yellow eye, the beak, the purple beret with its gold button and ribbon, the purple shawl with gold embroidery, the gold pendant with its glass lens, the dark blue-purple feathers, the wing and the tail feathers exactly as they are, in the same place, the same size. The raven still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #5",
+      "then": "tools/art-local/deshadow.py --like raven-girl-f3-x3.png"
+     },
+     {
+      "frame": 5,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "raven-girl-down",
+      "seed": 28202,
+      "input": "fal282-raven-girl-f3-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little raven girl walking to the right. Change only its legs and feet, so that both feet are flat on the ground under the body: the front leg (on the right) is bent at the knee and takes the weight, and the back foot (on the left) is a short step behind with its heel just lifting. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the big yellow eye, the beak, the purple beret with its gold button and ribbon, the purple shawl with gold embroidery, the gold pendant with its glass lens, the dark blue-purple feathers, the wing and the tail feathers exactly as they are, in the same place, the same size. The raven still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #2",
+      "then": "tools/art-local/deshadow.py --like raven-girl-f3-x3.png; CPU swing (shawl hem and tail feathers droop), tools/art-local/swing_part.py --cut x:420 --angle 7 --box 60,700,420,1070 --ramp 90 --fade top:80 --protect 250,1000,420,1070",
+      "balance_dx": 1
+     },
+     {
+      "frame": 6,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "raven-girl-pass",
+      "seed": 28202,
+      "input": "fal282-raven-girl-f3-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little raven girl walking to the right. Change only its legs and feet, so that one leg stands straight directly under the middle of the body with its foot flat on the ground, and the other leg is lifted, its foot raised well off the ground and tucked up under the body, swinging forward. Both legs look exactly like the legs in <image1>: the same golden-orange colour, the same scaly texture with soft shading, dark brown outlines and small dark claws. Both legs are the same colour. Keep the head, the big yellow eye, the beak, the purple beret with its gold button and ribbon, the purple shawl with gold embroidery, the gold pendant with its glass lens, the dark blue-purple feathers, the wing and the tail feathers exactly as they are, in the same place, the same size. The raven still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #4",
+      "then": "tools/art-local/deshadow.py --like raven-girl-f3-x3.png"
+     }
+    ]
+   }
+  ],
+  "fox-walk-163.png": [
+   {
+    "id": "avatar/fox-boy/walk",
+    "anchor": "shipped frame 1",
+    "frames": [
+     {
+      "frame": 1,
+      "source": "shipped assets/avatars/fox-boy-walk.webp frame 1 (the anchor, unchanged)"
+     },
+     {
+      "frame": 2,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "fox-boy-down",
+      "seed": 28201,
+      "input": "fal282-fox-boy-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fox boy walking to the right. Change only its legs and boots, so that both feet are flat on the ground under the body: the front leg (on the right) is bent at the knee and takes the weight, and the back foot (on the left) is a short step behind with its heel just lifting. Both legs look exactly like the legs in <image1>: the same olive-brown patched trousers rolled up at the bottom, the same dark brown boots, the same dark outlines. Both legs are the same colour. Keep the head, the ears, the eye, the face, the green neckerchief, the white shirt, the arms and paws, the brown satchel, and the big orange and white tail exactly as they are, in the same place, the same size. The fox still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #13",
+      "then": "tools/art-local/deshadow.py --like fox-boy-f1-x3.png; CPU swing (tail droops), tools/art-local/swing_part.py --cut x:560 --angle 6 --box 140,600,560,1080 --ramp 90 --protect 430,960,560,1080"
+     },
+     {
+      "frame": 3,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "fox-boy-pass",
+      "seed": 28201,
+      "input": "fal282-fox-boy-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fox boy walking to the right. Change only its legs and boots, so that one leg stands straight directly under the middle of the body with its foot flat on the ground, and the other leg is lifted, its foot raised well off the ground and tucked up under the body, swinging forward. Both legs look exactly like the legs in <image1>: the same olive-brown patched trousers rolled up at the bottom, the same dark brown boots, the same dark outlines. Both legs are the same colour. Keep the head, the ears, the eye, the face, the green neckerchief, the white shirt, the arms and paws, the brown satchel, and the big orange and white tail exactly as they are, in the same place, the same size. The fox still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #15",
+      "then": "tools/art-local/deshadow.py --like fox-boy-f1-x3.png"
+     },
+     {
+      "frame": 4,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "fox-boy-contactB-noshadow",
+      "seed": 28203,
+      "input": "fal282-fox-boy-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fox boy walking to the right. Change only its legs and boots, so that a long stride with the legs the other way round from <image1>: the leg that was behind now reaches forward to the right with its heel touching the ground, and the other leg is stretched back to the left with only its toes on the ground. Both legs look exactly like the legs in <image1>: the same olive-brown patched trousers rolled up at the bottom, the same dark brown boots, the same dark outlines. Both legs are the same colour. Keep the head, the ears, the eye, the face, the green neckerchief, the white shirt, the arms and paws, the brown satchel, and the big orange and white tail exactly as they are, in the same place, the same size. The fox still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. The feet stand on nothing: there is no shadow, no ground line and no dark strip under the boots; below the soles everything is fully transparent. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 2 #1",
+      "then": "tools/art-local/deshadow.py --like fox-boy-f1-x3.png",
+      "balance_dx": 1
+     },
+     {
+      "frame": 5,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "fox-boy-down",
+      "seed": 28202,
+      "input": "fal282-fox-boy-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fox boy walking to the right. Change only its legs and boots, so that both feet are flat on the ground under the body: the front leg (on the right) is bent at the knee and takes the weight, and the back foot (on the left) is a short step behind with its heel just lifting. Both legs look exactly like the legs in <image1>: the same olive-brown patched trousers rolled up at the bottom, the same dark brown boots, the same dark outlines. Both legs are the same colour. Keep the head, the ears, the eye, the face, the green neckerchief, the white shirt, the arms and paws, the brown satchel, and the big orange and white tail exactly as they are, in the same place, the same size. The fox still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #14",
+      "then": "tools/art-local/deshadow.py --like fox-boy-f1-x3.png; CPU swing (tail droops), tools/art-local/swing_part.py --cut x:560 --angle 6 --box 140,600,560,1080 --ramp 90 --protect 430,960,560,1080"
+     },
+     {
+      "frame": 6,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "fox-boy-pass",
+      "seed": 28202,
+      "input": "fal282-fox-boy-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fox boy walking to the right. Change only its legs and boots, so that one leg stands straight directly under the middle of the body with its foot flat on the ground, and the other leg is lifted, its foot raised well off the ground and tucked up under the body, swinging forward. Both legs look exactly like the legs in <image1>: the same olive-brown patched trousers rolled up at the bottom, the same dark brown boots, the same dark outlines. Both legs are the same colour. Keep the head, the ears, the eye, the face, the green neckerchief, the white shirt, the arms and paws, the brown satchel, and the big orange and white tail exactly as they are, in the same place, the same size. The fox still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #16",
+      "then": "tools/art-local/deshadow.py --like fox-boy-f1-x3.png",
+      "balance_dx": -1
+     }
+    ]
+   },
+   {
+    "id": "avatar/fox-girl/walk",
+    "anchor": "shipped frame 1",
+    "frames": [
+     {
+      "frame": 1,
+      "source": "shipped assets/avatars/fox-girl-walk.webp frame 1 (the anchor, unchanged)"
+     },
+     {
+      "frame": 2,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "fox-girl-down-noshadow",
+      "seed": 28203,
+      "input": "fal282-fox-girl-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fox girl walking to the right. Change only its legs and boots, so that both feet are flat on the ground under the body: the front leg (on the right) is bent at the knee and takes the weight, and the back foot (on the left) is a short step behind with its heel just lifting. Both legs look exactly like the legs in <image1>: the same brown trousers with cream wraps at the ankle, the same dark brown boots, the same dark outlines. Both legs are the same colour. Keep the head, the ears, the eye, the face, the yellow coat with its toggles, the arms and paws, the brown backpack, the big red and white tail and the red ribbon bow on it exactly as they are, in the same place, the same size. The fox still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. The feet stand on nothing: there is no shadow, no ground line and no dark strip under the boots; below the soles everything is fully transparent. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 2 #3",
+      "then": "tools/art-local/deshadow.py --like fox-girl-f1-x3.png; CPU swing (tail and ribbon droop), tools/art-local/swing_part.py --cut x:600 --angle 6 --box 120,540,600,1090 --ramp 90 --protect 500,960,600,1090",
+      "balance_dx": 1
+     },
+     {
+      "frame": 3,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "fox-girl-pass",
+      "seed": 28201,
+      "input": "fal282-fox-girl-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fox girl walking to the right. Change only its legs and boots, so that one leg stands straight directly under the middle of the body with its foot flat on the ground, and the other leg is lifted, its foot raised well off the ground and tucked up under the body, swinging forward. Both legs look exactly like the legs in <image1>: the same brown trousers with cream wraps at the ankle, the same dark brown boots, the same dark outlines. Both legs are the same colour. Keep the head, the ears, the eye, the face, the yellow coat with its toggles, the arms and paws, the brown backpack, the big red and white tail and the red ribbon bow on it exactly as they are, in the same place, the same size. The fox still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #21",
+      "then": "tools/art-local/deshadow.py --like fox-girl-f1-x3.png",
+      "balance_dx": 1
+     },
+     {
+      "frame": 4,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "fox-girl-contactB",
+      "seed": 28202,
+      "input": "fal282-fox-girl-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fox girl walking to the right. Change only its legs and boots, so that a long stride with the legs the other way round from <image1>: the leg that was behind now reaches forward to the right with its heel touching the ground, and the other leg is stretched back to the left with only its toes on the ground. Both legs look exactly like the legs in <image1>: the same brown trousers with cream wraps at the ankle, the same dark brown boots, the same dark outlines. Both legs are the same colour. Keep the head, the ears, the eye, the face, the yellow coat with its toggles, the arms and paws, the brown backpack, the big red and white tail and the red ribbon bow on it exactly as they are, in the same place, the same size. The fox still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #24",
+      "then": "tools/art-local/deshadow.py --like fox-girl-f1-x3.png"
+     },
+     {
+      "frame": 5,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "fox-girl-down",
+      "seed": 28202,
+      "input": "fal282-fox-girl-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fox girl walking to the right. Change only its legs and boots, so that both feet are flat on the ground under the body: the front leg (on the right) is bent at the knee and takes the weight, and the back foot (on the left) is a short step behind with its heel just lifting. Both legs look exactly like the legs in <image1>: the same brown trousers with cream wraps at the ankle, the same dark brown boots, the same dark outlines. Both legs are the same colour. Keep the head, the ears, the eye, the face, the yellow coat with its toggles, the arms and paws, the brown backpack, the big red and white tail and the red ribbon bow on it exactly as they are, in the same place, the same size. The fox still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #20",
+      "then": "tools/art-local/deshadow.py --like fox-girl-f1-x3.png; CPU swing (tail and ribbon droop), tools/art-local/swing_part.py --cut x:600 --angle 6 --box 120,540,600,1090 --ramp 90 --protect 500,960,600,1090",
+      "balance_dx": 1
+     },
+     {
+      "frame": 6,
+      "tool": "ComfyUI qwen21_edit (Qwen Image 2.1 int8 single-image edit), 25 steps euler/simple, cfg 1, 1024 px budget",
+      "label": "fox-girl-pass",
+      "seed": 28202,
+      "input": "fal282-fox-girl-f1-x3.png",
+      "prompt": "This is an RGBA format image with transparency. Edit <image1>, a little fox girl walking to the right. Change only its legs and boots, so that one leg stands straight directly under the middle of the body with its foot flat on the ground, and the other leg is lifted, its foot raised well off the ground and tucked up under the body, swinging forward. Both legs look exactly like the legs in <image1>: the same brown trousers with cream wraps at the ankle, the same dark brown boots, the same dark outlines. Both legs are the same colour. Keep the head, the ears, the eye, the face, the yellow coat with its toggles, the arms and paws, the brown backpack, the big red and white tail and the red ribbon bow on it exactly as they are, in the same place, the same size. The fox still faces right. The lowest foot stands on the same ground line as in <image1>. Change nothing else. Same painted style, same dark outlines. No ground, no shadow, no motion lines, no text. The image has an alpha channel and a transparent background.",
+      "render": "FAL-282 round 1 #22",
+      "then": "tools/art-local/deshadow.py --like fox-girl-f1-x3.png",
+      "balance_dx": -1
+     }
+    ]
+   }
+  ]
+ }
+}
