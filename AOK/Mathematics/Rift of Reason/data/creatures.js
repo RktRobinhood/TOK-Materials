@@ -482,6 +482,20 @@
         },
     });
 
+    // #129 expansion-18: existing portraits and bounded held-Axiom information/draw hooks.
+    Object.assign(Rift.data.creatures, {
+        'language-comma-caterpillar': {
+            name: 'Emma Wordson', inspiredBy: 'Emma Watson', colour: 'language', rarity: 'common', power: 2, cost: 2, attack: 1, health: 3,
+            ability: 'final-citation', abilityText: 'Guard. Last Word: show your oldest held Axiom, if any, and draw 1 personal card.',
+            blurb: 'One careful final comma. One very visible citation.', lines: [], release: 'expansion-18', packEligible: true,
+        },
+        'language-echo-egret': {
+            name: 'Sabrina Carpwenter', inspiredBy: 'Sabrina Carpenter', colour: 'language', rarity: 'uncommon', power: 3, cost: 3, attack: 2, health: 3,
+            ability: 'one-encore', abilityText: 'Once per turn, after you play a held Axiom, draw 1 personal card.',
+            blurb: 'That tiny rule somehow earned one more encore.', lines: [], release: 'expansion-18', packEligible: true,
+        },
+    });
+
     // #132 plot identities: their actual earned source is the permanent Acquisition registry.
     function plotCreature(name,inspiredBy,colour,attack,health,ability,abilityText,blurb){
         return {name,inspiredBy,colour,rarity:'rare',power:5,cost:5,attack,health,ability,abilityText,blurb,lines:[],release:'plot-1',packEligible:false};

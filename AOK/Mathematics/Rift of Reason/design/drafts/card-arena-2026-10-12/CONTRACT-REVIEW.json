@@ -143,7 +143,11 @@
     "perception-prism-puffin",
     "language-metaphor-mantis"
   ],
-  "held": 106,
+  "expansion18Batch": [
+    "language-comma-caterpillar",
+    "language-echo-egret"
+  ],
+  "held": 104,
   "rows": [
     {
       "id": "reason-premise-pigeon",
@@ -899,15 +903,17 @@
       "kind": "creature",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
-      "trigger": "Guard. Last Word: if you hold an Axiom",
+      "disposition": "expansion-18 runtime release (#129); see expansion-18 acceptance report",
+      "trigger": "Guard. Last Word: if the current controller holds an Axiom",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Guard. Last Word: if you hold an Axiom, reveal your oldest held Axiom and draw 1 personal-deck card.",
+      "payoffAndLifetime": "Guard. Last Word: if the current controller holds an Axiom, show their oldest held Axiom publicly and draw 1 personal card normally. The rule stays held; an already-public rule still qualifies without duplicating its public marker. No held rule means no draw. This unconditional Last Word effect precedes normal Mercy/return destination handling. Suppression and ordinary hand/deck limits apply; no chosen card, extra receipt or destination policy.",
       "counterplay": "Silence it or make the opponent use their held rules first.",
       "semanticRevision": "Emma Wordson exchanges a public held-rule clue for a last-word draw. This is neither plain Guard nor Footnote Finch attack growth.",
       "releaseChecks": [
         "resource: preserve normal energy, activation and hand caps; no refund on replay",
-        "information: explicit viewer and public/private label; no reserved-deck or prospective hidden read"
+        "identity: move actual instance; consume one-shots before effects; no cloned receipt or source",
+        "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap",
+        "derived state: legal target revalidation, normal swaps/prevention, fixed construction identity and explicit temporary expiry"
       ],
       "gates": [
         109
@@ -958,15 +964,17 @@
       "kind": "creature",
       "rarity": "uncommon",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
-      "trigger": "Once per turn",
+      "disposition": "expansion-18 runtime release (#129); see expansion-18 acceptance report",
+      "trigger": "Once per global turn per instance",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Once per turn, after you play an Axiom from hand, draw 1 personal-deck card.",
+      "payoffAndLifetime": "Once per global turn per instance, after the current controller actually plays an Axiom from hand, draw 1 personal card normally. Resolve the rule and its printed draws first; suppression is checked under the resulting rule. Legal held basic resets qualify; illegal no-change attempts, enemy casts, Axiomatic/shared-deck choices, free Fate flips and spell category resets do not. Mark the allowance before attempting the capped/empty-deck draw; bounce/replay keeps the same-turn stamp. Separate copies have independent stamps.",
       "counterplay": "Remove the engine or change rules through Fate.",
       "semanticRevision": null,
       "releaseChecks": [
         "resource: preserve normal energy, activation and hand caps; no refund on replay",
-        "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap"
+        "identity: move actual instance; consume one-shots before effects; no cloned receipt or source",
+        "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap",
+        "derived state: legal target revalidation, normal swaps/prevention, fixed construction identity and explicit temporary expiry"
       ],
       "gates": [
         109

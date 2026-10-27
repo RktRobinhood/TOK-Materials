@@ -2027,10 +2027,10 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-18: pack pool"
       },
       "silhouette": "Rounded caterpillar with chestnut head tufts, a practical gold shawl and intent eyes.",
-      "signatureProp": "One closed blank book, not a wand or school crest.",
+      "signatureProp": "One small comma-notched gold shield as the sole prop; no book, wand or school crest.",
       "jokeAngle": "Pauses the conversation until the sentence says what it means; proposed public speaking/bookish angle.",
       "mechanicLink": "The final word cites an actual rule in the hand, making the argument public.",
       "source": "https://interactive.unwomen.org/multimedia/feature/generationequalityrising/en/index.html",
@@ -2055,22 +2055,28 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-18 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 2,
         "attack": 1,
         "health": 3,
-        "text": "Guard. Last Word: if you hold an Axiom, reveal your oldest held Axiom and draw 1 personal-deck card.",
+        "text": "Guard. Last Word: if the current controller holds an Axiom, show their oldest held Axiom publicly and draw 1 personal card normally. The rule stays held; an already-public rule still qualifies without duplicating its public marker. No held rule means no draw. This unconditional Last Word effect precedes normal Mercy/return destination handling. Suppression and ordinary hand/deck limits apply; no chosen card, extra receipt or destination policy.",
         "gates": [
           109
         ]
+      },
+      "artReconciliation": {
+        "date": "2026-10-27",
+        "previousSignatureProp": "One closed blank book, not a wand or school crest.",
+        "source": "design/source-assets/4-caricatures/production-145-2026-10-13/outputs/language-comma-caterpillar.json",
+        "reason": "The preserved prompt explicitly requests the comma-notched gold shield and no book. Existing shipped portrait visually verified; no asset or source prompt changed."
       },
       "castDecision": {
         "authority": "Teacher delegated to builder, 12 October 2026; no teacher roster gate",
         "decision": "retain",
         "audienceLane": "internet, music, sport or screen-fandom crossover",
         "appealReason": "Keep the pun, expressive creature and readable public-persona gag: Pauses the conversation until the sentence says what it means; proposed public speaking/bookish angle.",
-        "smallScaleCue": "One closed blank book, not a wand or school crest."
+        "smallScaleCue": "One small comma-notched gold shield as the sole prop; no book, wand or school crest."
       }
     },
     {
@@ -2190,7 +2196,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-18: pack pool"
       },
       "silhouette": "Small carp with long pale fin tufts, dark stage jacket and gold ribbon accents.",
       "signatureProp": "One unbranded microphone; the body remains fish-shaped, no human face.",
@@ -2204,6 +2210,7 @@
         "hit",
         "defeat",
         "reveal",
+        "fate-warp",
         "axiom"
       ],
       "artId": "creature/language-echo-egret/idle",
@@ -2217,12 +2224,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-18 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
         "health": 3,
-        "text": "Once per turn, after you play an Axiom from hand, draw 1 personal-deck card.",
+        "text": "Once per global turn per instance, after the current controller actually plays an Axiom from hand, draw 1 personal card normally. Resolve the rule and its printed draws first; suppression is checked under the resulting rule. Legal held basic resets qualify; illegal no-change attempts, enemy casts, Axiomatic/shared-deck choices, free Fate flips and spell category resets do not. Mark the allowance before attempting the capped/empty-deck draw; bounce/replay keeps the same-turn stamp. Separate copies have independent stamps.",
         "gates": [
           109
         ]

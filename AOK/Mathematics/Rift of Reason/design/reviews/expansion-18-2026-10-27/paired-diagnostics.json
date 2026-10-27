@@ -1,0 +1,1197 @@
+{
+  "scope": "Exploratory paired differences. Draws count as half for each side; paired seat differences are averaged within each seed before estimating SE. Sixteen seed clusters per row are small and selected fixtures are not a tournament. No tuning or universal balance claim.",
+  "paired": [
+    {
+      "colour": "reason",
+      "edge": "strong",
+      "tag": "reason-emotion",
+      "seeds": 16,
+      "pairedDelta": 0,
+      "seedClusterSE": 0,
+      "beneficial": 0,
+      "adverse": 0,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "reason",
+      "edge": "weak",
+      "tag": "reason-memory",
+      "seeds": 16,
+      "pairedDelta": 0,
+      "seedClusterSE": 0,
+      "beneficial": 0,
+      "adverse": 0,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "reason",
+      "edge": "neutral",
+      "tag": "reason-perception",
+      "seeds": 16,
+      "pairedDelta": 0,
+      "seedClusterSE": 0,
+      "beneficial": 0,
+      "adverse": 0,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "emotion",
+      "edge": "strong",
+      "tag": "emotion-language",
+      "seeds": 16,
+      "pairedDelta": -0.09375,
+      "seedClusterSE": 0.09375,
+      "beneficial": 1,
+      "adverse": 4,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    {
+      "colour": "emotion",
+      "edge": "weak",
+      "tag": "emotion-reason",
+      "seeds": 16,
+      "pairedDelta": 0,
+      "seedClusterSE": 0,
+      "beneficial": 0,
+      "adverse": 0,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "emotion",
+      "edge": "neutral",
+      "tag": "emotion-imagination",
+      "seeds": 16,
+      "pairedDelta": 0,
+      "seedClusterSE": 0,
+      "beneficial": 0,
+      "adverse": 0,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "perception",
+      "edge": "strong",
+      "tag": "perception-imagination",
+      "seeds": 16,
+      "pairedDelta": 0,
+      "seedClusterSE": 0,
+      "beneficial": 0,
+      "adverse": 0,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "perception",
+      "edge": "weak",
+      "tag": "perception-language",
+      "seeds": 16,
+      "pairedDelta": -0.0625,
+      "seedClusterSE": 0.0625,
+      "beneficial": 1,
+      "adverse": 3,
+      "seedDeltas": [
+        0,
+        0,
+        -0.5,
+        0,
+        -0.5,
+        -0.5,
+        0,
+        0,
+        0,
+        0.5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "perception",
+      "edge": "neutral",
+      "tag": "perception-reason",
+      "seeds": 16,
+      "pairedDelta": 0,
+      "seedClusterSE": 0,
+      "beneficial": 0,
+      "adverse": 0,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "language",
+      "edge": "strong",
+      "tag": "language-perception",
+      "seeds": 16,
+      "pairedDelta": 0.15625,
+      "seedClusterSE": 0.08801929239282337,
+      "beneficial": 6,
+      "adverse": 1,
+      "seedDeltas": [
+        0,
+        0,
+        0.5,
+        0,
+        0,
+        0.5,
+        0.5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.5,
+        -0.5,
+        0,
+        1
+      ]
+    },
+    {
+      "colour": "language",
+      "edge": "weak",
+      "tag": "language-emotion",
+      "seeds": 16,
+      "pairedDelta": 0.09375,
+      "seedClusterSE": 0.08188851669597311,
+      "beneficial": 5,
+      "adverse": 2,
+      "seedDeltas": [
+        -0.5,
+        0,
+        0.5,
+        0.5,
+        0,
+        0.5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.5,
+        -0.5,
+        0.5,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "language",
+      "edge": "neutral",
+      "tag": "language-memory",
+      "seeds": 16,
+      "pairedDelta": -0.0625,
+      "seedClusterSE": 0.11967838846954226,
+      "beneficial": 5,
+      "adverse": 7,
+      "seedDeltas": [
+        -0.5,
+        0,
+        0.5,
+        -0.5,
+        0.5,
+        -0.5,
+        -0.5,
+        0.5,
+        0.5,
+        -1,
+        0,
+        0,
+        0.5,
+        0,
+        -0.5,
+        0
+      ]
+    },
+    {
+      "colour": "imagination",
+      "edge": "strong",
+      "tag": "imagination-memory",
+      "seeds": 16,
+      "pairedDelta": 0,
+      "seedClusterSE": 0,
+      "beneficial": 0,
+      "adverse": 0,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "imagination",
+      "edge": "weak",
+      "tag": "imagination-perception",
+      "seeds": 16,
+      "pairedDelta": 0,
+      "seedClusterSE": 0,
+      "beneficial": 0,
+      "adverse": 0,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "imagination",
+      "edge": "neutral",
+      "tag": "imagination-emotion",
+      "seeds": 16,
+      "pairedDelta": 0,
+      "seedClusterSE": 0,
+      "beneficial": 0,
+      "adverse": 0,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "memory",
+      "edge": "strong",
+      "tag": "memory-reason",
+      "seeds": 16,
+      "pairedDelta": 0,
+      "seedClusterSE": 0,
+      "beneficial": 0,
+      "adverse": 0,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "memory",
+      "edge": "weak",
+      "tag": "memory-imagination",
+      "seeds": 16,
+      "pairedDelta": 0,
+      "seedClusterSE": 0,
+      "beneficial": 0,
+      "adverse": 0,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "colour": "memory",
+      "edge": "neutral",
+      "tag": "memory-language",
+      "seeds": 16,
+      "pairedDelta": 0.03125,
+      "seedClusterSE": 0.08500919067959652,
+      "beneficial": 3,
+      "adverse": 2,
+      "seedDeltas": [
+        0,
+        0,
+        0,
+        -0.5,
+        0,
+        0,
+        0,
+        -0.5,
+        0,
+        0,
+        0,
+        1,
+        0.5,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "draws": [],
+  "earlierComparison": {
+    "source": "expansion-17-2026-10-26/mono-mixed-probe.json at ae86269",
+    "games": 64,
+    "scope": "Original selected decks and first16 seeds/seat under current AI; all expansion-17 effect contracts unchanged. Separate from expansion-18 counterplay hook cohorts.",
+    "rows": [
+      {
+        "colour": "perception",
+        "edge": "weak",
+        "partner": "language",
+        "mono": {
+          "creatures": [
+            "perception-prism-puffin",
+            "perception-prism-puffin",
+            "shakirattle",
+            "shakirattle",
+            "perception-cue-cricket",
+            "perception-cue-cricket",
+            "kardashiant",
+            "kardashiant"
+          ],
+          "tactics": [
+            "generic-recorded-choice",
+            "generic-recorded-choice",
+            "generic-board-sweep",
+            "generic-board-sweep",
+            "generic-clean-cut",
+            "generic-clean-cut",
+            "perception-follow-the-clue",
+            "perception-follow-the-clue",
+            "counterexample",
+            "counterexample",
+            "perception-strip-the-illusion",
+            "perception-strip-the-illusion"
+          ],
+          "axioms": [
+            "flux-plays-plus-1",
+            "flux-plays-minus-1",
+            "flux-draw-plus-1",
+            "flux-draw-minus-1",
+            "flux-growth-plus-1",
+            "flux-cost-plus-1",
+            "flux-cost-minus-1",
+            "limited-memory",
+            "momentum",
+            "two-plays"
+          ]
+        },
+        "mixed": {
+          "creatures": [
+            "perception-prism-puffin",
+            "perception-prism-puffin",
+            "shakirattle",
+            "shakirattle",
+            "language-metaphor-mantis",
+            "language-metaphor-mantis",
+            "language-question-quail",
+            "language-question-quail"
+          ],
+          "tactics": [
+            "generic-recorded-choice",
+            "generic-recorded-choice",
+            "generic-board-sweep",
+            "generic-board-sweep",
+            "generic-clean-cut",
+            "generic-clean-cut",
+            "perception-follow-the-clue",
+            "perception-follow-the-clue",
+            "counterexample",
+            "counterexample",
+            "language-a-better-label",
+            "language-a-better-label"
+          ],
+          "axioms": [
+            "flux-plays-plus-1",
+            "flux-plays-minus-1",
+            "flux-draw-plus-1",
+            "flux-draw-minus-1",
+            "flux-growth-plus-1",
+            "flux-cost-plus-1",
+            "flux-cost-minus-1",
+            "limited-memory",
+            "momentum",
+            "two-plays"
+          ]
+        },
+        "trials": [
+          {
+            "seed": 0,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 0,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 1,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 1,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 2,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 2,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 3,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 3,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 4,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 4,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 5,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 5,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 6,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 6,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 7,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 7,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 8,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 8,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 9,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 9,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 10,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 10,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 11,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 11,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 12,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 12,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 13,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 13,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 14,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 14,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 15,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 15,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          }
+        ],
+        "changedOutcomes": 0
+      },
+      {
+        "colour": "language",
+        "edge": "strong",
+        "partner": "perception",
+        "mono": {
+          "creatures": [
+            "language-metaphor-mantis",
+            "language-metaphor-mantis",
+            "language-question-quail",
+            "language-question-quail",
+            "beansprout",
+            "beansprout",
+            "footnote-finch",
+            "footnote-finch"
+          ],
+          "tactics": [
+            "generic-recorded-choice",
+            "generic-recorded-choice",
+            "generic-board-sweep",
+            "generic-board-sweep",
+            "generic-clean-cut",
+            "generic-clean-cut",
+            "language-a-better-label",
+            "language-a-better-label",
+            "counterexample",
+            "counterexample",
+            "language-change-the-subject",
+            "language-change-the-subject"
+          ],
+          "axioms": [
+            "flux-plays-plus-1",
+            "flux-plays-minus-1",
+            "flux-draw-plus-1",
+            "flux-draw-minus-1",
+            "flux-growth-plus-1",
+            "flux-cost-plus-1",
+            "flux-cost-minus-1",
+            "limited-memory",
+            "momentum",
+            "two-plays"
+          ]
+        },
+        "mixed": {
+          "creatures": [
+            "language-metaphor-mantis",
+            "language-metaphor-mantis",
+            "language-question-quail",
+            "language-question-quail",
+            "perception-prism-puffin",
+            "perception-prism-puffin",
+            "shakirattle",
+            "shakirattle"
+          ],
+          "tactics": [
+            "generic-recorded-choice",
+            "generic-recorded-choice",
+            "generic-board-sweep",
+            "generic-board-sweep",
+            "generic-clean-cut",
+            "generic-clean-cut",
+            "language-a-better-label",
+            "language-a-better-label",
+            "counterexample",
+            "counterexample",
+            "perception-follow-the-clue",
+            "perception-follow-the-clue"
+          ],
+          "axioms": [
+            "flux-plays-plus-1",
+            "flux-plays-minus-1",
+            "flux-draw-plus-1",
+            "flux-draw-minus-1",
+            "flux-growth-plus-1",
+            "flux-cost-plus-1",
+            "flux-cost-minus-1",
+            "limited-memory",
+            "momentum",
+            "two-plays"
+          ]
+        },
+        "trials": [
+          {
+            "seed": 0,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 0,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 1,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 1,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 2,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 2,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 3,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 3,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 4,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 4,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 5,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 5,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 6,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 6,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 7,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 7,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 8,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 8,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 9,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 9,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 10,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 10,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 11,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 11,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 12,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 12,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 13,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 13,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mono",
+            "priorWinner": "mono",
+            "turnLimit": false
+          },
+          {
+            "seed": 14,
+            "monoSeat": 0,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 14,
+            "monoSeat": 1,
+            "first": 0,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 15,
+            "monoSeat": 0,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          },
+          {
+            "seed": 15,
+            "monoSeat": 1,
+            "first": 1,
+            "winner": "mixed",
+            "priorWinner": "mixed",
+            "turnLimit": false
+          }
+        ],
+        "changedOutcomes": 0
+      }
+    ]
+  }
+}

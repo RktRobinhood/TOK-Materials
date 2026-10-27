@@ -1,0 +1,18 @@
+{
+  "command": "$tests=@(git ls-files 'tools/test/*.test.mjs'); node --max-old-space-size=2048 --test --test-concurrency=2 @tests tools/test/expansion-18.test.mjs",
+  "total": 1707,
+  "pass": 1706,
+  "skip": 1,
+  "fail": 0,
+  "duration_ms": 437196.8166,
+  "runtimeSHA256": {
+    "data/creatures.js": "185a17cc1493996cc8461c215f546d751cfb6bc7e012ca42fce1e526cce7e0dc",
+    "data/powers.js": "766963e43f7e7d73ffd1b1e6c5a4cd49c15973b0e6e9b665cdb408b2ad7d173c",
+    "js/battle/abilities.js": "a08a54356aea75dda82dcf3906defc42debd4715e895c19b8bd3a85c3975c861",
+    "js/battle/engine.js": "885dc0f3d19171a52c33692550bd1ea37bb760afdba9e9e21e56a28e15626b5f",
+    "js/battle/ai.js": "815b11a4a9dc5dd279e6f5fc4bca3250a0c43c39f5680cbf0f381386c60df55f"
+  },
+  "fullLogSHA256": "105c6edd2c397aa43a05f4b69140821a6e86666604d81aa2b33dd7bc594eef46",
+  "originalWindowsLogSHA256": "4759ecaeac697bf28b023576195b012a5417ee457fc969be7470635396fc708d",
+  "excluded": "Earlier unbounded-concurrency run interrupted by agent; no acceptance claimed. Targeted observer typo failed before any output artifact; corrected complete 256-game run accepted."
+}

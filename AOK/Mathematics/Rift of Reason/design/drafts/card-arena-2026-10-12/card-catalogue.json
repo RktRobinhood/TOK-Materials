@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, three expansion-10 cards, two expansion-11 cards, two expansion-12 cards, one expansion-13 creature, one expansion-14 creature, two expansion-15 creatures, two expansion-16 creatures, two expansion-17 creatures, eighteen plot-1 story cards, 106 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, three expansion-10 cards, two expansion-11 cards, two expansion-12 cards, one expansion-13 creature, one expansion-14 creature, two expansion-15 creatures, two expansion-16 creatures, two expansion-17 creatures, two expansion-18 creatures, eighteen plot-1 story cards, 104 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -1250,7 +1250,7 @@
       "cost": 2,
       "attack": 1,
       "health": 3,
-      "text": "Guard. Last Word: if you hold an Axiom, reveal your oldest held Axiom and draw 1 personal-deck card.",
+      "text": "Guard. Last Word: if the current controller holds an Axiom, show their oldest held Axiom publicly and draw 1 personal card normally. The rule stays held; an already-public rule still qualifies without duplicating its public marker. No held rule means no draw. This unconditional Last Word effect precedes normal Mercy/return destination handling. Suppression and ordinary hand/deck limits apply; no chosen card, extra receipt or destination policy.",
       "tags": [
         "guard",
         "inspection",
@@ -1258,7 +1258,7 @@
       ],
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Silence it or make the opponent use their held rules first.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-18 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "revision": {
@@ -1274,7 +1274,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-18: pack pool"
+      },
+      "runtimeRelease": "expansion-18",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Guard. Last Word: if you hold an Axiom, reveal your oldest held Axiom and draw 1 personal-deck card.",
+        "rationale": "Use unconditional Last Word and an oldest-held reveal helper, preserving current controller, public identity and ordinary draw/defeat handling."
       }
     },
     {
@@ -1343,14 +1349,14 @@
       "cost": 3,
       "attack": 2,
       "health": 3,
-      "text": "Once per turn, after you play an Axiom from hand, draw 1 personal-deck card.",
+      "text": "Once per global turn per instance, after the current controller actually plays an Axiom from hand, draw 1 personal card normally. Resolve the rule and its printed draws first; suppression is checked under the resulting rule. Legal held basic resets qualify; illegal no-change attempts, enemy casts, Axiomatic/shared-deck choices, free Fate flips and spell category resets do not. Mark the allowance before attempting the capped/empty-deck draw; bounce/replay keeps the same-turn stamp. Separate copies have independent stamps.",
       "tags": [
         "axiom",
         "draw"
       ],
       "strategy": "Labels, support, rule changes and temporary control",
       "counterplay": "Remove the engine or change rules through Fate.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-18 (#129); bounded engineering validation, not classroom balance certification",
       "identityStatus": "Mechanical contract retained; use builder-selected persona/pun/prop in persona-roster.json. Teacher delegated cast decisions; no teacher roster approval. Mechanical release and art QA remain.",
       "artDirection": "design/ART-BIBLE.md and approved 0-style/style-board.png",
       "gates": [
@@ -1360,7 +1366,13 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-18: pack pool"
+      },
+      "runtimeRelease": "expansion-18",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "Once per turn, after you play an Axiom from hand, draw 1 personal-deck card.",
+        "rationale": "Add a held-Axiom callback at the actual hand-play seam, retaining existing rule-change hooks and a persistent per-instance turn stamp without new AI weights."
       }
     },
     {

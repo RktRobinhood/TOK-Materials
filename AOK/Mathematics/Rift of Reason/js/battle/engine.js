@@ -157,6 +157,7 @@
         const s = { ...state };
         s.players = state.players.map(P => ({
             ...P, deck: P.deck.slice(), hand: P.hand.slice(), axHand: P.axHand.slice(), publicAxioms: (P.publicAxioms || []).slice(),
+            ...(P.axiomVisibility ? { axiomVisibility: P.axiomVisibility.slice() } : {}),
             board: P.board.slice(), armed: (P.armed || []).slice(), discard: P.discard.slice(), knows: P.knows.slice(),
         }));
         s.cards = cards;
@@ -711,6 +712,31 @@
         return null;
     }
 
+    // Rule IDs may repeat. Keep public visibility per held occurrence, rather than treating
+    // a later publicly drawn duplicate as a reveal of the oldest private copy. Older battle
+    // states have only the public multiset; assign those markers oldest-first on first use.
+    function heldAxiomVisibility(P) {
+        if (P.axiomVisibility && P.axiomVisibility.length === P.axHand.length && P.axiomVisibility.every((v, i) => v.id === P.axHand[i])) return P.axiomVisibility;
+        const publicRules = (P.publicAxioms || []).slice();
+        return P.axHand.map(id => {
+            const i = publicRules.indexOf(id), visible = i >= 0;
+            if (visible) publicRules.splice(i, 1);
+            return { id, public: visible };
+        });
+    }
+    function takeHeldAxiom(P, index) {
+        const visibility = heldAxiomVisibility(P), id = P.axHand[index];
+        P.axHand.splice(index, 1);
+        P.axiomVisibility = visibility.filter((v, i) => i !== index);
+        P.publicAxioms = P.axiomVisibility.filter(v => v.public).map(v => v.id);
+        return id;
+    }
+    function addHeldAxiom(P, id, visible) {
+        const visibility = heldAxiomVisibility(P);
+        P.axHand.push(id);
+        P.axiomVisibility = visibility.concat([{ id, public: !!visible }]);
+        if (visible) P.publicAxioms = (P.publicAxioms || []).concat([id]);
+    }
     const handCount = P => P.hand.length + P.axHand.length;
 
     function drawChoices(s) {
@@ -937,7 +963,7 @@
         });
         // Own rule cards (Granny's Spare Axiom) start in their player's hand, one of each.
         players.forEach((pl, p) => Array.from(new Set(pl.ownAxioms || [])).forEach(id => {
-            if (known[id] && known[id].own && handCount(s.players[p]) < opts.handLimit) s.players[p].axHand.push(id);
+            if (known[id] && known[id].own && handCount(s.players[p]) < opts.handLimit) addHeldAxiom(s.players[p], id, false);
         }));
         if (opts.spark) {
             s.players[1 - s.active].spark = true;
@@ -1111,6 +1137,18 @@
                 c.frozenUntil = Math.max(c.frozenUntil || 0, nextTurnEnd(G, c.controller));
             },
             bounce: cid => bounce(G, cid),
+            holdAxiom: (p, id) => addHeldAxiom(s.players[p], id, false),
+            revealOldestAxiom(p, label) {
+                const P = s.players[p];
+                if (!P.axHand.length) return null;
+                const id = P.axHand[0], visibility = heldAxiomVisibility(P);
+                if (!visibility[0].public) {
+                    P.axiomVisibility = visibility.map((v, i) => i ? v : { id, public: true });
+                    P.publicAxioms = (P.publicAxioms || []).concat([id]);
+                }
+                emit(G, { t: 'axiom-reveal', player: p, id, text: label + ': ' + playerName(s, p) + ' shows ' + axiomDefs()[id].name + '.' });
+                return id;
+            },
             fromDiscard(cid) {
                 const p = s.cards[cid].owner, P = s.players[p];
                 if (!removeFrom(P.discard, cid)) return false;
@@ -1436,9 +1474,8 @@
         const s = G.s, P = s.players[p];
         if (!s.axioms.deck.length || handCount(P) >= s.options.handLimit) return null;
         const id = s.axioms.deck.shift();
-        P.axHand.push(id);
         const publicCard = !!rules(s).publicAxioms;
-        if (publicCard) (P.publicAxioms || (P.publicAxioms = [])).push(id);
+        addHeldAxiom(P, id, publicCard);
         if (!quiet) emit(G, publicCard
             ? { t: 'draw-axiom', player: p, id, text: playerName(s, p) + ' takes the public rule card ' + axiomDefs()[id].name + '.' }
             : { t: 'draw-axiom', player: p, id, privateTo: p, text: 'You take the rule card ' + axiomDefs()[id].name + '.', publicText: playerName(s, p) + ' takes a rule card.' });
@@ -1664,8 +1701,7 @@
             const gone = [];
             while (extra > 0 && P.hand.length) { const cid = P.hand.shift(); s.cards[cid].burned = true; P.discard.push(cid); gone.push(cardName(s, cid)); extra--; }
             while (extra > 0 && P.axHand.length) {
-                const id = P.axHand.shift();
-                removeFrom(P.publicAxioms || [], id);
+                const id = takeHeldAxiom(P, 0);
                 if (!(axiomDefs()[id] || {}).own) s.axioms.discard.push(id); // an own card leaves the game
                 gone.push('a rule card'); extra--;
             }
@@ -2117,11 +2153,16 @@
         const s = G.s, p = s.active, P = s.players[p];
         spend(G, axiomCost(s, id, p));
         if (P.tax > 0) P.tax -= 1;
-        removeFrom(P.axHand, id);
-        removeFrom(P.publicAxioms || [], id);
+        takeHeldAxiom(P, P.axHand.indexOf(id));
         emit(G, { t: 'axiom-play', player: p, id, text: says(s, p, 'plays') + ' a rule card.' });
         setAxiom(G, id, p);
         for (let i = 0; i < (axiomDefs()[id].draws || 0); i++) draw(G, p);
+        // A held-card play is distinct from Axiomatic/free Fate changes and category resets.
+        P.board.slice().forEach(cid => {
+            if (P.board.includes(cid) && healthOf(s, cid).current > 0) eachAbility(s, s.cards[cid], def => {
+                if (def.onHeldAxiomPlayed) def.onHeldAxiomPlayed(api(G), s.cards[cid], id, p);
+            });
+        });
         afterMove(G);
     }
 

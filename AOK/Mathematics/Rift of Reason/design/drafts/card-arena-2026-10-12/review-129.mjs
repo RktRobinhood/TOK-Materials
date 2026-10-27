@@ -356,3 +356,19 @@ export function reviewExpansion17(cards){
         c.releaseRevision={issue:129,previousText:c.text,previousTarget:c.target,rationale:clarifications17[c.id][1]};c.text=clarifications17[c.id][0];
     }
 }
+
+// #129 expansion-18: held-rule reveal and source-specific once-per-turn draw.
+export const expansion18Batch=['language-comma-caterpillar','language-echo-egret'];
+const clarifications18={
+    'language-comma-caterpillar':['Guard. Last Word: if the current controller holds an Axiom, show their oldest held Axiom publicly and draw 1 personal card normally. The rule stays held; an already-public rule still qualifies without duplicating its public marker. No held rule means no draw. This unconditional Last Word effect precedes normal Mercy/return destination handling. Suppression and ordinary hand/deck limits apply; no chosen card, extra receipt or destination policy.',
+        'Use unconditional Last Word and an oldest-held reveal helper, preserving current controller, public identity and ordinary draw/defeat handling.'],
+    'language-echo-egret':['Once per global turn per instance, after the current controller actually plays an Axiom from hand, draw 1 personal card normally. Resolve the rule and its printed draws first; suppression is checked under the resulting rule. Legal held basic resets qualify; illegal no-change attempts, enemy casts, Axiomatic/shared-deck choices, free Fate flips and spell category resets do not. Mark the allowance before attempting the capped/empty-deck draw; bounce/replay keeps the same-turn stamp. Separate copies have independent stamps.',
+        'Add a held-Axiom callback at the actual hand-play seam, retaining existing rule-change hooks and a persistent per-instance turn stamp without new AI weights.'],
+};
+export function reviewExpansion18(cards){
+    for(const c of cards)if(expansion18Batch.includes(c.id)){
+        c.runtimeRelease='expansion-18';c.status='Released in expansion-18 (#129); bounded engineering validation, not classroom balance certification';
+        c.acquisition.releaseStatus='Released expansion-18: pack pool';
+        c.releaseRevision={issue:129,previousText:c.text,previousTarget:c.target,rationale:clarifications18[c.id][1]};c.text=clarifications18[c.id][0];
+    }
+}

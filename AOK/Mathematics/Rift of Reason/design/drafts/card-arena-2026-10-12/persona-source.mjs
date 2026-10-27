@@ -126,6 +126,11 @@ assert.equal(new Set(rows.map(r=>r.inspiration)).size,rows.length);
 assert.equal(rows.length,72);
 for(const colour of Object.keys(accents))assert.equal(rows.filter(r=>r.colour===colour).length,12);
 
+// Reconcile the older prop brief to the preserved intentional production145 prompt and inspected image.
+const emma=rows.find(r=>r.mechanicalId==='language-comma-caterpillar');
+emma.artReconciliation={date:'2026-10-27',previousSignatureProp:emma.signatureProp,source:'design/source-assets/4-caricatures/production-145-2026-10-13/outputs/language-comma-caterpillar.json',reason:'The preserved prompt explicitly requests the comma-notched gold shield and no book. Existing shipped portrait visually verified; no asset or source prompt changed.'};
+emma.signatureProp='One small comma-notched gold shield as the sole prop; no book, wand or school crest.';
+
 // Teacher delegated roster choices on 12 October: make and document editorial decisions.
 const replaced=new Set(["Debate Dingo","Clause Crane","Contract Coyote","Paradox Pony","Cloud Castle Crab"]);
 const niche=new Set(['Hannah Frycoon','Matt Parkbex','Destin Sandolin','Grant Sanderstag','James Mayfly','James Rand-eater','Adam Savash','Houdini Wisp','Amelia Airgator','Susie Dentshell','Miyazawhale','Chris Nolhog','Martha Starwart']);
@@ -135,6 +140,8 @@ for(const row of rows){
 }
 
 const completedColours=Object.keys(accents).filter(colour=>rows.filter(r=>r.colour===colour).length===12);
+const runtimeCount=rows.filter(r=>catalogue.cards.some(c=>c.id===r.mechanicalId&&c.runtimeRelease)).length;
+const runtimeSummary=runtimeCount+' of the72 selected creatures have runtime definitions; the other '+(rows.length-runtimeCount)+' remain held.';
 const stage={issue:139,status: "All six batches authored; cast selected by builder; no teacher roster review required", count:rows.length,target:72,rows};
 const pendingColours=Object.keys(accents).filter(colour=>!completedColours.includes(colour));
 stage.completedColours=completedColours;stage.pendingColours=pendingColours;stage.count=rows.length;
@@ -165,6 +172,6 @@ if(start>=0||finish>=0){
  }
 }
 roster+='\n'+begin+'\n';
-roster+='\n'+marker+'\n\nCast selected by the builder under the explicit 12 October delegation; no teacher roster approval required. Six foundation-1, five expansion-2 and four expansion-3 (#129) and six plot-1 creatures are runtime species; the other 51 remain held. See CONTRACT-AUDIT-123.md for the release ledger. The 210-card catalogue supplies mechanical working labels; this pass maps them to public-persona satire before art/release. Follow ART-BIBLE.md and the approved style board. Seven starter helper portraits are separate (#137), not a new cast direction. Source/props/voice/acquisition/mechanics mapping: [PERSONA-ROSTER.md](drafts/card-arena-2026-10-12/PERSONA-ROSTER.md) and persona-roster.json.\n\n| Proposed name | Inspired by | Mechanical ID | Colour / rarity | Recognition cue |\n|---|---|---|---|---|\n'+rows.map(r=>`| ${r.proposedName} | ${r.inspiration} | ${r.mechanicalId} | ${r.colour} / ${r.rarity} | ${r.signatureProp} |`).join('\n')+'\n\nAll six colours have twelve builder-selected personas. No teacher roster approval is required. Produce small batches under ART-BIBLE.md; mechanical release, art QA and save/acquisition checks still apply.\n';
+roster+='\n'+marker+'\n\nCast selected by the builder under the explicit 12 October delegation; no teacher roster approval required. '+runtimeSummary+' See CONTRACT-AUDIT-123.md for the release ledger. The 210-card catalogue supplies mechanical working labels; this pass maps them to public-persona satire before art/release. Follow ART-BIBLE.md and the approved style board. Seven starter helper portraits are separate (#137), not a new cast direction. Source/props/voice/acquisition/mechanics mapping: [PERSONA-ROSTER.md](drafts/card-arena-2026-10-12/PERSONA-ROSTER.md) and persona-roster.json.\n\n| Proposed name | Inspired by | Mechanical ID | Colour / rarity | Recognition cue |\n|---|---|---|---|---|\n'+rows.map(r=>`| ${r.proposedName} | ${r.inspiration} | ${r.mechanicalId} | ${r.colour} / ${r.rarity} | ${r.signatureProp} |`).join('\n')+'\n\nAll six colours have twelve builder-selected personas. No teacher roster approval is required. Produce small batches under ART-BIBLE.md; mechanical release, art QA and save/acquisition checks still apply.\n';
 fs.writeFileSync(rosterPath,roster+end+'\n'+(tail.trim()?tail:''));
 console.log(JSON.stringify({concepts:rows.length,completedColours:stage.completedColours,pendingColours:stage.pendingColours}));

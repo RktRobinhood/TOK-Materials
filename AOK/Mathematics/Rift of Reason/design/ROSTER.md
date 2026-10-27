@@ -99,7 +99,7 @@ Each has two original runtime voice lines and an additive pinned Google cast; no
 
 ## Card Arena expansion cast proposals — 12 October 2026
 
-Cast selected by the builder under the explicit 12 October delegation; no teacher roster approval required. Six foundation-1, five expansion-2 and four expansion-3 (#129) and six plot-1 creatures are runtime species; the other 51 remain held. See CONTRACT-AUDIT-123.md for the release ledger. The 210-card catalogue supplies mechanical working labels; this pass maps them to public-persona satire before art/release. Follow ART-BIBLE.md and the approved style board. Seven starter helper portraits are separate (#137), not a new cast direction. Source/props/voice/acquisition/mechanics mapping: [PERSONA-ROSTER.md](drafts/card-arena-2026-10-12/PERSONA-ROSTER.md) and persona-roster.json.
+Cast selected by the builder under the explicit 12 October delegation; no teacher roster approval required. 39 of the72 selected creatures have runtime definitions; the other 33 remain held. See CONTRACT-AUDIT-123.md for the release ledger. The 210-card catalogue supplies mechanical working labels; this pass maps them to public-persona satire before art/release. Follow ART-BIBLE.md and the approved style board. Seven starter helper portraits are separate (#137), not a new cast direction. Source/props/voice/acquisition/mechanics mapping: [PERSONA-ROSTER.md](drafts/card-arena-2026-10-12/PERSONA-ROSTER.md) and persona-roster.json.
 
 | Proposed name | Inspired by | Mechanical ID | Colour / rarity | Recognition cue |
 |---|---|---|---|---|
@@ -140,7 +140,7 @@ Cast selected by the builder under the explicit 12 October delegation; no teache
 | Amelia Airgator | Amelia Earhart | perception-horizon-hare | perception / mythic | Bank diagonally left, short legs tucked, animal head looking back and compass held close to the chest; glider wings and tail entirely in frame. |
 | Galileon | Galileo Galilei | perception-true-sight-stag | perception / legendary | Rendered RIGHT low crouch; original pose intent in provenance. |
 | Jimmy Fowlon | Jimmy Fallon | language-question-quail | language / common | One oversized plain brass microphone offered with an inviting wing gesture. |
-| Emma Wordson | Emma Watson | language-comma-caterpillar | language / common | One closed blank book, not a wand or school crest. |
+| Emma Wordson | Emma Watson | language-comma-caterpillar | language / common | One small comma-notched gold shield as the sole prop; no book, wand or school crest. |
 | Ryan Georilla | Ryan George | language-label-lemur | language / common | One blank label stamp; one raised questioning brow. |
 | Stephen Clawbert | Stephen Colbert | language-word-weasel | language / common | One blank cue card held with an exaggerated farewell flourish. |
 | Sabrina Carpwenter | Sabrina Carpenter | language-echo-egret | language / uncommon | One unbranded microphone; the body remains fish-shaped, no human face. |

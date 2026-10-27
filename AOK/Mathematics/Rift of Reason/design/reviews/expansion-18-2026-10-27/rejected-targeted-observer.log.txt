@@ -1,0 +1,13 @@
+file:///C:/Users/BlackBox/.codex/workspaces/tok-issue-loop-main/AOK/Mathematics/Rift%20of%20Reason/tools/sim-expansion-18-targeted.mjs:20
+        const end=AI.playOut(s,['competent','competent'],(before,a,after)=>{steps++;for(const e of after.lastEvents){const id=after.cards[e.cid]?.species;if(e.t==='ability'&&e.drawn!==undefined&&batch.includes(id))entrances[id]++;}});
+                                                                                                                                                                                                                      ^
+
+ReferenceError: entrances is not defined
+    at file:///C:/Users/BlackBox/.codex/workspaces/tok-issue-loop-main/AOK/Mathematics/Rift%20of%20Reason/tools/sim-expansion-18-targeted.mjs:20:215
+    at Object.playOut (C:\Users\BlackBox\.codex\workspaces\tok-issue-loop-main\AOK\Mathematics\Rift of Reason\js\battle\ai.js:1046:25)
+    at file:///C:/Users/BlackBox/.codex/workspaces/tok-issue-loop-main/AOK/Mathematics/Rift%20of%20Reason/tools/sim-expansion-18-targeted.mjs:20:22
+    at ModuleJob.run (node:internal/modules/esm/module_job:430:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:661:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.14.0

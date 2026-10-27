@@ -105,7 +105,7 @@
                 const deck = api.s.axioms.deck;
                 if (req.step === 'take') {
                     deck.splice(deck.indexOf(choice), 1);
-                    api.s.players[p].axHand.push(choice);
+                    api.holdAxiom(p, choice);
                     api.emit({ t: 'power', player: p, privateTo: p, text: 'Foresee: you take ' + axName(choice) + '.', publicText: 'Foresee: ' + api.H.playerName(api.s, p) + ' takes one of them.' });
                     foreseeBottom(api, p, req.n - 1, m);
                     return;

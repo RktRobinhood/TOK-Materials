@@ -1,0 +1,6332 @@
+[
+  {
+    "key": "emma-none",
+    "width": 1280,
+    "calm": false,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 3,
+              "baseAttack": 3,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 3
+                }
+              ],
+              "health": 19,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [],
+          "discard": [
+            "p1c0"
+          ]
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Emma Wordson with Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 3,
+          "pb": 1,
+          "text": "Mr. Beastie (3 attack) fights Emma Wordson (1 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 3,
+          "source": "p0c0",
+          "text": "Emma Wordson takes 3 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Emma Wordson is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "emma-empty",
+    "width": 1280,
+    "calm": false,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 3,
+              "baseAttack": 3,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 3
+                }
+              ],
+              "health": 19,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [
+            "momentum"
+          ],
+          "publicAxioms": [],
+          "board": [],
+          "discard": [
+            "p1c0"
+          ]
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Emma Wordson with Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 3,
+          "pb": 1,
+          "text": "Mr. Beastie (3 attack) fights Emma Wordson (1 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 3,
+          "source": "p0c0",
+          "text": "Emma Wordson takes 3 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Emma Wordson is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "emma-duplicate",
+    "width": 1280,
+    "calm": false,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 2,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [
+            "p0c1"
+          ],
+          "deck": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 3,
+              "baseAttack": 3,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 3
+                }
+              ],
+              "health": 19,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 0,
+          "monoColour": null,
+          "hand": [
+            "p1c1"
+          ],
+          "deck": [
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [
+            "momentum",
+            "momentum"
+          ],
+          "publicAxioms": [
+            "momentum",
+            "momentum"
+          ],
+          "board": [],
+          "discard": [
+            "p1c0"
+          ]
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Emma Wordson with Mr. Beastie.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 3,
+          "pb": 1,
+          "text": "Mr. Beastie (3 attack) fights Emma Wordson (1 attack).",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 3,
+          "source": "p0c0",
+          "text": "Emma Wordson takes 3 damage.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 1 damage.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "axiom-reveal",
+          "player": 1,
+          "id": "momentum",
+          "text": "Final Citation: Rival shows Momentum.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 1,
+          "cid": "p1c1",
+          "privateTo": 1,
+          "text": "You draw Mr. Beastie.",
+          "publicText": "Rival draws a card.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p1c0",
+          "revealed": "momentum",
+          "drawn": true,
+          "text": "Emma Wordson adds one final citation and draws a personal card.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Emma Wordson is defeated.",
+          "turn": 2,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "emma-mercy",
+    "width": 1280,
+    "calm": false,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 3,
+              "baseAttack": 3,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 3
+                }
+              ],
+              "health": 19,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [
+            "p1c1",
+            "p1c0"
+          ],
+          "deck": [
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [
+            "momentum"
+          ],
+          "publicAxioms": [
+            "momentum"
+          ],
+          "board": [],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Emma Wordson with Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 3,
+          "pb": 1,
+          "text": "Mr. Beastie (3 attack) fights Emma Wordson (1 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 3,
+          "source": "p0c0",
+          "text": "Emma Wordson takes 3 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom-reveal",
+          "player": 1,
+          "id": "momentum",
+          "text": "Final Citation: Rival shows Momentum.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 1,
+          "cid": "p1c1",
+          "privateTo": 1,
+          "text": "You draw Mr. Beastie.",
+          "publicText": "Rival draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p1c0",
+          "revealed": "momentum",
+          "drawn": true,
+          "text": "Emma Wordson adds one final citation and draws a personal card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "hand",
+          "why": "damage",
+          "text": "Emma Wordson is defeated, but Mercy returns it to the hand.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "sabrina-held",
+    "width": 1280,
+    "calm": false,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [
+            "p0c1"
+          ],
+          "deck": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "language-echo-egret",
+              "name": "Sabrina Carpwenter",
+              "speciesName": "Sabrina Carpwenter",
+              "legendary": false,
+              "colour": "language",
+              "printedColour": "language",
+              "colourless": false,
+              "cost": 3,
+              "baseCost": 3,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-encore",
+                  "name": "One Encore",
+                  "text": "Once per turn, after you play a held Axiom, draw 1 personal card.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": 1,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "axiom-play",
+          "player": 0,
+          "id": "underdog",
+          "text": "You play a rule card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom",
+          "id": "underdog",
+          "player": 0,
+          "basic": false,
+          "text": "Rule change — combat: Axiom of the Underdog. In a fight, only the creature with LOWER attack deals damage. Equal attack: both deal damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Proof Pup.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "drawn": true,
+          "text": "Sabrina Carpwenter adds one encore and draws a personal card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "sabrina-spent",
+    "width": 1280,
+    "calm": false,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "playsThisTurn": 2,
+          "monoColour": null,
+          "hand": [
+            "p0c1"
+          ],
+          "deck": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "language-echo-egret",
+              "name": "Sabrina Carpwenter",
+              "speciesName": "Sabrina Carpwenter",
+              "legendary": false,
+              "colour": "language",
+              "printedColour": "language",
+              "colourless": false,
+              "cost": 3,
+              "baseCost": 3,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-encore",
+                  "name": "One Encore",
+                  "text": "Once per turn, after you play a held Axiom, draw 1 personal card.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": 1,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "axiom-play",
+          "player": 0,
+          "id": "extensionality",
+          "text": "You play a rule card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom",
+          "id": "extensionality",
+          "player": 0,
+          "basic": false,
+          "text": "Rule change — combat: Axiom of Extensionality. Equal is equal: creatures with the same attack deal no damage to each other.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "sabrina-enter-empty",
+    "width": 1280,
+    "calm": false,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 7,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "language-echo-egret",
+              "name": "Sabrina Carpwenter",
+              "speciesName": "Sabrina Carpwenter",
+              "legendary": false,
+              "colour": "language",
+              "printedColour": "language",
+              "colourless": false,
+              "cost": 3,
+              "baseCost": 3,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-encore",
+                  "name": "One Encore",
+                  "text": "Once per turn, after you play a held Axiom, draw 1 personal card.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "axiom-play",
+          "player": 0,
+          "id": "empty-set",
+          "text": "You play a rule card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom",
+          "id": "empty-set",
+          "player": 0,
+          "basic": false,
+          "text": "Rule change — abilities: Axiom of the Empty Set. All creature abilities and keywords are switched off.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "sabrina-reset",
+    "width": 1280,
+    "calm": false,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 9,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [
+            "p0c1"
+          ],
+          "deck": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "language-echo-egret",
+              "name": "Sabrina Carpwenter",
+              "speciesName": "Sabrina Carpwenter",
+              "legendary": false,
+              "colour": "language",
+              "printedColour": "language",
+              "colourless": false,
+              "cost": 3,
+              "baseCost": 3,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-encore",
+                  "name": "One Encore",
+                  "text": "Once per turn, after you play a held Axiom, draw 1 personal card.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": 1,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "axiom-play",
+          "player": 0,
+          "id": "two-plays",
+          "text": "You play a rule card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom",
+          "id": "two-plays",
+          "player": 0,
+          "basic": true,
+          "text": "Rule change — plays: Two Moves. Activations: Unlimited → 2",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Proof Pup.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "drawn": true,
+          "text": "Sabrina Carpwenter adds one encore and draws a personal card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "sabrina-capped",
+    "width": 1280,
+    "calm": false,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 9,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [
+            "p0c1",
+            "p0c2"
+          ],
+          "deck": [
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "language-echo-egret",
+              "name": "Sabrina Carpwenter",
+              "speciesName": "Sabrina Carpwenter",
+              "legendary": false,
+              "colour": "language",
+              "printedColour": "language",
+              "colourless": false,
+              "cost": 3,
+              "baseCost": 3,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-encore",
+                  "name": "One Encore",
+                  "text": "Once per turn, after you play a held Axiom, draw 1 personal card.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": 1,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "axiom-play",
+          "player": 0,
+          "id": "spare-axiom",
+          "text": "You play a rule card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom",
+          "id": "spare-axiom",
+          "player": 0,
+          "clear": true,
+          "text": "Rule change — Granny's Spare Axiom: every rule goes back to the basics.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c2",
+          "privateTo": 0,
+          "text": "You draw Paper Dragon.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "drawn": false,
+          "text": "Sabrina Carpwenter uses one encore, but cannot draw a personal card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "emma-held",
+    "width": 1280,
+    "calm": true,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 3,
+              "baseAttack": 3,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 3
+                }
+              ],
+              "health": 19,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [
+            "p1c1"
+          ],
+          "deck": [
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [
+            "momentum",
+            "underdog"
+          ],
+          "publicAxioms": [
+            "momentum"
+          ],
+          "board": [],
+          "discard": [
+            "p1c0"
+          ]
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Emma Wordson with Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 3,
+          "pb": 1,
+          "text": "Mr. Beastie (3 attack) fights Emma Wordson (1 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 3,
+          "source": "p0c0",
+          "text": "Emma Wordson takes 3 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom-reveal",
+          "player": 1,
+          "id": "momentum",
+          "text": "Final Citation: Rival shows Momentum.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 1,
+          "cid": "p1c1",
+          "privateTo": 1,
+          "text": "You draw Mr. Beastie.",
+          "publicText": "Rival draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p1c0",
+          "revealed": "momentum",
+          "drawn": true,
+          "text": "Emma Wordson adds one final citation and draws a personal card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Emma Wordson is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "emma-none",
+    "width": 1280,
+    "calm": true,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 3,
+              "baseAttack": 3,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 3
+                }
+              ],
+              "health": 19,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [],
+          "discard": [
+            "p1c0"
+          ]
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Emma Wordson with Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 3,
+          "pb": 1,
+          "text": "Mr. Beastie (3 attack) fights Emma Wordson (1 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 3,
+          "source": "p0c0",
+          "text": "Emma Wordson takes 3 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Emma Wordson is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "emma-empty",
+    "width": 1280,
+    "calm": true,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 3,
+              "baseAttack": 3,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 3
+                }
+              ],
+              "health": 19,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [
+            "momentum"
+          ],
+          "publicAxioms": [],
+          "board": [],
+          "discard": [
+            "p1c0"
+          ]
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Emma Wordson with Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 3,
+          "pb": 1,
+          "text": "Mr. Beastie (3 attack) fights Emma Wordson (1 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 3,
+          "source": "p0c0",
+          "text": "Emma Wordson takes 3 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Emma Wordson is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "emma-duplicate",
+    "width": 1280,
+    "calm": true,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 2,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [
+            "p0c1"
+          ],
+          "deck": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 3,
+              "baseAttack": 3,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 3
+                }
+              ],
+              "health": 19,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 0,
+          "monoColour": null,
+          "hand": [
+            "p1c1"
+          ],
+          "deck": [
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [
+            "momentum",
+            "momentum"
+          ],
+          "publicAxioms": [
+            "momentum",
+            "momentum"
+          ],
+          "board": [],
+          "discard": [
+            "p1c0"
+          ]
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Emma Wordson with Mr. Beastie.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 3,
+          "pb": 1,
+          "text": "Mr. Beastie (3 attack) fights Emma Wordson (1 attack).",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 3,
+          "source": "p0c0",
+          "text": "Emma Wordson takes 3 damage.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 1 damage.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "axiom-reveal",
+          "player": 1,
+          "id": "momentum",
+          "text": "Final Citation: Rival shows Momentum.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 1,
+          "cid": "p1c1",
+          "privateTo": 1,
+          "text": "You draw Mr. Beastie.",
+          "publicText": "Rival draws a card.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p1c0",
+          "revealed": "momentum",
+          "drawn": true,
+          "text": "Emma Wordson adds one final citation and draws a personal card.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Emma Wordson is defeated.",
+          "turn": 2,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "emma-mercy",
+    "width": 1280,
+    "calm": true,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 3,
+              "baseAttack": 3,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 3
+                }
+              ],
+              "health": 19,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [
+            "p1c1",
+            "p1c0"
+          ],
+          "deck": [
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [
+            "momentum"
+          ],
+          "publicAxioms": [
+            "momentum"
+          ],
+          "board": [],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Emma Wordson with Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 3,
+          "pb": 1,
+          "text": "Mr. Beastie (3 attack) fights Emma Wordson (1 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 3,
+          "source": "p0c0",
+          "text": "Emma Wordson takes 3 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom-reveal",
+          "player": 1,
+          "id": "momentum",
+          "text": "Final Citation: Rival shows Momentum.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 1,
+          "cid": "p1c1",
+          "privateTo": 1,
+          "text": "You draw Mr. Beastie.",
+          "publicText": "Rival draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p1c0",
+          "revealed": "momentum",
+          "drawn": true,
+          "text": "Emma Wordson adds one final citation and draws a personal card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "hand",
+          "why": "damage",
+          "text": "Emma Wordson is defeated, but Mercy returns it to the hand.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "sabrina-held",
+    "width": 1280,
+    "calm": true,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [
+            "p0c1"
+          ],
+          "deck": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "language-echo-egret",
+              "name": "Sabrina Carpwenter",
+              "speciesName": "Sabrina Carpwenter",
+              "legendary": false,
+              "colour": "language",
+              "printedColour": "language",
+              "colourless": false,
+              "cost": 3,
+              "baseCost": 3,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-encore",
+                  "name": "One Encore",
+                  "text": "Once per turn, after you play a held Axiom, draw 1 personal card.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": 1,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "axiom-play",
+          "player": 0,
+          "id": "underdog",
+          "text": "You play a rule card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom",
+          "id": "underdog",
+          "player": 0,
+          "basic": false,
+          "text": "Rule change — combat: Axiom of the Underdog. In a fight, only the creature with LOWER attack deals damage. Equal attack: both deal damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Proof Pup.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "drawn": true,
+          "text": "Sabrina Carpwenter adds one encore and draws a personal card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "sabrina-spent",
+    "width": 1280,
+    "calm": true,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "playsThisTurn": 2,
+          "monoColour": null,
+          "hand": [
+            "p0c1"
+          ],
+          "deck": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "language-echo-egret",
+              "name": "Sabrina Carpwenter",
+              "speciesName": "Sabrina Carpwenter",
+              "legendary": false,
+              "colour": "language",
+              "printedColour": "language",
+              "colourless": false,
+              "cost": 3,
+              "baseCost": 3,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-encore",
+                  "name": "One Encore",
+                  "text": "Once per turn, after you play a held Axiom, draw 1 personal card.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": 1,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "axiom-play",
+          "player": 0,
+          "id": "extensionality",
+          "text": "You play a rule card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom",
+          "id": "extensionality",
+          "player": 0,
+          "basic": false,
+          "text": "Rule change — combat: Axiom of Extensionality. Equal is equal: creatures with the same attack deal no damage to each other.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "sabrina-enter-empty",
+    "width": 1280,
+    "calm": true,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 7,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "language-echo-egret",
+              "name": "Sabrina Carpwenter",
+              "speciesName": "Sabrina Carpwenter",
+              "legendary": false,
+              "colour": "language",
+              "printedColour": "language",
+              "colourless": false,
+              "cost": 3,
+              "baseCost": 3,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-encore",
+                  "name": "One Encore",
+                  "text": "Once per turn, after you play a held Axiom, draw 1 personal card.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "axiom-play",
+          "player": 0,
+          "id": "empty-set",
+          "text": "You play a rule card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom",
+          "id": "empty-set",
+          "player": 0,
+          "basic": false,
+          "text": "Rule change — abilities: Axiom of the Empty Set. All creature abilities and keywords are switched off.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "sabrina-reset",
+    "width": 1280,
+    "calm": true,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 9,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [
+            "p0c1"
+          ],
+          "deck": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "language-echo-egret",
+              "name": "Sabrina Carpwenter",
+              "speciesName": "Sabrina Carpwenter",
+              "legendary": false,
+              "colour": "language",
+              "printedColour": "language",
+              "colourless": false,
+              "cost": 3,
+              "baseCost": 3,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-encore",
+                  "name": "One Encore",
+                  "text": "Once per turn, after you play a held Axiom, draw 1 personal card.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": 1,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "axiom-play",
+          "player": 0,
+          "id": "two-plays",
+          "text": "You play a rule card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom",
+          "id": "two-plays",
+          "player": 0,
+          "basic": true,
+          "text": "Rule change — plays: Two Moves. Activations: Unlimited → 2",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Proof Pup.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "drawn": true,
+          "text": "Sabrina Carpwenter adds one encore and draws a personal card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "sabrina-capped",
+    "width": 1280,
+    "calm": true,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 9,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [
+            "p0c1",
+            "p0c2"
+          ],
+          "deck": [
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "language-echo-egret",
+              "name": "Sabrina Carpwenter",
+              "speciesName": "Sabrina Carpwenter",
+              "legendary": false,
+              "colour": "language",
+              "printedColour": "language",
+              "colourless": false,
+              "cost": 3,
+              "baseCost": 3,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-encore",
+                  "name": "One Encore",
+                  "text": "Once per turn, after you play a held Axiom, draw 1 personal card.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": 1,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "axiom-play",
+          "player": 0,
+          "id": "spare-axiom",
+          "text": "You play a rule card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom",
+          "id": "spare-axiom",
+          "player": 0,
+          "clear": true,
+          "text": "Rule change — Granny's Spare Axiom: every rule goes back to the basics.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c2",
+          "privateTo": 0,
+          "text": "You draw Paper Dragon.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "drawn": false,
+          "text": "Sabrina Carpwenter uses one encore, but cannot draw a personal card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "emma-held",
+    "width": 390,
+    "calm": true,
+    "layout": {
+      "scroll": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 3,
+              "baseAttack": 3,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 3
+                }
+              ],
+              "health": 19,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [
+            "p1c1"
+          ],
+          "deck": [
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [
+            "momentum",
+            "underdog"
+          ],
+          "publicAxioms": [
+            "momentum"
+          ],
+          "board": [],
+          "discard": [
+            "p1c0"
+          ]
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Emma Wordson with Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 3,
+          "pb": 1,
+          "text": "Mr. Beastie (3 attack) fights Emma Wordson (1 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 3,
+          "source": "p0c0",
+          "text": "Emma Wordson takes 3 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom-reveal",
+          "player": 1,
+          "id": "momentum",
+          "text": "Final Citation: Rival shows Momentum.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 1,
+          "cid": "p1c1",
+          "privateTo": 1,
+          "text": "You draw Mr. Beastie.",
+          "publicText": "Rival draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p1c0",
+          "revealed": "momentum",
+          "drawn": true,
+          "text": "Emma Wordson adds one final citation and draws a personal card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Emma Wordson is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "emma-none",
+    "width": 390,
+    "calm": true,
+    "layout": {
+      "scroll": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 3,
+              "baseAttack": 3,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 3
+                }
+              ],
+              "health": 19,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [],
+          "discard": [
+            "p1c0"
+          ]
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Emma Wordson with Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 3,
+          "pb": 1,
+          "text": "Mr. Beastie (3 attack) fights Emma Wordson (1 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 3,
+          "source": "p0c0",
+          "text": "Emma Wordson takes 3 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Emma Wordson is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "emma-empty",
+    "width": 390,
+    "calm": true,
+    "layout": {
+      "scroll": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 3,
+              "baseAttack": 3,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 3
+                }
+              ],
+              "health": 19,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [
+            "momentum"
+          ],
+          "publicAxioms": [],
+          "board": [],
+          "discard": [
+            "p1c0"
+          ]
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Emma Wordson with Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 3,
+          "pb": 1,
+          "text": "Mr. Beastie (3 attack) fights Emma Wordson (1 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 3,
+          "source": "p0c0",
+          "text": "Emma Wordson takes 3 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Emma Wordson is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "emma-duplicate",
+    "width": 390,
+    "calm": true,
+    "layout": {
+      "scroll": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 2,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [
+            "p0c1"
+          ],
+          "deck": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 3,
+              "baseAttack": 3,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 3
+                }
+              ],
+              "health": 19,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 0,
+          "monoColour": null,
+          "hand": [
+            "p1c1"
+          ],
+          "deck": [
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [
+            "momentum",
+            "momentum"
+          ],
+          "publicAxioms": [
+            "momentum",
+            "momentum"
+          ],
+          "board": [],
+          "discard": [
+            "p1c0"
+          ]
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Emma Wordson with Mr. Beastie.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 3,
+          "pb": 1,
+          "text": "Mr. Beastie (3 attack) fights Emma Wordson (1 attack).",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 3,
+          "source": "p0c0",
+          "text": "Emma Wordson takes 3 damage.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 1 damage.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "axiom-reveal",
+          "player": 1,
+          "id": "momentum",
+          "text": "Final Citation: Rival shows Momentum.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 1,
+          "cid": "p1c1",
+          "privateTo": 1,
+          "text": "You draw Mr. Beastie.",
+          "publicText": "Rival draws a card.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p1c0",
+          "revealed": "momentum",
+          "drawn": true,
+          "text": "Emma Wordson adds one final citation and draws a personal card.",
+          "turn": 2,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Emma Wordson is defeated.",
+          "turn": 2,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "emma-mercy",
+    "width": 390,
+    "calm": true,
+    "layout": {
+      "scroll": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 3,
+              "baseAttack": 3,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 3
+                }
+              ],
+              "health": 19,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [
+            "p1c1",
+            "p1c0"
+          ],
+          "deck": [
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [
+            "momentum"
+          ],
+          "publicAxioms": [
+            "momentum"
+          ],
+          "board": [],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Emma Wordson with Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 3,
+          "pb": 1,
+          "text": "Mr. Beastie (3 attack) fights Emma Wordson (1 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 3,
+          "source": "p0c0",
+          "text": "Emma Wordson takes 3 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom-reveal",
+          "player": 1,
+          "id": "momentum",
+          "text": "Final Citation: Rival shows Momentum.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 1,
+          "cid": "p1c1",
+          "privateTo": 1,
+          "text": "You draw Mr. Beastie.",
+          "publicText": "Rival draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p1c0",
+          "revealed": "momentum",
+          "drawn": true,
+          "text": "Emma Wordson adds one final citation and draws a personal card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "hand",
+          "why": "damage",
+          "text": "Emma Wordson is defeated, but Mercy returns it to the hand.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "sabrina-held",
+    "width": 390,
+    "calm": true,
+    "layout": {
+      "scroll": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [
+            "p0c1"
+          ],
+          "deck": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "language-echo-egret",
+              "name": "Sabrina Carpwenter",
+              "speciesName": "Sabrina Carpwenter",
+              "legendary": false,
+              "colour": "language",
+              "printedColour": "language",
+              "colourless": false,
+              "cost": 3,
+              "baseCost": 3,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-encore",
+                  "name": "One Encore",
+                  "text": "Once per turn, after you play a held Axiom, draw 1 personal card.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": 1,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "axiom-play",
+          "player": 0,
+          "id": "underdog",
+          "text": "You play a rule card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom",
+          "id": "underdog",
+          "player": 0,
+          "basic": false,
+          "text": "Rule change — combat: Axiom of the Underdog. In a fight, only the creature with LOWER attack deals damage. Equal attack: both deal damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Proof Pup.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "drawn": true,
+          "text": "Sabrina Carpwenter adds one encore and draws a personal card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "sabrina-spent",
+    "width": 390,
+    "calm": true,
+    "layout": {
+      "scroll": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 8,
+          "playsThisTurn": 2,
+          "monoColour": null,
+          "hand": [
+            "p0c1"
+          ],
+          "deck": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "language-echo-egret",
+              "name": "Sabrina Carpwenter",
+              "speciesName": "Sabrina Carpwenter",
+              "legendary": false,
+              "colour": "language",
+              "printedColour": "language",
+              "colourless": false,
+              "cost": 3,
+              "baseCost": 3,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-encore",
+                  "name": "One Encore",
+                  "text": "Once per turn, after you play a held Axiom, draw 1 personal card.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": 1,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "axiom-play",
+          "player": 0,
+          "id": "extensionality",
+          "text": "You play a rule card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom",
+          "id": "extensionality",
+          "player": 0,
+          "basic": false,
+          "text": "Rule change — combat: Axiom of Extensionality. Equal is equal: creatures with the same attack deal no damage to each other.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "sabrina-enter-empty",
+    "width": 390,
+    "calm": true,
+    "layout": {
+      "scroll": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 7,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "language-echo-egret",
+              "name": "Sabrina Carpwenter",
+              "speciesName": "Sabrina Carpwenter",
+              "legendary": false,
+              "colour": "language",
+              "printedColour": "language",
+              "colourless": false,
+              "cost": 3,
+              "baseCost": 3,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-encore",
+                  "name": "One Encore",
+                  "text": "Once per turn, after you play a held Axiom, draw 1 personal card.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "axiom-play",
+          "player": 0,
+          "id": "empty-set",
+          "text": "You play a rule card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom",
+          "id": "empty-set",
+          "player": 0,
+          "basic": false,
+          "text": "Rule change — abilities: Axiom of the Empty Set. All creature abilities and keywords are switched off.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "sabrina-reset",
+    "width": 390,
+    "calm": true,
+    "layout": {
+      "scroll": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 9,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [
+            "p0c1"
+          ],
+          "deck": [
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "language-echo-egret",
+              "name": "Sabrina Carpwenter",
+              "speciesName": "Sabrina Carpwenter",
+              "legendary": false,
+              "colour": "language",
+              "printedColour": "language",
+              "colourless": false,
+              "cost": 3,
+              "baseCost": 3,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-encore",
+                  "name": "One Encore",
+                  "text": "Once per turn, after you play a held Axiom, draw 1 personal card.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": 1,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "axiom-play",
+          "player": 0,
+          "id": "two-plays",
+          "text": "You play a rule card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom",
+          "id": "two-plays",
+          "player": 0,
+          "basic": true,
+          "text": "Rule change — plays: Two Moves. Activations: Unlimited → 2",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c1",
+          "privateTo": 0,
+          "text": "You draw Proof Pup.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "drawn": true,
+          "text": "Sabrina Carpwenter adds one encore and draws a personal card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "sabrina-capped",
+    "width": 390,
+    "calm": true,
+    "layout": {
+      "scroll": 390,
+      "width": 390
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 9,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [
+            "p0c1",
+            "p0c2"
+          ],
+          "deck": [
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "language-echo-egret",
+              "name": "Sabrina Carpwenter",
+              "speciesName": "Sabrina Carpwenter",
+              "legendary": false,
+              "colour": "language",
+              "printedColour": "language",
+              "colourless": false,
+              "cost": 3,
+              "baseCost": 3,
+              "attack": 2,
+              "baseAttack": 2,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 2
+                }
+              ],
+              "health": 3,
+              "maxHealth": 3,
+              "baseHealth": 3,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "one-encore",
+                  "name": "One Encore",
+                  "text": "Once per turn, after you play a held Axiom, draw 1 personal card.",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": false,
+                  "cost": null
+                }
+              ],
+              "silenced": false,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": true,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": 1,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p1c1",
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p1c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 0,
+              "baseAttack": 0,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 0
+                }
+              ],
+              "health": 20,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": false,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 0,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 0
+            }
+          ],
+          "discard": []
+        }
+      ],
+      "events": [
+        {
+          "t": "axiom-play",
+          "player": 0,
+          "id": "spare-axiom",
+          "text": "You play a rule card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom",
+          "id": "spare-axiom",
+          "player": 0,
+          "clear": true,
+          "text": "Rule change — Granny's Spare Axiom: every rule goes back to the basics.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 0,
+          "cid": "p0c2",
+          "privateTo": 0,
+          "text": "You draw Paper Dragon.",
+          "publicText": "You draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p0c0",
+          "drawn": false,
+          "text": "Sabrina Carpwenter uses one encore, but cannot draw a personal card.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  },
+  {
+    "key": "emma-held",
+    "width": 1280,
+    "calm": false,
+    "layout": {
+      "scroll": 1280,
+      "width": 1280
+    },
+    "outcome": {
+      "winner": null,
+      "endReason": null,
+      "turn": 1,
+      "active": 0,
+      "phase": "main",
+      "pending": null,
+      "players": [
+        {
+          "hearts": 7,
+          "energy": 10,
+          "playsThisTurn": 1,
+          "monoColour": null,
+          "hand": [],
+          "deck": [
+            "p0c1",
+            "p0c2",
+            "p0c3",
+            "p0c4",
+            "p0c5",
+            "p0c6",
+            "p0c7",
+            "p0c8",
+            "p0c9",
+            "p0c10",
+            "p0c11",
+            "p0c12",
+            "p0c13"
+          ],
+          "axHand": [],
+          "publicAxioms": [],
+          "board": [
+            {
+              "cid": "p0c0",
+              "kind": "creature",
+              "species": "beastie",
+              "name": "Mr. Beastie",
+              "speciesName": "Mr. Beastie",
+              "legendary": false,
+              "colour": "memory",
+              "printedColour": "memory",
+              "colourless": false,
+              "cost": 4,
+              "baseCost": 4,
+              "attack": 3,
+              "baseAttack": 3,
+              "attackParts": [
+                {
+                  "source": "base",
+                  "label": "Base",
+                  "amount": 3
+                }
+              ],
+              "health": 19,
+              "maxHealth": 20,
+              "baseHealth": 20,
+              "damaged": true,
+              "keywords": [],
+              "lines": [
+                {
+                  "id": "escalate",
+                  "name": "Escalate",
+                  "text": "+1 attack for each other creature you have played this match (max +3).",
+                  "kind": "passive",
+                  "gained": false,
+                  "warped": false,
+                  "off": true,
+                  "cost": null
+                }
+              ],
+              "silenced": true,
+              "onBoard": true,
+              "sleeping": false,
+              "frozen": false,
+              "activated": false,
+              "attacks": 1,
+              "canAttack": false,
+              "hidden": false,
+              "variant": null,
+              "taught": null,
+              "injured": [],
+              "changes": [],
+              "loaner": false,
+              "trophyOf": null,
+              "prediction": null,
+              "metaverseUsed": false,
+              "effects": [],
+              "lastEncoreTurn": null,
+              "buffs": [],
+              "damage": 1
+            }
+          ],
+          "discard": []
+        },
+        {
+          "hearts": 7,
+          "energy": 10,
+          "monoColour": null,
+          "hand": [
+            "p1c1"
+          ],
+          "deck": [
+            "p1c2",
+            "p1c3",
+            "p1c4",
+            "p1c5",
+            "p1c6",
+            "p1c7",
+            "p1c8",
+            "p1c9",
+            "p1c10",
+            "p1c11",
+            "p1c12",
+            "p1c13"
+          ],
+          "axHand": [
+            "momentum",
+            "underdog"
+          ],
+          "publicAxioms": [
+            "momentum"
+          ],
+          "board": [],
+          "discard": [
+            "p1c0"
+          ]
+        }
+      ],
+      "events": [
+        {
+          "t": "attack",
+          "player": 0,
+          "cid": "p0c0",
+          "target": "p1c0",
+          "text": "You attack Emma Wordson with Mr. Beastie.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "fight",
+          "attacker": "p0c0",
+          "defender": "p1c0",
+          "pa": 3,
+          "pb": 1,
+          "text": "Mr. Beastie (3 attack) fights Emma Wordson (1 attack).",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p1c0",
+          "amount": 3,
+          "source": "p0c0",
+          "text": "Emma Wordson takes 3 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "damage",
+          "cid": "p0c0",
+          "amount": 1,
+          "source": "p1c0",
+          "text": "Mr. Beastie takes 1 damage.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "axiom-reveal",
+          "player": 1,
+          "id": "momentum",
+          "text": "Final Citation: Rival shows Momentum.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "draw",
+          "player": 1,
+          "cid": "p1c1",
+          "privateTo": 1,
+          "text": "You draw Mr. Beastie.",
+          "publicText": "Rival draws a card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "ability",
+          "cid": "p1c0",
+          "revealed": "momentum",
+          "drawn": true,
+          "text": "Emma Wordson adds one final citation and draws a personal card.",
+          "turn": 1,
+          "round": 1
+        },
+        {
+          "t": "defeated",
+          "cid": "p1c0",
+          "player": 1,
+          "dest": "discard",
+          "why": "damage",
+          "text": "Emma Wordson is defeated.",
+          "turn": 1,
+          "round": 1
+        }
+      ]
+    }
+  }
+]

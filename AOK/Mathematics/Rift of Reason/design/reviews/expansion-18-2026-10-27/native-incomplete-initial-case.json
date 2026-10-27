@@ -1,0 +1,242 @@
+{
+  "reason": "Initial navigation snapshot was empty before document became ready. Excluded and complete case repeated.",
+  "outcomes": [
+    {
+      "key": "emma-held",
+      "width": 1280,
+      "calm": false,
+      "layout": {
+        "scroll": 1280,
+        "width": 1280
+      },
+      "outcome": {
+        "winner": null,
+        "endReason": null,
+        "turn": 1,
+        "active": 0,
+        "phase": "main",
+        "pending": null,
+        "players": [
+          {
+            "hearts": 7,
+            "energy": 10,
+            "playsThisTurn": 1,
+            "monoColour": null,
+            "hand": [],
+            "deck": [
+              "p0c1",
+              "p0c2",
+              "p0c3",
+              "p0c4",
+              "p0c5",
+              "p0c6",
+              "p0c7",
+              "p0c8",
+              "p0c9",
+              "p0c10",
+              "p0c11",
+              "p0c12",
+              "p0c13"
+            ],
+            "axHand": [],
+            "publicAxioms": [],
+            "board": [
+              {
+                "cid": "p0c0",
+                "kind": "creature",
+                "species": "beastie",
+                "name": "Mr. Beastie",
+                "speciesName": "Mr. Beastie",
+                "legendary": false,
+                "colour": "memory",
+                "printedColour": "memory",
+                "colourless": false,
+                "cost": 4,
+                "baseCost": 4,
+                "attack": 3,
+                "baseAttack": 3,
+                "attackParts": [
+                  {
+                    "source": "base",
+                    "label": "Base",
+                    "amount": 3
+                  }
+                ],
+                "health": 19,
+                "maxHealth": 20,
+                "baseHealth": 20,
+                "damaged": true,
+                "keywords": [],
+                "lines": [
+                  {
+                    "id": "escalate",
+                    "name": "Escalate",
+                    "text": "+1 attack for each other creature you have played this match (max +3).",
+                    "kind": "passive",
+                    "gained": false,
+                    "warped": false,
+                    "off": true,
+                    "cost": null
+                  }
+                ],
+                "silenced": true,
+                "onBoard": true,
+                "sleeping": false,
+                "frozen": false,
+                "activated": false,
+                "attacks": 1,
+                "canAttack": false,
+                "hidden": false,
+                "variant": null,
+                "taught": null,
+                "injured": [],
+                "changes": [],
+                "loaner": false,
+                "trophyOf": null,
+                "prediction": null,
+                "metaverseUsed": false,
+                "effects": [],
+                "lastEncoreTurn": null,
+                "buffs": [],
+                "damage": 1
+              }
+            ],
+            "discard": []
+          },
+          {
+            "hearts": 7,
+            "energy": 10,
+            "monoColour": null,
+            "hand": [
+              "p1c1"
+            ],
+            "deck": [
+              "p1c2",
+              "p1c3",
+              "p1c4",
+              "p1c5",
+              "p1c6",
+              "p1c7",
+              "p1c8",
+              "p1c9",
+              "p1c10",
+              "p1c11",
+              "p1c12",
+              "p1c13"
+            ],
+            "axHand": [
+              "momentum",
+              "underdog"
+            ],
+            "publicAxioms": [
+              "momentum"
+            ],
+            "board": [],
+            "discard": [
+              "p1c0"
+            ]
+          }
+        ],
+        "events": [
+          {
+            "t": "attack",
+            "player": 0,
+            "cid": "p0c0",
+            "target": "p1c0",
+            "text": "You attack Emma Wordson with Mr. Beastie.",
+            "turn": 1,
+            "round": 1
+          },
+          {
+            "t": "fight",
+            "attacker": "p0c0",
+            "defender": "p1c0",
+            "pa": 3,
+            "pb": 1,
+            "text": "Mr. Beastie (3 attack) fights Emma Wordson (1 attack).",
+            "turn": 1,
+            "round": 1
+          },
+          {
+            "t": "damage",
+            "cid": "p1c0",
+            "amount": 3,
+            "source": "p0c0",
+            "text": "Emma Wordson takes 3 damage.",
+            "turn": 1,
+            "round": 1
+          },
+          {
+            "t": "damage",
+            "cid": "p0c0",
+            "amount": 1,
+            "source": "p1c0",
+            "text": "Mr. Beastie takes 1 damage.",
+            "turn": 1,
+            "round": 1
+          },
+          {
+            "t": "axiom-reveal",
+            "player": 1,
+            "id": "momentum",
+            "text": "Final Citation: Rival shows Momentum.",
+            "turn": 1,
+            "round": 1
+          },
+          {
+            "t": "draw",
+            "player": 1,
+            "cid": "p1c1",
+            "privateTo": 1,
+            "text": "You draw Mr. Beastie.",
+            "publicText": "Rival draws a card.",
+            "turn": 1,
+            "round": 1
+          },
+          {
+            "t": "ability",
+            "cid": "p1c0",
+            "revealed": "momentum",
+            "drawn": true,
+            "text": "Emma Wordson adds one final citation and draws a personal card.",
+            "turn": 1,
+            "round": 1
+          },
+          {
+            "t": "defeated",
+            "cid": "p1c0",
+            "player": 1,
+            "dest": "discard",
+            "why": "damage",
+            "text": "Emma Wordson is defeated.",
+            "turn": 1,
+            "round": 1
+          }
+        ]
+      }
+    }
+  ],
+  "dom": [
+    {
+      "key": "emma-held",
+      "width": 1280,
+      "calm": false,
+      "stage": "before",
+      "dom": ""
+    },
+    {
+      "key": "emma-held",
+      "width": 1280,
+      "calm": false,
+      "stage": "selected",
+      "dom": "- 'generic \"Rival: 7 hearts\"':\n  - generic \"Rival\"\n  - generic \"7 of 12 hearts\":\n    - generic: \"7\"\n- generic: Deck 13\n- generic: Hand 2\n- generic: Discard 0\n- strong: \"10\"\n- text: /10\n- generic: Energy\n- button \"Emma Wordson, cost 2, attack 1, health 3 of 3, guard. Common rarity.\":\n  - generic \"Common rarity\":\n    - generic: C\n  - generic: Emma Wordson\n  - 'generic \"Last Word: Final Citation\"':\n    - generic \"Last Word\"\n  - generic: \"1\"\n  - generic: \"3\"\n- group \"Fate track\":\n  - generic: No Fate track in this match.\n- status:\n  - generic: \"Mr. Beastie: click a glowing target to attack.\"\n  - button \"Cancel\"\n  - button \"Preview move\"\n- button \"End turn\":\n  - generic: End\n  - generic: turn\n- button \"Mr. Beastie, cost 4, attack 3, health 20 of 20, ready. Uncommon rarity.\" [active]:\n  - generic \"Uncommon rarity\":\n    - generic: U\n  - generic: Mr. Beastie\n  - generic \"Escalate\":\n    - generic \"Escalate\"\n  - generic: \"3\"\n  - generic: \"20\"\n  - generic: No ability\n- 'generic \"Your hero: 7 hearts\"':\n  - generic \"You\"\n  - generic \"7 of 12 hearts\":\n    - generic: \"7\"\n- generic: Deck 13\n- generic: Hand 0\n- generic: Discard 0\n- generic: Your hand is empty.\n- strong: \"10\"\n- text: /10\n- generic: Energy\n- 'generic \"Card activations: 2 of 2 left this turn. Each cast, attack or manual Activate uses one.\"':\n  - generic: Uses\n- 'button \"Read Mr. Beastie: full text and active effects\"': Read Mr. Beastie\n- group \"Decks on the table\":\n  - button \"Draw from your deck\" [disabled]:\n    - generic: Your deck\n    - generic: \"13\"\n  - button \"Take a rule card\" [disabled]:\n    - generic: Shared axioms\n    - generic: \"2\"\n  - 'img \"Their deck: 13 cards\"':\n    - generic: Their deck\n    - generic: \"13\"\n- complementary:\n  - button \"How to play\"\n  - button \"Leave match\"\n  - region \"Axioms\":\n    - strong: Axioms\n    - generic: Active now · All basic.\n    - paragraph: Axioms are the rules both players start from. Rule cards and Fate can change them.\n    - 'button \"Win: Enemy hero to 0 ❤ wins\"':\n      - generic: Win\n      - generic: Enemy hero to 0 ❤ wins\n    - 'button \"Fights: Both creatures hit\"':\n      - generic: Fights\n      - generic: Both creatures hit\n    - 'button \"Card activations: 2 activations per turn\"':\n      - generic: Card activations\n      - generic: 2 activations per turn\n      - generic: 2 left\n    - 'button \"Attacks: Each creature attacks once\"':\n      - generic: Attacks\n      - generic: Each creature attacks once\n    - 'button \"Energy: +1 each turn\"':\n      - generic: Energy\n      - generic: +1 each turn\n    - 'button \"Drawing: Draw 1\"':\n      - generic: ⚖\n      - generic: Drawing\n      - generic: Draw 1\n    - 'button \"Card costs: Creature costs +0\"':\n      - generic: Card costs\n      - generic: Creature costs +0\n  - 'generic \"Colour matchups: Strong +1 / Weak −1\"'\n  - option \"Neutral\" [selected]\n  - option \"Strong\"\n  - option \"Weak\"\n  - option \"Weak at 1\"\n  - option \"Shield\"\n  - option \"Underdog\"\n  - option \"Reversed wheel\"\n  - option \"Zero attack\"\n- generic: U\n- generic: Uncommon\n- generic: Mr. Beastie\n- generic: Escalate\n- generic: \"3\"\n- generic: \"20\"\n- generic: ⏳ Memory\n- generic: \"Escalate: +1 attack for each other creature you have played this match (max +3).\"\n- generic: \"✅ Ready: drag it onto a target to attack.\"\n- generic: \"Active effects: none right now.\"\n- generic: \"Colour wheel: Strong +1 against Reason, Emotion; Weak −1 against Sense perception, Imagination; Neutral against Language, Memory. Positive attack stays at least 1; zero stays 0.\"\n- strong: Expansion-18 · memory-only save\n- combobox \"Expansion-18 card\":\n  - option \"emma-held\" [selected]\n  - option \"emma-none\"\n  - option \"emma-empty\"\n  - option \"emma-duplicate\"\n  - option \"emma-mercy\"\n  - option \"sabrina-held\"\n  - option \"sabrina-spent\"\n  - option \"sabrina-enter-empty\"\n  - option \"sabrina-reset\"\n  - option \"sabrina-capped\"\n- button \"Start card sample\"\n- button \"Check outcome\"\n- status: Hearts 7 / 7 · Energy 10 · main\n- button \"Open pack sample\"\n- generic \"Scratch outcome details\""
+    },
+    {
+      "key": "emma-held",
+      "width": 1280,
+      "calm": false,
+      "stage": "after",
+      "dom": "- 'generic \"Rival: 7 hearts\"':\n  - generic \"Rival\"\n  - generic \"7 of 12 hearts\":\n    - generic: \"7\"\n- generic: Deck 12\n- generic: Hand 3\n- generic: Discard 1\n- 'generic \"Public in Rival''s hand: Rule card: Momentum, Common\"':\n  - generic: \"2\"\n  - generic \"Common rarity\":\n    - generic: C\n    - generic: Common\n  - generic: Public\n- strong: \"10\"\n- text: /10\n- generic: Energy\n- generic: Rival's side is empty.\n- group \"Fate track\":\n  - generic: No Fate track in this match.\n- status:\n  - generic: Nothing left to do. Press End turn.\n  - generic: Emma Wordson is defeated.\n- button \"End turn\":\n  - generic: End\n  - generic: turn\n- generic: Nothing left to do\n- button \"Mr. Beastie, cost 4, attack 3, health 19 of 20. Uncommon rarity.\":\n  - generic \"Uncommon rarity\":\n    - generic: U\n  - generic: Mr. Beastie\n  - generic \"Escalate\":\n    - generic \"Escalate\"\n  - generic: \"3\"\n  - generic: \"19\"\n  - generic: No ability\n- 'generic \"Your hero: 7 hearts\"':\n  - generic \"You\"\n  - generic \"7 of 12 hearts\":\n    - generic: \"7\"\n- generic: Deck 13\n- generic: Hand 0\n- generic: Discard 0\n- generic: Your hand is empty.\n- strong: \"10\"\n- text: /10\n- generic: Energy\n- 'generic \"Card activations: 1 of 2 left this turn. Each cast, attack or manual Activate uses one.\"':\n  - generic: Uses\n- region \"Recent plays\":\n  - generic: Recent\n  - 'button \"You attack Emma Wordson with Mr. Beastie. Mr. Beastie (3 attack) fights Emma Wordson (1 attack). Emma Wordson takes 3 damage. Mr. Beastie takes 1 damage. Final Citation: Rival shows Momentum. Emma Wordson adds one final citation and draws a personal card. Emma Wordson is defeated.\"':\n    - generic: ⚔\n    - generic: You\n- group \"Decks on the table\":\n  - button \"Draw from your deck\" [disabled]:\n    - generic: Your deck\n    - generic: \"13\"\n  - button \"Take a rule card\" [disabled]:\n    - generic: Shared axioms\n    - generic: \"2\"\n  - 'img \"Their deck: 12 cards\"':\n    - generic: Their deck\n    - generic: \"12\"\n- complementary:\n  - button \"How to play\"\n  - button \"Leave match\"\n  - region \"Axioms\":\n    - strong: Axioms\n    - generic: Active now · All basic.\n    - paragraph: Axioms are the rules both players start from. Rule cards and Fate can change them.\n    - 'button \"Win: Enemy hero to 0 ❤ wins\"':\n      - generic: Win\n      - generic: Enemy hero to 0 ❤ wins\n    - 'button \"Fights: Both creatures hit\"':\n      - generic: Fights\n      - generic: Both creatures hit\n    - 'button \"Card activations: 2 activations per turn\"':\n      - generic: Card activations\n      - generic: 2 activations per turn\n      - generic: 1 left\n    - 'button \"Attacks: Each creature attacks once\"':\n      - generic: Attacks\n      - generic: Each creature attacks once\n    - 'button \"Energy: +1 each turn\"':\n      - generic: Energy\n      - generic: +1 each turn\n    - 'button \"Drawing: Draw 1\"':\n      - generic: ⚖\n      - generic: Drawing\n      - generic: Draw 1\n    - 'button \"Card costs: Creature costs +0\"':\n      - generic: Card costs\n      - generic: Creature costs +0\n  - 'generic \"Colour matchups: Strong +1 / Weak −1\"'\n  - option \"Neutral\" [selected]\n  - option \"Strong\"\n  - option \"Weak\"\n  - option \"Weak at 1\"\n  - option \"Shield\"\n  - option \"Underdog\"\n  - option \"Reversed wheel\"\n  - option \"Zero attack\"\n- strong: Expansion-18 · memory-only save\n- combobox \"Expansion-18 card\":\n  - option \"emma-held\" [selected]\n  - option \"emma-none\"\n  - option \"emma-empty\"\n  - option \"emma-duplicate\"\n  - option \"emma-mercy\"\n  - option \"sabrina-held\"\n  - option \"sabrina-spent\"\n  - option \"sabrina-enter-empty\"\n  - option \"sabrina-reset\"\n  - option \"sabrina-capped\"\n- button \"Start card sample\"\n- button \"Check outcome\" [active]\n- status: Hearts 7 / 7 · Energy 10 · main\n- button \"Open pack sample\"\n- generic \"Scratch outcome details\""
+    }
+  ]
+}

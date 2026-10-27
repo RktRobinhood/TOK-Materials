@@ -20,6 +20,7 @@
  *   shieldAgainstHigher            Shield for this fight only, when attacking higher effective attack
  *   onSurvive(api, card, foe)        after a fight it survives
  *   onAxiomPlayed(api, card, id, p)  whenever any player plays an axiom card
+ *   onHeldAxiomPlayed(api, card, id, p) after its controller plays a held Axiom and its printed draws
  *   onEnemyPlay(api, card, played)   whenever the opponent plays a creature
  *   choose(api, card, choice, req)   answer to api.ask(...)
  *   ignoresGuard, elusive, attacksPerTurn, heroDamage, damageReduction, noHeroOnArrival
@@ -861,6 +862,26 @@
                 if (api.attack(target) > 0) api.buffUntilStart(target, -1, 0, 'Quiet Block', card.controller);
                 api.emit({ t: 'ability', cid: card.cid, target, text: api.name(card.cid) + ' blocks ' + api.name(target) + ': no colour and -1 attack until your next turn starts.' });
             } },
+        },
+        // #129 expansion-18: a public final citation and a bounded held-rule encore.
+        'final-citation': {
+            name: 'Final Citation', keywords: ['guard'],
+            text: 'Guard. Last Word: show your oldest held Axiom, if any, and draw 1 personal card.',
+            lastWordEffect(api, card) {
+                const shown = api.revealOldestAxiom(card.controller, 'Final Citation');
+                if (!shown) return;
+                const drawn = !!api.draw(card.controller);
+                api.emit({ t: 'ability', cid: card.cid, revealed: shown, drawn, text: api.name(card.cid) + (drawn ? ' adds one final citation and draws a personal card.' : ' shows a final citation, but cannot draw a personal card.') });
+            },
+        },
+        'one-encore': {
+            name: 'One Encore', text: 'Once per turn, after you play a held Axiom, draw 1 personal card.',
+            onHeldAxiomPlayed(api, card, id, by) {
+                if (by !== card.controller || card.lastEncoreTurn === api.s.turn) return;
+                card.lastEncoreTurn = api.s.turn;
+                const drawn = !!api.draw(card.controller);
+                api.emit({ t: 'ability', cid: card.cid, drawn, text: api.name(card.cid) + (drawn ? ' adds one encore and draws a personal card.' : ' uses one encore, but cannot draw a personal card.') });
+            },
         },
         grook: {
             name: 'Grook',
