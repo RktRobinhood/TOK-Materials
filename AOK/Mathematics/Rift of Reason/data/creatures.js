@@ -496,6 +496,20 @@
         },
     });
 
+    // #129 expansion-19: existing portraits and ordinary private ordering/recovery Entrances.
+    Object.assign(Rift.data.creatures, {
+        'reason-logic-lynx': {
+            name: 'Derek Mullinx', inspiredBy: 'Derek Muller', colour: 'reason', rarity: 'uncommon', power: 4, cost: 4, attack: 3, health: 4,
+            ability: 'set-the-demo', abilityText: 'Entrance: look at your top 2 personal cards. Keep their order or swap them.',
+            blurb: 'Sets up the demonstration before asking the question.', lines: [], release: 'expansion-19', packEligible: true,
+        },
+        'memory-replay-raccoon': {
+            name: 'Nikola Jokaroo', inspiredBy: 'Nikola Jokic', colour: 'memory', rarity: 'uncommon', power: 3, cost: 3, attack: 2, health: 3,
+            ability: 'another-pass', abilityText: 'Entrance: return a defeated creature with printed cost 1 or less to your hand.',
+            blurb: 'One small teammate deserves another pass.', lines: [], release: 'expansion-19', packEligible: true,
+        },
+    });
+
     // #132 plot identities: their actual earned source is the permanent Acquisition registry.
     function plotCreature(name,inspiredBy,colour,attack,health,ability,abilityText,blurb){
         return {name,inspiredBy,colour,rarity:'rare',power:5,cost:5,attack,health,ability,abilityText,blurb,lines:[],release:'plot-1',packEligible:false};

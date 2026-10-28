@@ -147,7 +147,11 @@
     "language-comma-caterpillar",
     "language-echo-egret"
   ],
-  "held": 104,
+  "expansion19Batch": [
+    "reason-logic-lynx",
+    "memory-replay-raccoon"
+  ],
+  "held": 102,
   "rows": [
     {
       "id": "reason-premise-pigeon",
@@ -272,13 +276,14 @@
       "kind": "creature",
       "rarity": "uncommon",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-19 runtime release (#129); see expansion-19 acceptance report",
       "trigger": "Entrance",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Entrance: look at the top 2 personal-deck cards; keep their order or swap them.",
+      "payoffAndLifetime": "Entrance: when at least two personal-deck cards remain, privately inspect the top two and choose which stays on top. Keep the original order or swap only those two; all lower cards remain in order and no card is drawn. Fewer than two means no ordering or mandatory choice, checked by public count before hidden indexing. Commit either private choice by forgetting both inspected identities from opposing knowledge/sight, preserving unrelated knowledge, so a later ordinary draw does not disclose the choice. Planning cannot inspect hidden identities. No shared or reserved Fate card is read.",
       "counterplay": "Pressure its setup turn.",
       "semanticRevision": null,
       "releaseChecks": [
+        "resource: preserve normal energy, activation and hand caps; no refund on replay",
         "information: explicit viewer and public/private label; no reserved-deck or prospective hidden read",
         "derived state: legal target revalidation, normal swaps/prevention, fixed construction identity and explicit temporary expiry"
       ],
@@ -1472,15 +1477,18 @@
       "kind": "creature",
       "rarity": "uncommon",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-19 runtime release (#129); see expansion-19 acceptance report",
       "trigger": "Entrance",
       "target": "creature-local or explicitly named target in contract",
-      "payoffAndLifetime": "Entrance: return a friendly creature costing 1 or less from discard to hand.",
+      "payoffAndLifetime": "Entrance: choose one actual normally defeated creature in the current controller's own discard whose printed species cost is 1 or less, and return that instance to its owner hand normally. Exclude burned cards, spells, tokens and the opposing discard; live cost discounts or increases do not alter eligibility. No eligible card or no hand room means ordinary body entry without recovery. No copy, summon or next-play stat bonus is created. Normal suppression, recovery bookkeeping and activation/copy limits remain.",
       "counterplay": "Pressure during the replay turn.",
       "semanticRevision": null,
       "releaseChecks": [
+        "resource: preserve normal energy, activation and hand caps; no refund on replay",
         "identity: move actual instance; consume one-shots before effects; no cloned receipt or source",
-        "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap"
+        "tokens: reserve board capacity; finite generation; no collection copies; deterministic order",
+        "lifetime: authoritative owner/round/match stamp; no UI timer; copied source does not reset a match cap",
+        "derived state: legal target revalidation, normal swaps/prevention, fixed construction identity and explicit temporary expiry"
       ],
       "gates": [
         109

@@ -99,7 +99,7 @@ Each has two original runtime voice lines and an additive pinned Google cast; no
 
 ## Card Arena expansion cast proposals — 12 October 2026
 
-Cast selected by the builder under the explicit 12 October delegation; no teacher roster approval required. 39 of the72 selected creatures have runtime definitions; the other 33 remain held. See CONTRACT-AUDIT-123.md for the release ledger. The 210-card catalogue supplies mechanical working labels; this pass maps them to public-persona satire before art/release. Follow ART-BIBLE.md and the approved style board. Seven starter helper portraits are separate (#137), not a new cast direction. Source/props/voice/acquisition/mechanics mapping: [PERSONA-ROSTER.md](drafts/card-arena-2026-10-12/PERSONA-ROSTER.md) and persona-roster.json.
+Cast selected by the builder under the explicit 12 October delegation; no teacher roster approval required. 41 of the72 selected creatures have runtime definitions; the other 31 remain held. See CONTRACT-AUDIT-123.md for the release ledger. The 210-card catalogue supplies mechanical working labels; this pass maps them to public-persona satire before art/release. Follow ART-BIBLE.md and the approved style board. Seven starter helper portraits are separate (#137), not a new cast direction. Source/props/voice/acquisition/mechanics mapping: [PERSONA-ROSTER.md](drafts/card-arena-2026-10-12/PERSONA-ROSTER.md) and persona-roster.json.
 
 | Proposed name | Inspired by | Mechanical ID | Colour / rarity | Recognition cue |
 |---|---|---|---|---|

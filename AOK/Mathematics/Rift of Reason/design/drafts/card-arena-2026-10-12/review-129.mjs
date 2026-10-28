@@ -372,3 +372,19 @@ export function reviewExpansion18(cards){
         c.releaseRevision={issue:129,previousText:c.text,previousTarget:c.target,rationale:clarifications18[c.id][1]};c.text=clarifications18[c.id][0];
     }
 }
+
+// #129 expansion-19: private top-two order and bounded actual-instance recovery.
+export const expansion19Batch=['reason-logic-lynx','memory-replay-raccoon'];
+const clarifications19={
+    'reason-logic-lynx':['Entrance: when at least two personal-deck cards remain, privately inspect the top two and choose which stays on top. Keep the original order or swap only those two; all lower cards remain in order and no card is drawn. Fewer than two means no ordering or mandatory choice, checked by public count before hidden indexing. Commit either private choice by forgetting both inspected identities from opposing knowledge/sight, preserving unrelated knowledge, so a later ordinary draw does not disclose the choice. Planning cannot inspect hidden identities. No shared or reserved Fate card is read.',
+        'Reuse a private two-card choice and public short-deck guard, with the established private-permutation knowledge reset for both possible cards on either choice.'],
+    'memory-replay-raccoon':['Entrance: choose one actual normally defeated creature in the current controller\'s own discard whose printed species cost is 1 or less, and return that instance to its owner hand normally. Exclude burned cards, spells, tokens and the opposing discard; live cost discounts or increases do not alter eligibility. No eligible card or no hand room means ordinary body entry without recovery. No copy, summon or next-play stat bonus is created. Normal suppression, recovery bookkeeping and activation/copy limits remain.',
+        'Reuse the existing friendly-discard choice and fromDiscard recovery API with printed cost at most1, ordinary hand room and no Cameo bonus.'],
+};
+export function reviewExpansion19(cards){
+    for(const c of cards)if(expansion19Batch.includes(c.id)){
+        c.runtimeRelease='expansion-19';c.status='Released in expansion-19 (#129); bounded engineering validation, not classroom balance certification';
+        c.acquisition.releaseStatus='Released expansion-19: pack pool';
+        c.releaseRevision={issue:129,previousText:c.text,previousTarget:c.target,rationale:clarifications19[c.id][1]};c.text=clarifications19[c.id][0];
+    }
+}

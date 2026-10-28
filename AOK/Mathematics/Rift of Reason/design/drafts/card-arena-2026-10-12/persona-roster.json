@@ -337,7 +337,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-19: pack pool"
       },
       "silhouette": "Blue-grey lynx with tall ear tufts, dark practical jacket and an alert questioning face.",
       "signatureProp": "One large simple pulley wheel with a blue cord; avoid a cluttered laboratory.",
@@ -350,7 +350,8 @@
         "card-play",
         "hit",
         "defeat",
-        "reveal"
+        "reveal",
+        "fate-warp"
       ],
       "artId": "creature/reason-logic-lynx/idle",
       "palette": {
@@ -363,12 +364,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-19 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 4,
         "attack": 3,
         "health": 4,
-        "text": "Entrance: look at the top 2 personal-deck cards; keep their order or swap them.",
+        "text": "Entrance: when at least two personal-deck cards remain, privately inspect the top two and choose which stays on top. Keep the original order or swap only those two; all lower cards remain in order and no card is drawn. Fewer than two means no ordering or mandatory choice, checked by public count before hidden indexing. Commit either private choice by forgetting both inspected identities from opposing knowledge/sight, preserving unrelated knowledge, so a later ordinary draw does not disclose the choice. Planning cannot inspect hidden identities. No shared or reserved Fate card is read.",
         "gates": [
           109
         ]
@@ -3559,7 +3560,7 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-19: pack pool"
       },
       "silhouette": "A compact broad kangaroo with warm animal eyes, short rounded ears, a heavy balancing tail and worn silver-trimmed sports vest. Exactly two forelimbs and two hind legs; no human head. One unbranded silver-and-cream basketball is held for a pass.",
       "signatureProp": "PRIMARY FRONT: both animal eyes visible, low wide seated-brace with tail extending back; two forepaws offer the ball forward in a calm playful pass. No right-facing three-quarter pose.",
@@ -3584,12 +3585,12 @@
         "assets/creatures/astrophysicat-idle.webp"
       ],
       "overlap": "New persona, not an alternate print of an existing collectible. Keep original mechanical ID; same animal silhouette never merges species identity.",
-      "status": "Selected cast/art; runtime held pending per-concept validation",
+      "status": "Selected cast/art; expansion-19 runtime release; see acceptance report",
       "mechanicalContract": {
         "cost": 3,
         "attack": 2,
         "health": 3,
-        "text": "Entrance: return a friendly creature costing 1 or less from discard to hand.",
+        "text": "Entrance: choose one actual normally defeated creature in the current controller's own discard whose printed species cost is 1 or less, and return that instance to its owner hand normally. Exclude burned cards, spells, tokens and the opposing discard; live cost discounts or increases do not alter eligibility. No eligible card or no hand room means ordinary body entry without recovery. No copy, summon or next-play stat bonus is created. Normal suppression, recovery bookkeeping and activation/copy limits remain.",
         "gates": [
           109
         ]

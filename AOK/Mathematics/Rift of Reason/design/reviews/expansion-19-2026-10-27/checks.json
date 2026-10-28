@@ -1,0 +1,14 @@
+{
+  "command": "$tests=@(git ls-files 'tools/test/*.test.mjs'); node --max-old-space-size=2048 --test --test-concurrency=2 @tests tools/test/expansion-19.test.mjs",
+  "total": 1722,
+  "pass": 1721,
+  "skip": 1,
+  "fail": 0,
+  "duration_ms": 389647.7665,
+  "runtimeSHA256": {
+    "data/creatures.js": "87763010f634d6bca11ec2b69db2eb8e8f1a0176ea8c49111ef7404209148643",
+    "js/battle/abilities.js": "7bf3ef5b19aeec4bc9adc69130e5b9841bc5635822be40dce54363ef10a99af3"
+  },
+  "fullLogSHA256": "ae331afc7f7b02223ade53a32cfce99abc9be868f181eaf2c09006b30349059c",
+  "originalWindowsLogSHA256": "d85dc01222984740239c142ef87436fef016110a6dd53e5eaeb47f12b4ee18c9"
+}

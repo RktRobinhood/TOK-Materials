@@ -180,7 +180,7 @@ Original delivery directions and exact sharedSfx arrays are also in persona-rost
 | V-Squish | Playful reflective questioning with one deliberate pause; no copied opening line or impersonation. | card-play, hit, defeat |
 | Hannah Frycoon | Warm precise mathematical storytelling; use ordinary shared heal cue. | card-play, hit, defeat, heal |
 | Matt Parkbex | Dry cheerful maths-comedy rhythm; original short lines, no show quotations. | card-play, hit, defeat |
-| Derek Mullinx | Calm inquisitive explanation with restrained excitement; shared place/reveal audio. | card-play, hit, defeat, reveal |
+| Derek Mullinx | Calm inquisitive explanation with restrained excitement; shared place/reveal audio. | card-play, hit, defeat, reveal, fate-warp |
 | Destin Sandolin | Friendly exploratory maker voice; generic clunk/block cues; not an accent imitation. | card-play, hit, defeat, block |
 | Grant Sanderstag | Gentle measured visual explanation; no animated chart show or real voice imitation. | card-play, hit, defeat |
 | James Mayfly | Dry unhurried explanation in original delivery; no impersonation or long unskippable monologue. | card-play, hit, defeat, heal, reveal |

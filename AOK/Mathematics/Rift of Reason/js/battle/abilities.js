@@ -864,6 +864,44 @@
             } },
         },
         // #129 expansion-18: a public final citation and a bounded held-rule encore.
+        'set-the-demo': {
+            name: 'Set the Demo', text: 'Entrance: look at your top 2 personal cards. Keep their order or swap them.',
+            entrance: { run(api, card) {
+                if (api.planning) return; // The uncommitted AI cannot inspect an unseen personal deck.
+                const deck = api.s.players[card.controller].deck;
+                if (deck.length < 2) return;
+                const options = deck.slice(0, 2);
+                api.ask({ player: card.controller, kind: 'card', auto: false, options, prompt: 'Which of these two cards stays on top?',
+                    source: { type: 'ability', id: 'set-the-demo', cid: card.cid } });
+            } },
+            choose(api, card, cid) {
+                const deck = api.s.players[card.controller].deck, at = deck.indexOf(cid);
+                if (at < 0 || at > 1) return;
+                // Either private choice can hide the next draw. Forget both possibilities,
+                // including on Keep, so old public knowledge cannot disclose this choice.
+                const top = deck.slice(0, 2), other = api.s.players[1 - card.controller];
+                other.knows = other.knows.filter(id => !top.includes(id));
+                if (other.sight) other.sight = other.sight.filter(id => !top.includes(id));
+                if (at === 1) [deck[0], deck[1]] = [deck[1], deck[0]];
+                api.emit({ t: 'ability', cid: card.cid, player: card.controller, privateTo: card.controller,
+                    text: 'You keep ' + api.cardName(cid) + ' on top of your personal deck.', publicText: api.name(card.cid) + ' orders the top 2 personal cards.' });
+            },
+        },
+        'another-pass': {
+            name: 'Another Pass', text: 'Entrance: return a defeated creature with printed cost 1 or less to your hand.',
+            entrance: { run(api, card) {
+                if (!api.handRoom(card.controller)) return;
+                const options = api.s.players[card.controller].discard.filter(cid => {
+                    const c = api.s.cards[cid];
+                    return c.kind === 'creature' && !c.burned && !c.token && (Rift.data.creatures[c.species] || {}).cost <= 1;
+                });
+                api.ask({ player: card.controller, kind: 'card', options, prompt: 'Which small teammate gets another pass?', source: { type: 'ability', id: 'another-pass', cid: card.cid } });
+            } },
+            choose(api, card, cid) {
+                if (api.s.players[card.controller].discard.includes(cid) && api.handRoom(card.controller) && api.fromDiscard(cid))
+                    api.emit({ t: 'ability', cid: card.cid, target: cid, text: api.cardName(cid) + ' returns to your hand for another pass.' });
+            },
+        },
         'final-citation': {
             name: 'Final Citation', keywords: ['guard'],
             text: 'Guard. Last Word: show your oldest held Axiom, if any, and draw 1 personal card.',

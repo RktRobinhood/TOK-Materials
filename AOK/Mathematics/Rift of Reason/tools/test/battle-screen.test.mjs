@@ -2,6 +2,37 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { loadWithDom } from './fake-dom.mjs';
 
+test('Derek private Keep and Swap choices resolve through the production card menu in normal and Calm mode',()=>{
+    for(const calm of [false,true])for(const choice of ['p0c1','p0c2']){
+        const t=prepared({me:['reason-logic-lynx','beastie','proof-pup','paper-dragon'],opp:['beastie'],energy:10},(s,move)=>{
+            move('p0c0',0,'hand');move('p1c0',1,'board');s.players[1].knows=['p0c1'];s.players[1].sight=['p0c1'];
+        },{calm});
+        t.$('.b-hand [data-cid="p0c0"]').dispatchEvent({type:'click',detail:0});t.$('.b-prompt .btn.primary').dispatchEvent({type:'click',detail:0});t.g.flush();
+        assert.match(t.$('.b-choice').textContent,/Which of these two cards stays on top/);
+        assert(t.$('.b-choice [data-cid="p0c1"]'));assert(t.$('.b-choice [data-cid="p0c2"]'));
+        t.$('.b-choice [data-cid="'+choice+'"]').dispatchEvent({type:'click',detail:0});t.g.flush();
+        const s=t.handle.state;assert.equal(s.phase,'main');assert.equal(s.players[0].deck[0],choice);assert.equal(s.players[0].deck.at(-1),'p0c3');
+        assert.equal(s.players[0].energy,6);assert.equal(s.players[0].playsThisTurn,1);assert.equal(s.players[0].hand.length,0);
+        assert.equal(s.players[1].knows.length,0);assert.equal(s.players[1].sight.length,0);assert(t.$('.my-board [data-cid="p0c0"]'));
+        t.handle.destroy();
+    }
+});
+
+test('Nikola recovery choices use production controls without a stat bonus and Empty Set suppresses both new menus',()=>{
+    for(const calm of [false,true])for(const suppressed of [false,true]){
+        const t=prepared({me:['memory-replay-raccoon','memory-bookmark-bunny','reason-premise-pigeon','proof-pup'],opp:['beastie'],energy:10},(s,move)=>{
+            move('p0c0',0,'hand');move('p0c1',0,'discard');move('p0c2',0,'discard');move('p1c0',1,'board');if(suppressed)s.axioms.active.abilities='empty-set';
+        },{calm});
+        t.$('.b-hand [data-cid="p0c0"]').click();t.$('.b-prompt .btn.primary').click();t.g.flush();
+        if(!suppressed){assert.match(t.$('.b-choice').textContent,/Which small teammate gets another pass/);t.$('.b-choice [data-cid="p0c1"]').click();t.g.flush();}
+        const s=t.handle.state;assert.equal(s.phase,'main');assert.equal(s.players[0].energy,7);assert.equal(s.players[0].playsThisTurn,1);
+        assert.equal(s.players[0].hand.includes('p0c1'),!suppressed);assert(s.players[0].discard.includes('p0c2'));assert.equal(s.cards.p0c1.nextPlayHealth,undefined);
+        assert.equal(!!t.$('.b-hand [data-cid="p0c1"]'),!suppressed);t.handle.destroy();
+    }
+    const t=prepared({me:['reason-logic-lynx','beastie','proof-pup'],opp:['beastie'],energy:10},(s,move)=>{move('p0c0',0,'hand');s.axioms.active.abilities='empty-set';});
+    t.$('.b-hand [data-cid="p0c0"]').click();t.$('.b-prompt .btn.primary').click();t.g.flush();assert.equal(t.handle.state.phase,'main');assert.equal(t.handle.state.pending,null);t.handle.destroy();
+});
+
 const CORE = ['js/core/rift.js', 'js/core/assets.js', 'data/creatures.js', 'data/axioms.js', 'data/tactics.js',
     'js/battle/abilities.js', 'js/battle/engine.js', 'js/battle/lesson.js'];
 
