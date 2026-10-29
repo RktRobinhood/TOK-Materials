@@ -1,0 +1,239 @@
+[
+  {
+    "seed": 422,
+    "wants": [
+      "reason-logic-lynx",
+      "memory-replay-raccoon"
+    ],
+    "cards": [
+      {
+        "kind": "tactic",
+        "id": "imagination-sketch-a-friend",
+        "rarity": "common",
+        "foil": false,
+        "copies": 1
+      },
+      {
+        "kind": "creature",
+        "id": "memory-replay-raccoon",
+        "rarity": "uncommon",
+        "foil": false,
+        "uid": "pack:bq:1:1",
+        "copies": 1
+      },
+      {
+        "kind": "tactic",
+        "id": "memory-stored-resolve",
+        "rarity": "rare",
+        "foil": false,
+        "copies": 1
+      },
+      {
+        "kind": "creature",
+        "id": "reason-logic-lynx",
+        "rarity": "uncommon",
+        "foil": false,
+        "uid": "pack:bq:1:3",
+        "copies": 1
+      },
+      {
+        "kind": "creature",
+        "id": "language-definition-dolphin",
+        "rarity": "uncommon",
+        "foil": false,
+        "uid": "pack:bq:1:4",
+        "copies": 1
+      }
+    ],
+    "instances": [
+      {
+        "uid": "pack:bq:1:1",
+        "species": "memory-replay-raccoon",
+        "caughtAt": 1793244465462,
+        "powerDelta": 0,
+        "scars": [],
+        "injuries": [],
+        "warped": null,
+        "changes": [],
+        "trophyOf": null,
+        "wins": 0,
+        "variant": {
+          "attack": 0,
+          "health": 1,
+          "trait": null
+        },
+        "taught": null,
+        "foil": false
+      },
+      {
+        "uid": "pack:bq:1:3",
+        "species": "reason-logic-lynx",
+        "caughtAt": 1793244465464,
+        "powerDelta": 0,
+        "scars": [],
+        "injuries": [],
+        "warped": null,
+        "changes": [],
+        "trophyOf": null,
+        "wins": 0,
+        "variant": {
+          "attack": 1,
+          "health": 1,
+          "trait": null
+        },
+        "taught": null,
+        "foil": false
+      },
+      {
+        "uid": "pack:bq:1:4",
+        "species": "language-definition-dolphin",
+        "caughtAt": 1793244465466,
+        "powerDelta": 0,
+        "scars": [],
+        "injuries": [],
+        "warped": null,
+        "changes": [],
+        "trophyOf": null,
+        "wins": 0,
+        "variant": {
+          "attack": 0,
+          "health": 1,
+          "trait": null
+        },
+        "taught": null,
+        "foil": false
+      }
+    ]
+  },
+  {
+    "seed": 19,
+    "wants": [
+      "generic-pause-one-beat",
+      "generic-scheduled-shelter"
+    ],
+    "cards": [
+      {
+        "kind": "creature",
+        "id": "memory-replay-raccoon",
+        "rarity": "uncommon",
+        "foil": false,
+        "uid": "pack:j:1:0",
+        "copies": 1
+      },
+      {
+        "kind": "tactic",
+        "id": "imagination-tomorrow-s-sketch",
+        "rarity": "uncommon",
+        "foil": false,
+        "copies": 1
+      },
+      {
+        "kind": "tactic",
+        "id": "generic-scheduled-shelter",
+        "rarity": "uncommon",
+        "foil": false,
+        "copies": 1
+      },
+      {
+        "kind": "tactic",
+        "id": "generic-pause-one-beat",
+        "rarity": "common",
+        "foil": false,
+        "copies": 1
+      },
+      {
+        "kind": "creature",
+        "id": "reason-counterexample-crow",
+        "rarity": "common",
+        "foil": true,
+        "uid": "pack:j:1:4",
+        "copies": 1
+      }
+    ],
+    "instances": [
+      {
+        "uid": "pack:j:1:0",
+        "species": "memory-replay-raccoon",
+        "caughtAt": 1793244465468,
+        "powerDelta": 0,
+        "scars": [],
+        "injuries": [],
+        "warped": null,
+        "changes": [],
+        "trophyOf": null,
+        "wins": 0,
+        "variant": {
+          "attack": -1,
+          "health": 1,
+          "trait": null
+        },
+        "taught": null,
+        "foil": false
+      },
+      {
+        "uid": "pack:j:1:4",
+        "species": "reason-counterexample-crow",
+        "caughtAt": 1793244465476,
+        "powerDelta": 0,
+        "scars": [],
+        "injuries": [],
+        "warped": null,
+        "changes": [],
+        "trophyOf": null,
+        "wins": 0,
+        "variant": {
+          "attack": 0,
+          "health": 1,
+          "trait": "guard"
+        },
+        "taught": null,
+        "foil": true
+      }
+    ]
+  },
+  {
+    "seed": 725,
+    "wants": [
+      "imagination-tomorrow-s-sketch",
+      "memory-stored-resolve"
+    ],
+    "cards": [
+      {
+        "kind": "tactic",
+        "id": "emotion-quick-courage",
+        "rarity": "common",
+        "foil": false,
+        "copies": 1
+      },
+      {
+        "kind": "tactic",
+        "id": "generic-one-last-draw",
+        "rarity": "rare",
+        "foil": false,
+        "copies": 1
+      },
+      {
+        "kind": "tactic",
+        "id": "memory-stored-resolve",
+        "rarity": "rare",
+        "foil": false,
+        "copies": 1
+      },
+      {
+        "kind": "tactic",
+        "id": "imagination-tomorrow-s-sketch",
+        "rarity": "uncommon",
+        "foil": false,
+        "copies": 1
+      },
+      {
+        "kind": "tactic",
+        "id": "generic-pocket-plan",
+        "rarity": "common",
+        "foil": false,
+        "copies": 1
+      }
+    ],
+    "instances": []
+  }
+]

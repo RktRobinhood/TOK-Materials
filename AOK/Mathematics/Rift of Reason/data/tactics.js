@@ -415,6 +415,71 @@
             },
         },
     };
+    // #129 expansion-20: bounded one-shot support, using the canonical Fate queue.
+    tactics['generic-pause-one-beat'] = {
+        name: 'Pause One Beat', short: 'Next round: heal your hero 2', cost: 2, rarity: 'common',
+        art: 'art/spell-motif-generic', release: 'expansion-20', packEligible: true,
+        text: 'In 1 round, restore 2 hearts to your hero.', flavour: 'A little rest is already on the calendar.',
+        scheduled: {
+            delay: 1, summary: whose => whose + ' hero restores 2 hearts.', idle: 'your hero has full hearts.',
+            resolve(api, ev) { api.healHero(ev.controller, 2); },
+            project(s, ev) {
+                const players = s.players.slice(), p = ev.controller;
+                players[p] = Object.assign({}, players[p], { hearts: Math.min(players[p].maxHearts, players[p].hearts + 2) });
+                return Object.assign({}, s, { players });
+            },
+        },
+        run() { /* The Engine schedules the one-shot. */ },
+    };
+    tactics['generic-scheduled-shelter'] = {
+        name: 'Scheduled Shelter', short: 'Next round: your creatures gain Shield', cost: 3, rarity: 'uncommon',
+        art: 'art/spell-motif-generic', release: 'expansion-20', packEligible: true,
+        text: 'In 1 round, your creatures in play then gain Shield.', flavour: 'The roof arrives just in time.',
+        scheduled: {
+            delay: 1, summary: whose => whose + ' creatures in play then gain Shield.', idle: 'there is no creature to protect.',
+            resolve(api, ev) { api.s.players[ev.controller].board.slice().forEach(cid => api.addKeyword(cid, 'shield')); },
+            project(s, ev) {
+                const cards = Object.assign({}, s.cards);
+                s.players[ev.controller].board.forEach(cid => {
+                    const c = cards[cid];
+                    cards[cid] = Object.assign({}, c, { extraKeywords: c.extraKeywords.includes('shield') ? c.extraKeywords.slice() : c.extraKeywords.concat('shield'),
+                        shieldUsed: false, lostKeywords: (c.lostKeywords || []).filter(k => k !== 'shield') });
+                });
+                return Object.assign({}, s, { cards });
+            },
+        },
+        run() { /* The Engine schedules the one-shot. */ },
+    };
+    tactics['imagination-tomorrow-s-sketch'] = {
+        name: "Tomorrow's Sketch", short: 'Next round: two 1/1 paper tokens', cost: 2, colour: 'imagination', rarity: 'uncommon',
+        art: 'art/spell-motif-imagination', release: 'expansion-20', packEligible: true,
+        text: 'In 1 round, summon two colourless 1/1 paper tokens, if there is room.', flavour: 'Tomorrow has room for a second draft.',
+        scheduled: {
+            delay: 1, summary: whose => 'two colourless 1/1 paper tokens join ' + whose + ' side, if there is room.', idle: 'there is no room for a paper token.',
+            resolve(api, ev) { for (let i = 0; i < 2; i++) api.summon(ev.controller, 'paper-token'); },
+            project(s, ev, H) { return H.projectToken(H.projectToken(s, ev.controller, 'paper-token'), ev.controller, 'paper-token'); },
+        },
+        run() { /* The Engine schedules the one-shot. */ },
+    };
+    tactics['memory-stored-resolve'] = {
+        name: 'Stored Resolve', short: 'In 2 rounds: your creatures +1/+1, heal 1', cost: 4, colour: 'memory', rarity: 'rare',
+        art: 'art/spell-motif-memory', release: 'expansion-20', packEligible: true,
+        text: 'In 2 rounds, your creatures in play then gain 1 attack and 1 maximum health, then heal 1.', flavour: 'Leave some courage for later.',
+        scheduled: {
+            delay: 2, summary: whose => whose + ' creatures in play then gain 1 attack and 1 maximum health, then heal 1.', idle: 'there is no creature to boost.',
+            resolve(api, ev) { api.s.players[ev.controller].board.slice().forEach(cid => { api.buff(cid, 1, 1, 'Stored Resolve'); api.heal(cid, 1); }); },
+            project(s, ev) {
+                const cards = Object.assign({}, s.cards);
+                s.players[ev.controller].board.forEach(cid => {
+                    const c = cards[cid];
+                    cards[cid] = Object.assign({}, c, { damage: Math.max(0, c.damage - 1),
+                        buffs: c.buffs.concat([{ label: 'Stored Resolve', attack: 1, health: 1, temp: false }]) });
+                });
+                return Object.assign({}, s, { cards });
+            },
+        },
+        run() { /* The Engine schedules the one-shot. */ },
+    };
     // The first scheduled Fate spell (#119). Bench and tests only: no tacticDecks list, starter,
     // trainer deck or reward names it, so no student can own it yet (dev/battle.html?fate=you-cast).
     tactics['clean-slate'] = {

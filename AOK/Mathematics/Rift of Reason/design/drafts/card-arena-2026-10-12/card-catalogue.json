@@ -1,7 +1,7 @@
 {
   "version": 2,
   "date": "2026-10-12",
-  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, three expansion-10 cards, two expansion-11 cards, two expansion-12 cards, one expansion-13 creature, one expansion-14 creature, two expansion-15 creatures, two expansion-16 creatures, two expansion-17 creatures, two expansion-18 creatures, two expansion-19 creatures, eighteen plot-1 story cards, 102 held",
+  "status": "210 screened concepts; seven foundation-1 cards, eight expansion-2 cards, eight expansion-3 cards, eight expansion-4 cards, eight expansion-5 cards, eight expansion-6 cards, eight expansion-7 cards, eight expansion-8 cards, eight expansion-9 cards, three expansion-10 cards, two expansion-11 cards, two expansion-12 cards, one expansion-13 creature, one expansion-14 creature, two expansion-15 creatures, two expansion-16 creatures, two expansion-17 creatures, two expansion-18 creatures, two expansion-19 creatures, four expansion-20 spells, eighteen plot-1 story cards, 98 held",
   "reviewed": "2026-10-21",
   "counts": {
     "total": 210,
@@ -3805,7 +3805,7 @@
       ],
       "strategy": "Stat transformations, diverse boards and token plans",
       "counterplay": "Wipe after resolution or skip the node.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-20 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109,
         118,
@@ -3816,7 +3816,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-20: pack pool"
+      },
+      "runtimeRelease": "expansion-20",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "At +1 round, summon two colourless 1/1 paper tokens, limited by board space.",
+        "previousTarget": "none",
+        "rationale": "Use the existing public one-shot schedule: resolve once on landing, never after skip/cancel/settled Win; future board and normal healing, Shield or sequential paper capacity rules. No new replay, expiry, token ordering or price policy."
       }
     },
     {
@@ -4159,7 +4166,7 @@
       ],
       "strategy": "Discard recovery, delayed effects and bounded Fate re-entry",
       "counterplay": "Trade the board or skip the occurrence.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-20 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109,
         118,
@@ -4169,7 +4176,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-20: pack pool"
+      },
+      "runtimeRelease": "expansion-20",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "At +2 rounds, your creatures present then gain 1 attack and 1 maximum health, and heal 1. One-shot.",
+        "previousTarget": "none",
+        "rationale": "Use the existing public one-shot schedule: resolve once on landing, never after skip/cancel/settled Win; future board and normal healing, Shield or sequential paper capacity rules. No new replay, expiry, token ordering or price policy."
       }
     },
     {
@@ -5531,7 +5545,7 @@
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Skip the occurrence or exploit reversed Win.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-20 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109,
         118,
@@ -5541,7 +5555,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-20: pack pool"
+      },
+      "runtimeRelease": "expansion-20",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "At +1 round, restore 2 hearts to your hero. One-shot.",
+        "previousTarget": "none",
+        "rationale": "Use the existing public one-shot schedule: resolve once on landing, never after skip/cancel/settled Win; future board and normal healing, Shield or sequential paper capacity rules. No new replay, expiry, token ordering or price policy."
       }
     },
     {
@@ -5709,7 +5730,7 @@
       ],
       "strategy": "Simple support and shared rules accessible to any deck",
       "counterplay": "Trade them before resolution or skip.",
-      "status": "draft; not implemented or balance-tested",
+      "status": "Released in expansion-20 (#129); bounded engineering validation, not classroom balance certification",
       "gates": [
         109,
         118,
@@ -5719,7 +5740,14 @@
       "acquisition": {
         "channel": "pack-pool",
         "packEligible": true,
-        "releaseStatus": "draft; only enters packs when its implementation is released"
+        "releaseStatus": "Released expansion-20: pack pool"
+      },
+      "runtimeRelease": "expansion-20",
+      "releaseRevision": {
+        "issue": 129,
+        "previousText": "At +1 round, your creatures present then gain Shield. One-shot.",
+        "previousTarget": "none",
+        "rationale": "Use the existing public one-shot schedule: resolve once on landing, never after skip/cancel/settled Win; future board and normal healing, Shield or sequential paper capacity rules. No new replay, expiry, token ordering or price policy."
       }
     },
     {

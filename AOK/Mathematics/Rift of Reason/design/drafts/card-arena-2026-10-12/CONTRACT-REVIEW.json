@@ -151,7 +151,13 @@
     "reason-logic-lynx",
     "memory-replay-raccoon"
   ],
-  "held": 102,
+  "expansion20Batch": [
+    "generic-pause-one-beat",
+    "generic-scheduled-shelter",
+    "imagination-tomorrow-s-sketch",
+    "memory-stored-resolve"
+  ],
+  "held": 98,
   "rows": [
     {
       "id": "reason-premise-pigeon",
@@ -2555,7 +2561,7 @@
       "kind": "spell",
       "rarity": "uncommon",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-20 runtime release (#129); see expansion-20 acceptance report",
       "trigger": "paid cast",
       "target": "none",
       "payoffAndLifetime": "At +1 round, summon two colourless 1/1 paper tokens, limited by board space.",
@@ -2810,7 +2816,7 @@
       "kind": "spell",
       "rarity": "rare",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-20 runtime release (#129); see expansion-20 acceptance report",
       "trigger": "paid cast",
       "target": "none",
       "payoffAndLifetime": "At +2 rounds, your creatures present then gain 1 attack and 1 maximum health, and heal 1. One-shot.",
@@ -3797,7 +3803,7 @@
       "kind": "spell",
       "rarity": "common",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-20 runtime release (#129); see expansion-20 acceptance report",
       "trigger": "paid cast",
       "target": "none",
       "payoffAndLifetime": "At +1 round, restore 2 hearts to your hero. One-shot.",
@@ -3916,7 +3922,7 @@
       "kind": "spell",
       "rarity": "uncommon",
       "channel": "pack-pool",
-      "disposition": "held; not a runtime release",
+      "disposition": "expansion-20 runtime release (#129); see expansion-20 acceptance report",
       "trigger": "paid cast",
       "target": "none",
       "payoffAndLifetime": "At +1 round, your creatures present then gain Shield. One-shot.",

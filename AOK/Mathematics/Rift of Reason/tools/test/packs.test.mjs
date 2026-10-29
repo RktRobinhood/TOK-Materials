@@ -35,30 +35,31 @@ function setup(store = new Map(), opts = {}) {
 const owned = (R, s, card) => card.kind === 'creature' ? R.State.copiesOf(s, card.id) : R.State.cardCopies(card.kind, card.id, s);
 const ids = receipt => receipt.cards.map(c => c.kind + ':' + c.id + (c.foil ? '*' : ''));
 
-test('mounted expansion-19 acquisitions show both normal creatures and complete sequential or Skip receipts without another charge',async()=>{
-    for(const skip of [false,true]){
+test('mounted paid packs show E19 creature variants and all four E20 spells, then complete sequential or Skip receipts once',async()=>{
+    const cases=[{seed:422,ids:['reason-logic-lynx','memory-replay-raccoon']},{seed:19,ids:['generic-pause-one-beat','generic-scheduled-shelter','imagination-tomorrow-s-sketch']},{seed:725,ids:['imagination-tomorrow-s-sketch','memory-stored-resolve']}];
+    for(const fixture of cases)for(const skip of [false,true]){
         const store=new Map();
         const g=loadWithDom(FILES.concat(['js/core/assets.js',ctx=>{
             const R=ctx.Rift;R.Router={current:()=> 'map',go(){}};R.storage=memory(store);R.Audio={sfx(){}};
             const overlay=ctx.document.createElement('div');overlay.setAttribute('id','overlay');ctx.document.body.appendChild(overlay);
-            R.State.newGame();R.State.update(s=>{s.avatar={type:'owlet',variant:'girl'};R.State.grantStarter(s);s.seed=3104;s.map.at='campfire';s.wallet.coins=120;});R.State.saveNow();
+            R.State.newGame();R.State.update(s=>{s.avatar={type:'owlet',variant:'girl'};R.State.grantStarter(s);s.seed=fixture.seed;s.map.at='campfire';s.wallet.coins=120;});R.State.saveNow();
         },'js/core/shop.js','js/ui/ui.js','js/ui/pack-reveal.js']));
         const R=g.Rift,find=text=>g.document.body.querySelectorAll('button').find(b=>b.textContent===text);if(!skip)g.document.body.classList.add('calm-motion');R.UI.shop();
         find('Five-card pack · 50 Coins').click();find('Buy for 50 Coins').click();await new Promise(resolve=>setTimeout(resolve,0));
         assert.equal(R.State.get().wallet.coins,70);assert.equal(R.State.get().wallet.packSerial,1);
-        const cards=R.Packs.active().cards;assert(cards.some(c=>c.id==='reason-logic-lynx'&&!c.foil));assert(cards.some(c=>c.id==='memory-replay-raccoon'&&!c.foil));
+        const cards=R.Packs.active().cards;for(const id of fixture.ids)assert(cards.some(c=>c.id===id&&!c.foil));
         if(skip)find('Skip').click();else{
             find('Open pack').click();
             for(let i=2;i<=5;i++){
                 find('Next card ('+i+' of 5)').click();
-                if(i===4||i===5){const stats=i===4?'3 energy, 2 attack, 3 health':'4 energy, 3 attack, 4 health';assert(g.document.body.querySelectorAll('[aria-label]').some(n=>n.getAttribute('aria-label')===stats));}
+                if(['memory-replay-raccoon','reason-logic-lynx'].includes(cards[i-1].id)){const stats=cards[i-1].id==='memory-replay-raccoon'?'3 energy, 2 attack, 4 health':'4 energy, 4 attack, 5 health';assert(g.document.body.querySelectorAll('[aria-label]').some(n=>n.getAttribute('aria-label')===stats),JSON.stringify({seed:fixture.seed,id:cards[i-1].id,labels:g.document.body.querySelectorAll('[aria-label]').map(n=>n.getAttribute('aria-label'))}));}
             }
             find('See all cards').click();
         }
         const summary=g.document.body.querySelector('.pack-results');assert(summary);assert.equal(summary.children.length,5);
-        for(const name of ['Nikola Jokaroo','Derek Mullinx'])assert(summary.textContent.includes(name));assert.match(summary.textContent,/Folder 1\/4/);
+        for(const id of fixture.ids)assert(summary.textContent.includes((R.data.creatures[id]||R.data.tactics[id]).name));assert.match(summary.textContent,/Folder 1\/4/);
         find('Done').click();assert.equal(R.Packs.active(),null);assert.equal(R.State.get().wallet.coins,70);assert.equal(R.State.get().wallet.packSerial,1);
-        for(const id of ['reason-logic-lynx','memory-replay-raccoon'])assert.equal(R.State.copiesOf(R.State.get(),id),1);
+        for(const id of fixture.ids)assert.equal(R.data.creatures[id]?R.State.copiesOf(R.State.get(),id):R.State.cardCopies('tactic',id,R.State.get()),1);
     }
 });
 
@@ -364,7 +365,7 @@ test('mounted stall shows odds, confirms, reveals then lists the saved cards and
     let g = mount(); let R = g.Rift;
     const find = text => g.document.body.querySelectorAll('button').find(b => b.textContent === text);
     let shop = R.UI.shop();
-    assert.match(shop.node.textContent, /Next card: Common 67% \(57 kinds\), Uncommon 23\.7% \(22 kinds\), Rare 9\.3% \(11 kinds\)/);
+    assert.match(shop.node.textContent, /Next card: Common 67% \(58 kinds\), Uncommon 23\.7% \(24 kinds\), Rare 9\.3% \(12 kinds\)/);
     assert.match(shop.node.textContent, /Foil: 4% per card/);
     assert.match(shop.node.textContent, /Free packs saved: 1/);
     assert.ok(find('Open free pack · 5 cards'));

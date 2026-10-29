@@ -54,7 +54,8 @@ test('eighteen colour tactics: common, uncommon and rare for each colour; the fi
     const pack = Object.keys(T).filter(id => T[id].pack === 'fate');
     assert.deepEqual(plain(pack), ['clean-slate', 'leap-ahead', 'revisit', 'echoing-encouragement',
         'prepared-defence', 'delayed-observation', 'tomorrows-idea', 'remember-this', 'scheduled-speech']);
-    assert.deepEqual(plain(Object.keys(T).filter(id => T[id].scheduled)), ['clean-slate', 'echoing-encouragement',
+    assert.deepEqual(plain(Object.keys(T).filter(id => T[id].scheduled)), ['generic-pause-one-beat', 'generic-scheduled-shelter',
+        'imagination-tomorrow-s-sketch', 'memory-stored-resolve', 'clean-slate', 'echoing-encouragement',
         'prepared-defence', 'delayed-observation', 'tomorrows-idea', 'remember-this', 'scheduled-speech']);
     pack.forEach(id => assert.ok(!ids.includes(id), id));
     const expansion = Object.keys(T).filter(id => T[id].release === 'foundation-1');

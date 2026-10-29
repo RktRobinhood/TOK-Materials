@@ -388,3 +388,13 @@ export function reviewExpansion19(cards){
         c.releaseRevision={issue:129,previousText:c.text,previousTarget:c.target,rationale:clarifications19[c.id][1]};c.text=clarifications19[c.id][0];
     }
 }
+
+// #129 expansion-20: finite scheduled support; existing one-shot and token policies.
+export const expansion20Batch=['generic-pause-one-beat','generic-scheduled-shelter','imagination-tomorrow-s-sketch','memory-stored-resolve'];
+export function reviewExpansion20(cards){
+    for(const c of cards)if(expansion20Batch.includes(c.id)){
+        c.runtimeRelease='expansion-20';c.status='Released in expansion-20 (#129); bounded engineering validation, not classroom balance certification';
+        c.acquisition.releaseStatus='Released expansion-20: pack pool';
+        c.releaseRevision={issue:129,previousText:c.text,previousTarget:c.target,rationale:'Use the existing public one-shot schedule: resolve once on landing, never after skip/cancel/settled Win; future board and normal healing, Shield or sequential paper capacity rules. No new replay, expiry, token ordering or price policy.'};
+    }
+}

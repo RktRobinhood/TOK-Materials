@@ -19,7 +19,7 @@ function mount(opts = {}) {
     if (opts.calm) g.document.body.classList.add('calm-motion');
     const mk = (ids, prefix) => ids.map((species, i) => ({ uid: prefix + i, species, injuries: [], scars: [], powerDelta: 0 }));
     const s = E.createBattle({ seed: 'fate-ui',
-        players: [{ name: 'You', team: mk(['zuckerborg', 'kardashiant', 'astrophysicat'], 'me-'), tactics: ['clean-slate'] },
+        players: [{ name: 'You', team: mk(['zuckerborg', 'kardashiant', 'astrophysicat'], 'me-'), tactics: [opts.card || 'clean-slate'] },
             { name: 'Dummy', team: mk(['lobstorian', 'astrophysicat', 'beastie'], 'opp-'), tactics: [] }],
         axiomDeck: ['thrift', 'luxury', 'arrival', 'mercy'],
         options: { first: 0, shuffle: false, shuffleAxioms: false, spark: false, openHand: [0, 0], openAxioms: 0, timeline: true, fateStart: 3 } });
@@ -30,6 +30,7 @@ function mount(opts = {}) {
     move('p0c0', 0, 'board'); move('p0c1', 0, 'board'); move('p1c0', 1, 'board'); move('p1c1', 1, 'board'); move('p0t0', 0, 'hand');
     s.players.forEach(P => { P.energy = P.capacity = 10; });
     s.phase = 'main';
+    if(opts.hearts!=null)s.players[0].hearts=opts.hearts;
     const root = g.document.createElement('div');
     g.document.body.appendChild(root);
     const results = [];
@@ -128,4 +129,17 @@ test('a full schedule explains why Clean Slate cannot be played', () => {
     t.$('.b-hand [data-cid="p0t0"]').click();
     assert.match(t.root.textContent, /You already have 2 spells waiting on the Fate track\./);
     t.handle.destroy();
+});
+
+
+test('all four expansion-20 spells use production Fate countdown, inspection, resolution and spent markers in normal and Calm',()=>{
+    const ids=['generic-pause-one-beat','generic-scheduled-shelter','imagination-tomorrow-s-sketch','memory-stored-resolve'];
+    for(const card of ids)for(const calm of [false,true]){
+        const t=mount({card,calm,hearts:5}),name=t.Rift.data.tactics[card].name,delay=card==='memory-stored-resolve'?2:1;
+        const attack=t.E.attackOf(t.handle.state,'p0c0');playCleanSlate(t);const node=t.$('.b-fate .b-fev.sched[data-fate-event="f1"]');assert(node);assert(node.getAttribute('aria-label').includes(name));assert.equal(t.E.fateSchedule(t.handle.state)[0].rounds,delay);assert.match(node.getAttribute('aria-label'),/round/);node.click();assert(t.$('.b-inspect').textContent.includes(name));
+        for(let i=0;i<delay;i++)nextRound(t);assert.equal(t.fired(),1);const s=t.handle.state;assert.equal(t.E.fateSchedule(s)[0].state,'fired');assert(t.$('.b-fate .b-fpast.scheduled').getAttribute('aria-label').includes(name));
+        if(card==='generic-pause-one-beat')assert.equal(s.players[0].hearts,7);if(card==='generic-scheduled-shelter')assert(s.players[0].board.every(cid=>t.E.keywordsOf(s,cid).includes('shield')));
+        if(card==='imagination-tomorrow-s-sketch')assert.equal(s.players[0].board.filter(cid=>s.cards[cid].token).length,2);if(card==='memory-stored-resolve')assert.equal(t.E.attackOf(s,'p0c0'),attack+1);
+        t.handle.destroy();
+    }
 });
