@@ -146,11 +146,11 @@ S-21 prisoner identification photograph
 
 White Rose resistance leaflet
   Local image: assets/images/white-rose.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:1943_German_High_Court_decree_(_death_sentence_)_against_Hans_Fritz_Scholl_Sophia_Magalena_Scholl_and_Christoph_Herman_Probst.jpg
-  Image credit: German Peoples Court February 1943 Chief Judge Roland Freisler | Wikimedia Commons | Public domain
-  Image match method: commons-search:White Rose resistance original leaflet 1943 Munich
+  Image record: https://commons.wikimedia.org/wiki/File%3AFlugblatt_IV_vs_801x0_0_11.jpg
+  Image credit: Weiße Rose | Wikimedia Commons | Public domain
+  Image match method: manual-review-2026-11-13
   Historical source: https://www.gedenkstaette-stille-helden.de/en/
-  Background: 
+  Background: None
 
 Katyn massacre forensic report
   Local image: assets/images/katyn-report.jpg
@@ -314,11 +314,11 @@ Letter from Birmingham Jail manuscript
 
 Votes for Women parade banner
   Local image: assets/images/suffrage-banner.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:National_Woman_Suffrage_Publishing_Co.,_Votes_for_Women_a_Success_1917_Cornell_CUL_PJM_1193_01.jpg
-  Image credit: National Woman Suffrage Publishing Co. | Wikimedia Commons | Public domain
-  Image match method: named-commons-file
+  Image record: https://commons.wikimedia.org/wiki/File%3AJosephine_Bennett_carrying_the_Connecticut_Votes_for_Women_banner_in_parade_May_2%2C_1914.jpg
+  Image credit: Hartford Courant | Wikimedia Commons | Public domain
+  Image match method: manual-review-2026-11-13
   Historical source: https://commons.wikimedia.org/wiki/File:National_Woman_Suffrage_Publishing_Co.,_Votes_for_Women_a_Success_1917_Cornell_CUL_PJM_1193_01.jpg
-  Background: 
+  Background: None
 
 Japanese American resident identification card
   Local image: assets/images/internment-card.jpg
@@ -530,11 +530,11 @@ Antikythera mechanism fragments
 
 Sutton Hoo helmet
   Local image: assets/images/sutton-hoo.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:1966_Ordnance_Survey_-_Sutton_Hoo_helmet.jpg
-  Image credit: Arthur Thomas Chester of the Archaeology Division of the Ordnance Survey in consultation with the British Museum 's Department of  | Wikimedia Commons | Public domain
-  Image match method: commons-search:Sutton Hoo helmet
+  Image record: https://commons.wikimedia.org/wiki/File%3ASutton_Hoo_helmet_2016.png
+  Image credit: user:Geni | Wikimedia Commons | Public domain
+  Image match method: manual-review-2026-11-13
   Historical source: https://commons.wikimedia.org/wiki/File:1966_Ordnance_Survey_-_Sutton_Hoo_helmet.jpg
-  Background: 
+  Background: None
 
 Terracotta warrior from Pit 1, Xi'an
   Local image: assets/images/qin-warrior.jpg
@@ -570,11 +570,11 @@ Great Shigir Idol, preserved carved wooden sculpture
 
 Harry Burton photograph of Tutankhamun's tomb
   Local image: assets/images/carter-photo.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:Burton_Tutankhamun_tomb_photographs_1_001.jpg
-  Image credit: Harry Burton (1879-1940) | Wikimedia Commons | Public domain
-  Image match method: commons-search:Harry Burton photograph of Tutankhamun's tomb
+  Image record: https://commons.wikimedia.org/wiki/File%3ATutankhamun_tomb_photographs_2_011.jpg
+  Image credit: Harry Burton | Wikimedia Commons | Public domain
+  Image match method: manual-review-2026-11-13
   Historical source: https://en.wikipedia.org/wiki/Discovery_of_the_tomb_of_Tutankhamun
-  Background: https://commons.wikimedia.org/wiki/File:Burton_Tutankhamun_tomb_photographs_1_001.jpg
+  Background: https://commons.wikimedia.org/wiki/File%3ATutankhamun_tomb_photographs_2_011.jpg
 
 Diamond Sutra, printed scroll Or.8210/P.2
   Local image: assets/images/diamond-sutra.jpg
@@ -586,17 +586,17 @@ Diamond Sutra, printed scroll Or.8210/P.2
 
 Lead ossuary made for the reburial of Richard III
   Local image: assets/images/richard-iii-ossuary.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:Emma_Wigley,_Leicester_Cathedral.jpg
-  Image credit: Peter_Glyn | Wikimedia Commons | CC BY-SA 3.0
-  Image match method: commons-search:reburial richard
+  Image record: https://commons.wikimedia.org/wiki/File%3APicture_of_Richard_III%27s_new_tomb.jpg
+  Image credit: Isananni | Wikimedia Commons | CC BY-SA 3.0
+  Image match method: manual-review-2026-11-13
   Historical source: https://en.wikipedia.org/wiki/Richard_III_of_England
-  Background: https://commons.wikimedia.org/wiki/File:Emma_Wigley,_Leicester_Cathedral.jpg
+  Background: https://commons.wikimedia.org/wiki/File%3APicture_of_Richard_III%27s_new_tomb.jpg
 
 PHerc. 172, the unopened Herculaneum papyrus
-  Local image: assets/images/herculaneum-172.png
-  Image record: https://commons.wikimedia.org/wiki/File:Herculaneum_papyrus_1425.png
-  Image credit: Unknown author Unknown author | Wikimedia Commons | Public domain
-  Image match method: named-commons-file
+  Local image: assets/images/herculaneum-172.jpg
+  Image record: https://commons.wikimedia.org/wiki/File%3AHerculaneum_papyri.jpg
+  Image credit: Stabile et al. (2021) | Wikimedia Commons | CC BY 4.0
+  Image match method: manual-review-2026-11-13
   Historical source: https://www.bodleian.ox.ac.uk/about/media/feb25/herculaneum-scroll
   Background: https://en.wikipedia.org/wiki/Herculaneum_papyri
 
@@ -650,11 +650,11 @@ Maya Dresden Codex
 
 Cyrus Cylinder
   Local image: assets/images/cyrus-cylinder.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:Barrel_cylinder_of_Cyrus_(transcription).jpg
-  Image credit: Theophilus Goldridge Pinches M.R.A.S. (1856 – 6 June 1934 Muswell Hill, London) | Wikimedia Commons | Public domain
-  Image match method: commons-search:Cyrus Cylinder
+  Image record: https://commons.wikimedia.org/wiki/File%3ACyrus_Cylinder_front.jpg
+  Image credit: Prioryman | Wikimedia Commons | CC BY-SA 3.0
+  Image match method: manual-review-2026-11-13
   Historical source: https://en.wikipedia.org/wiki/Cyrus_Cylinder
-  Background: https://commons.wikimedia.org/wiki/File:Barrel_cylinder_of_Cyrus_(transcription).jpg
+  Background: https://commons.wikimedia.org/wiki/File%3ACyrus_Cylinder_front.jpg
 
 Phaistos Disc, clay spiral inscription
   Local image: assets/images/phaistos-disc.jpg
@@ -690,11 +690,11 @@ CERN NeXT computer used as first web server
 
 Pentagon Papers, original Defence Department report, Part I
   Local image: assets/images/pentagon-papers.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:The_Pentagon,_Headquarters_of_the_US_Department_of_Defense_(cropped).jpg
-  Image credit: Touch Of Light | Wikimedia Commons | CC BY-SA 4.0
-  Image match method: commons-search:department pentagon
+  Image record: https://commons.wikimedia.org/wiki/File%3APentagon-Papers-Part-I.pdf
+  Image credit: US Government | Wikimedia Commons | Public domain
+  Image match method: manual-review-2026-11-13
   Historical source: https://www.archives.gov/research/pentagon-papers
-  Background: 
+  Background: None
 
 Tarikh al-Sudan chronicle manuscript
   Local image: assets/images/timbuktu.png
