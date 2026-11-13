@@ -118,7 +118,7 @@ A Chronicle of Current Events, issue 1, samizdat typescript
   Image credit: Nkrita | Wikimedia Commons | CC BY-SA 4.0
   Image match method: named-commons-file
   Historical source: https://catalog.archivum.org/catalog/0Nv3NqAn6p
-  Background: 
+  Background: None
 
 El Mercurio front page after the Chilean coup, September 1973
   Local image: assets/images/chile-newspaper.jpg
@@ -134,7 +134,7 @@ Secret protocol to the Molotov-Ribbentrop Pact
   Image credit: Soviet and German Goverments | Wikimedia Commons | Public domain
   Image match method: commons-search:Secret protocol to the Molotov-Ribbentrop Pact
   Historical source: https://avalon.law.yale.edu/20th_century/addsepro.asp
-  Background: 
+  Background: None
 
 S-21 prisoner identification photograph
   Local image: assets/images/tuol-sleng-photo.jpg
@@ -166,7 +166,7 @@ Boots remaining from the Budapest Stalin statue
   Image credit: Ines Zgonc | Wikimedia Commons | CC BY 3.0
   Image match method: named-commons-file
   Historical source: https://www.terrorhaza.hu/en
-  Background: 
+  Background: None
 
 Prague Spring newspaper issue under invasion
   Local image: assets/images/prague-newspaper.jpg
@@ -182,7 +182,7 @@ Treaty of Tordesillas manuscript
   Image credit: Original: Biblioteca Nacional de Lisboa Photo: User:Joserebelo | Wikimedia Commons | Public domain
   Image match method: commons-search:Treaty of Tordesillas manuscript
   Historical source: https://www.unesco.org/en/memory-world/treaty-tordesillas
-  Background: 
+  Background: None
 
 Map associated with the Berlin Conference
   Local image: assets/images/berlin-conference.jpg
@@ -206,7 +206,7 @@ Sykes-Picot Agreement map
   Image credit: Royal Geographical Society (Map), Mark Sykes & François Georges-Picot (Annotations) | Wikimedia Commons | Public domain
   Image match method: named-commons-file
   Historical source: https://commons.wikimedia.org/wiki/File:MPK1-426_Sykes_Picot_Agreement_Map_signed_8_May_1916.jpg
-  Background: 
+  Background: None
 
 Radcliffe partition map of British India
   Local image: assets/images/partition-map.png
@@ -214,7 +214,7 @@ Radcliffe partition map of British India
   Image credit: Research Dept., F.O., September, 1948 | Wikimedia Commons | Public domain
   Image match method: commons-search:Radcliffe partition India map 1947
   Historical source: https://commons.wikimedia.org/wiki/File:Map_of_Sir_Cyril_Radcliffe%27s_award_of_August_1947_for_Bengal_and_Assam.png
-  Background: 
+  Background: None
 
 Balfour Declaration letter to Lord Rothschild
   Local image: assets/images/balfour-letter.jpg
@@ -222,7 +222,7 @@ Balfour Declaration letter to Lord Rothschild
   Image credit: UK Government | Wikimedia Commons | Public domain
   Image match method: commons-search:declaration rothschild
   Historical source: https://searcharchives.bl.uk/catalog/040-002093104
-  Background: 
+  Background: None
 
 Canadian Indian Act, 1876, first statute
   Local image: assets/images/indian-act.jpg
@@ -246,7 +246,7 @@ Photograph of pupils at Regina Indian Industrial School
   Image credit: Saskg | Wikimedia Commons | CC BY-SA 4.0
   Image match method: named-commons-file
   Historical source: https://www.regina.ca/about-regina/regina-history-facts/index.html
-  Background: 
+  Background: None
 
 Chinese Canadian head-tax certificate
   Local image: assets/images/head-tax.jpg
@@ -254,7 +254,7 @@ Chinese Canadian head-tax certificate
   Image credit: Vancouver Public Library Historical Photographs | Wikimedia Commons | No restrictions
   Image match method: commons-search:Chinese Canadian head tax certificate 1885
   Historical source: https://commons.wikimedia.org/wiki/File:Mr._%22Lee_Don%22_paid_%24500_Canadian_dollar_%22head_tax%22_on_2_August_1918_under_Chinese_Immigration_Act_of_1885_certificate_VPL_30625_(cropped).jpg
-  Background: 
+  Background: None
 
 Emancipation Proclamation signed original
   Local image: assets/images/emancipation.jpg
@@ -262,7 +262,7 @@ Emancipation Proclamation signed original
   Image credit: Abraham Lincoln , digital reproduction by George Chriss ( GChriss ). With prior publication, the Emancipation Proclamation became  | Wikimedia Commons | Public domain
   Image match method: commons-search:Emancipation Proclamation signed original
   Historical source: https://www.archives.gov/milestone-documents/emancipation-proclamation
-  Background: 
+  Background: None
 
 Declaration of Sentiments writing table
   Local image: assets/images/seneca-table.jpg
@@ -270,7 +270,7 @@ Declaration of Sentiments writing table
   Image credit: Unknown author Unknown author | Wikimedia Commons | Public domain
   Image match method: commons-search:Seneca Falls Declaration of Sentiments table Smithsonian
   Historical source: https://commons.wikimedia.org/wiki/File:Declaration_of_Sentiments_table.jpg
-  Background: 
+  Background: None
 
 Shawl owned by Harriet Tubman
   Local image: assets/images/tubman-shawl.jpg
@@ -286,15 +286,15 @@ Rosa Parks arrest fingerprint card
   Image credit: Gene Herrick for the Associated Press; restored by Adam Cuerden | Wikimedia Commons | Public domain
   Image match method: named-commons-file
   Historical source: https://www.archives.gov/education/lessons/rosa-parks
-  Background: 
+  Background: None
 
 Emmett Till's original casket
   Local image: assets/images/emmett-casket.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:Roberts_Temple_Church_of_God_in_Christ.jpg
-  Image credit: Legimet | Wikimedia Commons | CC BY-SA 4.0
-  Image match method: commons-search:Emmett Till's original casket
+  Image record: https://commons.wikimedia.org/wiki/File%3AEmmett_Till%27s_funeral_-_mourners_%28restored%29.jpg
+  Image credit: Dave Mann | Wikimedia Commons | CC0
+  Image match method: manual-review-2026-11-13
   Historical source: https://commons.wikimedia.org/wiki/File:Roberts_Temple_Church_of_God_in_Christ.jpg
-  Background: 
+  Background: None
 
 I AM A MAN placard, Memphis sanitation strike
   Local image: assets/images/i-am-a-man.jpg
@@ -302,13 +302,13 @@ I AM A MAN placard, Memphis sanitation strike
   Image credit: Adam Jones, Ph.D. | Wikimedia Commons | CC BY-SA 3.0
   Image match method: commons-search:sanitation memphis
   Historical source: https://commons.wikimedia.org/wiki/File:I_Am_a_Man_-_Diorama_of_Memphis_Sanitation_Workers_Strike_-_National_Civil_Rights_Museum_-_Downtown_Memphis_-_Tennessee_-_USA.jpg
-  Background: 
+  Background: None
 
 Letter from Birmingham Jail manuscript
   Local image: assets/images/king-letter.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:Kamala_Harris_reads_excerpt_from_Dr._Martin_Luther_King,_Jr.%27s_1963_Letter_from_Birmingham_Jail.ogv
-  Image credit: Kamala Harris | Wikimedia Commons | Public domain
-  Image match method: named-commons-file
+  Image record: https://commons.wikimedia.org/wiki/File%3ARecreation_of_Martin_Luther_King%27s_Cell_in_Birmingham_Jail_-_National_Civil_Rights_Museum_-_Downtown_Memphis_-_Tennessee_-_USA.jpg
+  Image credit: Adam Jones, Ph.D. | Wikimedia Commons | CC BY-SA 3.0
+  Image match method: manual-review-2026-11-13
   Historical source: https://kinginstitute.stanford.edu/letter-birmingham-jail
   Background: https://en.wikipedia.org/wiki/Letter_from_Birmingham_Jail
 
@@ -329,10 +329,10 @@ Japanese American resident identification card
   Background: None
 
 Brown v. Board of Education decision
-  Local image: assets/images/brown-decision.png
-  Image record: https://commons.wikimedia.org/wiki/File:Audio_Recording_of_President_Clinton%27s_Question-and-Answer_Session_on_the_Brown_v._Board_of_Education_Supreme_Court_Decision_in_Beltsville,_Maryland_-_DPLA_-_5bb135890a1f66ba255cb5c74f343fdf.mp3
-  Image credit: Department of Defense. Defense Information Systems Agency. White House Communications Agency. 6/25/1991 | Wikimedia Commons | Public domain
-  Image match method: commons-search:Brown v. Board of Education decision
+  Local image: assets/images/brown-decision.jpg
+  Image record: https://commons.wikimedia.org/wiki/File%3AJudgment%2C_Brown_v._Board_of_Education%2C_05311955.gif
+  Image credit: The U.S. National Archives | Wikimedia Commons | Public domain
+  Image match method: manual-review-2026-11-13
   Historical source: https://www.archives.gov/milestone-documents/brown-v-board-of-education
   Background: https://en.wikipedia.org/wiki/Brown_v._Board_of_Education
 
@@ -342,7 +342,7 @@ Oneg Shabbat archive milk can no. 2, Warsaw
   Image credit: US Holocaust Memorial Museum / Warsaw Oyneg Shabes milk-can artefact
   Image match method: original-specified-image
   Historical source: https://encyclopedia.ushmm.org/content/en/artifact/milk-can-used-to-store-content-of-the-oneg-shabbat-archives
-  Background: 
+  Background: None
 
 Suitcase belonging to František Aufrecht, Auschwitz collection
   Local image: assets/images/auschwitz-suitcase.jpg
@@ -358,7 +358,7 @@ Auschwitz Sonderkommando clandestine photograph
   Image credit: Alberto Errera | Wikimedia Commons | Public domain
   Image match method: named-commons-file
   Historical source: https://commons.wikimedia.org/wiki/File:Alberto_Errera_-_Sonderkommando_photograph_283.jpg
-  Background: 
+  Background: None
 
 Damaged synagogue Torah scroll from Nazi persecution
   Local image: assets/images/torah-scroll.jpg
@@ -366,7 +366,7 @@ Damaged synagogue Torah scroll from Nazi persecution
   Image credit: Reda Kerbush | Wikimedia Commons | CC BY-SA 4.0
   Image match method: commons-search:persecution synagogue
   Historical source: https://encyclopedia.ushmm.org/content/en/article/kristallnacht
-  Background: 
+  Background: None
 
 Wannsee Conference protocol copy
   Local image: assets/images/wannsee.jpg
@@ -374,7 +374,7 @@ Wannsee Conference protocol copy
   Image credit: File:Wannsee Conference - List of Jews in European countries.JPG | Wikimedia Commons | Public domain
   Image match method: commons-search:Wannsee Conference protocol copy
   Historical source: https://commons.wikimedia.org/wiki/File:Wannsee_Conference_-_List_of_Jews_in_European_countries.JPG
-  Background: 
+  Background: None
 
 Nuremberg trial evidentiary film, Nazi Concentration Camps
   Local image: assets/images/nuremberg-film.jpg
@@ -390,7 +390,7 @@ S-21 prisoner photograph of Chum Mey era
   Image credit: Sgroey | Wikimedia Commons | CC BY 4.0
   Image match method: named-commons-file
   Historical source: https://tuolsleng.gov.kh/en/
-  Background: 
+  Background: None
 
 Kangura magazine issue promoting hatred
   Local image: assets/images/kangura.jpg
@@ -406,7 +406,7 @@ ICMP Geography of Genocide map, Srebrenica
   Image credit: United States. Central Intelligence Agency. Office Of Russian And European Analysis | Wikimedia Commons | Public domain
   Image match method: commons-search:srebrenica geography
   Historical source: https://icmp.int/news/icmps-geography-of-genocide-map-launched-at-the-srebrenica-memorial-center-and-online/
-  Background: 
+  Background: None
 
 Raphael Lemkin's Axis Rule in Occupied Europe
   Local image: assets/images/lemkin-book.jpg
@@ -414,7 +414,7 @@ Raphael Lemkin's Axis Rule in Occupied Europe
   Image credit: Unknown author Unknown author | Wikimedia Commons | Public domain
   Image match method: commons-search:Raphael Lemkin's Axis Rule in Occupied Europe
   Historical source: https://www.ushmm.org/genocide-prevention/simon-skjodt-center/work/learn/genocide-and-mass-atrocities/what-is-genocide
-  Background: 
+  Background: None
 
 Huexotzinco Codex, eight pictographic legal panels
   Local image: assets/images/huexotzinco.jpg
@@ -422,7 +422,7 @@ Huexotzinco Codex, eight pictographic legal panels
   Image credit: Library of Congress Huexotzinco Codex, sheet 1a · Wikimedia Commons
   Image match method: original-specified-image
   Historical source: https://commons.wikimedia.org/wiki/File:Huex_codex_1a_loc.jpg
-  Background: 
+  Background: None
 
 Great Domesday Book
   Local image: assets/images/domesday.jpg
@@ -430,7 +430,7 @@ Great Domesday Book
   Image credit: Andrews, William | Wikimedia Commons | Public domain
   Image match method: commons-search:Great Domesday Book
   Historical source: https://www.nationalarchives.gov.uk/explore-the-collection/explore-by-time-period/medieval/domesday/
-  Background: 
+  Background: None
 
 Hereford Mappa Mundi
   Local image: assets/images/hereford-map.jpg
@@ -438,7 +438,7 @@ Hereford Mappa Mundi
   Image credit: "Richard of Haldingham and Lafford", also known as Richard de Bello, Konrad Miller | Wikimedia Commons | Public domain
   Image match method: commons-search:Hereford Mappa Mundi
   Historical source: https://www.themappamundi.co.uk/
-  Background: 
+  Background: None
 
 Catalan Atlas image of Mansa Musa
   Local image: assets/images/catalan-atlas.jpg
@@ -446,7 +446,7 @@ Catalan Atlas image of Mansa Musa
   Image credit: attributed to Abraham Cresques | Wikimedia Commons | Public domain
   Image match method: commons-search:Catalan Atlas image of Mansa Musa
   Historical source: https://commons.wikimedia.org/wiki/File:Catalan_Atlas_BNF_Sheet_6_Mansa_Musa.jpg
-  Background: 
+  Background: None
 
 Charles Booth poverty map, East Central London sheet
   Local image: assets/images/booth-poverty-map.jpg
@@ -454,7 +454,7 @@ Charles Booth poverty map, East Central London sheet
   Image credit: Charles Booth | Wikimedia Commons | No restrictions
   Image match method: commons-search:Charles Booth 1898 1899 poverty map East Central London sheet 5
   Historical source: https://booth.lse.ac.uk/learn-more/what-were-the-poverty-maps
-  Background: 
+  Background: None
 
 Mercator world map, 1569
   Local image: assets/images/mercator.jpg
@@ -462,23 +462,23 @@ Mercator world map, 1569
   Image credit: Emery Walker | Wikimedia Commons | Public domain
   Image match method: commons-search:Mercator world map, 1569
   Historical source: https://commons.wikimedia.org/wiki/File:EB1911_-_Map_-_Fig._31.%E2%80%94Mercator%27s_Chart_of_the_World_(1569).jpg
-  Background: 
+  Background: None
 
 Operation Fortitude deception planning map
-  Local image: assets/images/fortitude-map.png
-  Image record: https://commons.wikimedia.org/wiki/File:Map_of_Operation_Bodyguard_subordinate_plans-ar.png
-  Image credit: Original: ErrantX Derivative: Amr F.Nagy | Wikimedia Commons | CC BY-SA 3.0
-  Image match method: commons-search:Operation Fortitude deception map 1944
+  Local image: assets/images/fortitude-map.jpg
+  Image record: https://commons.wikimedia.org/wiki/File%3AMap_of_Operation_Bodyguard_subordinate_plans.png
+  Image credit: ErrantX | Wikimedia Commons | CC BY-SA 3.0
+  Image match method: manual-review-2026-11-13
   Historical source: https://commons.wikimedia.org/wiki/File:Map_of_Operation_Bodyguard_subordinate_plans-ar.png
-  Background: 
+  Background: None
 
 Printed Peace of Westphalia treaty text
-  Local image: assets/images/westphalia.png
-  Image record: https://peaceofwestphalia.org/everything-peace-of-westphalia/documents-and-sources/
-  Image credit: Image on original institution/source page: peaceofwestphalia.org
-  Image match method: source-site-feature-image
+  Local image: assets/images/westphalia.jpg
+  Image record: https://commons.wikimedia.org/wiki/File%3AFredsf%C3%B6rdraget_i_Osnabr%C3%BCck_24_oktober_1648_-_Westfaliska_freden.tif
+  Image credit: Unknown author | Wikimedia Commons | Public domain
+  Image match method: manual-review-2026-11-13
   Historical source: https://peaceofwestphalia.org/everything-peace-of-westphalia/documents-and-sources/
-  Background: 
+  Background: None
 
 Te Tiriti o Waitangi: the Waitangi signing sheet
   Local image: assets/images/waitangi-sheet.jpg
@@ -510,7 +510,7 @@ Vinland Map manuscript
   Image credit: Unknown author Unknown author | Wikimedia Commons | Public domain
   Image match method: commons-search:Vinland Map manuscript
   Historical source: https://pre1600ms.beinecke.library.yale.edu/docs/pre1600.ms350a.htm
-  Background: 
+  Background: None
 
 Great Isaiah Scroll from Qumran
   Local image: assets/images/isaiah-scroll.jpg
@@ -518,7 +518,7 @@ Great Isaiah Scroll from Qumran
   Image credit: Photographs by Ardon Bar Hama, author of original document is unknown. | Wikimedia Commons | Public domain
   Image match method: commons-search:Great Isaiah Scroll from Qumran
   Historical source: https://www.imj.org.il/en/wings/shrine-book/dead-sea-scrolls
-  Background: 
+  Background: None
 
 Antikythera mechanism fragments
   Local image: assets/images/antikythera.jpg
@@ -526,7 +526,7 @@ Antikythera mechanism fragments
   Image credit: Therese Clutario | Wikimedia Commons | CC BY 2.0
   Image match method: commons-search:Antikythera mechanism fragments
   Historical source: https://antikythera-mechanism.namuseum.gr/en/
-  Background: 
+  Background: None
 
 Sutton Hoo helmet
   Local image: assets/images/sutton-hoo.jpg
@@ -542,7 +542,7 @@ Terracotta warrior from Pit 1, Xi'an
   Image credit: Aaron Zhu | Wikimedia Commons | CC BY-SA 3.0
   Image match method: commons-search:Terracotta warrior from Pit 1, Xi'an
   Historical source: https://www.bmy.com.cn/index.html
-  Background: 
+  Background: None
 
 Pompeii dog plaster cast
   Local image: assets/images/pompeii-dog.jpg
@@ -550,7 +550,7 @@ Pompeii dog plaster cast
   Image credit: Geremia Discanno (d. 1907) | Wikimedia Commons | Public domain
   Image match method: commons-search:Pompeii dog plaster cast
   Historical source: https://pompeiisites.org/en/
-  Background: 
+  Background: None
 
 Nebra Sky Disc, Bronze Age metalwork
   Local image: assets/images/nebra-sky-disc.jpg
@@ -558,7 +558,7 @@ Nebra Sky Disc, Bronze Age metalwork
   Image credit: Nebra Sky Disc in museum, Wikimedia Commons photo
   Image match method: original-specified-image
   Historical source: https://www.landesmuseum-vorgeschichte.de/en/nebra-sky-disc
-  Background: 
+  Background: None
 
 Great Shigir Idol, preserved carved wooden sculpture
   Local image: assets/images/shigir-idol.jpg
@@ -606,7 +606,7 @@ Mary Seacole’s Wonderful Adventures, 1857 first edition
   Image credit: Unknown author Unknown author | Wikimedia Commons | Public domain
   Image match method: named-commons-file
   Historical source: https://digital.library.upenn.edu/women/seacole/adventures/adventures.html
-  Background: 
+  Background: None
 
 Olympe de Gouges’s Declaration of the Rights of Woman
   Local image: assets/images/declaration-woman.jpg
@@ -614,7 +614,7 @@ Olympe de Gouges’s Declaration of the Rights of Woman
   Image credit: 1791 Declaration of the Rights of Woman, historical printed text · Wikimedia Commons
   Image match method: original-specified-image
   Historical source: https://commons.wikimedia.org/wiki/File:DDFC.jpg
-  Background: 
+  Background: None
 
 Frederick Douglass's Narrative, first edition
   Local image: assets/images/douglass-narrative.jpg
@@ -622,7 +622,7 @@ Frederick Douglass's Narrative, first edition
   Image credit: Frederick Douglass | Wikimedia Commons | Public domain
   Image match method: commons-search:Frederick Douglass's Narrative, first edition
   Historical source: https://commons.wikimedia.org/wiki/File:Frontispiece_of_Frederick_Douglass_in_Narrative_of_the_Life_of_Frederick_Douglass,_an_American_Slave_(1845).jpg
-  Background: 
+  Background: None
 
 Vindolanda Tablet 291, Claudia Severa’s birthday invitation
   Local image: assets/images/vindolanda-291.jpg
@@ -630,7 +630,7 @@ Vindolanda Tablet 291, Claudia Severa’s birthday invitation
   Image credit: Roman Inscriptions of Britain / British Museum, tablet 291
   Image match method: original-specified-image
   Historical source: https://romaninscriptionsofbritain.org/inscriptions/TabVindol291
-  Background: 
+  Background: None
 
 Universal Declaration of Human Rights, 1948 printed text
   Local image: assets/images/udhr.jpg
@@ -697,28 +697,28 @@ Pentagon Papers, original Defence Department report, Part I
   Background: None
 
 Tarikh al-Sudan chronicle manuscript
-  Local image: assets/images/timbuktu.png
-  Image record: https://commons.wikimedia.org/wiki/File:Krasinski_manuscript_GDL_chronicle.png
-  Image credit: Vaclau Lastouski | Wikimedia Commons | Public domain
-  Image match method: commons-search:manuscript chronicle
+  Local image: assets/images/timbuktu.jpg
+  Image record: https://commons.wikimedia.org/wiki/File%3A%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE_%D8%A7%D9%84%D8%B3%D9%88%D8%AF%D8%A7%D9%86.jpg
+  Image credit: إيان | Wikimedia Commons | Public domain
+  Image match method: manual-review-2026-11-13
   Historical source: https://www.loc.gov/exhibits/mali/mali-exhibit.html
-  Background: 
+  Background: None
 
 Posselt’s Zimbabwe Bird, removed in 1889 and returned in 2026
   Local image: assets/images/zimbabwe-bird.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:Lisa_returned_to_school_through_DREAMS,_Bulawayo_Zimbabwe_(36273605224).jpg
-  Image credit: USAID in Africa | Wikimedia Commons | Public domain
-  Image match method: commons-search:zimbabwe returned
+  Image record: https://commons.wikimedia.org/wiki/File%3ASoapstone_birds_on_pedestals.jpg
+  Image credit: James Theodore Bent | Wikimedia Commons | Public domain
+  Image match method: manual-review-2026-11-13
   Historical source: https://www.sahra.org.za/exile-repatriation/zimbabwe-soapstone-bird/
-  Background: 
+  Background: None
 
 Piri Reis world map fragment, Topkapi H 1824
-  Local image: assets/images/piri-reis.webp
-  Image record: https://www.unesco.org/sites/default/files/styles/paragraph_medium_desktop/public/structured_data/mow001/11130879_turkey_piri_reis_920x200.jpg.webp?itok=RVZZznGy
-  Image credit: Topkapı Palace Museum / UNESCO Memory of the World, 1513 Piri Reis world map fragment
-  Image match method: original-specified-image
+  Local image: assets/images/piri-reis.jpg
+  Image record: https://commons.wikimedia.org/wiki/File%3APiri_reis_world_map_01.jpg
+  Image credit: Piri Reis | Wikimedia Commons | Public domain
+  Image match method: manual-review-2026-11-13
   Historical source: https://www.unesco.org/en/memory-world/piri-reis-world-map-1513
-  Background: 
+  Background: None
 
 John Harvey's 1588 book using the phrase "artificiall intelligence"
   Local image: assets/images/artificial-intelligence-1588.jpg
