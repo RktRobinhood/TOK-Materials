@@ -90,9 +90,9 @@ Hoa Hakananai'a moai, British Museum
 
 Maqdala Psalter, V&A MSL/1869/185/1
   Local image: assets/images/maqdala.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:British_ships_in_Annesley_Bay,_Eritrea_3cdf2d7e74a3ee78a787843cdfce4260.jpg
-  Image credit: Photograph taken by 10 field company Royal Engineers during the Magdala Campaign of 1867-68 Ethiopia. Annesley Bay | Wikimedia Commons | Public domain
-  Image match method: named-commons-file
+  Image record: https://commons.wikimedia.org/wiki/File%3ALondon-Victoria_and_Albert_Museum-Crown-02.jpg
+  Image credit: by Junho Jung at Flickr from South Korea | Wikimedia Commons | CC BY-SA 3.0
+  Image match method: manual-review-2026-11-13
   Historical source: https://www.vam.ac.uk/articles/ethiopian-collections-at-the-vampa
   Background: https://en.wikipedia.org/wiki/Battle_of_Magdala
 
@@ -122,11 +122,11 @@ A Chronicle of Current Events, issue 1, samizdat typescript
 
 El Mercurio front page after the Chilean coup, September 1973
   Local image: assets/images/chile-newspaper.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:1907-09-01,_Mercurio,_Luis_Par%C3%ADs,_Compa%C3%B1y.jpg
-  Image credit: Manuel Compañy | Wikimedia Commons | Public domain
-  Image match method: commons-search:september mercurio
+  Image record: https://commons.wikimedia.org/wiki/File%3ALa_Junta_Militar_ordena_UBICAR_Y_DETENER.jpg
+  Image credit: Policia de Investigaciones | Wikimedia Commons | Public domain
+  Image match method: manual-review-2026-11-13
   Historical source: https://culturadigital.udp.cl/coleccion/coleccion-patricio-silva/page/4/
-  Background: 
+  Background: None
 
 Secret protocol to the Molotov-Ribbentrop Pact
   Local image: assets/images/secret-protocol.jpg
@@ -138,11 +138,11 @@ Secret protocol to the Molotov-Ribbentrop Pact
 
 S-21 prisoner identification photograph
   Local image: assets/images/tuol-sleng-photo.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:Photograph_Taken_During_the_Identification_of_Robert_Moser_-_DPLA_-_58940b93d346074d524bba53dcb78aa8.jpg
-  Image credit: Department of Defense. Department of the Army. Office of the Deputy Chief of Staff for Operations. U.S. Army Audiovisual Center. c | Wikimedia Commons | Public domain
-  Image match method: commons-search:S-21 prisoner identification photograph
+  Image record: https://commons.wikimedia.org/wiki/File%3ATuol_Sleng_Genocide_Museum_%2811958292403%29.jpg
+  Image credit: Clay Gilliland | Wikimedia Commons | CC BY-SA 2.0
+  Image match method: manual-review-2026-11-13
   Historical source: https://tuolsleng.gov.kh/en/
-  Background: 
+  Background: None
 
 White Rose resistance leaflet
   Local image: assets/images/white-rose.jpg
@@ -170,11 +170,11 @@ Boots remaining from the Budapest Stalin statue
 
 Prague Spring newspaper issue under invasion
   Local image: assets/images/prague-newspaper.jpg
-  Image record: https://www.ustrcr.cz/en/
-  Image credit: Image on original institution/source page: www.ustrcr.cz
-  Image match method: source-site-feature-image
+  Image record: https://commons.wikimedia.org/wiki/File%3ARovnost_21_08_1968.jpg
+  Image credit: OISV | Wikimedia Commons | CC BY-SA 4.0
+  Image match method: manual-review-2026-11-13
   Historical source: https://www.ustrcr.cz/en/
-  Background: 
+  Background: None
 
 Treaty of Tordesillas manuscript
   Local image: assets/images/tordesillas.jpg
@@ -322,11 +322,11 @@ Votes for Women parade banner
 
 Japanese American resident identification card
   Local image: assets/images/internment-card.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:Gabor_B._Levy%27s_United_States_Resident_Alien%27s_Border_Crossing_Identification_Card_-_DPLA_-_9ba6a60ca44534adab35ef7e34c311cb_(page_1).jpg
-  Image credit: United States. Immigration and Naturalization Service | Wikimedia Commons | Public domain
-  Image match method: commons-search:identification resident
+  Image record: https://commons.wikimedia.org/wiki/File%3AHayward%2C_California._Farmer_of_Japanese_ancestry_is_showing_his_identification_card_to_a_Wartime_Ci_._._._-_NARA_-_537525.jpg
+  Image credit: Dorothea Lange | Wikimedia Commons | Public domain
+  Image match method: manual-review-2026-11-13
   Historical source: https://commons.wikimedia.org/wiki/File:Gabor_B._Levy%27s_United_States_Resident_Alien%27s_Border_Crossing_Identification_Card_-_DPLA_-_9ba6a60ca44534adab35ef7e34c311cb_(page_1).jpg
-  Background: 
+  Background: None
 
 Brown v. Board of Education decision
   Local image: assets/images/brown-decision.png
@@ -346,11 +346,11 @@ Oneg Shabbat archive milk can no. 2, Warsaw
 
 Suitcase belonging to František Aufrecht, Auschwitz collection
   Local image: assets/images/auschwitz-suitcase.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:Auschwitz_Death_wall_1.5.jpg
-  Image credit: Gigatel Cyf Ltd. | Wikimedia Commons | CC BY 3.0
-  Image match method: named-commons-file
+  Image record: https://commons.wikimedia.org/wiki/File%3AAuscchwitz_suitcases.jpg
+  Image credit: Jklamo | Wikimedia Commons | CC BY 3.0
+  Image match method: manual-review-2026-11-13
   Historical source: https://en.wikipedia.org/wiki/Auschwitz-Birkenau_State_Museum
-  Background: https://commons.wikimedia.org/wiki/File:Auschwitz_Death_wall_1.5.jpg
+  Background: https://commons.wikimedia.org/wiki/File%3AAuscchwitz_suitcases.jpg
 
 Auschwitz Sonderkommando clandestine photograph
   Local image: assets/images/sonderkommando.jpg
@@ -394,11 +394,11 @@ S-21 prisoner photograph of Chum Mey era
 
 Kangura magazine issue promoting hatred
   Local image: assets/images/kangura.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:01846_Chapel_of_the_Institute_for_Jewish_converts_of_the_London_Society_for_Promoting_Christianity_Amongst_the_Jews_at_Warsaw.jpg
-  Image credit: Silar | Wikimedia Commons | Public domain
-  Image match method: commons-search:promoting magazine
+  Image record: https://commons.wikimedia.org/wiki/File%3APhoto-KanguraNo26-G_Kayibanda.jpg
+  Image credit: Unknown photographer | Wikimedia Commons | Public domain
+  Image match method: manual-review-2026-11-13
   Historical source: https://unictr.irmct.org/en/cases/ictr-99-52
-  Background: 
+  Background: None
 
 ICMP Geography of Genocide map, Srebrenica
   Local image: assets/images/srebrenica-map.jpg
@@ -562,11 +562,11 @@ Nebra Sky Disc, Bronze Age metalwork
 
 Great Shigir Idol, preserved carved wooden sculpture
   Local image: assets/images/shigir-idol.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:Church_of_St._Peter_of_Flers-Bourg,_trumeau_highlighting_a_wooden_sculpture_of_Saint_Peter.jpg
-  Image credit: Pierre André Leclercq | Wikimedia Commons | CC BY-SA 4.0
-  Image match method: commons-search:preserved sculpture
+  Image record: https://commons.wikimedia.org/wiki/File%3AThe_Big_Shigir_idol_-_The_Museum_of_History_and_Archeology_of_the_Urals.jpg
+  Image credit: Лапоть | Wikimedia Commons | CC0
+  Image match method: manual-review-2026-11-13
   Historical source: https://en.wikipedia.org/wiki/Shigir_Idol
-  Background: https://commons.wikimedia.org/wiki/File:Church_of_St._Peter_of_Flers-Bourg,_trumeau_highlighting_a_wooden_sculpture_of_Saint_Peter.jpg
+  Background: https://commons.wikimedia.org/wiki/File%3AThe_Big_Shigir_idol_-_The_Museum_of_History_and_Archeology_of_the_Urals.jpg
 
 Harry Burton photograph of Tutankhamun's tomb
   Local image: assets/images/carter-photo.jpg
@@ -719,3 +719,11 @@ Piri Reis world map fragment, Topkapi H 1824
   Image match method: original-specified-image
   Historical source: https://www.unesco.org/en/memory-world/piri-reis-world-map-1513
   Background: 
+
+John Harvey's 1588 book using the phrase "artificiall intelligence"
+  Local image: assets/images/artificial-intelligence-1588.jpg
+  Image record: https://www.folger.edu/blogs/collation/artificial-intelligence-1588/
+  Image credit: Folger Shakespeare Library, STC 12908 copy 1, sig. C3v | photo via The Collation
+  Image match method: manual-review-2026-11-13
+  Historical source: https://www.folger.edu/blogs/collation/artificial-intelligence-1588/
+  Background: https://en.wikipedia.org/wiki/Dartmouth_workshop

@@ -2,7 +2,7 @@
 const OBJECTS=JSON.parse(document.getElementById('objectData').textContent);
 const PROMPTS=JSON.parse(document.getElementById('promptData').textContent);
 const O=new Map(OBJECTS.map(o=>[o.id,o]));
-const READY=OBJECTS.length===90&&OBJECTS.every(o=>o.localImage&&o.image?.startsWith('assets/images/')&&o.source);
+const READY=OBJECTS.length>=90&&OBJECTS.every(o=>o.localImage&&o.image?.startsWith('assets/images/')&&o.source);
 const $=(x)=>document.getElementById(x);
 const root=$('app'), modal=$('modal'), saveStatus=$('saveStatus');
 const STORAGE='tok-history-object-lab-v1';
