@@ -362,9 +362,9 @@ Auschwitz Sonderkommando clandestine photograph
 
 Damaged synagogue Torah scroll from Nazi persecution
   Local image: assets/images/torah-scroll.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:Tribute_to_the_Victims_of_Nazi_Persecution_%E2%80%93_Synagogue_of_D%C3%BCsseldorf.jpg
-  Image credit: Reda Kerbush | Wikimedia Commons | CC BY-SA 4.0
-  Image match method: commons-search:persecution synagogue
+  Image record: https://commons.wikimedia.org/wiki/File%3ASynagogue_Ettlingen-_Fragment_of_Torah_scroll%2C_burned_during_Kristal_Nacht.jpg
+  Image credit: Unknown author | Wikimedia Commons | Public domain
+  Image match method: manual-review-2026-11-13
   Historical source: https://encyclopedia.ushmm.org/content/en/article/kristallnacht
   Background: None
 
@@ -498,9 +498,9 @@ Inka khipu from Chulpaca, Smithsonian 14/3866
 
 Beringer’s forged fossil stones in his 1726 engraved plates
   Local image: assets/images/beringer-stones.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:Map_engraved_on_stone.JPG
-  Image credit: Celinebj | Wikimedia Commons | CC BY-SA 4.0
-  Image match method: commons-search:engraved beringer
+  Image record: https://commons.wikimedia.org/wiki/File%3ALithographiae_Wirceburgensis_1726_Tafel_03.jpg
+  Image credit: Johann Bartholomaeus Adam Beringer | Wikimedia Commons | Public domain
+  Image match method: manual-review-2026-11-13
   Historical source: https://www.bibliothek.uni-wuerzburg.de/en/about-us/events/exhibition-fakt-fake/wuerzburg-lying-stones/
   Background: https://en.wikipedia.org/wiki/Beringer%27s_Lying_Stones
 
