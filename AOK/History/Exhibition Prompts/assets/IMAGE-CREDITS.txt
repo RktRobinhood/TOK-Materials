@@ -34,11 +34,11 @@ Robert E. Lee Monument, Richmond
 
 John A. Macdonald statue, Kingston
   Local image: assets/images/macdonald-statue.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:John_A._Macdonald_Statue,_Queen%27s_Park,_Toronto,_Ontario_(29709409160).jpg
-  Image credit: Ken Lund from Reno, Nevada, USA | Wikimedia Commons | CC BY-SA 2.0
-  Image match method: commons-search:John A. Macdonald statue, Kingston
+  Image record: https://commons.wikimedia.org/wiki/File%3ASir_John_A_Macdonald_statue_%28Kingston%2C_Ontario%29.jpg
+  Image credit: Doug Kerr from Albany, NY, United States | Wikimedia Commons | CC BY-SA 2.0
+  Image match method: manual-review-2026-11-13
   Historical source: https://en.wikipedia.org/wiki/John_A._Macdonald
-  Background: https://commons.wikimedia.org/wiki/File:John_A._Macdonald_Statue,_Queen%27s_Park,_Toronto,_Ontario_(29709409160).jpg
+  Background: https://commons.wikimedia.org/wiki/File%3ASir_John_A_Macdonald_statue_%28Kingston%2C_Ontario%29.jpg
 
 Benin palace brass plaque, British Museum
   Local image: assets/images/benin-plaque.jpg
@@ -154,9 +154,9 @@ White Rose resistance leaflet
 
 Katyn massacre forensic report
   Local image: assets/images/katyn-report.jpg
-  Image record: https://commons.wikimedia.org/wiki/File:Katyn_-_decision_of_massacre_p3.jpg
-  Image credit: Лаврентий Павлович Берия | Wikimedia Commons | Public domain
-  Image match method: named-commons-file
+  Image record: https://commons.wikimedia.org/wiki/File%3AKatyn-1943-04-30.jpg
+  Image credit: International Katyn Commission | Wikimedia Commons | Public domain
+  Image match method: manual-review-2026-11-13
   Historical source: https://eng.ipn.gov.pl/
   Background: https://en.wikipedia.org/wiki/Katyn_massacre
 
