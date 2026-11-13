@@ -1,0 +1,721 @@
+TOK HISTORY OBJECT LAB - IMAGE & SOURCE CREDITS
+
+Lion of al-Lat, Palmyra
+  Local image: assets/images/lion-al-lat.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Lion%20in%20the%20garden%20of%20Palmyra%20Archeological%20Museum,%202010-04-21.jpg
+  Image credit: Photograph of the Lion of al-Lat before 2015, Wikimedia Commons
+  Image match method: original-specified-image
+  Historical source: https://www.unesco.org/en/articles/restoration-completed-lion-al-lat-statue-ancient-city-palmyra-damaged-isil
+  Background: https://en.wikipedia.org/wiki/Lion_of_Al-l%C4%81t
+
+Assyrian lamassu at Mosul's Nergal Gate
+  Local image: assets/images/mosul-lamassu.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:A_late_1960s_photograph_captures_students_from_Saint_Thomas_Private_High_School_for_Girls_in_Baghdad,_Iraq,_visiting_the_colossal_lamassu_at_Mosul%E2%80%99s_Nergal_Gate.jpg
+  Image credit: Neuroforever | Wikimedia Commons | CC BY-SA 4.0
+  Image match method: commons-search:Nergal Gate lamassu Mosul
+  Historical source: https://whc.unesco.org/en/news/1239/
+  Background: https://en.wikipedia.org/wiki/Lamassu
+
+Edward Colston statue, Bristol
+  Local image: assets/images/edward-colston.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Edward%20Colston%201895%20statue.jpg
+  Image credit: Edward Colston statue photographed in Bristol, Wikimedia Commons
+  Image match method: original-specified-image
+  Historical source: https://exhibitions.bristolmuseums.org.uk/the-colston-statue/
+  Background: https://en.wikipedia.org/wiki/Statue_of_Edward_Colston
+
+Robert E. Lee Monument, Richmond
+  Local image: assets/images/richmond-lee.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Statue%20Robert%20E.%20Lee%20Richmond%20(cropped).JPG
+  Image credit: Photograph of Richmond Lee Monument before removal, Wikimedia Commons
+  Image match method: original-specified-image
+  Historical source: https://en.wikipedia.org/wiki/Robert_E._Lee_Monument_(Richmond,_Virginia)
+  Background: https://commons.wikimedia.org/wiki/File:Statue%20Robert%20E.%20Lee%20Richmond%20(cropped).JPG
+
+John A. Macdonald statue, Kingston
+  Local image: assets/images/macdonald-statue.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:John_A._Macdonald_Statue,_Queen%27s_Park,_Toronto,_Ontario_(29709409160).jpg
+  Image credit: Ken Lund from Reno, Nevada, USA | Wikimedia Commons | CC BY-SA 2.0
+  Image match method: commons-search:John A. Macdonald statue, Kingston
+  Historical source: https://en.wikipedia.org/wiki/John_A._Macdonald
+  Background: https://commons.wikimedia.org/wiki/File:John_A._Macdonald_Statue,_Queen%27s_Park,_Toronto,_Ontario_(29709409160).jpg
+
+Benin palace brass plaque, British Museum
+  Local image: assets/images/benin-plaque.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Palais_oba.jpg
+  Image credit: Jaymz Height-Field at French Wikipedia | Wikimedia Commons | CC BY-SA 3.0
+  Image match method: commons-search:Benin palace brass plaque, British Museum
+  Historical source: https://en.wikipedia.org/wiki/Benin_Bronzes
+  Background: https://commons.wikimedia.org/wiki/File:Palais_oba.jpg
+
+Parthenon sculptures in London
+  Local image: assets/images/parthenon.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:London_-_Great_Russell_Street_-_British_Museum_-_Greece-_Parthenon_-_Elgin_Marbles_-_Parts_of_the_Frieze.jpg
+  Image credit: Txllxt TxllxT | Wikimedia Commons | CC BY-SA 4.0
+  Image match method: commons-search:Parthenon sculptures in London
+  Historical source: https://en.wikipedia.org/wiki/Elgin_Marbles
+  Background: https://commons.wikimedia.org/wiki/File:London_-_Great_Russell_Street_-_British_Museum_-_Greece-_Parthenon_-_Elgin_Marbles_-_Parts_of_the_Frieze.jpg
+
+Archimedes Palimpsest, folio 70v
+  Local image: assets/images/archimedes-palimpsest.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Archimedes_Palimpsest.jpg
+  Image credit: Matthew Kon | Wikimedia Commons | Public domain
+  Image match method: commons-search:palimpsest archimedes
+  Historical source: https://archimedespalimpsest.org/
+  Background: https://en.wikipedia.org/wiki/Archimedes_Palimpsest
+
+Nefertiti bust, Berlin
+  Local image: assets/images/nefertiti.png
+  Image record: https://commons.wikimedia.org/wiki/File:Bust_of_Nefertiti_at_the_Neues_Museum,_Berlin.stl
+  Image credit: Original artist unknown, 3-D render made by https://www.myminifactory.com/users/Scan%20The%20World | Wikimedia Commons | CC0
+  Image match method: commons-search:Nefertiti bust Berlin museum
+  Historical source: https://en.wikipedia.org/wiki/Nefertiti_Bust
+  Background: https://commons.wikimedia.org/wiki/File:Bust_of_Nefertiti_at_the_Neues_Museum,_Berlin.stl
+
+Koh-i-Noor diamond in the British Crown Jewels
+  Local image: assets/images/kohinoor.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Drawing_of_the_%22Koh-I-Noor_Diamond%22_MET_DP804282.jpg
+  Image credit: Creator:R. S. Garrard & Co. | Wikimedia Commons | CC0
+  Image match method: commons-search:Koh-i-Noor diamond in the British Crown Jewels
+  Historical source: https://en.wikipedia.org/wiki/Koh-i-Noor
+  Background: https://commons.wikimedia.org/wiki/File:Drawing_of_the_%22Koh-I-Noor_Diamond%22_MET_DP804282.jpg
+
+Hoa Hakananai'a moai, British Museum
+  Local image: assets/images/hoa-hakananai-a.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Back_view._Basalt_statue,_Hoa_Hakananai%27a_(hidden_or_stolen_friend)._Moai%3B_an_ancestor_figure,_made_by_the_Rapanui_people._1000-1200_CE._From_Orongo_(Polynesia,_Easter_Island)%3B_probably_made_in_Rano_Kao._British_Museum.jpg
+  Image credit: Osama Shukir Muhammed Amin FRCP(Glasg) | Wikimedia Commons | CC BY-SA 4.0
+  Image match method: commons-search:Hoa Hakananai'a moai, British Museum
+  Historical source: https://en.wikipedia.org/wiki/Hoa_Hakananai%27a
+  Background: https://commons.wikimedia.org/wiki/File:Back_view._Basalt_statue,_Hoa_Hakananai%27a_(hidden_or_stolen_friend)._Moai%3B_an_ancestor_figure,_made_by_the_Rapanui_people._1000-1200_CE._From_Orongo_(Polynesia,_Easter_Island)%3B_probably_made_in_Rano_Kao._British_Museum.jpg
+
+Maqdala Psalter, V&A MSL/1869/185/1
+  Local image: assets/images/maqdala.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:British_ships_in_Annesley_Bay,_Eritrea_3cdf2d7e74a3ee78a787843cdfce4260.jpg
+  Image credit: Photograph taken by 10 field company Royal Engineers during the Magdala Campaign of 1867-68 Ethiopia. Annesley Bay | Wikimedia Commons | Public domain
+  Image match method: named-commons-file
+  Historical source: https://www.vam.ac.uk/articles/ethiopian-collections-at-the-vampa
+  Background: https://en.wikipedia.org/wiki/Battle_of_Magdala
+
+Stalin photograph with Nikolai Yezhov removed
+  Local image: assets/images/stalin-yezhov.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Nikolai_Yezhov_with_Stalin_and_Molotov_along_the_Volga_Don_Canal.jpg
+  Image credit: Unknown author Unknown author | Wikimedia Commons | Public domain
+  Image match method: named-commons-file
+  Historical source: https://en.wikipedia.org/wiki/Censorship_of_images_in_the_Soviet_Union
+  Background: https://commons.wikimedia.org/wiki/File:Nikolai_Yezhov_with_Stalin_and_Molotov_along_the_Volga_Don_Canal.jpg
+
+Jeonnam Daily newspaper page with censored reporting, 1980
+  Local image: assets/images/gwangju-censored.jpg
+  Image record: https://image.koreajoongangdaily.com/11209674.webp?format=jpg&height=720&imageId=11209674&width=960
+  Image credit: Esther Chung / Korea JoongAng Daily (2020), photograph of the 2 June 1980 Jeonnam Daily censorship exhibit
+  Image match method: original-specified-image
+  Historical source: https://www.koreajoongangdaily.com/lifestyle/special-exhibition-hopes-to-shed-light-on-gwangju-uprising/11208965
+  Background: https://en.wikipedia.org/wiki/Gwangju_Uprising
+
+A Chronicle of Current Events, issue 1, samizdat typescript
+  Local image: assets/images/samizdat-chronicle.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Samizdat_Chronicle_of_Current_Events_No_15_Trial_of_Natalya_Gorbanevskaya.jpg
+  Image credit: Nkrita | Wikimedia Commons | CC BY-SA 4.0
+  Image match method: named-commons-file
+  Historical source: https://catalog.archivum.org/catalog/0Nv3NqAn6p
+  Background: 
+
+El Mercurio front page after the Chilean coup, September 1973
+  Local image: assets/images/chile-newspaper.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:1907-09-01,_Mercurio,_Luis_Par%C3%ADs,_Compa%C3%B1y.jpg
+  Image credit: Manuel Compañy | Wikimedia Commons | Public domain
+  Image match method: commons-search:september mercurio
+  Historical source: https://culturadigital.udp.cl/coleccion/coleccion-patricio-silva/page/4/
+  Background: 
+
+Secret protocol to the Molotov-Ribbentrop Pact
+  Local image: assets/images/secret-protocol.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Secret_Protocol_to_Molotov%E2%80%93Ribbentrop_Pact_Page_1.jpg
+  Image credit: Soviet and German Goverments | Wikimedia Commons | Public domain
+  Image match method: commons-search:Secret protocol to the Molotov-Ribbentrop Pact
+  Historical source: https://avalon.law.yale.edu/20th_century/addsepro.asp
+  Background: 
+
+S-21 prisoner identification photograph
+  Local image: assets/images/tuol-sleng-photo.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Photograph_Taken_During_the_Identification_of_Robert_Moser_-_DPLA_-_58940b93d346074d524bba53dcb78aa8.jpg
+  Image credit: Department of Defense. Department of the Army. Office of the Deputy Chief of Staff for Operations. U.S. Army Audiovisual Center. c | Wikimedia Commons | Public domain
+  Image match method: commons-search:S-21 prisoner identification photograph
+  Historical source: https://tuolsleng.gov.kh/en/
+  Background: 
+
+White Rose resistance leaflet
+  Local image: assets/images/white-rose.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:1943_German_High_Court_decree_(_death_sentence_)_against_Hans_Fritz_Scholl_Sophia_Magalena_Scholl_and_Christoph_Herman_Probst.jpg
+  Image credit: German Peoples Court February 1943 Chief Judge Roland Freisler | Wikimedia Commons | Public domain
+  Image match method: commons-search:White Rose resistance original leaflet 1943 Munich
+  Historical source: https://www.gedenkstaette-stille-helden.de/en/
+  Background: 
+
+Katyn massacre forensic report
+  Local image: assets/images/katyn-report.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Katyn_-_decision_of_massacre_p3.jpg
+  Image credit: Лаврентий Павлович Берия | Wikimedia Commons | Public domain
+  Image match method: named-commons-file
+  Historical source: https://eng.ipn.gov.pl/
+  Background: https://en.wikipedia.org/wiki/Katyn_massacre
+
+Boots remaining from the Budapest Stalin statue
+  Local image: assets/images/stalin-boots.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Stalin%27s_Boots.jpg
+  Image credit: Ines Zgonc | Wikimedia Commons | CC BY 3.0
+  Image match method: named-commons-file
+  Historical source: https://www.terrorhaza.hu/en
+  Background: 
+
+Prague Spring newspaper issue under invasion
+  Local image: assets/images/prague-newspaper.jpg
+  Image record: https://www.ustrcr.cz/en/
+  Image credit: Image on original institution/source page: www.ustrcr.cz
+  Image match method: source-site-feature-image
+  Historical source: https://www.ustrcr.cz/en/
+  Background: 
+
+Treaty of Tordesillas manuscript
+  Local image: assets/images/tordesillas.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Treaty_of_Tordesillas.jpg
+  Image credit: Original: Biblioteca Nacional de Lisboa Photo: User:Joserebelo | Wikimedia Commons | Public domain
+  Image match method: commons-search:Treaty of Tordesillas manuscript
+  Historical source: https://www.unesco.org/en/memory-world/treaty-tordesillas
+  Background: 
+
+Map associated with the Berlin Conference
+  Local image: assets/images/berlin-conference.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Africa_after_the_Berlin_Conference.jpg
+  Image credit: Justus Perthes | Wikimedia Commons | Public domain
+  Image match method: commons-search:map Africa Berlin Conference 1885 colonial
+  Historical source: https://en.wikipedia.org/wiki/Berlin_Conference
+  Background: https://commons.wikimedia.org/wiki/File:Africa_after_the_Berlin_Conference.jpg
+
+Roger Casement's Congo Report
+  Local image: assets/images/casement-report.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Casement_Roger.jpg
+  Image credit: File:Casement Roger.jpg | Wikimedia Commons | Public domain
+  Image match method: named-commons-file
+  Historical source: https://en.wikipedia.org/wiki/Casement_Report
+  Background: https://commons.wikimedia.org/wiki/File:Casement_Roger.jpg
+
+Sykes-Picot Agreement map
+  Local image: assets/images/sykes-picot.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:MPK1-426_Sykes_Picot_Agreement_Map_signed_8_May_1916.jpg
+  Image credit: Royal Geographical Society (Map), Mark Sykes & François Georges-Picot (Annotations) | Wikimedia Commons | Public domain
+  Image match method: named-commons-file
+  Historical source: https://commons.wikimedia.org/wiki/File:MPK1-426_Sykes_Picot_Agreement_Map_signed_8_May_1916.jpg
+  Background: 
+
+Radcliffe partition map of British India
+  Local image: assets/images/partition-map.png
+  Image record: https://commons.wikimedia.org/wiki/File:Map_of_Sir_Cyril_Radcliffe%27s_award_of_August_1947_for_Bengal_and_Assam.png
+  Image credit: Research Dept., F.O., September, 1948 | Wikimedia Commons | Public domain
+  Image match method: commons-search:Radcliffe partition India map 1947
+  Historical source: https://commons.wikimedia.org/wiki/File:Map_of_Sir_Cyril_Radcliffe%27s_award_of_August_1947_for_Bengal_and_Assam.png
+  Background: 
+
+Balfour Declaration letter to Lord Rothschild
+  Local image: assets/images/balfour-letter.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Lord_Rothschild_initial_Balfour_Declaration_draft_and_Balfour_draft_reply,_July_and_August_1917.jpg
+  Image credit: UK Government | Wikimedia Commons | Public domain
+  Image match method: commons-search:declaration rothschild
+  Historical source: https://searcharchives.bl.uk/catalog/040-002093104
+  Background: 
+
+Canadian Indian Act, 1876, first statute
+  Local image: assets/images/indian-act.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Statutes_of_Canada.jpg
+  Image credit: Coolcaesar at en.wikipedia | Wikimedia Commons | CC BY-SA 3.0
+  Image match method: commons-search:canadian statute
+  Historical source: https://laws-lois.justice.gc.ca/eng/acts/I-5/
+  Background: https://en.wikipedia.org/wiki/Indian_Act
+
+Lenape wampum belt associated with William Penn
+  Local image: assets/images/wampum-penn.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:The_belt_of_wampum_delivered_by_the_Indians_to_William_Penn_at_the_%22Great_Treaty%22_(1682).jpg
+  Image credit: Historical Society of Pennsylvania, 1857 | Wikimedia Commons | Public domain
+  Image match method: named-commons-file
+  Historical source: https://en.wikipedia.org/wiki/Wampum
+  Background: https://commons.wikimedia.org/wiki/File:The_belt_of_wampum_delivered_by_the_Indians_to_William_Penn_at_the_%22Great_Treaty%22_(1682).jpg
+
+Photograph of pupils at Regina Indian Industrial School
+  Local image: assets/images/residential-photo.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Battleford_Industrial_School_Cemetery_Cairn.jpg
+  Image credit: Saskg | Wikimedia Commons | CC BY-SA 4.0
+  Image match method: named-commons-file
+  Historical source: https://www.regina.ca/about-regina/regina-history-facts/index.html
+  Background: 
+
+Chinese Canadian head-tax certificate
+  Local image: assets/images/head-tax.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Mr._%22Lee_Don%22_paid_%24500_Canadian_dollar_%22head_tax%22_on_2_August_1918_under_Chinese_Immigration_Act_of_1885_certificate_VPL_30625_(cropped).jpg
+  Image credit: Vancouver Public Library Historical Photographs | Wikimedia Commons | No restrictions
+  Image match method: commons-search:Chinese Canadian head tax certificate 1885
+  Historical source: https://commons.wikimedia.org/wiki/File:Mr._%22Lee_Don%22_paid_%24500_Canadian_dollar_%22head_tax%22_on_2_August_1918_under_Chinese_Immigration_Act_of_1885_certificate_VPL_30625_(cropped).jpg
+  Background: 
+
+Emancipation Proclamation signed original
+  Local image: assets/images/emancipation.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Emancipation_proclamation_typeset_signed.jpg
+  Image credit: Abraham Lincoln , digital reproduction by George Chriss ( GChriss ). With prior publication, the Emancipation Proclamation became  | Wikimedia Commons | Public domain
+  Image match method: commons-search:Emancipation Proclamation signed original
+  Historical source: https://www.archives.gov/milestone-documents/emancipation-proclamation
+  Background: 
+
+Declaration of Sentiments writing table
+  Local image: assets/images/seneca-table.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Declaration_of_Sentiments_table.jpg
+  Image credit: Unknown author Unknown author | Wikimedia Commons | Public domain
+  Image match method: commons-search:Seneca Falls Declaration of Sentiments table Smithsonian
+  Historical source: https://commons.wikimedia.org/wiki/File:Declaration_of_Sentiments_table.jpg
+  Background: 
+
+Shawl owned by Harriet Tubman
+  Local image: assets/images/tubman-shawl.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:(Portrait_of_Harriet_Tubman)_(LOC)_(38899564300).jpg
+  Image credit: Lindsley, Harvey B., 1842-1921 | Wikimedia Commons | Public domain
+  Image match method: named-commons-file
+  Historical source: https://en.wikipedia.org/wiki/Harriet_Tubman
+  Background: https://commons.wikimedia.org/wiki/File:(Portrait_of_Harriet_Tubman)_(LOC)_(38899564300).jpg
+
+Rosa Parks arrest fingerprint card
+  Local image: assets/images/rosa-fingerprint.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Rosa_Parks_being_fingerprinted_by_Deputy_Sheriff_D.H._Lackey_after_being_arrested_on_February_22,_1956,_during_the_Montgomery_bus_boycott.jpg
+  Image credit: Gene Herrick for the Associated Press; restored by Adam Cuerden | Wikimedia Commons | Public domain
+  Image match method: named-commons-file
+  Historical source: https://www.archives.gov/education/lessons/rosa-parks
+  Background: 
+
+Emmett Till's original casket
+  Local image: assets/images/emmett-casket.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Roberts_Temple_Church_of_God_in_Christ.jpg
+  Image credit: Legimet | Wikimedia Commons | CC BY-SA 4.0
+  Image match method: commons-search:Emmett Till's original casket
+  Historical source: https://commons.wikimedia.org/wiki/File:Roberts_Temple_Church_of_God_in_Christ.jpg
+  Background: 
+
+I AM A MAN placard, Memphis sanitation strike
+  Local image: assets/images/i-am-a-man.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:I_Am_a_Man_-_Diorama_of_Memphis_Sanitation_Workers_Strike_-_National_Civil_Rights_Museum_-_Downtown_Memphis_-_Tennessee_-_USA.jpg
+  Image credit: Adam Jones, Ph.D. | Wikimedia Commons | CC BY-SA 3.0
+  Image match method: commons-search:sanitation memphis
+  Historical source: https://commons.wikimedia.org/wiki/File:I_Am_a_Man_-_Diorama_of_Memphis_Sanitation_Workers_Strike_-_National_Civil_Rights_Museum_-_Downtown_Memphis_-_Tennessee_-_USA.jpg
+  Background: 
+
+Letter from Birmingham Jail manuscript
+  Local image: assets/images/king-letter.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Kamala_Harris_reads_excerpt_from_Dr._Martin_Luther_King,_Jr.%27s_1963_Letter_from_Birmingham_Jail.ogv
+  Image credit: Kamala Harris | Wikimedia Commons | Public domain
+  Image match method: named-commons-file
+  Historical source: https://kinginstitute.stanford.edu/letter-birmingham-jail
+  Background: https://en.wikipedia.org/wiki/Letter_from_Birmingham_Jail
+
+Votes for Women parade banner
+  Local image: assets/images/suffrage-banner.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:National_Woman_Suffrage_Publishing_Co.,_Votes_for_Women_a_Success_1917_Cornell_CUL_PJM_1193_01.jpg
+  Image credit: National Woman Suffrage Publishing Co. | Wikimedia Commons | Public domain
+  Image match method: named-commons-file
+  Historical source: https://commons.wikimedia.org/wiki/File:National_Woman_Suffrage_Publishing_Co.,_Votes_for_Women_a_Success_1917_Cornell_CUL_PJM_1193_01.jpg
+  Background: 
+
+Japanese American resident identification card
+  Local image: assets/images/internment-card.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Gabor_B._Levy%27s_United_States_Resident_Alien%27s_Border_Crossing_Identification_Card_-_DPLA_-_9ba6a60ca44534adab35ef7e34c311cb_(page_1).jpg
+  Image credit: United States. Immigration and Naturalization Service | Wikimedia Commons | Public domain
+  Image match method: commons-search:identification resident
+  Historical source: https://commons.wikimedia.org/wiki/File:Gabor_B._Levy%27s_United_States_Resident_Alien%27s_Border_Crossing_Identification_Card_-_DPLA_-_9ba6a60ca44534adab35ef7e34c311cb_(page_1).jpg
+  Background: 
+
+Brown v. Board of Education decision
+  Local image: assets/images/brown-decision.png
+  Image record: https://commons.wikimedia.org/wiki/File:Audio_Recording_of_President_Clinton%27s_Question-and-Answer_Session_on_the_Brown_v._Board_of_Education_Supreme_Court_Decision_in_Beltsville,_Maryland_-_DPLA_-_5bb135890a1f66ba255cb5c74f343fdf.mp3
+  Image credit: Department of Defense. Defense Information Systems Agency. White House Communications Agency. 6/25/1991 | Wikimedia Commons | Public domain
+  Image match method: commons-search:Brown v. Board of Education decision
+  Historical source: https://www.archives.gov/milestone-documents/brown-v-board-of-education
+  Background: https://en.wikipedia.org/wiki/Brown_v._Board_of_Education
+
+Oneg Shabbat archive milk can no. 2, Warsaw
+  Local image: assets/images/oneg-shabbat-can.jpg
+  Image record: https://collections.ushmm.org/iiif-b/assets/761607
+  Image credit: US Holocaust Memorial Museum / Warsaw Oyneg Shabes milk-can artefact
+  Image match method: original-specified-image
+  Historical source: https://encyclopedia.ushmm.org/content/en/artifact/milk-can-used-to-store-content-of-the-oneg-shabbat-archives
+  Background: 
+
+Suitcase belonging to František Aufrecht, Auschwitz collection
+  Local image: assets/images/auschwitz-suitcase.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Auschwitz_Death_wall_1.5.jpg
+  Image credit: Gigatel Cyf Ltd. | Wikimedia Commons | CC BY 3.0
+  Image match method: named-commons-file
+  Historical source: https://en.wikipedia.org/wiki/Auschwitz-Birkenau_State_Museum
+  Background: https://commons.wikimedia.org/wiki/File:Auschwitz_Death_wall_1.5.jpg
+
+Auschwitz Sonderkommando clandestine photograph
+  Local image: assets/images/sonderkommando.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Alberto_Errera_-_Sonderkommando_photograph_283.jpg
+  Image credit: Alberto Errera | Wikimedia Commons | Public domain
+  Image match method: named-commons-file
+  Historical source: https://commons.wikimedia.org/wiki/File:Alberto_Errera_-_Sonderkommando_photograph_283.jpg
+  Background: 
+
+Damaged synagogue Torah scroll from Nazi persecution
+  Local image: assets/images/torah-scroll.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Tribute_to_the_Victims_of_Nazi_Persecution_%E2%80%93_Synagogue_of_D%C3%BCsseldorf.jpg
+  Image credit: Reda Kerbush | Wikimedia Commons | CC BY-SA 4.0
+  Image match method: commons-search:persecution synagogue
+  Historical source: https://encyclopedia.ushmm.org/content/en/article/kristallnacht
+  Background: 
+
+Wannsee Conference protocol copy
+  Local image: assets/images/wannsee.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Wannsee_Conference_-_List_of_Jews_in_European_countries.JPG
+  Image credit: File:Wannsee Conference - List of Jews in European countries.JPG | Wikimedia Commons | Public domain
+  Image match method: commons-search:Wannsee Conference protocol copy
+  Historical source: https://commons.wikimedia.org/wiki/File:Wannsee_Conference_-_List_of_Jews_in_European_countries.JPG
+  Background: 
+
+Nuremberg trial evidentiary film, Nazi Concentration Camps
+  Local image: assets/images/nuremberg-film.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Nazi_Concentration_Camps.webm
+  Image credit: Produced for the U.S. Counsel for Prosecution of Axis Criminality. Directed by Navy Cmdrs. James B. Donovan and E. Ray Kellogg. Ge | Wikimedia Commons | Public domain
+  Image match method: named-commons-file
+  Historical source: https://encyclopedia.ushmm.org/content/en/timeline-event/holocaust/1942-1945/film-at-the-nuremberg-trial
+  Background: https://en.wikipedia.org/wiki/Nazi_Concentration_Camps_(film)
+
+S-21 prisoner photograph of Chum Mey era
+  Local image: assets/images/s21-portrait.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:S21_Tuol_Sleng_photos_of_victims.jpg
+  Image credit: Sgroey | Wikimedia Commons | CC BY 4.0
+  Image match method: named-commons-file
+  Historical source: https://tuolsleng.gov.kh/en/
+  Background: 
+
+Kangura magazine issue promoting hatred
+  Local image: assets/images/kangura.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:01846_Chapel_of_the_Institute_for_Jewish_converts_of_the_London_Society_for_Promoting_Christianity_Amongst_the_Jews_at_Warsaw.jpg
+  Image credit: Silar | Wikimedia Commons | Public domain
+  Image match method: commons-search:promoting magazine
+  Historical source: https://unictr.irmct.org/en/cases/ictr-99-52
+  Background: 
+
+ICMP Geography of Genocide map, Srebrenica
+  Local image: assets/images/srebrenica-map.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Balkan_battlegrounds_LOC_2010588135-14.jpg
+  Image credit: United States. Central Intelligence Agency. Office Of Russian And European Analysis | Wikimedia Commons | Public domain
+  Image match method: commons-search:srebrenica geography
+  Historical source: https://icmp.int/news/icmps-geography-of-genocide-map-launched-at-the-srebrenica-memorial-center-and-online/
+  Background: 
+
+Raphael Lemkin's Axis Rule in Occupied Europe
+  Local image: assets/images/lemkin-book.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Raphael_Lemkin_Axis_1944_title.jpg
+  Image credit: Unknown author Unknown author | Wikimedia Commons | Public domain
+  Image match method: commons-search:Raphael Lemkin's Axis Rule in Occupied Europe
+  Historical source: https://www.ushmm.org/genocide-prevention/simon-skjodt-center/work/learn/genocide-and-mass-atrocities/what-is-genocide
+  Background: 
+
+Huexotzinco Codex, eight pictographic legal panels
+  Local image: assets/images/huexotzinco.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Huex%20codex%201a%20loc.jpg
+  Image credit: Library of Congress Huexotzinco Codex, sheet 1a · Wikimedia Commons
+  Image match method: original-specified-image
+  Historical source: https://commons.wikimedia.org/wiki/File:Huex_codex_1a_loc.jpg
+  Background: 
+
+Great Domesday Book
+  Local image: assets/images/domesday.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Domesday-book-1804x972.jpg
+  Image credit: Andrews, William | Wikimedia Commons | Public domain
+  Image match method: commons-search:Great Domesday Book
+  Historical source: https://www.nationalarchives.gov.uk/explore-the-collection/explore-by-time-period/medieval/domesday/
+  Background: 
+
+Hereford Mappa Mundi
+  Local image: assets/images/hereford-map.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:1896_facsimile_of_the_Hereford_Mappa_Mundi_by_Konrad_Miller.jpg
+  Image credit: "Richard of Haldingham and Lafford", also known as Richard de Bello, Konrad Miller | Wikimedia Commons | Public domain
+  Image match method: commons-search:Hereford Mappa Mundi
+  Historical source: https://www.themappamundi.co.uk/
+  Background: 
+
+Catalan Atlas image of Mansa Musa
+  Local image: assets/images/catalan-atlas.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Catalan_Atlas_BNF_Sheet_6_Mansa_Musa.jpg
+  Image credit: attributed to Abraham Cresques | Wikimedia Commons | Public domain
+  Image match method: commons-search:Catalan Atlas image of Mansa Musa
+  Historical source: https://commons.wikimedia.org/wiki/File:Catalan_Atlas_BNF_Sheet_6_Mansa_Musa.jpg
+  Background: 
+
+Charles Booth poverty map, East Central London sheet
+  Local image: assets/images/booth-poverty-map.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Printed_Map_Descriptive_of_London_Poverty_1898-1899._Sheet_5._East_Central_District_(22736909652).jpg
+  Image credit: Charles Booth | Wikimedia Commons | No restrictions
+  Image match method: commons-search:Charles Booth 1898 1899 poverty map East Central London sheet 5
+  Historical source: https://booth.lse.ac.uk/learn-more/what-were-the-poverty-maps
+  Background: 
+
+Mercator world map, 1569
+  Local image: assets/images/mercator.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:EB1911_-_Map_-_Fig._31.%E2%80%94Mercator%27s_Chart_of_the_World_(1569).jpg
+  Image credit: Emery Walker | Wikimedia Commons | Public domain
+  Image match method: commons-search:Mercator world map, 1569
+  Historical source: https://commons.wikimedia.org/wiki/File:EB1911_-_Map_-_Fig._31.%E2%80%94Mercator%27s_Chart_of_the_World_(1569).jpg
+  Background: 
+
+Operation Fortitude deception planning map
+  Local image: assets/images/fortitude-map.png
+  Image record: https://commons.wikimedia.org/wiki/File:Map_of_Operation_Bodyguard_subordinate_plans-ar.png
+  Image credit: Original: ErrantX Derivative: Amr F.Nagy | Wikimedia Commons | CC BY-SA 3.0
+  Image match method: commons-search:Operation Fortitude deception map 1944
+  Historical source: https://commons.wikimedia.org/wiki/File:Map_of_Operation_Bodyguard_subordinate_plans-ar.png
+  Background: 
+
+Printed Peace of Westphalia treaty text
+  Local image: assets/images/westphalia.png
+  Image record: https://peaceofwestphalia.org/everything-peace-of-westphalia/documents-and-sources/
+  Image credit: Image on original institution/source page: peaceofwestphalia.org
+  Image match method: source-site-feature-image
+  Historical source: https://peaceofwestphalia.org/everything-peace-of-westphalia/documents-and-sources/
+  Background: 
+
+Te Tiriti o Waitangi: the Waitangi signing sheet
+  Local image: assets/images/waitangi-sheet.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Bay_of_Plenty_(Fedarb)_Sheet,_Te_Tiriti_o_Waitangi_(12195488783).jpg
+  Image credit: Archives New Zealand from New Zealand | Wikimedia Commons | CC BY-SA 2.0
+  Image match method: commons-search:Te Tiriti o Waitangi: the Waitangi signing sheet
+  Historical source: https://www.archives.govt.nz/discover-our-stories/the-treaty-of-waitangi/the-sheets-and-signatures-of-te-tiriti-o-waitangi
+  Background: https://en.wikipedia.org/wiki/Treaty_of_Waitangi
+
+Inka khipu from Chulpaca, Smithsonian 14/3866
+  Local image: assets/images/quipu.jpg
+  Image record: https://ids.si.edu/ids/deliveryService?id=ark%3A%2F65665%2Fom833281b36892c4a35b605adeadd15fb60&max=980
+  Image credit: Smithsonian National Museum of the American Indian, NMAI 14/3866, Chulpaca khipu
+  Image match method: original-specified-image
+  Historical source: https://en.wikipedia.org/wiki/Quipu
+  Background: https://ids.si.edu/ids/deliveryService?id=ark%3A%2F65665%2Fom833281b36892c4a35b605adeadd15fb60&max=980
+
+Beringer’s forged fossil stones in his 1726 engraved plates
+  Local image: assets/images/beringer-stones.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Map_engraved_on_stone.JPG
+  Image credit: Celinebj | Wikimedia Commons | CC BY-SA 4.0
+  Image match method: commons-search:engraved beringer
+  Historical source: https://www.bibliothek.uni-wuerzburg.de/en/about-us/events/exhibition-fakt-fake/wuerzburg-lying-stones/
+  Background: https://en.wikipedia.org/wiki/Beringer%27s_Lying_Stones
+
+Vinland Map manuscript
+  Local image: assets/images/vinland.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Facsimile_of_the_Vinland_map_a_promotional_poster_of_Yale_University_published_in_1965.jpg
+  Image credit: Unknown author Unknown author | Wikimedia Commons | Public domain
+  Image match method: commons-search:Vinland Map manuscript
+  Historical source: https://pre1600ms.beinecke.library.yale.edu/docs/pre1600.ms350a.htm
+  Background: 
+
+Great Isaiah Scroll from Qumran
+  Local image: assets/images/isaiah-scroll.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Great_Isaiah_Scroll.jpg
+  Image credit: Photographs by Ardon Bar Hama, author of original document is unknown. | Wikimedia Commons | Public domain
+  Image match method: commons-search:Great Isaiah Scroll from Qumran
+  Historical source: https://www.imj.org.il/en/wings/shrine-book/dead-sea-scrolls
+  Background: 
+
+Antikythera mechanism fragments
+  Local image: assets/images/antikythera.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Fragments_of_the_Antikythera_Mechanism.jpg
+  Image credit: Therese Clutario | Wikimedia Commons | CC BY 2.0
+  Image match method: commons-search:Antikythera mechanism fragments
+  Historical source: https://antikythera-mechanism.namuseum.gr/en/
+  Background: 
+
+Sutton Hoo helmet
+  Local image: assets/images/sutton-hoo.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:1966_Ordnance_Survey_-_Sutton_Hoo_helmet.jpg
+  Image credit: Arthur Thomas Chester of the Archaeology Division of the Ordnance Survey in consultation with the British Museum 's Department of  | Wikimedia Commons | Public domain
+  Image match method: commons-search:Sutton Hoo helmet
+  Historical source: https://commons.wikimedia.org/wiki/File:1966_Ordnance_Survey_-_Sutton_Hoo_helmet.jpg
+  Background: 
+
+Terracotta warrior from Pit 1, Xi'an
+  Local image: assets/images/qin-warrior.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Terracotta_warrior,_Xi%27an,_China_-_panoramio.jpg
+  Image credit: Aaron Zhu | Wikimedia Commons | CC BY-SA 3.0
+  Image match method: commons-search:Terracotta warrior from Pit 1, Xi'an
+  Historical source: https://www.bmy.com.cn/index.html
+  Background: 
+
+Pompeii dog plaster cast
+  Local image: assets/images/pompeii-dog.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Watercolor_of_a_plaster_cast_of_a_dog_victim_of_Vesuvius_Pompeii_by_Geremia_Discanno_pub_1882.jpg
+  Image credit: Geremia Discanno (d. 1907) | Wikimedia Commons | Public domain
+  Image match method: commons-search:Pompeii dog plaster cast
+  Historical source: https://pompeiisites.org/en/
+  Background: 
+
+Nebra Sky Disc, Bronze Age metalwork
+  Local image: assets/images/nebra-sky-disc.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Himmelsscheibe.Nebra.vorne.P1034154.jpg
+  Image credit: Nebra Sky Disc in museum, Wikimedia Commons photo
+  Image match method: original-specified-image
+  Historical source: https://www.landesmuseum-vorgeschichte.de/en/nebra-sky-disc
+  Background: 
+
+Great Shigir Idol, preserved carved wooden sculpture
+  Local image: assets/images/shigir-idol.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Church_of_St._Peter_of_Flers-Bourg,_trumeau_highlighting_a_wooden_sculpture_of_Saint_Peter.jpg
+  Image credit: Pierre André Leclercq | Wikimedia Commons | CC BY-SA 4.0
+  Image match method: commons-search:preserved sculpture
+  Historical source: https://en.wikipedia.org/wiki/Shigir_Idol
+  Background: https://commons.wikimedia.org/wiki/File:Church_of_St._Peter_of_Flers-Bourg,_trumeau_highlighting_a_wooden_sculpture_of_Saint_Peter.jpg
+
+Harry Burton photograph of Tutankhamun's tomb
+  Local image: assets/images/carter-photo.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Burton_Tutankhamun_tomb_photographs_1_001.jpg
+  Image credit: Harry Burton (1879-1940) | Wikimedia Commons | Public domain
+  Image match method: commons-search:Harry Burton photograph of Tutankhamun's tomb
+  Historical source: https://en.wikipedia.org/wiki/Discovery_of_the_tomb_of_Tutankhamun
+  Background: https://commons.wikimedia.org/wiki/File:Burton_Tutankhamun_tomb_photographs_1_001.jpg
+
+Diamond Sutra, printed scroll Or.8210/P.2
+  Local image: assets/images/diamond-sutra.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Diamond%20Sutra%20of%20868%20AD%20-%20The%20Diamond%20Sutra%20(868),%20frontispiece%20and%20text%20-%20BL%20Or.%208210-P.2.jpg
+  Image credit: British Library Or.8210/P.2, dated Diamond Sutra scroll · Wikimedia Commons
+  Image match method: original-specified-image
+  Historical source: https://en.wikipedia.org/wiki/Diamond_Sutra
+  Background: https://commons.wikimedia.org/wiki/File:Diamond%20Sutra%20of%20868%20AD%20-%20The%20Diamond%20Sutra%20(868),%20frontispiece%20and%20text%20-%20BL%20Or.%208210-P.2.jpg
+
+Lead ossuary made for the reburial of Richard III
+  Local image: assets/images/richard-iii-ossuary.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Emma_Wigley,_Leicester_Cathedral.jpg
+  Image credit: Peter_Glyn | Wikimedia Commons | CC BY-SA 3.0
+  Image match method: commons-search:reburial richard
+  Historical source: https://en.wikipedia.org/wiki/Richard_III_of_England
+  Background: https://commons.wikimedia.org/wiki/File:Emma_Wigley,_Leicester_Cathedral.jpg
+
+PHerc. 172, the unopened Herculaneum papyrus
+  Local image: assets/images/herculaneum-172.png
+  Image record: https://commons.wikimedia.org/wiki/File:Herculaneum_papyrus_1425.png
+  Image credit: Unknown author Unknown author | Wikimedia Commons | Public domain
+  Image match method: named-commons-file
+  Historical source: https://www.bodleian.ox.ac.uk/about/media/feb25/herculaneum-scroll
+  Background: https://en.wikipedia.org/wiki/Herculaneum_papyri
+
+Mary Seacole’s Wonderful Adventures, 1857 first edition
+  Local image: assets/images/seacole-memoir.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Mary_Jane_Seacole.jpeg
+  Image credit: Unknown author Unknown author | Wikimedia Commons | Public domain
+  Image match method: named-commons-file
+  Historical source: https://digital.library.upenn.edu/women/seacole/adventures/adventures.html
+  Background: 
+
+Olympe de Gouges’s Declaration of the Rights of Woman
+  Local image: assets/images/declaration-woman.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:DDFC.jpg
+  Image credit: 1791 Declaration of the Rights of Woman, historical printed text · Wikimedia Commons
+  Image match method: original-specified-image
+  Historical source: https://commons.wikimedia.org/wiki/File:DDFC.jpg
+  Background: 
+
+Frederick Douglass's Narrative, first edition
+  Local image: assets/images/douglass-narrative.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Frontispiece_of_Frederick_Douglass_in_Narrative_of_the_Life_of_Frederick_Douglass,_an_American_Slave_(1845).jpg
+  Image credit: Frederick Douglass | Wikimedia Commons | Public domain
+  Image match method: commons-search:Frederick Douglass's Narrative, first edition
+  Historical source: https://commons.wikimedia.org/wiki/File:Frontispiece_of_Frederick_Douglass_in_Narrative_of_the_Life_of_Frederick_Douglass,_an_American_Slave_(1845).jpg
+  Background: 
+
+Vindolanda Tablet 291, Claudia Severa’s birthday invitation
+  Local image: assets/images/vindolanda-291.jpg
+  Image record: https://romaninscriptionsofbritain.org/images/TV.291-color-BM.jpg
+  Image credit: Roman Inscriptions of Britain / British Museum, tablet 291
+  Image match method: original-specified-image
+  Historical source: https://romaninscriptionsofbritain.org/inscriptions/TabVindol291
+  Background: 
+
+Universal Declaration of Human Rights, 1948 printed text
+  Local image: assets/images/udhr.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:The_universal_declaration_of_human_rights_10_December_1948.jpg
+  Image credit: UN | Wikimedia Commons | Public domain
+  Image match method: commons-search:declaration universal
+  Historical source: https://www.un.org/en/about-us/universal-declaration-of-human-rights
+  Background: https://en.wikipedia.org/wiki/Universal_Declaration_of_Human_Rights
+
+Maya Dresden Codex
+  Local image: assets/images/dresden-codex.jpg
+  Image record: https://dh.scu.edu/exhibits/files/original/4802/dresden_codex_.jpeg
+  Image credit: Page of the Dresden Codex, Santa Clara University digital exhibit
+  Image match method: original-specified-image
+  Historical source: https://en.wikipedia.org/wiki/Dresden_Codex
+  Background: https://dh.scu.edu/exhibits/files/original/4802/dresden_codex_.jpeg
+
+Cyrus Cylinder
+  Local image: assets/images/cyrus-cylinder.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Barrel_cylinder_of_Cyrus_(transcription).jpg
+  Image credit: Theophilus Goldridge Pinches M.R.A.S. (1856 – 6 June 1934 Muswell Hill, London) | Wikimedia Commons | Public domain
+  Image match method: commons-search:Cyrus Cylinder
+  Historical source: https://en.wikipedia.org/wiki/Cyrus_Cylinder
+  Background: https://commons.wikimedia.org/wiki/File:Barrel_cylinder_of_Cyrus_(transcription).jpg
+
+Phaistos Disc, clay spiral inscription
+  Local image: assets/images/phaistos-disc.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:%CE%94%CE%AF%CF%83%CE%BA%CE%BF%CF%82%20%CF%84%CE%B7%CF%82%20%CE%A6%CE%B1%CE%B9%CF%83%CF%84%CE%BF%CF%8D%20%CF%80%CE%BB%CE%B5%CF%85%CF%81%CE%AC%20%CE%91%206380.JPG
+  Image credit: Phaistos Disc, face A, Heraklion Archaeological Museum · Wikimedia Commons
+  Image match method: original-specified-image
+  Historical source: https://en.wikipedia.org/wiki/Phaistos_Disc
+  Background: https://commons.wikimedia.org/wiki/File:%CE%94%CE%AF%CF%83%CE%BA%CE%BF%CF%82%20%CF%84%CE%B7%CF%82%20%CE%A6%CE%B1%CE%B9%CF%83%CF%84%CE%BF%CF%8D%20%CF%80%CE%BB%CE%B5%CF%85%CF%81%CE%AC%20%CE%91%206380.JPG
+
+Sojourner Truth’s 1864 carte-de-visite, Smithsonian 2018.17.12
+  Local image: assets/images/sojourner-card.jpg
+  Image record: https://ids.si.edu/ids/deliveryService?id=NMAAHC-2018_17_12_001&max_w=700
+  Image credit: Smithsonian NMAAHC, accession 2018.17.12 · public domain
+  Image match method: original-specified-image
+  Historical source: https://en.wikipedia.org/wiki/Sojourner_Truth
+  Background: https://ids.si.edu/ids/deliveryService?id=NMAAHC-2018_17_12_001&max_w=700
+
+RMS Titanic wireless distress message record
+  Local image: assets/images/titanic-wireless.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Titanic%27s_Marconi_appartus.jpg
+  Image credit: Cliff1066 | Wikimedia Commons | CC BY 2.0
+  Image match method: commons-search:Titanic wireless distress message telegraph Marconi 1912
+  Historical source: https://www.rmg.co.uk/collections/research-guides/research-guide-d1-rms-titanic-fact-sheet
+  Background: https://en.wikipedia.org/wiki/Sinking_of_the_Titanic
+
+CERN NeXT computer used as first web server
+  Local image: assets/images/cern-next.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:First_Web_Server.jpg
+  Image credit: User:Coolcaesar at en.wikipedia | Wikimedia Commons | CC BY-SA 3.0
+  Image match method: commons-search:CERN NeXT computer used as first web server
+  Historical source: https://en.wikipedia.org/wiki/World_Wide_Web
+  Background: https://commons.wikimedia.org/wiki/File:First_Web_Server.jpg
+
+Pentagon Papers, original Defence Department report, Part I
+  Local image: assets/images/pentagon-papers.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:The_Pentagon,_Headquarters_of_the_US_Department_of_Defense_(cropped).jpg
+  Image credit: Touch Of Light | Wikimedia Commons | CC BY-SA 4.0
+  Image match method: commons-search:department pentagon
+  Historical source: https://www.archives.gov/research/pentagon-papers
+  Background: 
+
+Tarikh al-Sudan chronicle manuscript
+  Local image: assets/images/timbuktu.png
+  Image record: https://commons.wikimedia.org/wiki/File:Krasinski_manuscript_GDL_chronicle.png
+  Image credit: Vaclau Lastouski | Wikimedia Commons | Public domain
+  Image match method: commons-search:manuscript chronicle
+  Historical source: https://www.loc.gov/exhibits/mali/mali-exhibit.html
+  Background: 
+
+Posselt’s Zimbabwe Bird, removed in 1889 and returned in 2026
+  Local image: assets/images/zimbabwe-bird.jpg
+  Image record: https://commons.wikimedia.org/wiki/File:Lisa_returned_to_school_through_DREAMS,_Bulawayo_Zimbabwe_(36273605224).jpg
+  Image credit: USAID in Africa | Wikimedia Commons | Public domain
+  Image match method: commons-search:zimbabwe returned
+  Historical source: https://www.sahra.org.za/exile-repatriation/zimbabwe-soapstone-bird/
+  Background: 
+
+Piri Reis world map fragment, Topkapi H 1824
+  Local image: assets/images/piri-reis.webp
+  Image record: https://www.unesco.org/sites/default/files/styles/paragraph_medium_desktop/public/structured_data/mow001/11130879_turkey_piri_reis_920x200.jpg.webp?itok=RVZZznGy
+  Image credit: Topkapı Palace Museum / UNESCO Memory of the World, 1513 Piri Reis world map fragment
+  Image match method: original-specified-image
+  Historical source: https://www.unesco.org/en/memory-world/piri-reis-world-map-1513
+  Background: 
